@@ -1,0 +1,10 @@
+﻿<LSLSnippets xmlns="http://joeswammi.com/sl/se/LSLSnippet">
+  <CodeSnippet Format="1.0.0" Title="llSay">
+    <Snippet InsertToEvent="state_entry">
+      <![CDATA[llSay(0, "Example!");]]>
+    </Snippet>
+    <Snippet InsertToEvent="touch_start">
+      <![CDATA[llSay(0, "Touched: "+(string)total_number);]]>
+    </Snippet>
+  </CodeSnippet>
+</LSLSnippets>

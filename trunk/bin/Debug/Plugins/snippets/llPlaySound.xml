@@ -1,0 +1,14 @@
+﻿<LSLSnippets xmlns="http://joeswammi.com/sl/se/LSLSnippet">
+  <CodeSnippet Format="1.0.0" Title="llPlaySound">
+    <Snippet InsertToEvent="touch_start">
+      <![CDATA[PlaySound("my_soundwav", 1);]]>
+    </Snippet>
+    <Snippet InsertToEvent="lslstart">
+      <![CDATA[PlaySound(string sound, float volume)
+{
+	if(llGetInventoryType(sound) == INVENTORY_SOUND)
+		llPlaySound(sound, volume);
+}]]>
+    </Snippet>
+  </CodeSnippet>
+</LSLSnippets>

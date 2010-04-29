@@ -1,0 +1,6 @@
+<Project name="Project" guid="e705b479-0e54-45a5-94ef-8c8da4914594">
+	<Object name="Object" guid="162ebdf0-9831-4fe9-98dd-25a96c2eed6f" active="true">
+		<Script name="Script.lsl" guid="10744d52-ea2f-4338-b4a2-ddf5b1ebfa57">
+		</Script>
+	</Object>
+</Project>

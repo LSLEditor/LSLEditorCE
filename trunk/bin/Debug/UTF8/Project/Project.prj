@@ -1,0 +1,8 @@
+<Project name="Project" guid="93ade8ce-6b99-4d25-a8f1-382a6511ee88">
+	<Object name="Object" guid="a73d474d-51fb-4a3f-802b-8d431e6079b8" active="true">
+		<Notecard name="Notecard.txt" guid="811009a2-d7c4-49da-8954-e5388c7c5666">
+		</Notecard>
+		<Script name="Script.lsl" guid="9f6eb85b-8acf-457c-8c42-f645804562e3">
+		</Script>
+	</Object>
+</Project>

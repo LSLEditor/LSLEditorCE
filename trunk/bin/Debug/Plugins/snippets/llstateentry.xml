@@ -1,0 +1,7 @@
+<LSLSnippets xmlns="http://joeswammi.com/sl/se/LSLSnippet">
+<CodeSnippet Format="1.0.0" Title="stateentry">
+<Snippet InsertToEvent="state_entry">
+<![CDATA[llSay(0, "STATE ENTRY!!!");]]>
+</Snippet>
+</CodeSnippet>
+</LSLSnippets>

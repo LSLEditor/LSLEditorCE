@@ -1,0 +1,93 @@
+﻿<LSLSnippets xmlns="http://joeswammi.com/sl/se/LSLSnippet">
+  <CodeSnippet Format="1.0.0" Title="NotecardReader v3">
+    <Snippet InsertToEvent="lslstart">
+      <![CDATA[string NOTE_CARD = "SETTINGS_CARD";  //This is the name of the notecard
+list notecard;                  //Holds all lines found in the notecard
+integer curLine;]]>
+    </Snippet>
+    <Snippet InsertToEvent="state_entry">
+      <![CDATA[//Only read the card once if the main list is empty
+		if(curLine == 0)
+		{
+			state NotecardtoList;
+		}]]>
+    </Snippet>
+    <Snippet InsertToEvent="touch_start">
+      <![CDATA[//Display notecard list...
+		integer i;
+		integer lenofnotecard = llGetListLength(notecard);
+		llWhisper(0, "length: " + (string)llGetListLength(notecard));
+		for(i=0;i < lenofnotecard;i++)
+		{
+			llWhisper(0, (string)i + ": " + llList2String(notecard, i));
+		}
+
+		//How to convert a CSV line to a list...
+		list temp = llCSV2List(llList2String(notecard, 0));//Get first line
+		for(i=0;i < llGetListLength(temp);i++)
+		{
+			llWhisper(0, "llCSV2List["+(string)i + "]: " + llList2String(temp, i));
+		}]]>
+    </Snippet>
+    <Snippet InsertToEvent="lslend">
+      <![CDATA[//////////////////////////////////////
+state __getnotecardtolist
+{
+	state_entry()
+	{
+		state NotecardtoList;
+	}
+}
+///<summary>
+///Loads and xmlcard into the main list variable
+///</summary>
+///<returns></returns>
+state NotecardtoList
+{
+	//Start at beginning of xmlcard
+	state_entry()
+	{
+		integer ready = TRUE;
+		if (llGetInventoryKey(NOTE_CARD) == NULL_KEY)
+		{
+			llOwnerSay("Error: \"" + NOTE_CARD + "\" does not exist in the object's inventory.");
+			ready = FALSE;
+		}
+
+		if (ready)
+		{
+			if(curLine == 0)
+				llWhisper(0, "Please wait. Reading data from "+NOTE_CARD+"....");
+
+			llGetNotecardLine(NOTE_CARD, curLine);    // request first line
+		}
+	}
+
+	//dataserver event is triggered when the requested data is returned to the script.
+	dataserver(key queryid, string data)
+	{
+		if (data == EOF)
+		{
+			llOwnerSay("Completed loading " + NOTE_CARD);
+			state default;
+		}
+		else
+		{
+			if(data != "")
+			{
+				//Check to see if the line begins with a '#' (comment line)
+				if (llSubStringIndex(data, "#") == -1)
+				{
+					notecard += data;            // Add the current notecard line to the string
+				}
+			}
+
+			//Always advance the reading of the card...
+			++curLine;                  // increase line count
+			state __getnotecardtolist;
+		}
+	}
+}]]>
+    </Snippet>
+  </CodeSnippet>
+</LSLSnippets>

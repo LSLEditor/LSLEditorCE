@@ -1,0 +1,10 @@
+<Project name="Project123" guid="c2703798-7139-439e-8bc9-62bc95605861">
+	<Object name="Object" guid="b1a2697e-3d58-4df0-b470-bcd83e146090" active="true">
+		<Notecard name="Notecard.txt" guid="f57835e5-e70e-4147-949e-1be6fb490397">
+		</Notecard>
+		<Notecard name="Notecard2.txt" guid="d691c528-d50c-4537-a323-9e6e153dd05a">
+		</Notecard>
+		<Notecard name="Notecard3.txt" guid="36fb7454-8128-48bb-9a9e-f84e7bd874a4">
+		</Notecard>
+	</Object>
+</Project>
