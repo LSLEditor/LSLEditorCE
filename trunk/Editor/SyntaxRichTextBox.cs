@@ -2020,7 +2020,59 @@ namespace LSLEditor
 				EndUpdate();
 			}
 		}
+        public void doOutline()
+        {
+            //TODO: finish the outline class and such
+            //      still a work in progress trying to figure out exactly how i wanna do this.
+            int len = this.Lines.Length;
+            if (len < 1)
+            {
+                return;
+            }
+            Dictionary<int, Helpers.OutlineHelper> list = new Dictionary<int, LSLEditor.Helpers.OutlineHelper>();
+            using (StringReader reader = new StringReader(this.Text))
+            {
+                string line;
+                
+                int lineNumber = 0;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] words = line.Split(' ');
+                    foreach (string word in words)
+                    {
+                        if (keyWords.ContainsKeyWord(word))
+                        {
+                            KeyWordInfo k = keyWords.GetKeyWordInfo(word);
+                            switch (k.type)
+                            {
+                                case KeyWordTypeEnum.Functions:
+                                    list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
+                                    break;
+                                case KeyWordTypeEnum.Events:
+                                     break;
+                                case KeyWordTypeEnum.Constants:
+                                    break;
+                                case KeyWordTypeEnum.Class:
+                                    break;
+                                case KeyWordTypeEnum.Vars:
+                                    break;
+                                default:
+                                    
+                                    break;
+                            }
+                                
+                        }
+                    }
 
+                    lineNumber++;
+
+                }
+            }
+            //TODO: parse dict and create the outline in the treeview
+            
+
+
+        }
 		public void SaveCurrentFile(string strPath)
 		{
 			try
