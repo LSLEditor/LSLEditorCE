@@ -1,0 +1,10 @@
+default
+{
+    state_entry()
+    {
+        if((key)"")
+            llOwnerSay("TRUE");
+        else
+            llOwnerSay("FALSE");
+    }
+}  

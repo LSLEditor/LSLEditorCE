@@ -1,0 +1,23 @@
+// LSLSnippetsPlugin v1.1.0
+// by Seneca Taliaferro/Joseph P. Socoloski III (Minoa)
+// Copyright 2008. All Rights Reserved.
+// http://lslsnippets.googlecode.com
+// NOTE:   Add your own LSL snippets to an existing script.
+//         Plugin for LSLEditor v2.34+
+// WHAT'S NEW: 	
+//          - Bug Fix issue#1: Added state_entry to dropdown list
+// LIMITS:  
+// TODO:    
+//LICENSE
+//BY DOWNLOADING AND USING, YOU AGREE TO THE FOLLOWING TERMS:
+//If it is your intent to use this software for non-commercial purposes, 
+//such as in academic research, this software is free and is covered under 
+//the GNU GPL License, given here: <http://www.gnu.org/licenses/gpl.txt> 
+////////////////////////////////////////////////////////////////////////////
+
+lslSnippetsApp is an application to demostrate lslSnippetsLib.
+lslSnippetsLib is a dll that can read your own custom LSL snippets and
+insert them into an existing LSL script.
+----------------------------------------------------------------------------
+You may need to install Microsoft .NET Framework 3.5 before running
+http://www.microsoft.com/downloads/details.aspx?FamilyID=333325FD-AE52-4E35-B531-508D977D32A6&displaylang=en

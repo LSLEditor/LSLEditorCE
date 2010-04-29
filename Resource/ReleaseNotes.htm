@@ -1,0 +1,1382 @@
+<div style="font-family: Verdana, sans-serif;font-size: 13px;line-height: 1.3;">
+
+	<h3>Release 2.40</h3>
+
+	<p><u>April 17 2010 14:51 (local time)</u><br />
+		- Added: stub functions for:
+		<ul>
+			<li>llGetFreeURLs</li>
+			<li>llRequestURL</li>
+			<li>llRequestSecureURL</li>
+			<li>llReleaseURL</li>
+			<li>llHTTPResponse</li>
+			<li>llGetHTTPHeader</li>
+		</ul>
+<br /> 
+	</p>
+
+	<h3>Release 2.39</h3>
+
+	<p><u>October 28 2008 11:28 (local time)</u><br />
+		- Added: stub functions for:
+		<ul>
+			<li>llTextBox </li>
+			<li>llGetAgentLanguage </li>
+			<li>llDetectedTouchUV </li>
+			<li>llDetectedTouchFace </li>
+			<li>llDetectedTouchPos </li>
+			<li>llDetectedTouchNormal </li>
+			<li>llDetectedTouchBinormal </li>
+			<li>llDetectedTouchST </li>
+			<li>llSHA1String </li>
+		</ul>
+<br /> 
+	</p>
+
+	<h3>Release 2.38</h3>
+
+	<p><u>July 28 2008 14:10 (local time)</u></p>
+		- Changed: Key cache file changed, so did lsleditor (??? who made the xml file, it uses siblings, not parent-child relations????)<br /> 
+	</p>
+
+	<p>Summer break ;-)</p>
+
+	<p><u>May 18 2008 18:37 (local time)</u></p>
+		- Changed: Ctrl-Shft-A uses 4-spaces intdent when (auto)pasting in SL<br /> 
+	</p>
+
+	<p><u>May 13 2008 13:21 (local time)</u></p>
+		- Changed: Adding duplicate items in solution explorer starts numbering at 1<br />
+		- Fixed: focus when switching tabs<br />
+		- Fixed: Save All (Ctrl Shft S), does not save Solution<br />
+	</p>
+	
+	<h3>Release 2.37</h3>
+
+	<p><u>May 2 2008 19:00 (local time)</u></p>
+		- Added: PRIM_GLOW<br />
+		- Added: llSetClickAction (and constants)<br />
+		- Fixed: &amp; in dialogue box<br />
+		- Fixed: Permission dialogue box text messed up when the script name is too long<br /> 
+	</p>
+
+	<h3>Release 2.36</h3>
+
+	<p><u>Apr 3 2008 12:47 (local time)</u></p>
+		- Fixed: llAbs throws error on large numbers<br /> 
+	</p>
+
+	<p><u>Mar 28 2008 12:47 (local time)</u></p>
+		- Fixed: llListen should also listen when using "" keys<br /> 
+		- Added: Basic authentication to llHTTPRequest, eg. http: //userid:password@domain.name/path<br />
+		- Added: llEmail shows error responses from smtp server when in error<br />
+	</p>
+
+	<p><u>Mar 27 2008 13:33 (local time)</u></p>
+		- Added (experimental): 'Ctrl Shift A' pastes active LSLEditor script to SecondLife (has to open script editor in SL first)<br />
+	</p>
+
+	<p><u>Mar 21 2008 12:12 (local time)</u></p>
+		- Fixed: Shift Home crashes editor when nothing is selected<br /> 
+	</p>
+	
+	<h3>Release 2.35</h3>
+
+	<p><u>Mar 16 2008 15:22 (local time)</u></p>
+		- Added: llGetParcelDetails (see also menu - tools - options - debugging internal)<br /> 
+		- Added: Alt-Backspace alternative for Ctrl-Z<br />
+		- Fixed: Some focus issue on the find window<br />
+		- Added: PARCEL_MEDIA_COMMAND_TYPE, PARCEL_MEDIA_COMMAND_SIZE, PARCEL_MEDIA_COMMAND_DESC, PARCEL_MEDIA_COMMAND_LOOP_SET</br>
+		- Added: Contact item on menu Help<br />
+		- Removed: some compression code<br />
+	</p>
+	
+	<p><u>Feb 29 2008 12:40 (local time)</u></p>
+		- Fixed: NULL_KEY was no key<br />
+	</p>
+
+	<h3>Release 2.34</h3>
+
+	<p><u>Feb 23 2008 19:45 (local time)</u></p>
+	<p>
+		- Added: First generic plugin support<br />
+		- Added: integer multiply operator for float operand<br /> 
+		- Added: minus operator to rotation<br />
+		- Fixed: Internals to pass more language tests, e.g. bool on ZERO_ROTATION and NULL_KEY, adding items to list<br /> 
+	</p>
+	
+	<p><u>Feb 22 2008 23:38 (local time)</u></p>
+	<p>
+		- Fixed: Browser status hides bottom scrollbar<br /> 
+		- Fixed: Switching between Tabbed document and Windowed document, browser disappears<br />
+		- Fixed: (key)"" == False<br />
+		- Added: state changes allowed in global functions (when set in Debugging - General menu)<br />
+		- Fixed: info on llInsertString was missing a few spaces<br />
+		- Added: Debug windows have context menu, Copy, Select All and <b>Clear</b><br />
+		- Added: File - New - New notecard<br />
+		- Changed: llGetScriptName returns scriptname without extension (when set in Debugging - General menu)<br />
+		- Fixed: Don't send empty bugreports<br />
+		- Fixed: tabs are presented in SL as 4 spaces, for example llStringLength("\t") == 4<br />
+		- Fixed: remove old files after Autoupdate<br />
+		- Fixed: autoupdate menu was readonly<br />
+	</p>
+
+	<h3>Release 2.33</h3>
+
+	<p><u>Feb 12 2008 08:12 (local time)</u></p>
+	<p>
+		- Fixed: llLog and llLog10<br />
+	</p>
+	
+	<p><u>Feb 04 2008 16:30 (local time)</u></p>
+	<p>
+		- Added: Shortcut key for lslint, F7 ;-)<br />
+		- Fixed: llMessageLinked using LINK_THIS works also when NOT using solution explorer<br /> 
+		- Fixed: default value of key type is wrong<br /> 
+		- Added: All animation / expression names are added to the autocompletion function (as strings)<br />
+		- Added: Autocompletion of animation names can be switched on/off by menu Tools - Options - Text Editor - Code completion<br /> 
+		- Fixed: crash of lsleditor on llHTTPRequest when errors occur<br /> 
+		- Changed: Information on llSensorRepeat()<br />
+		- Added: llResetLandPassList()<br /> 
+	</p>
+	
+	<h3>Release 2.32</h3>
+
+	<p><u>Jan 27 2008 14:00 (local time)</u></p>
+	<p>
+		- Added: open multiple files from menu 'File - Open - File...' or Ctrl-O<br /> 
+		- Fixed: global functions do not parse when using multiple brackets on 1 line<br /> 
+		- Fixed: renaming files and directories in solution explorer sometimes crashes lsleditor<br />
+		- Changed: 'Recent Projects' in 'Recent Solutions'<br />
+		- Changed: 'Add new Project' changed into 'Add new Solution'<br />
+	</p>
+	
+	<h3>Release 2.31</h3>
+
+	<p><u>Jan 14 2008 16:28 (local time)</u></p>
+	<p>
+		- Changed: llUnescapeURL and llEscapeURL using UTF8 encoding<br />
+		- Changed: llBase64ToString and llStringToBase64 using UTF8 encoding<br />
+		- Changed: improved label parsing<br />
+	</p>
+
+
+	<p><u>Jan 12 2008 10:43 (local time)</u></p>
+	<p>
+		- Fixed: llDialog does not show OK button, using no buttons<br />
+	</p>
+
+	<p><u>Jan 09 2008 17:18 (local time)</u></p>
+	<p>
+		- Added: Online Help browser, New tab for every search can be unchecked in menu Tools - Options - Environment - Help<br />
+		- Fixed: No scrolling when using Autoformat (Ctrl-D)<br />
+	</p>
+
+	<p><u>Jan 06 2008 13:31 (local time)</u></p>
+	<p>
+		- Fixed: llGetListEntryType does not work on negative index<br />
+		- Added: missing operators on integer<br />
+		- Fixed: wrong parsing and casting of large hex numbers<br />
+	</p>
+
+	<p><u>Jan 05 2008 12:44 (local time)</u></p>
+	<p>
+		- Added: show status of capslock<br />
+	</p>
+
+	<h3>Release 2.30</h3>
+	
+	<p><u>Dec 29 2007 12:27 (local time)</u></p>
+	<p>
+		- Fixed: llParseString2List loops when using empty strings on spacers<br />
+	</p>
+	
+	<p><u>Dec 27 2007 22:57 (local time)</u></p>
+	<p>
+		- Added: Disable tooltip user-setting, menu Tools - Options - Help<br />
+		- Added: Link to the LSLEditor forum, menu Help - Forum<br />
+		- Added: Auto save on menu Tools - Options - Debugging - General - Auto save<br />
+		- Fixed: sending/retrieving bugreports crashes lsleditor when internet connection is not available<br />
+		- Fixed: turning off autoindent errors on braces<br />
+		- Fixed: line number issue on scrolling<br /> 
+		- Fixed: cast error using llList2Vector for strings<br />
+	</p>
+
+	<h3>Release 2.29</h3>
+
+	<p><u>Dec 18 2007 16:38 (local time)</u></p>
+	<p>
+		- Added: when nothing is selected, Shift-Delete, copies entire line to clipboard and deletes it<br />
+		- Fixed: Ctrl-X is not undo-able<br />
+		- Fixed: jump labels containing '_' give error<br />
+		- Added: ATTACH_HUD_* constants<br />
+	</p>
+
+	<p><u>Dec 14 2007 17:51 (local time)</u></p>
+	<p>
+		- Fixed: Unchecking Check-For-Updates, does check for updates, thats wrong<br />
+	</p>
+	
+	<h3>Release 2.28</h3>
+
+	<p><u>Dec 14 2007 00:40 (local time)</u></p>
+	<p>
+		- Added: INS (insert) / OVR (override) on status bar, changes when hitting Insert key<br />
+		- Changed: Tab on notecards shows 'Text', where scripts shows 'Script'<br />
+	</p>
+
+
+	<p><u>Dec 13 2007 23:52 (local time)</u></p>
+	<p>
+		- Added: When changing to a non existing state, show warning<br />
+		- Changed: llGetWallclock and llGetGMTclock<br />
+	</p>
+
+	<p><u>Dec 09 2007 02:30 (local time)</u></p>
+	<p>
+		- Fixed: certain conditions the tab-stops at 4 chars goes to 6 chars wide<br />
+	</p>
+	
+	<p><u>Dec 08 2007 15:55 (local time)</u></p>
+	<p>
+		- Changed: Some Internals to pass more tests from <a href="http://wiki.secondlife.com/wiki/LSL_Language_Test">http://wiki.secondlife.com/wiki/LSL_Language_Test</a><br />
+		  Some tests fail due to known issues. <a href="http://www.lsleditor.org/help/knownissues.htm">http://www.lsleditor.org/help/knownissues.htm</a><br />		  
+		- Fixed: shift-home and shift-end selects from 'start' cq. 'end' of selection (only forward selection supported)<br />
+	</p>
+	
+	<p><u>Dec 07 2007 02:44 (local time)</u></p>
+	<p>
+		- Fixed: lsleditor crashes when using lslint plugin<br />
+		- Added: Total char count<br />
+		- Added: Last modified on SolutionExplorer items properties<br />
+		- Changed: new implementation of llHTTPRequest, returns http status<br />
+		- Changed: float shows 6 digits behind the decimal point (like SL)<br />
+	</p>
+
+	<p><u>Dec 06 2007 14:38 (local time)</u></p>
+	<p>
+		- Fixed: Version 2.24 an above were broken on simple Verbose messages!!<br />
+	</p>
+
+	<h3>Release 2.27</h3>
+
+	<p><u>Dec 05 2007 17:35 (local time)</u></p>
+	<p>
+		- Fixed: llModPow gives wrong answer using large numbers<br />
+		- Fixed: Crash when clicked on errors, when script edit windows are closed<br />
+		- Fixed: Oops Renaming files and objects in Solutionexplorer using same name but upper/lower case chars<br />
+		- Fixed: Oops from llGetObjectDetails (only OBJECT_NAME and OBJECT_DESC implemented)<br />
+		- Fixed: comments having unballanced string quotes do not compile<br />
+	</p>
+
+	<h3>Release 2.26</h3>
+
+	<p><u>Nov 28 2007 19:31 (local time)</u></p>
+	<p>
+		- Changed: llBase64ToInteger , needs testings<br />
+		- Changed: paint line numbers only when they are changed<br />
+		- Changed: doubleclick selects whole words (including '_')<br />
+	</p>
+	
+	<p><u>Nov 26 2007 13:33 (local time)</u></p>
+	<p>
+		- Added: random return when failing to parse string in llBase64ToInteger<br />
+		- Fixed: list constructor and large signed/unsigned integer problem<br />
+	</p>
+	
+	<p><u>Nov 24 2007 19:16 (local time)</u></p>
+	<p>
+		- Fixed: llListenRemove does not work<br />
+		- Fixed: llMessageLinked adds 1 extra event when compiling<br />
+	</p>
+	
+	<h3>Release 2.25</h3>
+
+	<p><u>Nov 22 2007 23:59 (local time)</u></p>
+	<p>
+		- Added: true/false operators on vector and rotation<br />
+		- Fixed: llRequestAgentData(uuid, DATA_BORN) has wrong date notation<br />
+		- Fixed: listen event always gets the wrong sender id<br />
+	</p>
+
+	<p><u>Nov 20 2007 09:20 (local time)</u></p>
+	<p>
+		- Fixed: typo on llRemoveSensor<br />
+	</p>
+	
+	<p><u>Nov 19 2007 10:09 (local time)</u></p>
+	<p>
+		- Fixed: llGetWallclock gives also fraction of seconds<br />
+		- Added: X-SecondLife-Shard header in http request can be configured via menu - Tools - Options - Debugging - Internal (default = Production)<br />
+		- Fixed: X-SecondLife-Region header in http request uses int coords.<br />
+		- Fixed: notecards don't care about 'autocorrect indent'<br />
+	</p>
+
+	<p><u>Nov 15 2007 00:19 (local time)</u></p>
+	<p>
+		- Fixed: Find and Find Replace window pushes editor to background when goes invisible<br />
+		- Fixed: Find and Find Replace window does not focus text search box<br />
+	</p>
+
+	<p><u>Nov 14 2007 17:10 (local time)</u></p>
+	<p>
+		- Added: X-SecondLife-* headers in http request<br />
+	</p>
+
+
+	<h3>Release 2.24</h3>
+
+	<p><u>Nov 13 2007 01:33 (local time)</u></p>
+	<p>
+		- Added: llResetLandBanList<br />
+	</p>
+
+	<p><u>Nov 10 2007 03:12 (local time)</u></p>
+	<p>
+		- Fixed: Editing notecards is broken<br />
+	</p>
+
+	<p><u>Nov 09 2007 01:21 (local time)</u></p>
+	<p>
+		- Fixed: CONTROL_ML_LBUTTON was missssspelleddd<br />
+	</p>
+
+	<p><u>Nov 07 2007 14:19 (local time)</u></p>
+	<p>
+		- Fixed: info on llDetachFromAvatar() shows argument<br />
+	</p>
+
+	<h3>Release 2.23</h3>
+
+	<p><u>Nov 02 2007 15:53 (local time)</u></p>
+	<p>
+		- Added: PRIM_SCULPT_TYPE_* constants<br />
+	</p>
+
+	<p><u>Oct 30 2007 11:53 (local time)</u></p>
+	<p>
+		- Added: Findwindow uses F3 for next find<br />
+	</p>
+
+	<p><u>Oct 26 2007 10:57 (local time)</u></p>
+	<p>
+		- Fixed: Some menu items use online wiki (if available), others use offline wiki<br />
+	</p>
+	
+	<p><u>Oct 24 2007 14:53 (local time)</u></p>
+	<p>
+		- Fixed: clicking Errors located on last line looses control on edit window<br />
+		- Added: Shortcut keys to solution explorer<br />
+		- Fixed: New script in solution explorer does not use indent user setting<br />
+	</p>
+	
+	<p><u>Oct 23 2007 20:13 (local time)</u></p>
+	<p>
+		- Changed: Shift-End, does not select the newline char<br />
+		- Changed: LSLEditor remembers workingdirectory<br />
+		- Changed: 'View Solutionexplorer' made persistent<br />
+	</p>
+
+	<h3>Release 2.22</h3>
+
+	<p><u>Oct 23 2007 20:13 (local time)</u></p>
+	<p>
+		- Changed: When importing script, make form active.<br />
+		- Changed: combox box for listening channels set to first channel by default<br />
+		- Fixed: llScaleTexture has wrong arguments (and description)<br />
+		- Changed: Menu item, "File - New - File" changed to File - New - Script"<br />
+		- Fixed: llResetScript has to go directly to state_entry (and resetting vars)<br />
+	</p>
+
+	<p><u>Oct 22 2007 04:00 (local time)</u></p>
+	<p>
+		- Changed: vars don't have to be initialised before usage<br />
+	</p>
+	
+	<p><u>Oct 21 2007 20:18 (local time)</u></p>
+	<p>
+		- Changed: Solution explorer, files are opened only once at a time<br />
+		- Changed: Solution explorer, changed Prim entity to Object<br />
+		- Changed: Solution explorer, Objects can be added to Objects<br />
+		- Added: llMessageLinked can use linknum in solution explorer(needs testing)<br />
+		<ul>
+			<li>LINK_ROOT</li>
+			<li>LINK_SET</li>
+			<li>LINK_ALL_OTHERS</li>
+			<li>LINK_ALL_CHILDREN</li>
+			<li>LINK_THIS</li>
+		</ul>
+		Relationship is defined by place in solution explorer tree (no need to use llCreateLink)<br /><br />
+		- Fixed: the dialog is missing several buttons when using long text<br />
+		- Changed: llDialog and llRequestPermissions removed topmost property<br />
+	</p>
+	
+	<p><u>Oct 20 2007 12:09 (local time)</u></p>
+	<p>
+		- Added: Contextmenu on error list, Copy or Copy Description only<br />
+		- Fixed: plugin, lslint, possible crash on multiple line error output<br />
+	</p>
+	
+	<p><u>Oct 18 2007 11:46 (local time)</u></p>
+	<p>
+		- Fixed: possible crash on not initialized string<br />
+		- Fixed: reading notecards outside solution explorer was broken<br />
+		- Added: llGetObjectDetails (supported OBJECT_NAME, OBJECT_DESC)<br />
+		- Added: llSensor / llSensorRepeat / llSensorRemove() / sensor (event)<br />
+			(only simple event trigger, num_detected is always 1)<br /> 
+		- Fixed: llRequestPermissions is broken<br />
+	</p>
+	
+	<p><u>Oct 16 2007 23:29 (local time)</u></p>
+	<p>
+		- Fixed: Old bug on multiple changed scripts saving using Ctrl-S shortcut only saves first script<br />
+		- Fixed: Rename objects do not set object-name correctly<br />
+	</p>
+	
+	<h3>Release 2.21</h3>
+
+	<p><u>Oct 16 2007 13:46 (local time)</u></p>
+	<p>
+		- Changed: Find/Replace window hides when pressing Escape<br />
+		- Changed: Find/Replace window keeps focus<br />
+	</p>
+
+	<p><u>Oct 15 2007 23:10 (local time)</u></p>
+	<p>
+		- Changed: Tools menu, starts at top node<br />
+		- Added: LSLEditor goes unicode<br />
+		menu - tools - options - text editor - general - output format
+			<ul>
+				<li>ANSI (default)</li>
+				<li>Unicode</li>
+				<li>Unicode big endian</li>
+				<li>UTF-8</li>
+			</ul>
+		- Fixed: Save on new.lsl file crashes LSLEditor<br />
+		- Changed: bugreport, Highlight entry in left pane (also when lost focus)<br /> 
+		- Fixed: bugreport, 'check all / uncheck all' button has wrong initial state<br />
+		- Changed: autocompletion on ll-functions having zero arguments (or single void argument) completes with ')' char<br />
+		- Added: double-clicking on an error message after compile, line in edit window is highlighted<br />
+	</p>
+
+	<p><u>Oct 10 2007 10:59 (local time)</u></p>
+	<p>
+		- Changed: In respect to solution explorer
+		<ul>
+			<li>llGetObjectDesc</li>
+			<li>llSetObjectDesc</li>
+			<li>llGetObjectName</li>
+			<li>llSetObjectName</li>
+		</ul>
+	</p>
+
+	<h3>Release 2.20</h3>
+
+	<p><u>Oct 09 2007 16:12 (local time)</u></p>
+	<p>
+		- Added: Plugin support<br />
+		- Fixed: llList2Key crash<br />
+	</p>
+	
+	<p><u>Oct 08 2007 23:55 (local time)</u></p>
+	<p>
+		- Changed: Opened files in solution explorer are asked to save when closed<br />
+		- Changed: bugreport, files to be included are unchecked by default<br />
+	</p>
+	
+	<p><u>Oct 03 2007 19:22 (local time)</u></p>
+	<p>
+		- Added: bool operators on list<br />
+		- Fixed: Multiple 'if' indent (only on autoformat document)<br />
+		- Added: integer operator + and - (overrides internal operators)<br />
+		- Fixed: llParseStringKeepNulls last empty element is not added<br />
+		- Fixed: llListSort on non string items<br />
+		- Fixed: Sometimes scrolling is disabled when moving the cursor<br />
+		- Fixed: Multiline comments on highlighted chars gives colored results<br />
+		- Fixed: llList2XXX functions for negative index<br />
+		- Added: explicit string operator on bool<br />
+	</p>
+	<p><u>Oct 02 2007 18:25 (local time)</u></p>
+	<p>
+		- Added: Menu - Tools - Options - Text editor - warning on different indent scheme (on by default)<br />
+		- Added: Menu - Tools - Options - Text editor - autocorrect indent on file loading (off by default)<br />
+		- Fixed: changing guid on items in solutionexplorer reflects on opened script windows<br />
+		- Changed: Wildcard autocompletion on argument, changed to show only pulldown menu (example llGetInventoryName)<br />
+		- Added: llRot2Fwd / llRot2Up / llRot2Left<br />
+	</p>
+
+	<h3>Release 2.19</h3>
+
+	<p><u>Oct 01 2007 16:30 (local time)</u></p>
+	<p>
+		- Changed: Make text bold on active tab<br />
+		- Fixed: llUnescapeURL returns UTF8 strings, for example: llOwnerSay(llUnescapeURL("pr%c3%aate"));<br />
+		- Fixed: Syntax errors are on column - 1<br />
+		- Added: Command line option /run starts debugging after loading scripts (if any)<br />
+		- Fixed: Syntax errors on scripts having same name are clickable<br />
+		- Fixed: Copy / Paste gives wrong colors in editor<br />
+	</p>
+	
+	<p><u>Sep 29 2007 21:35 (local time)</u></p>
+	<p>
+		- Added: Changing Guid of any item in solution explorer<br />
+		- Changed: manual listen event trigger, channel is combobox<br />
+		(listen filter does only work on normal chat messages, not on manual event trigger)<br />
+		- Added: Ctrl-C copies selected errors to clipboard<br />
+		- Added: Ctrl-A selects all text errors list<br />
+		- Added: Ctrl-A selects all text in debug and simulator console<br />
+		- Added: Line, Column and Char position of cursor (added Column)<br />
+		- Fixed: "There are 0 instances, replace them all?"<br />
+		- Fixed: var names containing 'jump' are wrongly parsed<br />
+		- Fixed: llAttachToAvatar wrong description<br />
+	</p>
+
+	<p><u>Sep 22 2007 19:29 (local time)</u></p>
+	<p>
+		- Fixed: Selection from last line does not work<br />
+	</p>
+
+	<h3>Release 2.18</h3>
+
+	<p><u>Sep 21 2007 19:09 (local time)</u></p>
+	<p>
+		- Fixed: SaveAs was broken<br />
+		- Fixed: autocompletion on 'default', only when there is no default state<br />
+		- Fixed: state change to same state, acts like a return<br />
+		- Changed: Ctrl-D (format document) keeps cursor on line<br />
+		- Changed: Ctrl-E (format selection) keeps text selected<br />
+		- Added: Tools - Options - Debugging - General - Quoted strings in list output (default = none)<br />
+		- Changed: Major change to the list object (needs testing)<br />
+		- Fixed: Some minor indent bug on outermost braces when typing<br />
+		- Changed: Verbose output gives more readable lists<br />
+		- Fixed: llParseString2List and llParseStringKeepNulls (needs testing)<br />
+	</p>
+
+	<p><u>Sep 19 2007 16:47 (local time)</u></p>
+	<p>
+		- Added: http 'ContentLength' on llHTTPRequest POST requests<br />
+	</p>
+
+	<h3>Release 2.17</h3>
+
+	<p><u>Sep 19 2007 12:47 (local time)</u></p>
+	<p>
+		- Fixed: Closing LSLEditor saves (all) changed files using its own name, example files (new.lsl) shows dialog<br />
+	</p>
+
+	<p><u>Sep 18 2007 12:47 (local time)</u></p>
+	<p>
+		- Fixed: Labels can have whitespace between @ and label name<br />
+	</p>
+
+	<p><u>Sep 17 2007 14:41 (local time)</u></p>
+	<p>
+		- Added: Tools - Options - Debugging - General - Single Quote char allowed outside strings<br />
+	</p>
+	
+	<p><u>Sep 16 2007 14:41 (local time)</u></p>
+	<p>
+		- Fixed: Typing many '}' on same lines, gives weird autoformatting<br />
+		- Fixed: Bracket highlighting when typing braces (curly brackets)<br />
+		- Fixed: Rotation '/' operator<br />
+	</p>
+	
+	<p><u>Sep 15 2007 17:45 (local time)</u></p>
+	<p>
+		- Added: Update application supports 'gzip','zip' and 'bzip2'<br />
+		- Changed: Richlabel has some extra right margin<br />
+		- Fixed: 4-Spaces indent was broken on tools menu<br />
+		- Fixed: Annoying scroll when bracket highligthing and code formatting<br />
+		- Fixed: 'If you see this, something is wrong' on state change and llResetScript<br />
+		- Fixed: Die button kills runaway processes like 'while(TRUE);'<br />
+		- Added: Icons for errors and warnings<br />
+		- Added: Compiler generates warnings (can be switched off in menu Tools - Options - Debugging - General)<br />
+	</p>
+
+	<p><u>Sep 14 2007 10:52 (local time)</u></p>
+	<p>
+		- Fixed: llOwnerSay talks only to the owner, preventing possible loops<br />
+	</p>
+	
+	<p><u>Sep 13 2007 16:39 (local time)</u></p>
+	<p>
+		- Added: Date/time on printed output<br />
+		- Changed: Case insensitive on ECC<br />
+	</p>
+
+	<h3>Release 2.16</h3>
+
+	<p><u>Sep 13 2007 12:10 (local time)</u></p>
+	<p>
+		- Added: Experimental Code Completion (ECC) on user defined variable names, menu - tools - options - Text Editor - Code Completion<br />
+		- Changed: Escape toggles on/off autocompletion and tooltips<br />
+	</p>
+	
+	<p><u>Sep 12 2007 16:28 (local time)</u></p>
+	<p>
+		- Added: Pagesetup margins on printed documents<br />
+		- Added: header and footer on printed documents<br />
+		- Added: Print selection<br />
+		- Fixed: llList2ListStrided crashed for nonsense (<=0) strides<br />
+	</p>	
+	
+	<p><u>Sep 11 2007 17:07 (local time)</u></p>
+	<p>
+		- Added: Ctrl-Del removes whitespace/word<br />
+		- Fixed: llToUpper / llToLower gives wrong hint<br />
+	</p>
+	
+	<p><u>Sep 06 2007 13:35 (local time)</u></p>
+	<p>
+		- Fixed: First users see only a small window<br />
+	</p>
+	
+	<h3>Release 2.15</h3>
+
+	<p><u>Sep 03 2007 17:00 (local time)</u></p>
+	<p>
+		- Fixed: Renaming of non scripts and non notecards<br />
+		- Added: Solution Explorer, changing filetype of items<br />
+		- Changed: Solution Explorer, project and inventory paths are saved as a relative path to solution file (if possible)<br />
+		- Changed: Solution Explorer, "Add New File -> Script" , have it use the default.lsl file, same as "new.lsl" when opening.<br />
+		- Fixed: 0xFFFFFFFF parsed as integer<br />
+		- Fixed: capitalization of 'string' and 'float'<br />
+		- Added: PRIM_TYPE_SCULPT constant<br />
+	</p>
+
+	<p><u>Aug 31 2007 12:07 (local time)</u></p>
+	<p>
+		- Fixed: Recent projects menu blocks when dirty script has to be saved<br />
+		- Added: Menu - Tools - Options - Environment - General - delete old files after update<br />
+	</p>
+	
+	<h3>Release 2.14</h3>
+
+	<p><u>Aug 27 2007 12:07 (local time)</u></p>
+	<p>
+		- Fixed: Crash in Renaming files containing illegal chars in Solutionexplorer<br />
+		- Fixed: Find / Replace broken<br />
+		- Fixed: Labels are broken<br />
+	</p>
+	
+	<p><u>Aug 24 2007 15:30 (local time)</u></p>
+	<p>
+		- Added: Menu - Project - Add New File , add new file to active Prim in SolutionExplorer (if Any)<br />
+		- Added: Check if solution file already exist when Create new solution<br />
+		- Added: F3 shortcut for 'Find Next'<br />
+		- Fixed: Pressing Ctrl-H twice crashes program<br />
+		- Added: Multiline strings<br />
+		- Fixed: String (capital S) can be used as a var<br />
+		- Added: Explicit string operator on internal integer<br />
+		- Added: File Association for .lsl and .sol files (Menu-Tools)<br />
+	</p>
+
+	<p><u>Aug 23 2007 23:02 (local time)</u></p>
+	<p>
+		- Fixed: Linenumbers incorrect after scrolling<br />
+		- Fixed: default state has not to be on column 0<br />
+		- Fixed: When user clicks 'No' on llRequestPermissions, do trigger run_time_permissions<br />
+		- Fixed: Brackets highlighting now skips comments<br />
+		- Changed: Online Wiki Address can be changed<br />
+		- Changed: Bugreport shows unique number and date/time<br />
+		- Changed: Bugreport uploadservice can handle normal filenames, spaces included ;-)<br />
+		- Added: llGetInventoryType (when using solution explorer)<br />
+		- Changed: Blockcommenting Ctrl-K and Ctrl-L (also on non selected line)<br />
+	</p>
+
+	<h3>Release 2.13</h3>
+
+	<p><u>Aug 22 2007 17:57 (local time)</u></p>
+	<p>
+		- Fixed: Crash on making default state<br />
+		- Fixed: Linenumbers only appear when scrolling<br />
+		- Fixed: Crash on some debug code, writing to D drive<br />
+		- Fixed: float parsing on lists does Oops...<br />
+		- Added: Experimental wildcard argument completion (for example llListStatistics)<br />
+		- Fixed: Tooltip on codecompletion can not get outside client area<br />
+		- Fixed: Coloring when typing strings<br />
+		- Fixed: indenting fails on strings containing // chars<br />
+	</p>
+
+	<p><u>Aug 21 2007 19:28 (local time)</u></p>
+	<p>
+		- Changed: Reading scripts using default codepage<br />
+		- Added: llListStatistics (needs more testing)<br />
+		- fixed: llCSV2List escapes angle brackets<br />
+	</p>
+	
+	<p><u>Aug 20 2007 23:48 (local time)</u></p>
+	<p>
+		- Fixed: Find / Find and Replace window mixes up settings<br />
+		- Fixed: Sending bugreport crashes editor when offline<br />
+	</p>
+	
+	<p><u>Aug 18 2007 21:19 (local time)</u></p>
+	<p>
+		- Changed: new Tools Options menu<br />
+		- Fixed: Single quotation char in comment breaks parsing<br />
+	</p>
+	
+	<p><u>Aug 17 2007 19:22 (local time)</u></p>
+	<p>
+		- Fixed: Quad and Vector parsing breaks at certain conditions<br />
+		- Fixed: some changes to text do not set dirty flag<br />
+	</p>
+	
+	<p><u>Aug 16 2007 23:57 (local time)</u></p>
+	<p>
+		- Fixed: changing state into same state goes into loop<br />
+		- Fixed: llCSV2List is not really inverse to llList2CSV (llCSV2List does not parse rotations and vectors, yet)<br />
+		- Fixed: labels without ';' does not give syntax error<br />
+		- Fixed: jump @label; does not give syntax error<br />
+		- Fixed: floats getting truncated on non-English systems<br />
+		- Changed: Position and Size of editor window are only restored when in workingarea of Primary screen<br />
+		- Fixed: Script error on download HTML Help file<br />
+	</p>
+	
+	<p><u>Aug 15 2007 17:51 (local time)</u></p>
+	<p>
+		- Fixed: Don't compile nor syntax check notecards using solution explorer<br />
+		- Added: llInsertString<br />
+		- Fixed: llGiveInventoryList has wrong ref argument (syntax check breaks)<br />
+		- Fixed: Tab and Shift Tab on selected text<br />
+		- Added: Toggle button check / uncheck attached scripts on the bugreport form<br />
+		- Fixed: Argument of event changed(integer change)<br />
+		- Changed: Sending bugreports can be canceled<br />
+		- Changed: implicit float to integer operator to explicit<br />
+	</p>
+	
+	<h3>Release 2.12</h3>
+
+	<p><u>Aug 10 2007 13:13 (local time)</u></p>
+	<p>
+		- Added: LSLEditorHelp offline wiki (Tools - Editor properties)<br />
+		- Changed: Find window keeps search entries<br />
+	</p>
+
+	<p><u>Aug 05 2007 00:30 (local time)</u></p>
+	<p>
+		- Fixed: Cursor position on backspace<br />
+	</p>
+
+	<p><u>Aug 03 2007 16:50 (local time)</u></p>
+	<p>
+		- Added: Ctrl-F (find) uses keyword on cursor position<br />
+		- Added: Ctrl-Up / Ctrl-Down history scrolling on chat box<br />
+		- Fixed: llSetLinkTexture() do not take texture uuids<br />
+		- Fixed: llParseString2List refuse to take keys as strings<br />
+		- Added: Solution Explorer, F2 for rename<br />
+		- Added: default.lsl in LSL-Editor directory will be used as 'new.lsl' template<br />
+		- Fixed: llSetColor tooltip is wrong<br />
+	</p>
+
+	<p><u>Aug 02 2007 23:42 (local time)</u></p>
+	<p>
+		- Added: Smtp Authentication for llEmail (Tools, Runtime Properties, External, Email)<br />
+	</p>
+	
+	<h3>Release 2.11</h3>
+
+	<p><u>Jul 30 2007 16:19 (local time)</u></p>
+	<p>
+		- Added: Home key works also on white-space lines<br />
+		- Fixed: After sending two bugreports, button is disabled<br />
+		- Added: POST method to llHttpRequest (untested)<br />
+	</p>
+
+	<p><u>Jul 28 2007 12:05 (local time)</u></p>
+	<p>
+		- Fixed: Richtext label inserts spaces after color change<br />
+		- Added: Sound support (simple) use llPlaySound and .wav file in solution explorer<br />
+	</p>
+	
+	<p><u>Jul 26 2007 13:29 (local time)</u></p>
+	<p>
+		- Added: PageUp and PageDown on intellisense dropdown menu<br />
+		- Fixed: Editor crash when closing project having browser window open<br />
+		- Added: llGetLocalPos()<br />
+	</p>
+	
+	<h3>Release 2.10</h3>
+
+	<p><u>Jul 25 2007 14:30 (local time)</u></p>
+	<p>
+		- Added: Solution Explorer (first look)<br />
+		<ul>
+			<li>llGetObjectName</li>
+			<li>llGetScriptName</li>
+			<li>llGetKey</li>
+			<li>llGetInventoryName</li>
+			<li>llGetInventoryKey</li>
+			<li>llGetInventoryNumber</li>
+			<li>llGetNumberOfNotecardLines</li>
+			<li>llGetNotecardLine</li>
+		</ul>
+		- Added: Reset option on Editor properties<br />
+		- Added: mod operator (%) on integer<br />
+	</p>
+	
+	<p><u>Jul 24 2007 11:55 (local time)</u></p>
+	<p>
+		- Changed: Recent file list is clipped (showing ...)<br />
+		- Fixed: Syntax error on negative line numbers (?!) breaks editor<br />
+	</p>
+
+	<p><u>Jul 20 2007 10:55 (local time)</u></p>
+	<p>
+		- Added: Checkbox on Edit tab to Disable compile / syntaxcheck<br />
+		- Added: Allow scripts to open by Drag and Drop on LSL-Editor<br />
+		- Fixed: Indent on return when in middle of a line<br />
+		- Added: llGetDate<br />
+		- Fixed: llDie in script does not work, throws an error<br />
+		- Changed: id in llMessageLinked / message_link accepts strings<br />
+	</p>
+
+	<p><u>Jul 19 2007 15:27 (local time)</u></p>
+	<p>
+		- Added: Bugtracker to Menu Help , Bugreport<br />
+		- Changed: Home button toggles between start of line, and first non whitespace<br />
+	</p>
+
+	<h3>Release 2.9</h3>
+
+	<p><u>Jul 16 2007 11:25 (local time)</u></p>
+	<p>
+		- Changed: Autocompletion images scale on changing fonts<br />
+		- Changed: Tab alignement on changing fonts<br />
+	</p>
+	
+	<p><u>Jul 15 2007 23:51 (local time)</u></p>
+	<p>
+		- Added: Editor Properties, Font selector for editor and tooltips<br />
+		- Fixed: Ctrl-X does not have paste<br />
+	</p>
+
+	<p><u>Jul 13 2007 15:20 (local time)</u></p>
+	<p>
+		- Changed: Bugreport name and email adres made sticky<br />
+		- Fixed: Bugreport window looses focus when tooltip shows<br />
+		- Added: Shift-Delete<br />
+		- Fixed: Ctrl-X can not undo<br />
+		- Fixed: Ctrl-Home does not go to line 1, column 1<br />
+		- Fixed: Shift-Home does not appear to select text<br />
+	</p>
+
+	<p><u>Jul 12 2007 12:59 (local time)</u></p>
+	<p>
+		- Fixed: Tooltip shows bold on some High-Resolution machines (David IOU1)<br />
+	</p>
+
+	<h3>Release 2.8</h3>
+
+	<p><u>Jul 10 2007 08:41 (local time)</u></p>
+	<p>
+		- Fixed: Runtime properties, incorrect key from cache (xor)<br />
+	</p>
+	
+	<p><u>Jul 9 2007 14:51 (local time)</u></p>
+	<p>
+		- Added: Editor properties: Auto update frequency<br />
+		- Added: Editor properties: Indent settings<br />
+	</p>
+
+	<p><u>Jul 8 2007 23:59 (local time)</u></p>
+	<p>
+		- Changed: Tooltip font is SystemFonts.MessageBoxFont<br />
+		- Fixed: llRot2Up returns void....<br />
+	</p>
+	
+	<p><u>Jul 6 2007 13:13 (local time)</u></p>
+	<p>
+		- Fixed: MD5 checksum on update function breaks<br />
+		- Added: Boundary checks on list functions<br />
+		- Fixed: jump statement gives error (_goto)<br/>
+	</p>
+
+	<h3>Release 2.7</h3>
+
+	<p><u>Jul 4 2007 12:12 (local time)</u></p>
+	<p>
+		- Added: Bitwise Xor operator on integer (^)<br/>
+	</p>
+
+
+	<p><u>Jul 3 2007 20:56 (local time)</u></p>
+	<p>
+		- Fixed: XML-RPC server not closed when closing LSL-Editor<br/>
+	</p>
+
+	<p><u>Jul 2 2007 14:41 (local time)</u></p>
+	<p>
+		- Fixed: Size of Simulator resets to default<br />
+		- Changed: Vector and Rotation parser<br />
+		- Changed: Vector and Rotation fields changed from double to float<br />
+		- Added: Preprocessor processes all internal reserved words<br />
+		- Changed: llDialog / llRequestPermissions / link_message / llMessageLinked uses new TaskQueue<br />
+	</p>
+
+	<p><u>Jul 1 2007 23:55 (local time)</u></p>
+	<p>
+		- Added: Smart indenting on closing parenthesis (experimental)<br />
+		- Revised: (Needs testing!!)
+			<ul>
+				<li>llGetSubString</li> 
+				<li>llDeleteSubString</li> 
+				<li>llList2List</li> 
+				<li>llDeleteSubList</li>
+			</ul>
+		- Added:
+			<ul>
+				<li>llIntegerToBase64</li>
+				<li>llBase64ToInteger</li>
+				<li>llStringToBase64</li>
+				<li>llBase64ToString</li>
+				<li>llXorBase64StringsCorrect</li>
+		</ul>
+	</p>
+
+	<p><u>Jun 30 2007 11:41 (local time)</u></p>
+	<p>
+		- Fixed: Can't close tabs when in Windows Classic mode<br />
+		- Changed: Internal, state / event has its own TaskQueue (needs testing)<br />
+	</p>
+	
+	<p><u>Jun 29 2007 16:38 (local time)</u></p>
+	<p>
+		- Fixed: Integer '~' operator works only on TRUE/FALSE<br />
+		- Added: Syntax checker button F6 (no compile / execute)<br />
+		- Changed: Internal, Simulator / Compiler as usercontrols<br /> 
+	</p>
+	
+	<p><u>Jun 28 2007 12:18 (local time)</u></p>
+	<p>
+		- Added: Ctr-Shft-S to Save as...<br />
+		- Added: AutoUpdate check (daily) / Manual update on Help menu<br />
+		- Added: Double click on compiler error goes to error line / column<br />
+		- Changed: Compiler errors shows on listview<br />
+		- Changed: Tab / Shift Tab , toggles indent block of text<br />
+		- Changed: Home button sets cursor to beginning of line, after whitespace<br />
+	</p>
+
+	<h3>Release 2.6</h3>
+
+	<p><u>Jun 27 2007 18:20 (local time)</u></p>
+	<p>
+		- Fixed: Editor crashes on error in dataserver script<br />
+		- Changed: synchronized llGetNumberOfNotecardLines / llGetNotecardLine dataserver requests<br />
+	</p>
+
+	<p><u>Jun 26 2007 11:49 (local time)</u></p>
+	<p>
+		- Fixed: llDialog does not talk anymore<br />
+	</p>
+
+	<p><u>Jun 25 2007 21:08 (local time)</u></p>
+	<p>
+		- Fixed: Indent adds tab on lines ending in comment or whitespace<br />
+		- Added: XML-RPC listening base port 50888<br />
+			<ul>
+				<li> remote_data (event)</li>
+				<li> llOpenRemoteDataChannel</li>
+				<li> llCloseRemoteDataChannel</li>
+				<li> llRemoteDataReply</li>
+				<li> llSendRemoteData (untested)</li>
+			</ul>
+		- Fixed: Tooltips shows 'lt;' and 'gt;'<br />
+		- Added: Bugreport to Menu Help<br />
+		- Added: llLoadURL<br />
+		- Added: listen callbacks are removed on state change<br />
+		- Added: llListenControl<br />
+	</p>
+	<p><u>Jun 24 2007 13:11 (local time)</u></p>
+	<p>
+		- Added: Print preview<br />
+		- Fixed: Editor only prints 1 page<br />
+		- Added: ReplaceAll<br />
+		- Fixed: Find and Replace issues<br />
+	</p>
+	<p><u>Jun 22 2007 18:59 (local time)</u></p>
+	<p>
+		- Added: The ~ (complement) operator to integer<br />
+		- Fixed: global functions containing whitespace gives compile error<br />
+		- Added: Keep user settings between LSLEditor updates<br />
+		- Added: llGetNumberOfNotecardLines / llGetNotecardLine<br />
+		- Added: Recent files list in the File menu<br />
+	</p>
+
+	<p><u>Jun 21 2007 13:41 (local time)</u></p>
+	<p>
+		- Fixed: Compiles empty documents and/or absent default state<br />
+	</p>
+
+	<h3>Release 2.5</h3>
+
+	<p><u>Jun 20 2007 22:41 (local time)</u></p>
+	<p>
+		- Fixed: Menu Tools does not work<br />
+		- Added: llStringTrim<br />
+	</p>
+
+	<p><u>Jun 18 2007 14:50 (local time)</u></p>
+	<p>
+		- Fixed: Backspace / Delete issues when brackets highlighted<br />
+	</p>
+
+	<p><u>Jun 14 2007 23:59 (local time)</u></p>
+	<p>
+		- Fixed: Backspace unreliable when brackets highlighted<br />
+		- Changed: Tab-characters have same width as 4 spaces<br />
+		- Changed: auto indent on typing if/else<br />
+		- Changed: format document indent if/else<br />
+		- Fixed: timer stops after state change<br />
+		- Fixed: llList2Integer broken<br />
+		- Added: llMessageLinked / link_message<br />
+		- Fixed: llListReplaceList gives wrong answer<br />
+	</p>
+
+	<p><u>Jun 13 2007 20:21 (local time)</u></p>
+	<p>
+		- Fixed: key problem (breaks listen and more)<br />
+	</p>
+
+	<h3>Release 2.4</h3>
+
+	<p><u>Jun 13 2007 12:12 (local time)</u></p>
+	<p>
+		- Release 2.4<br />
+	</p>
+
+	<p><u>Jun 12 2007 16:43 (local time)</u></p>
+	<p>
+		- Fixed: llSetTimerEvent broken<br />
+		- Added: Redo<br />
+		- Changed: Linenumbers stops at and-of-document<br />
+		- Fixed: Cursorposition shows on closed tab<br />
+		- Changed: Close button on tab shows on mouse hover<br />
+		- Fixed: Argument typing shows wrong color<br />
+		- Fixed: Slow brackets matching<br />
+		- Fixed: Slow editing large documents / long lines<br />
+	</p>
+
+	<p><u>Jun 11 2007 11:36 (local time)</u></p>
+	<p>
+		- Fixed: Line numbers incorrect after delete all<br />
+		- Fixed: Cursor position does not show on non primary script<br />
+		- Fixed: Undo eats memory<br />
+		- Fixed: Undo slow on large documents<br />
+	</p>
+	<p><u>Jun 09 2007 11:44 (local time)</u></p>
+	<p>
+		- Added: brackets matching<br />
+		<ul>
+			<li>parentheses or round brackets:  ( )</li>
+			<li>box brackets or square brackets:  [ ]</li>
+			<li>curly brackets or braces:  { }</li>
+			<li>angle brackets or chevrons: &lt; &gt;</li>
+		</ul>
+	</p>
+	<p><u>Jun 08 2007 19:35 (local time)</u></p>
+	<p>
+		- Fixed: Undo after find / replace<br />
+		- Fixed: Undo does nothing<br />
+		- Added: Color scheme for tooltips<br />
+		- Fixed: Missing spaces in tooltips<br />
+		- Fixed: Keyboard hint vertical position changes<br />
+		- Fixed: Mouse Tooltip shows on EOL<br />
+	</p>
+
+	<p><u>Jun 07 2007 13:41 (local time)</u></p>
+	<p>
+		- Added: Find and Replace<br />
+	</p>
+
+	<h3>Release 2.3</h3>
+	
+	<p><u>Jun 06 2007 17:01 (local time)</u></p>
+	<p>
+		- Fixed: Editor does not show on taskbar<br />
+		- Added: bool operators on key<br />
+
+		- Added: Operator vector / rotation<br />
+		- Fixed: Save Ctrl-S in debug session<br />
+	</p>
+	<p><u>Jun 05 2007 23:33 (local time)</u></p>
+	<p>
+		- Fixed: A lot of operators<br />
+		- Fixed: llDeleteSubString<br />
+		- Added: Block commenting Ctrl-K Ctrl-L<br />
+		- Fixed: Compiler errors hide internal types<br />
+		- Improved: parsing strings, including escape chars<br />
+		- Changed: No codecompletion nor hints typing within strings<br />
+		- Changed: No codecompletion nor hints typing within comments<br />
+		- Fixed: blind tabs showing again on XP without VisualStyles<br />
+		- Added: Shortcutkeys for formatting<br />
+	</p>
+	<p><u>Jun 04 2007 21:52 (local time)</u></p>
+	<p>
+		- Changed: replaced double by float<br />
+		- Fixed: Parsing long files takes to much time<br />
+		- Fixed: Line-numbers frozen<br />
+		- Fixed: compile error on 'state' between quotes<br />
+		- Fixed: AutoWordSelection problem appears to be an insolvable Microsoft bug, ... i solved it<br />
+		- Added: Showing Line / Character position of cursor on statusbar<br />
+	</p>
+	<p><u>Jun 03 2007 20:54 (local time)</u></p>
+	<p>	
+		- Fixed: AutoWordSelection off, and stay off<br />
+		- Fixed: indent whitespace can be a mix of tab and spaces<br />
+		- Added: default / state to autocompletion ;-)<br />
+		- Added: operators + and - for rotation / rotation<br />
+		- Added: operators multiplication of vector / rotation<br />
+		- Added: operators multiplication and division of rotation / rotation<br />
+	</p>
+	<p><u>Jun 02 2007 18:58 (local time)</u></p>
+	<p>	
+		- Added: llAxisAngle2Rot<br />
+		- Added: some vector operators<br />
+		- Fixed: codecompletion tooltip disappears when hitting arrow keys<br />
+		- Fixed: blind tabs showing again on XP without VisualStyles<br />
+	</p>
+	<p><u>Jun 01 2007 23:34 (local time)</u></p>
+	<p>
+		- Added: at_target, http_response and remote_data events<br />
+		- Added: Goto form acts on return key<br />
+		- Added: First implementation of llDialog<br />
+		- Fixed: VisualStyleRenderer crash on startup<br />
+		- Fixed: Indent was broken<br />
+		- Added: implicit string operator on key<br />
+		- Added: implicit bool operators to string class<br />
+	</p>
+
+	<p><u>May 31 2007 23:55 (local time)</u></p>
+	<p>
+		- Added: llSleep<br />
+		- Added: Editor Goto Line (Ctrl-G)<br />
+		- Added: Ctrl-F4 closes active window/tab<br />
+		- Added: Editor option Wiki-pages in Seperate browser<br />
+		- Fixed: Linenumber drawing double-buffered in editor<br />
+		- Added: Close button to Tab pages<br />
+		- Fixed: 'Tab' key inserts a tab character or 4-space characters, depending on the Editor-settings<br />
+		- Fixed: timer problem when changing states<br />
+	</p>
+
+	<p><u>May 29 2007 16:41 (local time)</u></p>
+	<p>
+		- Improved: parenthesis indenting old 'C' style accepted<br />
+		- Added Editor options: Auto Word Selection (off by default)<br />
+		- Fixed: Linenumber drawing double-buffered in editor<br />
+		- Added a 'Die' button to the compiler<br />
+		- Added Editor options: SL (ugly) color-scheme / SL 4-spaces indent<br />
+		- Fixed: crash on editing end-of-document<br />
+		- Fixed: void argument on events<br />
+	</p>
+
+	<p><u>May 28 2007 23:34 (local time)</u></p>
+	<p>
+		- Autocompletion including arguments on 'events'<br />
+		- Fixed: incorrect color on pasting text<br />
+		- Fixed: autoformatting on selected text<br />
+		- Fixed: incorrect old argument list on non-functions<br />
+	</p>
+	
+	<p><u>May 27 2007 13:15 (local time)</u></p>
+	<p>
+		- llListFindList bug fixed<br />
+		- added comparison operators for list,key,float,integer,vector and rotation<br />
+		- when opening an existing document, the untouched 'new.lsl' example is destroyed<br />
+	</p>
+	
+	<h3>Release 2.2</h3>
+
+	<p><u>May 26 2007 18:00 (local time)</u></p>
+	<p>
+		- Tooltipping / Codecompletion hitting the boundaries of parent window<br />
+	</p>
+	
+	<p><u>May 25 2007 11:28 (local time)</u></p>
+	<p>
+		- Explicit cast 'list' implemented for string,integer,key,float,vector and rotation<br />
+	</p>
+
+	<p><u>May 24 2007 19:34 (local time)</u></p>
+	<p>
+		- Compiler error shows correct line numbers<br />
+		- Debug tab only visible when there are no compile errors<br />
+		- Removed C# tab<br />
+		- Small bug fixed, on empty information, when using codecompletion<br />
+		- Codecompletion shows ALL keywords<br />
+		- Shows '*' after filename when document is changed<br />
+	</p>
+
+	<p><u>May 23 2007 21:03 (local time)</u></p>
+	<p>
+		- Compiler starts at Output tab, on error shows C# tab<br />
+		- Tabbed documents!!<br />
+		Thanks to Darek and Marco for their bug reports:<br />
+		- Fixed: Operator '+' is ambiguous on operands of type 'LSLEditor.SecondLife.integer' and 'LSLEditor.SecondLife.integer'<br />
+		- Fixed: Operator '+=' cannot be applied to operands of type 'LSLEditor.SecondLife.list' and 'double'<br />
+		- Fixed: Operator '+=' cannot be applied to operands of type 'LSLEditor.SecondLife.list' and 'LSLEditor.SecondLife.key'<br />
+		- Copy from the debug window enabled<br />
+	</p>
+	
+	<p><u>May 22 2007 23:46 (local time)</u></p>
+	<p>
+		- Bug fix on empty key in Sim properties<br />
+		- Show function arguments while typing<br />
+	</p>
+
+
+	<p><u>May 16 2007 13:07 (local time)</u></p>
+	<p>
+		- Simulator docks at bottom<br />
+	</p>
+	
+	<h3>Release 2.1</h3>
+
+	<p><u>May 14 2007 22:47 (local time)</u></p>
+	<p>
+		- <b>Release 2.1 (Multiple document interface)</b><br />
+		- Running multiple LSL scripts concurrent<br />
+		- Chat/listen implementation between LSL scripts<br />
+		- First implementation of a 'find' (Ctrl-F) option<br />
+	</p>
+	<p><u>May 08 2007 16:37 (local time)</u></p>
+	<p>
+		- llListRandomize<br />
+		- llListSort<br />
+		- llListReplaceList (to be tested)<br />
+		- llParseString2List (todo spacers)<br />
+		- llParseStringKeepNulls (todo spacers)<br />
+	</p>
+	
+	<p><u>May 07 2007 19:53 (local time)</u></p>
+	<p>
+		- llMD5String implemented
+		- Implemented a lot of list functions (see examples)<br />
+		- Fixed state bug<br />
+		- llResetScript()<br />
+		- Tooltip improved<br />
+	</p>
+
+	<p><u>May 06 2007 13:03 (local time)</u></p>
+	<p>
+		- Parser improved a lot!!<br />
+	</p>
+
+	<p><u>May 04 2007 17:15 (local time)</u></p>
+	<p>
+		- LSL keywords updated 19 Dec 2006 for LSL 1.13<br />
+	</p>
+	<p><u>May 03 2007 18:49 (local time)</u></p>
+	<p>
+		- Execution is more stable, and useful error reports :-)<br />
+		- Implemented listen filter (llListen / llListenRemove)<br />
+		- some minor bugfixes<br />
+	</p>
+	<p><u>May 02 2007 19:41 (local time)</u></p>
+	<p>
+		- llListFindList implemented<br />
+		- KEY_NULL implemented<br />
+		- key compare<br />
+		- llGetOwnerKey returns key in compiler properties<br />
+		- llToLower / llToUpper<br />
+		- llEuler2Rot / llRot2Euler<br />
+		- Code completion shows function arguments when typing<br />
+		- Cleaned the resource files<br />
+		- Updated a lot more, can't remember ;-)<br />
+	</p>
+
+	<p><u>May 01 2007 13:47 (local time)</u></p>
+	<p>
+		- Manual Chat works, on different channels (listen)
+	</p>
+	<p><u>Apr 30 2007 23:57 (local time)</u></p>
+	<p>
+		- Format document (Edit -&gt; Advanced -&gt; Format Document)<br />
+		- llFrand seeding<br />
+		- casting bug fixed (parser)<br />
+		- run_time_permissions event bug fixed<br />
+		- llDialog shows messagebox (no buttons)<br />
+		- Did some testing on "Shippou Oud - Fruit machine"<br />
+		- Import Examples<br />
+		- Timer bug fixed<br />
+		- Al lot of internal base class changes<br />
+	</p>
+
+	<p><u>Apr 29 2007 15:29 (local time)</u></p>
+	<p>First implementation of linenumbers</p>
+
+	<h3>Release 2.0</h3>
+
+	<p><u>Apr 28 2007 14:01 (local time)</u></p>
+	<p>Changed project to .NET 2.0</p>
+
+	<p><u>Mar 30 2007 12:54 (local time)</u></p>
+	<p>- changed wiki adres</p>
+	
+	<p><u>Jan 2007 - Mar 2007</u></p>
+	<p>- Sabbatical :-), doing nothing....</p>
+	
+	<p><u>Dec 26 2006 12:54 (local time)</u></p>
+	<p>- first implementation of printing</p>
+	<p><u>Nov 21 2006 23:22 (local time)</u></p>
+	<p>- delete key bug fixed</p>
+	<p><u>Nov 08 2006 00:40 (local time)</u></p>
+	<p>- got Strife _double back in place<br>
+	- some C# coloring</p>
+	<p><u>Nov 05 2006 14:54 (local time)</u></p>
+	<p>- Just some minor updates, lack of time at the moment</p>
+	<p><u>Oct 29 2006 01:00 (local time)</u></p>
+	<p>- State change fires state_exit and state_entry<br>
+	- compiler on tabcontrole</p>
+	<p><u>Oct 28 2006 02:00 (local time)</u></p>
+	<p>- Float2Hex example compiles (thanx to Strife Onizuka)</p>
+	<p><u>Oct 27 2006 21:59 (local time)</u></p>
+	<p>- Global class compiles correctly on vars (static) and user defined 
+	functions (void and non void)</p>
+	<p><u>Oct 26 2006 01:07 (local time)</u></p>
+	<p>- code completion, tab/return and contains icons for different types<br>
+	- other type of tooltipping.... not nice.<br>
+	- override &amp; , to make it bool answer...</p>
+	<p><u>Oct 25 2006 01:46 (local time)</u></p>
+	<p>- http can use proxy<br>
+	- smtp<br>
+	- properties windows for compiler<br>
+	- integer made out of struct, to override (string) explicit operator</p>
+	<p><u>Oct 22 2006 21:43 (local time)</u></p>
+	<p>- first implementation of llHTTPRequest / http_response<br>
+	- made a lot of lists functions<br>
+	- more lists on one line (not lists within lists)</p>
+	<p><u>Oct 20 2006 21:00 (local time)</u></p>
+	<p>- State change, shows correct events</p>
+	<p><u>Oct 20 2006 0:03 (local time)</u></p>
+	<p>- Implemented (almost) all Math functions<br>
+	- Timer works</p>
+	<p><u>Oct 19 2006 03:00 (local time)</u></p>
+	<p>- some edit improvements<br>
+	- states work!!</p>
+	<p><u>Oct 16 2006 23:50 (local time)</u></p>
+	<p>- Improvement parsing script, vector,rotation, simple list (one line)<br>
+	- Global vars, wrapped in global class<br>
+	- Checkupdate function in the program<br>
+	- First attempt multiple state (only default state executes, have patients 
+	my friends...)</p>
+	<p><u>Oct 14 2006 18:36 (local time)</u></p>
+	<p>- User argument input for events like touch_start (see picture above)</p>
+	<p><u>Oct 8, 2006 18:36 (local time)</u></p>
+	<p>- Code highlighting<br/>
+	- Code completion<br/>
+	- Code info, took the old LSLguide, and used Appendix, i can do better i 
+	know<br/>
+	- F1 , on a keyword, does show up the LSLWiki page on the keyword<br>
+	- Compile, the hello world example should work on state_entry event<br>
+	- Open/Save and edit lsl script files</p>
+	<p><u>Oct 2, 2006 (local time)</u></p>
+	
+	<h3>Release 1.0</h3>
+
+	<p>First idea and prototype</p>
+
+	<p><u>Oct 1, 2006 (local time)</u></p>
+
+</div>
