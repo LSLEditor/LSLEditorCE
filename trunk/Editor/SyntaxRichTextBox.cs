@@ -2038,7 +2038,7 @@ namespace LSLEditor
             using (StringReader reader = new StringReader(ttext))
             {
                 string line;
-                
+
                 int lineNumber = 0;
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -2048,42 +2048,41 @@ namespace LSLEditor
                     string[] words = line.Split(' ');
                     foreach (string word in words)
                     {
-                       Debug.WriteLine("ww:"+word);
+                        //Debug.WriteLine("ww:" + word);
                         if (keyWords.ContainsKeyWord(word))
                         {
                             KeyWordInfo k = keyWords.GetKeyWordInfo(word);
-                            Debug.WriteLine("w:"+word);
-                            Debug.WriteLine("k:" + k.type);
-                             if (!list.ContainsKey(lineNumber))
-                             {
-                            switch (k.type)
+                          //  Debug.WriteLine("w:" + word);
+                            //Debug.WriteLine("k:" + k.type);
+                            if (!list.ContainsKey(lineNumber))
                             {
-                               
-                                case KeyWordTypeEnum.Functions:
-                                    list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
-                                   // Debug.WriteLine(k);
-                                    break;
-                                case KeyWordTypeEnum.Events:
-                                    list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
-                                    break;
-                                case KeyWordTypeEnum.Constants:
-                                    list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
-                                    break;
-                                case KeyWordTypeEnum.Class:
-                                    list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
-                                    break;
-                                case KeyWordTypeEnum.Vars:
-                                    list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
-                                    break;
-                                case KeyWordTypeEnum.States:
-                                    list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
-                                    break;
-                                default:
+                                switch (k.type)
+                                {
 
-                                    break;
+                                    case KeyWordTypeEnum.Functions:
+                                        list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
+                                        // Debug.WriteLine(k);
+                                        break;
+                                    case KeyWordTypeEnum.Events:
+                                        list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
+                                        break;
+                                    case KeyWordTypeEnum.Constants:
+                                        list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
+                                        break;
+                                    case KeyWordTypeEnum.Class:
+                                        list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
+                                        break;
+                                    case KeyWordTypeEnum.Vars:
+                                        list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
+                                        break;
+                                    case KeyWordTypeEnum.States:
+                                        list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
+                                        break;
+                                    default:
+                                        //Debug.WriteLine(k);
+                                        break;
+                                }
                             }
-                             }
-
                         }
                     }
 
@@ -2093,39 +2092,66 @@ namespace LSLEditor
             }
             //TODO: parse dict and create the outline in the treeview
             //WILL SOMEONE PLEASE FUCKING FINISH THIS!
-            p.treeView1.Nodes.Clear();
-            string lastState = "none";
-            string lastevent = "none";
-            foreach (LSLEditor.Helpers.OutlineHelper k in list.Values)
+
+            if (p != null) //It gives the parent-scriptwindow as null when you try to run it
             {
+                p.tvOutline.BeginUpdate();
+                p.tvOutline.Nodes.Clear();
+                TreeNode lastState = null;
+                TreeNode lastEvent = null;
+                TreeNode lastScope = null;
 
-
-                //Debug.WriteLine(b.Name);
-                if (k.info.type == KeyWordTypeEnum.States)
+                foreach (LSLEditor.Helpers.OutlineHelper k in list.Values)
                 {
-
-                    
-                    lastState = k.info.name;
-                }
-                else
-                {
-                    if (k.info.type == KeyWordTypeEnum.Events)
+                    switch (k.info.type)
                     {
-
+                        case KeyWordTypeEnum.States:
+                            lastState = createOutlineNode(k);
+                            lastScope = lastState;
+                            p.tvOutline.Nodes.Add(lastState);
+                            break;
+                        case KeyWordTypeEnum.Events:
+                            if (lastState != null) //we need a state for every event!
+                            {
+                                lastEvent = createOutlineNode(k);
+                                lastScope = lastEvent;
+                                lastState.Nodes.Add(lastEvent);
+                            }
+                            break;
+                        case KeyWordTypeEnum.Functions:
+                            if (lastScope != null)
+                            {
+                                lastScope.Nodes.Add(createOutlineNode(k));
+                            }
+                            break;
+                        case KeyWordTypeEnum.Class:
+                            if (lastScope != null)
+                            {
+                                lastScope.Nodes.Add(createOutlineNode(k));
+                            }
+                            else
+                            {
+                                p.tvOutline.Nodes.Add(createOutlineNode(k));
+                            }
+                            break;
+                        default:
+                            p.tvOutline.Nodes.Add(createOutlineNode(k));
+                            break;
                     }
-                    else
-                    {
-
-                    }
-
-
-
                 }
+                p.tvOutline.EndUpdate();
+                // p.tvOutline.Nodes.Add(states);
+                p.tvOutline.ExpandAll();
             }
+        }
 
-           // p.treeView1.Nodes.Add(states);
-            p.treeView1.ExpandAll();
-
+        TreeNode createOutlineNode(Helpers.OutlineHelper ohOutline)
+        {
+            TreeNode result = null;
+            int ImageKey = (int)ohOutline.info.type;
+            result = new TreeNode(string.Format("{0} [{1}]", ohOutline.info.name, ohOutline.line + 1), ImageKey, ImageKey);
+            result.Tag = ohOutline;
+            return result;
         }
 
 		public void SaveCurrentFile(string strPath)

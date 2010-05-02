@@ -901,6 +901,7 @@ namespace LSLEditor
 			this.TooltipListBox.XOffset = 200; // TODO, afhankelijk van toegepaste font
 			this.GListBoxWindow.Tag = "";
 
+            // This order equals with the KeyWordTypeEnum in KeyWords.cs
 			ImageList imageList = new ImageList();
 			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Unknown.gif"));
 			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Functions.gif"));
@@ -909,8 +910,10 @@ namespace LSLEditor
 			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Class.gif"));
 			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Vars.gif"));
 			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Properties.gif"));
+            imageList.Images.Add(new Bitmap(this.GetType(), "Images.States.gif"));
 
 			this.GListBoxWindow.GListBox.ImageList = imageList;
+            this.tvOutline.ImageList = imageList;
 
 			this.Move += new EventHandler(LSLEditorForm_SetPosition);
 			this.Resize += new EventHandler(LSLEditorForm_SetPosition);
@@ -1874,7 +1877,23 @@ namespace LSLEditor
 			NativeHelper.SendMyKeys.ClipBoardToApp("SecondLife", null);
 		}
 
-
-
+        private void tvOutline_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            EditForm editForm = this.ActiveMdiForm as EditForm;
+            if (editForm == null)
+                return;
+            if (e.Node.Tag is Helpers.OutlineHelper)
+            {
+                Helpers.OutlineHelper ohOutline = (Helpers.OutlineHelper)e.Node.Tag;
+                if (ohOutline.line < editForm.TextBox.Lines.Length)
+                {
+                    //editForm.Focus();
+                    editForm.TextBox.Select();
+                    editForm.TextBox.Goto(ohOutline.line + 1);
+                    
+                    
+                }
+            }
+        }
 	}
 }
