@@ -73,7 +73,7 @@
     <Word name="{" />
     <Word name="}" />
   </Words>
-  <Words name="States" color="#0000ff" slcolor="#801A4D">
+  <Words icon="States" name="States" color="#0000ff" slcolor="#801A4D">
     <Word name="default">
       All scripts must have a
       <font color="blue">default</font>

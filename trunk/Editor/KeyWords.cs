@@ -60,7 +60,8 @@ namespace LSLEditor
 		Constants = 3,
 		Class = 4,
 		Vars = 5,
-		Properties = 6
+		Properties = 6,
+        States = 7
 	}
 
 	public struct KeyWordInfo
@@ -137,6 +138,9 @@ namespace LSLEditor
 						case "Vars":
 							type = KeyWordTypeEnum.Vars;
 							break;
+                        case "States":
+                            type = KeyWordTypeEnum.States;
+                            break;
 						case "Enum":
 							if (!Properties.Settings.Default.CodeCompletionAnimation)
 								continue;

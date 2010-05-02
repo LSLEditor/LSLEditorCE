@@ -523,6 +523,7 @@ namespace LSLEditor
 
 		private void EndUpdate()
 		{
+            doOutline();
 			intUpdate = Math.Max(0, intUpdate - 1);
 
 			if (intUpdate > 0) // only the last one
@@ -2032,38 +2033,56 @@ namespace LSLEditor
                 return;
             }
             Dictionary<int, Helpers.OutlineHelper> list = new Dictionary<int, LSLEditor.Helpers.OutlineHelper>();
-            using (StringReader reader = new StringReader(this.Text))
+            string ttext = this.Text;
+            ttext.Replace("\r\n", "");
+            using (StringReader reader = new StringReader(ttext))
             {
                 string line;
-
+                
                 int lineNumber = 0;
                 while ((line = reader.ReadLine()) != null)
                 {
 
+                    line = line.Trim();
+                    line = line.Split('(')[0];
                     string[] words = line.Split(' ');
                     foreach (string word in words)
                     {
+                       Debug.WriteLine("ww:"+word);
                         if (keyWords.ContainsKeyWord(word))
                         {
                             KeyWordInfo k = keyWords.GetKeyWordInfo(word);
+                            Debug.WriteLine("w:"+word);
+                            Debug.WriteLine("k:" + k.type);
+                             if (!list.ContainsKey(lineNumber))
+                             {
                             switch (k.type)
                             {
+                               
                                 case KeyWordTypeEnum.Functions:
                                     list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
-                                    Debug.WriteLine(k);
+                                   // Debug.WriteLine(k);
                                     break;
                                 case KeyWordTypeEnum.Events:
+                                    list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
                                     break;
                                 case KeyWordTypeEnum.Constants:
+                                    list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
                                     break;
                                 case KeyWordTypeEnum.Class:
+                                    list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
                                     break;
                                 case KeyWordTypeEnum.Vars:
+                                    list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
+                                    break;
+                                case KeyWordTypeEnum.States:
+                                    list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
                                     break;
                                 default:
 
                                     break;
                             }
+                             }
 
                         }
                     }
@@ -2073,17 +2092,42 @@ namespace LSLEditor
                 }
             }
             //TODO: parse dict and create the outline in the treeview
+            //WILL SOMEONE PLEASE FUCKING FINISH THIS!
+            p.treeView1.Nodes.Clear();
+            string lastState = "none";
+            string lastevent = "none";
             foreach (LSLEditor.Helpers.OutlineHelper k in list.Values)
             {
-                TreeNode b = new TreeNode();
-                b.Name = k.info.name;
-                Debug.WriteLine(b.Name);
-                p.treeView1.Nodes.Add(b);
 
+
+                //Debug.WriteLine(b.Name);
+                if (k.info.type == KeyWordTypeEnum.States)
+                {
+
+                    
+                    lastState = k.info.name;
+                }
+                else
+                {
+                    if (k.info.type == KeyWordTypeEnum.Events)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+
+
+
+                }
             }
 
+           // p.treeView1.Nodes.Add(states);
+            p.treeView1.ExpandAll();
 
         }
+
 		public void SaveCurrentFile(string strPath)
 		{
 			try

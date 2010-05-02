@@ -1,7 +1,4 @@
-integer a()
-{
-	return 1;
-}
+
 // www.lsleditor.org  by Alphons van der Heijden (SL: Alphons Jano)
 default
 {
@@ -12,5 +9,6 @@ default
 	touch_start(integer total_number)
 	{
 		llSay(0, "Touched: "+(string)total_number);
+		integer a = 1;
 	}
 }
