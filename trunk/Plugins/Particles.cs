@@ -52,22 +52,23 @@ namespace LSLEditor.Plugins
 	{
 		public Particles(LSLEditorForm parent)
 		{
+            string strPluginName = "Particles";
+
+            string strDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string strPluginsDirectory = Path.Combine(strDirectory, "Plugins");
+            string strProgram = Path.Combine(strPluginsDirectory, strPluginName + ".exe");
+
+            Assembly assembly = Assembly.LoadFrom(strProgram);
+            Form frmMain = assembly.CreateInstance("Particles.frmMain") as Form;
+
 			if (parent.IsMdiContainer)
 			{
-				string strPluginName = "Particles";
-				//string strArguments = "";
-
-				string strDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-				string strPluginsDirectory = Path.Combine(strDirectory, "Plugins");
-				string strProgram = Path.Combine(strPluginsDirectory, strPluginName + ".exe");
-
-				Assembly assembly = Assembly.LoadFrom(strProgram);
-				Form frmMain = assembly.CreateInstance("Particles.frmMain") as Form;
 				parent.AddForm(frmMain);
 			}
 			else
 			{
-				MessageBox.Show("This plugin does not run in tabbed mode", "Particles plugin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				//MessageBox.Show("This plugin does not run in tabbed mode", "Particles plugin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                frmMain.Show();
 			}
 		}
 	}
