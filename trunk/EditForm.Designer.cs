@@ -31,8 +31,8 @@ namespace LSLEditor
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.numberedTextBoxUC1 = new NumberedTextBox.NumberedTextBoxUC();
             this.tvOutline = new System.Windows.Forms.TreeView();
+            this.numberedTextBoxUC1 = new NumberedTextBox.NumberedTextBoxUC();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -64,6 +64,7 @@ namespace LSLEditor
             // 
             // splitContainer1
             // 
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(3, 3);
             this.splitContainer1.Name = "splitContainer1";
@@ -79,16 +80,8 @@ namespace LSLEditor
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainer1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainer1.Size = new System.Drawing.Size(546, 232);
-            this.splitContainer1.SplitterDistance = 437;
+            this.splitContainer1.SplitterDistance = 397;
             this.splitContainer1.TabIndex = 7;
-            // 
-            // numberedTextBoxUC1
-            // 
-            this.numberedTextBoxUC1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numberedTextBoxUC1.Location = new System.Drawing.Point(0, 0);
-            this.numberedTextBoxUC1.Name = "numberedTextBoxUC1";
-            this.numberedTextBoxUC1.Size = new System.Drawing.Size(437, 232);
-            this.numberedTextBoxUC1.TabIndex = 4;
             // 
             // tvOutline
             // 
@@ -96,10 +89,19 @@ namespace LSLEditor
             this.tvOutline.HotTracking = true;
             this.tvOutline.Location = new System.Drawing.Point(0, 0);
             this.tvOutline.Name = "tvOutline";
-            this.tvOutline.Size = new System.Drawing.Size(105, 232);
+            this.tvOutline.Size = new System.Drawing.Size(141, 228);
             this.tvOutline.TabIndex = 6;
+            this.tvOutline.VisibleChanged += new System.EventHandler(this.tvOutline_VisibleChanged);
             this.tvOutline.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvOutline_AfterSelect);
             this.tvOutline.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvOutline_NodeMouseClick);
+            // 
+            // numberedTextBoxUC1
+            // 
+            this.numberedTextBoxUC1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numberedTextBoxUC1.Location = new System.Drawing.Point(0, 0);
+            this.numberedTextBoxUC1.Name = "numberedTextBoxUC1";
+            this.numberedTextBoxUC1.Size = new System.Drawing.Size(393, 228);
+            this.numberedTextBoxUC1.TabIndex = 4;
             // 
             // EditForm
             // 

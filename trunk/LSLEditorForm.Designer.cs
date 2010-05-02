@@ -141,6 +141,7 @@ namespace LSLEditor
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.outlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlExtended1 = new System.Windows.Forms.TabControlExtended(this.components);
             this.tabControlExtended2 = new System.Windows.Forms.TabControlExtended(this.components);
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -639,7 +640,8 @@ namespace LSLEditor
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.solutionExplorerToolStripMenuItem});
+            this.solutionExplorerToolStripMenuItem,
+            this.outlineToolStripMenuItem});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(44, 20);
             this.toolStripMenuItem2.Text = "View";
@@ -1026,6 +1028,16 @@ namespace LSLEditor
             // 
             this.openFileDialog2.FileName = "openFileDialog2";
             // 
+            // outlineToolStripMenuItem
+            // 
+            this.outlineToolStripMenuItem.Checked = true;
+            this.outlineToolStripMenuItem.CheckOnClick = true;
+            this.outlineToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.outlineToolStripMenuItem.Name = "outlineToolStripMenuItem";
+            this.outlineToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.outlineToolStripMenuItem.Text = "Outline";
+            this.outlineToolStripMenuItem.CheckedChanged += new System.EventHandler(this.outlineToolStripMenuItem_CheckedChanged);
+            // 
             // tabControlExtended1
             // 
             this.tabControlExtended1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -1220,5 +1232,6 @@ namespace LSLEditor
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
         private System.Windows.Forms.ToolTip toolTip1;
+        public System.Windows.Forms.ToolStripMenuItem outlineToolStripMenuItem;
 	}
 }

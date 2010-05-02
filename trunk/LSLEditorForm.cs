@@ -1877,6 +1877,29 @@ namespace LSLEditor
 			NativeHelper.SendMyKeys.ClipBoardToApp("SecondLife", null);
 		}
 
+        private void outlineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //old
+        }
+
+        private void outlineToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (Form k in this.Children)
+            {
+                EditForm editForm = k as EditForm;
+                if (editForm == null)
+                    return;
+                if (outlineToolStripMenuItem.Checked)
+                {
+                    editForm.splitContainer1.Panel2Collapsed = false;
+                }
+                else
+                {
+                    editForm.splitContainer1.Panel2Collapsed = true;
+                }
+            }
+        }
+
 
 	}
 }

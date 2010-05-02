@@ -57,7 +57,7 @@ namespace LSLEditor
 
 		private string m_FullPathName;
 		private Guid m_Guid;
-
+        private bool sOutline = true;
 		public LSLEditorForm parent;
 
 		private const int WM_NCACTIVATE = 0x0086;
@@ -158,6 +158,14 @@ namespace LSLEditor
             imageList.Images.Add(new Bitmap(this.GetType(), "Images.States.gif"));
 
             this.tvOutline.ImageList = imageList;
+            if (lslEditorForm.outlineToolStripMenuItem.Checked)
+            {
+                splitContainer1.Panel2Collapsed = false;
+            }
+            else
+            {
+                splitContainer1.Panel2Collapsed = true;
+            }
 			SetFont();
 		}
 
@@ -485,6 +493,16 @@ namespace LSLEditor
         {
             
             //this.TextBox.Select
+        }
+
+        private void splitContainer1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tvOutline_VisibleChanged(object sender, EventArgs e)
+        {
+            this.tvOutline.ExpandAll();
         }
 	}
 }

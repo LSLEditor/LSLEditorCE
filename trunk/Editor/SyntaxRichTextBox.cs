@@ -2147,6 +2147,7 @@ namespace LSLEditor
                 p.tvOutline.EndUpdate();
                 // p.tvOutline.Nodes.Add(states);
                 p.tvOutline.ExpandAll();
+
             }
         }
 

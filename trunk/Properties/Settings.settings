@@ -6,7 +6,7 @@
       <Value Profile="(Default)">SecondLife Name</Value>
     </Setting>
     <Setting Name="Version" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">2.40.0</Value>
+      <Value Profile="(Default)">2.40.1</Value>
     </Setting>
     <Setting Name="BrowserInWindow" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
