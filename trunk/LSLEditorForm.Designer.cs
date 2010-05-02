@@ -733,7 +733,7 @@ namespace LSLEditor
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.optionsToolStripMenuItem.Text = "Options...";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -1084,10 +1084,12 @@ namespace LSLEditor
             // tvOutline
             // 
             this.tvOutline.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvOutline.HideSelection = false;
             this.tvOutline.Location = new System.Drawing.Point(3, 3);
             this.tvOutline.Name = "tvOutline";
             this.tvOutline.Size = new System.Drawing.Size(186, 438);
             this.tvOutline.TabIndex = 0;
+            this.tvOutline.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvOutline_AfterSelect);
             this.tvOutline.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvOutline_NodeMouseClick);
             // 
             // LSLEditorForm

@@ -1879,21 +1879,34 @@ namespace LSLEditor
 
         private void tvOutline_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            EditForm editForm = this.ActiveMdiForm as EditForm;
-            if (editForm == null)
-                return;
-            if (e.Node.Tag is Helpers.OutlineHelper)
-            {
-                Helpers.OutlineHelper ohOutline = (Helpers.OutlineHelper)e.Node.Tag;
-                if (ohOutline.line < editForm.TextBox.Lines.Length)
+            this.BeginInvoke(new TreeNodeMouseClickEventHandler(
+                delegate(object sender2, TreeNodeMouseClickEventArgs e2)
                 {
-                    //editForm.Focus();
-                    editForm.TextBox.Select();
-                    editForm.TextBox.Goto(ohOutline.line + 1);
-                    
-                    
-                }
-            }
+                    EditForm editForm = this.ActiveMdiForm as EditForm;
+                    if (editForm == null)
+                        return;
+                    if (e.Node.Tag is Helpers.OutlineHelper)
+                    {
+                        Helpers.OutlineHelper ohOutline = (Helpers.OutlineHelper)e.Node.Tag;
+                        if (ohOutline.line < editForm.TextBox.Lines.Length)
+                        {
+                            //editForm.Focus();
+                            //editForm.TextBox.Select();
+                            //editForm.TextBox.Goto(ohOutline.line + 1);
+
+                            //editForm.Focus();
+                            editForm.TextBox.Select();
+                            editForm.TextBox.SelectionStart = editForm.TextBox.GetFirstCharIndexFromLine(ohOutline.line);
+
+
+                        }
+                    }
+                }), sender, e);
+        }
+
+        private void tvOutline_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
         }
 	}
 }

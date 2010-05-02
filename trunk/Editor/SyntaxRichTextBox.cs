@@ -487,7 +487,7 @@ namespace LSLEditor
 			{
 			}
 
-			EndUpdate();
+			EndUpdate(false);
 			this.Focus();
 		}
 
@@ -521,9 +521,10 @@ namespace LSLEditor
 			eventMask = SendMessage(this.Handle, EM_GETEVENTMASK, 0, IntPtr.Zero);
 		}
 
-		private void EndUpdate()
+		private void EndUpdate(bool update_outline)
 		{
-            doOutline();
+            if(update_outline) doOutline();
+
 			intUpdate = Math.Max(0, intUpdate - 1);
 
 			if (intUpdate > 0) // only the last one
@@ -655,7 +656,7 @@ namespace LSLEditor
 			this.SelectionStart = intStart;
 			this.SelectionLength = intLength;
 			AutoFormat(true);
-			EndUpdate();
+			EndUpdate(true);
 		}
 
 		private void ProcessEnter()
@@ -678,7 +679,7 @@ namespace LSLEditor
 					}
 				}
 			}
-			EndUpdate();
+			EndUpdate(true);
 		}
 
 		private void SmartIndenting()
@@ -727,7 +728,7 @@ namespace LSLEditor
 				BracketHighlichting();
 			}
 
-			EndUpdate();
+			EndUpdate(false);
 		}
 
 		public void Delete()
@@ -736,7 +737,7 @@ namespace LSLEditor
 			if (this.SelectionLength == 0)
 				this.SelectionLength = 1;
 			this.ColoredText = "";
-			EndUpdate();
+			EndUpdate(true);
 			OnTextChanged(null);
 		}
 
@@ -745,7 +746,7 @@ namespace LSLEditor
 			BeginUpdate();
 			this.Copy();
 			this.ColoredText = "";
-			EndUpdate();
+			EndUpdate(true);
 			OnTextChanged(null);
 		}
 
@@ -789,7 +790,7 @@ namespace LSLEditor
 				ColorLine(intStart, intStop - intStart);
 			}
 
-			EndUpdate();
+			EndUpdate(true);
 			this.Focus();
 		}
 
@@ -825,7 +826,7 @@ namespace LSLEditor
 				ColorLine(intStart, intStop - intStart);
 			}
 
-			EndUpdate();
+			EndUpdate(true);
 			this.Focus();
 		}
 
@@ -879,7 +880,7 @@ namespace LSLEditor
 			this.SelectionStart = intBackupSelectionStart;
 			this.SelectionLength = intBackupSelectionLength;
 			this.HighLightLine = -1;
-			EndUpdate();
+			EndUpdate(false);
 		}
 
 		private void CursorPositionChanged()
@@ -1061,7 +1062,7 @@ namespace LSLEditor
 								this.SelectionStart = this.GetFirstCharIndexOfCurrentLine();
 								int intLine = this.GetLineFromCharIndex(this.SelectionStart);
 								this.SelectionLength = this.Lines[intLine].Length + 1;
-								EndUpdate();
+								EndUpdate(true);
 							}
 						}
 						this.Copy();
@@ -1135,7 +1136,7 @@ namespace LSLEditor
 			if (this.SelectionLength == 0)
 				this.SelectionLength = 1;
 			this.ColoredText = "";
-			EndUpdate();
+			EndUpdate(true);
 			OnTextChanged(null);
 			CursorPositionChanged();
 		}
@@ -1482,7 +1483,7 @@ namespace LSLEditor
 			this.SelectionStart = SelectionStartBackup;
 			this.SelectionColor = this.ForeColor;
 
-			EndUpdate();
+			EndUpdate(false);
 		}
 
 		private int AutoFormat(bool OnlySelectedText)
@@ -1515,7 +1516,7 @@ namespace LSLEditor
 			this.SelectionStart = intBackupStart;
 			this.SelectionLength = intSelectionLength;
 			this.RTBScrollPos = scrollPoint;
-			EndUpdate();
+			EndUpdate(false);
 		}
 
 		public void FormatDocument()
@@ -1526,7 +1527,7 @@ namespace LSLEditor
 			AutoFormat(false);
 			this.SelectionStart = Math.Max(0,this.GetFirstCharIndexFromLine(intLine));
 			this.RTBScrollPos = scrollPoint;
-			EndUpdate();
+			EndUpdate(false);
 		}
 
 		public void ClearUndoStack()
@@ -1549,7 +1550,7 @@ namespace LSLEditor
 				this.SelectionLength = this.Text.Length; //TODO
 				this.ColoredText = value;
 				this.SelectionStart = intBackup;
-				EndUpdate();
+				EndUpdate(true);
 			}
 		}
 
@@ -1609,7 +1610,7 @@ namespace LSLEditor
 			this.ColoredText = strSelected;
 
 			this.SelectionStart += intOffset;
-			EndUpdate();
+			EndUpdate(true);
 
 			// if any
 			ShowKeyBoardHint();
@@ -1757,7 +1758,7 @@ namespace LSLEditor
 			this.ColoredText = strSelectedText;
 			this.SelectionStart = intBackup;
 			this.SelectionLength = strSelectedText.Length;
-			EndUpdate();
+			EndUpdate(true);
 		}
 
 		public void MultiLineTab(bool blnAdd)
@@ -1902,7 +1903,7 @@ namespace LSLEditor
 
 			this.RTBScrollPos = scrollPoint;
 
-			EndUpdate();
+			EndUpdate(false);
 		}
 
 		private void BracketHighlichting()
@@ -1975,7 +1976,7 @@ namespace LSLEditor
 
 			this.RTBScrollPos = scrollPoint;
 
-			EndUpdate();
+			EndUpdate(false);
 		}
 
 		public override string SelectedText
@@ -2019,7 +2020,7 @@ namespace LSLEditor
 					this.SelectionLength = 0;
 					this.SelectionStart += value.Length;
 				}
-				EndUpdate();
+				EndUpdate(true);
 			}
 		}
         public void doOutline()
