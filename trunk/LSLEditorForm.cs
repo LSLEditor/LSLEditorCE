@@ -913,7 +913,7 @@ namespace LSLEditor
             imageList.Images.Add(new Bitmap(this.GetType(), "Images.States.gif"));
 
 			this.GListBoxWindow.GListBox.ImageList = imageList;
-            this.tvOutline.ImageList = imageList;
+           // this.tvOutline.ImageList = imageList;
 
 			this.Move += new EventHandler(LSLEditorForm_SetPosition);
 			this.Resize += new EventHandler(LSLEditorForm_SetPosition);
@@ -1877,36 +1877,6 @@ namespace LSLEditor
 			NativeHelper.SendMyKeys.ClipBoardToApp("SecondLife", null);
 		}
 
-        private void tvOutline_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            this.BeginInvoke(new TreeNodeMouseClickEventHandler(
-                delegate(object sender2, TreeNodeMouseClickEventArgs e2)
-                {
-                    EditForm editForm = this.ActiveMdiForm as EditForm;
-                    if (editForm == null)
-                        return;
-                    if (e.Node.Tag is Helpers.OutlineHelper)
-                    {
-                        Helpers.OutlineHelper ohOutline = (Helpers.OutlineHelper)e.Node.Tag;
-                        if (ohOutline.line < editForm.TextBox.Lines.Length)
-                        {
-                            //editForm.Focus();
-                            //editForm.TextBox.Select();
-                            //editForm.TextBox.Goto(ohOutline.line + 1);
 
-                            //editForm.Focus();
-                            editForm.TextBox.Select();
-                            editForm.TextBox.SelectionStart = editForm.TextBox.GetFirstCharIndexFromLine(ohOutline.line);
-
-
-                        }
-                    }
-                }), sender, e);
-        }
-
-        private void tvOutline_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
-        }
 	}
 }

@@ -139,7 +139,7 @@ namespace LSLEditor
 
 			this.Icon = lslEditorForm.Icon;
 			this.parent = lslEditorForm;
-
+            this.numberedTextBoxUC1.TextBox.setEditform(this);
 			this.numberedTextBoxUC1.TextBox.Init(this.parent, this.parent.ConfLSL);
 			this.numberedTextBoxUC1.TextBox.OnDirtyChanged += new IsDirtyHandler(TextBox_OnDirtyChanged);
 
@@ -147,7 +147,17 @@ namespace LSLEditor
 			this.Resize += new EventHandler(EditForm_Position);
 
 			this.Layout += new LayoutEventHandler(EditForm_Layout);
+            ImageList imageList = new ImageList();
+            imageList.Images.Add(new Bitmap(this.GetType(), "Images.Unknown.gif"));
+            imageList.Images.Add(new Bitmap(this.GetType(), "Images.Functions.gif"));
+            imageList.Images.Add(new Bitmap(this.GetType(), "Images.Events.gif"));
+            imageList.Images.Add(new Bitmap(this.GetType(), "Images.Constants.gif"));
+            imageList.Images.Add(new Bitmap(this.GetType(), "Images.Class.gif"));
+            imageList.Images.Add(new Bitmap(this.GetType(), "Images.Vars.gif"));
+            imageList.Images.Add(new Bitmap(this.GetType(), "Images.Properties.gif"));
+            imageList.Images.Add(new Bitmap(this.GetType(), "Images.States.gif"));
 
+            this.tvOutline.ImageList = imageList;
 			SetFont();
 		}
 
@@ -354,8 +364,8 @@ namespace LSLEditor
 
 		public bool StartCompiler()
 		{
-			if (this.disableCompilesyntaxCheckToolStripMenuItem.Checked)
-				return false;
+			//if (this.disableCompilesyntaxCheckToolStripMenuItem.Checked)
+			//	return false;
 
 			if (!this.IsScript)
 				return false;
@@ -385,8 +395,8 @@ namespace LSLEditor
 
 		public bool SyntaxCheck()
 		{
-			if (this.disableCompilesyntaxCheckToolStripMenuItem.Checked)
-				return false;
+			//if (this.disableCompilesyntaxCheckToolStripMenuItem.Checked)
+			//	return false;
 
 			if (!this.IsScript)
 				return false;
@@ -443,7 +453,37 @@ namespace LSLEditor
 
 		private void disableCompilesyntaxCheckToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			this.disableCompilesyntaxCheckToolStripMenuItem.Checked = !this.disableCompilesyntaxCheckToolStripMenuItem.Checked;
+			//this.disableCompilesyntaxCheckToolStripMenuItem.Checked = !this.disableCompilesyntaxCheckToolStripMenuItem.Checked;
 		}
+        private void tvOutline_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            //this.BeginInvoke(new TreeNodeMouseClickEventHandler(
+              //  delegate(object sender2, TreeNodeMouseClickEventArgs e2)
+                //{
+
+                    if (e.Node.Tag is Helpers.OutlineHelper)
+                    {
+                        Helpers.OutlineHelper ohOutline = (Helpers.OutlineHelper)e.Node.Tag;
+                        if (ohOutline.line < this.TextBox.Lines.Length)
+                        {
+                            //editForm.Focus();
+                            //editForm.TextBox.Select();
+                            //editForm.TextBox.Goto(ohOutline.line + 1);
+
+                            TextBox.Focus();
+                            this.TextBox.Select();
+                            this.TextBox.SelectionStart = this.TextBox.GetFirstCharIndexFromLine(ohOutline.line);
+                            
+
+                        }
+                    }
+              //  }), sender, e);
+        }
+
+        private void tvOutline_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            
+            //this.TextBox.Select
+        }
 	}
 }

@@ -111,7 +111,7 @@ namespace LSLEditor
 
 		// bracket highlighting
 		private List<int> HighLightList;
-        public LSLEditorForm p;
+        public EditForm p;
 		public float CharWidth;
 		public int LineHeight;
 
@@ -291,7 +291,10 @@ namespace LSLEditor
 			//SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 			//SetStyle(ControlStyles.Opaque, true);
 		}
-
+        public void setEditform(EditForm ed)
+        {
+            p = ed;
+        }
 		public void Init(LSLEditorForm parent, XmlDocument xml)
 		{
 			if (parent != null)
@@ -301,7 +304,8 @@ namespace LSLEditor
 				this.TooltipMouse = parent.TooltipMouse;
 				this.TooltipKeyboard = parent.TooltipKeyboard;
 				this.TooltipListBox = parent.TooltipListBox;
-                p = parent;
+             //   p = this.Parent as EditForm;
+               // p = parent; moved to edit form
 			}
 
 			string ColorScheme = "color";
