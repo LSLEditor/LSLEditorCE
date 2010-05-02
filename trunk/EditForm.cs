@@ -455,11 +455,12 @@ namespace LSLEditor
 		{
 			//this.disableCompilesyntaxCheckToolStripMenuItem.Checked = !this.disableCompilesyntaxCheckToolStripMenuItem.Checked;
 		}
+
         private void tvOutline_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            //this.BeginInvoke(new TreeNodeMouseClickEventHandler(
-              //  delegate(object sender2, TreeNodeMouseClickEventArgs e2)
-                //{
+            this.parent.BeginInvoke(new TreeNodeMouseClickEventHandler(
+                delegate(object sender2, TreeNodeMouseClickEventArgs e2)
+                {
 
                     if (e.Node.Tag is Helpers.OutlineHelper)
                     {
@@ -470,14 +471,14 @@ namespace LSLEditor
                             //editForm.TextBox.Select();
                             //editForm.TextBox.Goto(ohOutline.line + 1);
 
-                            TextBox.Focus();
+                            //TextBox.Focus();
                             this.TextBox.Select();
                             this.TextBox.SelectionStart = this.TextBox.GetFirstCharIndexFromLine(ohOutline.line);
                             
 
                         }
                     }
-              //  }), sender, e);
+                }), sender, e);
         }
 
         private void tvOutline_AfterSelect(object sender, TreeViewEventArgs e)
