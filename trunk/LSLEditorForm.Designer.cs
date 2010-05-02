@@ -135,17 +135,17 @@ namespace LSLEditor
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.closeTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tabControlExtended2 = new System.Windows.Forms.TabControlExtended(this.components);
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.solutionExplorer1 = new LSLEditor.Solution.SolutionExplorer();
+            this.outline = new System.Windows.Forms.TabPage();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.tabControlExtended1 = new System.Windows.Forms.TabControlExtended(this.components);
-            this.tabControlExtended2 = new System.Windows.Forms.TabControlExtended(this.components);
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.solutionExplorer1 = new LSLEditor.Solution.SolutionExplorer();
-            this.outline = new System.Windows.Forms.TabPage();
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -995,51 +995,6 @@ namespace LSLEditor
             this.panel2.TabIndex = 20;
             this.panel2.Visible = false;
             // 
-            // splitter2
-            // 
-            this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter2.Location = new System.Drawing.Point(534, 24);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(8, 470);
-            this.splitter2.TabIndex = 22;
-            this.splitter2.TabStop = false;
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 458);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(534, 36);
-            this.panel1.TabIndex = 23;
-            this.panel1.Visible = false;
-            // 
-            // splitter1
-            // 
-            this.splitter1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.splitter1.Location = new System.Drawing.Point(0, 450);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitter1.Size = new System.Drawing.Size(534, 8);
-            this.splitter1.TabIndex = 24;
-            this.splitter1.TabStop = false;
-            this.splitter1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter1_SplitterMoved);
-            // 
-            // openFileDialog2
-            // 
-            this.openFileDialog2.FileName = "openFileDialog2";
-            // 
-            // tabControlExtended1
-            // 
-            this.tabControlExtended1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabControlExtended1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.tabControlExtended1.Location = new System.Drawing.Point(0, 414);
-            this.tabControlExtended1.Name = "tabControlExtended1";
-            this.tabControlExtended1.SelectedIndex = 0;
-            this.tabControlExtended1.Size = new System.Drawing.Size(534, 36);
-            this.tabControlExtended1.TabIndex = 25;
-            this.tabControlExtended1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControlExtended1_MouseDown);
-            this.tabControlExtended1.SelectedIndexChanged += new System.EventHandler(this.tabControlExtended1_SelectedIndexChanged);
-            // 
             // tabControlExtended2
             // 
             this.tabControlExtended2.Controls.Add(this.tabPage1);
@@ -1088,6 +1043,51 @@ namespace LSLEditor
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(186, 438);
             this.treeView1.TabIndex = 0;
+            // 
+            // splitter2
+            // 
+            this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.splitter2.Location = new System.Drawing.Point(534, 24);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(8, 470);
+            this.splitter2.TabIndex = 22;
+            this.splitter2.TabStop = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 458);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(534, 36);
+            this.panel1.TabIndex = 23;
+            this.panel1.Visible = false;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.splitter1.Location = new System.Drawing.Point(0, 450);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.splitter1.Size = new System.Drawing.Size(534, 8);
+            this.splitter1.TabIndex = 24;
+            this.splitter1.TabStop = false;
+            this.splitter1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter1_SplitterMoved);
+            // 
+            // openFileDialog2
+            // 
+            this.openFileDialog2.FileName = "openFileDialog2";
+            // 
+            // tabControlExtended1
+            // 
+            this.tabControlExtended1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tabControlExtended1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControlExtended1.Location = new System.Drawing.Point(0, 414);
+            this.tabControlExtended1.Name = "tabControlExtended1";
+            this.tabControlExtended1.SelectedIndex = 0;
+            this.tabControlExtended1.Size = new System.Drawing.Size(534, 36);
+            this.tabControlExtended1.TabIndex = 25;
+            this.tabControlExtended1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControlExtended1_MouseDown);
+            this.tabControlExtended1.SelectedIndexChanged += new System.EventHandler(this.tabControlExtended1_SelectedIndexChanged);
             // 
             // LSLEditorForm
             // 
@@ -1243,6 +1243,6 @@ namespace LSLEditor
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
         private System.Windows.Forms.TabPage outline;
-        private System.Windows.Forms.TreeView treeView1;
+        public System.Windows.Forms.TreeView treeView1;
 	}
 }

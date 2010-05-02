@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LSLEditor.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
@@ -88,9 +88,6 @@
     </Setting>
     <Setting Name="WikiSeperateBrowser" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="OopsRemove" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\Documents and Settings\Alphons\Mijn documenten\Visual Studio 2005\Projects</Value>
     </Setting>
     <Setting Name="About" Type="System.String" Scope="Application">
       <Value Profile="(Default)">About.htm</Value>
@@ -298,59 +295,40 @@
         </Value>
     </Setting>
     <Setting Name="Update" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">
-          http://www.lsleditor.org/checkforupdate/Default.aspx?
-        </Value>
+      <Value Profile="(Default)">http://www.lsleditor.org/checkforupdate/Default.aspx?</Value>
     </Setting>
     <Setting Name="Examples" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">
-          http://www.lsleditor.org/examples/
-        </Value>
+      <Value Profile="(Default)">http://www.lsleditor.org/examples/</Value>
     </Setting>
     <Setting Name="Upload" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">
-          http://www.lsleditor.org/uploadscript/
-        </Value>
+      <Value Profile="(Default)">http://www.lsleditor.org/uploadscript/</Value>
     </Setting>
     <Setting Name="ConfCSharp" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">
-          Resource.ConfCSharp.xml
-        </Value>
+      <Value Profile="(Default)">Resource.ConfCSharp.xml</Value>
     </Setting>
     <Setting Name="UpdateManifest" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">
-          http://www.lsleditor.org/CheckForUpdate/Manifest.aspx
-        </Value>
+      <Value Profile="(Default)">http://www.lsleditor.org/CheckForUpdate/Manifest.aspx</Value>
     </Setting>
     <Setting Name="ToolsOptions" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">
-          Resource.ToolsOptions.xml
-        </Value>
+      <Value Profile="(Default)">Resource.ToolsOptions.xml</Value>
     </Setting>
     <Setting Name="ContactUrl" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">
-          http://www.lsleditor.org/mail/
-        </Value>
+      <Value Profile="(Default)">http://www.lsleditor.org/mail/</Value>
     </Setting>
     <Setting Name="DonateUrl" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">
-          http://www.lsleditor.org/donate.htm
-        </Value>
+      <Value Profile="(Default)">http://www.lsleditor.org/donate.htm</Value>
     </Setting>
     <Setting Name="Help2" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">
-          http://wiki.secondlife.com/wiki/Special:Search?go=Go&amp;search=
-        </Value>
+      <Value Profile="(Default)">http://wiki.secondlife.com/wiki/Special:Search?go=Go&amp;search=</Value>
     </Setting>
     <Setting Name="Help1" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">
-          http://www.lslwiki.net/lslwiki/wakka.php?wakka=
-        </Value>
+      <Value Profile="(Default)">http://www.lslwiki.net/lslwiki/wakka.php?wakka=</Value>
     </Setting>
     <Setting Name="ForumLSLEditor" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">
-          http://www.lsleditor.org/forum/
-        </Value>
+      <Value Profile="(Default)">http://www.lsleditor.org/forum/</Value>
+    </Setting>
+    <Setting Name="OopsRemove" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Documents and Settings\Alphons\Mijn documenten\Visual Studio 2005\Projects</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -361,15 +361,6 @@ namespace LSLEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Documents and Settings\\Alphons\\Mijn documenten\\Visual Studio 2005\\Projects")]
-        public string OopsRemove {
-            get {
-                return ((string)(this["OopsRemove"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("About.htm")]
         public string About {
             get {
@@ -1124,7 +1115,7 @@ namespace LSLEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          http://www.lsleditor.org/checkforupdate/Default.aspx?\r\n        ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.lsleditor.org/checkforupdate/Default.aspx?")]
         public string Update {
             get {
                 return ((string)(this["Update"]));
@@ -1133,7 +1124,7 @@ namespace LSLEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          http://www.lsleditor.org/examples/\r\n        ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.lsleditor.org/examples/")]
         public string Examples {
             get {
                 return ((string)(this["Examples"]));
@@ -1142,7 +1133,7 @@ namespace LSLEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          http://www.lsleditor.org/uploadscript/\r\n        ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.lsleditor.org/uploadscript/")]
         public string Upload {
             get {
                 return ((string)(this["Upload"]));
@@ -1151,7 +1142,7 @@ namespace LSLEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          Resource.ConfCSharp.xml\r\n        ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Resource.ConfCSharp.xml")]
         public string ConfCSharp {
             get {
                 return ((string)(this["ConfCSharp"]));
@@ -1160,7 +1151,7 @@ namespace LSLEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          http://www.lsleditor.org/CheckForUpdate/Manifest.aspx\r\n        ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.lsleditor.org/CheckForUpdate/Manifest.aspx")]
         public string UpdateManifest {
             get {
                 return ((string)(this["UpdateManifest"]));
@@ -1169,7 +1160,7 @@ namespace LSLEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          Resource.ToolsOptions.xml\r\n        ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Resource.ToolsOptions.xml")]
         public string ToolsOptions {
             get {
                 return ((string)(this["ToolsOptions"]));
@@ -1178,7 +1169,7 @@ namespace LSLEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          http://www.lsleditor.org/mail/\r\n        ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.lsleditor.org/mail/")]
         public string ContactUrl {
             get {
                 return ((string)(this["ContactUrl"]));
@@ -1187,7 +1178,7 @@ namespace LSLEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          http://www.lsleditor.org/donate.htm\r\n        ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.lsleditor.org/donate.htm")]
         public string DonateUrl {
             get {
                 return ((string)(this["DonateUrl"]));
@@ -1196,8 +1187,7 @@ namespace LSLEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          http://wiki.secondlife.com/wiki/Special:Search?go=Go&search=\r\n       " +
-            " ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://wiki.secondlife.com/wiki/Special:Search?go=Go&search=")]
         public string Help2 {
             get {
                 return ((string)(this["Help2"]));
@@ -1206,7 +1196,7 @@ namespace LSLEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          http://www.lslwiki.net/lslwiki/wakka.php?wakka=\r\n        ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.lslwiki.net/lslwiki/wakka.php?wakka=")]
         public string Help1 {
             get {
                 return ((string)(this["Help1"]));
@@ -1215,10 +1205,19 @@ namespace LSLEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          http://www.lsleditor.org/forum/\r\n        ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.lsleditor.org/forum/")]
         public string ForumLSLEditor {
             get {
                 return ((string)(this["ForumLSLEditor"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Documents and Settings\\Alphons\\Mijn documenten\\Visual Studio 2005\\Projects")]
+        public string OopsRemove {
+            get {
+                return ((string)(this["OopsRemove"]));
             }
         }
     }

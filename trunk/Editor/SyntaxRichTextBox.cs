@@ -53,7 +53,7 @@ using System.ComponentModel;
 using System.Drawing.Printing;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
-
+using System.Diagnostics;
 namespace LSLEditor
 {
 	public delegate void IsDirtyHandler(object sender, EventArgs e);
@@ -111,7 +111,7 @@ namespace LSLEditor
 
 		// bracket highlighting
 		private List<int> HighLightList;
-
+        public LSLEditorForm p;
 		public float CharWidth;
 		public int LineHeight;
 
@@ -301,6 +301,7 @@ namespace LSLEditor
 				this.TooltipMouse = parent.TooltipMouse;
 				this.TooltipKeyboard = parent.TooltipKeyboard;
 				this.TooltipListBox = parent.TooltipListBox;
+                p = parent;
 			}
 
 			string ColorScheme = "color";
@@ -2024,6 +2025,7 @@ namespace LSLEditor
         {
             //TODO: finish the outline class and such
             //      still a work in progress trying to figure out exactly how i wanna do this.
+
             int len = this.Lines.Length;
             if (len < 1)
             {
@@ -2033,10 +2035,11 @@ namespace LSLEditor
             using (StringReader reader = new StringReader(this.Text))
             {
                 string line;
-                
+
                 int lineNumber = 0;
                 while ((line = reader.ReadLine()) != null)
                 {
+
                     string[] words = line.Split(' ');
                     foreach (string word in words)
                     {
@@ -2047,9 +2050,10 @@ namespace LSLEditor
                             {
                                 case KeyWordTypeEnum.Functions:
                                     list.Add(lineNumber, new LSLEditor.Helpers.OutlineHelper(k, lineNumber));
+                                    Debug.WriteLine(k);
                                     break;
                                 case KeyWordTypeEnum.Events:
-                                     break;
+                                    break;
                                 case KeyWordTypeEnum.Constants:
                                     break;
                                 case KeyWordTypeEnum.Class:
@@ -2057,10 +2061,10 @@ namespace LSLEditor
                                 case KeyWordTypeEnum.Vars:
                                     break;
                                 default:
-                                    
+
                                     break;
                             }
-                                
+
                         }
                     }
 
@@ -2069,7 +2073,14 @@ namespace LSLEditor
                 }
             }
             //TODO: parse dict and create the outline in the treeview
-            
+            foreach (LSLEditor.Helpers.OutlineHelper k in list.Values)
+            {
+                TreeNode b = new TreeNode();
+                b.Name = k.info.name;
+                Debug.WriteLine(b.Name);
+                p.treeView1.Nodes.Add(b);
+
+            }
 
 
         }

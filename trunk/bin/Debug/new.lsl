@@ -1,12 +1,16 @@
+integer a()
+{
+	return 1;
+}
 // www.lsleditor.org  by Alphons van der Heijden (SL: Alphons Jano)
 default
 {
 	state_entry()
 	{
-		llSay(0, "Ready to test!");
+		llSay(0, "Hello, Avatar!");
 	}
 	touch_start(integer total_number)
 	{
-		llSay(0, "Length of \\t (tab) character: "+(string)llStringLength("\t"));
+		llSay(0, "Touched: "+(string)total_number);
 	}
 }
