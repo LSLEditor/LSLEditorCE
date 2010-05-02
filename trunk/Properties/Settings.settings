@@ -280,7 +280,6 @@
     </Setting>
     <Setting Name="Example" Type="System.String" Scope="Application">
       <Value Profile="(Default)">
-          // www.lsleditor.org  by Alphons van der Heijden (SL: Alphons Jano)
           default
           {
           state_entry()
@@ -295,7 +294,7 @@
         </Value>
     </Setting>
     <Setting Name="Update" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://www.lsleditor.org/checkforupdate/Default.aspx?</Value>
+      <Value Profile="(Default)">http://lsleditor.sourceforge.net/check4update.php?</Value>
     </Setting>
     <Setting Name="Examples" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://www.lsleditor.org/examples/</Value>
@@ -307,13 +306,13 @@
       <Value Profile="(Default)">Resource.ConfCSharp.xml</Value>
     </Setting>
     <Setting Name="UpdateManifest" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://www.lsleditor.org/CheckForUpdate/Manifest.aspx</Value>
+      <Value Profile="(Default)">http://lsleditor.sourceforge.net/update.php</Value>
     </Setting>
     <Setting Name="ToolsOptions" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Resource.ToolsOptions.xml</Value>
     </Setting>
     <Setting Name="ContactUrl" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://www.lsleditor.org/mail/</Value>
+      <Value Profile="(Default)">https://sourceforge.net/tracker/?group_id=319248</Value>
     </Setting>
     <Setting Name="DonateUrl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://www.lsleditor.org/donate.htm</Value>
@@ -325,7 +324,7 @@
       <Value Profile="(Default)">http://www.lslwiki.net/lslwiki/wakka.php?wakka=</Value>
     </Setting>
     <Setting Name="ForumLSLEditor" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://www.lsleditor.org/forum/</Value>
+      <Value Profile="(Default)">https://sourceforge.net/projects/lsleditor/forums</Value>
     </Setting>
     <Setting Name="OopsRemove" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\Documents and Settings\Alphons\Mijn documenten\Visual Studio 2005\Projects</Value>
