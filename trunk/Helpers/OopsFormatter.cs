@@ -1,7 +1,7 @@
 // /**
 // ********
 // *
-// * ORIGIONAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
+// * ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
 // * The code was donated on 4/28/2010 by Alphons van der Heijden
 // * To Brandon'Dimentox Travanti' Husbands & Malcolm J. Kudra which in turn Liscense under the GPLv2.
 // * In agreement to Alphons van der Heijden wishes.
@@ -58,7 +58,10 @@ namespace LSLEditor
 			strInput = strInput.Replace("SecondLife.", "");
 			strInput = strInput.Replace("String", "string");
 			strInput = strInput.Replace("Float", "float");
-			strInput = strInput.Replace(Properties.Settings.Default.OopsRemove, "");
+
+			//TODO: there was something here for removing the path (is it needed?)
+            //Properties.Settings.Default.OopsRemove = @"C:\Documents and Settings\Alphons\Visual Studio 2005\Projects";
+            //strInput = strInput.Replace(Properties.Settings.Default.OopsRemove, "");
 
 			return strInput;
 		}

@@ -2,7 +2,7 @@
 /**
 ********
 *
-* ORIGIONAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
+* ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
 * The code was donated on 4/28/2010 by Alphons van der Heijden
 * To Brandon'Dimentox Travanti' Husbands & Malcolm J. Kudra which in turn Liscense under the GPLv2.
 * In agreement to Alphons van der Heijden wishes.
@@ -124,12 +124,39 @@
       void llSetLinkPrimitiveParams(integer linknumber, list rules);
 
       Sets the parameters (or properties) of any linked prim in none step
+      <Argument name="linknumber">Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_* flag</Argument>
+      <Argument name="rules"></Argument>
+    </Word>
+
+    <Word name="llSetLinkPrimitiveParamsFast">
+      llSetLinkPrimitiveParamsFast( integer linknumber, list rules );
+
+      Set primitive parameters for linknumber based on rules with no built-in script sleep. This function is identical to llSetLinkPrimitiveParams except without the delay.
+            <Argument name="linknumber">Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_* flag</Argument>
+            <Argument name="rules"></Argument>
     </Word>
 
     <Word name="llSetLinkTexture">
       void llSetLinkTexture(integer linknumber, string texture, integer face);
 
       Sets the texture of linked prims
+    </Word>
+
+    <Word name="llSetLinkTextureAnim">
+      llSetLinkTextureAnim( integer link, integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate );
+      
+      Animate the texture on the specified face/faces of the
+      specified prim/prims by setting the texture scale and offset.
+      Identical to llSetTextureAnim except able to modify any prim in the link set.
+
+      <Argument name="link">Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_* flag to effect</Argument>
+      <Argument name="mode">mask of Mode flags</Argument>
+      <Argument name="face">face number or ALL_SIDES</Argument>
+      <Argument name="sizex">horizontal frames (ignored for ROTATE and SCALE)</Argument>
+      <Argument name="sizey">vertical frames (ignored for ROTATE and SCALE)</Argument>
+      <Argument name="start">Start position/frame number (or radians for ROTATE)</Argument>
+      <Argument name="length">number of frames to display (or radians for ROTATE)</Argument>
+      <Argument name="rate">frames per second (must not be zero)</Argument>
     </Word>
 
     <Word name="llGetObjectPrimCount">
@@ -162,7 +189,7 @@
       <Argument name="category" wild="PARCEL_COUNT_.*">
         a PARCEL_COUNT_* flag
       </Argument>
-      <Argument name="sim_wide">Can be TRUE or FALSE</Argument>
+      <Argument name="sim_wide" wild="TRUE|FALSE">Can be TRUE or FALSE</Argument>
     </Word>
 
     <Word name="llGetParcelPrimOwners">
@@ -207,6 +234,9 @@
 
       If add == TRUE, users that do no have object modify permissions can
       still drop inventory items onto object.
+      <Argument name="add" wild="TRUE|FALSE">
+        boolean, If TRUE allows anyone to drop inventory on prim, FALSE revokes.
+      </Argument>
     </Word>
     <Word name="llAngleBetween">
       float llAngleBetween(rotation a, rotation b);
@@ -219,6 +249,10 @@
       Applies the impulse in local coordinates if local == TRUE.
       Otherwise the impulse is applied in global coordinates.
       This function only works on physical objects.
+      <Argument name="force"></Argument>
+      <Argument name="local" wild="TRUE|FALSE">
+        boolean, if TRUE, force is treated as a local directional vector instead of region directional vector.
+      </Argument>
     </Word>
     <Word name="llApplyRotationalImpulse">
       llApplyRotationalImpulse(vector force, integer local);
@@ -226,6 +260,10 @@
       Applies a rotational impulse force in local coordinates if local == TRUE.
       Otherwise the impulse is applied in global coordinates.
       This function only works on physical objects.
+      <Argument name="force"></Argument>
+      <Argument name="local" wild="TRUE|FALSE">
+        boolean, if TRUE, uses local axis, if FALSE, uses region axis.
+      </Argument>
     </Word>
     <Word name="llAsin">
       float llAsin(float val);
@@ -289,12 +327,18 @@
       Returns the cloud density at the object position + offset.
     </Word>
     <Word name="llCollisionFilter">
-      llCollisionFilter(string name, key id, iteger accept);
+      llCollisionFilter(string name, key id, integer accept);
 
       If accept == TRUE, only accept collisions with objects name and id,
       otherwise with objects not name or id.
       Specify an empty string or NULL_KEY to not filter
       on the corresponding parameter.
+      <Argument name="name"></Argument>
+      <Argument name="id"></Argument>
+      <Argument name="accept" wild="TRUE|FALSE">
+        If TRUE, only accept collisions with objects name AND id 
+        (either is optional), otherwise with objects not name AND id
+      </Argument>
     </Word>
     <Word name="llCollisionSound">
       llCollisionSound(string impact_sound, float impact_volume);
@@ -443,7 +487,7 @@
     <Word name="llEdgeOfWorld">
       integer llEdgeOfWorld(vector pos, vector dir);
 
-      Returns TRUE if the line along dir from poshits the edge
+      Returns TRUE if the line along dir from pos hits the edge
       of the world in the current simulator and returns
       FALSE if that edge crosses into another simulator.
     </Word>
@@ -455,7 +499,7 @@
     <Word name="llEmail">
       llEmail(string address, string subject, string message);
 
-      Sends email to addresswith subjectand message.
+      Sends email to address with subject and message.
     </Word>
     <Word name="llEuler2Rot">
       rotation llEuler2Rot(vector vec);
@@ -502,7 +546,7 @@
     <Word name="llGetAlpha">
       float llGetAlpha(integer face);
 
-      Returns the alpha of the given face. If faceis ALL_SIDES
+      Returns the alpha of the given face. If face is ALL_SIDES
       the value returned is the mean average of all faces.
     </Word>
     <Word name="llGetAndResetTime">
@@ -577,12 +621,12 @@
     <Word name="llGetLandOwnerAt">
       key llGetLandOwnerAt(vector pos);
 
-      Returns the key of the land owner at posor NULL_KEY if public.
+      Returns the key of the land owner at pos or NULL_KEY if public.
     </Word>
     <Word name="llGetLinkKey">
       key llGetLinkKey(integer linknum);
 
-      Returns the key of linknumin the link set.
+      Returns the key of linknum in the link set.
     </Word>
     <Word name="llGetLinkName">
       string llGetLinkName(integer linknum);
@@ -595,6 +639,15 @@
       Returns what link number in a link set the for the object
       which has this script. 0 means no link, 1 the root, 2 for
       first child, etc.
+    </Word>
+    <Word name="llGetLinkPrimitiveParams">
+      list llGetLinkPrimitiveParams( integer link, list params );
+
+      Identical to llGetPrimitiveParams except acts on the prim specified by the link number given.
+
+      Returns the list of primitive attributes requested in the params list for link
+      <Argument name="link">to get the parameters of</Argument>
+      <Argument name="params">a list of PRIM_* flags</Argument>
     </Word>
     <Word name="llGetListEntryType">
       integer llGetListEntryType(list src, integer index);
@@ -719,7 +772,7 @@
     <Word name="llGetScriptState">
       integer llGetScriptState(string name);
 
-      Resets TRUE if script nameis running
+      Resets TRUE if script name is running
     </Word>
     <Word name="llGetStatus">
       integer llGetStatus(integer status);
@@ -747,12 +800,12 @@
     <Word name="llGetTexture">
       string llGetTexture(integer face);
 
-      Returns the texture of faceif it is found in object inventory.
+      Returns the texture of face if it is found in object inventory.
     </Word>
     <Word name="llGetTextureOffset">
       vector llGetTextureOffset(integer side);
 
-      Returns the texture offset of sidein the x and y components of a vector.
+      Returns the texture offset of side in the x and y components of a vector.
     </Word>
     <Word name="llGetTextureRot">
       float llGetTextureRot(integer side);
@@ -816,7 +869,7 @@
     <Word name="llGiveMoney">
       llGiveMoney(key destination, integer amount);
 
-      Transfer amountfrom the script owner to destination.
+      Transfer amount from the script owner to destination.
       This call will fail if PERMISSION_DEBIT has not been set.
     </Word>
     <Word name="llGround">
@@ -837,9 +890,19 @@
     <Word name="llGroundRepel">
       llGroundRepel(float height, integer water, float tau);
 
-      Critically damps to heightif within height* 0.5 of level.
-      The heightis above ground level if water
+      Critically damps to height if within height* 0.5 of level.
+      The height is above ground level if water
       is FALSE or above the higher of land and water if water is TRUE.
+      Do not use with vehicles. Only works in physics-enabled objects.
+      <Argument name="height">
+        Distance above the ground
+      </Argument>
+      <Argument name="water" wild="TRUE|FALSE">
+        boolean, if TRUE then hover above water too.
+      </Argument>
+      <Argument name="tau">
+        seconds to critically damp in
+      </Argument>
     </Word>
     <Word name="llGroundSlope">
       vector llGroundSlope(vector offset);
@@ -854,12 +917,22 @@
     <Word name="llInstantMessage">
       llInstantMessage(key user, string message);
 
-      Send messageto the user as an instant message.
+      Send message to the user as an instant message.
     </Word>
     <Word name="llKey2Name">
       string llKey2Name(key id);
 
       If object id is in the same simulator, return the name of the object.
+    </Word>
+    <Word name="llLinkParticleSystem">
+      llLinkParticleSystem( integer link, list rules );
+
+      A particle system defined by a list of rules is set for the prim(s) link.
+      This is identical to llParticleSystem except that it applies to a 
+      specified linked prim and not just the prim the script is in.
+
+      <Argument name="link">Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_* flag</Argument>
+      <Argument name="rules">Particle system rules list in the format [ rule1, data1, rule2, data2 . . . ruleN, dataN ]</Argument>
     </Word>
     <Word name="llList2CSV">
       string llList2CSV(list src);
@@ -890,7 +963,7 @@
       would capture the first list entry. Using negative
       numbers for startand/or end causes the index to count backwards
       from the length of the list, so 0,-1 would
-      capture the entire list. If startis larger than end the list
+      capture the entire list. If start is larger than end the list
       returned is the exclusion of the entries, so 6,4 would
       give the entire list except for the 5th entry.
     </Word>
@@ -929,7 +1002,7 @@
       list llListRandomize(list src, integer stride);
 
       Returns srcrandomized into blocks of size stride.
-      If the length of srcdividided by strideis non-zero,
+      If the length of src divided by stride is non-zero,
       this function does not randomize the list.
     </Word>
     <Word name="llListSort">
@@ -976,7 +1049,7 @@
       llLookAt(vector target, float strength, float damping);
 
       Cause object to point the forward axis toward target.
-      Good strengthvalues are around half the mass of the
+      Good strength values are around half the mass of the
       object and good damping values are less than 1/10th of the strength.
       Asymmetrical shapes require smaller
       damping. A strength of 0.0 cancels the look at.
@@ -999,7 +1072,7 @@
     <Word name="llLoopSoundMaster">
       llLoopSoundMaster(string sound, flaot volume);
 
-      Behaviour is identical to llLoopSound, with the addition of marking
+      Behavior is identical to llLoopSound, with the addition of marking
       the source as a "Sync Master", causing
       "Slave" sounds to sync to it. If there are multiple masters within
       a viewers interest area, the most audible one (a
@@ -1010,7 +1083,7 @@
     <Word name="llLoopSoundSlave">
       llLoopSoundSlave(string sound, flaot volume);
 
-      Behaviour is identical to llLoopSound,
+      Behavior is identical to llLoopSound,
       unless there is a "Sync Master" present. If a Sync Master is already
       playing the Slave sound will begin playing from the same point
       the master is in its loop syncronizing the loop
@@ -1018,6 +1091,7 @@
       is already playing, the Slave will skip to the
       correct position to sync with the Master.
     </Word>
+    <!--
     <Word name="llMakeExplosion">
       llMakeExplosion(integer particles, float scale, float velocity, float lifetime,float arc, string texture, vector offset);
 
@@ -1038,11 +1112,12 @@
 
       Make smoky particles using texturefrom the objects inventory.
     </Word>
+    -->
     <Word name="llMessageLinked">
       llMessageLinked(integer linknum, integer num, string str, key id);
 
       Sends num, str, and id to members of the link set.
-      The linknumparameter is either the linked number
+      The linknum parameter is either the linked number
       available through llGetLinkNumber or a link constant.
     </Word>
     <Word name="llMinEventDelay">
@@ -1065,7 +1140,7 @@
     <Word name="llMoveToTarget">
       llMoveToTarget(vector target, float tau);
 
-      Critically damp to position targetin tau-seconds if the
+      Critically damp to position target in tau-seconds if the
       script is physical. Good tau-values are greater than 0.2. 
       A tau of 0.0 stops the critical damping.
     </Word>
@@ -1073,7 +1148,7 @@
       llOffsetTexture(float offset_s, float offset_t, integer face);
 
       Sets the texture s and t offsets of face. 
-      If faceis ALL_SIDES this function sets the texture offsets for 
+      If face is ALL_SIDES this function sets the texture offsets for 
       all faces.
     </Word>
     <Word name="llOverMyLand">
@@ -1109,13 +1184,21 @@
     <Word name="llPassCollisions">
       llPassCollisions(integer pass);
 
-      If passis TRUE, land and object collisions are passed from 
+      If pass is TRUE, land and object collisions are passed from
       children on to parents.
+      The default is FALSE if there is no script to handle the collision events.
+      <Argument name="pass" wild="TRUE|FALSE">
+        boolean, if TRUE, collisions are passed from children on to parents
+      </Argument>
     </Word>
     <Word name="llPassTouches">
       llPassTouches(integer pass);
 
-      If passis TRUE, touches are passed from children on to parents.
+      If pass is TRUE, touches are passed from children on to parents.
+      The default is TRUE if there is no script to handle the touch events.
+      <Argument name="pass">
+        boolean, if TRUE, touches are passed from children on to parents
+      </Argument>
     </Word>
     <Word name="llPlaySound">
       llPlaySound(string sound, float volume);
@@ -1133,7 +1216,7 @@
     <Word name="llPlaySoundSlave">
       llPlaySoundSlave(string sound, float volume);
 
-      Behaviour is identical to llPlaySound, unless there is 
+      Behavior is identical to llPlaySound, unless there is 
       a "Sync Master" present. If a Sync Master is already
       playing the Slave sound will not be played until the Master 
       hits its loop point and returns to the beginning.
@@ -1143,15 +1226,17 @@
       on the end of the sound or ensure that
       llPlaySoundSlave is called at least once per loop of the Master.
     </Word>
+    <!--
     <Word name="llPointAt">
       llPointAt(vector pos);
 
       Make avatar that owns object point at pos.
     </Word>
+    -->
     <Word name="llPow">
       llPow(float base, float exp);
 
-      Returns baseraised to the exp.
+      Returns base raised to the exp.
     </Word>
     <Word name="llPreloadSound">
       llPreloadSound(string sound);
@@ -1161,30 +1246,32 @@
     <Word name="llPushObject">
       llPushObject(key id, vector impulse, vector angular_impulse, integer local);
 
-      Applies impulseand angular_impulseto object id.
+      Applies impulse and angular_impulse to object id.
     </Word>
     <Word name="llReleaseControls">
       llReleaseControls(key avatar);
 
       Stop taking inputs from avatar.
     </Word>
+    <!--
     <Word name="llRemoteLoadScript">
       llRemoteLoadScript(key target, string name, integer running, integer param);
 
       If the owner of the object this script is attached can modify target
       and the objects are in the same region, copy
       script nameonto target, if running == TRUE, start the script with param.
-      If namealready exists on target, it is replaced.
+      If name already exists on target, it is replaced.
     </Word>
+    -->
     <Word name="llRemoveInventory">
       llRemoveInventory(string inventory);
 
-      Remve the name inventory item from the object inventory.
+      Remove the named inventory item from the object inventory.
     </Word>
     <Word name="llRemoveVehicleFlags">
       llRemoveVehicleFlags(integer flags);
 
-      Sets the vehicle flagsto FALSE. Valid parameters can be found in the vehicle flags constants section.
+      Sets the vehicle flags to FALSE. Valid parameters can be found in the vehicle flags constants section.
     </Word>
     <Word name="llRequestAgentData">
       key llRequestAgentData(key id, integer data);
@@ -1193,7 +1280,7 @@
       is collected, the dataserver event is
       called with the returned key returned from this function passed in
       the requested parameter. See the agent data
-      constants for details about valid values of dataand what each will 
+      constants for details about valid values of data and what each will 
       return in the dataserver event.
     </Word>
     <Word name="llRequestInventoryData">
@@ -1208,11 +1295,11 @@
       vector. This position is in region local coordinates.
     </Word>
     <Word name="llRequestPermissions">
-      llRequestPermissions(key avatar, iteger perm);
+      llRequestPermissions(key avatar, integer perm);
 
-      Ask avatar to allow the script to do perm. The permparameter should 
+      Ask avatar to allow the script to do perm. The perm parameter should 
       be a permission constant. Multiple
-      permissions can be requested simultaneously by oring the 
+      permissions can be requested simultaneously by ORing the 
       constants together. Many of the permissions requests
       can only go to object owner. This call will not stop script 
       execution -if the specified avatar grants the requested
@@ -1236,11 +1323,11 @@
     <Word name="llRezObject">
       llRezObject(string inventory, vector pos, vector vel, rotation rot, integer param);
 
-      Creates objects inventory object at position poswith velocity 
-      veland rotation rot. The paramvalue
+      Creates object&apos;s inventory object at position pos with velocity 
+      vel and rotation rot. The param value
       will be available to the newly created object in the on_rez 
       event or through the llGetStartParameter library
-      function. The velparameter is ignored if the rezzed object 
+      function. The vel parameter is ignored if the rezzed object 
       is not physical.
     </Word>
     <Word name="llRot2Angle">
@@ -1281,7 +1368,7 @@
     <Word name="llRotLookAt">
       llRotLookAt(rotation rot, float strength, float damping);
 
-      Cause object to rotate to rot. Good strengthvalues are around 
+      Cause object to rotate to rot. Good strength values are around 
       half the mass of the object and good
       damping values are less than 1/10th of the strength. 
       Asymmetrical shapes require smaller damping.A
@@ -1290,7 +1377,7 @@
     <Word name="llRotTarget">
       integer llRotTarget(rotation rot, float error);
 
-      Set object rotation within error of rotationas a rotational 
+      Set object rotation within error of rotation as a rotational 
       target and return an integer number for the
       target. The number can be used in llRotTargetRemove.
     </Word>
@@ -1302,13 +1389,13 @@
     <Word name="llRotateTexture">
       llRotateTexture(float radians, integer face);
 
-      Sets the texture rotation of faceto radians. 
-      If faceALL_SIDES, rotate the texture of all faces.
+      Sets the texture rotation of face to radians. 
+      If face ALL_SIDES, rotate the texture of all faces.
     </Word>
     <Word name="llRound">
       integer llRound(float val);
 
-      returns valrounded to the nearest integer.
+      returns val rounded to the nearest integer.
     </Word>
     <Word name="llSameGroup">
       integer llSameGroup(key id);
@@ -1351,17 +1438,17 @@
     <Word name="llScriptDanger">
       integer llScriptDanger(vector pos);
 
-      Returns true if pos is over public land, land that doesnt allow everyone
-      to edit and build, or land that doesnt allow outside scripts.
+      Returns true if pos is over public land, land that doesn&apos;t allow everyone
+      to edit and build, or land that doesn&apos;t allow outside scripts.
     </Word>
     <Word name="llSensor">
       llSensor(string name, key id, integer type, float range, float arc);
 
-      Performs a single scan for nameand id with typewithin 
-      rangemeters and arcradians of forward vector.
+      Performs a single scan for name and id with type within 
+      range meters and arc radians of forward vector.
       Specifying a blank name or NULL_KEY id will not filter 
       results for any particular name or id A range of 0.0
-      does not perform a scan. The typeparameter should be an 
+      does not perform a scan. The type parameter should be an 
       object type constant vlaue.
     </Word>
     <Word name="llSensorRemove">
@@ -1383,9 +1470,9 @@
       llSetAlpha(float alpha, integer face);
 
       Sets the alpha value for face. If face is ALL_SIDES,
-      set the alpha to all faces. The alphavalue is interpreted
+      set the alpha to all faces. The alpha value is interpreted
       as an opacity percentage -1.0 is fully opaque, and 0.2 is
-      mostly transparent. This api will clamp alphavalues
+      mostly transparent. This api will clamp alpha values
       less 0.1 to .1 and greater than 1.0 to 1.
     </Word>
     <Word name="llSetBuoyancy">
@@ -1421,21 +1508,46 @@
       llSetForce(vector force, integer local);
 
       If the object is physical, this function sets the force. 
-      The vector is in loal coordinates if local is TRUE, global if
+      The vector is in local coordinates if local is TRUE, global if
       FALSE.
+      <Argument name="force">
+        directional force
+      </Argument>
+      <Argument name="local" wild="TRUE|FALSE">
+        boolean, if TRUE uses local axis, if FALSE uses region axis.
+      </Argument>
     </Word>
     <Word name="llSetForceAndTorque">
       llSetForceAndTorque(vector force, vector torque, integer local);
 
-      If the object is physical, this function sets the forceand 
+      If the object is physical, this function sets the force and 
       torque. The vectors are in loal coordinates if local is
       TRUE, global if FALSE.
+      <Argument name="force">
+        directional force
+      </Argument>
+      <Argument name="torque">
+        torque force
+      </Argument>
+      <Argument name="local" wild="TRUE|FALSE">
+        boolean, if TRUE uses local axis, if FALSE uses region axis.
+      </Argument>
     </Word>
     <Word name="llSetHoverHeight">
       llSetHoverHeight(float height, float water, float tau);
 
       Critically damps to a height. The height is above ground 
-      and water if water is TRUE.
+      and water if water is TRUE. Only works with physics-enabled objects.
+      Do not use with vehicles. Use llStopHover to stop hovering.
+      <Argument name="height">
+        Distance above the ground
+      </Argument>
+      <Argument name="water" wild="TRUE|FALSE">
+        boolean, if TRUE then hover above water too.
+      </Argument>
+      <Argument name="tau">
+        seconds to critically damp in
+      </Argument>
     </Word>
     <Word name="llSetLinkColor">
       llSetLinkColor(integer linknumber, vector color, integer face);
@@ -1443,7 +1555,7 @@
       Sets the color of the linked child specified by linknumber.
       A value of 0 means no link, 1 the root, 2 for first
       child, etc. If linknumber is ALL_SIDES, set the color 
-      of all objects in the linked set. If faceis
+      of all objects in the linked set. If face is
       ALL_SIDES, set the color of all faces.
     </Word>
     <Word name="llSetObjectName">
@@ -1478,7 +1590,7 @@
     <Word name="llSetSitText">
       llSetSitText(string text);
 
-      Displays textrather than sit in viewer pie menu.
+      Displays text rather than sit in viewer pie menu.
     </Word>
     <Word name="llSetSoundQueueing">
       llSetSoundQueueing(integer queue);
@@ -1488,11 +1600,14 @@
       The default for objects is FALSE. Setting this value to 
       TRUE will make the sound wait until the current playing
       sound reaches its end. The queue is one level deep.
+      <Argument name="queue" wild="TRUE|FALSE">
+        boolean, sound queuing: TRUE enables, FALSE disables (default)
+      </Argument>
     </Word>
     <Word name="llSetStatus">
       llSetStatus(integer status, integer value);
 
-      Sets the statusto value. Use status constants for the values of status.
+      Sets the status to value. Use status constants for the values of status.
     </Word>
     <Word name="llSetText">
       llSetText(string text, vector color, float alpha);
@@ -1503,64 +1618,55 @@
     <Word name="llSetTexture">
       llSetTexture(string texture, integer face);
 
-      Sets the texturefrom object inventory of face. 
+      Sets the texture from object inventory of face. 
       If face is ALL_SIDES, set the texture to all faces.
     </Word>
     <Word name="llSetTextureAnim">
       llSetTextureAnim(integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate);
 
       Animates a texture by setting the texture scale and offset. 
-      The mode is a mask of texture animation constants.
-      You can only have one texture animation on an object, 
-      calling llSetTextureAnim more than once on an object
-      will reset it.
-      You can only do one traditional animation, ROTATE or SCALE 
-      at a time, you cannot combine masks. In the case
-      of ROTATE or SCALE, sizex and sizey are ignored, and startand 
-      lengthare used as the start and
-      length values of the animation. For rotation, startand lengthare 
-      in radians.
-      The facespecified which face to animate. If faceis ALL_SIDES, 
-      all textures on the object are animated.
-      The sizex and sizey describe the layout of the frames within 
-      the texture. sizex specifies how many
-      horizontal frames and sizey is how many vertical frames.
-      startis the frame number to begin the animation on. Frames 
-      are numbered from left to right, top to bottom,
-      starting at 0.
-      lengthis the number of frames to animate. 0 means to animate 
-      all frames after the start frame.
-      rateis the frame rate to animate at. 1.0 means 1 frame per 
-      second, 10.0 means 10 frames per second, etc.
-    </Word>
+      <Argument name="mode">mask of Mode flags</Argument>
+      <Argument name="face">face number or ALL_SIDES</Argument>
+      <Argument name="sizex">horizontal frames (ignored for ROTATE and SCALE)</Argument>
+      <Argument name="sizey">vertical frames (ignored for ROTATE and SCALE)</Argument>
+      <Argument name="start">Start position/frame number (or radians for ROTATE)</Argument>
+      <Argument name="length">number of frames to display (or radians for ROTATE)</Argument>
+      <Argument name="rate">frames per second (must not be zero)</Argument>
+  </Word>
     <Word name="llSetTimerEvent">
       llSetTimerEvent(float sec);
 
-      Sets the timer event to be triggered every secseconds. 
+      Sets the timer event to be triggered every sec seconds. 
       Passing in 0.0 stops further timer events.
     </Word>
     <Word name="llSetTorque">
       llSetTorque(vector torque, integer local);
 
       If the object is physical, this function sets the torque. 
-      The vector is in loal coordinates if local is TRUE, global
+      The vector is in local coordinates if local is TRUE, global
       if FALSE.
+      <Argument name="torque">
+        torque force
+      </Argument>
+      <Argument name="local" wild="TRUE|FALSE">
+        boolean, if TRUE uses local axis, if FALSE uses region axis.
+      </Argument>
     </Word>
     <Word name="llSetTouchText">
       llSetTouchText(string text);
 
-      Displays textin viewer pie menu that acts as a touch.
+      Displays text in viewer pie menu that acts as a touch.
     </Word>
     <Word name="llSetVehicleFlags">
       llSetVehicleFlags(integer flags);
 
-      Sets the vehicle flagsto TRUE. 
+      Sets the vehicle flags to TRUE. 
       Valid parameters can be found in the vehicle flags constants section.
     </Word>
     <Word name="llSetVehicleFloatParam">
       llSetVehicleFloatParam(integer param_name, float param_value);
 
-      Sets the vehicle floating point parameter param_nameto param_value. 
+      Sets the vehicle floating point parameter param_name to param_value. 
       Valid parameters and their expected
       values can be found in the vehicle parameter constants section.
     </Word>
@@ -1574,21 +1680,21 @@
     <Word name="llSetVehicleRotationParam">
       llSetVehicleRotationParam(integer param_name, rotation param_value);
 
-      Sets the vehicle rotation parameter param_nameto param_value. 
+      Sets the vehicle rotation parameter param_name to param_value. 
       Valid parameters can be found in the
       vehicle parameter constants section.
     </Word>
     <Word name="llSetVehicleVectorParam">
       llSetVehicleVectorParam(integer param_name, vector param_value);
 
-      Sets the vehicle vector parameter param_nameto param_value. 
+      Sets the vehicle vector parameter param_name to param_value. 
       Valid parameters can be found in the
-      vehicle paramter constants section.
+      vehicle parameter constants section.
     </Word>
     <Word name="llShout">
       llShout(integer channel, string text);
 
-      Shout texton channel. Channel 0 is the public chat channel that 
+      Shout text on channel. Channel 0 is the public chat channel that 
       all avatars see as chat text. Channels 1 to
       2,147,483,648 are private channels that are not sent to 
       avatars but other scripts can listen for through the llListen api.
@@ -1596,7 +1702,7 @@
     <Word name="llSin">
       float llSin(float theta);
 
-      Returns the sine of thetain radians.
+      Returns the sine of theta in radians.
     </Word>
     <Word name="llSitTarget">
       llSitTarget(vector offset, rotation rot);
@@ -1607,12 +1713,12 @@
     <Word name="llSleep">
       llSleep(float sec);
 
-      Puts the script to sleep for secseconds.
+      Puts the script to sleep for sec seconds.
     </Word>
     <Word name="llSqrt">
       float llSqrt(float val);
 
-      Returns the square root of val. If valis less than 0.0, 
+      Returns the square root of val. If val is less than 0.0, 
       this function returns 0.0 and raises a math runtime error.
     </Word>
     <Word name="llStartAnimation">
@@ -1640,11 +1746,13 @@
 
       Stops critically damped motion.
     </Word>
+    <!--
     <Word name="llStopPointAt">
       llStopPointAt(void);
 
       Stop avatar that owns object pointing.
     </Word>
+    -->
     <Word name="llStopSound">
       llStopSound(void);
 
@@ -1666,26 +1774,35 @@
     <Word name="llTakeControls">
       llTakeControls(integer controls, integer accept, integer pass_on);
 
-      If (accept== (controls and  input)), send input to object. 
-      If the boolean pass_onis TRUE, also send input
-      to avatar.
+      If ( accept == (controls and  input) ), send input to object. 
+      If the boolean pass_on is TRUE, also send input
+      to avatar. Requires the PERMISSION_TAKE_CONTROLS permission to run.
+      <Argument name="controls" wild="CONTROL_.*">
+        bitfield of CONTROL_* flags
+      </Argument>
+      <Argument name="accept" wild="TRUE|FALSE">
+        boolean, determines whether control events are generated 
+      </Argument>
+      <Argument name="pass_on" wild="TRUE|FALSE">
+        boolean, determines whether controls are disabled
+      </Argument>
     </Word>
     <Word name="llTan">
       float llTan(float theta);
 
-      Returns the tangent of thetaradians.
+      Returns the tangent of theta radians.
     </Word>
     <Word name="llTarget">
       integer llTarget(vector position, float range);
 
-      Set object position within rangeof positionas a target 
+      Set object position within range of position as a target 
       and returns an integer ID for the target.
     </Word>
     <Word name="llTargetOmega">
       llTargetOmega(vector axis, float spinrate, float gain);
 
-      Attempt to spin at spinratewith strength gainon axis.
-      A spinrateof 0.0 cancels the spin. This
+      Attempt to spin at spinrate with strength gain on axis.
+      A spinrate of 0.0 cancels the spin. This
       function always works in object local coordinates.
     </Word>
     <Word name="llTargetRemove">
@@ -1696,7 +1813,7 @@
     <Word name="llTeleportAgentHome">
       llTeleportAgentHome(key id);
 
-      Teleport agent on the owners land to agents home location.
+      Teleport agent on the owner&apos;s land to agent&apos;s home location.
     </Word>
     <Word name="llToLower">
       string llToLower(string src);
@@ -1769,6 +1886,9 @@
       collision events are NOT generated. The script must be applied
       to the root object of the link set to get the collision events. 
       Collision filters work normally.
+      <Argument name="detect" wild="TRUE|FALSE">
+        TRUE enables, FALSE disables
+      </Argument>
     </Word>
     <Word name="llWater">
       float llWater(vector offset);
@@ -1778,7 +1898,7 @@
     <Word name="llWhisper">
       llWhisper(integer channel, string text);
 
-      Whisper texton channel. Channel 0 is the public chat channel that
+      Whisper text on channel. Channel 0 is the public chat channel that
       all avatars see as chat text. Channels 1 to 2,147,483,648 are
       private channels that are not sent to avatars but other scripts
       can listen for through the llListen api.
@@ -1818,6 +1938,14 @@
       Resets all camera parameters to default values and turns
       off scripted camera control.
     </Word>
+    <Word name="llClearPrimMedia">
+      integer llClearPrimMedia( integer face );
+
+      Clears (deletes) the media and all params from the given face.
+
+      Returns an integer that is a STATUS_* flag which details the success/failure of the operation.
+            <Argument name="face">face number</Argument>
+    </Word>
     <Word name="llCloseRemoteDataChannel">
       llCloseRemoteDataChannel(key channel);
 
@@ -1847,6 +1975,12 @@
       Just like llSitTarget, this changes a permanent property
       of the prim (not the object) and needs to be reset by calling
       this function with mouselook set to FALSE in order to disable it.
+      <Argument name="mouselook" wild="TRUE|FALSE">
+        boolean, if TRUE when an avatar sits on the prim, 
+        the avatar will be forced into mouselook mode. 
+        FALSE is the default setting and will undo 
+        a previously set TRUE or do nothing.
+      </Argument>
     </Word>
     <Word name="llGetAnimationList">
       list llGetAnimationList(key id);
@@ -1970,6 +2104,17 @@
       list llGetPrimitiveParams(list params);
 
       Returns primitive parameters specified in the params list.
+    </Word>
+    <Word name="llGetPrimMediaParams">
+      list llGetPrimMediaParams( integer face, list params );
+
+      Get the media params for a particular face on an object, given the desired list of names.
+
+      Returns a list of values in the order requested.
+        <Argument name="face">face number</Argument>
+        <Argument name="params">a set of names (in no particular order)</Argument>
+
+        Returns an empty list if no media exists on the face.
     </Word>
     <Word name="llGetRegionCorner">
       vector llGetRegionCorner();
@@ -2132,6 +2277,7 @@
       it will add a null string instead of discarding it
       like llParseString2List does.
     </Word>
+    <!--
     <Word name="llReleaseCamera">
       llReleaseCamera(key agent);
 
@@ -2140,6 +2286,7 @@
       llSetCameraParams has been granted via
       llRequestPermissions(agent_key, PERMISSION_CONTROL_CAMERA).
     </Word>
+    -->
     <Word name="llRemoteDataReply">
       llRemoteDataReply(key channel, key message_id, string sdata, integer idata);
 
@@ -2147,11 +2294,13 @@
       on channel with payload of string sdata and integer idata.
       The size of sdata is limited to 254 characters.
     </Word>
+    <!--
     <Word name="llRemoteDataSetRegion">
       llRemoteDataSetRegion();
 
       does not work!
     </Word>
+    -->
     <Word name="llRemoteLoadScriptPin">
       llRemoteLoadScriptPin(key target, string name, integer pin, integer running, integer start_param);
 
@@ -2223,6 +2372,17 @@
 
       Sets the rotation of a child prim relative to the root prim.
     </Word>
+
+    <Word name="llSetPrimMediaParams">
+      integer llSetPrimMediaParams( integer face, list params );
+
+      Set the media params for a particular face.
+
+      Returns an integer that is a STATUS_* flag which details the success/failure of the operation(s).
+            <Argument name="face">face number</Argument>
+            <Argument name="params">a set of name/value pairs (in no particular order)</Argument>
+    </Word>
+
     <Word name="llSetObjectDesc">
       llSetObjectDesc(string name);
 
@@ -2283,6 +2443,7 @@
       your key in s2 to encrypt or put the encrypted data into s1
       with the same key in s2 to decrypt again.
     </Word>
+    <!--
     <Word name="llSetInventoryPermMask">
       llSetInventoryPermMask(string item, integer mask, integer value);
 
@@ -2294,17 +2455,20 @@
       Sets the given permission mask to the new value on the root object 
       the task is attached to.
     </Word>
+    -->
     <Word name="llSetSoundRadius">
       llSetSoundRadius(float radius);
 
       Establishes a hard cut-off radius for audibility of scripted 
       sounds (both attached and triggered)
     </Word>
+    <!--
     <Word name="llTakeCamera">
       llTakeCamera(key avatar);
 
       Move avatar's viewpoint to task
     </Word>
+    -->
     <Word name="llGetObjectDetails">
       list llGetObjectDetails(key id, list params);
 
@@ -2426,21 +2590,43 @@
 
     <Word name="llGetFreeURLs">
       integer llGetFreeURLs( );
+      
+      Returns an integer that is the number of available URLs.
     </Word>
     <Word name="llRequestURL">
       key llRequestURL( );
+      
+      Requests one HTTP:// url for use by this script. The http_request event is triggered with the result of the request.
+      
+      Returns a key that is the handle used for identifying the result in the http_request event.
     </Word>
     <Word name="llRequestSecureURL">
       key llRequestSecureURL( );
+      
+      Requests one HTTPS:// (SSL) url for use by this object. The http_request event is tiggered with results.
+      
+      Returns a key that is the handle used for identifying the request in the http_request event.
     </Word>
     <Word name="llReleaseURL">
       llReleaseURL( string url );
+      
+      Releases the specified URL, it will no longer be usable.
+            <Argument name="url">URL to release</Argument>
     </Word>
     <Word name="llHTTPResponse">
-      llHTTPResponse( key request_id, integer status, string body );
+			void llHTTPResponse( key request_id, integer status, string body );
+
+			Responds to request_id with status and body.
+			<Argument name="request_id">A valid HTTP request key</Argument>
+			<Argument name="status">HTTP Status (200, 400, 404, etc)</Argument>
+			<Argument name="body">Contents of the response</Argument>
     </Word>
     <Word name="llGetHTTPHeader">
-      llHTTPResponse( key request_id, integer status, string body );
+			string llGetHTTPHeader( key request_id, string header );
+
+			Returns a string that is the value for header for request_id.
+			<Argument name="request_id">A valid HTTP request key</Argument>
+			<Argument name="header">Header value name</Argument>
     </Word>
 
   </Words>
@@ -2682,6 +2868,14 @@
       the total_number parameter. Information on those objects may be gathered
       via the llDetected() library functions.
     </Word>
+    <Word name="http_request" args="key request_id, string method, string body">
+      http_request(key request_id, string method, string body);
+
+      Triggered when task receives an HTTP request.
+            <Argument name="request_id">HTTP request id for response use, and function response identification.</Argument>
+            <Argument name="method">GET, POST, PUT</Argument>
+            <Argument name="body">Contents of the request.</Argument>
+    </Word>
     <Word name="http_response" args="key request_id,integer status,list metadata,string body">
       http_response(key request_id, integer status, list metadata, string body);
 
@@ -2711,7 +2905,7 @@
     </WordsSubsection>
     <WordsSubsection name="C.2. Status Constants">
       The status constants are used in the llSetStatus and llGetStatus 
-      library calls. These constants can be bitwise ored
+      library calls. These constants can be bitwise ORed
       together when calling the library functions to set the same 
       value to more than one status flag
       Status Constants
@@ -3501,7 +3695,7 @@
         llSetVehicleVectorParam( VEHICLE_LINEAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
         llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_TIMESCALE, 1000 );
         llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE, 120 );
-        // no agular motor
+        // no angular motor
         llSetVehicleVectorParam( VEHICLE_ANGULAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
         llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_TIMESCALE, 1000 );
         llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE, 120 );
@@ -3548,7 +3742,7 @@
         llSetVehicleVectorParam( VEHICLE_LINEAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
         llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_TIMESCALE, 1 );
         llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE, 60 );
-        // agular motor wins after a second, decays in less time than that
+        // angular motor wins after a second, decays in less time than that
         llSetVehicleVectorParam( VEHICLE_ANGULAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
         llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_TIMESCALE, 1 );
         llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE, 0.8 );
@@ -3592,7 +3786,7 @@
         llSetVehicleVectorParam( VEHICLE_LINEAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
         llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_TIMESCALE, 5 );
         llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE, 60 );
-        // agular motor wins after four seconds, decays in same amount of time
+        // angular motor wins after four seconds, decays in same amount of time
         llSetVehicleVectorParam( VEHICLE_ANGULAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
         llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_TIMESCALE, 4 );
         llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE, 4 );
@@ -3636,7 +3830,7 @@
         llSetVehicleVectorParam( VEHICLE_LINEAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
         llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_TIMESCALE, 2 );
         llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE, 60 );
-        // agular motor
+        // angular motor
         llSetVehicleVectorParam( VEHICLE_ANGULAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
         llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_TIMESCALE, 4 );
         llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE, 8 );
@@ -3680,7 +3874,7 @@
         llSetVehicleVectorParam( VEHICLE_LINEAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
         llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_TIMESCALE, 5 );
         llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE, 60 );
-        // agular motor
+        // angular motor
         llSetVehicleVectorParam( VEHICLE_ANGULAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
         llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_TIMESCALE, 6 );
         llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE, 10 );
@@ -3834,6 +4028,7 @@
       <Word name="PARCEL_DETAILS_AREA" value="4" />
       <Word name="PARCEL_DETAILS_DESC" value="1" />
       <Word name="PARCEL_DETAILS_GROUP" value="3" />
+	  <Word name="PARCEL_DETAILS_ID" value="5" />
       <Word name="PARCEL_DETAILS_NAME" value="0" />
       <Word name="PARCEL_DETAILS_OWNER" value="2" />
       <Word name="PAYMENT_INFO_ON_FILE" value="1" />
@@ -3910,6 +4105,7 @@
       <Word name="PRIM_TEXGEN_DEFAULT" />
       <Word name="PRIM_TEXGEN_PLANAR" />
       <Word name="PRIM_TEXTURE" />
+	  <Word name="PRIM_TEXT" />
       <Word name="PRIM_TYPE" />
 
       <Word name="PRIM_TYPE_BOX" />
@@ -4034,14 +4230,27 @@
     </WordsSubsection>
   </Words>
   <Words name="Deprecated" color="#000000" slcolor="#000000">
+    <Word name="llMakeExplosion" />
+    <Word name="llMakeFire" />
+    <Word name="llMakeFountain" />
+    <Word name="llMakeSmoke" />
+    <Word name="llPointAt" />
+    <Word name="llRefreshPrimURL" />
+    <Word name="llReleaseCamera" />
+    <Word name="llRemoteDataSetRegion" />
+    <Word name="llRemoteLoadScript" />
+    <Word name="llSetPrimURL" />
     <Word name="llSound" />
     <Word name="llSoundPreload" />
-
+    <Word name="llStopPointAt" />
+    <Word name="llTakeCamera" />
     <Word name="llXorBase64Strings" />
   </Words>
 
   <Words name="Removed" color="#000000" slcolor="#000000">
     <Word name="llGodLikeRezObject" />
+    <Word name="llSetInventoryPermMask" />
+    <Word name="llSetObjectPermMask" />
   </Words>
 
   <Words icon="Enum" name="Names" color="#A0A0A0" slcolor="#003300">

@@ -1,7 +1,7 @@
 // /**
 // ********
 // *
-// * ORIGIONAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
+// * ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
 // * The code was donated on 4/28/2010 by Alphons van der Heijden
 // * To Brandon'Dimentox Travanti' Husbands & Malcolm J. Kudra which in turn Liscense under the GPLv2.
 // * In agreement to Alphons van der Heijden wishes.
@@ -169,6 +169,7 @@ namespace LSLEditor
 		virtual public void touch_start(integer total_number) { }
 		virtual public void remote_data(integer event_type, key channel, key message_id, String sender, integer idata, String sdata) { }
 		virtual public void http_response(key request_id, integer status, list metadata, String body) { }
+        virtual public void http_request(key request_id, String method, String body) { }
 		#endregion
 
 		#region all constants
@@ -508,6 +509,7 @@ namespace LSLEditor
 		public static readonly integer PARCEL_DETAILS_OWNER = 2;
 		public static readonly integer PARCEL_DETAILS_GROUP = 3;
 		public static readonly integer PARCEL_DETAILS_AREA = 4;
+        public static readonly integer PARCEL_DETAILS_ID = 5;
 
 		public static readonly integer PAYMENT_INFO_ON_FILE = 1;
 		public static readonly integer PAYMENT_INFO_USED = 2;
@@ -591,6 +593,7 @@ namespace LSLEditor
 		public static readonly integer PRIM_TEXGEN = 22;
 		public static readonly integer PRIM_TEXGEN_DEFAULT = 0;
 		public static readonly integer PRIM_TEXGEN_PLANAR = 1;
+        public static readonly integer PRIM_TEXT = 26;
 		public static readonly integer PRIM_TEXTURE = 17;
 		public static readonly integer PRIM_TYPE = 9;
 
@@ -2445,6 +2448,11 @@ namespace LSLEditor
 			Verbose("ParticleSystem(" + parameters.ToString() + ")");
 		}
 
+        public void llLinkParticleSystem(integer link, list parameters)
+        {
+            Verbose("LinkParticleSystem(" + link + "," + parameters.ToString() + ")");
+        }
+
 		public void llPassCollisions(integer pass)
 		{
 			Verbose("PassCollisions(" + pass + ")");
@@ -2802,6 +2810,11 @@ namespace LSLEditor
 			Verbose("SetTextureAnim(" + mode + "," + face + "," + sizex + "," + sizey + "," + start + "," + length + "," + rate + ")");
 		}
 
+        public void llSetLinkTextureAnim(integer link, integer mode, integer face, integer sizex, integer sizey, Float start, Float length, Float rate)
+        {
+            Verbose("SetLinkTextureAnim(" + link + "," + mode + "," + face + "," + sizex + "," + sizey + "," + start + "," + length + "," + rate + ")");
+        }
+
 		public void llSetTimerEvent(Float sec)
 		{
 			Verbose("SetTimerEvent(" + sec + ")");
@@ -3086,6 +3099,11 @@ namespace LSLEditor
 			Verbose("GetPrimitiveParams(" + myparams.ToString() + ")");
 			return new list();
 		}
+        public list llGetLinkPrimitiveParams(integer link, list myparams)
+        {
+            Verbose("GetLinkPrimitiveParams(" + link + "," + myparams.ToString() + ")");
+            return new list();
+        }
 
 		public vector llGetRootPosition()
 		{
@@ -3644,9 +3662,14 @@ PARCEL_DETAILS_AREA  4  The parcel's area, in sqm.  (5 Characters)  integer
 			return result;
 		}
 
-		public void llSetLinkPrimitiveParams(integer linknumber, list rules)
+        public void llSetLinkPrimitiveParams(integer linknumber, list rules)
+        {
+            Verbose("llSetLinkPrimitiveParams({0},[{1}])", linknumber, rules);
+        }
+
+		public void llSetLinkPrimitiveParamsFast(integer linknumber, list rules)
 		{
-			Verbose("llSetLinkPrimitiveParams({0},[{1}])",linknumber,rules);
+			Verbose("llSetLinkPrimitiveParamsFast({0},[{1}])", linknumber, rules);
 		}
 
 		public void llSetLinkTexture(integer linknumber, String texture, integer face)
@@ -3796,5 +3819,20 @@ PARCEL_DETAILS_AREA  4  The parcel's area, in sqm.  (5 Characters)  integer
 			return "not-implemented";
 		}
 
+        public list llGetPrimMediaParams(integer face, list myparams)
+        {
+            Verbose("GetPrimMediaParams(" + face + "," + myparams.ToString() + ")");
+            return new list();
+        }
+        public integer llSetPrimMediaParams(integer face, list myparams)
+        {
+            Verbose("SetPrimMediaParams(" + face + "," + myparams.ToString() + ")");
+            return 0;
+        }
+        public integer llClearPrimMedia(integer face)
+        {
+            Verbose("ClearPrimMedia(" + face + ")");
+            return 0;
+        }
 	}
 }

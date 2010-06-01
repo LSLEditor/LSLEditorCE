@@ -326,8 +326,5 @@
     <Setting Name="ForumLSLEditor" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://sourceforge.net/projects/lsleditor/forums</Value>
     </Setting>
-    <Setting Name="OopsRemove" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\Documents and Settings\Alphons\Mijn documenten\Visual Studio 2005\Projects</Value>
-    </Setting>
   </Settings>
 </SettingsFile>

@@ -1,7 +1,7 @@
 // /**
 // ********
 // *
-// * ORIGIONAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
+// * ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
 // * The code was donated on 4/28/2010 by Alphons van der Heijden
 // * To Brandon'Dimentox Travanti' Husbands & Malcolm J. Kudra which in turn Liscense under the GPLv2.
 // * In agreement to Alphons van der Heijden wishes.
@@ -166,11 +166,14 @@ namespace LSLEditor
 				string strLine = sr.ReadLine();
 				if (strLine == null)
 					break;
-				int intSplit = strLine.IndexOf("=");
+				
+                int intSplit = strLine.IndexOf("=");
 				if (intSplit < 0)
 					continue;
-				string strName = strLine.Substring(0, intSplit);
+				
+                string strName = strLine.Substring(0, intSplit);
 				string strValue = strLine.Substring(intSplit + 1);
+
 				switch (strName)
 				{
 					case "Version":
@@ -182,8 +185,7 @@ namespace LSLEditor
 					case "Url":
 						strDownloadUrl = strValue;
 						break;
-
-					case "GZipVersion":
+                    case "GZipVersion":
 						strVersionNew = strValue;
 						break;
 					case "GZipHash":
@@ -192,7 +194,6 @@ namespace LSLEditor
 					case "GZipUrl":
 						strDownloadUrl = strValue;
 						break;
-
 					case "ZipVersion":
 						strVersionNew = strValue;
 						break;
@@ -202,8 +203,7 @@ namespace LSLEditor
 					case "ZipUrl":
 						strDownloadUrl = strValue;
 						break;
-
-					case "HelpHash":
+                    case "HelpHash":
 						strHelpHashNew = strValue;
 						break;
 					case "HelpUrl2":
@@ -212,7 +212,6 @@ namespace LSLEditor
 					case "HelpReferer":
 						strHelpReferer = strValue;
 						break;
-
 					default:
 						break;
 				}

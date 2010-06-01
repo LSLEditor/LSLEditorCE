@@ -1,7 +1,7 @@
 // /**
 // ********
 // *
-// * ORIGIONAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
+// * ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
 // * The code was donated on 4/28/2010 by Alphons van der Heijden
 // * To Brandon'Dimentox Travanti' Husbands & Malcolm J. Kudra which in turn Liscense under the GPLv2.
 // * In agreement to Alphons van der Heijden wishes.
@@ -50,7 +50,7 @@ using System.Runtime.CompilerServices;
 // associated with an assembly.
 //
 [assembly: AssemblyTitle("LSL-Editor")]
-[assembly: AssemblyDescription("LSL-Editor for editing en compiling LSL scripts")]
+[assembly: AssemblyDescription("LSL-Editor for editing and compiling LSL scripts")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Van der Heijden Holding BV")]
 [assembly: AssemblyProduct("")]

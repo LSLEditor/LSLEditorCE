@@ -1,7 +1,7 @@
 // /**
 // ********
 // *
-// * ORIGIONAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
+// * ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
 // * The code was donated on 4/28/2010 by Alphons van der Heijden
 // * To Brandon'Dimentox Travanti' Husbands & Malcolm J. Kudra which in turn Liscense under the GPLv2.
 // * In agreement to Alphons van der Heijden wishes.
@@ -469,7 +469,6 @@ namespace LSLEditor
             this.parent.BeginInvoke(new TreeNodeMouseClickEventHandler(
                 delegate(object sender2, TreeNodeMouseClickEventArgs e2)
                 {
-
                     if (e.Node.Tag is Helpers.OutlineHelper)
                     {
                         Helpers.OutlineHelper ohOutline = (Helpers.OutlineHelper)e.Node.Tag;
