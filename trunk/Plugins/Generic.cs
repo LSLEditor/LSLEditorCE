@@ -45,6 +45,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Reflection;
+using LSLEditor.Docking;
 
 namespace LSLEditor.Plugins
 {
@@ -83,11 +84,11 @@ namespace LSLEditor.Plugins
 
 			foreach (Type t in assembly.GetTypes())
 			{
-				if (t.BaseType.Name == "Form")
+				if (t.BaseType.Name == "DockContent")
 				{
-					Form form = assembly.CreateInstance(t.FullName, false,
+					DockContent form = assembly.CreateInstance(t.FullName, false,
 						BindingFlags.Public|BindingFlags.Instance|BindingFlags.CreateInstance,
-						null,args,null,null) as Form;
+                        null, args, null, null) as DockContent;
 					if (form != null)
 					{
 						parent.AddForm(form);

@@ -29,6 +29,21 @@ namespace LSLEditor
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
+            LSLEditor.Docking.DockPanelSkin dockPanelSkin1 = new LSLEditor.Docking.DockPanelSkin();
+            LSLEditor.Docking.AutoHideStripSkin autoHideStripSkin1 = new LSLEditor.Docking.AutoHideStripSkin();
+            LSLEditor.Docking.DockPanelGradient dockPanelGradient1 = new LSLEditor.Docking.DockPanelGradient();
+            LSLEditor.Docking.TabGradient tabGradient1 = new LSLEditor.Docking.TabGradient();
+            LSLEditor.Docking.DockPaneStripSkin dockPaneStripSkin1 = new LSLEditor.Docking.DockPaneStripSkin();
+            LSLEditor.Docking.DockPaneStripGradient dockPaneStripGradient1 = new LSLEditor.Docking.DockPaneStripGradient();
+            LSLEditor.Docking.TabGradient tabGradient2 = new LSLEditor.Docking.TabGradient();
+            LSLEditor.Docking.DockPanelGradient dockPanelGradient2 = new LSLEditor.Docking.DockPanelGradient();
+            LSLEditor.Docking.TabGradient tabGradient3 = new LSLEditor.Docking.TabGradient();
+            LSLEditor.Docking.DockPaneStripToolWindowGradient dockPaneStripToolWindowGradient1 = new LSLEditor.Docking.DockPaneStripToolWindowGradient();
+            LSLEditor.Docking.TabGradient tabGradient4 = new LSLEditor.Docking.TabGradient();
+            LSLEditor.Docking.TabGradient tabGradient5 = new LSLEditor.Docking.TabGradient();
+            LSLEditor.Docking.DockPanelGradient dockPanelGradient3 = new LSLEditor.Docking.DockPanelGradient();
+            LSLEditor.Docking.TabGradient tabGradient6 = new LSLEditor.Docking.TabGradient();
+            LSLEditor.Docking.TabGradient tabGradient7 = new LSLEditor.Docking.TabGradient();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LSLEditorForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,6 +104,7 @@ namespace LSLEditor
             this.uncommentingSelectedTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.solutionExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.outlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewObjecttoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,16 +116,9 @@ namespace LSLEditor
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.horizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.verticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.ArangeIconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.browserInWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.WikiSepBrowserstoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
-            this.tabbedViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeActiveWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.indexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,24 +143,13 @@ namespace LSLEditor
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.closeTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.splitter2 = new System.Windows.Forms.Splitter();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.outlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControlExtended1 = new System.Windows.Forms.TabControlExtended(this.components);
-            this.tabControlExtended2 = new System.Windows.Forms.TabControlExtended(this.components);
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.solutionExplorer1 = new LSLEditor.Solution.SolutionExplorer();
+            this.dockPanel = new LSLEditor.Docking.DockPanel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.tabControlExtended2.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -199,7 +197,7 @@ namespace LSLEditor
             this.toolStripSeparator21,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
@@ -210,7 +208,7 @@ namespace LSLEditor
             this.newFileToolStripMenuItem,
             this.notecardToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // newProjectToolStripMenuItem
@@ -218,7 +216,7 @@ namespace LSLEditor
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
             this.newProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
                         | System.Windows.Forms.Keys.N)));
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.newProjectToolStripMenuItem.Text = "Solution...";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
             // 
@@ -227,14 +225,14 @@ namespace LSLEditor
             this.newFileToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.NEWDOC;
             this.newFileToolStripMenuItem.Name = "newFileToolStripMenuItem";
             this.newFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newFileToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.newFileToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.newFileToolStripMenuItem.Text = "Script";
             this.newFileToolStripMenuItem.Click += new System.EventHandler(this.newFileToolStripMenuItem_Click);
             // 
             // notecardToolStripMenuItem
             // 
             this.notecardToolStripMenuItem.Name = "notecardToolStripMenuItem";
-            this.notecardToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.notecardToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.notecardToolStripMenuItem.Text = "Notecard";
             this.notecardToolStripMenuItem.Click += new System.EventHandler(this.notecardToolStripMenuItem_Click);
             // 
@@ -244,7 +242,7 @@ namespace LSLEditor
             this.openProjectSolutionToolStripMenuItem,
             this.openFileToolStripMenuItem});
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // openProjectSolutionToolStripMenuItem
@@ -252,7 +250,7 @@ namespace LSLEditor
             this.openProjectSolutionToolStripMenuItem.Name = "openProjectSolutionToolStripMenuItem";
             this.openProjectSolutionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
                         | System.Windows.Forms.Keys.O)));
-            this.openProjectSolutionToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.openProjectSolutionToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.openProjectSolutionToolStripMenuItem.Text = "Project/Solution...";
             this.openProjectSolutionToolStripMenuItem.Click += new System.EventHandler(this.openProjectSolutionToolStripMenuItem_Click);
             // 
@@ -261,14 +259,14 @@ namespace LSLEditor
             this.openFileToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.OPEN;
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
             this.openFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.openFileToolStripMenuItem.Text = "File...";
             this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(184, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(188, 6);
             // 
             // addToolStripMenuItem
             // 
@@ -277,40 +275,40 @@ namespace LSLEditor
             this.toolStripSeparator19,
             this.existingProjectToolStripMenuItem});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.addToolStripMenuItem.Text = "Add";
             this.addToolStripMenuItem.Visible = false;
             // 
             // newProjectToolStripMenuItem1
             // 
             this.newProjectToolStripMenuItem1.Name = "newProjectToolStripMenuItem1";
-            this.newProjectToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
+            this.newProjectToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
             this.newProjectToolStripMenuItem1.Text = "New project...";
             this.newProjectToolStripMenuItem1.Click += new System.EventHandler(this.newProjectToolStripMenuItem1_Click);
             // 
             // toolStripSeparator19
             // 
             this.toolStripSeparator19.Name = "toolStripSeparator19";
-            this.toolStripSeparator19.Size = new System.Drawing.Size(160, 6);
+            this.toolStripSeparator19.Size = new System.Drawing.Size(168, 6);
             // 
             // existingProjectToolStripMenuItem
             // 
             this.existingProjectToolStripMenuItem.Name = "existingProjectToolStripMenuItem";
-            this.existingProjectToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.existingProjectToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.existingProjectToolStripMenuItem.Text = "Existing project...";
             this.existingProjectToolStripMenuItem.Click += new System.EventHandler(this.existingProjectToolStripMenuItem_Click);
             // 
             // addToolStripSeparator
             // 
             this.addToolStripSeparator.Name = "addToolStripSeparator";
-            this.addToolStripSeparator.Size = new System.Drawing.Size(184, 6);
+            this.addToolStripSeparator.Size = new System.Drawing.Size(188, 6);
             this.addToolStripSeparator.Visible = false;
             // 
             // closeFileToolStripMenuItem
             // 
             this.closeFileToolStripMenuItem.Name = "closeFileToolStripMenuItem";
             this.closeFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
-            this.closeFileToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.closeFileToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.closeFileToolStripMenuItem.Text = "Close";
             this.closeFileToolStripMenuItem.Click += new System.EventHandler(this.closeFileToolStripMenuItem_Click);
             // 
@@ -318,40 +316,40 @@ namespace LSLEditor
             // 
             this.closeSolutiontoolStripMenuItem.Enabled = false;
             this.closeSolutiontoolStripMenuItem.Name = "closeSolutiontoolStripMenuItem";
-            this.closeSolutiontoolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.closeSolutiontoolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.closeSolutiontoolStripMenuItem.Text = "Close Solution";
             this.closeSolutiontoolStripMenuItem.Click += new System.EventHandler(this.closeSolutiontoolStripMenuItem_Click);
             // 
             // toolStripSeparator20
             // 
             this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(184, 6);
+            this.toolStripSeparator20.Size = new System.Drawing.Size(188, 6);
             // 
             // importExampleToolStripMenuItem
             // 
             this.importExampleToolStripMenuItem.Name = "importExampleToolStripMenuItem";
-            this.importExampleToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.importExampleToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.importExampleToolStripMenuItem.Text = "Import Example...";
             this.importExampleToolStripMenuItem.Click += new System.EventHandler(this.importExampleToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(184, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(188, 6);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.SAVE;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -361,26 +359,26 @@ namespace LSLEditor
             this.SaveAllToolStripMenuItem.Name = "SaveAllToolStripMenuItem";
             this.SaveAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
                         | System.Windows.Forms.Keys.S)));
-            this.SaveAllToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.SaveAllToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.SaveAllToolStripMenuItem.Text = "Save All";
             this.SaveAllToolStripMenuItem.Click += new System.EventHandler(this.SaveAllToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(184, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(188, 6);
             // 
             // pageSettingsToolStripMenuItem
             // 
             this.pageSettingsToolStripMenuItem.Name = "pageSettingsToolStripMenuItem";
-            this.pageSettingsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.pageSettingsToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.pageSettingsToolStripMenuItem.Text = "Page settings...";
             this.pageSettingsToolStripMenuItem.Click += new System.EventHandler(this.pageSettingsToolStripMenuItem_Click);
             // 
             // printPreviewtoolStripMenuItem
             // 
             this.printPreviewtoolStripMenuItem.Name = "printPreviewtoolStripMenuItem";
-            this.printPreviewtoolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.printPreviewtoolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.printPreviewtoolStripMenuItem.Text = "Print Preview...";
             this.printPreviewtoolStripMenuItem.Click += new System.EventHandler(this.printPreviewtoolStripMenuItem_Click);
             // 
@@ -389,50 +387,50 @@ namespace LSLEditor
             this.printToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.PRINT;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.printToolStripMenuItem.Text = "Print...";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(184, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(188, 6);
             // 
             // copyToClipboardToolStripMenuItem
             // 
             this.copyToClipboardToolStripMenuItem.Name = "copyToClipboardToolStripMenuItem";
-            this.copyToClipboardToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.copyToClipboardToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.copyToClipboardToolStripMenuItem.Text = "Copy to clipboard";
             this.copyToClipboardToolStripMenuItem.Click += new System.EventHandler(this.copyToClipboardToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(184, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(188, 6);
             // 
             // recentFileToolStripMenuItem
             // 
             this.recentFileToolStripMenuItem.Name = "recentFileToolStripMenuItem";
-            this.recentFileToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.recentFileToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.recentFileToolStripMenuItem.Text = "Recent Files";
             this.recentFileToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.recentFileToolStripMenuItem_DropDownItemClicked);
             // 
             // recentProjectToolStripMenuItem
             // 
             this.recentProjectToolStripMenuItem.Name = "recentProjectToolStripMenuItem";
-            this.recentProjectToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.recentProjectToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.recentProjectToolStripMenuItem.Text = "Recent Solutions";
             this.recentProjectToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.recentProjectToolStripMenuItem_DropDownItemClicked);
             // 
             // toolStripSeparator21
             // 
             this.toolStripSeparator21.Name = "toolStripSeparator21";
-            this.toolStripSeparator21.Size = new System.Drawing.Size(184, 6);
+            this.toolStripSeparator21.Size = new System.Drawing.Size(188, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -455,7 +453,7 @@ namespace LSLEditor
             this.toolStripSeparator14,
             this.advancedToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // undoToolStripMenuItem
@@ -463,7 +461,7 @@ namespace LSLEditor
             this.undoToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.UNDO;
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
@@ -472,21 +470,21 @@ namespace LSLEditor
             this.redoToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.REDO;
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(222, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(221, 6);
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.CUT;
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
             this.cutToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+X";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
@@ -495,7 +493,7 @@ namespace LSLEditor
             this.copyToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.COPY;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+C";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
@@ -504,7 +502,7 @@ namespace LSLEditor
             this.pasteToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.PASTE;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+V";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
@@ -513,20 +511,20 @@ namespace LSLEditor
             this.deleteToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.DELETE;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeyDisplayString = "Del";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(222, 6);
+            this.toolStripSeparator13.Size = new System.Drawing.Size(221, 6);
             // 
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
             this.selectAllToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+A";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.selectAllToolStripMenuItem.Text = "Select All";
             this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
             // 
@@ -535,14 +533,14 @@ namespace LSLEditor
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
             this.toolStripMenuItem8.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
                         | System.Windows.Forms.Keys.A)));
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(225, 22);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(224, 22);
             this.toolStripMenuItem8.Text = "Select All to SL";
             this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(222, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(221, 6);
             // 
             // FindtoolStripMenuItem
             // 
@@ -551,14 +549,14 @@ namespace LSLEditor
             this.replaceToolStripMenuItem,
             this.findNextToolStripMenuItem});
             this.FindtoolStripMenuItem.Name = "FindtoolStripMenuItem";
-            this.FindtoolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.FindtoolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.FindtoolStripMenuItem.Text = "Find and Replace";
             // 
             // findToolStripMenuItem1
             // 
             this.findToolStripMenuItem1.Name = "findToolStripMenuItem1";
             this.findToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.findToolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
+            this.findToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
             this.findToolStripMenuItem1.Text = "Find";
             this.findToolStripMenuItem1.Click += new System.EventHandler(this.findToolStripMenuItem_Click);
             // 
@@ -566,7 +564,7 @@ namespace LSLEditor
             // 
             this.replaceToolStripMenuItem.Name = "replaceToolStripMenuItem";
             this.replaceToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
-            this.replaceToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.replaceToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.replaceToolStripMenuItem.Text = "Replace";
             this.replaceToolStripMenuItem.Click += new System.EventHandler(this.replaceToolStripMenuItem_Click);
             // 
@@ -574,7 +572,7 @@ namespace LSLEditor
             // 
             this.findNextToolStripMenuItem.Name = "findNextToolStripMenuItem";
             this.findNextToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.findNextToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.findNextToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.findNextToolStripMenuItem.Text = "Find next";
             this.findNextToolStripMenuItem.Visible = false;
             this.findNextToolStripMenuItem.Click += new System.EventHandler(this.findNextToolStripMenuItem_Click);
@@ -583,14 +581,14 @@ namespace LSLEditor
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(225, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(224, 22);
             this.toolStripMenuItem1.Text = "Goto...";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripSeparator14
             // 
             this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(222, 6);
+            this.toolStripSeparator14.Size = new System.Drawing.Size(221, 6);
             // 
             // advancedToolStripMenuItem
             // 
@@ -600,14 +598,14 @@ namespace LSLEditor
             this.commentInToolStripMenuItem,
             this.uncommentingSelectedTextToolStripMenuItem});
             this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
-            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.advancedToolStripMenuItem.Text = "Advanced";
             // 
             // formatDocumentToolStripMenuItem
             // 
             this.formatDocumentToolStripMenuItem.Name = "formatDocumentToolStripMenuItem";
             this.formatDocumentToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.formatDocumentToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.formatDocumentToolStripMenuItem.Size = new System.Drawing.Size(258, 22);
             this.formatDocumentToolStripMenuItem.Text = "Format document";
             this.formatDocumentToolStripMenuItem.Click += new System.EventHandler(this.formatDocumentToolStripMenuItem_Click);
             // 
@@ -615,7 +613,7 @@ namespace LSLEditor
             // 
             this.formatSelectedTextToolStripMenuItem.Name = "formatSelectedTextToolStripMenuItem";
             this.formatSelectedTextToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.formatSelectedTextToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.formatSelectedTextToolStripMenuItem.Size = new System.Drawing.Size(258, 22);
             this.formatSelectedTextToolStripMenuItem.Text = "Format selected text";
             this.formatSelectedTextToolStripMenuItem.Click += new System.EventHandler(this.formatSelectedTextToolStripMenuItem_Click);
             // 
@@ -624,7 +622,7 @@ namespace LSLEditor
             this.commentInToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.ININDENT;
             this.commentInToolStripMenuItem.Name = "commentInToolStripMenuItem";
             this.commentInToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
-            this.commentInToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.commentInToolStripMenuItem.Size = new System.Drawing.Size(258, 22);
             this.commentInToolStripMenuItem.Text = "Commenting selected text";
             this.commentInToolStripMenuItem.Click += new System.EventHandler(this.commentInToolStripMenuItem_Click);
             // 
@@ -633,7 +631,7 @@ namespace LSLEditor
             this.uncommentingSelectedTextToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.DEINDENT;
             this.uncommentingSelectedTextToolStripMenuItem.Name = "uncommentingSelectedTextToolStripMenuItem";
             this.uncommentingSelectedTextToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.uncommentingSelectedTextToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.uncommentingSelectedTextToolStripMenuItem.Size = new System.Drawing.Size(258, 22);
             this.uncommentingSelectedTextToolStripMenuItem.Text = "Uncommenting selected text";
             this.uncommentingSelectedTextToolStripMenuItem.Click += new System.EventHandler(this.uncommentingSelectedTextToolStripMenuItem_Click);
             // 
@@ -643,15 +641,25 @@ namespace LSLEditor
             this.solutionExplorerToolStripMenuItem,
             this.outlineToolStripMenuItem});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(44, 20);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(41, 20);
             this.toolStripMenuItem2.Text = "View";
             // 
             // solutionExplorerToolStripMenuItem
             // 
             this.solutionExplorerToolStripMenuItem.Name = "solutionExplorerToolStripMenuItem";
-            this.solutionExplorerToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.solutionExplorerToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.solutionExplorerToolStripMenuItem.Text = "Solution Explorer";
             this.solutionExplorerToolStripMenuItem.Click += new System.EventHandler(this.solutionExplorerToolStripMenuItem_Click);
+            // 
+            // outlineToolStripMenuItem
+            // 
+            this.outlineToolStripMenuItem.Checked = true;
+            this.outlineToolStripMenuItem.CheckOnClick = true;
+            this.outlineToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.outlineToolStripMenuItem.Name = "outlineToolStripMenuItem";
+            this.outlineToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.outlineToolStripMenuItem.Text = "Outline";
+            this.outlineToolStripMenuItem.CheckedChanged += new System.EventHandler(this.outlineToolStripMenuItem_CheckedChanged);
             // 
             // projectToolStripMenuItem
             // 
@@ -659,7 +667,7 @@ namespace LSLEditor
             this.addNewObjecttoolStripMenuItem,
             this.addNewFileToolStripMenuItem});
             this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
-            this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.projectToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.projectToolStripMenuItem.Text = "Project";
             // 
             // addNewObjecttoolStripMenuItem
@@ -668,7 +676,7 @@ namespace LSLEditor
             this.addNewObjecttoolStripMenuItem.Name = "addNewObjecttoolStripMenuItem";
             this.addNewObjecttoolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
                         | System.Windows.Forms.Keys.A)));
-            this.addNewObjecttoolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.addNewObjecttoolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.addNewObjecttoolStripMenuItem.Text = "Add New Object";
             this.addNewObjecttoolStripMenuItem.Click += new System.EventHandler(this.addNewObjecttoolStripMenuItem_Click);
             // 
@@ -676,7 +684,7 @@ namespace LSLEditor
             // 
             this.addNewFileToolStripMenuItem.Enabled = false;
             this.addNewFileToolStripMenuItem.Name = "addNewFileToolStripMenuItem";
-            this.addNewFileToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.addNewFileToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.addNewFileToolStripMenuItem.Text = "Add New Item";
             // 
             // buildToolStripMenuItem
@@ -687,7 +695,7 @@ namespace LSLEditor
             this.toolStripSeparator23,
             this.syntaxCheckerToolStripMenuItem});
             this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
-            this.buildToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.buildToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.buildToolStripMenuItem.Text = "Debug";
             // 
             // startToolStripMenuItem
@@ -695,7 +703,7 @@ namespace LSLEditor
             this.startToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.START;
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
             this.startToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.startToolStripMenuItem.Text = "Start";
             this.startToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem_Click);
             // 
@@ -705,20 +713,20 @@ namespace LSLEditor
             this.stopToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.END;
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
             this.stopToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F5)));
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.stopToolStripMenuItem.Text = "Stop";
             this.stopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
             // 
             // toolStripSeparator23
             // 
             this.toolStripSeparator23.Name = "toolStripSeparator23";
-            this.toolStripSeparator23.Size = new System.Drawing.Size(170, 6);
+            this.toolStripSeparator23.Size = new System.Drawing.Size(177, 6);
             // 
             // syntaxCheckerToolStripMenuItem
             // 
             this.syntaxCheckerToolStripMenuItem.Name = "syntaxCheckerToolStripMenuItem";
             this.syntaxCheckerToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6;
-            this.syntaxCheckerToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.syntaxCheckerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.syntaxCheckerToolStripMenuItem.Text = "Syntax Checker";
             this.syntaxCheckerToolStripMenuItem.Click += new System.EventHandler(this.syntaxCheckerToolStripMenuItem_Click);
             // 
@@ -727,103 +735,51 @@ namespace LSLEditor
             this.toolStripMenuItem3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem});
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(48, 20);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(44, 20);
             this.toolStripMenuItem3.Text = "Tools";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.optionsToolStripMenuItem.Text = "Options...";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.horizontalToolStripMenuItem,
-            this.verticalToolStripMenuItem,
-            this.cascadeToolStripMenuItem,
-            this.toolStripSeparator11,
-            this.ArangeIconsToolStripMenuItem,
-            this.toolStripSeparator10,
             this.browserInWindowToolStripMenuItem,
             this.WikiSepBrowserstoolStripMenuItem,
             this.toolStripSeparator16,
-            this.tabbedViewToolStripMenuItem,
             this.closeActiveWindowToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.viewToolStripMenuItem.Text = "Window";
-            // 
-            // horizontalToolStripMenuItem
-            // 
-            this.horizontalToolStripMenuItem.Name = "horizontalToolStripMenuItem";
-            this.horizontalToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
-            this.horizontalToolStripMenuItem.Text = "Horizontal";
-            this.horizontalToolStripMenuItem.Click += new System.EventHandler(this.horizontalToolStripMenuItem_Click);
-            // 
-            // verticalToolStripMenuItem
-            // 
-            this.verticalToolStripMenuItem.Name = "verticalToolStripMenuItem";
-            this.verticalToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
-            this.verticalToolStripMenuItem.Text = "Vertical";
-            this.verticalToolStripMenuItem.Click += new System.EventHandler(this.verticalToolStripMenuItem_Click);
-            // 
-            // cascadeToolStripMenuItem
-            // 
-            this.cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
-            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
-            this.cascadeToolStripMenuItem.Text = "Cascade";
-            this.cascadeToolStripMenuItem.Click += new System.EventHandler(this.cascadeToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator11
-            // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(260, 6);
-            // 
-            // ArangeIconsToolStripMenuItem
-            // 
-            this.ArangeIconsToolStripMenuItem.Name = "ArangeIconsToolStripMenuItem";
-            this.ArangeIconsToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
-            this.ArangeIconsToolStripMenuItem.Text = "Arange Icons";
-            this.ArangeIconsToolStripMenuItem.Click += new System.EventHandler(this.normalToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(260, 6);
             // 
             // browserInWindowToolStripMenuItem
             // 
             this.browserInWindowToolStripMenuItem.Name = "browserInWindowToolStripMenuItem";
-            this.browserInWindowToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
+            this.browserInWindowToolStripMenuItem.Size = new System.Drawing.Size(258, 22);
             this.browserInWindowToolStripMenuItem.Text = "Browser in window";
             this.browserInWindowToolStripMenuItem.Click += new System.EventHandler(this.browserInWindowToolStripMenuItem_Click);
             // 
             // WikiSepBrowserstoolStripMenuItem
             // 
             this.WikiSepBrowserstoolStripMenuItem.Name = "WikiSepBrowserstoolStripMenuItem";
-            this.WikiSepBrowserstoolStripMenuItem.Size = new System.Drawing.Size(263, 22);
+            this.WikiSepBrowserstoolStripMenuItem.Size = new System.Drawing.Size(258, 22);
             this.WikiSepBrowserstoolStripMenuItem.Text = "Online Wiki-pages separate Browser";
             this.WikiSepBrowserstoolStripMenuItem.Click += new System.EventHandler(this.WikiSepBrowserstoolStripMenuItem_Click);
             // 
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(260, 6);
-            // 
-            // tabbedViewToolStripMenuItem
-            // 
-            this.tabbedViewToolStripMenuItem.Name = "tabbedViewToolStripMenuItem";
-            this.tabbedViewToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
-            this.tabbedViewToolStripMenuItem.Text = "Tabbed document";
-            this.tabbedViewToolStripMenuItem.Click += new System.EventHandler(this.tabbedViewToolStripMenuItem_Click);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(255, 6);
             // 
             // closeActiveWindowToolStripMenuItem
             // 
             this.closeActiveWindowToolStripMenuItem.Name = "closeActiveWindowToolStripMenuItem";
             this.closeActiveWindowToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F4)));
-            this.closeActiveWindowToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
+            this.closeActiveWindowToolStripMenuItem.Size = new System.Drawing.Size(258, 22);
             this.closeActiveWindowToolStripMenuItem.Text = "Close active window";
             this.closeActiveWindowToolStripMenuItem.Click += new System.EventHandler(this.closeActiveWindowToolStripMenuItem_Click);
             // 
@@ -847,14 +803,14 @@ namespace LSLEditor
             this.toolStripSeparator17,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // indexToolStripMenuItem
             // 
             this.indexToolStripMenuItem.Name = "indexToolStripMenuItem";
             this.indexToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
-            this.indexToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.indexToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.indexToolStripMenuItem.Text = "Index LSL Wiki";
             this.indexToolStripMenuItem.Click += new System.EventHandler(this.indexToolStripMenuItem_Click);
             // 
@@ -862,93 +818,93 @@ namespace LSLEditor
             // 
             this.helpKeywordToolStripMenuItem.Name = "helpKeywordToolStripMenuItem";
             this.helpKeywordToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.helpKeywordToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.helpKeywordToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.helpKeywordToolStripMenuItem.Text = "Help on keyword";
             this.helpKeywordToolStripMenuItem.Click += new System.EventHandler(this.helpKeywordToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(208, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(216, 6);
             // 
             // checkForUpdatesToolStripMenuItem
             // 
             this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.checkForUpdatesToolStripMenuItem.Text = "Info on the latest release...";
             this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(211, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(219, 22);
             this.toolStripMenuItem4.Text = "Check for update...";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(208, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(216, 6);
             // 
             // ReleaseNotesToolStripMenuItem
             // 
             this.ReleaseNotesToolStripMenuItem.Name = "ReleaseNotesToolStripMenuItem";
-            this.ReleaseNotesToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.ReleaseNotesToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.ReleaseNotesToolStripMenuItem.Text = "Release notes...";
             this.ReleaseNotesToolStripMenuItem.Click += new System.EventHandler(this.ReleaseNotesToolStripMenuItem_Click);
             // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(208, 6);
+            this.toolStripSeparator12.Size = new System.Drawing.Size(216, 6);
             // 
             // makeBugReporttoolStripMenuItem
             // 
             this.makeBugReporttoolStripMenuItem.Name = "makeBugReporttoolStripMenuItem";
-            this.makeBugReporttoolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.makeBugReporttoolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.makeBugReporttoolStripMenuItem.Text = "Bug report...";
             this.makeBugReporttoolStripMenuItem.Click += new System.EventHandler(this.makeBugReporttoolStripMenuItem_Click);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(211, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(219, 22);
             this.toolStripMenuItem6.Text = "LSLEditor Forum...";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.forumStripMenuItem_Click);
             // 
             // toolStripSeparator22
             // 
             this.toolStripSeparator22.Name = "toolStripSeparator22";
-            this.toolStripSeparator22.Size = new System.Drawing.Size(208, 6);
+            this.toolStripSeparator22.Size = new System.Drawing.Size(216, 6);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(211, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(219, 22);
             this.toolStripMenuItem5.Text = "Donate...";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // toolStripSeparator15
             // 
             this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(208, 6);
+            this.toolStripSeparator15.Size = new System.Drawing.Size(216, 6);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(211, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(219, 22);
             this.toolStripMenuItem7.Text = "Contact...";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(208, 6);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(216, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -976,108 +932,72 @@ namespace LSLEditor
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.closeTabToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(104, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(112, 26);
             // 
             // closeTabToolStripMenuItem
             // 
             this.closeTabToolStripMenuItem.Name = "closeTabToolStripMenuItem";
-            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.closeTabToolStripMenuItem.Text = "Close";
             this.closeTabToolStripMenuItem.Click += new System.EventHandler(this.closeTabToolStripMenuItem_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.tabControlExtended2);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(542, 24);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 470);
-            this.panel2.TabIndex = 20;
-            this.panel2.Visible = false;
-            // 
-            // splitter2
-            // 
-            this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter2.Location = new System.Drawing.Point(534, 24);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(8, 470);
-            this.splitter2.TabIndex = 22;
-            this.splitter2.TabStop = false;
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 458);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(534, 36);
-            this.panel1.TabIndex = 23;
-            this.panel1.Visible = false;
-            // 
-            // splitter1
-            // 
-            this.splitter1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.splitter1.Location = new System.Drawing.Point(0, 450);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitter1.Size = new System.Drawing.Size(534, 8);
-            this.splitter1.TabIndex = 24;
-            this.splitter1.TabStop = false;
-            this.splitter1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter1_SplitterMoved);
             // 
             // openFileDialog2
             // 
             this.openFileDialog2.FileName = "openFileDialog2";
             // 
-            // outlineToolStripMenuItem
+            // dockPanel
             // 
-            this.outlineToolStripMenuItem.Checked = true;
-            this.outlineToolStripMenuItem.CheckOnClick = true;
-            this.outlineToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.outlineToolStripMenuItem.Name = "outlineToolStripMenuItem";
-            this.outlineToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.outlineToolStripMenuItem.Text = "Outline";
-            this.outlineToolStripMenuItem.CheckedChanged += new System.EventHandler(this.outlineToolStripMenuItem_CheckedChanged);
-            // 
-            // tabControlExtended1
-            // 
-            this.tabControlExtended1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabControlExtended1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.tabControlExtended1.Location = new System.Drawing.Point(0, 414);
-            this.tabControlExtended1.Name = "tabControlExtended1";
-            this.tabControlExtended1.SelectedIndex = 0;
-            this.tabControlExtended1.Size = new System.Drawing.Size(534, 36);
-            this.tabControlExtended1.TabIndex = 25;
-            this.tabControlExtended1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControlExtended1_MouseDown);
-            this.tabControlExtended1.SelectedIndexChanged += new System.EventHandler(this.tabControlExtended1_SelectedIndexChanged);
-            // 
-            // tabControlExtended2
-            // 
-            this.tabControlExtended2.Controls.Add(this.tabPage1);
-            this.tabControlExtended2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlExtended2.Location = new System.Drawing.Point(0, 0);
-            this.tabControlExtended2.Name = "tabControlExtended2";
-            this.tabControlExtended2.SelectedIndex = 0;
-            this.tabControlExtended2.Size = new System.Drawing.Size(200, 470);
-            this.tabControlExtended2.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.solutionExplorer1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(192, 444);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "SolutionExplorer";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // solutionExplorer1
-            // 
-            this.solutionExplorer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.solutionExplorer1.Location = new System.Drawing.Point(3, 3);
-            this.solutionExplorer1.Name = "solutionExplorer1";
-            this.solutionExplorer1.Size = new System.Drawing.Size(186, 438);
-            this.solutionExplorer1.TabIndex = 0;
+            this.dockPanel.ActiveAutoHideContent = null;
+            this.dockPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dockPanel.DockBackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.dockPanel.Location = new System.Drawing.Point(0, 24);
+            this.dockPanel.Name = "dockPanel";
+            this.dockPanel.Size = new System.Drawing.Size(742, 470);
+            dockPanelGradient1.EndColor = System.Drawing.SystemColors.ControlLight;
+            dockPanelGradient1.StartColor = System.Drawing.SystemColors.ControlLight;
+            autoHideStripSkin1.DockStripGradient = dockPanelGradient1;
+            tabGradient1.EndColor = System.Drawing.SystemColors.Control;
+            tabGradient1.StartColor = System.Drawing.SystemColors.Control;
+            tabGradient1.TextColor = System.Drawing.SystemColors.ControlDarkDark;
+            autoHideStripSkin1.TabGradient = tabGradient1;
+            dockPanelSkin1.AutoHideStripSkin = autoHideStripSkin1;
+            tabGradient2.EndColor = System.Drawing.SystemColors.ControlLightLight;
+            tabGradient2.StartColor = System.Drawing.SystemColors.ControlLightLight;
+            tabGradient2.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripGradient1.ActiveTabGradient = tabGradient2;
+            dockPanelGradient2.EndColor = System.Drawing.SystemColors.Control;
+            dockPanelGradient2.StartColor = System.Drawing.SystemColors.Control;
+            dockPaneStripGradient1.DockStripGradient = dockPanelGradient2;
+            tabGradient3.EndColor = System.Drawing.SystemColors.ControlLight;
+            tabGradient3.StartColor = System.Drawing.SystemColors.ControlLight;
+            tabGradient3.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripGradient1.InactiveTabGradient = tabGradient3;
+            dockPaneStripSkin1.DocumentGradient = dockPaneStripGradient1;
+            tabGradient4.EndColor = System.Drawing.SystemColors.ActiveCaption;
+            tabGradient4.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            tabGradient4.StartColor = System.Drawing.SystemColors.GradientActiveCaption;
+            tabGradient4.TextColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dockPaneStripToolWindowGradient1.ActiveCaptionGradient = tabGradient4;
+            tabGradient5.EndColor = System.Drawing.SystemColors.Control;
+            tabGradient5.StartColor = System.Drawing.SystemColors.Control;
+            tabGradient5.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripToolWindowGradient1.ActiveTabGradient = tabGradient5;
+            dockPanelGradient3.EndColor = System.Drawing.SystemColors.ControlLight;
+            dockPanelGradient3.StartColor = System.Drawing.SystemColors.ControlLight;
+            dockPaneStripToolWindowGradient1.DockStripGradient = dockPanelGradient3;
+            tabGradient6.EndColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            tabGradient6.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            tabGradient6.StartColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            tabGradient6.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripToolWindowGradient1.InactiveCaptionGradient = tabGradient6;
+            tabGradient7.EndColor = System.Drawing.Color.Transparent;
+            tabGradient7.StartColor = System.Drawing.Color.Transparent;
+            tabGradient7.TextColor = System.Drawing.SystemColors.ControlDarkDark;
+            dockPaneStripToolWindowGradient1.InactiveTabGradient = tabGradient7;
+            dockPaneStripSkin1.ToolWindowGradient = dockPaneStripToolWindowGradient1;
+            dockPanelSkin1.DockPaneStripSkin = dockPaneStripSkin1;
+            this.dockPanel.Skin = dockPanelSkin1;
+            this.dockPanel.TabIndex = 10;
             // 
             // LSLEditorForm
             // 
@@ -1085,11 +1005,7 @@ namespace LSLEditor
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(742, 516);
-            this.Controls.Add(this.tabControlExtended1);
-            this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.splitter2);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.dockPanel);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1107,9 +1023,6 @@ namespace LSLEditor
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.tabControlExtended2.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1132,8 +1045,7 @@ namespace LSLEditor
 		private System.Windows.Forms.ToolStripMenuItem copyToClipboardToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem projectToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem buildToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
@@ -1154,41 +1066,25 @@ namespace LSLEditor
 		private System.Windows.Forms.ToolStripMenuItem indexToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem formatSelectedTextToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem horizontalToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem verticalToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem cascadeToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem ArangeIconsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem formatSelectedTextToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem helpKeywordToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-		private System.Windows.Forms.ToolStripMenuItem browserInWindowToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
 		private System.Windows.Forms.ToolStripMenuItem ReleaseNotesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
 		private System.Windows.Forms.ToolStripMenuItem FindtoolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
 		private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem;
-		private System.Windows.Forms.StatusStrip statusStrip1;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
-		private System.Windows.Forms.ToolStripMenuItem tabbedViewToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem closeTabToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-		private System.Windows.Forms.ToolStripMenuItem closeActiveWindowToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem WikiSepBrowserstoolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
 		private System.Windows.Forms.ToolStripMenuItem commentInToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem uncommentingSelectedTextToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem1;
-		private System.Windows.Forms.ToolStripMenuItem replaceToolStripMenuItem;
-		private System.Windows.Forms.Panel panel2;
-		private System.Windows.Forms.Splitter splitter2;
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Splitter splitter1;
-		private System.Windows.Forms.TabControlExtended tabControlExtended1;
+        private System.Windows.Forms.ToolStripMenuItem replaceToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
 		private System.Windows.Forms.ToolStripMenuItem solutionExplorerToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
@@ -1211,10 +1107,7 @@ namespace LSLEditor
 		private System.Windows.Forms.ToolStripMenuItem makeBugReporttoolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;
 		private System.Windows.Forms.ToolStripMenuItem recentProjectToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-		private System.Windows.Forms.TabControlExtended tabControlExtended2;
-		private System.Windows.Forms.TabPage tabPage1;
-		private Solution.SolutionExplorer solutionExplorer1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator23;
 		private System.Windows.Forms.ToolStripMenuItem syntaxCheckerToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
@@ -1233,5 +1126,11 @@ namespace LSLEditor
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
         private System.Windows.Forms.ToolTip toolTip1;
         public System.Windows.Forms.ToolStripMenuItem outlineToolStripMenuItem;
+        private LSLEditor.Docking.DockPanel dockPanel;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem browserInWindowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem WikiSepBrowserstoolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
+        private System.Windows.Forms.ToolStripMenuItem closeActiveWindowToolStripMenuItem;
 	}
 }

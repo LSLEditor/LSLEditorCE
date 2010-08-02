@@ -51,7 +51,7 @@ using System.Collections.Generic;
 
 namespace LSLEditor.Solution
 {
-	public partial class SolutionExplorer : UserControl
+	public partial class SolutionExplorer : ToolWindow
 	{
 		public enum TypeSL : int
 		{

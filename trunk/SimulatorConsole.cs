@@ -45,10 +45,11 @@ using System;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using LSLEditor.Docking;
 
 namespace LSLEditor
 {
-	public partial class SimulatorConsole : UserControl
+	public partial class SimulatorConsole : DockContent
 	{
 		public event SecondLifeHost.SecondLifeHostChatHandler OnChat;
 		public event EventHandler OnControl;

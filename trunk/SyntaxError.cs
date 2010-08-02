@@ -45,10 +45,11 @@ using System;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
+using LSLEditor.Docking;
 
 namespace LSLEditor
 {
-	public partial class SyntaxError : UserControl
+	public partial class SyntaxError : DockContent
 	{
 		public SyntaxError()
 		{

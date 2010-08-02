@@ -54,6 +54,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using System.Drawing.Printing;
 
+using LSLEditor.Docking;
 // aximp is oude informatie, maar ik laat het er even instaan
 // aximp %WINDIR%\System32\shdocvw.dll /out:"d:\temp\AxInterop.SHDocVw.dll" /keyfile:"D:\Documents and Settings\Administrator\Mijn documenten\Mijn keys\Test.snk"
 // copieer de TWEE files AxInterop.SHDocVw.dll en SHDocVw.dll in de bin/Debug directory
@@ -86,8 +87,11 @@ namespace LSLEditor
 
 		private Browser browser;
 		private SimulatorConsole SimulatorConsole;
+        
 
 		public bool CancelClosing = false;
+
+        public Solution.SolutionExplorer m_SolutionExplorer;
 
 		public GListBoxWindow GListBoxWindow;
 		public TooltipWindow TooltipMouse;
@@ -126,7 +130,7 @@ namespace LSLEditor
 		{
 			get
 			{
-				return this.solutionExplorer1;
+                return this.m_SolutionExplorer;
 			}
 		}
 
@@ -170,6 +174,9 @@ namespace LSLEditor
 
 			InitializeComponent();
 
+            m_SolutionExplorer = new LSLEditor.Solution.SolutionExplorer();
+            m_SolutionExplorer.parent = this;
+
 			InitRecentFileList();
 			InitRecentProjectList();
 			InitPluginsList();
@@ -194,8 +201,9 @@ namespace LSLEditor
 					return this.MdiChildren;
 
 				List<Form> children = new List<Form>();
-				foreach (TabPage tabPage in this.tabControlExtended1.TabPages)
-					children.Add(tabPage.Tag as Form);
+			//TODO: Find Child forms
+                //foreach (TabPage tabPage in this.tabControlExtended1.TabPages)
+				//	children.Add(tabPage.Tag as Form);
 				return children.ToArray();
 			}
 		}
@@ -208,9 +216,12 @@ namespace LSLEditor
 					return this.ActiveMdiChild;
 				else
 				{
-					if (this.tabControlExtended1.SelectedTab == null)
-						return null;
-					return this.tabControlExtended1.SelectedTab.Tag as Form;
+                    //TODO: Get Active Mdi Form
+                    return null;
+                    //dockPanel.ActiveContent
+				//	if (this.tabControlExtended1.SelectedTab == null)
+				//		return null;
+				//	return this.tabControlExtended1.SelectedTab.Tag as Form;
 				}
 			}		
 		}
@@ -223,7 +234,8 @@ namespace LSLEditor
 			}
 			else
 			{
-				for (int intI = 0; intI < this.tabControlExtended1.TabCount; intI++)
+                //TODO: Activate the right Mdi Form
+				/*for (int intI = 0; intI < this.tabControlExtended1.TabCount; intI++)
 				{
 					TabPage tabPage = this.tabControlExtended1.TabPages[intI];
 					EditForm f = tabPage.Tag as EditForm;
@@ -233,32 +245,40 @@ namespace LSLEditor
 						tabPage.Focus();
 						break;
 					}
-				}
+				}*/
 			}
 		}
 
-		public void AddForm(Form form)
+		public void AddForm(DockContent form)
 		{
 			if (this.IsMdiContainer)
 			{
-				form.MdiParent = this;
-				form.Tag = null;
-				form.Show();
-				ActivateMdiChild(form);
+				//form.MdiParent = this;
+				//form.Tag = null;
+				//form.Show();
+				//ActivateMdiChild(form);
+
+                //TODO: add form in the right way
+                form.Show(dockPanel);
 			}
 			else
 			{
-				form.Visible = false;
-				form.MdiParent = null;
-				TabPage tabPage = new TabPage(form.Text+"   ");
-				tabPage.BackColor = Color.White;
-				for(int intI=form.Controls.Count-1;intI>=0;intI--)
-					tabPage.Controls.Add(form.Controls[intI]);
-				tabPage.Tag = form;
-				form.Tag = tabPage;
-				//tabPage.Controls.Add(form.Controls[0]);
-				this.tabControlExtended1.TabPages.Add(tabPage);
-				this.tabControlExtended1.SelectedTab = tabPage;
+                
+                
+
+				//form.Visible = false;
+				//form.MdiParent = null;
+				//TabPage tabPage = new TabPage(form.Text+"   ");
+				//tabPage.BackColor = Color.White;
+				//for(int intI=form.Controls.Count-1;intI>=0;intI--)
+				//	tabPage.Controls.Add(form.Controls[intI]);
+				//tabPage.Tag = form;
+				//form.Tag = tabPage;
+				// Was already commented out //tabPage.Controls.Add(form.Controls[0]);
+				
+                
+                //this.tabControlExtended1.TabPages.Add(tabPage);
+				//this.tabControlExtended1.SelectedTab = tabPage;
 			}
 		}
 
@@ -304,10 +324,11 @@ namespace LSLEditor
 				if (Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location).Contains("beta"))
 					this.Text += " (BETA)";
 			}
-
+            
+            //TODO: Fix close buttons on tabs
 			// enables close buttons on tab
-			this.tabControlExtended1.SetDrawMode();
-			this.tabControlExtended1.OnTabClose += new EventHandler(tabControl1_OnTabClose);
+			//this.tabControlExtended1.SetDrawMode();
+			//this.tabControlExtended1.OnTabClose += new EventHandler(tabControl1_OnTabClose);
 
 			if (args.Length == 0)
 			{
@@ -646,7 +667,8 @@ namespace LSLEditor
 			}
 			else
 			{
-				for (int intI = 0; intI < this.tabControlExtended1.TabCount; intI++)
+                //TODO: find browser in childs
+				/*for (int intI = 0; intI < this.tabControlExtended1.TabCount; intI++)
 				{
 					TabPage tabPage = this.tabControlExtended1.TabPages[intI];
 					Browser b = tabPage.Tag as Browser;
@@ -656,7 +678,7 @@ namespace LSLEditor
 						tabPage.Focus();
 						break;
 					}
-				}
+				}*/
 			}
 
 			return this.browser;
@@ -887,8 +909,9 @@ namespace LSLEditor
 
 			SetFontsOnWindows();
 
-			this.solutionExplorer1.parent = this;
-			this.solutionExplorer1.CreateNewFileDrowDownMenu(this.addNewFileToolStripMenuItem);
+            //TODO: Fix new file drop down
+			//this.solutionExplorer1.parent = this;
+			//this.solutionExplorer1.CreateNewFileDrowDownMenu(this.addNewFileToolStripMenuItem);
 			this.solutionExplorerToolStripMenuItem.Checked = Properties.Settings.Default.ShowSolutionExplorer;
 			ShowSolutionExplorer(this.solutionExplorerToolStripMenuItem.Checked);
 
@@ -958,7 +981,8 @@ namespace LSLEditor
 		{
 			try
 			{
-				this.tabControlExtended1.Visible = false;
+                //TODO: hmmm?
+				//this.tabControlExtended1.Visible = false;
 
 				// this.panel1.Visible = false; // Simulator
 				// this.panel2.Visible = false; // right pane
@@ -979,12 +1003,6 @@ namespace LSLEditor
 
 				this.browserInWindowToolStripMenuItem.Checked = 
 					Properties.Settings.Default.BrowserInWindow;
-
-				this.tabbedViewToolStripMenuItem.Checked =
-					Properties.Settings.Default.TabbedDocument;
-
-				if (this.tabbedViewToolStripMenuItem.Checked)
-					SwitchDocumentView();
 
 				this.WikiSepBrowserstoolStripMenuItem.Checked =
 					Properties.Settings.Default.WikiSeperateBrowser;
@@ -1116,26 +1134,6 @@ namespace LSLEditor
 			browser.ShowWebBrowser("Check for Updates", Properties.Settings.Default.Update + strVersion);
 		}
 
-		private void horizontalToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			this.LayoutMdi(MdiLayout.TileHorizontal);
-		}
-
-		private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			this.LayoutMdi(MdiLayout.TileVertical);
-		}
-
-		private void cascadeToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			this.LayoutMdi(MdiLayout.Cascade);
-		}
-
-		private void normalToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			this.LayoutMdi(MdiLayout.ArrangeIcons);
-		}
-
 		private void browserInWindowToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			this.browserInWindowToolStripMenuItem.Checked = !this.browserInWindowToolStripMenuItem.Checked;
@@ -1181,15 +1179,19 @@ namespace LSLEditor
 				return;
 
 			this.SimulatorConsole = new SimulatorConsole(this.SolutionExplorer, this.Children);
-			this.panel1.Controls.Clear();
-			this.panel1.Controls.Add(this.SimulatorConsole);
-			this.panel1.Visible = true;
-			this.splitter1.SplitPosition = Properties.Settings.Default.SimulatorSize.Height;
+
+            this.SimulatorConsole.Show(dockPanel);
+            //TODO: Show Simulator Console somewhere
+            //this.panel1.Controls.Clear();
+			//this.panel1.Controls.Add(this.SimulatorConsole);
+			//this.panel1.Visible = true;
+			//this.splitter1.SplitPosition = Properties.Settings.Default.SimulatorSize.Height;
 		}
 
 		public void StopSimulator()
 		{
-			this.panel1.Visible = false;
+            //TODO: Hide simulator? Or we could keep it like the debug output in VS
+			//this.panel1.Visible = false;
 			if (this.SimulatorConsole != null)
 			{
 				this.SimulatorConsole.Stop();
@@ -1201,7 +1203,8 @@ namespace LSLEditor
 
 		private bool SyntaxCheck(bool Silent)
 		{
-			this.panel1.Visible = false;
+            //TODO: What do we hide on SyntaxCheck?
+			//this.panel1.Visible = false;
 			InitSyntaxError();
 
 			foreach (Form form in this.Children)
@@ -1219,10 +1222,12 @@ namespace LSLEditor
 
 			if (this.SyntaxErrors.HasErrors)
 			{
-				this.panel1.Controls.Clear();
-				this.panel1.Controls.Add(this.SyntaxErrors);
-				this.panel1.Visible = true;
-				this.splitter1.SplitPosition = Properties.Settings.Default.SimulatorSize.Height;
+                this.SyntaxErrors.Show(dockPanel);
+                //TODO: Show errors somewhere in an output
+				//this.panel1.Controls.Clear();
+				//this.panel1.Controls.Add(this.SyntaxErrors);
+				//this.panel1.Visible = true;
+				//this.splitter1.SplitPosition = Properties.Settings.Default.SimulatorSize.Height;
 				return false;
 			}
 			else
@@ -1253,8 +1258,9 @@ namespace LSLEditor
 
 		private void splitter1_SplitterMoved(object sender, SplitterEventArgs e)
 		{
-			if( this.splitter1.SplitPosition>50)
-				Properties.Settings.Default.SimulatorSize = new Size(this.splitter1.Width, this.splitter1.SplitPosition);
+            //TODO: Splitter moved? I Think this is depricated
+			//if( this.splitter1.SplitPosition>50)
+			//	Properties.Settings.Default.SimulatorSize = new Size(this.splitter1.Width, this.splitter1.SplitPosition);
 		}
 
 		void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -1263,68 +1269,6 @@ namespace LSLEditor
 			this.TooltipMouse.Visible = false;
 			this.TooltipKeyboard.Visible = false;
 			this.TooltipListBox.Visible = false;
-		}
-
-		private void SwitchDocumentView()
-		{
-			bool blnTabbed = this.tabbedViewToolStripMenuItem.Checked;
-
-			this.horizontalToolStripMenuItem.Enabled = !blnTabbed;
-			this.verticalToolStripMenuItem.Enabled = !blnTabbed;
-			this.cascadeToolStripMenuItem.Enabled = !blnTabbed;
-			this.ArangeIconsToolStripMenuItem.Enabled = !blnTabbed;
-
-			if (blnTabbed)
-			{
-				if (!this.IsMdiContainer)
-					return;// no change
-				this.tabControlExtended1.TabPages.Clear();
-				foreach (Form form in this.Children)
-				{
-					//AddForm(editForm);
-					form.Visible = false;
-					form.MdiParent = null;
-					TabPage tabPage = new TabPage(form.Text+"   ");
-					tabPage.BackColor = Color.White;
-					tabPage.Tag = form;
-					form.Tag = tabPage;
-					tabPage.Controls.Add(form.Controls[0]);
-					this.tabControlExtended1.TabPages.Add(tabPage);
-				}
-				this.IsMdiContainer = false;
-				this.tabControlExtended1.Dock = DockStyle.Fill;
-				this.tabControlExtended1.SelectedIndexChanged += new EventHandler(tabControl1_SelectedIndexChanged);
-				this.tabControlExtended1.Visible = true;
-			}
-			else
-			{
-				if (this.IsMdiContainer)
-					return;// no change
-
-				this.tabControlExtended1.Visible = false;
-				//this.tabControl1.Dock = DockStyle.Bottom;
-				this.IsMdiContainer = true;
-				foreach (TabPage tabPage in this.tabControlExtended1.TabPages)
-				{
-					Form form = tabPage.Tag as Form;
-					if (form != null)
-					{
-						form.Tag = null;
-						form.Controls.Add(tabPage.Controls[0]);
-						form.MdiParent = this;
-						form.Visible = true;
-					}
-				}
-				this.tabControlExtended1.TabPages.Clear();
-			}
-			Properties.Settings.Default.TabbedDocument = blnTabbed;
-		}
-
-		private void tabbedViewToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			this.tabbedViewToolStripMenuItem.Checked = !this.tabbedViewToolStripMenuItem.Checked;
-			Properties.Settings.Default.TabbedDocument = this.tabbedViewToolStripMenuItem.Checked;
-			SwitchDocumentView();
 		}
 
 		private void tabControlExtended1_MouseDown(object sender, MouseEventArgs e)
@@ -1359,14 +1303,19 @@ namespace LSLEditor
 
 		private void CloseTab(int intTabToDelete)
 		{
+            //TODO: Find a new way for closing tabs
+            /*
 			// reset toolstrip information
 			this.toolStripStatusLabel1.Text = "";
 
 			//int intTabToDelete = (int)this.contextMenuStrip1.Tag;
-			if (intTabToDelete >= this.tabControlExtended1.TabCount)
+			
+            if (intTabToDelete >= this.tabControlExtended1.TabCount)
 				return;
-			TabPage tabPage = this.tabControlExtended1.TabPages[intTabToDelete];
-			if (tabPage.Text.Contains("Browser"))
+			
+            TabPage tabPage = this.tabControlExtended1.TabPages[intTabToDelete];
+			
+            if (tabPage.Text.Contains("Browser"))
 			{
 				this.browser.Dispose();
 				this.browser = null;
@@ -1400,6 +1349,7 @@ namespace LSLEditor
 				editForm = null;
 			}
 			this.tabControlExtended1.TabPages[intTabToDelete].Dispose();
+            */
 			GC.Collect();
 		}
 
@@ -1443,10 +1393,14 @@ namespace LSLEditor
 			}
 			else
 			{
-				int intTabToClose = this.tabControlExtended1.SelectedIndex;
+                //TODO: Find a new way
+				/*
+                int intTabToClose = this.tabControlExtended1.SelectedIndex;
 				if (intTabToClose >= 0)
 					CloseTab(intTabToClose);
-			}
+			
+                 */
+            }
 		}
 
 		private void closeActiveWindowToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1537,9 +1491,18 @@ namespace LSLEditor
 
 		public void ShowSolutionExplorer(bool blnVisible)
 		{
-			this.panel2.Visible = blnVisible;
+            //TODO: We need another way to activate the Solution Explorer
+			//this.panel2.Visible = blnVisible;
+            if (blnVisible)
+            {
+                m_SolutionExplorer.Show(dockPanel);
+            }
+            else
+            {
+                m_SolutionExplorer.Hide();
+            }
 			this.solutionExplorerToolStripMenuItem.Checked = blnVisible;
-			this.tabControlExtended1.Refresh();
+			//this.tabControlExtended1.Refresh();
 		}
 
 		private void solutionExplorerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1660,7 +1623,7 @@ namespace LSLEditor
 			if (CloseAllOpenWindows())
 			{
 				string strPath = tsmi.Tag.ToString();
-				this.solutionExplorer1.OpenSolution(strPath);
+				this.SolutionExplorer.OpenSolution(strPath);
 			}
 		}
 
@@ -1708,9 +1671,7 @@ namespace LSLEditor
 		{
 			this.browserInWindowToolStripMenuItem.Checked = Properties.Settings.Default.BrowserInWindow;
 			this.WikiSepBrowserstoolStripMenuItem.Checked = Properties.Settings.Default.WikiSeperateBrowser;
-			this.tabbedViewToolStripMenuItem.Checked = Properties.Settings.Default.TabbedDocument;
 
-			SwitchDocumentView();
 			SetFontsOnWindows();
 			InitPluginsList();
 		}
@@ -1731,10 +1692,11 @@ namespace LSLEditor
 			{
 				if (lslint.HasErrors)
 				{
-					this.panel1.Controls.Clear();
-					this.panel1.Controls.Add(this.SyntaxErrors);
-					this.panel1.Visible = true;
-					this.splitter1.SplitPosition = Properties.Settings.Default.SimulatorSize.Height;
+                    //TODO: Show errors somewhere else
+					//this.panel1.Controls.Clear();
+					//this.panel1.Controls.Add(this.SyntaxErrors);
+					//this.panel1.Visible = true;
+					//this.splitter1.SplitPosition = Properties.Settings.Default.SimulatorSize.Height;
 				}
 				else
 				{
@@ -1777,7 +1739,8 @@ namespace LSLEditor
 
 		private void PluginsHandler(object sender, EventArgs e)
 		{
-			this.panel1.Visible = false;
+            //TODO: What do we hide here?
+			//this.panel1.Visible = false;
 
 			ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
 			if (tsmi == null)

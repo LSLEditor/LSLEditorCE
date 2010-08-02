@@ -46,10 +46,11 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
+using LSLEditor.Docking;
 
 namespace LSLEditor
 {
-	public partial class Browser : Form
+	public partial class Browser : DockContent
 	{
 		private LSLEditorForm lslEditorForm;
 

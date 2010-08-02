@@ -61,15 +61,15 @@ namespace LSLEditor.Plugins
             Assembly assembly = Assembly.LoadFrom(strProgram);
             Form frmMain = assembly.CreateInstance("Particles.frmMain") as Form;
 
-			if (parent.IsMdiContainer)
+		/*	if (parent.IsMdiContainer)
 			{
 				parent.AddForm(frmMain);
 			}
 			else
-			{
+			{*/
 				//MessageBox.Show("This plugin does not run in tabbed mode", "Particles plugin", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 frmMain.Show();
-			}
+			//}
 		}
 	}
 }

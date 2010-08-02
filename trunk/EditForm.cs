@@ -46,12 +46,12 @@ using System.IO;
 using System.Xml;
 using System.Drawing;
 using System.Windows.Forms;
-
+using LSLEditor.Docking;
 using LSLEditor.Helpers;
 
 namespace LSLEditor
 {
-	public partial class EditForm : Form
+	public partial class EditForm : DockContent
 	{
 		public RuntimeConsole runtime;
 
@@ -182,7 +182,7 @@ namespace LSLEditor
 
 		void EditForm_Position(object sender, EventArgs e)
 		{
-			this.numberedTextBoxUC1.TextBox.SetPosition(this.MdiParent.RectangleToScreen(this.MdiParent.ClientRectangle));
+			//this.numberedTextBoxUC1.TextBox.SetPosition(this.MdiParent.RectangleToScreen(this.MdiParent.ClientRectangle));
 		}
 
 		void TextBox_OnDirtyChanged(object sender, EventArgs e)
@@ -195,8 +195,9 @@ namespace LSLEditor
 			TabPage tabPage = this.Tag as TabPage;
 			if (tabPage != null)
 				tabPage.Text = this.Text;
+
 			this.parent.OnDirtyChanged(this.numberedTextBoxUC1.TextBox.Dirty);
-		}
+        }
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
 		{

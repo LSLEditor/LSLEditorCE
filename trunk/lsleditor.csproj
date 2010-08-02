@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{59468D25-6E68-4113-B740-C6EF4695045B}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -95,6 +95,7 @@
       <Name>System</Name>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>
@@ -128,6 +129,103 @@
     <None Include="BZip2Decompress\MD5Verify.cs" />
     <None Include="BZip2Decompress\StrangeCrc.cs" />
     <Compile Include="Decompressor\ZipEntry.cs" />
+    <Compile Include="Docking\AutoHideStripBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockAreasEditor.cs" />
+    <Compile Include="Docking\DockContent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Docking\DockContentCollection.cs" />
+    <Compile Include="Docking\DockContentEventArgs.cs" />
+    <Compile Include="Docking\DockContentHandler.cs" />
+    <Compile Include="Docking\DockOutlineBase.cs" />
+    <Compile Include="Docking\DockPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Docking\DockPane.SplitterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Docking\DockPaneCaptionBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockPaneCollection.cs" />
+    <Compile Include="Docking\DockPanel.AutoHideWindow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockPanel.DockDragHandler.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockPanel.DragHandler.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockPanel.FocusManager.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockPanel.MdiClientController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockPanel.Persistor.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockPanel.SplitterDragHandler.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockPanelExtender.cs" />
+    <Compile Include="Docking\DockPanelSkin.cs" />
+    <Compile Include="Docking\DockPaneStripBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockWindow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockWindow.SplitterControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockWindowCollection.cs" />
+    <Compile Include="Docking\DragForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Docking\DummyControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\Enums.cs" />
+    <Compile Include="Docking\FloatWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Docking\FloatWindowCollection.cs" />
+    <Compile Include="Docking\Helpers\DockHelper.cs" />
+    <Compile Include="Docking\Helpers\DrawHelper.cs" />
+    <Compile Include="Docking\Helpers\ResourceHelper.cs" />
+    <Compile Include="Docking\Helpers\Win32Helper.cs" />
+    <Compile Include="Docking\InertButtonBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\Interfaces.cs" />
+    <Compile Include="Docking\Localization.cs" />
+    <Compile Include="Docking\Measures.cs" />
+    <Compile Include="Docking\NestedDockingStatus.cs" />
+    <Compile Include="Docking\NestedPaneCollection.cs" />
+    <Compile Include="Docking\Resources.Designer.cs" />
+    <Compile Include="Docking\SplitterBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\Strings.Designer.cs" />
+    <Compile Include="Docking\VisibleNestedPaneCollection.cs" />
+    <Compile Include="Docking\VS2005AutoHideStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\VS2005DockPaneCaption.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\VS2005DockPaneStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\Win32\Enums.cs" />
+    <Compile Include="Docking\Win32\NativeMethods.cs" />
     <Compile Include="Editor\KeyWords.cs" />
     <None Include="Editor\RoundCorners.cs" />
     <Compile Include="Decompressor\Decompress.cs" />
@@ -293,13 +391,13 @@
       <DependentUpon>TabControlExtended.cs</DependentUpon>
     </Compile>
     <Compile Include="SimulatorConsole.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="SimulatorConsole.Designer.cs">
       <DependentUpon>SimulatorConsole.cs</DependentUpon>
     </Compile>
     <Compile Include="Solution\SolutionExplorer.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Solution\SolutionExplorer.designer.cs">
       <DependentUpon>SolutionExplorer.cs</DependentUpon>
@@ -312,7 +410,7 @@
     </Compile>
     <Compile Include="Plugins\Svn.cs" />
     <Compile Include="SyntaxError.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="SyntaxError.Designer.cs">
       <DependentUpon>SyntaxError.cs</DependentUpon>
@@ -401,6 +499,12 @@
     <Compile Include="Tools\VersionControlGeneral.Designer.cs">
       <DependentUpon>VersionControlGeneral.cs</DependentUpon>
     </Compile>
+    <Compile Include="ToolWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolWindow.Designer.cs">
+      <DependentUpon>ToolWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="UpdateApplicationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -419,6 +523,12 @@
     <EmbeddedResource Include="BugReport\BugReportForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>BugReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docking\Resources.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docking\Strings.resx">
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Solution\GuidProperty.resx">
       <SubType>Designer</SubType>
@@ -501,6 +611,30 @@
     <EmbeddedResource Include="Images\Close-Active.gif" />
     <EmbeddedResource Include="Images\Close-Disabled.gif" />
     <EmbeddedResource Include="Images\Close-Inactive.gif" />
+    <Content Include="Docking\DockPanel.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PaneDiamond.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Bottom.bmp" />
+    <Content Include="Docking\Resources\Dockindicator_PaneDiamond_Fill.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Hotspot.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_HotspotIndex.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Left.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Right.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Top.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelBottom.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelBottom_Active.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelFill.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelFill_Active.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelLeft.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelLeft_Active.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelRight.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelRight_Active.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelTop.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PanelTop_Active.bmp" />
+    <Content Include="Docking\Resources\DockPane_AutoHide.bmp" />
+    <Content Include="Docking\Resources\DockPane_Close.bmp" />
+    <Content Include="Docking\Resources\DockPane_Dock.bmp" />
+    <Content Include="Docking\Resources\DockPane_Option.bmp" />
+    <Content Include="Docking\Resources\DockPane_OptionOverflow.bmp" />
     <Content Include="Icons\ADDITEM.GIF" />
     <Content Include="Icons\COPY.GIF" />
     <Content Include="Icons\CUT.GIF" />
@@ -646,6 +780,10 @@
     <EmbeddedResource Include="Tools\VersionControlGeneral.resx">
       <SubType>Designer</SubType>
       <DependentUpon>VersionControlGeneral.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolWindow.resx">
+      <DependentUpon>ToolWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateApplicationForm.resx">
       <SubType>Designer</SubType>
