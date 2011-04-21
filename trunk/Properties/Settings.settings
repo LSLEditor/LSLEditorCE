@@ -6,7 +6,7 @@
       <Value Profile="(Default)">SecondLife Name</Value>
     </Setting>
     <Setting Name="Version" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">2.40.1</Value>
+      <Value Profile="(Default)">2.42</Value>
     </Setting>
     <Setting Name="BrowserInWindow" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -215,12 +215,6 @@
     <Setting Name="IndentAutoCorrect" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="VersionControl" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="VersionControlSVN" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="SvnExe" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
@@ -325,6 +319,18 @@
     </Setting>
     <Setting Name="ForumLSLEditor" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://sourceforge.net/projects/lsleditor/forums</Value>
+    </Setting>
+    <Setting Name="qasite" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://metaversegames.net/questions/lsl</Value>
+    </Setting>
+    <Setting Name="svnloc" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="VersionControl" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="VersionControlSVN" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

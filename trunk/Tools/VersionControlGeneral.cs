@@ -53,7 +53,7 @@ namespace LSLEditor.Tools
 		{
 			InitializeComponent();
 
-			this.groupBox1.Enabled = Properties.Settings.Default.VersionControl;
+            this.groupBox1.Enabled = true;//Properties.Settings.Default.VersionControl;
 
 			this.checkBox1.Checked = Properties.Settings.Default.VersionControlSVN;
 			this.checkBox1.CheckedChanged += new EventHandler(checkBox1_CheckedChanged);
