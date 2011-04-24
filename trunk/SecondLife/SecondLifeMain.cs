@@ -3,7 +3,7 @@
 // *
 // * ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
 // * The code was donated on 4/28/2010 by Alphons van der Heijden
-// * To Brandon'Dimentox Travanti' Husbands & Malcolm J. Kudra which in turn Liscense under the GPLv2.
+// * To Brandon 'Dimentox Travanti' Husbands & Malcolm J. Kudra, who in turn License under the GPLv2.
 // * In agreement to Alphons van der Heijden wishes.
 // *
 // * The community would like to thank Alphons for all of his hard work, blood sweat and tears.
@@ -296,6 +296,7 @@ namespace LSLEditor
 		public static readonly integer CHANGED_OWNER = 128;
 		public static readonly integer CHANGED_REGION = 256;
 		public static readonly integer CHANGED_TELEPORT = 512;
+        public static readonly integer CHANGED_REGION_START = 1024;
 
 		public static readonly integer TYPE_INTEGER = 1;
 		public static readonly integer TYPE_FLOAT = 2;
@@ -563,6 +564,7 @@ namespace LSLEditor
 
 		public static readonly integer PRIM_CAST_SHADOWS = 24;
 		public static readonly integer PRIM_COLOR = 18;
+        public static readonly integer PRIM_DESC = 28;
 		public static readonly integer PRIM_FLEXIBLE = 21;
 		public static readonly integer PRIM_FULLBRIGHT = 20;
 		public static readonly integer PRIM_HOLE_CIRCLE = 16;
@@ -579,6 +581,7 @@ namespace LSLEditor
 		public static readonly integer PRIM_MATERIAL_STONE = 0;
 		public static readonly integer PRIM_MATERIAL_WOOD = 3;
 
+        public static readonly integer PRIM_NAME = 27;
 		public static readonly integer PRIM_PHANTOM = 5;
 		public static readonly integer PRIM_PHYSICS = 3;
 		public static readonly integer PRIM_POINT_LIGHT = 23;

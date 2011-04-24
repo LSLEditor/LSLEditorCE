@@ -3,8 +3,8 @@
 // *
 // * ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
 // * The code was donated on 4/28/2010 by Alphons van der Heijden
-// * To Brandon'Dimentox Travanti' Husbands & Malcolm J. Kudra which in turn Liscense under the GPLv2.
-// * In agreement to Alphons van der Heijden wishes.
+// * To Brandon 'Dimentox Travanti' Husbands & Malcolm J. Kudra, who in turn License under the GPLv2.
+// * In agreement with Alphons van der Heijden's wishes.
 // *
 // * The community would like to thank Alphons for all of his hard work, blood sweat and tears.
 // * Without his work the community would be stuck with crappy editors.
