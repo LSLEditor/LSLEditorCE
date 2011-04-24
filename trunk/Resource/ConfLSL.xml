@@ -4016,6 +4016,7 @@
 			<Word name="CAMERA_POSITION_THRESHOLD" />
 			<Word name="CHANGED_OWNER" />
 			<Word name="CHANGED_REGION" />
+      <Word name="CHANGED_REGION_START" />
 			<Word name="CHANGED_TELEPORT" />
 			<Word name="DATA_SIM_POS" />
 			<Word name="DATA_SIM_RATING" />
@@ -4153,6 +4154,7 @@
 
 			<Word name="PRIM_CAST_SHADOWS" />
 			<Word name="PRIM_COLOR" />
+      <Word name="PRIM_DESC" />
 			<Word name="PRIM_FLEXIBLE" />
 			<Word name="PRIM_FULLBRIGHT" />
 
@@ -4170,6 +4172,7 @@
 			<Word name="PRIM_MATERIAL_RUBBER" />
 			<Word name="PRIM_MATERIAL_STONE" />
 			<Word name="PRIM_MATERIAL_WOOD" />
+      <Word name="PRIM_NAME" />
 			<Word name="PRIM_PHANTOM" />
 			<Word name="PRIM_PHYSICS" />
 			<Word name="PRIM_POINT_LIGHT" />
