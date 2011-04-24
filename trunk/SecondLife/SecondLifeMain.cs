@@ -3108,6 +3108,13 @@ namespace LSLEditor
             return new list();
         }
 
+        public integer llGetLinkNumberOfSides(integer link)
+        {
+            integer result = 6;
+            Verbose("GetLinkNumberOfSides()={" + link + "}", result);
+            return result;
+        }
+
 		public vector llGetRootPosition()
 		{
 			Verbose("GetRootPosition()");
