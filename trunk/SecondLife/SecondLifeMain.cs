@@ -2493,7 +2493,8 @@ namespace LSLEditor
 		}
 
 		public void llRemoveInventory(String inventory)
-		{
+        {
+            host.RemoveInventory(inventory);
 			Verbose("RemoveInventory(" + inventory + ")");
 		}
 
@@ -3739,6 +3740,7 @@ PARCEL_DETAILS_AREA  4  The parcel's area, in sqm.  (5 Characters)  integer
 		public void llTextBox(key avatar, String message, integer chat_channel)
 		{
 			Verbose("llTextBox({0},\"{1}\",{2})",avatar,message,chat_channel);
+			host.llTextBox(avatar, message, chat_channel);
 		}
 
 		// 336

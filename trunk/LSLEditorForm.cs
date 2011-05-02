@@ -102,6 +102,7 @@ namespace LSLEditor
 		public GotoWindow GotoWindow;
 
 		public List<llDialogForm> llDialogForms;
+        public List<llTextBoxForm> llTextBoxForms;
 		public List<PermissionsForm> PermissionForms;
 
 		private UpdateApplicationForm updateApplicationForm;
@@ -916,6 +917,7 @@ namespace LSLEditor
 			ShowSolutionExplorer(this.solutionExplorerToolStripMenuItem.Checked);
 
 			this.llDialogForms = new List<llDialogForm>();
+            this.llTextBoxForms = new List<llTextBoxForm>();
 			this.PermissionForms = new List<PermissionsForm>();
 
 			this.TooltipMouse.Tag = "";
@@ -972,6 +974,11 @@ namespace LSLEditor
 				df.Top = this.Top + 30;
 				df.Left = this.Right - df.Width - 5;
 			}
+            foreach(llTextBoxForm tbf in this.llTextBoxForms)
+            {
+                tbf.Left = this.Left + this.Width / 2 - tbf.Width / 2;
+                tbf.Top = this.Top + this.Height / 2 - tbf.Height / 2;
+            }
 			EditForm editForm = this.ActiveMdiForm as EditForm;
 			if (editForm != null)
 				editForm.TextBox.SetPosition(Screen.PrimaryScreen.WorkingArea);

@@ -618,6 +618,39 @@ namespace LSLEditor
 
 			this.mainForm.Invoke(new ShowDialogDelegate(Dialog), this, (SecondLife.String)GetObjectName(), secondLife.llGetOwner(), (SecondLife.String)Properties.Settings.Default.AvatarName, message, buttons, channel);
 		}
+        delegate void ShowTextBoxDelegate(SecondLifeHost host,
+            SecondLife.String objectName,
+            SecondLife.key k,
+            SecondLife.String name,
+            SecondLife.String message,
+            SecondLife.integer channel);
+        private void TextBox(SecondLifeHost host,
+            SecondLife.String objectName,
+            SecondLife.key k,
+            SecondLife.String name,
+            SecondLife.String message,
+            SecondLife.integer channel)
+        {
+            llTextBoxForm TextBoxForm = new llTextBoxForm(host, objectName, k, name, message, channel);
+            TextBoxForm.Left = this.mainForm.Left + this.mainForm.Width / 2 - TextBoxForm.Width / 2;
+            TextBoxForm.Top = this.mainForm.Top + this.mainForm.Height / 2 - TextBoxForm.Height / 2;
+            TextBoxForm.Show(this.mainForm);
+            this.mainForm.llTextBoxForms.Add(TextBoxForm);
+        }
+        public void llTextBox(SecondLife.key avatar, SecondLife.String message, SecondLife.integer channel)
+        {
+            if (message.ToString().Length >= 512)
+            {
+                VerboseMessage("llTextBox: message too long, must be less than 512 characters");
+                return;
+            }
+            if (message.ToString().Length == 0)
+            {
+                VerboseMessage("llTextBos: must supply a message");
+                return;
+            }
+            this.mainForm.Invoke(new ShowTextBoxDelegate(TextBox), this, (SecondLife.String)GetObjectName(), secondLife.llGetOwner(), (SecondLife.String)Properties.Settings.Default.AvatarName, message, channel);
+        }
 
 		public void SetPermissions(SecondLife.integer intPermissions)
 		{
@@ -929,6 +962,11 @@ namespace LSLEditor
 		{
 			return mainForm.SolutionExplorer.GetInventoryType(this.guid, name);
 		}
+
+        public void RemoveInventory(SecondLife.String name)
+        {
+            mainForm.SolutionExplorer.RemoveInventory(this.guid, name);
+        }
 
 		public System.Media.SoundPlayer GetSoundPlayer(string sound)
 		{

@@ -175,10 +175,16 @@ namespace LSLEditor
 							list.Remove(guid);
 					}
 					break;
-				case -4: // LINK_THIS
+                case -4: // LINK_THIS
+                    /*
+                     * From SL Wiki: "Causes the script to act only upon the prim the prim the script is in."
+                     * This means LINK_THIS, links to every script in the prim, not just the caller.
+                     * @author = MrSoundless
+                     * @date = 28 April 2011
+                     */
 					list = new List<Guid>();
-					list.Add(secondLifeHostSender.guid); // 4 feb 2008
-					//list = this.solutionExplorer.GetScripts(ObjectGuid, true);
+					//list.Add(secondLifeHostSender.guid); // 4 feb 2008
+					list = this.solutionExplorer.GetScripts(ObjectGuid, true); // 28 april 2011
 					break;
 				default: // Link number
 					Guid ObjectNrGuid = this.solutionExplorer.GetGuidFromObjectNr(ObjectGuid, intLinkNum);

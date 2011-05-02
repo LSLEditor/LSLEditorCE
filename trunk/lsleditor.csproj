@@ -237,6 +237,12 @@
     <Compile Include="Helpers\HTTPRequest.cs" />
     <Compile Include="Helpers\OutlineHelper.cs" />
     <Compile Include="Helpers\SendMyKeys.cs" />
+    <Compile Include="llTextBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="llTextBoxForm.Designer.cs">
+      <DependentUpon>llTextBoxForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Plugins\Generic.cs" />
     <Compile Include="Solution\GuidProperty.cs">
       <SubType>Form</SubType>
@@ -533,6 +539,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Docking\Strings.resx">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="llTextBoxForm.resx">
+      <DependentUpon>llTextBoxForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Solution\GuidProperty.resx">
       <SubType>Designer</SubType>
