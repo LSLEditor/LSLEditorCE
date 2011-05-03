@@ -2421,7 +2421,19 @@ namespace LSLEditor.Solution
 			}
 		}
 
-	}
+        public delegate void RemoveInventoryDelegate(Guid guid, SecondLife.String name);
+        public void RemoveInventory(Guid guid, SecondLife.String name)
+        {
+
+            if (this.treeView1.InvokeRequired)
+                this.treeView1.Invoke(new RemoveInventoryDelegate(RemoveInventory), new object[] { guid, name });
+
+            TreeNode treeNode = FindGuid(this.treeView1.TopNode, guid);
+            if (treeNode == null)
+                return;
+            treeNode.Remove();
+        }
+    }
 	public class NodeSorter : System.Collections.IComparer
 	{
 		public int Compare(object x, object y)
