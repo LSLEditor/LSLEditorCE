@@ -3160,13 +3160,6 @@
 			your key in s2 to encrypt or put the encrypted data into s1
 			with the same key in s2 to decrypt again.
 		</Word>
-
-		<Word name="llSetObjectPermMask">
-			llSetObjectPermMask(integer mask, integer value);
-
-			Sets the given permission mask to the new value on the root object
-			the task is attached to.
-		</Word>
 	</Words>
 
 
