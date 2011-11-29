@@ -2182,7 +2182,15 @@ namespace LSLEditor
 						enc = Encoding.Default;
 						break;
 				}
-				StreamWriter sw = new StreamWriter(strPath,false, enc);
+                StreamWriter sw;
+                if (enc != Encoding.UTF8)
+                {
+                    sw = new StreamWriter(strPath, false, enc);
+                }
+                else
+                {
+                    sw = new StreamWriter(strPath);
+                }
 				sw.Write(this.Text);
 				sw.Close();
 				//this.SaveFile(strPath, RichTextBoxStreamType.PlainText);
