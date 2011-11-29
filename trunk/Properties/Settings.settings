@@ -5,9 +5,6 @@
     <Setting Name="AvatarName" Type="System.String" Scope="User">
       <Value Profile="(Default)">SecondLife Name</Value>
     </Setting>
-    <Setting Name="Version" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">2.42</Value>
-    </Setting>
     <Setting Name="BrowserInWindow" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -331,6 +328,9 @@
     </Setting>
     <Setting Name="VersionControlSVN" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Version" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2.43</Value>
     </Setting>
   </Settings>
 </SettingsFile>
