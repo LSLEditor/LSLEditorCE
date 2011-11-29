@@ -3190,20 +3190,6 @@
 			to llRotTarget.
 		</Word>
 
-		<Word name="not_at_rot_target">
-			not_at_rot_target(void);
-
-			When a target is set via the llRotTarget library call,
-			but the script is outside the specified angle this event is raised.
-		</Word>
-
-		<Word name="not_at_target">
-			not_at_target(void);
-
-			When a target is set via the llTarget library call,
-			but the script is outside the specified range this event is raised.
-		</Word>
-
 		<Word name="attach" args="key attached">
 			attach(key attached);
 
@@ -3278,6 +3264,22 @@
 			The remaining tells how many more emails are known as still pending.
 		</Word>
 
+		<Word name="http_request" args="key request_id, string method, string body">
+			http_request(key request_id, string method, string body);
+
+			Triggered when task receives an HTTP request.
+						<Argument name="request_id">HTTP request id for response use, and function response identification.</Argument>
+						<Argument name="method">GET, POST, PUT</Argument>
+						<Argument name="body">Contents of the request.</Argument>
+		</Word>
+
+		<Word name="http_response" args="key request_id,integer status,list metadata,string body">
+			http_response(key request_id, integer status, list metadata, string body);
+
+			This event handler is invoked when an HTTP response is received for
+			a pending llHTTPRequest request or if a pending request fails or times out.
+		</Word>
+
 		<Word name="land_collision" args="vector position">
 			land_collision(vector position);
 
@@ -3344,6 +3346,20 @@
 			(via the llSensor library call) but are not sensing anything.
 		</Word>
 
+		<Word name="not_at_rot_target">
+			not_at_rot_target(void);
+
+			When a target is set via the llRotTarget library call,
+			but the script is outside the specified angle this event is raised.
+		</Word>
+
+		<Word name="not_at_target">
+			not_at_target(void);
+
+			When a target is set via the llTarget library call,
+			but the script is outside the specified range this event is raised.
+		</Word>
+
 		<Word name="object_rez" args="key id">
 			object_rez(key id);
 
@@ -3358,6 +3374,12 @@
 			Triggered whenever a object is rez-ed from inventory
 			or by another object. The start_paramis the parameter
 			passed in from the call to llRezObject.
+		</Word>
+
+		<Word name="remote_data" args="integer event_type,key channel,key message_id,string sender,integer idata,string sdata">
+			remote_data(integer event_type, key channel, key message_id, string sender, integer idata, string sdata);
+
+			Triggered by various XML-RPC calls with event_type specifying the type of data.
 		</Word>
 
 		<Word name="run_time_permissions" args="integer permissions">
@@ -3435,26 +3457,13 @@
 			via the llDetected() library functions.
 		</Word>
 
-		<Word name="http_request" args="key request_id, string method, string body">
-			http_request(key request_id, string method, string body);
+		<Word name="transaction_result" args="key kID, integer iSuccess, string iText">
+			transaction_result(key RequestID, integer Success, string Text)
 
-			Triggered when task receives an HTTP request.
-						<Argument name="request_id">HTTP request id for response use, and function response identification.</Argument>
-						<Argument name="method">GET, POST, PUT</Argument>
-						<Argument name="body">Contents of the request.</Argument>
-		</Word>
-
-		<Word name="http_response" args="key request_id,integer status,list metadata,string body">
-			http_response(key request_id, integer status, list metadata, string body);
-
-			This event handler is invoked when an HTTP response is received for
-			a pending llHTTPRequest request or if a pending request fails or times out.
-		</Word>
-
-		<Word name="remote_data" args="integer event_type,key channel,key message_id,string sender,integer idata,string sdata">
-			remote_data(integer event_type, key channel, key message_id, string sender, integer idata, string sdata);
-
-			Triggered by various XML-RPC calls with event_type specifying the type of data.
+			Triggered by llTransferMoney() function.
+			<Argument name="RequestID">The key returned by an llTransferMoney call to identify the specific request.</Argument>
+			<Argument name="Success">Boolean value, indicating success of the transfer</Argument>
+			<Argument name="Message">Message which depends on the result of the transaction. If iSuccess is true, this will contain &lt;destination_id&gt;,&lt;amount&gt;</Argument>
 		</Word>
 	</Words>
 
