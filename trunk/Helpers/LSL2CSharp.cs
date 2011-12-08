@@ -175,7 +175,7 @@ namespace LSLEditor
 
 			// State change, excluding global functions
 			regex = new Regex(
-				@"(\s+)state\s+(\w*)(\s*;)",
+				@"(\s+)state\s+(\w+)(\s*;)",
 				RegexOptions.IgnorePatternWhitespace
 				| RegexOptions.Compiled
 				);
