@@ -3450,7 +3450,7 @@
 			via the llDetected() library functions.
 		</Word>
 
-		<Word name="transaction_result" args="key kID, integer iSuccess, string iText">
+		<Word name="transaction_result" args="key kID, integer iSuccess, string sText">
 			transaction_result(key RequestID, integer Success, string Text)
 
 			Triggered by llTransferMoney() function.
@@ -3476,6 +3476,7 @@
 				An integer constant for boolean comparisons. Has the value '0'.
 			</Word>
 		</WordsSubsection>
+
 		<WordsSubsection name="C.2. Status Constants">
 			The status constants are used in the llSetStatus and llGetStatus
 			library calls. These constants can be bitwise ORed
@@ -3540,6 +3541,7 @@
 			<Word name="STATUS_TYPE_MISMATCH" value="1001">Argument(s) passed to function had a type mismatch.</Word>
 			<Word name="STATUS_WHITELIST_FAILED" value="2001">Whitelist Failed.</Word>
 		</WordsSubsection>
+
 		<WordsSubsection name="C.3. Object Type Constants">
 			These constants can be combined using the binary | operator
 			and are used in the llSensor and related calls.
@@ -3558,6 +3560,7 @@
 				Scripted in-world objects.
 			</Word>
 		</WordsSubsection>
+
 		<WordsSubsection name="C.4. Permission Constants">
 			The permission constants are used for passing values
 			to llRequestPermissions, determing the value of
@@ -3605,6 +3608,7 @@
 				object.
 			</Word>
 		</WordsSubsection>
+
 		<WordsSubsection name="C.5. Inventory Constants">
 			These constants can be used to refer to a specific inventory
 			type in calls to llGetInventoryNumber
@@ -3623,6 +3627,7 @@
 			<Word name="INVENTORY_SOUND" value=""></Word>
 			<Word name="INVENTORY_TEXTURE" value=""></Word>
 		</WordsSubsection>
+
 		<WordsSubsection name="C.6. Attachment Constants">
 			These constants are used to refer to attachment points
 			in calls to llAttachToAvatar.
@@ -3730,6 +3735,7 @@
 			<Word name="ATTACH_HUD_TOP_LEFT"></Word>
 			<Word name="ATTACH_HUD_TOP_RIGHT"></Word>
 		</WordsSubsection>
+
 		<WordsSubsection name="C.7. Land Constants">
 			These constants are only used in calls to llModifyLand.
 			The constants are equivalent to the similarly labelled
@@ -3757,6 +3763,7 @@
 			</Word>
 			<Word name="LAND_SMOOTH" />
 		</WordsSubsection>
+
 		<WordsSubsection name="C.8. Link Constants">
 			These constants are used in calls to llSetLinkColor and
 			llMessageLinked.
@@ -3777,6 +3784,7 @@
 			</Word>
 			<Word name="LINK_THIS" />
 		</WordsSubsection>
+
 		<WordsSubsection name="C.9. Control Constants">
 			These constants are used in llTakeControls as well
 			as the control event handler.
@@ -3812,6 +3820,7 @@
 				Test for the avatar left button control while in mouse look.
 			</Word>
 		</WordsSubsection>
+
 		<WordsSubsection name="C.10. Change Constants">
 			These constants are used in the changed event handler.
 			Change Constants
@@ -3843,6 +3852,7 @@
 				texture has changed.
 			</Word>
 		</WordsSubsection>
+
 		<WordsSubsection name="C.11. Type Constants">
 			These constants are used to determine the variable type
 			stored in a heterogenous list. The value returned from
@@ -3871,6 +3881,7 @@
 				The list entry is invalid.
 			</Word>
 		</WordsSubsection>
+
 		<WordsSubsection name="C.12. Agent Info Constants">
 			Each of these constants represents a bit in the integer
 			returned from the llGetAgentInfo function and can be used
@@ -3897,6 +3908,7 @@
 			<Word name="AGENT_TYPING" value="" />
 			<Word name="AGENT_WALKING" value="" />
 		</WordsSubsection>
+
 		<WordsSubsection name="C.13. Texture Animation Constants">
 			These constants are used in the llSetTextureAnim api to
 			control the animation mode.
@@ -3923,6 +3935,7 @@
 				slide in the X direction, instead of playing separate frames.
 			</Word>
 		</WordsSubsection>
+
 		<WordsSubsection name="C.14. Particle System Constants">
 			These constants are used in calls to the llParticleSystem
 			api to specify parameters.
@@ -4078,6 +4091,7 @@
 				an asset name for the texture to use for the particles.
 			</Word>
 		</WordsSubsection>
+
 		<WordsSubsection name="C.15. Agent Data Constants">
 			These constants are used in calls to the
 			llRequestAgentData api to collect information about
@@ -4109,6 +4123,7 @@
 			<Word name="DATA_SIM_RATING" />
 			<Word name="DATA_SIM_STATUS" />
 		</WordsSubsection>
+
 		<WordsSubsection name="C.16. Float Constants">
 			LSL provides a small collection of floating point
 			constants for use in float arithmetic.
@@ -4140,6 +4155,7 @@
 				6.28318530 - The radians of a circle.
 			</Word>
 		</WordsSubsection>
+
 		<WordsSubsection name="C.17. Key Constant">
 			There is only one key constant which acts as an invalid key: NULL_KEY.
 			<Word name="TEXTURE_BLANK"></Word>
@@ -4150,27 +4166,32 @@
 
 			<Word name="NULL_KEY" />
 		</WordsSubsection>
+
 		<WordsSubsection name="C.18. Miscellaneous Integer Constants">
 			There is one uncategorized integer constant
 			which is used in some of the texturing and coloring api: ALL_SIDES
 			<Word name="ALL_SIDES" />
 		</WordsSubsection>
+
 		<WordsSubsection name="C.19. Miscellaneous String Constants">
 			There is one uncategorized string constant
 			which is used in the dataserver event: EOF
 			<Word name="EOF" />
 		</WordsSubsection>
-		<WordsSubsection name="C.20. Vector Constant">
+
+		<WordsSubsection name="C.20. Vector Constants">
 			There is only one vector constant which
 			acts as a zero vector: ZERO_VECTOR = &lt;0,0,0&gt;.
 			<Word name="TOUCH_INVALID_TEXCOORD" type="vector" value="&lt;-1.0, -1.0, 0.0&gt;"></Word>
 			<Word name="ZERO_VECTOR" />
 		</WordsSubsection>
+
 		<WordsSubsection name="C.21. Rotation Constant">
 			There is only one rotation constant
 			which acts as a zero rotation: ZERO_ROTATION = &lt;0,0,0,1&gt;.
 			<Word name="ZERO_ROTATION" />
 		</WordsSubsection>
+
 		<WordsSubsection name="C.22. Vehicle Parameters">
 			Parameters
 			<Word name="VEHICLE_HOVER_EFFICIENCY" />
@@ -4276,6 +4297,7 @@
 				local frame (x, y, z).
 			</Word>
 		</WordsSubsection>
+
 		<WordsSubsection name="C.23. Vehicle Flags">
 			Flags
 			<Word name="VEHICLE_FLAG_CAMERA_DECOUPLED" />
@@ -4313,6 +4335,7 @@
 				Prevents ground vehicles from motoring into the sky.
 			</Word>
 		</WordsSubsection>
+
 		<WordsSubsection name="C.24. Vehicle Types">
 			Types
 			<Word name="VEHICLE_TYPE_AIRPLANE">
