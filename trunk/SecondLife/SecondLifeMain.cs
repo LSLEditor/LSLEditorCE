@@ -300,7 +300,7 @@ namespace LSLEditor
         public static readonly integer CLICK_ACTION_OPEN = 4;
         public static readonly integer CLICK_ACTION_PLAY = 5;
         public static readonly integer CLICK_ACTION_OPEN_MEDIA = 6;
-
+        public static readonly string CONTENT_TYPE_HTML = "text/html";
         public static readonly integer CONTROL_FWD = 1;
         public static readonly integer CONTROL_BACK = 2;
         public static readonly integer CONTROL_LEFT = 4;
@@ -350,6 +350,19 @@ namespace LSLEditor
         public static readonly integer INVENTORY_ANIMATION = 20;
         public static readonly integer INVENTORY_GESTURE = 21;
 
+        public static readonly integer KFM_CMD_PAUSE = 2;
+        public static readonly integer KFM_CMD_PLAY = 0;
+        public static readonly integer KFM_CMD_STOP = 1;
+        public static readonly integer KFM_COMMAND = 0;
+        public static readonly integer KFM_DATA = 2;
+        public static readonly integer KFM_FORWARD = 0;
+        public static readonly integer KFM_LOOP = 1;
+        public static readonly integer KFM_MODE = 1;
+        public static readonly integer KFM_PING_PONG = 2;
+        public static readonly integer KFM_REVERSE = 2;
+        public static readonly integer KFM_ROTATION = 1;
+        public static readonly integer KFM_TRANSLATION = 2;
+
         public static readonly integer LAND_LEVEL = 0;
         public static readonly integer LAND_RAISE = 1;
         public static readonly integer LAND_LOWER = 2;
@@ -357,9 +370,9 @@ namespace LSLEditor
         public static readonly integer LAND_NOISE = 4;
         public static readonly integer LAND_REVERT = 5;
 
-        public static readonly integer LAND_SMALL_BRUSH = 1;
-        public static readonly integer LAND_MEDIUM_BRUSH = 2;
         public static readonly integer LAND_LARGE_BRUSH = 3;
+        public static readonly integer LAND_MEDIUM_BRUSH = 2;
+        public static readonly integer LAND_SMALL_BRUSH = 1;
 
         public static readonly integer LINK_ROOT = 1;
         public static readonly integer LINK_SET = -1;
@@ -590,6 +603,11 @@ namespace LSLEditor
         public static readonly integer PSYS_PART_TARGET_POS_MASK = 64;
         public static readonly integer PSYS_PART_TARGET_LINEAR_MASK = 128;
         public static readonly integer PSYS_PART_EMISSIVE_MASK = 256;
+
+        public static readonly integer PSYS_PART_SRC_PATTERN_ANGLE = 0x04;
+        public static readonly integer PSYS_PART_SRC_PATTERN_ANGLE_CONE = 0x08;
+        public static readonly integer PSYS_PART_SRC_PATTERN_DROP = 0x01;
+        public static readonly integer PSYS_PART_SRC_PATTERN_EXPLODE = 0x02;
 
         public static readonly integer PSYS_PART_START_COLOR = 1;
         public static readonly integer PSYS_PART_START_ALPHA = 2;
