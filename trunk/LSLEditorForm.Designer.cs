@@ -127,8 +127,8 @@ namespace LSLEditor
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.makeBugReporttoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -140,6 +140,7 @@ namespace LSLEditor
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dockPanel = new LSLEditor.Docking.DockPanel();
+            this.releaseNotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -207,8 +208,8 @@ namespace LSLEditor
             // newProjectToolStripMenuItem
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-                        | System.Windows.Forms.Keys.N)));
+            this.newProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.N)));
             this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.newProjectToolStripMenuItem.Text = "Solution...";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
@@ -241,8 +242,8 @@ namespace LSLEditor
             // openProjectSolutionToolStripMenuItem
             // 
             this.openProjectSolutionToolStripMenuItem.Name = "openProjectSolutionToolStripMenuItem";
-            this.openProjectSolutionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-                        | System.Windows.Forms.Keys.O)));
+            this.openProjectSolutionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.O)));
             this.openProjectSolutionToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.openProjectSolutionToolStripMenuItem.Text = "Project/Solution...";
             this.openProjectSolutionToolStripMenuItem.Click += new System.EventHandler(this.openProjectSolutionToolStripMenuItem_Click);
@@ -350,8 +351,8 @@ namespace LSLEditor
             // 
             this.SaveAllToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.SAVEAS;
             this.SaveAllToolStripMenuItem.Name = "SaveAllToolStripMenuItem";
-            this.SaveAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-                        | System.Windows.Forms.Keys.S)));
+            this.SaveAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
             this.SaveAllToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.SaveAllToolStripMenuItem.Text = "Save All";
             this.SaveAllToolStripMenuItem.Click += new System.EventHandler(this.SaveAllToolStripMenuItem_Click);
@@ -524,8 +525,8 @@ namespace LSLEditor
             // toolStripMenuItem8
             // 
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-                        | System.Windows.Forms.Keys.A)));
+            this.toolStripMenuItem8.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.A)));
             this.toolStripMenuItem8.Size = new System.Drawing.Size(225, 22);
             this.toolStripMenuItem8.Text = "Select All to SL";
             this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
@@ -665,8 +666,8 @@ namespace LSLEditor
             // 
             this.addNewObjecttoolStripMenuItem.Enabled = false;
             this.addNewObjecttoolStripMenuItem.Name = "addNewObjecttoolStripMenuItem";
-            this.addNewObjecttoolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-                        | System.Windows.Forms.Keys.A)));
+            this.addNewObjecttoolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.A)));
             this.addNewObjecttoolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.addNewObjecttoolStripMenuItem.Text = "Add New Object";
             this.addNewObjecttoolStripMenuItem.Click += new System.EventHandler(this.addNewObjecttoolStripMenuItem_Click);
@@ -732,7 +733,7 @@ namespace LSLEditor
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.optionsToolStripMenuItem.Text = "Options...";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -785,6 +786,7 @@ namespace LSLEditor
             this.toolStripSeparator9,
             this.makeBugReporttoolStripMenuItem,
             this.toolStripSeparator12,
+            this.releaseNotesToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
@@ -830,17 +832,17 @@ namespace LSLEditor
             this.toolStripSeparator9.Name = "toolStripSeparator9";
             this.toolStripSeparator9.Size = new System.Drawing.Size(207, 6);
             // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(207, 6);
-            // 
             // makeBugReporttoolStripMenuItem
             // 
             this.makeBugReporttoolStripMenuItem.Name = "makeBugReporttoolStripMenuItem";
             this.makeBugReporttoolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.makeBugReporttoolStripMenuItem.Text = "Bug report...";
             this.makeBugReporttoolStripMenuItem.Click += new System.EventHandler(this.makeBugReporttoolStripMenuItem_Click);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(207, 6);
             // 
             // aboutToolStripMenuItem
             // 
@@ -939,6 +941,13 @@ namespace LSLEditor
             dockPanelSkin1.DockPaneStripSkin = dockPaneStripSkin1;
             this.dockPanel.Skin = dockPanelSkin1;
             this.dockPanel.TabIndex = 10;
+            // 
+            // releaseNotesToolStripMenuItem
+            // 
+            this.releaseNotesToolStripMenuItem.Name = "releaseNotesToolStripMenuItem";
+            this.releaseNotesToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.releaseNotesToolStripMenuItem.Text = "Release Notes...";
+            this.releaseNotesToolStripMenuItem.Click += new System.EventHandler(this.releaseNotesToolStripMenuItem_Click);
             // 
             // LSLEditorForm
             // 
@@ -1066,5 +1075,6 @@ namespace LSLEditor
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripMenuItem closeActiveWindowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
+        private System.Windows.Forms.ToolStripMenuItem releaseNotesToolStripMenuItem;
 	}
 }

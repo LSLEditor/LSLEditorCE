@@ -1245,7 +1245,7 @@ namespace LSLEditor
 			}
 		}
 
-		private void ReleaseNotesToolStripMenuItem_Click(object sender, EventArgs e)
+		private void releaseNotesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Browser browser = GetBrowser();
 			string strExeFileName = Path.GetFileName(Assembly.GetExecutingAssembly().CodeBase);
