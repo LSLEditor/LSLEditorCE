@@ -1748,14 +1748,18 @@ namespace LSLEditor
 			string strW = GetNewWhiteSpace(-1);
 			int intTabs = (int)(strW.Length / AutoFormatter.GetTab().Length);
 
-			if (this.SelectionLength == 0)
+			int intLastLine = this.GetLineFromCharIndex(this.SelectionStart + this.SelectionLength);
+
+			int intLine = this.GetLineFromCharIndex(this.SelectionStart);
+			this.SelectionStart = this.GetFirstCharIndexFromLine(intLine);
+			int intLength = 0;
+			do
 			{
-				int intLine = this.GetLineFromCharIndex(this.SelectionStart);
-				int intStart = this.GetFirstCharIndexFromLine(intLine);
-				int intLength = this.Lines[intLine].Length + 1;
-				this.SelectionStart = intStart;
-				this.SelectionLength = intLength;
-			}
+				intLength += this.Lines[intLine].Length + 1;
+				intLine++;
+			} while (intLine <= intLastLine);
+			this.SelectionLength = intLength;
+
 			string strSelectedText = AutoFormatter.MultiLineComment(blnAdd, intTabs, this.SelectedText);
 
 			int intBackup = this.SelectionStart;
