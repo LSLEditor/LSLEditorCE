@@ -899,9 +899,15 @@ namespace LSLEditor
 
 		public new void Paste()
 		{
-			ResetHighlichting();
+			ResetHighlighting();
 
-			if (Clipboard.GetDataObject().GetDataPresent(DataFormats.Text, true))
+			// First try with Unicode
+			if (Clipboard.GetDataObject().GetDataPresent(DataFormats.UnicodeText, true))
+			{
+				string strTextToPaste = Clipboard.GetDataObject().GetData(DataFormats.UnicodeText, true).ToString().Replace("\r", "");
+				this.ColoredText = strTextToPaste;
+			} // failing that try ANSI text.
+			else if (Clipboard.GetDataObject().GetDataPresent(DataFormats.Text, true))
 			{
 				string strTextToPaste = Clipboard.GetDataObject().GetData(DataFormats.Text, true).ToString().Replace("\r", "");
 				this.ColoredText = strTextToPaste;
@@ -1147,7 +1153,7 @@ namespace LSLEditor
 
 		protected override void OnKeyPress(KeyPressEventArgs e)
 		{
-			ResetHighlichting();
+			ResetHighlighting();
 
 			char keyChar = e.KeyChar;
 
@@ -1743,19 +1749,23 @@ namespace LSLEditor
 		{
 			BeginUpdate();
 
-			ResetHighlichting();
+			ResetHighlighting();
 
 			string strW = GetNewWhiteSpace(-1);
 			int intTabs = (int)(strW.Length / AutoFormatter.GetTab().Length);
 
-			if (this.SelectionLength == 0)
+			int intLastLine = this.GetLineFromCharIndex(this.SelectionStart + this.SelectionLength);
+
+			int intLine = this.GetLineFromCharIndex(this.SelectionStart);
+			this.SelectionStart = this.GetFirstCharIndexFromLine(intLine);
+			int intLength = 0;
+			do
 			{
-				int intLine = this.GetLineFromCharIndex(this.SelectionStart);
-				int intStart = this.GetFirstCharIndexFromLine(intLine);
-				int intLength = this.Lines[intLine].Length + 1;
-				this.SelectionStart = intStart;
-				this.SelectionLength = intLength;
-			}
+				intLength += this.Lines[intLine].Length + 1;
+				intLine++;
+			} while (intLine <= intLastLine);
+			this.SelectionLength = intLength;
+
 			string strSelectedText = AutoFormatter.MultiLineComment(blnAdd, intTabs, this.SelectedText);
 
 			int intBackup = this.SelectionStart;
@@ -1888,7 +1898,7 @@ namespace LSLEditor
 			}
 		}
 
-		private void ResetHighlichting()
+		private void ResetHighlighting()
 		{
 			if (HighLightList.Count == 0)
 				return;

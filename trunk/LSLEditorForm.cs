@@ -1245,7 +1245,7 @@ namespace LSLEditor
 			}
 		}
 
-		private void ReleaseNotesToolStripMenuItem_Click(object sender, EventArgs e)
+		private void releaseNotesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Browser browser = GetBrowser();
 			string strExeFileName = Path.GetFileName(Assembly.GetExecutingAssembly().CodeBase);
@@ -1699,11 +1699,7 @@ namespace LSLEditor
 			{
 				if (lslint.HasErrors)
 				{
-                    //TODO: Show errors somewhere else
-					//this.panel1.Controls.Clear();
-					//this.panel1.Controls.Add(this.SyntaxErrors);
-					//this.panel1.Visible = true;
-					//this.splitter1.SplitPosition = Properties.Settings.Default.SimulatorSize.Height;
+					this.SyntaxErrors.Show(dockPanel);
 				}
 				else
 				{

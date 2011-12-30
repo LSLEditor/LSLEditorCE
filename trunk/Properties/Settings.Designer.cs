@@ -868,18 +868,6 @@ namespace LSLEditor.Properties {
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ANSI")]
-        public string OutputFormat {
-            get {
-                return ((string)(this["OutputFormat"]));
-            }
-            set {
-                this["OutputFormat"] = value;
-            }
-        }
-
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ShowSolutionExplorer {
             get {
@@ -1222,10 +1210,22 @@ namespace LSLEditor.Properties {
 
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2.43")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2.44.0")]
         public string Version {
             get {
                 return ((string)(this["Version"]));
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("UTF-8")]
+        public string OutputFormat {
+            get {
+                return ((string)(this["OutputFormat"]));
+            }
+            set {
+                this["OutputFormat"] = value;
             }
         }
     }
