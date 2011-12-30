@@ -128,18 +128,18 @@ namespace LSLEditor.Tools
 			this.checkBox1.AutoSize = true;
 			this.checkBox1.Location = new System.Drawing.Point(16, 24);
 			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(142, 17);
+			this.checkBox1.Size = new System.Drawing.Size(145, 17);
 			this.checkBox1.TabIndex = 0;
-			this.checkBox1.Text = "use original colorscheme";
+			this.checkBox1.Text = "use original color scheme";
 			this.checkBox1.UseVisualStyleBackColor = true;
 			// 
-			// EnvironmentFontColors
+			// TextEditorFontColors
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.groupBox1);
-			this.Name = "EnvironmentFontColors";
+			this.Name = "TextEditorFontColors";
 			this.Size = new System.Drawing.Size(392, 272);
 			this.groupBox5.ResumeLayout(false);
 			this.groupBox5.PerformLayout();
