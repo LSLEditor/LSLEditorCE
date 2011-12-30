@@ -332,5 +332,8 @@
     <Setting Name="OutputFormat" Type="System.String" Scope="User">
       <Value Profile="(Default)">UTF-8</Value>
     </Setting>
+    <Setting Name="OutputFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">UTF-8</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
