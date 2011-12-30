@@ -11,15 +11,19 @@
 					<li>"Release Notes..." to help menu.</li>
 				</ul>
 
-				- Updated
+				* Changed
 				<ul>
-					<li>About.htm</li>
+					<li>Updated About.htm</li>
+					<li>Tools => Options => Text Editor => General - Changed labels to properly reflect the output file format.</li>
+					<li>UTF-8 output no longer prefixes the B.O.M. character.</li>
+					<li>UTF-8 is now the default file output format. ANSI is deprecated and will be removed at a later date.</li>
 				</ul>
 
-				- Fixed:
+				* Fixed:
 				<ul>
 					<li>2995296 - Search | Comment Line (Ctl+K) Breaks Line After Search Term</li>
 					<li>3461546 - ReleaseNotes.htm in source, but never used</li>
+					<li>no id - Fix for state change without state name passing syntax-check.</li>
 					<li>3465488 - lslint does not show errors.</li>
 				</ul>
 			</div>
@@ -143,13 +147,13 @@
 
 			<div>
 				<h3><u>2011-04-21</u> - Release 2.42</h3>
-				- Added: constants
+				* Added: constants
 				<ul>
 					<li>CHANGED_REGION_START</li>
 					<li>PRIM_DESC</li>
 					<li>PRIM_NAME</li>
 				</ul>
-				- Added: functions (highlighting only):
+				* Added: functions (highlighting only):
 				<ul>
 					<li>llCastRay</li>
 					<li>llGetLinkNumberOfSides</li>
