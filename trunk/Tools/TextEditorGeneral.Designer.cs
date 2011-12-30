@@ -224,7 +224,7 @@ namespace LSLEditor.Tools
 			this.radioButton6.Size = new System.Drawing.Size(65, 17);
 			this.radioButton6.TabIndex = 1;
 			this.radioButton6.TabStop = true;
-			this.radioButton6.Text = "Unicode";
+			this.radioButton6.Text = "UTF-16 LE";
 			this.radioButton6.UseVisualStyleBackColor = true;
 			// 
 			// radioButton7
@@ -235,7 +235,7 @@ namespace LSLEditor.Tools
 			this.radioButton7.Size = new System.Drawing.Size(117, 17);
 			this.radioButton7.TabIndex = 2;
 			this.radioButton7.TabStop = true;
-			this.radioButton7.Text = "Unicode big endian";
+			this.radioButton7.Text = "UTF-16 BE";
 			this.radioButton7.UseVisualStyleBackColor = true;
 			// 
 			// radioButton8
