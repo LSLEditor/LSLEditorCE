@@ -3482,21 +3482,47 @@
 			together when calling the library functions to set the same
 			value to more than one status flag
 			Status Constants
-			<Word name="STATUS_PHYSICS">
+			<Word name="STATUS_BLOCK_GRAB" value="64">
+				Controls whether the object can be grabbed.
+				A grab is the default action when in third person, and is
+				available as the hand tool in build mode.
+				This is useful for physical objects that you don't want other
+				people to be able to trivially disturb.
+				The default if FALSE
+			</Word>
+			<Word name="STATUS_BLOCK_GRAB_OBJECT" value="1024">Prevent click-and-drag movement on all prims in the object.</Word>
+			<Word name="STATUS_BOUNDS_ERROR" value="1002">Argument(s) passed to function had a bounds error.</Word>
+			<Word name="STATUS_CAST_SHADOWS" value="" />
+			<Word name="STATUS_DIE_AT_EDGE" value="">
+				Controls whether the object is returned to the owners
+				inventory if it wanders off the edge of the world. It is
+				useful to set this status TRUE for things like bullets
+				or rockets. The default is TRUE
+			</Word>
+			<Word name="STATUS_INTERNAL_ERROR" value="1999">.An internal error occurred.</Word>
+			<Word name="STATUS_MALFORMED_PARAMS" value="1000"> Function was called with malformed parameters.</Word>
+			<Word name="STATUS_NOT_FOUND" value="1003">.Object or other item was not found.</Word>
+			<Word name="STATUS_NOT_SUPPORTED" value="1004">Feature not supported.</Word>
+			<Word name="STATUS_OK" value="0">
+
+				Result of function call was success
+			</Word>
+			<Word name="STATUS_PHYSICS" value="">
 				Controls whether the object moves physically.
 				This controls the same flag that the ui checkbox for
 				Physical controls. The default is FALSE.
 			</Word>
-			<Word name="STATUS_PHANTOM">
+			<Word name="STATUS_PHANTOM" value="">
 				Controls whether the object collides or not.
 				Setting the value to TRUE makes the object non-colliding with
 				all objects. It is a good idea to use this for most objects
 				that move or rotate, but are non-physical. It is also
 				useful for simulating volumetric lighting. The default is FALSE.
 			</Word>
-			<Word name="STATUS_ROTATE_X"></Word>
-			<Word name="STATUS_ROTATE_Y"></Word>
-			<Word name="STATUS_ROTATE_Z">
+			<Word name="STATUS_RETURN_AT_EDGE" value="" />
+			<Word name="STATUS_ROTATE_X" value=""></Word>
+			<Word name="STATUS_ROTATE_Y" value=""></Word>
+			<Word name="STATUS_ROTATE_Z" value="">
 				Controls whether the object can physically rotate around
 				the specific axis or not. This flag has no meaning
 				for non-physical objects. Set the value to FALSE
@@ -3506,36 +3532,24 @@
 				the effect is a sit-and-spin device. They spin around the
 				Z axis (up) but not around the X or Y axis.
 			</Word>
-			<Word name="STATUS_BLOCK_GRAB">
-				Controls whether the object can be grabbed.
-				A grab is the default action when in third person, and is
-				available as the hand tool in build mode.
-				This is useful for physical objects that you dont want other
-				people to be able to trivially disturb.
-				The default if FALSE
-			</Word>
-			<Word name="STATUS_SANDBOX">
+			<Word name="STATUS_SANDBOX" value="">
 				Controls whether the object can cross region boundaries
 				and move more than 20 meters from its creation
 				point. The default if FALSE.
 			</Word>
-			<Word name="STATUS_DIE_AT_EDGE">
-				Controls whether the object is returned to the owners
-				inventory if it wanders off the edge of the world. It is
-				useful to set this status TRUE for things like bullets
-				or rockets. The default is TRUE
-			</Word>
+			<Word name="STATUS_TYPE_MISMATCH" value="1001">Argument(s) passed to function had a type mismatch.</Word>
+			<Word name="STATUS_WHITELIST_FAILED" value="2001">Whitelist Failed.</Word>
 		</WordsSubsection>
 		<WordsSubsection name="C.3. Object Type Constants">
 			These constants can be combined using the binary | operator
 			and are used in the llSensor and related calls.
 			Object Type Constants
-			<Word name="AGENT">
-				Objects in world that are agents.
-			</Word>
 			<Word name="ACTIVE">
 				Objects in world that are running a script or
 				currently pysically moving.
+			</Word>
+			<Word name="AGENT">
+				Objects in world that are agents.
 			</Word>
 			<Word name="PASSIVE">
 				Static in-world objects.
@@ -3554,39 +3568,41 @@
 			used in conjunction.
 
 			Permission Constants
-			<Word name="PERMISSION_DEBIT">
-				If this permission is enabled, the object can successfully
-				call llGiveMoney to debit the owners account.
-			</Word>
-			<Word name="PERMISSION_TAKE_CONTROLS">
-				If this permission enabled, the object can successfully
-				call the llTakeControls libray call.
-			</Word>
-			<Word name="PERMISSION_REMAP_CONTROLS">
-				(not yet implemented)
-			</Word>
-			<Word name="PERMISSION_TRIGGER_ANIMATION">
-				If this permission is enabled, the object can successfully
-				call llStartAnimation for the avatar that owns this
-				object.
-			</Word>
-			<Word name="PERMISSION_ATTACH">
+			<Word name="PERMISSION_ATTACH" value="">
 				If this permission is enabled, the object can successfully
 				call llAttachToAvatar to attach to the given avatar.
 			</Word>
-			<Word name="PERMISSION_RELEASE_OWNERSHIP">
-				(not yet implemented)
-			</Word>
-			<Word name="PERMISSION_CHANGE_LINKS">
+			<Word name="PERMISSION_CHANGE_LINKS" value="">
 				If this permission is enabled, the object can successfully
 				call llCreateLink, llBreakLink, and
 				llBreakAllLinks to change links to other objects.
 			</Word>
-			<Word name="PERMISSION_CHANGE_JOINTS">
+			<Word name="PERMISSION_CONTROL_CAMERA" value="" />
+			<Word name="PERMISSION_DEBIT" value="">
+				If this permission is enabled, the object can successfully
+				call llGiveMoney to debit the owners account.
+			</Word>
+			<Word name="PERMISSION_CHANGE_JOINTS" value="">
 				(not yet implemented)
 			</Word>
-			<Word name="PERMISSION_CHANGE_PERMISSIONS">
+			<Word name="PERMISSION_CHANGE_PERMISSIONS" value="">
 				(not yet implemented)
+			</Word>
+			<Word name="PERMISSION_RELEASE_OWNERSHIP" value="">
+				(not yet implemented)
+			</Word>
+			<Word name="PERMISSION_REMAP_CONTROLS" value="">
+				(not yet implemented)
+			</Word>
+			<Word name="PERMISSION_TAKE_CONTROLS" value="">
+				If this permission enabled, the object can successfully
+				call the llTakeControls libray call.
+			</Word>
+			<Word name="PERMISSION_TRACK_CAMERA" value="" />
+			<Word name="PERMISSION_TRIGGER_ANIMATION" value="">
+				If this permission is enabled, the object can successfully
+				call llStartAnimation for the avatar that owns this
+				object.
 			</Word>
 		</WordsSubsection>
 		<WordsSubsection name="C.5. Inventory Constants">
@@ -3594,72 +3610,80 @@
 			type in calls to llGetInventoryNumber
 			andllGetInventoryName.
 			Inventory Constants
-			<Word name="INVENTORY_TEXTURE"></Word>
-			<Word name="INVENTORY_SOUND"></Word>
-			<Word name="INVENTORY_OBJECT"></Word>
-			<Word name="INVENTORY_SCRIPT"></Word>
-			<Word name="INVENTORY_LANDMARK"></Word>
-			<Word name="INVENTORY_CLOTHING"></Word>
-			<Word name="INVENTORY_NOTECARD"></Word>
-			<Word name="INVENTORY_BODYPART">
-				Each constant refers to the named type of inventory.
-			</Word>
+			<Word name="INVENTORY_ALL" value="" />
+			<Word name="INVENTORY_ANIMATION" value="" />
+			<Word name="INVENTORY_BODYPART" value="" />
+			<Word name="INVENTORY_CLOTHING" value=""></Word>
+			<Word name="INVENTORY_GESTURE" value="" />
+			<Word name="INVENTORY_LANDMARK" value=""></Word>
+			<Word name="INVENTORY_NOTECARD" value=""></Word>
+			<Word name="INVENTORY_NONE" value="" />
+			<Word name="INVENTORY_OBJECT" value=""></Word>
+			<Word name="INVENTORY_SCRIPT" value=""></Word>
+			<Word name="INVENTORY_SOUND" value=""></Word>
+			<Word name="INVENTORY_TEXTURE" value=""></Word>
 		</WordsSubsection>
 		<WordsSubsection name="C.6. Attachment Constants">
 			These constants are used to refer to attachment points
 			in calls to llAttachToAvatar.
 			Attachment Constants
-			<Word name="ATTACH_CHEST">
-				Attach to the avatar chest.
-			</Word>
-			<Word name="ATTACH_HEAD">
-				Attach to the avatar head.
-			</Word>
-			<Word name="ATTACH_LSHOULDER">
-				Attach to the avatar left shoulder.
-			</Word>
-			<Word name="ATTACH_RSHOULDER">
-				Attach to the avatar right shoulder.
-			</Word>
-			<Word name="ATTACH_LHAND">
-				Attach to the avatar left hand.
-			</Word>
-			<Word name="ATTACH_RHAND">
-				Attach to the avatar right hand.
-			</Word>
-			<Word name="ATTACH_LFOOT">
-				Attach to the avatar left foot.
-			</Word>
-			<Word name="ATTACH_RFOOT">
-				Attach to the avatar right foot.
-			</Word>
 			<Word name="ATTACH_BACK">
 				Attach to the avatar back.
 			</Word>
-			<Word name="ATTACH_PELVIS">
-				Attach to the avatar pelvis.
+			<Word name="ATTACH_BELLY">
+				Attach to the avatar belly.
 			</Word>
-			<Word name="ATTACH_MOUTH">
-				Attach to the avatar mouth.
+			<Word name="ATTACH_CHEST">
+				Attach to the avatar chest.
 			</Word>
 			<Word name="ATTACH_CHIN">
 				Attach to the avatar chin.
 			</Word>
+			<Word name="ATTACH_HEAD">
+				Attach to the avatar head.
+			</Word>
+
 			<Word name="ATTACH_LEAR">
 				Attach to the avatar left ear.
-			</Word>
-			<Word name="ATTACH_REAR">
-				Attach to the avatar right ear.
 			</Word>
 			<Word name="ATTACH_LEYE">
 				Attach to the avatar left eye.
 			</Word>
-			<Word name="ATTACH_REYE">
-				Attach to the avatar right eye.
+			<Word name="ATTACH_LFOOT">
+				Attach to the avatar left foot.
+			</Word>
+			<Word name="ATTACH_LHAND">
+				Attach to the avatar left hand.
+			</Word>
+			<Word name="ATTACH_LHIP">
+				Attach to the avatar left hip.
+			</Word>
+			<Word name="ATTACH_LLARM">
+				Attach to the avatar left lower arm.
+			</Word>
+			<Word name="ATTACH_LLLEG">
+				Attach to the avatar lower left leg.
+			</Word>
+			<Word name="ATTACH_LPEC">
+				Attach to the avatar left pectoral. (depreciated)
+			</Word>
+			<Word name="ATTACH_LSHOULDER">
+				Attach to the avatar left shoulder.
+			</Word>
+			<Word name="ATTACH_LULEG">
+				Attach to the avatar lower upper leg.
+			</Word>
+
+			<Word name="ATTACH_MOUTH">
+				Attach to the avatar mouth.
 			</Word>
 			<Word name="ATTACH_NOSE">
 				Attach to the avatar nose.
 			</Word>
+			<Word name="ATTACH_PELVIS">
+				Attach to the avatar pelvis.
+			</Word>
+
 			<Word name="ATTACH_RUARM">
 				Attach to the avatar right upper arm.
 			</Word>
@@ -3669,88 +3693,89 @@
 			<Word name="ATTACH_LUARM">
 				Attach to the avatar left upper arm.
 			</Word>
-			<Word name="ATTACH_LLARM">
-				Attach to the avatar left lower arm.
+			<Word name="ATTACH_REAR">
+				Attach to the avatar right ear.
+			</Word>
+			<Word name="ATTACH_REYE">
+				Attach to the avatar right eye.
+			</Word>
+			<Word name="ATTACH_RFOOT">
+				Attach to the avatar right foot.
+			</Word>
+			<Word name="ATTACH_RHAND">
+				Attach to the avatar right hand.
 			</Word>
 			<Word name="ATTACH_RHIP">
 				Attach to the avatar right hip.
 			</Word>
-			<Word name="ATTACH_RULEG">
-				Attach to the avatar right upper leg.
-			</Word>
 			<Word name="ATTACH_RLLEG">
 				Attach to the avatar right lower leg.
-			</Word>
-			<Word name="ATTACH_LHIP">
-				Attach to the avatar left hip.
-			</Word>
-			<Word name="ATTACH_LULEG">
-				Attach to the avatar lower upper leg.
-			</Word>
-			<Word name="ATTACH_LLLEG">
-				Attach to the avatar lower left leg.
-			</Word>
-			<Word name="ATTACH_BELLY">
-				Attach to the avatar belly.
 			</Word>
 			<Word name="ATTACH_RPEC">
 				Attach to the avatar right pectoral. (depreciated)
 			</Word>
-			<Word name="ATTACH_LPEC">
-				Attach to the avatar left pectoral. (depreciated)
+			<Word name="ATTACH_RSHOULDER">
+				Attach to the avatar right shoulder.
+			</Word>
+			<Word name="ATTACH_RULEG">
+				Attach to the avatar right upper leg.
 			</Word>
 
+			<Word name="ATTACH_HUD_BOTTOM"></Word>
+			<Word name="ATTACH_HUD_BOTTOM_LEFT"></Word>
+			<Word name="ATTACH_HUD_BOTTOM_RIGHT"></Word>
+			<Word name="ATTACH_HUD_CENTER_1"></Word>
 			<Word name="ATTACH_HUD_CENTER_2"></Word>
-			<Word name="ATTACH_HUD_TOP_RIGHT"></Word>
 			<Word name="ATTACH_HUD_TOP_CENTER"></Word>
 			<Word name="ATTACH_HUD_TOP_LEFT"></Word>
-			<Word name="ATTACH_HUD_CENTER_1"></Word>
-			<Word name="ATTACH_HUD_BOTTOM_LEFT"></Word>
-			<Word name="ATTACH_HUD_BOTTOM"></Word>
-			<Word name="ATTACH_HUD_BOTTOM_RIGHT"></Word>
+			<Word name="ATTACH_HUD_TOP_RIGHT"></Word>
 		</WordsSubsection>
 		<WordsSubsection name="C.7. Land Constants">
 			These constants are only used in calls to llModifyLand.
 			The constants are equivalent to the similarly labelled
 			user interface elements for editing land in the viewer.
 			Land Constants
+			<Word name="LAND_LARGE_BRUSH">
+				Use a large brush size.
+			</Word>
 			<Word name="LAND_LEVEL">
 				Action to level the land.
-			</Word>
-			<Word name="LAND_RAISE">
-				Action to raise the land.
 			</Word>
 			<Word name="LAND_LOWER">
 				Action to lower the land.
 			</Word>
-			<Word name="LAND_SMALL_BRUSH">
-				Use a small brush size.
-			</Word>
 			<Word name="LAND_MEDIUM_BRUSH">
 				Use a medium brush size.
 			</Word>
-			<Word name="LAND_LARGE_BRUSH">
-				Use a large brush size.
+			<Word name="LAND_NOISE" />
+			<Word name="LAND_RAISE">
+				Action to raise the land.
 			</Word>
+			<Word name="LAND_REVERT" />
+			<Word name="LAND_SMALL_BRUSH">
+				Use a small brush size.
+			</Word>
+			<Word name="LAND_SMOOTH" />
 		</WordsSubsection>
 		<WordsSubsection name="C.8. Link Constants">
 			These constants are used in calls to llSetLinkColor and
 			llMessageLinked.
 
 			Link Constants
-			<Word name="LINK_SET">
-				This targets every object in the linked set.
-			</Word>
-			<Word name="LINK_ROOT">
-				This targets the root of the linked set.
+			<Word name="LINK_ALL_CHILDREN">
+				This targets every object except the root in the linked set.
 			</Word>
 			<Word name="LINK_ALL_OTHERS">
 				This targets every object in the linked set except
 				the object with the script.
 			</Word>
-			<Word name="LINK_ALL_CHILDREN">
-				This targets every object except the root in the linked set.
+			<Word name="LINK_ROOT">
+				This targets the root of the linked set.
 			</Word>
+			<Word name="LINK_SET">
+				This targets every object in the linked set.
+			</Word>
+			<Word name="LINK_THIS" />
 		</WordsSubsection>
 		<WordsSubsection name="C.9. Control Constants">
 			These constants are used in llTakeControls as well
@@ -3790,9 +3815,6 @@
 		<WordsSubsection name="C.10. Change Constants">
 			These constants are used in the changed event handler.
 			Change Constants
-			<Word name="CHANGED_INVENTORY">
-				The object inventory has changed.
-			</Word>
 			<Word name="CHANGED_ALLOWED_DROP">
 				The object inventory has changed because an item was
 				added through the llAllowInventoryDrop interface.
@@ -3800,18 +3822,25 @@
 			<Word name="CHANGED_COLOR">
 				The object color has changed.
 			</Word>
-			<Word name="CHANGED_SHAPE">
-				The object shape has changed, eg, a box to a cylinder
-			</Word>
-			<Word name="CHANGED_SCALE">
-				The object scale has changed.
-			</Word>
-			<Word name="CHANGED_TEXTURE">
-				The texture offset, scale rotation, or simply the object
-				texture has changed.
+			<Word name="CHANGED_INVENTORY">
+				The object inventory has changed.
 			</Word>
 			<Word name="CHANGED_LINK">
 				The object has linked or its links were broken.
+			</Word>
+			<Word name="CHANGED_OWNER" />
+			<Word name="CHANGED_REGION" />
+			<Word name="CHANGED_REGION_START" />
+			<Word name="CHANGED_SCALE">
+				The object scale has changed.
+			</Word>
+			<Word name="CHANGED_SHAPE">
+				The object shape has changed, eg, a box to a cylinder
+			</Word>
+			<Word name="CHANGED_TELEPORT" />
+			<Word name="CHANGED_TEXTURE">
+				The texture offset, scale rotation, or simply the object
+				texture has changed.
 			</Word>
 		</WordsSubsection>
 		<WordsSubsection name="C.11. Type Constants">
@@ -3848,15 +3877,25 @@
 			in an expression to determine the specified information
 			about an agent.
 			Agent Info Constants
-			<Word name="AGENT_FLYING">
-				The agent is flying.
-			</Word>
-			<Word name="AGENT_ATTACHMENTS">
+			<Word name="AGENT_ALWAYS_RUN" value="" />
+			<Word name="AGENT_ATTACHMENTS" value="">
 				The agent has attachments.
 			</Word>
-			<Word name="AGENT_SCRIPTED">
+			<Word name="AGENT_AWAY" value="" />
+			<Word name="AGENT_BUSY" value="" />
+			<Word name="AGENT_CROUCHING" value="" />
+			<Word name="AGENT_FLYING" value="">
+				The agent is flying.
+			</Word>
+			<Word name="AGENT_IN_AIR" value="" />
+			<Word name="AGENT_MOUSELOOK" value="" />
+			<Word name="AGENT_ON_OBJECT" value="" />
+			<Word name="AGENT_SITTING" value="" />
+			<Word name="AGENT_SCRIPTED" value="">
 				The agent has scripted attachments.
 			</Word>
+			<Word name="AGENT_TYPING" value="" />
+			<Word name="AGENT_WALKING" value="" />
 		</WordsSubsection>
 		<WordsSubsection name="C.13. Texture Animation Constants">
 			These constants are used in the llSetTextureAnim api to
@@ -3868,14 +3907,11 @@
 			<Word name="LOOP">
 				Loop the texture animation.
 			</Word>
-			<Word name="REVERSE">
-				Play animation in reverse direction.
-			</Word>
 			<Word name="PING_PONG">
 				play animation going forwards, then backwards.
 			</Word>
-			<Word name="SMOOTH">
-				slide in the X direction, instead of playing separate frames.
+			<Word name="REVERSE">
+				Play animation in reverse direction.
 			</Word>
 			<Word name="ROTATE">
 				Animate texture rotation.
@@ -3883,153 +3919,163 @@
 			<Word name="SCALE">
 				Animate the texture scale.
 			</Word>
+			<Word name="SMOOTH">
+				slide in the X direction, instead of playing separate frames.
+			</Word>
 		</WordsSubsection>
 		<WordsSubsection name="C.14. Particle System Constants">
 			These constants are used in calls to the llParticleSystem
 			api to specify parameters.
 			Particle System Parameters
-			<Word name="PSYS_PART_FLAGS">
+			<Word name="PSYS_PART_BOUNCE_MASK" value="">
+				Particles bounce off of a plane at the objects Z height.
+			</Word>
+			<Word name="PSYS_PART_EMISSIVE_MASK" value="">
+				The particle glows.
+			</Word>
+			<Word name="PSYS_PART_END_ALPHA" value="">
+				a float which determines the ending alpha of the object.
+			</Word>
+			<Word name="PSYS_PART_END_COLOR" value="">
+				a vector &lt;r, g, b&gt; which determines the ending
+				color of the object.
+			</Word>
+			<Word name="PSYS_PART_END_SCALE" value="">
+				a vector &lt;sx, sy, z&gt;, which is the ending
+				size of the particle billboard in meters (z is ignored).
+			</Word>
+			<Word name="PSYS_PART_FLAGS" value="">
 				Each particle that is emitted by the particle system is
 				simulated based on the following flags. To use
 				multiple flags, bitwise or (|) them together.
 				PSYS_PART_FLAGS Values
 			</Word>
-			<Word name="PSYS_PART_INTERP_COLOR_MASK">
-				Interpolate both the color and alpha from the start
-				value to the end value.
-			</Word>
-			<Word name="PSYS_PART_INTERP_SCALE_MASK">
-				Interpolate the particle scale from the start value
-				to the end value.
-			</Word>
-			<Word name="PSYS_PART_WIND_MASK">
-				Particles have their velocity damped towards the wind velocity.
-			</Word>
-			<Word name="PSYS_PART_BOUNCE_MASK">
-				Particles bounce off of a plane at the objects Z height.
-			</Word>
-			<Word name="PSYS_PART_FOLLOW_SRC_MASK">
+			<Word name="PSYS_PART_FOLLOW_SRC_MASK" value="">
 				The particle position is relative to the source objects position.
 			</Word>
-			<Word name="PSYS_PART_FOLLOW_VELOCITY_MASK">
+			<Word name="PSYS_PART_FOLLOW_VELOCITY_MASK" value="">
 				The particle orientation is rotated so the vertical
 				axis faces towards the particle velocity.
 			</Word>
-			<Word name="PSYS_PART_TARGET_POS_MASK">
-				The particle heads towards the location of the target
-				object as defined by PSYS_SRC_TARGET_KEY.
+			<Word name="PSYS_PART_INTERP_COLOR_MASK" value="">
+				Interpolate both the color and alpha from the start
+				value to the end value.
 			</Word>
-			<Word name="PSYS_PART_EMISSIVE_MASK">
-				The particle glows.
+			<Word name="PSYS_PART_INTERP_SCALE_MASK" value="">
+				Interpolate the particle scale from the start value
+				to the end value.
 			</Word>
-			<Word name="PSYS_PART_RANDOM_ACCEL_MASK">
-				(not implemented)
+			<Word name="PSYS_PART_MAX_AGE" value="">
+				age in seconds of a particle at which it dies.
 			</Word>
-			<Word name="PSYS_PART_RANDOM_VEL_MASK">
-				(not implemented)
-			</Word>
-			<Word name="PSYS_PART_TRAIL_MASK">
-				(not implemented)
-			</Word>
-			<Word name="PSYS_SRC_PATTERN">
-				The pattern which is used to generate particles.
-				Use one of the following values:
-				PSYS_SRC_PATTERN Values
-			</Word>
-			<Word name="PSYS_PART_SRC_PATTERN_DROP">
+			<Word name="PSYS_PART_SRC_PATTERN_DROP" value="">
 				Drop particles at the source position.
 			</Word>
-			<Word name="PSYS_PART_SRC_PATTERN_EXPLODE">
+			<Word name="PSYS_PART_SRC_PATTERN_EXPLODE" value="">
 				Shoot particles out in all directions,
 				using the burst parameters.
 			</Word>
-			<Word name="PSYS_PART_SRC_PATTERN_ANGLE">
+			<Word name="PSYS_PART_SRC_PATTERN_ANGLE" value="">
 				Shoot particles across a 2 dimensional area defined
 				by the arc created from
 				PSYS_SRC_OUTERANGLE.
 				There will be an open area defined by PSYS_SRC_INNERANGLE
 				within the larger arc.
 			</Word>
-			<Word name="PSYS_PART_SRC_PATTERN_ANGLE_CONE">
+			<Word name="PSYS_PART_SRC_PATTERN_ANGLE_CONE" value="">
 				Shoot particles out in a 3 dimensional cone with
 				an outer arc of PSYS_SRC_OUTERANGLE and an
 				inner open area defined by PSYS_SRC_INNERANGLE.
 			</Word>
-			<Word name="PSYS_PART_START_COLOR">
-				a vector &lt;r,g,b&gt; which determines the starting
-				color of the object.
-			</Word>
-			<Word name="PSYS_PART_START_ALPHA">
+			<Word name="PSYS_PART_START_ALPHA" value="">
 				a float which determines the starting alpha of the object.
 			</Word>
-			<Word name="PSYS_PART_END_COLOR">
-				a vector &lt;r, g, b&gt; which determines the ending
-				color of the object.
+			<Word name="PSYS_PART_START_COLOR">
+				a vector &lt;r, g, b&gt; which determines the starting colour of the object.
 			</Word>
-			<Word name="PSYS_PART_END_ALPHA">
-				a float which determines the ending alpha of the object.
-			</Word>
-			<Word name="PSYS_PART_START_SCALE">
+			<Word name="PSYS_PART_START_SCALE" value="">
 				a vector &lt;sx, sy, z&gt;,
 				which is the starting size of the particle billboard
 				in meters (z is ignored).
 			</Word>
-			<Word name="PSYS_PART_END_SCALE">
-				a vector &lt;sx, sy, z&gt;, which is the ending
-				size of the particle billboard in meters (z is ignored).
+			<Word name="PSYS_PART_TARGET_LINEAR_MASK" value="" />
+			<Word name="PSYS_PART_TARGET_POS_MASK" value="">
+				The particle heads towards the location of the target
+				object as defined by PSYS_SRC_TARGET_KEY.
 			</Word>
-			<Word name="PSYS_PART_MAX_AGE">
-				age in seconds of a particle at which it dies.
+			<Word name="PSYS_PART_WIND_MASK" value="">
+				Particles have their velocity damped towards the wind velocity.
 			</Word>
-			<Word name="PSYS_SRC_ACCEL">
+
+			<Word name="PSYS_SRC_ACCEL" value="">
 				a vector &lt;x, y, z&gt; which is the acceleration
 				to apply on particles.
 			</Word>
-			<Word name="PSYS_SRC_TEXTURE">
-				an asset name for the texture to use for the particles.
-			</Word>
-			<Word name="PSYS_SRC_BURST_RATE">
+			<Word name="PSYS_SRC_BURST_RATE" value="">
 				how often to release a particle burst (float seconds).
 			</Word>
-			<Word name="PSYS_SRC_INNERANGLE">
+			<Word name="PSYS_SRC_ANGLE_BEGIN" value="">
+				Area in radians specifying where particles
+				will NOT be created (for ANGLE patterns)
+			</Word>
+			<Word name="PSYS_SRC_ANGLE_END" value="">
+				Area in radians filled with particles
+				(for ANGLE patterns) (if lower than PSYS_SRC_ANGLE_BEGIN,
+				acts as PSYS_SRC_ANGLE_BEGIN itself,
+				and PSYS_SRC_ANGLE_BEGIN acts as PSYS_SRC_ANGLE_END)
+			</Word>
+			<Word name="PSYS_SRC_INNERANGLE" value="">
 				specifies the inner angle of the arc created
 				by the PSYS_PART_SRC_PATTERN_ANGLE or
 				PSYS_PART_SRC_PATTERN_ANGLE_CONE source pattern.
 				The area specified will not have particles
 				in it..
 			</Word>
-			<Word name="PSYS_SRC_OUTERANGLE">
+			<Word name="PSYS_SRC_BURST_PART_COUNT" value="">
+				how many particles to release in a burst.
+			</Word>
+			<Word name="PSYS_SRC_BURST_RADIUS" value="">
+				what distance from the center of the object
+				to create the particles.
+			</Word>
+			<Word name="PSYS_SRC_BURST_SPEED_MIN" value="">
+				minimum speed that a particle should be moving.
+			</Word>
+			<Word name="PSYS_SRC_BURST_SPEED_MAX" value="">
+				maximum speed that a particle should be moving.
+			</Word>
+			<Word name="PSYS_SRC_MAX_AGE" value="">
+				how long this particle system should last,
+				0.0 menas forever.
+			</Word>
+			<Word name="PSYS_SRC_OMEGA" value="">
+				Sets the angular velocity to rotate the axis
+				that SRC_PATTERN_ANGLE and
+				SRC_PATTERN_ANGLE_CONE use..
+			</Word>
+			<Word name="PSYS_SRC_OUTERANGLE" value="">
 				specifies the outer angle of the arc created
 				by the PSYS_PART_SRC_PATTERN_ANGLE or
 				PSYS_PART_SRC_PATTERN_ANGLE_CONE source pattern.
 				The area between the outer and inner angle
 				will be filled with particles..
 			</Word>
-			<Word name="PSYS_SRC_BURST_PART_COUNT">
-				how many particles to release in a burst.
+			<Word name="PSYS_SRC_PATTERN" value="">
+				The pattern which is used to generate particles.
+				Use one of the following values:
+				PSYS_SRC_PATTERN Values
 			</Word>
-			<Word name="PSYS_SRC_BURST_RADIUS">
-				what distance from the center of the object
-				to create the particles.
-			</Word>
-			<Word name="PSYS_SRC_BURST_SPEED_MIN">
-				minimum speed that a particle should be moving.
-			</Word>
-			<Word name="PSYS_SRC_BURST_SPEED_MAX">
-				maximum speed that a particle should be moving.
-			</Word>
-			<Word name="PSYS_SRC_MAX_AGE">
-				how long this particle system should last,
-				0.0 menas forever.
-			</Word>
-			<Word name="PSYS_SRC_TARGET_KEY">
+			<Word name="PSYS_SRC_PATTERN_ANGLE" value="" />
+			<Word name="PSYS_SRC_PATTERN_ANGLE_CONE" value="" />
+			<Word name="PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY" value="" />
+			<Word name="PSYS_SRC_PATTERN_DROP" value="" />
+			<Word name="PSYS_SRC_PATTERN_EXPLODE" value="" />
+			<Word name="PSYS_SRC_TARGET_KEY" value="">
 				the key of a target object to move towards
 				if PSYS_PART_TARGET_POS_MASK is enabled.
 			</Word>
-			<Word name="PSYS_SRC_OMEGA">
-				Sets the angular velocity to rotate the axis
-				that SRC_PATTERN_ANGLE and
-				SRC_PATTERN_ANGLE_CONE use..
+			<Word name="PSYS_SRC_TEXTURE" value="">
+				an asset name for the texture to use for the particles.
 			</Word>
 		</WordsSubsection>
 		<WordsSubsection name="C.15. Agent Data Constants">
@@ -4037,16 +4083,16 @@
 			llRequestAgentData api to collect information about
 			an agent which will
 			be provided in the dataserver event.
-			Texture Animation Constants
-			<Word name="DATA_ONLINE">
-				"1" for online "0" for offline.
+			<Word name="DATA_BORN">
+				The date the agent was born returned in ISO 8601 format of YYYY-MM-DD.
 			</Word>
 			<Word name="DATA_NAME">
 				The name of the agent.
 			</Word>
-			<Word name="DATA_BORN">
-				The date the agent was born returned in ISO 8601 format of YYYY-MM-DD.
+			<Word name="DATA_ONLINE">
+				"1" for online "0" for offline.
 			</Word>
+			<Word name="DATA_PAYINFO" value="8" />
 			<Word name="DATA_RATING">
 				Returns the agent ratings as a comma separated string
 				of six integers. They are:
@@ -4058,6 +4104,10 @@
 				5. Positive rated building
 				6. Negative rated building
 			</Word>
+
+			<Word name="DATA_SIM_POS" />
+			<Word name="DATA_SIM_RATING" />
+			<Word name="DATA_SIM_STATUS" />
 		</WordsSubsection>
 		<WordsSubsection name="C.16. Float Constants">
 			LSL provides a small collection of floating point
@@ -4067,19 +4117,16 @@
 			but are sometimes useful for other applications such as
 			specifying arc radians to sensor or particle system functions.
 			Float Constants
-			<Word name="PI">
-				3.14159265 - The radians of a hemicircle.
-			</Word>
-			<Word name="TWO_PI">
-				6.28318530 - The radians of a circle.
-			</Word>
-			<Word name="PI_BY_TWO">
-				1.57079633 - The radians of a quarter circle.
-			</Word>
 			<Word name="DEG_TO_RAD">
 				0.01745329 - Number of radians per degree.
 				You can use this to convert degrees to radians by multiplying
 				the degrees by this number.
+			</Word>
+			<Word name="PI">
+				3.14159265 - The radians of a hemicircle.
+			</Word>
+			<Word name="PI_BY_TWO">
+				1.57079633 - The radians of a quarter circle.
 			</Word>
 			<Word name="RAD_TO_DEG">
 				57.2957795 - Number of degrees per radian.
@@ -4089,28 +4136,46 @@
 			<Word name="SQRT2">
 				1.41421356 - The square root of 2.
 			</Word>
+			<Word name="TWO_PI">
+				6.28318530 - The radians of a circle.
+			</Word>
 		</WordsSubsection>
 		<WordsSubsection name="C.17. Key Constant">
 			There is only one key constant which acts as an invalid key: NULL_KEY.
+			<Word name="TEXTURE_BLANK"></Word>
+			<Word name="TEXTURE_DEFAULT"></Word>
+			<Word name="TEXTURE_PLYWOOD"></Word>
+			<Word name="TEXTURE_TRANSPARENT"></Word>
+			<Word name="TEXTURE_MEDIA"></Word>
+
+			<Word name="NULL_KEY" />
 		</WordsSubsection>
 		<WordsSubsection name="C.18. Miscellaneous Integer Constants">
 			There is one uncategorized integer constant
 			which is used in some of the texturing and coloring api: ALL_SIDES
+			<Word name="ALL_SIDES" />
 		</WordsSubsection>
 		<WordsSubsection name="C.19. Miscellaneous String Constants">
 			There is one uncategorized string constant
 			which is used in the dataserver event: EOF
+			<Word name="EOF" />
 		</WordsSubsection>
 		<WordsSubsection name="C.20. Vector Constant">
 			There is only one vector constant which
 			acts as a zero vector: ZERO_VECTOR = &lt;0,0,0&gt;.
+			<Word name="TOUCH_INVALID_TEXCOORD" type="vector" value="&lt;-1.0, -1.0, 0.0&gt;"></Word>
+			<Word name="ZERO_VECTOR" />
 		</WordsSubsection>
 		<WordsSubsection name="C.21. Rotation Constant">
 			There is only one rotation constant
 			which acts as a zero rotation: ZERO_ROTATION = &lt;0,0,0,1&gt;.
+			<Word name="ZERO_ROTATION" />
 		</WordsSubsection>
 		<WordsSubsection name="C.22. Vehicle Parameters">
 			Parameters
+			<Word name="VEHICLE_HOVER_EFFICIENCY" />
+			<Word name="VEHICLE_HOVER_TIMESCALE" />
+			<Word name="VEHICLE_LINEAR_MOTOR_OFFSET" />
 			<Word name="VEHICLE_LINEAR_FRICTION_TIMESCALE">
 				A vector of timescales for exponential
 				decay of the vehicles linear velocity along its preferred axes of
@@ -4149,16 +4214,6 @@
 			<Word name="VEHICLE_HOVER_HEIGHT">
 				The height (above the terrain or water, or global)
 				at which the vehicle will try to hover.
-			</Word>
-			<Word name="VEHICLE_HOVER_HEIGHT_EFFICIENCY">
-				A slider between minimum (0.0 = bouncy)
-				and maximum (1.0 = fast as possible) damped motion of the
-				hover behavior.
-			</Word>
-			<Word name="VEHICLE_HOVER_HEIGHT_TIMESCALE">
-				The period of bounce (or timescale of exponential approach,
-				depending on the hover efficiency) for the
-				vehicle to hover to the proper height.
 			</Word>
 			<Word name="VEHICLE_BUOYANCY">
 				A slider between minimum (0.0) and maximum anti-gravity (1.0).
@@ -4223,6 +4278,9 @@
 		</WordsSubsection>
 		<WordsSubsection name="C.23. Vehicle Flags">
 			Flags
+			<Word name="VEHICLE_FLAG_CAMERA_DECOUPLED" />
+			<Word name="VEHICLE_FLAG_MOUSELOOK_BANK" />
+			<Word name="VEHICLE_FLAG_MOUSELOOK_STEER" />
 			<Word name="VEHICLE_FLAG_NO_FLY_UP">
 				Old, changed to VEHICLE_FLAG_NO_DEFLECTION_UP
 			</Word>
@@ -4257,142 +4315,6 @@
 		</WordsSubsection>
 		<WordsSubsection name="C.24. Vehicle Types">
 			Types
-			<Word name="VEHICLE_TYPE_SLED">
-				Simple vehicle that bumps along the ground,
-				and likes to move along its local x-axis.
-				// most friction for left-right, least for up-down
-				llSetVehicleVectorParam( VEHICLE_LINEAR_FRICTION_TIMESCALE, &lt;30, 1, 1000&gt; );
-				// no angular friction
-				llSetVehicleVectorParam( VEHICLE_ANGULAR_FRICTION_TIMESCALE, &lt;1000, 1000, 1000&gt; );
-				// no linear motor
-				llSetVehicleVectorParam( VEHICLE_LINEAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
-				llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_TIMESCALE, 1000 );
-				llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE, 120 );
-				// no angular motor
-				llSetVehicleVectorParam( VEHICLE_ANGULAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
-				llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_TIMESCALE, 1000 );
-				llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE, 120 );
-				// no hover (but with timescale of 10 sec if enabled)
-				llSetVehicleFloatParam( VEHICLE_HOVER_HEIGHT, 0 );
-				llSetVehicleFloatParam( VEHICLE_HOVER_EFFICIENCY, 10 );
-				llSetVehicleFloatParam( VEHICLE_HOVER_TIMESCALE, 10 );
-				llSetVehicleFloatParam( VEHICLE_BUOYANCY, 0 );
-				// maximum linear deflection with timescale of 1 second
-				llSetVehicleFloatParam( VEHICLE_LINEAR_DEFLECTION_EFFICIENCY, 1 );
-				llSetVehicleFloatParam( VEHICLE_LINEAR_DEFLECTION_TIMESCALE, 1 );
-				// no angular deflection
-				llSetVehicleFloatParam( VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY, 0 );
-				llSetVehicleFloatParam( VEHICLE_ANGULAR_DEFLECTION_TIMESCALE, 10 );
-				// no vertical attractor (doesnt mind flipping over)
-				llSetVehicleFloatParam( VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY, 1 );
-				llSetVehicleFloatParam( VEHICLE_VERTICAL_ATTRACTION_TIMESCALE, 1000 );
-				// no banking
-				llSetVehicleFloatParam( VEHICLE_BANKING_EFFICIENCY, 0 );
-				llSetVehicleFloatParam( VEHICLE_BANKING_MIX, 1 );
-				llSetVehicleFloatParam( VEHICLE_BANKING_TIMESCALE, 10 );
-				// default rotation of local frame
-				llSetVehicleRotationParam( VEHICLE_REFERENCE_FRAME, &lt;0, 0, 0, 1&gt; );
-				// remove these flags
-				llRemoveVehicleFlags( VEHICLE_FLAG_HOVER_WATER_ONLY
-				| VEHICLE_FLAG_HOVER_TERRAIN_ONLY
-				| VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT
-				| VEHICLE_FLAG_HOVER_UP_ONLY );
-				// set these flags (the limit_roll flag will have no effect
-				// until banking is enabled, if ever)
-				llSetVehicleFlags( VEHICLE_FLAG_NO_DEFLECTION_UP
-				| VEHICLE_FLAG_LIMIT_ROLL_ONLY
-				| VEHICLE_FLAG_LIMIT_MOTOR_UP );
-			</Word>
-			<Word name="VEHICLE_TYPE_CAR">
-				Another vehicle that bounces along the ground but needs
-				the motors to be driven from external controls or
-				timer events.
-				// most friction for left-right, least for up-down
-				llSetVehicleVectorParam( VEHICLE_LINEAR_FRICTION_TIMESCALE, &lt;100, 2, 1000&gt; );
-				// no angular friction
-				llSetVehicleVectorParam( VEHICLE_ANGULAR_FRICTION_TIMESCALE, &lt;1000, 1000, 1000&gt; );
-				// linear motor wins after about a second, decays after about a minute
-				llSetVehicleVectorParam( VEHICLE_LINEAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
-				llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_TIMESCALE, 1 );
-				llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE, 60 );
-				// angular motor wins after a second, decays in less time than that
-				llSetVehicleVectorParam( VEHICLE_ANGULAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
-				llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_TIMESCALE, 1 );
-				llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE, 0.8 );
-				// no hover
-				llSetVehicleFloatParam( VEHICLE_HOVER_HEIGHT, 0 );
-				llSetVehicleFloatParam( VEHICLE_HOVER_EFFICIENCY, 0 );
-				llSetVehicleFloatParam( VEHICLE_HOVER_TIMESCALE, 1000 );
-				llSetVehicleFloatParam( VEHICLE_BUOYANCY, 0 );
-				// maximum linear deflection with timescale of 2 seconds
-				llSetVehicleFloatParam( VEHICLE_LINEAR_DEFLECTION_EFFICIENCY, 1 );
-				llSetVehicleFloatParam( VEHICLE_LINEAR_DEFLECTION_TIMESCALE, 2 );
-				// no angular deflection
-				llSetVehicleFloatParam( VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY, 0 );
-				llSetVehicleFloatParam( VEHICLE_ANGULAR_DEFLECTION_TIMESCALE, 10 );
-				// critically damped vertical attractor
-				llSetVehicleFloatParam( VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY, 1 );
-				llSetVehicleFloatParam( VEHICLE_VERTICAL_ATTRACTION_TIMESCALE, 10 );
-				// weak negative critically damped banking
-				llSetVehicleFloatParam( VEHICLE_BANKING_EFFICIENCY, -0.2 );
-				llSetVehicleFloatParam( VEHICLE_BANKING_MIX, 1 );
-				llSetVehicleFloatParam( VEHICLE_BANKING_TIMESCALE, 1 );
-				// default rotation of local frame
-				llSetVehicleRotationParam( VEHICLE_REFERENCE_FRAME, &lt;0, 0, 0, 1&gt; );
-				// remove these flags
-				llRemoveVehicleFlags( VEHICLE_FLAG_HOVER_WATER_ONLY
-				| VEHICLE_FLAG_HOVER_TERRAIN_ONLY
-				| VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT);
-				// set these flags
-				llSetVehicleFlags( VEHICLE_FLAG_NO_DEFLECTION_UP
-				| VEHICLE_FLAG_LIMIT_ROLL_ONLY
-				| VEHICLE_FLAG_HOVER_UP_ONLY
-				| VEHICLE_FLAG_LIMIT_MOTOR_UP );
-			</Word>
-			<Word name="VEHICLE_TYPE_BOAT">
-				Hovers over water with lots of friction and some anglar deflection.
-				// least for forward-back, most friction for up-down
-				llSetVehicleVectorParam( VEHICLE_LINEAR_FRICTION_TIMESCALE, &lt;10, 3, 2&gt; );
-				// uniform angular friction (setting it as a scalar rather than a vector)
-				llSetVehicleFloatParam( VEHICLE_ANGULAR_FRICTION_TIMESCALE, 10 );
-				// linear motor wins after about five seconds, decays after about a minute
-				llSetVehicleVectorParam( VEHICLE_LINEAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
-				llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_TIMESCALE, 5 );
-				llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE, 60 );
-				// angular motor wins after four seconds, decays in same amount of time
-				llSetVehicleVectorParam( VEHICLE_ANGULAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
-				llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_TIMESCALE, 4 );
-				llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE, 4 );
-				// hover
-				llSetVehicleFloatParam( VEHICLE_HOVER_HEIGHT, 0 );
-				llSetVehicleFloatParam( VEHICLE_HOVER_EFFICIENCY, 0.5 );
-				llSetVehicleFloatParam( VEHICLE_HOVER_TIMESCALE, 2.0 );
-				llSetVehicleFloatParam( VEHICLE_BUOYANCY, 1 );
-				// halfway linear deflection with timescale of 3 seconds
-				llSetVehicleFloatParam( VEHICLE_LINEAR_DEFLECTION_EFFICIENCY, 0.5 );
-				llSetVehicleFloatParam( VEHICLE_LINEAR_DEFLECTION_TIMESCALE, 3 );
-				// angular deflection
-				llSetVehicleFloatParam( VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY, 0.5 );
-				llSetVehicleFloatParam( VEHICLE_ANGULAR_DEFLECTION_TIMESCALE, 5 );
-				// somewhat bounscy vertical attractor
-				llSetVehicleFloatParam( VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY, 0.5 );
-				llSetVehicleFloatParam( VEHICLE_VERTICAL_ATTRACTION_TIMESCALE, 5 );
-				// weak negative damped banking
-				llSetVehicleFloatParam( VEHICLE_BANKING_EFFICIENCY, -0.3 );
-				llSetVehicleFloatParam( VEHICLE_BANKING_MIX, 0.8 );
-				llSetVehicleFloatParam( VEHICLE_BANKING_TIMESCALE, 1 );
-				// default rotation of local frame
-				llSetVehicleRotationParam( VEHICLE_REFERENCE_FRAME, &lt;0, 0, 0, 1&gt; );
-				// remove these flags
-				llRemoveVehicleFlags( VEHICLE_FLAG_HOVER_TERRAIN_ONLY
-				| VEHICLE_FLAG_LIMIT_ROLL_ONLY
-				| VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT);
-				// set these flags
-				llSetVehicleFlags( VEHICLE_FLAG_NO_DEFLECTION_UP
-				| VEHICLE_FLAG_HOVER_WATER_ONLY
-				| VEHICLE_FLAG_HOVER_UP_ONLY
-				| VEHICLE_FLAG_LIMIT_MOTOR_UP );
-			</Word>
 			<Word name="VEHICLE_TYPE_AIRPLANE">
 				Uses linear deflection for lift, no hover, and banking to turn.
 				// very little friction along forward-back axis
@@ -4480,17 +4402,147 @@
 				| VEHICLE_FLAG_HOVER_UP_ONLY
 				| VEHICLE_FLAG_LIMIT_MOTOR_UP );
 			</Word>
-			<Word name="AGENT_ALWAYS_RUN" />
-			<Word name="AGENT_AWAY" />
-			<Word name="AGENT_BUSY" />
-			<Word name="AGENT_CROUCHING" />
-			<Word name="AGENT_IN_AIR" />
-			<Word name="AGENT_MOUSELOOK" />
-			<Word name="AGENT_ON_OBJECT" />
-			<Word name="AGENT_SITTING" />
-			<Word name="AGENT_TYPING" />
-			<Word name="AGENT_WALKING" />
-			<Word name="ALL_SIDES" />
+			<Word name="VEHICLE_TYPE_BOAT">
+				Hovers over water with lots of friction and some anglar deflection.
+				// least for forward-back, most friction for up-down
+				llSetVehicleVectorParam( VEHICLE_LINEAR_FRICTION_TIMESCALE, &lt;10, 3, 2&gt; );
+				// uniform angular friction (setting it as a scalar rather than a vector)
+				llSetVehicleFloatParam( VEHICLE_ANGULAR_FRICTION_TIMESCALE, 10 );
+				// linear motor wins after about five seconds, decays after about a minute
+				llSetVehicleVectorParam( VEHICLE_LINEAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
+				llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_TIMESCALE, 5 );
+				llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE, 60 );
+				// angular motor wins after four seconds, decays in same amount of time
+				llSetVehicleVectorParam( VEHICLE_ANGULAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
+				llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_TIMESCALE, 4 );
+				llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE, 4 );
+				// hover
+				llSetVehicleFloatParam( VEHICLE_HOVER_HEIGHT, 0 );
+				llSetVehicleFloatParam( VEHICLE_HOVER_EFFICIENCY, 0.5 );
+				llSetVehicleFloatParam( VEHICLE_HOVER_TIMESCALE, 2.0 );
+				llSetVehicleFloatParam( VEHICLE_BUOYANCY, 1 );
+				// halfway linear deflection with timescale of 3 seconds
+				llSetVehicleFloatParam( VEHICLE_LINEAR_DEFLECTION_EFFICIENCY, 0.5 );
+				llSetVehicleFloatParam( VEHICLE_LINEAR_DEFLECTION_TIMESCALE, 3 );
+				// angular deflection
+				llSetVehicleFloatParam( VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY, 0.5 );
+				llSetVehicleFloatParam( VEHICLE_ANGULAR_DEFLECTION_TIMESCALE, 5 );
+				// somewhat bounscy vertical attractor
+				llSetVehicleFloatParam( VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY, 0.5 );
+				llSetVehicleFloatParam( VEHICLE_VERTICAL_ATTRACTION_TIMESCALE, 5 );
+				// weak negative damped banking
+				llSetVehicleFloatParam( VEHICLE_BANKING_EFFICIENCY, -0.3 );
+				llSetVehicleFloatParam( VEHICLE_BANKING_MIX, 0.8 );
+				llSetVehicleFloatParam( VEHICLE_BANKING_TIMESCALE, 1 );
+				// default rotation of local frame
+				llSetVehicleRotationParam( VEHICLE_REFERENCE_FRAME, &lt;0, 0, 0, 1&gt; );
+				// remove these flags
+				llRemoveVehicleFlags( VEHICLE_FLAG_HOVER_TERRAIN_ONLY
+				| VEHICLE_FLAG_LIMIT_ROLL_ONLY
+				| VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT);
+				// set these flags
+				llSetVehicleFlags( VEHICLE_FLAG_NO_DEFLECTION_UP
+				| VEHICLE_FLAG_HOVER_WATER_ONLY
+				| VEHICLE_FLAG_HOVER_UP_ONLY
+				| VEHICLE_FLAG_LIMIT_MOTOR_UP );
+			</Word>
+			<Word name="VEHICLE_TYPE_CAR">
+				Another vehicle that bounces along the ground but needs
+				the motors to be driven from external controls or
+				timer events.
+				// most friction for left-right, least for up-down
+				llSetVehicleVectorParam( VEHICLE_LINEAR_FRICTION_TIMESCALE, &lt;100, 2, 1000&gt; );
+				// no angular friction
+				llSetVehicleVectorParam( VEHICLE_ANGULAR_FRICTION_TIMESCALE, &lt;1000, 1000, 1000&gt; );
+				// linear motor wins after about a second, decays after about a minute
+				llSetVehicleVectorParam( VEHICLE_LINEAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
+				llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_TIMESCALE, 1 );
+				llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE, 60 );
+				// angular motor wins after a second, decays in less time than that
+				llSetVehicleVectorParam( VEHICLE_ANGULAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
+				llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_TIMESCALE, 1 );
+				llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE, 0.8 );
+				// no hover
+				llSetVehicleFloatParam( VEHICLE_HOVER_HEIGHT, 0 );
+				llSetVehicleFloatParam( VEHICLE_HOVER_EFFICIENCY, 0 );
+				llSetVehicleFloatParam( VEHICLE_HOVER_TIMESCALE, 1000 );
+				llSetVehicleFloatParam( VEHICLE_BUOYANCY, 0 );
+				// maximum linear deflection with timescale of 2 seconds
+				llSetVehicleFloatParam( VEHICLE_LINEAR_DEFLECTION_EFFICIENCY, 1 );
+				llSetVehicleFloatParam( VEHICLE_LINEAR_DEFLECTION_TIMESCALE, 2 );
+				// no angular deflection
+				llSetVehicleFloatParam( VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY, 0 );
+				llSetVehicleFloatParam( VEHICLE_ANGULAR_DEFLECTION_TIMESCALE, 10 );
+				// critically damped vertical attractor
+				llSetVehicleFloatParam( VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY, 1 );
+				llSetVehicleFloatParam( VEHICLE_VERTICAL_ATTRACTION_TIMESCALE, 10 );
+				// weak negative critically damped banking
+				llSetVehicleFloatParam( VEHICLE_BANKING_EFFICIENCY, -0.2 );
+				llSetVehicleFloatParam( VEHICLE_BANKING_MIX, 1 );
+				llSetVehicleFloatParam( VEHICLE_BANKING_TIMESCALE, 1 );
+				// default rotation of local frame
+				llSetVehicleRotationParam( VEHICLE_REFERENCE_FRAME, &lt;0, 0, 0, 1&gt; );
+				// remove these flags
+				llRemoveVehicleFlags( VEHICLE_FLAG_HOVER_WATER_ONLY
+				| VEHICLE_FLAG_HOVER_TERRAIN_ONLY
+				| VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT);
+				// set these flags
+				llSetVehicleFlags( VEHICLE_FLAG_NO_DEFLECTION_UP
+				| VEHICLE_FLAG_LIMIT_ROLL_ONLY
+				| VEHICLE_FLAG_HOVER_UP_ONLY
+				| VEHICLE_FLAG_LIMIT_MOTOR_UP );
+			</Word>
+			<Word name="VEHICLE_TYPE_NONE" />
+			<Word name="VEHICLE_TYPE_SLED">
+				Simple vehicle that bumps along the ground,
+				and likes to move along its local x-axis.
+				// most friction for left-right, least for up-down
+				llSetVehicleVectorParam( VEHICLE_LINEAR_FRICTION_TIMESCALE, &lt;30, 1, 1000&gt; );
+				// no angular friction
+				llSetVehicleVectorParam( VEHICLE_ANGULAR_FRICTION_TIMESCALE, &lt;1000, 1000, 1000&gt; );
+				// no linear motor
+				llSetVehicleVectorParam( VEHICLE_LINEAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
+				llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_TIMESCALE, 1000 );
+				llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE, 120 );
+				// no angular motor
+				llSetVehicleVectorParam( VEHICLE_ANGULAR_MOTOR_DIRECTION, &lt;0, 0, 0&gt; );
+				llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_TIMESCALE, 1000 );
+				llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE, 120 );
+				// no hover (but with timescale of 10 sec if enabled)
+				llSetVehicleFloatParam( VEHICLE_HOVER_HEIGHT, 0 );
+				llSetVehicleFloatParam( VEHICLE_HOVER_EFFICIENCY, 10 );
+				llSetVehicleFloatParam( VEHICLE_HOVER_TIMESCALE, 10 );
+				llSetVehicleFloatParam( VEHICLE_BUOYANCY, 0 );
+				// maximum linear deflection with timescale of 1 second
+				llSetVehicleFloatParam( VEHICLE_LINEAR_DEFLECTION_EFFICIENCY, 1 );
+				llSetVehicleFloatParam( VEHICLE_LINEAR_DEFLECTION_TIMESCALE, 1 );
+				// no angular deflection
+				llSetVehicleFloatParam( VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY, 0 );
+				llSetVehicleFloatParam( VEHICLE_ANGULAR_DEFLECTION_TIMESCALE, 10 );
+				// no vertical attractor (doesnt mind flipping over)
+				llSetVehicleFloatParam( VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY, 1 );
+				llSetVehicleFloatParam( VEHICLE_VERTICAL_ATTRACTION_TIMESCALE, 1000 );
+				// no banking
+				llSetVehicleFloatParam( VEHICLE_BANKING_EFFICIENCY, 0 );
+				llSetVehicleFloatParam( VEHICLE_BANKING_MIX, 1 );
+				llSetVehicleFloatParam( VEHICLE_BANKING_TIMESCALE, 10 );
+				// default rotation of local frame
+				llSetVehicleRotationParam( VEHICLE_REFERENCE_FRAME, &lt;0, 0, 0, 1&gt; );
+				// remove these flags
+				llRemoveVehicleFlags( VEHICLE_FLAG_HOVER_WATER_ONLY
+				| VEHICLE_FLAG_HOVER_TERRAIN_ONLY
+				| VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT
+				| VEHICLE_FLAG_HOVER_UP_ONLY );
+				// set these flags (the limit_roll flag will have no effect
+				// until banking is enabled, if ever)
+				llSetVehicleFlags( VEHICLE_FLAG_NO_DEFLECTION_UP
+				| VEHICLE_FLAG_LIMIT_ROLL_ONLY
+				| VEHICLE_FLAG_LIMIT_MOTOR_UP );
+			</Word>
+		</WordsSubsection>
+
+		<WordsSubsection name="C.99. Miscellaneous constants.">
+			Constants that do not fit into any of the previously defined categories.
 			<Word name="CAMERA_ACTIVE" />
 			<Word name="CAMERA_BEHINDNESS_ANGLE" />
 			<Word name="CAMERA_BEHINDNESS_LAG" />
@@ -4505,32 +4557,72 @@
 			<Word name="CAMERA_POSITION_LAG" />
 			<Word name="CAMERA_POSITION_LOCKED" />
 			<Word name="CAMERA_POSITION_THRESHOLD" />
-			<Word name="CHANGED_OWNER" />
-			<Word name="CHANGED_REGION" />
-      <Word name="CHANGED_REGION_START" />
-			<Word name="CHANGED_TELEPORT" />
-			<Word name="DATA_SIM_POS" />
-			<Word name="DATA_SIM_RATING" />
-			<Word name="DATA_SIM_STATUS" />
+
+			<Word name="CLICK_ACTION_BUY">
+				When the prim is touched, the buy dialog is opened
+			</Word>
+			<Word name="CLICK_ACTION_OPEN_MEDIA">
+				When the prim is touched, the web media dialog is opened"
+			</Word>
+			<Word name="CLICK_ACTION_NONE">
+				Performs the default action: when the prim is touched, touch events are triggered"
+			</Word>
+			<Word name="CLICK_ACTION_OPEN">
+				When the prim is touched, the object inventory dialog is opened
+			</Word>
+			<Word name="CLICK_ACTION_PAY">
+				When the prim is touched, the pay dialog is opened
+			</Word>
+			<Word name="CLICK_ACTION_PLAY">
+				When the prim is touched, html-on-a-prim is enabled?
+			</Word>
+			<Word name="CLICK_ACTION_SIT">
+				When the prim is touched, the avatar sits upon it
+			</Word>
+			<Word name="CLICK_ACTION_TOUCH">
+				When the prim is touched, touch events are triggered"
+			</Word>
+
+			<Word name="CONTENT_TYPE_HTML">"text/html", only valid for embedded browsers on content owned by the person viewing. Falls back to "text/plain" otherwise.</Word>
 			<Word name="DEBUG_CHANNEL">
 				DEBUG_CHANNEL is an integer constant that, when passed to
 				llSay, llWhisper, or llShout as a channel parameter,
 				will print text to the Script Warning/Error Window.
 				It has the value '2147483647'.
 			</Word>
-			<Word name="EOF" />
+			<Word name="DENSITY">Used with llSetPhysicsMaterial to enable the density value. Must be between 1.0 and 22587.0 (in Kg/m^3 -- see if you can figure out what 22587 represents)</Word>
+
+			<Word name="ESTATE_ACCESS_ALLOWED_AGENT_ADD" value="4">Add the agent to this estate's Allowed Residents list.</Word>
+			<Word name="ESTATE_ACCESS_ALLOWED_AGENT_REMOVE" value="8">Remove the agent from this estate's Allowed Residents list.</Word>
+			<Word name="ESTATE_ACCESS_ALLOWED_GROUP_ADD" value="16">Add the group to this estate's Allowed groups list.</Word>
+			<Word name="ESTATE_ACCESS_ALLOWED_GROUP_REMOVE" value="32">Remove the group from this estate's Allowed groups list.</Word>
+			<Word name="ESTATE_ACCESS_BANNED_AGENT_ADD" value="64">Add the agent to this estate's Banned residents list.</Word>
+			<Word name="ESTATE_ACCESS_BANNED_AGENT_REMOVE" value="128">Remove the agent from this estate's Banned residents list.</Word>
+
+			<Word name="FRICTION">Used with llSetPhysicsMaterial to enable the friction value. Must be between 0.0 and 255.0</Word>
+			<Word name="GRAVITY_MULTIPLIER" value="8">Used with llSetPhysicsMaterial to enable the gravity multiplier value. Must be between -1.0 and +28.0</Word>
+
 			<Word name="HTTP_BODY_MAXLENGTH" />
 			<Word name="HTTP_BODY_TRUNCATED" />
+
 			<Word name="HTTP_METHOD" />
 			<Word name="HTTP_MIMETYPE" />
-			<Word name="INVENTORY_ALL" />
-			<Word name="INVENTORY_ANIMATION" />
-			<Word name="INVENTORY_GESTURE" />
-			<Word name="INVENTORY_NONE" />
-			<Word name="LAND_NOISE" />
-			<Word name="LAND_REVERT" />
-			<Word name="LAND_SMOOTH" />
-			<Word name="LINK_THIS" />
+			<Word name="HTTP_VERBOSE_THROTTLE"></Word>
+			<Word name="HTTP_VERIFY_CERT" value="3" />
+
+			<Word name="KFM_CMD_PAUSE" value="2">For use with KFM_COMMAND.</Word>
+			<Word name="KFM_CMD_PLAY" value="0">For use with KFM_COMMAND.</Word>
+			<Word name="KFM_CMD_STOP" value="1">For use with KFM_COMMAND.</Word>
+			<Word name="KFM_COMMAND" value="0"></Word>
+			<Word name="KFM_DATA" value="2"></Word>
+			<Word name="KFM_FORWARD" value="0">For use with KFM_MODE.</Word>
+			<Word name="KFM_LOOP" value="1">For use with KFM_MODE.</Word>
+			<Word name="KFM_MODE" value="1"></Word>
+			<Word name="KFM_PING_PONG" value="2">For use with KFM_MODE.</Word>
+			<Word name="KFM_REVERSE" value="2">For use with KFM_MODE.</Word>
+			<Word name="KFM_ROTATION" value="1">For use with KFM_DATA.</Word>
+			<Word name="KFM_TRANSLATION" value="2">For use with KFM_DATA.</Word>
+
 			<Word name="LIST_STAT_GEOMETRIC_MEAN" />
 			<Word name="LIST_STAT_MAX" />
 			<Word name="LIST_STAT_MEAN" />
@@ -4541,12 +4633,61 @@
 			<Word name="LIST_STAT_STD_DEV" />
 			<Word name="LIST_STAT_SUM" />
 			<Word name="LIST_STAT_SUM_SQUARES" />
+
+			<Word name="OBJECT_CREATOR" value="">
+				Gets the object's creator key.
+				If id is an avatar, a NULL_KEY is returned.
+			</Word>
+			<Word name="OBJECT_DESC" value="">
+				Gets the object's description.
+				If id is an avatar, an empty string is returned.
+			</Word>
+			<Word name="OBJECT_GROUP" value="">
+				Gets the prims's group key.
+				If id is an avatar, a NULL_KEY is returned.
+			</Word>
+			<Word name="OBJECT_NAME" value="">
+				Gets the object's name.
+			</Word>
+			<Word name="OBJECT_OWNER" value="">
+				Gets an object's owner's key.
+				If id is group owned, a NULL_KEY is returned.
+			</Word>
+			<Word name="OBJECT_POS" value="">
+				Gets the object's position in region coordinates.
+			</Word>
+			<Word name="OBJECT_ROT" value="">
+				Gets the object's rotation.
+			</Word>
+			<Word name="OBJECT_VELOCITY" value="">
+				Gets the object's velocity.
+			</Word>
+
+			<Word name="OBJECT_STREAMING_COST" value="15"></Word>
+			<Word name="OBJECT_PHYSICS_COST" value="16"></Word>
+			<Word name="OBJECT_SERVER_COST" value="14"></Word>
+			<Word name="OBJECT_PRIM_EQUIVALENCE" value="13"></Word>
+
 			<Word name="MASK_BASE" />
 			<Word name="MASK_EVERYONE" />
 			<Word name="MASK_GROUP" />
 			<Word name="MASK_NEXT" />
 			<Word name="MASK_OWNER" />
-			<Word name="NULL_KEY" />
+
+			<Word name="PARCEL_COUNT_GROUP" value="2" />
+			<Word name="PARCEL_COUNT_OTHER" value="3" />
+			<Word name="PARCEL_COUNT_OWNER" value="1" />
+			<Word name="PARCEL_COUNT_SELECTED" value="4" />
+			<Word name="PARCEL_COUNT_TEMP" value="5" />
+			<Word name="PARCEL_COUNT_TOTAL" value="0" />
+
+			<Word name="PARCEL_DETAILS_AREA" value="4" />
+			<Word name="PARCEL_DETAILS_DESC" value="1" />
+			<Word name="PARCEL_DETAILS_GROUP" value="3" />
+			<Word name="PARCEL_DETAILS_ID" value="5" />
+			<Word name="PARCEL_DETAILS_NAME" value="0" />
+			<Word name="PARCEL_DETAILS_OWNER" value="2" />
+			<Word name="PARCEL_DETAILS_SEE_AVATARS" value="6">The parcel's avatar visibility setting. (1 char.).</Word>
 
 			<Word name="PARCEL_FLAG_ALLOW_CREATE_OBJECTS" />
 			<Word name="PARCEL_FLAG_ALLOW_DAMAGE" />
@@ -4554,7 +4695,9 @@
 			<Word name="PARCEL_FLAG_ALLOW_LANDMARK" />
 			<Word name="PARCEL_FLAG_ALLOW_SCRIPTS" />
 			<Word name="PARCEL_FLAG_ALLOW_TERRAFORM" />
+
 			<Word name="PARCEL_FLAG_LOCAL_SOUND_ONLY" />
+
 			<Word name="PARCEL_FLAG_USE_ACCESS_GROUP" />
 			<Word name="PARCEL_FLAG_USE_ACCESS_LIST" />
 			<Word name="PARCEL_FLAG_USE_BAN_LIST" />
@@ -4563,65 +4706,44 @@
 			<Word name="PARCEL_FLAG_ALLOW_GROUP_SCRIPTS" value="0x2000000" />
 			<Word name="PARCEL_FLAG_RESTRICT_PUSHOBJECT" value="0x200000" />
 
+			<Word name="PARCEL_MEDIA_COMMAND_AGENT" />
+			<Word name="PARCEL_MEDIA_COMMAND_AUTO_ALIGN" />
 			<Word name="PARCEL_FLAG_ALLOW_CREATE_GROUP_OBJECTS" />
 			<Word name="PARCEL_FLAG_ALLOW_ALL_OBJECT_ENTRY" />
 			<Word name="PARCEL_FLAG_ALLOW_GROUP_OBJECT_ENTRY" />
 
-			<Word name="PARCEL_MEDIA_COMMAND_STOP" />
-			<Word name="PARCEL_MEDIA_COMMAND_PAUSE" />
-			<Word name="PARCEL_MEDIA_COMMAND_PLAY" />
-			<Word name="PARCEL_MEDIA_COMMAND_LOOP" />
-			<Word name="PARCEL_MEDIA_COMMAND_TEXTURE" />
-			<Word name="PARCEL_MEDIA_COMMAND_URL" />
-			<Word name="PARCEL_MEDIA_COMMAND_TIME" />
-			<Word name="PARCEL_MEDIA_COMMAND_AGENT" />
-			<Word name="PARCEL_MEDIA_COMMAND_UNLOAD" />
-			<Word name="PARCEL_MEDIA_COMMAND_AUTO_ALIGN" />
-
-			<Word name="PARCEL_MEDIA_COMMAND_TYPE" value="10">
-				Use this to get or set the parcel media MIME type (e.g. "text/html").
-			</Word>
-			<Word name="PARCEL_MEDIA_COMMAND_SIZE" value="11">
-				Use this to get or set the parcel media pixel resolution.
-			</Word>
 			<Word name="PARCEL_MEDIA_COMMAND_DESC" value="12">
 				Use this to get or set the parcel media description.
 			</Word>
 			<Word name="PARCEL_MEDIA_COMMAND_LOOP_SET" value="13">
 				Used to get or set the parcel's media looping variable.
 			</Word>
-
-			<Word name="DATA_PAYINFO" value="8" />
-			<Word name="HTTP_VERIFY_CERT" value="3" />
-			<Word name="PARCEL_COUNT_GROUP" value="2" />
-			<Word name="PARCEL_COUNT_OTHER" value="3" />
-			<Word name="PARCEL_COUNT_OWNER" value="1" />
-			<Word name="PARCEL_COUNT_SELECTED" value="4" />
-			<Word name="PARCEL_COUNT_TEMP" value="5" />
-			<Word name="PARCEL_COUNT_TOTAL" value="0" />
-			<Word name="PARCEL_DETAILS_AREA" value="4" />
-			<Word name="PARCEL_DETAILS_DESC" value="1" />
-			<Word name="PARCEL_DETAILS_GROUP" value="3" />
-		<Word name="PARCEL_DETAILS_ID" value="5" />
-			<Word name="PARCEL_DETAILS_NAME" value="0" />
-			<Word name="PARCEL_DETAILS_OWNER" value="2" />
-			<Word name="PAYMENT_INFO_ON_FILE" value="1" />
-			<Word name="PAYMENT_INFO_USED" value="2" />
-			<Word name="REGION_FLAG_RESTRICT_PUSHOBJECT" value="4194304" />
-
-			<Word name="STRING_TRIM_HEAD" />
-			<Word name="STRING_TRIM_TAIL" />
-			<Word name="STRING_TRIM" />
+			<Word name="PARCEL_MEDIA_COMMAND_PAUSE" />
+			<Word name="PARCEL_MEDIA_COMMAND_PLAY" />
+			<Word name="PARCEL_MEDIA_COMMAND_LOOP" />
+			<Word name="PARCEL_MEDIA_COMMAND_SIZE" value="11">
+				Use this to get or set the parcel media pixel resolution.
+			</Word>
+			<Word name="PARCEL_MEDIA_COMMAND_STOP" />
+			<Word name="PARCEL_MEDIA_COMMAND_TEXTURE" />
+			<Word name="PARCEL_MEDIA_COMMAND_TIME" />
+			<Word name="PARCEL_MEDIA_COMMAND_TYPE" value="10">
+				Use this to get or set the parcel media MIME type (e.g. "text/html").
+			</Word>
+			<Word name="PARCEL_MEDIA_COMMAND_UNLOAD" />
+			<Word name="PARCEL_MEDIA_COMMAND_URL" />
 
 			<Word name="PAY_DEFAULT" />
 			<Word name="PAY_HIDE" />
+
+			<Word name="PAYMENT_INFO_ON_FILE" value="1" />
+			<Word name="PAYMENT_INFO_USED" value="2" />
+
 			<Word name="PERM_ALL" />
 			<Word name="PERM_COPY" />
 			<Word name="PERM_MODIFY" />
 			<Word name="PERM_MOVE" />
 			<Word name="PERM_TRANSFER" />
-			<Word name="PERMISSION_CONTROL_CAMERA" />
-			<Word name="PERMISSION_TRACK_CAMERA" />
 
 			<Word name="PRIM_BUMP_BARK" />
 			<Word name="PRIM_BUMP_BLOBS" />
@@ -4645,7 +4767,10 @@
 
 			<Word name="PRIM_CAST_SHADOWS" />
 			<Word name="PRIM_COLOR" />
-      <Word name="PRIM_DESC" />
+			<Word name="PRIM_DESC" />
+			<Word name="PRIM_GLOW">
+				PRIM_GLOW is used to get or set the glow status of the face.
+			</Word>
 			<Word name="PRIM_FLEXIBLE" />
 			<Word name="PRIM_FULLBRIGHT" />
 
@@ -4663,12 +4788,50 @@
 			<Word name="PRIM_MATERIAL_RUBBER" />
 			<Word name="PRIM_MATERIAL_STONE" />
 			<Word name="PRIM_MATERIAL_WOOD" />
-      <Word name="PRIM_NAME" />
+
+			<Word name="PRIM_MEDIA_ALT_IMAGE_ENABLE" value="0" status="Unimplemented">Boolean. Gets/Sets the default image state (the image that the user sees before a piece of media is active) for the chosen face. The default image is specified by Second Life's server for that media type.</Word>
+			<Word name="PRIM_MEDIA_AUTO_LOOP" value="4">Boolean. Gets/Sets whether auto-looping is enabled.</Word>
+			<Word name="PRIM_MEDIA_AUTO_PLAY" value="5">Boolean. Gets/Sets whether the media auto-plays when a Resident can view it.</Word>
+			<Word name="PRIM_MEDIA_AUTO_SCALE" value="6">Boolean. Gets/Sets whether auto-scaling is enabled. Auto-scaling forces the media to the full size of the texture.</Word>
+			<Word name="PRIM_MEDIA_AUTO_ZOOM" value="7">Boolean. Gets/Sets  whether clicking the media triggers auto-zoom and auto-focus on the media.</Word>
+			<Word name="PRIM_MEDIA_CONTROLS" value="1">Integer. Gets/Sets the style of controls. Can be either PRIM_MEDIA_CONTROLS_STANDARD or PRIM_MEDIA_CONTROLS_MINI.</Word>
+			<Word name="PRIM_MEDIA_CONTROLS_MINI" value="1">Mini web navigation controls; does not include an address bar.</Word>
+			<Word name="PRIM_MEDIA_CONTROLS_STANDARD" value="0">Standard web navigation controls.</Word>
+			<Word name="PRIM_MEDIA_CURRENT_URL" value="2">String. Gets/Sets the current url displayed on the chosen face. Changing this URL causes navigation. 1024 characters Maximum.</Word>
+			<Word name="PRIM_MEDIA_FIRST_CLICK_INTERACT" value="8">Boolean. Gets/Sets whether the first click interaction is enabled.</Word>
+			<Word name="PRIM_MEDIA_HEIGHT_PIXELS" value="10">Integer. Gets/Sets the height of the media in pixels.</Word>
+			<Word name="PRIM_MEDIA_HOME_URL" value="3">String. Gets/Sets the home URL for the chosen face. 1024 characters maximum.</Word>
+			<Word name="PRIM_MEDIA_PERM_ANYONE" value="4"></Word>
+			<Word name="PRIM_MEDIA_PERM_GROUP" value="2"></Word>
+			<Word name="PRIM_MEDIA_PERM_NONE" value="0"></Word>
+			<Word name="PRIM_MEDIA_PERM_OWNER" value="1"></Word>
+			<Word name="PRIM_MEDIA_PERMS_CONTROL" value="14">Integer. Gets/Sets the permissions mask that control who can see the media control bar above the object:: PRIM_MEDIA_PERM_ANYONE, PRIM_MEDIA_PERM_GROUP, PRIM_MEDIA_PERM_NONE, PRIM_MEDIA_PERM_OWNER</Word>
+			<Word name="PRIM_MEDIA_PERMS_INTERACT" value="13">Integer. Gets/Sets the permissions mask that control who can interact with the object: PRIM_MEDIA_PERM_ANYONE, PRIM_MEDIA_PERM_GROUP, PRIM_MEDIA_PERM_NONE, PRIM_MEDIA_PERM_OWNER</Word>
+			<Word name="PRIM_MEDIA_WHITELIST" value="12">String. Gets/Sets the whitelist as a string of escaped, comma-separated URLs. This string can hold up to 64 URLs or 1024 characters, whichever comes first.</Word>
+			<Word name="PRIM_MEDIA_WHITELIST_ENABLE" value="11">Boolean. Gets/Sets whether navigation is restricted to URLs in PRIM_MEDIA_WHITELIST.</Word>
+			<Word name="PRIM_MEDIA_WIDTH_PIXELS" value="9">Integer. Gets/Sets the width of the media in pixels.</Word>
+
+			<Word name="PRIM_NAME" />
+			<Word name="PRIM_OMEGA"></Word>
 			<Word name="PRIM_PHANTOM" />
+
 			<Word name="PRIM_PHYSICS" />
+			<Word name="PRIM_PHYSICS_MATERIAL" value="31"></Word>
+			<Word name="PRIM_PHYSICS_SHAPE_CONVEX" value="2">Use the convex hull of the prim shape for physics (this is the default for mesh objects).</Word>
+			<Word name="PRIM_PHYSICS_SHAPE_NONE" value="1">Ignore this prim in the physics shape. NB: This cannot be applied to the root prim.</Word>
+			<Word name="PRIM_PHYSICS_SHAPE_PRIM" value="0">Use the normal prim shape for physics (this is the default for all non-mesh objects).</Word>
+			<Word name="PRIM_PHYSICS_SHAPE_TYPE" value="30">Allows you to set the physics shape type of a prim via lsl. Permitted values are:
+				PRIM_PHYSICS_SHAPE_NONE, PRIM_PHYSICS_SHAPE_PRIM, PRIM_PHYSICS_SHAPE_CONVEX
+			</Word>
+
 			<Word name="PRIM_POINT_LIGHT" />
-			<Word name="PRIM_POSITION" />
-			<Word name="PRIM_ROTATION" />
+			<Word name="PRIM_POS_LOCAL"></Word>
+			<Word name="PRIM_POSITION" value="" />
+			<Word name="PRIM_ROTATION" value="" />
+			<Word name="PRIM_ROT_LOCAL"></Word>
+
+			<Word name="PRIM_SCULPT_FLAG_INVERT" value="64">Render inside out (inverts the normals).</Word>
+			<Word name="PRIM_SCULPT_FLAG_MIRROR" value="128">Render an X axis mirror of the sculpty.</Word>
 
 			<Word name="PRIM_SHINY_HIGH" />
 			<Word name="PRIM_SHINY_LOW" />
@@ -4677,13 +4840,15 @@
 
 			<Word name="PRIM_SIZE" />
 			<Word name="PRIM_TEMP_ON_REZ" />
+
 			<Word name="PRIM_TEXGEN" />
 			<Word name="PRIM_TEXGEN_DEFAULT" />
 			<Word name="PRIM_TEXGEN_PLANAR" />
-			<Word name="PRIM_TEXTURE" />
-		<Word name="PRIM_TEXT" />
-			<Word name="PRIM_TYPE" />
 
+			<Word name="PRIM_TEXTURE" />
+			<Word name="PRIM_TEXT" />
+
+			<Word name="PRIM_TYPE" />
 			<Word name="PRIM_TYPE_BOX" />
 			<Word name="PRIM_TYPE_CYLINDER" />
 			<Word name="PRIM_TYPE_PRISM" />
@@ -4698,31 +4863,15 @@
 			<Word name="PRIM_SCULPT_TYPE_PLANE" />
 			<Word name="PRIM_SCULPT_TYPE_CYLINDER" />
 
-			<Word name="PRIM_GLOW">
-				PRIM_GLOW is used to get or set the glow status of the face.
-			</Word>
+			<Word name="PROFILE_NONE">Disables profiling</Word>
+			<Word name="PROFILE_SCRIPT_MEMORY">Enables memory profiling</Word>
 
-			<Word name="PSYS_PART_TARGET_LINEAR_MASK" />
-			<Word name="PSYS_SRC_ANGLE_BEGIN">
-				Area in radians specifying where particles
-				will NOT be created (for ANGLE patterns)
-			</Word>
-			<Word name="PSYS_SRC_ANGLE_END">
-				Area in radians filled with particles
-				(for ANGLE patterns) (if lower than PSYS_SRC_ANGLE_BEGIN,
-				acts as PSYS_SRC_ANGLE_BEGIN itself,
-				and PSYS_SRC_ANGLE_BEGIN acts as PSYS_SRC_ANGLE_END)
-			</Word>
-			<Word name="PSYS_SRC_PATTERN_ANGLE" />
-			<Word name="PSYS_SRC_PATTERN_ANGLE_CONE" />
-			<Word name="PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY" />
-			<Word name="PSYS_SRC_PATTERN_DROP" />
-			<Word name="PSYS_SRC_PATTERN_EXPLODE" />
 			<Word name="PUBLIC_CHANNEL">
 				PUBLIC_CHANNEL is an integer constant that, when passed to
 				llSay, llWhisper, or llShout as a channel parameter,
 				will print text to the publicly heard chat channel. Has the value '0'.
 			</Word>
+
 			<Word name="REGION_FLAG_ALLOW_DAMAGE" />
 			<Word name="REGION_FLAG_ALLOW_DIRECT_TELEPORT" />
 			<Word name="REGION_FLAG_BLOCK_FLY" />
@@ -4730,78 +4879,21 @@
 			<Word name="REGION_FLAG_DISABLE_COLLISIONS" />
 			<Word name="REGION_FLAG_DISABLE_PHYSICS" />
 			<Word name="REGION_FLAG_FIXED_SUN" />
+			<Word name="REGION_FLAG_RESTRICT_PUSHOBJECT" value="4194304" />
 			<Word name="REGION_FLAG_SANDBOX" />
+
 			<Word name="REMOTE_DATA_CHANNEL" />
 			<Word name="REMOTE_DATA_REPLY" />
 			<Word name="REMOTE_DATA_REQUEST" />
-			<Word name="STATUS_CAST_SHADOWS" />
-			<Word name="STATUS_RETURN_AT_EDGE" />
-			<Word name="VEHICLE_FLAG_CAMERA_DECOUPLED" />
-			<Word name="VEHICLE_FLAG_MOUSELOOK_BANK" />
-			<Word name="VEHICLE_FLAG_MOUSELOOK_STEER" />
-			<Word name="VEHICLE_HOVER_EFFICIENCY" />
-			<Word name="VEHICLE_HOVER_TIMESCALE" />
-			<Word name="VEHICLE_LINEAR_MOTOR_OFFSET" />
-			<Word name="VEHICLE_TYPE_NONE" />
-			<Word name="ZERO_ROTATION" />
-			<Word name="ZERO_VECTOR" />
 
-			<Word name="OBJECT_NAME">
-				Gets the object's name.
-			</Word>
-			<Word name="OBJECT_DESC">
-				Gets the object's description.
-				If id is an avatar, an empty string is returned.
-			</Word>
-			<Word name="OBJECT_POS">
-				Gets the object's position in region coordinates.
-			</Word>
-			<Word name="OBJECT_ROT">
-				Gets the object's rotation.
-			</Word>
-			<Word name="OBJECT_VELOCITY">
-				Gets the object's velocity.
-			</Word>
-			<Word name="OBJECT_OWNER">
-				Gets an object's owner's key.
-				If id is group owned, a NULL_KEY is returned.
-			</Word>
-			<Word name="OBJECT_GROUP">
-				Gets the prims's group key.
-				If id is an avatar, a NULL_KEY is returned.
-			</Word>
-			<Word name="OBJECT_CREATOR">
-				Gets the object's creator key.
-				If id is an avatar, a NULL_KEY is returned.
-			</Word>
+			<Word name="RESTITUTION" value="4">Used with llSetPhysicsMaterial to enable the density value. Must be between 0.0 and 1.0</Word>
 
-			<Word name="CLICK_ACTION_NONE">
-				Performs the default action: when the prim is touched, touch events are triggered"
-			</Word>
-			<Word name="CLICK_ACTION_TOUCH">
-				When the prim is touched, touch events are triggered"
-			</Word>
-			<Word name="CLICK_ACTION_SIT">
-				When the prim is touched, the avatar sits upon it
-			</Word>
-			<Word name="CLICK_ACTION_BUY">
-				When the prim is touched, the buy dialog is opened
-			</Word>
-			<Word name="CLICK_ACTION_PAY">
-				When the prim is touched, the pay dialog is opened
-			</Word>
-			<Word name="CLICK_ACTION_OPEN">
-				When the prim is touched, the object inventory dialog is opened
-			</Word>
-			<Word name="CLICK_ACTION_PLAY">
-				When the prim is touched, html-on-a-prim is enabled?
-			</Word>
-			<Word name="CLICK_ACTION_OPEN_MEDIA">
-				When the prim is touched, the web media dialog is opened"
-			</Word>
+			<Word name="STRING_TRIM" />
+			<Word name="STRING_TRIM_HEAD" />
+			<Word name="STRING_TRIM_TAIL" />
 
-			<Word name="URL_REQUEST_GRANTED" />
 			<Word name="URL_REQUEST_DENIED" />
+			<Word name="URL_REQUEST_GRANTED" />
 
 		</WordsSubsection>
 	</Words>
