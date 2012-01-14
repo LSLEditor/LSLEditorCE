@@ -64,10 +64,7 @@ namespace LSLEditor
 			// 3 oct 2007
 			public static explicit operator String(bool a)
 			{
-				if (a)
-					return "1";
-				else
-					return "0";
+				return a ? "1" : "0";
 			}
 
 			// 24 augustus 2007 
@@ -93,10 +90,7 @@ namespace LSLEditor
 
 			public static implicit operator bool(String s)
 			{
-				if (s.value == null)
-					return false;
-				else
-					return (s.value.Length != 0);
+				return (s.value == null) ? false : (s.value.Length != 0);
 			}
 
 			public static bool operator ==(String x, String y)
