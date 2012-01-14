@@ -57,7 +57,13 @@ namespace NumberedTextBox
 			this.numbered1.richTextBox1 = this.syntaxRichTextBox1;
 			this.syntaxRichTextBox1.OnPaintNumbers += new EventHandler(syntaxRichTextBox1_OnPaintNumbers);
 			this.FontChanged += new EventHandler(NumberedTextBoxUC_FontChanged);
+            this.syntaxRichTextBox1.OnCursorPositionChanged += new LSLEditor.SyntaxRichTextBox.CursorPositionChangedHandler(syntaxRichTextBox1_OnCursorPositionChanged);
 		}
+
+        void syntaxRichTextBox1_OnCursorPositionChanged(object sender, LSLEditor.SyntaxRichTextBox.CursorPositionEventArgs e)
+        {
+            this.numbered1.Invalidate();
+        }
 
 		void NumberedTextBoxUC_FontChanged(object sender, EventArgs e)
 		{

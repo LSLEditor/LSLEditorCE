@@ -82,13 +82,18 @@ namespace LSLEditor.Editor
 			int firstLine = 0;
 			int lastLine = 10;
 			Font font = this.Font;
-
+            int selectedLineStart = -1, selectedLineEnd = -1;
 			if (this.richTextBox1 == null)
 			{
 				LineHeight = 16.0F;
 			}
 			else
 			{
+                if (richTextBox1.SelectionStart != -1)
+                {
+                    selectedLineStart = richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart);
+                    selectedLineEnd = richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart + richTextBox1.SelectionLength);
+                }
 				//we get index of first visible char and number of first visible line
 				Point pos = new Point(0, 0);
 
@@ -123,7 +128,7 @@ namespace LSLEditor.Editor
 				g.SetClip(new Rectangle(0, 0, this.Width, this.richTextBox1.ClientRectangle.Height));
 
 			for (int i = firstLine; i < lastLine; i++)
-				g.DrawString(string.Format("{0:0###}", i + 1), font, brush,
+				g.DrawString(string.Format("{0:0###}", i + 1), (i>=selectedLineStart && i<= selectedLineEnd) ? new Font(font,FontStyle.Bold) : font, brush,
 					new PointF(0F, delta + (i - firstLine) * LineHeight) );
 			//g.DrawLine(new Pen(brush), backBuffer.Width - 1, 0, backBuffer.Width - 1, backBuffer.Height);
 		}

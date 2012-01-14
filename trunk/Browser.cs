@@ -171,10 +171,6 @@ namespace LSLEditor
 					}
 				}
 			}
-
 		}
-
-	
-	
 	}
 }
