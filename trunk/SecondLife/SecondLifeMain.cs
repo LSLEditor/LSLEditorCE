@@ -77,6 +77,7 @@ namespace LSLEditor
         private Float m_Volume;
 
         private String m_ObjectName;
+		private String m_ParcelMusicURL;
         private vector m_pos;
         private rotation m_rot;
         private rotation m_rotlocal;
@@ -224,6 +225,9 @@ namespace LSLEditor
         public static readonly integer AGENT_CROUCHING = 1024;
         public static readonly integer AGENT_BUSY = 2048;
         public static readonly integer AGENT_ALWAYS_RUN = 4096;
+		public static readonly integer AGENT_AUTOPILOT = 0x2000;
+		public static readonly integer AGENT_BY_LEGACY_NAME = 0x1;
+		public static readonly integer AGENT_BY_USERNAME = 0x10;
 
         public static readonly integer ATTACH_CHEST = 1;
         public static readonly integer ATTACH_HEAD = 2;
@@ -291,6 +295,7 @@ namespace LSLEditor
         public static readonly integer CHANGED_REGION = 256;
         public static readonly integer CHANGED_TELEPORT = 512;
         public static readonly integer CHANGED_REGION_START = 1024;
+		public static readonly integer CHANGED_MEDIA = 2048;
 
         public static readonly integer CLICK_ACTION_NONE = 0;
         public static readonly integer CLICK_ACTION_TOUCH = 0;
@@ -411,6 +416,12 @@ namespace LSLEditor
         public static readonly integer OBJECT_SERVER_COST = 14;
         public static readonly integer OBJECT_PRIM_EQUIVALENCE = 13;
 
+		public static readonly integer OBJECT_RUNNING_SCRIPT_COUNT = 9;
+		public static readonly integer OBJECT_SCRIPT_MEMORY = 11;
+		public static readonly integer OBJECT_SCRIPT_TIME = 12;
+		public static readonly integer OBJECT_TOTAL_SCRIPT_COUNT = 10;
+		public static readonly integer OBJECT_UNKNOWN_DETAIL = -1;
+
         public static readonly integer PARCEL_COUNT_TOTAL = 0;
         public static readonly integer PARCEL_COUNT_OWNER = 1;
         public static readonly integer PARCEL_COUNT_GROUP = 2;
@@ -471,8 +482,6 @@ namespace LSLEditor
         public static readonly integer PERM_MODIFY = 16384;
         public static readonly integer PERM_MOVE = 524288;
         public static readonly integer PERM_TRANSFER = 8192;
-        public static readonly integer PRIM_BUMP_BARK = 4;
-        public static readonly integer PRIM_BUMP_BLOBS = 12;
 
         public static readonly integer PERMISSION_DEBIT = 2;
         public static readonly integer PERMISSION_TAKE_CONTROLS = 4;
@@ -486,6 +495,8 @@ namespace LSLEditor
         public static readonly integer PERMISSION_TRACK_CAMERA = 1024;
         public static readonly integer PERMISSION_CONTROL_CAMERA = 2048;
 
+        public static readonly integer PRIM_BUMP_BARK = 4;
+        public static readonly integer PRIM_BUMP_BLOBS = 12;
         public static readonly integer PRIM_BUMP_BRICKS = 5;
         public static readonly integer PRIM_BUMP_BRIGHT = 1;
         public static readonly integer PRIM_BUMP_CHECKER = 6;
@@ -513,6 +524,7 @@ namespace LSLEditor
         public static readonly integer PRIM_HOLE_DEFAULT = 0;
         public static readonly integer PRIM_HOLE_SQUARE = 32;
         public static readonly integer PRIM_HOLE_TRIANGLE = 48;
+		public static readonly integer PRIM_LINK_TARGET = 34;
         public static readonly integer PRIM_MATERIAL = 2;
         public static readonly integer PRIM_MATERIAL_FLESH = 4;
         public static readonly integer PRIM_MATERIAL_GLASS = 2;
@@ -585,6 +597,7 @@ namespace LSLEditor
 
         public static readonly integer PRIM_GLOW = 25;
 
+		public static readonly integer PRIM_SCULPT_TYPE_MASK = 7;
         public static readonly integer PRIM_SCULPT_TYPE_SPHERE = 1;
         public static readonly integer PRIM_SCULPT_TYPE_TORUS = 2;
         public static readonly integer PRIM_SCULPT_TYPE_PLANE = 3;
@@ -641,6 +654,22 @@ namespace LSLEditor
 
         public static readonly integer PUBLIC_CHANNEL = 0;
 
+		public static readonly integer RC_DATA_FLAGS = 2;
+		public static readonly integer RC_DETECT_PHANTOM = 1;
+		public static readonly integer RC_GET_LINK_NUM = 4;
+		public static readonly integer RC_GET_NORMAL = 1;
+		public static readonly integer RC_GET_ROOT_KEY = 2;
+		public static readonly integer RC_MAX_HITS = 3;
+		public static readonly integer RC_REJECT_AGENTS = 1;
+		public static readonly integer RC_REJECT_LAND = 8;
+		public static readonly integer RC_REJECT_NONPHYSICAL = 4;
+		public static readonly integer RC_REJECT_PHYSICAL = 2;
+		public static readonly integer RC_REJECT_TYPES = 2;
+		public static readonly integer RCERR_CAST_TIME_EXCEEDED = -3;
+		public static readonly integer RCERR_SIM_PERF_LOW = -2;
+		public static readonly integer RCERR_UNKNOWN = -1;
+
+
         public static readonly integer REGION_FLAG_ALLOW_DAMAGE = 1;
         public static readonly integer REGION_FLAG_FIXED_SUN = 16;
         public static readonly integer REGION_FLAG_BLOCK_TERRAFORM = 64;
@@ -685,7 +714,9 @@ namespace LSLEditor
         public static readonly key TEXTURE_TRANSPARENT = "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903";
         public static readonly key TEXTURE_MEDIA = "8b5fec65-8d8d-9dc5-cda8-8fdf2716e361";
 
+		public static readonly integer TOUCH_INVALID_FACE = 0xFFFFFFFF;
         public static readonly vector TOUCH_INVALID_TEXCOORD = new vector(-1.0, -1.0, 0.0);
+		public static readonly vector TOUCH_INVALID_VECTOR = new vector(0.0, 0.0, 0.0);
 
         public static readonly integer TYPE_INTEGER = 1;
         public static readonly integer TYPE_FLOAT = 2;
@@ -1139,6 +1170,12 @@ namespace LSLEditor
         {
             Verbose("AttachToAvatar(" + avatar + "," + attachment + ")");
         }
+
+		public key llAvatarOnLinkSitTarget(integer LinkNumber)
+		{
+			Verbose("llAvatarOnLinkSitTarget()");
+			return new key(Guid.NewGuid());
+		}
 
         public key llAvatarOnSitTarget()
         {
@@ -2156,6 +2193,12 @@ namespace LSLEditor
             Verbose("llGetParcelMaxPrims(" + pos + "," + sim_wide + ")");
             return 0;
         }
+
+		public string llGetParcelMusicURL()
+		{
+			Verbose("llGetParcelMaxPrims()={1}", m_ParcelMusicURL);
+			return m_ParcelMusicURL;
+		}
 
         public integer llGetParcelPrimCount(vector pos, integer category, integer sim_wide)
         {
@@ -3597,6 +3640,11 @@ namespace LSLEditor
             Verbose("SetColor(" + color + "," + face + ")");
         }
 
+		public void llSetContentType(key HTTPRequestID, integer ContentType)
+		{
+			Verbose("llSetContentType(" + HTTPRequestID + "," + ContentType + ")");
+		}
+
         public void llSetDamage(Float damage)
         {
             Verbose("SetDamage(" + damage + ")");
@@ -3631,6 +3679,11 @@ namespace LSLEditor
         {
             Verbose("SetLinkAlpha(" + linknumber + "," + alpha + "," + face + ")");
         }
+
+		public void llSetLinkCamera(integer LinkNumber, vector EyeOffset, vector LookOffset)
+		{
+			Verbose("llSetLinkCamera(" + LinkNumber + "," + EyeOffset + "," + LookOffset + ")");
+		}
 
         public void llSetLinkColor(integer linknumber, vector color, integer face)
         {
@@ -3695,6 +3748,7 @@ namespace LSLEditor
         public void llSetParcelMusicURL(String url)
         {
             Verbose("SetParcelMusicURL(" + url + ")");
+			m_ParcelMusicURL = url;
         }
 
         public void llSetPayPrice(integer price, list quick_pay_buttons)
@@ -3723,6 +3777,12 @@ namespace LSLEditor
         {
             Verbose("SetPrimitiveParams(" + rule.ToString() + ")");
         }
+
+		public vector llSetRegionPos(vector Position)
+		{
+			Verbose("SetRemoteScriptAccessPin(" + Position + ")");
+			m_pos = Position;
+		}
 
         public void llSetRemoteScriptAccessPin(integer pin)
         {

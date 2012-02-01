@@ -4873,10 +4873,11 @@
 			<Word name="PRIM_TYPE_RING" />
 			<Word name="PRIM_TYPE_SCULPT" />
 
+			<Word name="PRIM_SCULPT_TYPE_MASK" />
+			<Word name="PRIM_SCULPT_TYPE_CYLINDER" />
+			<Word name="PRIM_SCULPT_TYPE_PLANE" />
 			<Word name="PRIM_SCULPT_TYPE_SPHERE" />
 			<Word name="PRIM_SCULPT_TYPE_TORUS" />
-			<Word name="PRIM_SCULPT_TYPE_PLANE" />
-			<Word name="PRIM_SCULPT_TYPE_CYLINDER" />
 
 			<Word name="PROFILE_NONE">Disables profiling</Word>
 			<Word name="PROFILE_SCRIPT_MEMORY">Enables memory profiling</Word>
