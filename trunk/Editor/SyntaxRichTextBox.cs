@@ -2223,7 +2223,7 @@ namespace LSLEditor
 			{
 				if (File.Exists(path))
 				{
-					StreamReader sr = new StreamReader(path, Encoding.Default);
+					StreamReader sr = new StreamReader(path, Encoding.UTF8);
 					this.Text = sr.ReadToEnd();
 					sr.Close();
 				}
