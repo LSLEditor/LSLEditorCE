@@ -222,6 +222,12 @@
 			<Argument name="attachment" wild="ATTACH_.*" />
 		</Word>
 
+		<Word name="llAvatarOnLinkSitTarget">
+			key llAvatarOnLinkSitTarget(integer iLinkNumber);
+
+			Returns a key that is the UUID of the user seated on the specified link's prim.
+		</Word>
+
 		<Word name="llAvatarOnSitTarget">
 			key llAvatarOnSitTarget(void);
 
@@ -1109,6 +1115,13 @@
 
 		<Word name="llGetParcelMaxPrims">
 			integer llGetParcelMaxPrims(vector pos, integer sim_wide);
+		</Word>
+
+		<Word name="llGetParcelMusicURL">
+			string llGetParcelMusicURL();
+
+			Returns a string containing the parcel streaming audio URL.
+			The object owner (avatar or group) must also be the land owner.
 		</Word>
 
 		<Word name="llGetParcelPrimCount">
@@ -2464,6 +2477,12 @@
 			Sets the color of face. If face is ALL_SIDES, set the color to all faces.
 		</Word>
 
+		<Word name="llSetContentType">
+			void llSetContentType(key kRequestID, integer iCcontentType);
+
+			Set the Internet media type of an LSL HTTP server response. ContentType accepts the constants CONTENT_TYPE_TEXT and CONTENT_TYPE_HTML.
+		</Word>
+
 		<Word name="llSetDamage">
 			llSetDamage(float damage);
 
@@ -2541,6 +2560,12 @@
 
 			Sets the side number face on the linked child linknumber
 			to the transparency alpha.
+		</Word>
+
+		<Word name="llSetLinkCamera">
+			void llSetLinkCamera(integer iLink, vector vEyeOffset, vector vLookOffset);
+
+			Sets the camera eye offset, and the offset that camera is looking at, for avatars that sit on the linked prim.
 		</Word>
 
 		<Word name="llSetLinkColor">
@@ -2679,6 +2704,13 @@
 			This function changes the many properties (or "parameters")
 			of a prim in one operation. The parameter is a list of changes.
 			(Don't confuse prim parameters with function parameters.)
+		</Word>
+
+		<Word name="llSetRegionPos">
+			integer llSetRegionPos(vector vPosition)
+
+			Tries to moves the entire object so that the root prim is within 0.1m of vPosition.
+			Returns TRUE on success, otherwise FALSE.
 		</Word>
 
 		<Word name="llSetRemoteScriptAccessPin">
@@ -3504,10 +3536,7 @@
 			<Word name="STATUS_MALFORMED_PARAMS" value="1000"> Function was called with malformed parameters.</Word>
 			<Word name="STATUS_NOT_FOUND" value="1003">.Object or other item was not found.</Word>
 			<Word name="STATUS_NOT_SUPPORTED" value="1004">Feature not supported.</Word>
-			<Word name="STATUS_OK" value="0">
-
-				Result of function call was success
-			</Word>
+			<Word name="STATUS_OK" value="0">Result of function call was success.</Word>
 			<Word name="STATUS_PHYSICS" value="">
 				Controls whether the object moves physically.
 				This controls the same flag that the ui checkbox for
@@ -3543,19 +3572,16 @@
 		</WordsSubsection>
 
 		<WordsSubsection name="C.3. Object Type Constants">
-			These constants can be combined using the binary | operator
-			and are used in the llSensor and related calls.
+			These constants can be combined using the binary | operator and are used in the llSensor and related calls.
 			Object Type Constants
 			<Word name="ACTIVE">
 				Objects in world that are running a script or
 				currently pysically moving.
 			</Word>
-			<Word name="AGENT">
-				Objects in world that are agents.
-			</Word>
-			<Word name="PASSIVE">
-				Static in-world objects.
-			</Word>
+			<Word name="AGENT">Objects in world that are agents.</Word>
+			<Word name="AGENT_BY_LEGACY_NAME" value="0x1"></Word>
+			<Word name="AGENT_BY_USERNAME" value="0x10"></Word>
+			<Word name="PASSIVE">Static in-world objects.</Word>
 			<Word name="SCRIPTED">
 				Scripted in-world objects.
 			</Word>
@@ -3824,33 +3850,18 @@
 		<WordsSubsection name="C.10. Change Constants">
 			These constants are used in the changed event handler.
 			Change Constants
-			<Word name="CHANGED_ALLOWED_DROP">
-				The object inventory has changed because an item was
-				added through the llAllowInventoryDrop interface.
-			</Word>
-			<Word name="CHANGED_COLOR">
-				The object color has changed.
-			</Word>
-			<Word name="CHANGED_INVENTORY">
-				The object inventory has changed.
-			</Word>
-			<Word name="CHANGED_LINK">
-				The object has linked or its links were broken.
-			</Word>
+			<Word name="CHANGED_ALLOWED_DROP">The object inventory has changed because an item was added through the llAllowInventoryDrop interface.</Word>
+			<Word name="CHANGED_COLOR">The object colour has changed.</Word>
+			<Word name="CHANGED_INVENTORY">The object inventory has changed.</Word>
+			<Word name="CHANGED_LINK">The object has linked or its links were broken.</Word>
+			<Word name="CHANGED_MEDIA" />
 			<Word name="CHANGED_OWNER" />
 			<Word name="CHANGED_REGION" />
 			<Word name="CHANGED_REGION_START" />
-			<Word name="CHANGED_SCALE">
-				The object scale has changed.
-			</Word>
-			<Word name="CHANGED_SHAPE">
-				The object shape has changed, eg, a box to a cylinder
-			</Word>
+			<Word name="CHANGED_SCALE">The object scale has changed.</Word>
+			<Word name="CHANGED_SHAPE">The object shape has changed, e.g., a box to a cylinder.</Word>
 			<Word name="CHANGED_TELEPORT" />
-			<Word name="CHANGED_TEXTURE">
-				The texture offset, scale rotation, or simply the object
-				texture has changed.
-			</Word>
+			<Word name="CHANGED_TEXTURE">The texture offset, scale rotation, or simply the object texture has changed.</Word>
 		</WordsSubsection>
 
 		<WordsSubsection name="C.11. Type Constants">
@@ -3859,27 +3870,13 @@
 			llGetListEntryType can be used for comparison against
 			these constants.
 			Type Constants
-			<Word name="TYPE_INTEGER">
-				The list entry is an integer.
-			</Word>
-			<Word name="TYPE_FLOAT">
-				The list entry is a float.
-			</Word>
-			<Word name="TYPE_STRING">
-				The list entry is a string.
-			</Word>
-			<Word name="TYPE_KEY">
-				The list entry is a key.
-			</Word>
-			<Word name="TYPE_VECTOR">
-				The list entry is a vector.
-			</Word>
-			<Word name="TYPE_ROTATION">
-				The list entry is a rotation.
-			</Word>
-			<Word name="TYPE_INVALID">
-				The list entry is invalid.
-			</Word>
+			<Word name="TYPE_INTEGER">The list entry is an integer.</Word>
+			<Word name="TYPE_FLOAT">The list entry is a float.</Word>
+			<Word name="TYPE_STRING">The list entry is a string.</Word>
+			<Word name="TYPE_KEY">The list entry is a key.</Word>
+			<Word name="TYPE_VECTOR">The list entry is a vector.</Word>
+			<Word name="TYPE_ROTATION">The list entry is a rotation.</Word>
+			<Word name="TYPE_INVALID">The list entry is invalid.</Word>
 		</WordsSubsection>
 
 		<WordsSubsection name="C.12. Agent Info Constants">
@@ -3889,22 +3886,17 @@
 			about an agent.
 			Agent Info Constants
 			<Word name="AGENT_ALWAYS_RUN" value="" />
-			<Word name="AGENT_ATTACHMENTS" value="">
-				The agent has attachments.
-			</Word>
+			<Word name="AGENT_ATTACHMENTS" value="">The agent has attachments.</Word>
+			<Word name="AGENT_AUTOPILOT" value="0x2000"></Word>
 			<Word name="AGENT_AWAY" value="" />
 			<Word name="AGENT_BUSY" value="" />
 			<Word name="AGENT_CROUCHING" value="" />
-			<Word name="AGENT_FLYING" value="">
-				The agent is flying.
-			</Word>
+			<Word name="AGENT_FLYING" value="">The agent is flying.</Word>
 			<Word name="AGENT_IN_AIR" value="" />
 			<Word name="AGENT_MOUSELOOK" value="" />
 			<Word name="AGENT_ON_OBJECT" value="" />
 			<Word name="AGENT_SITTING" value="" />
-			<Word name="AGENT_SCRIPTED" value="">
-				The agent has scripted attachments.
-			</Word>
+			<Word name="AGENT_SCRIPTED" value="">The agent has scripted attachments.</Word>
 			<Word name="AGENT_TYPING" value="" />
 			<Word name="AGENT_WALKING" value="" />
 		</WordsSubsection>
@@ -4669,27 +4661,25 @@
 				Gets the prims's group key.
 				If id is an avatar, a NULL_KEY is returned.
 			</Word>
-			<Word name="OBJECT_NAME" value="">
-				Gets the object's name.
-			</Word>
+			<Word name="OBJECT_NAME" value="">Gets the object's name.</Word>
 			<Word name="OBJECT_OWNER" value="">
 				Gets an object's owner's key.
 				If id is group owned, a NULL_KEY is returned.
 			</Word>
-			<Word name="OBJECT_POS" value="">
-				Gets the object's position in region coordinates.
-			</Word>
-			<Word name="OBJECT_ROT" value="">
-				Gets the object's rotation.
-			</Word>
-			<Word name="OBJECT_VELOCITY" value="">
-				Gets the object's velocity.
-			</Word>
+			<Word name="OBJECT_POS" value="">Gets the object's position in region coordinates.</Word>
+			<Word name="OBJECT_ROT" value="">Gets the object's rotation.</Word>
+			<Word name="OBJECT_VELOCITY" value="">Gets the object's velocity.</Word>
 
 			<Word name="OBJECT_STREAMING_COST" value="15"></Word>
 			<Word name="OBJECT_PHYSICS_COST" value="16"></Word>
 			<Word name="OBJECT_SERVER_COST" value="14"></Word>
 			<Word name="OBJECT_PRIM_EQUIVALENCE" value="13"></Word>
+
+			<Word name="OBJECT_RUNNING_SCRIPT_COUNT" value="9" />
+			<Word name="OBJECT_SCRIPT_MEMORY" value="11" />
+			<Word name="OBJECT_SCRIPT_TIME" value="12" />
+			<Word name="OBJECT_TOTAL_SCRIPT_COUNT" value="10" />
+			<Word name="OBJECT_UNKNOWN_DETAIL" value="-1" />
 
 			<Word name="MASK_BASE" />
 			<Word name="MASK_EVERYONE" />
@@ -4802,6 +4792,8 @@
 			<Word name="PRIM_HOLE_SQUARE" />
 			<Word name="PRIM_HOLE_TRIANGLE" />
 
+			<Word name="PRIM_LINK_TARGET" />
+
 			<Word name="PRIM_MATERIAL" />
 			<Word name="PRIM_MATERIAL_FLESH" />
 			<Word name="PRIM_MATERIAL_GLASS" />
@@ -4895,6 +4887,22 @@
 				will print text to the publicly heard chat channel. Has the value '0'.
 			</Word>
 
+			<Word name="RC_DATA_FLAGS" value="2" />
+			<Word name="RC_DETECT_PHANTOM" value="1" />
+			<Word name="RC_GET_LINK_NUM" value="4" />
+			<Word name="RC_GET_NORMAL" value="1" />
+			<Word name="RC_GET_ROOT_KEY" value="2" />
+			<Word name="RC_MAX_HITS" value="3" />
+			<Word name="RC_REJECT_AGENTS" value="1" />
+			<Word name="RC_REJECT_LAND" value="8" />
+			<Word name="RC_REJECT_NONPHYSICAL" value="4" />
+			<Word name="RC_REJECT_PHYSICAL" value="2" />
+			<Word name="RC_REJECT_TYPES" value="2" />
+
+			<Word name="RCERR_CAST_TIME_EXCEEDED" value="-3" />
+			<Word name="RCERR_SIM_PERF_LOW" value="-2" />
+			<Word name="RCERR_UNKNOWN" value="-1" />
+
 			<Word name="REGION_FLAG_ALLOW_DAMAGE" />
 			<Word name="REGION_FLAG_ALLOW_DIRECT_TELEPORT" />
 			<Word name="REGION_FLAG_BLOCK_FLY" />
@@ -4914,6 +4922,9 @@
 			<Word name="STRING_TRIM" />
 			<Word name="STRING_TRIM_HEAD" />
 			<Word name="STRING_TRIM_TAIL" />
+
+			<Word name="TOUCH_INVALID_FACE" />
+			<Word name="TOUCH_INVALID_VECTOR" />
 
 			<Word name="URL_REQUEST_DENIED" />
 			<Word name="URL_REQUEST_GRANTED" />

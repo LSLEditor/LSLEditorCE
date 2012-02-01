@@ -2,315 +2,344 @@
 	<head>
 		<title>Release Notes</title>
 		<style>
-			.date { text-decoration: underline }
+			.date { text-decoration: underline; }
 		</style>
 	</head>
-	<body style="background-color: white; font-family: Verdana, sans-serif; font-size: 13px; line-height: 1.3">
-		<h1>Release Notes</h1>
+	<body style="background-color: white; font-family: Verdana, sans-serif;font-size: 13px;line-height: 1.3">
 		<div>
-			<h3><span class="date">2012-01-01</span> - Release 2.44.0</h3>
-			- Added
-			<ul>
-				<li>"Release Notes..." to help menu.</li>
-			</ul>
+			<div>
+				<h3><span class="date">2012-01-</span> - Release 2.44.1</h3>
+				- Added: constants:
+				<ul>
+				  <li>AGENT_AUTOPILOT</li>
+				  <li>AGENT_BY_LEGACY_NAME</li>
+				  <li>AGENT_BY_USERNAME</li>
+				  <li>CHANGED_MEDIA</li>
+				  <li>OBJECT_RUNNING_SCRIPT_COUNT</li>
+				  <li>OBJECT_SCRIPT_MEMORY</li>
+				  <li>OBJECT_SCRIPT_TIME</li>
+				  <li>OBJECT_TOTAL_SCRIPT_COUNT</li>
+				  <li>OBJECT_UNKNOWN_DETAIL</li>
+				  <li>PRIM_LINK_TARGET</li>
+				  <li>PRIM_SCULPT_TYPE_MASK</li>
+				  <li>RC_DATA_FLAGS</li>
+				  <li>RC_DETECT_PHANTOM</li>
+				  <li>RC_GET_LINK_NUM</li>
+				  <li>RC_GET_NORMAL</li>
+				  <li>RC_GET_ROOT_KEY</li>
+				  <li>RC_MAX_HITS</li>
+				  <li>RC_REJECT_AGENTS</li>
+				  <li>RC_REJECT_LAND</li>
+				  <li>RC_REJECT_NONPHYSICAL</li>
+				  <li>RC_REJECT_PHYSICAL</li>
+				  <li>RC_REJECT_TYPES</li>
+				  <li>RCERR_CAST_TIME_EXCEEDED</li>
+				  <li>RCERR_SIM_PERF_LOW</li>
+				  <li>RCERR_UNKNOWN</li>
+				  <li>TOUCH_INVALID_FACE</li>
+				  <li>TOUCH_INVALID_VECTOR</li>
+				</ul>
+				- Added: functions:
+				<ul>
+					<li>llAvatarOnLinkSitTarget</li>
+					<li>llGetParcelMusicURL</li>
+					<li>llSetContentType</li>
+					<li>llSetLinkCamera</li>
+					<li>llSetRegionPos</li>
+				</ul>
+			</div>
+			<div>
+				<h3><span class="date">2012-01-01</span> - Release 2.44.0</h3>
+				- Added
+				<ul>
+					<li>"Release Notes..." to help menu.</li>
+				</ul>
 
-			- Changed
-			<ul>
-				<li>Updated About.htm</li>
-				<li>Tools => Options => Text Editor => General - Changed labels to properly reflect the output file format.</li>
-				<li>UTF-8 is now the default file output format. ANSI is deprecated and will be removed at a later date.</li>
-			</ul>
+				- Changed
+				<ul>
+					<li>Updated About.htm</li>
+					<li>Tools => Options => Text Editor => General - Changed labels to properly reflect the output file format.</li>
+					<li>UTF-8 output no longer prefixes the B.O.M. character.</li>
+					<li>UTF-8 is now the default file output format. ANSI is deprecated and will be removed at a later date.</li>
+				</ul>
 
-			- Fixed:
-			<ul>
-				<li>SF ID: 2995296 - Search | Comment Line (Ctl+K) Breaks Line After Search Term.</li>
-				<li>SF ID: 3461546 - ReleaseNotes.htm in source, but never used</li>
-				<li>SF ID: none - Fix for state change without state name passing syntax-check.</li>
-				<li>SF ID: 3465488 - lslint does not show errors.</li>
-				<li>SF ID: 2999054 - Unicode characters do not paste correctly.</li>
-				<li>SF ID: none - Fixed typo in Font/Colour options dialogue.</li>
-			</ul>
-		</div>
+				- Fixed:
+				<ul>
+					<li>SF ID: 2995296 - Search | Comment Line (Ctl+K) Breaks Line After Search Term.</li>
+					<li>SF ID: 3461546 - ReleaseNotes.htm in source, but never used</li>
+					<li>SF ID: none - Fix for state change without state name passing syntax-check.</li>
+					<li>SF ID: 3465488 - lslint does not show errors.</li>
+					<li>SF ID: 2999054 - Unicode characters do not paste correctly.</li>
+					<li>SF ID: none - Fixed typo in Font/Colour options dialogue.</li>
+				</ul>
+			</div>
 
-		<div>
-			<h3><span class="date">2011-12-12</span> - Release 2.43.1</h3>
-			- Added: constants
-			<ul>
-				<li>CONTENT_TYPE_HTML</li>
-				<li>DENSITY</li>
-				<li>ESTATE_ACCESS_ALLOWED_AGENT_ADD</li>
-				<li>ESTATE_ACCESS_ALLOWED_AGENT_REMOVE</li>
-				<li>ESTATE_ACCESS_ALLOWED_GROUP_ADD</li>
-				<li>ESTATE_ACCESS_ALLOWED_GROUP_REMOVE</li>
-				<li>ESTATE_ACCESS_BANNED_AGENT_ADD</li>
-				<li>ESTATE_ACCESS_BANNED_AGENT_REMOVE</li>
-				<li>FRICTION</li>
-				<li>GRAVITY_MULTIPLIER</li>
-				<li>HTTP_VERBOSE_THROTTLE</li>
-				<li>KFM_CMD_PAUSE</li>
-				<li>KFM_CMD_PLAY</li>
-				<li>KFM_CMD_STOP</li>
-				<li>KFM_COMMAND</li>
-				<li>KFM_DATA</li>
-				<li>KFM_FORWARD</li>
-				<li>KFM_LOOP</li>
-				<li>KFM_MODE</li>
-				<li>KFM_PING_PONG</li>
-				<li>KFM_REVERSE</li>
-				<li>KFM_ROTATION</li>
-				<li>KFM_TRANSLATION</li>
-				<li>OBJECT_PHYSICS_COST</li>
-				<li>OBJECT_PRIM_EQUIVALENCE</li>
-				<li>OBJECT_SERVER_COST</li>
-				<li>OBJECT_STREAMING_COST</li>
-				<li>PARCEL_DETAILS_SEE_AVATARS</li>
-				<li>PRIM_MATERIAL</li>
-				<li>PRIM_MEDIA_ALT_IMAGE_ENABLE</li>
-				<li>PRIM_MEDIA_AUTO_LOOP</li>
-				<li>PRIM_MEDIA_AUTO_PLAY</li>
-				<li>PRIM_MEDIA_AUTO_SCALE</li>
-				<li>PRIM_MEDIA_AUTO_ZOOM</li>
-				<li>PRIM_MEDIA_CONTROLS</li>
-				<li>PRIM_MEDIA_CONTROLS_MINI</li>
-				<li>PRIM_MEDIA_CONTROLS_STANDARD</li>
-				<li>PRIM_MEDIA_CURRENT_URL</li>
-				<li>PRIM_MEDIA_FIRST_CLICK_INTERACT</li>
-				<li>PRIM_MEDIA_HEIGHT_PIXELS</li>
-				<li>PRIM_MEDIA_HOME_URL</li>
-				<li>PRIM_MEDIA_PERMS_CONTROL</li>
-				<li>PRIM_MEDIA_PERMS_INTERACT</li>
-				<li>PRIM_MEDIA_PERM_ANYONE</li>
-				<li>PRIM_MEDIA_PERM_GROUP</li>
-				<li>PRIM_MEDIA_PERM_NONE</li>
-				<li>PRIM_MEDIA_PERM_OWNER</li>
-				<li>PRIM_MEDIA_WHITELIST</li>
-				<li>PRIM_MEDIA_WHITELIST_ENABLE</li>
-				<li>PRIM_MEDIA_WIDTH_PIXELS</li>
-				<li>PRIM_OMEGA</li>
-				<li>PRIM_PHYSICS_MATERIAL</li>
-				<li>PRIM_PHYSICS_SHAPE_CONVEX</li>
-				<li>PRIM_PHYSICS_SHAPE_NONE</li>
-				<li>PRIM_PHYSICS_SHAPE_PRIM</li>
-				<li>PRIM_PHYSICS_SHAPE_TYPE</li>
-				<li>PRIM_POS_LOCAL</li>
-				<li>PRIM_ROT_LOCAL</li>
-				<li>PRIM_SCULPT_FLAG_INVERT</li>
-				<li>PRIM_SCULPT_FLAG_MIRROR</li>
-				<li>PROFILE_NONE</li>
-				<li>PROFILE_SCRIPT_MEMORY</li>
-				<li>RESTITUTION</li>
-				<li>STATUS_BLOCK_GRAB_OBJECT</li>
-				<li>STATUS_BOUNDS_ERROR</li>
-				<li>STATUS_INTERNAL_ERROR</li>
-				<li>STATUS_MALFORMED_PARAMS</li>
-				<li>STATUS_NOT_FOUND</li>
-				<li>STATUS_NOT_SUPPORTED</li>
-				<li>STATUS_OK</li>
-				<li>STATUS_TYPE_MISMATCH</li>
-				<li>STATUS_WHITELIST_FAILED</li>
-				<li>TEXTURE_BLANK</li>
-				<li>TEXTURE_DEFAULT</li>
-				<li>TEXTURE_MEDIA</li>
-				<li>TEXTURE_PLYWOOD</li>
-				<li>TEXTURE_TRANSPARENT</li>
-				<li>TOUCH_INVALID_TEXCOORD</li>
-			</ul>
-			- other changes: Cleaned up parts of the highlighting XML file generally, and reordered some entries.
-		</div>
+			<div>
+				<h3><span class="date">2011-12-12</span> - Release 2.43.1</h3>
+				- Added: constants
+				<ul>
+					<li>CONTENT_TYPE_HTML</li>
+					<li>DENSITY</li>
+					<li>ESTATE_ACCESS_ALLOWED_AGENT_ADD</li>
+					<li>ESTATE_ACCESS_ALLOWED_AGENT_REMOVE</li>
+					<li>ESTATE_ACCESS_ALLOWED_GROUP_ADD</li>
+					<li>ESTATE_ACCESS_ALLOWED_GROUP_REMOVE</li>
+					<li>ESTATE_ACCESS_BANNED_AGENT_ADD</li>
+					<li>ESTATE_ACCESS_BANNED_AGENT_REMOVE</li>
+					<li>FRICTION</li>
+					<li>GRAVITY_MULTIPLIER</li>
+					<li>HTTP_VERBOSE_THROTTLE</li>
+					<li>KFM_CMD_PAUSE</li>
+					<li>KFM_CMD_PLAY</li>
+					<li>KFM_CMD_STOP</li>
+					<li>KFM_COMMAND</li>
+					<li>KFM_DATA</li>
+					<li>KFM_FORWARD</li>
+					<li>KFM_LOOP</li>
+					<li>KFM_MODE</li>
+					<li>KFM_PING_PONG</li>
+					<li>KFM_REVERSE</li>
+					<li>KFM_ROTATION</li>
+					<li>KFM_TRANSLATION</li>
+					<li>OBJECT_PHYSICS_COST</li>
+					<li>OBJECT_PRIM_EQUIVALENCE</li>
+					<li>OBJECT_SERVER_COST</li>
+					<li>OBJECT_STREAMING_COST</li>
+					<li>PARCEL_DETAILS_SEE_AVATARS</li>
+					<li>PRIM_MATERIAL</li>
+					<li>PRIM_MEDIA_ALT_IMAGE_ENABLE</li>
+					<li>PRIM_MEDIA_AUTO_LOOP</li>
+					<li>PRIM_MEDIA_AUTO_PLAY</li>
+					<li>PRIM_MEDIA_AUTO_SCALE</li>
+					<li>PRIM_MEDIA_AUTO_ZOOM</li>
+					<li>PRIM_MEDIA_CONTROLS</li>
+					<li>PRIM_MEDIA_CONTROLS_MINI</li>
+					<li>PRIM_MEDIA_CONTROLS_STANDARD</li>
+					<li>PRIM_MEDIA_CURRENT_URL</li>
+					<li>PRIM_MEDIA_FIRST_CLICK_INTERACT</li>
+					<li>PRIM_MEDIA_HEIGHT_PIXELS</li>
+					<li>PRIM_MEDIA_HOME_URL</li>
+					<li>PRIM_MEDIA_PERMS_CONTROL</li>
+					<li>PRIM_MEDIA_PERMS_INTERACT</li>
+					<li>PRIM_MEDIA_PERM_ANYONE</li>
+					<li>PRIM_MEDIA_PERM_GROUP</li>
+					<li>PRIM_MEDIA_PERM_NONE</li>
+					<li>PRIM_MEDIA_PERM_OWNER</li>
+					<li>PRIM_MEDIA_WHITELIST</li>
+					<li>PRIM_MEDIA_WHITELIST_ENABLE</li>
+					<li>PRIM_MEDIA_WIDTH_PIXELS</li>
+					<li>PRIM_OMEGA</li>
+					<li>PRIM_PHYSICS_MATERIAL</li>
+					<li>PRIM_PHYSICS_SHAPE_CONVEX</li>
+					<li>PRIM_PHYSICS_SHAPE_NONE</li>
+					<li>PRIM_PHYSICS_SHAPE_PRIM</li>
+					<li>PRIM_PHYSICS_SHAPE_TYPE</li>
+					<li>PRIM_POS_LOCAL</li>
+					<li>PRIM_ROT_LOCAL</li>
+					<li>PRIM_SCULPT_FLAG_INVERT</li>
+					<li>PRIM_SCULPT_FLAG_MIRROR</li>
+					<li>PROFILE_NONE</li>
+					<li>PROFILE_SCRIPT_MEMORY</li>
+					<li>RESTITUTION</li>
+					<li>STATUS_BLOCK_GRAB_OBJECT</li>
+					<li>STATUS_BOUNDS_ERROR</li>
+					<li>STATUS_INTERNAL_ERROR</li>
+					<li>STATUS_MALFORMED_PARAMS</li>
+					<li>STATUS_NOT_FOUND</li>
+					<li>STATUS_NOT_SUPPORTED</li>
+					<li>STATUS_OK</li>
+					<li>STATUS_TYPE_MISMATCH</li>
+					<li>STATUS_WHITELIST_FAILED</li>
+					<li>TEXTURE_BLANK</li>
+					<li>TEXTURE_DEFAULT</li>
+					<li>TEXTURE_MEDIA</li>
+					<li>TEXTURE_PLYWOOD</li>
+					<li>TEXTURE_TRANSPARENT</li>
+					<li>TOUCH_INVALID_TEXCOORD</li>
+				</ul>
+				- other changes: Cleaned up parts of the highlighting XML file generally, and reordered some entries.
+			</div>
 
-		<div>
-			<h3><span class="date">2011-12-06</span> - Release 2.43</h3>
-			- Added: event
-			<ul>
-			  <li>transaction_result</li>
-			</ul>
-			- Added: functions:
-			<ul>
-			  <li>llCastRay - syntax-checker only, highlighting added previously.</li>
-			  <li>llClearLinkMedia - syntax-checker only, highlighting added previously.</li>
-			  <li>llGetDisplayName</li>
-			  <li>llGetLinkMedia</li>
-			  <li>llGetMassMKS</li>
-			  <li>llGetMemoryLimit</li>
-			  <li>llGetPhysicsMaterial</li>
-			  <li>llLinkSitTarget - syntax-checker only, highlighting added previously.</li>
-			  <li>llManageEstateAccess</li>
-			  <li>llScriptProfiler</li>
-			  <li>llSetAngularVelocity</li>
-			  <li>llSetKeyframedMotion</li>
-			  <li>llSetLinkMedia</li>
-			  <li>llSetMemoryLimit</li>
-			  <li>llSetPhysicsMaterial</li>
-			  <li>llSetVelocity</li>
-			  <li>llTransferLindenDollars</li>
-			</ul>
-			- Fixed UTF-8 file format from prefixing with a BOM. While not invalid, it confuses some apps.
-			<br />
-		</div>
-
-
-		<div>
-			<h3><span class="date">2011-04-21</span> - Release 2.42</h3>
-			* Added: constants
-			<ul>
-				<li>CHANGED_REGION_START</li>
-				<li>PRIM_DESC</li>
-				<li>PRIM_NAME</li>
-			</ul>
-			* Added: functions (highlighting only):
-			<ul>
-				<li>llCastRay</li>
-				<li>llGetLinkNumberOfSides</li>
-				<li>llGetSPMaxMemory</li>
-				<li>llGetUsedMemory</li>
-				<li>llGetUsername</li>
-				<li>llRequestDisplayName</li>
-				<li>llRequestUsername</li>
-			</ul>
-		</div>
-
-
-		<div>
-			<h3><span class="date">2010</span> - Release 2.41</h3>
-		</div>
-
-
-		<div>
-			<h3>Release 2.40</h3>
-			<span class="date">April 17 2010 14:51 (local time)</span><br />
-			- Added: stub functions for:
-			<ul>
-				<li>llGetFreeURLs</li>
-				<li>llRequestURL</li>
-				<li>llRequestSecureURL</li>
-				<li>llReleaseURL</li>
-				<li>llHTTPResponse</li>
-				<li>llGetHTTPHeader</li>
-			</ul>
-		</div>
-
-
-		<div>
-			<h3>Release 2.39</h3>
-			<span class="date">October 28 2008 11:28 (local time)</span><br />
-			- Added: stub functions for:
-			<ul>
-				<li>llTextBox </li>
-				<li>llGetAgentLanguage </li>
-				<li>llDetectedTouchUV </li>
-				<li>llDetectedTouchFace </li>
-				<li>llDetectedTouchPos </li>
-				<li>llDetectedTouchNormal </li>
-				<li>llDetectedTouchBinormal </li>
-				<li>llDetectedTouchST </li>
-				<li>llSHA1String </li>
-			</ul>
-		</div>
+			<div>
+				<h3><span class="date">2011-12-06</span> - Release 2.43</h3>
+				- Added: event
+				<ul>
+				  <li>transaction_result</li>
+				</ul>
+				- Added: functions:
+				<ul>
+				  <li>llCastRay - syntax-checker only, highlighting added previously.</li>
+				  <li>llClearLinkMedia - syntax-checker only, highlighting added previously.</li>
+				  <li>llGetDisplayName</li>
+				  <li>llGetLinkMedia</li>
+				  <li>llGetMassMKS</li>
+				  <li>llGetMemoryLimit</li>
+				  <li>llGetPhysicsMaterial</li>
+				  <li>llLinkSitTarget - syntax-checker only, highlighting added previously.</li>
+				  <li>llManageEstateAccess</li>
+				  <li>llScriptProfiler</li>
+				  <li>llSetAngularVelocity</li>
+				  <li>llSetKeyframedMotion</li>
+				  <li>llSetLinkMedia</li>
+				  <li>llSetMemoryLimit</li>
+				  <li>llSetPhysicsMaterial</li>
+				  <li>llSetVelocity</li>
+				  <li>llTransferLindenDollars</li>
+				</ul>
+				- Fixed UTF-8 file format from prefixing with a BOM. While not invalid, it confuses some apps.
+				<br />
+			</div>
 
 
-		<div>
-			<h3>Release 2.38</h3>
-			<span class="date">July 28 2008 14:10 (local time)</span>
-			- Changed: Key cache file changed, so did lsleditor (??? who made the xml file, it uses siblings, not parent-child relations????)<br />
-		</div>
+			<div>
+				<h3><span class="date">2011-04-21</span> - Release 2.42</h3>
+				* Added: constants
+				<ul>
+					<li>CHANGED_REGION_START</li>
+					<li>PRIM_DESC</li>
+					<li>PRIM_NAME</li>
+				</ul>
+				* Added: functions (highlighting only):
+				<ul>
+					<li>llCastRay</li>
+					<li>llGetLinkNumberOfSides</li>
+					<li>llGetSPMaxMemory</li>
+					<li>llGetUsedMemory</li>
+					<li>llGetUsername</li>
+					<li>llRequestDisplayName</li>
+					<li>llRequestUsername</li>
+				</ul>
+			</div>
 
 
-		<div><p>Summer break ;-)</p></div>
+			<div>
+				<h3><span class="date">2010</span> - Release 2.41</h3>
+			</div>
 
 
-		<div>
-			<p><span class="date">May 18 2008 18:37 (local time)</span></p>
-			- Changed: Ctrl-Shft-A uses 4-spaces intdent when (auto)pasting in SL<br />
-		</div>
+			<div>
+				<h3><span class="date">April 17 2010 14:51 (local time)</span> Release 2.40</h3>
+				- Added: stub functions for:
+				<ul>
+					<li>llGetFreeURLs</li>
+					<li>llRequestURL</li>
+					<li>llRequestSecureURL</li>
+					<li>llReleaseURL</li>
+					<li>llHTTPResponse</li>
+					<li>llGetHTTPHeader</li>
+				</ul>
+			</div>
 
 
-		<div>
-			<span class="date">May 13 2008 13:21 (local time)</span>
-			- Changed: Adding duplicate items in solution explorer starts numbering at 1<br />
-			- Fixed: focus when switching tabs<br />
-			- Fixed: Save All (Ctrl Shft S), does not save Solution<br />
-		</div>
+			<div>
+				<h3><span class="date">October 28 2008 11:28 (local time)</span> Release 2.39</h3>
+				- Added: stub functions for:
+				<ul>
+					<li>llTextBox</li>
+					<li>llGetAgentLanguage</li>
+					<li>llDetectedTouchUV</li>
+					<li>llDetectedTouchFace</li>
+					<li>llDetectedTouchPos</li>
+					<li>llDetectedTouchNormal</li>
+					<li>llDetectedTouchBinormal</li>
+					<li>llDetectedTouchST</li>
+					<li>llSHA1String </li>
+				</ul>
+			</div>
 
 
-		<div>
-			<h3>Release 2.37</h3>
-			<span class="date">May 2 2008 19:00 (local time)</span>
-			- Added: PRIM_GLOW<br />
-			- Added: llSetClickAction (and constants)<br />
-			- Fixed: &amp; in dialogue box<br />
-			- Fixed: Permission dialogue box text messed up when the script name is too long<br />
-		</div>
+			<div>
+				<h3><span class="date">July 28 2008 14:10 (local time)</span> Release 2.38</h3>
+				- Changed: Key cache file changed, so did lsleditor (??? who made the xml file, it uses siblings, not parent-child relations????)
+			</div>
+
+			<div>Summer break ;-)</div>
+
+			<div><span class="date">May 18 2008 18:37 (local time)</span>
+				- Changed: Ctrl-Shft-A uses 4-spaces intdent when (auto)pasting in SL
+			</div>
+
+			<div><span class="date">May 13 2008 13:21 (local time)</span>
+				- Changed: Adding duplicate items in solution explorer starts numbering at 1<br />
+				- Fixed: focus when switching tabs<br />
+				- Fixed: Save All (Ctrl Shft S), does not save Solution<br />
+			</div>
 
 
-		<div>
-			<h3>Release 2.36</h3>
-			<p><span class="date">Apr 3 2008 12:47 (local time)</span>
-			- Fixed: llAbs throws error on large numbers<br />
+			<div>
+				<h3><span class="date">May 2 2008 19:00 (local time)</span>> Release 2.37</h3>
+				- Added: PRIM_GLOW<br />
+				- Added: llSetClickAction (and constants)<br />
+				- Fixed: &amp; in dialogue box<br />
+				- Fixed: Permission dialogue box text messed up when the script name is too long<br />
+			</div>
 
-			<p><span class="date">Mar 28 2008 12:47 (local time)</span>
-			- Fixed: llListen should also listen when using "" keys<br />
-			- Added: Basic authentication to llHTTPRequest, eg. http: //userid:password@domain.name/path<br />
-			- Added: llEmail shows error responses from smtp server when in error<br />
-			</p>
 
-			<p><span class="date">Mar 27 2008 13:33 (local time)</span>
+			<div><span class="date"></span>
+				<h3>Apr 3 2008 12:47 (local time) Release 2.36</h3>
+				- Fixed: llAbs throws error on large numbers<br />
+			</div>
+
+			<div><span class="date">Mar 28 2008 12:47 (local time)</span>
+				- Fixed: llListen should also listen when using "" keys<br />
+				- Added: Basic authentication to llHTTPRequest, eg. http: //userid:password@domain.name/path<br />
+				- Added: llEmail shows error responses from smtp server when in error<br />
+			</div>
+
+			<div><p><span class="date">Mar 27 2008 13:33 (local time)</span></p>
 				- Added (experimental): 'Ctrl Shift A' pastes active LSLEditor script to SecondLife (has to open script editor in SL first)<br />
-			</p>
+			</div>
 
-			<p><span class="date">Mar 21 2008 12:12 (local time)</span>
+			<div><span class="date">Mar 21 2008 12:12 (local time)</span><br />
 				- Fixed: Shift Home crashes editor when nothing is selected<br />
-			</p>
-		</div>
+			</div>
 
 
-		<div>
-			<h3>Release 2.35</h3>
-			<p><span class="date">Mar 16 2008 15:22 (local time)</span>
+			<div>
+				<h3><span class="date">Mar 16 2008 15:22 (local time)</span> Release 2.35</h3>
 				- Added: llGetParcelDetails (see also menu - tools - options - debugging internal)<br />
 				- Added: Alt-Backspace alternative for Ctrl-Z<br />
 				- Fixed: Some focus issue on the find window<br />
 				- Added: PARCEL_MEDIA_COMMAND_TYPE, PARCEL_MEDIA_COMMAND_SIZE, PARCEL_MEDIA_COMMAND_DESC, PARCEL_MEDIA_COMMAND_LOOP_SET</br>
 				- Added: Contact item on menu Help<br />
 				- Removed: some compression code<br />
-			</p>
+			</div>
 
-			<p><span class="date">Feb 29 2008 12:40 (local time)</span>
+			<div><p><span class="date">Feb 29 2008 12:40 (local time)</span></p>
 				- Fixed: NULL_KEY was no key<br />
-			</p>
-		</div>
+			</div>
 
 
-		<div>
-			<h3>Release 2.34</h3>
-			<p><span class="date">Feb 23 2008 19:45 (local time)</span></p>
-			<p>
+			<div>
+				<h3><span class="date">Feb 23 2008 19:45 (local time)</span> Release 2.34</h3>
 				- Added: First generic plugin support<br />
 				- Added: integer multiply operator for float operand<br />
 				- Added: minus operator to rotation<br />
 				- Fixed: Internals to pass more language tests, e.g. bool on ZERO_ROTATION and NULL_KEY, adding items to list<br />
-			</p>
+			</div>
 
 			<p><span class="date">Feb 22 2008 23:38 (local time)</span></p>
-			<p>- Fixed: Browser status hides bottom scrollbar<br />
-			- Fixed: Switching between Tabbed document and Windowed document, browser disappears<br />
-			- Fixed: (key)"" == False<br />
-			- Added: state changes allowed in global functions (when set in Debugging - General menu)<br />
-			- Fixed: info on llInsertString was missing a few spaces<br />
-			- Added: Debug windows have context menu, Copy, Select All and <b>Clear</b><br />
-			- Added: File - New - New notecard<br />
-			- Changed: llGetScriptName returns scriptname without extension (when set in Debugging - General menu)<br />
-			- Fixed: Don't send empty bugreports<br />
-			- Fixed: tabs are presented in SL as 4 spaces, for example llStringLength("\t") == 4<br />
-			- Fixed: remove old files after Autoupdate<br />
-			- Fixed: autoupdate menu was readonly<br />
+			<p>
+				- Fixed: Browser status hides bottom scrollbar<br />
+				- Fixed: Switching between Tabbed document and Windowed document, browser disappears<br />
+				- Fixed: (key)"" == False<br />
+				- Added: state changes allowed in global functions (when set in Debugging - General menu)<br />
+				- Fixed: info on llInsertString was missing a few spaces<br />
+				- Added: Debug windows have context menu, Copy, Select All and <b>Clear</b><br />
+				- Added: File - New - New notecard<br />
+				- Changed: llGetScriptName returns scriptname without extension (when set in Debugging - General menu)<br />
+				- Fixed: Don't send empty bugreports<br />
+				- Fixed: tabs are presented in SL as 4 spaces, for example llStringLength("\t") == 4<br />
+				- Fixed: remove old files after Autoupdate<br />
+				- Fixed: autoupdate menu was readonly<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.33</h3>
+
 			<p><span class="date">Feb 12 2008 08:12 (local time)</span></p>
-			<p>- Fixed: llLog and llLog10</p>
+			<p>
+				- Fixed: llLog and llLog10<br />
+			</p>
 
 			<p><span class="date">Feb 04 2008 16:30 (local time)</span></p>
 			<p>
@@ -323,11 +352,9 @@
 				- Changed: Information on llSensorRepeat()<br />
 				- Added: llResetLandPassList()<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.32</h3>
+
 			<p><span class="date">Jan 27 2008 14:00 (local time)</span></p>
 			<p>
 				- Added: open multiple files from menu 'File - Open - File...' or Ctrl-O<br />
@@ -336,17 +363,16 @@
 				- Changed: 'Recent Projects' in 'Recent Solutions'<br />
 				- Changed: 'Add new Project' changed into 'Add new Solution'<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.31</h3>
+
 			<p><span class="date">Jan 14 2008 16:28 (local time)</span></p>
 			<p>
 				- Changed: llUnescapeURL and llEscapeURL using UTF8 encoding<br />
 				- Changed: llBase64ToString and llStringToBase64 using UTF8 encoding<br />
 				- Changed: improved label parsing<br />
 			</p>
+
 
 			<p><span class="date">Jan 12 2008 10:43 (local time)</span></p>
 			<p>
@@ -370,11 +396,9 @@
 			<p>
 				- Added: show status of capslock<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.30</h3>
+
 			<p><span class="date">Dec 29 2007 12:27 (local time)</span></p>
 			<p>
 				- Fixed: llParseString2List loops when using empty strings on spacers<br />
@@ -390,11 +414,9 @@
 				- Fixed: line number issue on scrolling<br />
 				- Fixed: cast error using llList2Vector for strings<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.29</h3>
+
 			<p><span class="date">Dec 18 2007 16:38 (local time)</span></p>
 			<p>
 				- Added: when nothing is selected, Shift-Delete, copies entire line to clipboard and deletes it<br />
@@ -407,16 +429,15 @@
 			<p>
 				- Fixed: Unchecking Check-For-Updates, does check for updates, thats wrong<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.28</h3>
+
 			<p><span class="date">Dec 14 2007 00:40 (local time)</span></p>
 			<p>
 				- Added: INS (insert) / OVR (override) on status bar, changes when hitting Insert key<br />
 				- Changed: Tab on notecards shows 'Text', where scripts shows 'Script'<br />
 			</p>
+
 
 			<p><span class="date">Dec 13 2007 23:52 (local time)</span></p>
 			<p>
@@ -449,11 +470,9 @@
 			<p>
 				- Fixed: Version 2.24 an above were broken on simple Verbose messages!!<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.27</h3>
+
 			<p><span class="date">Dec 05 2007 17:35 (local time)</span></p>
 			<p>
 				- Fixed: llModPow gives wrong answer using large numbers<br />
@@ -462,11 +481,9 @@
 				- Fixed: Oops from llGetObjectDetails (only OBJECT_NAME and OBJECT_DESC implemented)<br />
 				- Fixed: comments having unballanced string quotes do not compile<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.26</h3>
+
 			<p><span class="date">Nov 28 2007 19:31 (local time)</span></p>
 			<p>
 				- Changed: llBase64ToInteger , needs testings<br />
@@ -485,11 +502,9 @@
 				- Fixed: llListenRemove does not work<br />
 				- Fixed: llMessageLinked adds 1 extra event when compiling<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.25</h3>
+
 			<p><span class="date">Nov 22 2007 23:59 (local time)</span></p>
 			<p>
 				- Added: true/false operators on vector and rotation<br />
@@ -520,11 +535,10 @@
 			<p>
 				- Added: X-SecondLife-* headers in http request<br />
 			</p>
-		</div>
 
 
-		<div>
 			<h3>Release 2.24</h3>
+
 			<p><span class="date">Nov 13 2007 01:33 (local time)</span></p>
 			<p>
 				- Added: llResetLandBanList<br />
@@ -544,10 +558,9 @@
 			<p>
 				- Fixed: info on llDetachFromAvatar() shows argument<br />
 			</p>
-		</div>
 
-		<div>
 			<h3>Release 2.23</h3>
+
 			<p><span class="date">Nov 02 2007 15:53 (local time)</span></p>
 			<p>
 				- Added: PRIM_SCULPT_TYPE_* constants<br />
@@ -576,10 +589,9 @@
 				- Changed: LSLEditor remembers workingdirectory<br />
 				- Changed: 'View Solutionexplorer' made persistent<br />
 			</p>
-		</div>
 
-		<div>
 			<h3>Release 2.22</h3>
+
 			<p><span class="date">Oct 23 2007 20:13 (local time)</span></p>
 			<p>
 				- Changed: When importing script, make form active.<br />
@@ -595,24 +607,22 @@
 			</p>
 
 			<p><span class="date">Oct 21 2007 20:18 (local time)</span></p>
-			<p>
+			<div>
 				- Changed: Solution explorer, files are opened only once at a time<br />
 				- Changed: Solution explorer, changed Prim entity to Object<br />
 				- Changed: Solution explorer, Objects can be added to Objects<br />
 				- Added: llMessageLinked can use linknum in solution explorer(needs testing)<br />
-			</p>
-			<ul>
-				<li>LINK_ROOT</li>
-				<li>LINK_SET</li>
-				<li>LINK_ALL_OTHERS</li>
-				<li>LINK_ALL_CHILDREN</li>
-				<li>LINK_THIS</li>
-			</ul>
-			<p>
+				<ul>
+					<li>LINK_ROOT</li>
+					<li>LINK_SET</li>
+					<li>LINK_ALL_OTHERS</li>
+					<li>LINK_ALL_CHILDREN</li>
+					<li>LINK_THIS</li>
+				</ul>
 				Relationship is defined by place in solution explorer tree (no need to use llCreateLink)<br /><br />
 				- Fixed: the dialog is missing several buttons when using long text<br />
 				- Changed: llDialog and llRequestPermissions removed topmost property<br />
-			</p>
+			</div>
 
 			<p><span class="date">Oct 20 2007 12:09 (local time)</span></p>
 			<p>
@@ -635,10 +645,9 @@
 				- Fixed: Old bug on multiple changed scripts saving using Ctrl-S shortcut only saves first script<br />
 				- Fixed: Rename objects do not set object-name correctly<br />
 			</p>
-		</div>
 
-		<div>
 			<h3>Release 2.21</h3>
+
 			<p><span class="date">Oct 16 2007 13:46 (local time)</span></p>
 			<p>
 				- Changed: Find/Replace window hides when pressing Escape<br />
@@ -646,40 +655,36 @@
 			</p>
 
 			<p><span class="date">Oct 15 2007 23:10 (local time)</span></p>
-			<p>
+			<div>
 				- Changed: Tools menu, starts at top node<br />
 				- Added: LSLEditor goes unicode<br />
 				menu - tools - options - text editor - general - output format
-			</p>
-			<ul>
-				<li>ANSI (default)</li>
-				<li>Unicode</li>
-				<li>Unicode big endian</li>
-				<li>UTF-8</li>
-			</ul>
-			<p>
+					<ul>
+						<li>ANSI (default)</li>
+						<li>Unicode</li>
+						<li>Unicode big endian</li>
+						<li>UTF-8</li>
+					</ul>
 				- Fixed: Save on new.lsl file crashes LSLEditor<br />
 				- Changed: bugreport, Highlight entry in left pane (also when lost focus)<br />
 				- Fixed: bugreport, 'check all / uncheck all' button has wrong initial state<br />
 				- Changed: autocompletion on ll-functions having zero arguments (or single void argument) completes with ')' char<br />
 				- Added: double-clicking on an error message after compile, line in edit window is highlighted<br />
-			</p>
+			</div>
 
 			<p><span class="date">Oct 10 2007 10:59 (local time)</span></p>
-			<p>
+			<div>
 				- Changed: In respect to solution explorer
-			</p>
 				<ul>
 					<li>llGetObjectDesc</li>
 					<li>llSetObjectDesc</li>
 					<li>llGetObjectName</li>
 					<li>llSetObjectName</li>
 				</ul>
-		</div>
+			</div>
 
-
-		<div>
 			<h3>Release 2.20</h3>
+
 			<p><span class="date">Oct 09 2007 16:12 (local time)</span></p>
 			<p>
 				- Added: Plugin support<br />
@@ -712,11 +717,9 @@
 				- Changed: Wildcard autocompletion on argument, changed to show only pulldown menu (example llGetInventoryName)<br />
 				- Added: llRot2Fwd / llRot2Up / llRot2Left<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.19</h3>
+
 			<p><span class="date">Oct 01 2007 16:30 (local time)</span></p>
 			<p>
 				- Changed: Make text bold on active tab<br />
@@ -745,11 +748,9 @@
 			<p>
 				- Fixed: Selection from last line does not work<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.18</h3>
+
 			<p><span class="date">Sep 21 2007 19:09 (local time)</span></p>
 			<p>
 				- Fixed: SaveAs was broken<br />
@@ -768,11 +769,9 @@
 			<p>
 				- Added: http 'ContentLength' on llHTTPRequest POST requests<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.17</h3>
+
 			<p><span class="date">Sep 19 2007 12:47 (local time)</span></p>
 			<p>
 				- Fixed: Closing LSLEditor saves (all) changed files using its own name, example files (new.lsl) shows dialog<br />
@@ -817,11 +816,9 @@
 				- Added: Date/time on printed output<br />
 				- Changed: Case insensitive on ECC<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.16</h3>
+
 			<p><span class="date">Sep 13 2007 12:10 (local time)</span></p>
 			<p>
 				- Added: Experimental Code Completion (ECC) on user defined variable names, menu - tools - options - Text Editor - Code Completion<br />
@@ -846,11 +843,9 @@
 			<p>
 				- Fixed: First users see only a small window<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.15</h3>
+
 			<p><span class="date">Sep 03 2007 17:00 (local time)</span></p>
 			<p>
 				- Fixed: Renaming of non scripts and non notecards<br />
@@ -867,11 +862,9 @@
 				- Fixed: Recent projects menu blocks when dirty script has to be saved<br />
 				- Added: Menu - Tools - Options - Environment - General - delete old files after update<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.14</h3>
+
 			<p><span class="date">Aug 27 2007 12:07 (local time)</span></p>
 			<p>
 				- Fixed: Crash in Renaming files containing illegal chars in Solutionexplorer<br />
@@ -903,11 +896,9 @@
 				- Added: llGetInventoryType (when using solution explorer)<br />
 				- Changed: Blockcommenting Ctrl-K and Ctrl-L (also on non selected line)<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.13</h3>
+
 			<p><span class="date">Aug 22 2007 17:57 (local time)</span></p>
 			<p>
 				- Fixed: Crash on making default state<br />
@@ -967,12 +958,10 @@
 				- Changed: Sending bugreports can be canceled<br />
 				- Changed: implicit float to integer operator to explicit<br />
 			</p>
-		</div>
 
+			<h3>Release 2.12</h3>
 
-		<div>
-				<h3>Release 2.12</h3>
-				<p><span class="date">Aug 10 2007 13:13 (local time)</span></p>
+			<p><span class="date">Aug 10 2007 13:13 (local time)</span></p>
 			<p>
 				- Added: LSLEditorHelp offline wiki (Tools - Editor properties)<br />
 				- Changed: Find window keeps search entries<br />
@@ -998,11 +987,9 @@
 			<p>
 				- Added: Smtp Authentication for llEmail (Tools, Runtime Properties, External, Email)<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.11</h3>
+
 			<p><span class="date">Jul 30 2007 16:19 (local time)</span></p>
 			<p>
 				- Added: Home key works also on white-space lines<br />
@@ -1022,15 +1009,12 @@
 				- Fixed: Editor crash when closing project having browser window open<br />
 				- Added: llGetLocalPos()<br />
 			</p>
-		</div>
 
+			<h3>Release 2.10</h3>
 
-		<div>
-				<h3>Release 2.10</h3>
-				<p><span class="date">Jul 25 2007 14:30 (local time)</span></p>
-			<p>
+			<p><span class="date">Jul 25 2007 14:30 (local time)</span></p>
+			<div>
 				- Added: Solution Explorer (first look)<br />
-			</p>
 				<ul>
 					<li>llGetObjectName</li>
 					<li>llGetScriptName</li>
@@ -1041,10 +1025,9 @@
 					<li>llGetNumberOfNotecardLines</li>
 					<li>llGetNotecardLine</li>
 				</ul>
-			<p>
 				- Added: Reset option on Editor properties<br />
 				- Added: mod operator (%) on integer<br />
-			</p>
+			</div>
 
 			<p><span class="date">Jul 24 2007 11:55 (local time)</span></p>
 			<p>
@@ -1067,11 +1050,9 @@
 				- Added: Bugtracker to Menu Help , Bugreport<br />
 				- Changed: Home button toggles between start of line, and first non whitespace<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.9</h3>
+
 			<p><span class="date">Jul 16 2007 11:25 (local time)</span></p>
 			<p>
 				- Changed: Autocompletion images scale on changing fonts<br />
@@ -1098,11 +1079,9 @@
 			<p>
 				- Fixed: Tooltip shows bold on some High-Resolution machines (David IOU1)<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.8</h3>
+
 			<p><span class="date">Jul 10 2007 08:41 (local time)</span></p>
 			<p>
 				- Fixed: Runtime properties, incorrect key from cache (xor)<br />
@@ -1126,11 +1105,9 @@
 				- Added: Boundary checks on list functions<br />
 				- Fixed: jump statement gives error (_goto)<br/>
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.7</h3>
+
 			<p><span class="date">Jul 4 2007 12:12 (local time)</span></p>
 			<p>
 				- Added: Bitwise Xor operator on integer (^)<br/>
@@ -1152,17 +1129,15 @@
 			</p>
 
 			<p><span class="date">Jul 1 2007 23:55 (local time)</span></p>
-			<p>
+			<div>
 				- Added: Smart indenting on closing parenthesis (experimental)<br />
 				- Revised: (Needs testing!!)
-			</p>
 					<ul>
 						<li>llGetSubString</li>
 						<li>llDeleteSubString</li>
 						<li>llList2List</li>
 						<li>llDeleteSubList</li>
 					</ul>
-			<p>
 				- Added:
 					<ul>
 						<li>llIntegerToBase64</li>
@@ -1171,6 +1146,7 @@
 						<li>llBase64ToString</li>
 						<li>llXorBase64StringsCorrect</li>
 				</ul>
+			</div>
 
 			<p><span class="date">Jun 30 2007 11:41 (local time)</span></p>
 			<p>
@@ -1194,11 +1170,9 @@
 				- Changed: Tab / Shift Tab , toggles indent block of text<br />
 				- Changed: Home button sets cursor to beginning of line, after whitespace<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.6</h3>
+
 			<p><span class="date">Jun 27 2007 18:20 (local time)</span></p>
 			<p>
 				- Fixed: Editor crashes on error in dataserver script<br />
@@ -1211,24 +1185,22 @@
 			</p>
 
 			<p><span class="date">Jun 25 2007 21:08 (local time)</span></p>
-			<p>
+			<div>
 				- Fixed: Indent adds tab on lines ending in comment or whitespace<br />
 				- Added: XML-RPC listening base port 50888<br />
-			</p>
-			<ul>
-				<li> remote_data (event)</li>
-				<li> llOpenRemoteDataChannel</li>
-				<li> llCloseRemoteDataChannel</li>
-				<li> llRemoteDataReply</li>
-				<li> llSendRemoteData (untested)</li>
-			</ul>
-			<p>
+					<ul>
+						<li> remote_data (event)</li>
+						<li> llOpenRemoteDataChannel</li>
+						<li> llCloseRemoteDataChannel</li>
+						<li> llRemoteDataReply</li>
+						<li> llSendRemoteData (untested)</li>
+					</ul>
 				- Fixed: Tooltips shows 'lt;' and 'gt;'<br />
 				- Added: Bugreport to Menu Help<br />
 				- Added: llLoadURL<br />
 				- Added: listen callbacks are removed on state change<br />
 				- Added: llListenControl<br />
-			</p>
+			</div>
 			<p><span class="date">Jun 24 2007 13:11 (local time)</span></p>
 			<p>
 				- Added: Print preview<br />
@@ -1249,11 +1221,9 @@
 			<p>
 				- Fixed: Compiles empty documents and/or absent default state<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.5</h3>
+
 			<p><span class="date">Jun 20 2007 22:41 (local time)</span></p>
 			<p>
 				- Fixed: Menu Tools does not work<br />
@@ -1281,11 +1251,9 @@
 			<p>
 				- Fixed: key problem (breaks listen and more)<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.4</h3>
+
 			<p><span class="date">Jun 13 2007 12:12 (local time)</span></p>
 			<p>
 				- Release 2.4<br />
@@ -1311,15 +1279,15 @@
 				- Fixed: Undo slow on large documents<br />
 			</p>
 			<p><span class="date">Jun 09 2007 11:44 (local time)</span></p>
-			<p>
+			<div>
 				- Added: brackets matching<br />
-			</p>
-			<ul>
-				<li>parentheses or round brackets:  ( )</li>
-				<li>box brackets or square brackets:  [ ]</li>
-				<li>curly brackets or braces:  { }</li>
-				<li>angle brackets or chevrons: &lt; &gt;</li>
-			</ul>
+				<ul>
+					<li>parentheses or round brackets:  ( )</li>
+					<li>box brackets or square brackets:  [ ]</li>
+					<li>curly brackets or braces:  { }</li>
+					<li>angle brackets or chevrons: &lt; &gt;</li>
+				</ul>
+			</div>
 			<p><span class="date">Jun 08 2007 19:35 (local time)</span></p>
 			<p>
 				- Fixed: Undo after find / replace<br />
@@ -1334,11 +1302,9 @@
 			<p>
 				- Added: Find and Replace<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.3</h3>
+
 			<p><span class="date">Jun 06 2007 17:01 (local time)</span></p>
 			<p>
 				- Fixed: Editor does not show on taskbar<br />
@@ -1432,11 +1398,9 @@
 				- added comparison operators for list,key,float,integer,vector and rotation<br />
 				- when opening an existing document, the untouched 'new.lsl' example is destroyed<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.2</h3>
+
 			<p><span class="date">May 26 2007 18:00 (local time)</span></p>
 			<p>
 				- Tooltipping / Codecompletion hitting the boundaries of parent window<br />
@@ -1479,11 +1443,9 @@
 			<p>
 				- Simulator docks at bottom<br />
 			</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.1</h3>
+
 			<p><span class="date">May 14 2007 22:47 (local time)</span></p>
 			<p>
 				- <b>Release 2.1 (Multiple document interface)</b><br />
@@ -1556,11 +1518,9 @@
 
 			<p><span class="date">Apr 29 2007 15:29 (local time)</span></p>
 			<p>First implementation of linenumbers</p>
-		</div>
 
-
-		<div>
 			<h3>Release 2.0</h3>
+
 			<p><span class="date">Apr 28 2007 14:01 (local time)</span></p>
 			<p>Changed project to .NET 2.0</p>
 
@@ -1619,19 +1579,19 @@
 			<p><span class="date">Oct 8, 2006 18:36 (local time)</span></p>
 			<p>- Code highlighting<br/>
 			- Code completion<br/>
-			- Code info, took the old LSL guide, and used Appendix, i can do better i
+			- Code info, took the old LSLguide, and used Appendix, i can do better i
 			know<br/>
-			- F1 , on a keyword, does show up the LSL Wiki page on the keyword<br>
+			- F1 , on a keyword, does show up the LSLWiki page on the keyword<br>
 			- Compile, the hello world example should work on state_entry event<br>
 			- Open/Save and edit lsl script files</p>
 			<p><span class="date">Oct 2, 2006 (local time)</span></p>
-		</div>
 
-
-		<div>
 			<h3>Release 1.0</h3>
+
 			<p>First idea and prototype</p>
+
 			<p><span class="date">Oct 1, 2006 (local time)</span></p>
+
 		</div>
 	</body>
 </html>
