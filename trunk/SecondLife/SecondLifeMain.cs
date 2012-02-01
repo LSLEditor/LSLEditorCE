@@ -3778,10 +3778,11 @@ namespace LSLEditor
             Verbose("SetPrimitiveParams(" + rule.ToString() + ")");
         }
 
-		public vector llSetRegionPos(vector Position)
+		public integer llSetRegionPos(vector Position)
 		{
 			Verbose("SetRemoteScriptAccessPin(" + Position + ")");
 			m_pos = Position;
+			return true;
 		}
 
         public void llSetRemoteScriptAccessPin(integer pin)
