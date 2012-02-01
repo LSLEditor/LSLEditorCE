@@ -3780,7 +3780,7 @@ namespace LSLEditor
 
 		public integer llSetRegionPos(vector Position)
 		{
-			Verbose("SetRemoteScriptAccessPin(" + Position + ")");
+			Verbose("llSetRegionPos(" + Position + ")");
 			m_pos = Position;
 			return true;
 		}
