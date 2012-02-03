@@ -237,6 +237,7 @@
     <Compile Include="Helpers\HTTPRequest.cs" />
     <Compile Include="Helpers\OutlineHelper.cs" />
     <Compile Include="Helpers\SendMyKeys.cs" />
+    <Compile Include="Helpers\TextFileEncodingDetector.cs" />
     <Compile Include="llTextBoxForm.cs">
       <SubType>Form</SubType>
     </Compile>
