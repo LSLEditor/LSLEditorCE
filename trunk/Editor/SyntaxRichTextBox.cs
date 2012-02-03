@@ -54,6 +54,9 @@ using System.Drawing.Printing;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+
+using LSLEditor.Helpers;
+
 namespace LSLEditor
 {
 	public delegate void IsDirtyHandler(object sender, EventArgs e);
@@ -2223,7 +2226,9 @@ namespace LSLEditor
 			{
 				if (File.Exists(path))
 				{
-					StreamReader sr = new StreamReader(path, Encoding.UTF8);
+					// TODO needs to be refactored to read the file in once and pass the byte array to be checked.
+					Encoding fileEncoding = TextFileEncodingDetector.DetectTextFileEncoding(path, Encoding.UTF8);
+					StreamReader sr = new StreamReader(path, fileEncoding);
 					this.Text = sr.ReadToEnd();
 					sr.Close();
 				}

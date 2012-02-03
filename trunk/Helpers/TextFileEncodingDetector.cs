@@ -23,7 +23,7 @@ namespace LSLEditor.Helpers
 		 *      Windows-1252 (in .Net, also incorrectly called "ASCII") encodings, we use a
 		 *      heuristic - so the more of the file we can sample the better the guess. If you
 		 *      are going to read the whole file into memory at some point, then best to pass
-		 *      in the whole byte byte array directly. Otherwise, decide how to trade off
+		 *      in the whole byte array directly. Otherwise, decide how to trade off
 		 *      reliability against performance / memory usage.
 		 *
 		 *  - The UTF-8 detection heuristic only works for western text, as it relies on
