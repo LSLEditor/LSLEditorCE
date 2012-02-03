@@ -42,10 +42,10 @@ namespace LSLEditor.Tools
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.checkBox4 = new System.Windows.Forms.CheckBox();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
-			this.radioButton5 = new System.Windows.Forms.RadioButton();
-			this.radioButton6 = new System.Windows.Forms.RadioButton();
-			this.radioButton7 = new System.Windows.Forms.RadioButton();
 			this.radioButton8 = new System.Windows.Forms.RadioButton();
+			this.radioButton7 = new System.Windows.Forms.RadioButton();
+			this.radioButton6 = new System.Windows.Forms.RadioButton();
+			this.radioButton5 = new System.Windows.Forms.RadioButton();
 			this.groupBox4.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -205,49 +205,50 @@ namespace LSLEditor.Tools
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "output format";
 			// 
-			// radioButton5
+			// radioButton8
 			// 
-			this.radioButton5.AutoSize = true;
-			this.radioButton5.Location = new System.Drawing.Point(16, 24);
-			this.radioButton5.Name = "radioButton5";
-			this.radioButton5.Size = new System.Drawing.Size(50, 17);
-			this.radioButton5.TabIndex = 0;
-			this.radioButton5.TabStop = true;
-			this.radioButton5.Text = "ANSI";
-			this.radioButton5.UseVisualStyleBackColor = true;
-			// 
-			// radioButton6
-			// 
-			this.radioButton6.AutoSize = true;
-			this.radioButton6.Location = new System.Drawing.Point(16, 48);
-			this.radioButton6.Name = "radioButton6";
-			this.radioButton6.Size = new System.Drawing.Size(65, 17);
-			this.radioButton6.TabIndex = 1;
-			this.radioButton6.TabStop = true;
-			this.radioButton6.Text = "UTF-16 LE";
-			this.radioButton6.UseVisualStyleBackColor = true;
+			this.radioButton8.AutoSize = true;
+			this.radioButton8.Location = new System.Drawing.Point(16, 24);
+			this.radioButton8.Name = "radioButton8";
+			this.radioButton8.Size = new System.Drawing.Size(55, 17);
+			this.radioButton8.TabIndex = 0;
+			this.radioButton8.TabStop = true;
+			this.radioButton8.Text = "UTF-8";
+			this.radioButton8.UseVisualStyleBackColor = true;
 			// 
 			// radioButton7
 			// 
 			this.radioButton7.AutoSize = true;
-			this.radioButton7.Location = new System.Drawing.Point(16, 72);
+			this.radioButton7.Location = new System.Drawing.Point(16, 96);
 			this.radioButton7.Name = "radioButton7";
-			this.radioButton7.Size = new System.Drawing.Size(117, 17);
-			this.radioButton7.TabIndex = 2;
+			this.radioButton7.Size = new System.Drawing.Size(78, 17);
+			this.radioButton7.TabIndex = 3;
 			this.radioButton7.TabStop = true;
 			this.radioButton7.Text = "UTF-16 BE";
 			this.radioButton7.UseVisualStyleBackColor = true;
 			// 
-			// radioButton8
+			// radioButton6
 			// 
-			this.radioButton8.AutoSize = true;
-			this.radioButton8.Location = new System.Drawing.Point(16, 96);
-			this.radioButton8.Name = "radioButton8";
-			this.radioButton8.Size = new System.Drawing.Size(55, 17);
-			this.radioButton8.TabIndex = 3;
-			this.radioButton8.TabStop = true;
-			this.radioButton8.Text = "UTF-8";
-			this.radioButton8.UseVisualStyleBackColor = true;
+			this.radioButton6.AutoSize = true;
+			this.radioButton6.Location = new System.Drawing.Point(16, 72);
+			this.radioButton6.Name = "radioButton6";
+			this.radioButton6.Size = new System.Drawing.Size(77, 17);
+			this.radioButton6.TabIndex = 2;
+			this.radioButton6.TabStop = true;
+			this.radioButton6.Text = "UTF-16 LE";
+			this.radioButton6.UseVisualStyleBackColor = true;
+			// 
+			// radioButton5
+			// 
+			this.radioButton5.AutoSize = true;
+			this.radioButton5.Enabled = false;
+			this.radioButton5.Location = new System.Drawing.Point(16, 49);
+			this.radioButton5.Name = "radioButton5";
+			this.radioButton5.Size = new System.Drawing.Size(100, 17);
+			this.radioButton5.TabIndex = 1;
+			this.radioButton5.Text = "UTF-8 + B.O.M.";
+			this.radioButton5.UseVisualStyleBackColor = true;
+			this.radioButton5.Visible = false;
 			// 
 			// TextEditorGeneral
 			// 
