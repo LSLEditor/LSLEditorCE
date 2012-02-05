@@ -129,6 +129,7 @@ namespace LSLEditor
 			}
 		}
 
+		// TODO This callback needs to determine if this version is not older than current and disable the Update button if so.
 		void manifest_DownloadCompleted(object sender, DownloadStringCompletedEventArgs e)
 		{
 			if (e.Error != null)
