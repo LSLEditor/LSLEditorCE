@@ -55,24 +55,52 @@ namespace LSLEditor
 		private WebClient manifest;
 		private WebClient client;
 
-		private string strHashNew;
+		private string strHashWeb;
 		private string strDownloadUrl;
 
-		private string strHelpHashNew;
+		private string strHelpHashWeb;
 		private string strHelpUrl;
 		private string strHelpReferer;
 
 		private bool blnOnlyHelpFile;
 
+		private struct versionInfo
+		{
+			public Version version;
+			public string hash;
+			public string uri;
+
+			public versionInfo(string ver)
+			{
+				version = new Version(ver);
+				hash = "";
+				uri = "";
+			}
+
+			public versionInfo(string ver, string md5)
+			{
+				version = new Version(ver);
+				hash = md5;
+				uri = "";
+			}
+
+			public versionInfo(string ver, string md5, string URI)
+			{
+				version = new Version(ver);
+				hash = md5;
+				uri = URI;
+			}
+		}
+
 		public UpdateApplicationForm()
 		{
 			InitializeComponent();
-			this.strHashNew = "";
-			this.strHelpHashNew = "";
+			this.strHashWeb = "";
+			this.strHelpHashWeb = "";
 			this.strDownloadUrl = null;
 			this.strHelpUrl = null;
 			this.strHelpReferer = null;
-			this.button1.Enabled = false;
+			this.buttonUpdate.Enabled = false;
 			this.blnOnlyHelpFile = false;
 		}
 
@@ -123,7 +151,7 @@ namespace LSLEditor
 			if (blnForce)
 			{
 				Properties.Settings.Default.CheckDate = DateTime.Now;
-				Properties.Settings.Default.Save(); // save also al settings
+				Properties.Settings.Default.Save(); // save also all settings
 
 				StartDownloadinManifest();
 			}
@@ -134,32 +162,37 @@ namespace LSLEditor
 			if (e.Error != null)
 				return;
 
-			string strHashOld = Decompressor.MD5Verify.ComputeHash(Assembly.GetExecutingAssembly().Location);
-			string strVersionOld = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			string strVersionNew = strVersionOld;
+			versionInfo bzip  = new versionInfo();
+			versionInfo gzip = new versionInfo();
+			versionInfo wzip = new versionInfo();
 
-			string strHelpHashOld = "";
+			versionInfo web = new versionInfo();
+
+			versionInfo current = new versionInfo(Assembly.GetExecutingAssembly().GetName().Version.ToString());
+			current.hash = Decompressor.MD5Verify.ComputeHash(Assembly.GetExecutingAssembly().Location);
+			current.uri = "";
+
+			string strHelpHashMe = "";
 			string strHelpFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), Properties.Settings.Default.HelpOfflineFile);
 			if (File.Exists(strHelpFile))
 			{
-				strHelpHashOld = Decompressor.MD5Verify.ComputeHash(strHelpFile);
+				strHelpHashMe = Decompressor.MD5Verify.ComputeHash(strHelpFile);
 			}
 			else
 			{
 				// help file does not exist
 				if (Properties.Settings.Default.HelpOffline || blnOnlyHelpFile)
 				{
-					strHelpHashOld = "*"; // force new update
+					strHelpHashMe = "*"; // force new update
 				}
 				else
 				{
-					strHelpHashOld = ""; // no update
-					this.label5.Visible = false;
-					this.label6.Visible = false;
+					strHelpHashMe = ""; // no update
+					this.labelHelpFile.Visible = false;
+					this.labelHelpversionString.Visible = false;
 				}
 			}
 
-			strHashNew = strHashOld;
 			StringReader sr = new StringReader(e.Result);
 			for (int intI = 0; intI < 255; intI++)
 			{
@@ -174,37 +207,41 @@ namespace LSLEditor
                 string strName = strLine.Substring(0, intSplit);
 				string strValue = strLine.Substring(intSplit + 1);
 
+				//All hashes are of the uncompressed file. However, different archives may contain different versions.
 				switch (strName)
 				{
 					case "Version":
-						strVersionNew = strValue;
+					case "BZipVersion":
+						bzip = new versionInfo(strValue);
 						break;
 					case "Hash":
-						strHashNew = strValue;
+					case "BZipHash":
+						bzip.hash = strValue;
 						break;
 					case "Url":
-						strDownloadUrl = strValue;
+					case "BZipUrl":
+						bzip.uri = strValue;
 						break;
                     case "GZipVersion":
-						strVersionNew = strValue;
+						gzip = new versionInfo(strValue);
 						break;
 					case "GZipHash":
-						strHashNew = strValue;
+						gzip.hash = strValue;
 						break;
 					case "GZipUrl":
-						strDownloadUrl = strValue;
+						gzip.uri = strValue;
 						break;
 					case "ZipVersion":
-						strVersionNew = strValue;
+						wzip = new versionInfo(strValue);
 						break;
 					case "ZipHash":
-						strHashNew = strValue;
+						wzip.hash = strValue;
 						break;
 					case "ZipUrl":
-						strDownloadUrl = strValue;
+						wzip.uri = strValue;
 						break;
                     case "HelpHash":
-						strHelpHashNew = strValue;
+						strHelpHashWeb = strValue;
 						break;
 					case "HelpUrl2":
 						strHelpUrl = strValue;
@@ -217,51 +254,74 @@ namespace LSLEditor
 				}
 			}
 
-			this.label3.Text = strVersionOld;
-			this.label4.Text = strVersionNew;
-
-			if (strHelpHashOld == "")
-				strHelpHashOld = strHelpHashNew;
-
-			if (strHelpHashOld == strHelpHashNew)
+			web = bzip;
+			/*
+			if (!String.IsNullOrEmpty(gzip.uri) && (gzip.compare(web) == 1))
 			{
-				this.label6.Text = "Up to date";
+				web = gzip;
+			}
+
+
+			if (!String.IsNullOrEmpty(wzip.uri) && (wzip.compare(web) == 1))
+			{
+				web = wzip;
+			}
+			*/
+
+			this.labelOurVersionString.Text = current.version.ToString();
+			this.labelLatestVersionString.Text = web.version.ToString();
+
+			if (String.IsNullOrEmpty(web.uri) || (web.version.CompareTo(current.version) != 1))
+			{
+				return;
+			}
+
+			if (strHelpHashMe == "")
+				strHelpHashMe = strHelpHashWeb;
+
+			if (strHelpHashMe == strHelpHashWeb)
+			{
+				this.labelHelpversionString.Text = "Up to date";
 				this.strHelpUrl = null;
 			}
 			else
 			{
-				this.label6.Text = "Out of date";
+				this.labelHelpversionString.Text = "Out of date";
 			}
 
-			if (strHashOld == strHashNew)
+			if (current.hash == web.hash)
 			{
 				this.strDownloadUrl = null;
+			}
+			else
+			{
+				this.strDownloadUrl = web.uri;
 			}
 
 			if (this.blnOnlyHelpFile)
 			{
 				this.strDownloadUrl = null;
-				this.label2.Visible = false;
-				this.label4.Visible = false;
+				this.labelLatestVersion.Visible = false;
+				this.labelLatestVersionString.Visible = false;
 			}
 
 			if (this.strHelpUrl != null || this.strDownloadUrl != null)
 			{
-				this.button1.Enabled = true;
+				this.buttonUpdate.Enabled = true;
 
 				if (OnUpdateAvailable != null)
 					OnUpdateAvailable(this, null);
 			}
 		}
 
-		private void button2_Click(object sender, EventArgs e)
+		private void buttonCancel_Click(object sender, EventArgs e)
 		{
 			this.Close();
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void buttonUpdate_Click(object sender, EventArgs e)
 		{
-			this.button1.Enabled = false;
+			this.buttonUpdate.Enabled = false;
 			Download();
 		}
 
@@ -310,9 +370,9 @@ namespace LSLEditor
 				string strNewFile = Path.Combine(strDirectory, Properties.Settings.Default.HelpOfflineFile);
 
 				string strComputedHash = Decompressor.MD5Verify.ComputeHash(strNewFile);
-				if (strComputedHash != strHelpHashNew)
+				if (strComputedHash != strHelpHashWeb)
 				{
-					this.button1.Enabled = true;
+					this.buttonUpdate.Enabled = true;
 					throw new Exception("MD5 Hash of HelpFile not correct, try downloading again!");
 				}
 				if (this.strDownloadUrl != null)
@@ -386,7 +446,7 @@ namespace LSLEditor
 						break;
 				}
 				string strComputedHash = Decompressor.MD5Verify.ComputeHash(strNewFile);
-				if (strComputedHash == strHashNew)
+				if (strComputedHash == strHashWeb)
 				{
 					if (File.Exists(strOldFile))
 						File.Delete(strOldFile);
@@ -406,7 +466,7 @@ namespace LSLEditor
 				}
 				else
 				{
-					this.button1.Enabled = true;
+					this.buttonUpdate.Enabled = true;
 					throw new Exception("MD5 Hash not correct, try downloading again!");
 				}
 			}
