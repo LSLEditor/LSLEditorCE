@@ -43,6 +43,7 @@
 // */
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 //
 // General Information about an assembly is controlled through the following 
@@ -99,3 +100,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyName("")]
 [assembly: AssemblyKeyFile("..\\..\\Resource\\test.snk")]
+[assembly: ComVisibleAttribute(false)]

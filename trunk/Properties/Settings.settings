@@ -300,7 +300,7 @@
       <Value Profile="(Default)">Resource.ToolsOptions.xml</Value>
     </Setting>
     <Setting Name="ContactUrl" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://sourceforge.net/tracker/?group_id=319248</Value>
+      <Value Profile="(Default)">https://sourceforge.net/projects/lsleditor/</Value>
     </Setting>
     <Setting Name="DonateUrl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://www.lsleditor.org/donate.htm</Value>
@@ -332,7 +332,7 @@
     <Setting Name="OutputFormat" Type="System.String" Scope="User">
       <Value Profile="(Default)">UTF-8</Value>
     </Setting>
-    <Setting Name="OutputFormat" Type="System.String" Scope="User">
+    <Setting Name="OutputFormat1" Type="System.String" Scope="User">
       <Value Profile="(Default)">UTF-8</Value>
     </Setting>
   </Settings>

@@ -1123,7 +1123,7 @@ namespace LSLEditor.Properties {
 
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://sourceforge.net/tracker/?group_id=319248")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://sourceforge.net/projects/lsleditor/")]
         public string ContactUrl {
             get {
                 return ((string)(this["ContactUrl"]));
@@ -1226,6 +1226,18 @@ namespace LSLEditor.Properties {
             }
             set {
                 this["OutputFormat"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("UTF-8")]
+        public string OutputFormat1 {
+            get {
+                return ((string)(this["OutputFormat1"]));
+            }
+            set {
+                this["OutputFormat1"] = value;
             }
         }
     }
