@@ -496,8 +496,8 @@ namespace LSLEditor
 		private void InitPluginsList()
 		{
 			// erase old plugins
-			for (int intI = this.toolStripMenuItem3.DropDownItems.Count - 1; intI > 0; intI--)
-				this.toolStripMenuItem3.DropDownItems.RemoveAt(intI);
+			for (int intI = this.toolsStripMenuItem.DropDownItems.Count - 1; intI > 0; intI--)
+				this.toolsStripMenuItem.DropDownItems.RemoveAt(intI);
 
 			if (Properties.Settings.Default.Plugins == null)
 				return;
@@ -510,7 +510,7 @@ namespace LSLEditor
 					tsmi = new ToolStripMenuItem(strPlugin, null, handler, Keys.F7);
 				else
 					tsmi = new ToolStripMenuItem(strPlugin, null, handler);
-				this.toolStripMenuItem3.DropDownItems.Add(tsmi);
+				this.toolsStripMenuItem.DropDownItems.Add(tsmi);
 			}
 		}
 
@@ -1550,7 +1550,7 @@ namespace LSLEditor
 			if (tsmi == null)
 				return;
 
-			this.fileToolStripMenuItem.HideDropDown();
+			this.fileStripMenuItem.HideDropDown();
 
 			string strPath = tsmi.Tag.ToString();
 			OpenFile(strPath, Guid.NewGuid());
@@ -1625,7 +1625,7 @@ namespace LSLEditor
 			if (tsmi == null)
 				return;
 
-			this.fileToolStripMenuItem.HideDropDown();
+			this.fileStripMenuItem.HideDropDown();
 
 			if (CloseAllOpenWindows())
 			{
