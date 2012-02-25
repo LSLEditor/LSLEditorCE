@@ -12,7 +12,7 @@
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
     <AssemblyName>LSLEditor</AssemblyName>
-    <AssemblyOriginatorKeyFile>Resource\Test.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>testing.pfx</AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
     <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
@@ -245,6 +245,7 @@
       <DependentUpon>llTextBoxForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Generic.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solution\GuidProperty.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -316,9 +317,6 @@
     </Compile>
     <Compile Include="Plugins\LSLint.cs" />
     <Compile Include="Plugins\Particles.cs" />
-    <Compile Include="Resource\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Browser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -720,6 +718,8 @@
     <Content Include="LSLEditor.rc" />
     <EmbeddedResource Include="Resource\ToolsOptions.xml" />
     <EmbeddedResource Include="Resource\thanks.gif" />
+    <None Include="Test.snk" />
+    <None Include="testing.pfx" />
     <None Include="Web References\org.lsleditor.www\Service1.disco" />
     <EmbeddedResource Include="Resource\About.htm" />
     <EmbeddedResource Include="Resource\ReleaseNotes.htm">
@@ -813,7 +813,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resource\Test.snk" />
     <None Include="Web References\org.lsleditor.www\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
