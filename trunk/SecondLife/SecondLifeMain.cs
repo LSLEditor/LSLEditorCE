@@ -270,6 +270,9 @@ namespace LSLEditor
         public static readonly integer ATTACH_HUD_BOTTOM = 37;
         public static readonly integer ATTACH_HUD_BOTTOM_RIGHT = 38;
 
+		public static readonly integer AVOID_CHARACTERS = 1;
+		public static readonly integer AVOID_DYNAMIC_OBSTACLES = 2;
+
         public static readonly integer CAMERA_PITCH = 0;
         public static readonly integer CAMERA_FOCUS_OFFSET = 1;
         public static readonly integer CAMERA_POSITION_LAG = 5;
@@ -297,6 +300,24 @@ namespace LSLEditor
         public static readonly integer CHANGED_TELEPORT = 512;
         public static readonly integer CHANGED_REGION_START = 1024;
 		public static readonly integer CHANGED_MEDIA = 2048;
+
+		public static readonly integer CHARACTER_AVOIDANCE_MODE = 5;
+		public static readonly integer CHARACTER_CMD_JUMP = 0x01;
+		public static readonly integer CHARACTER_CMD_STOP = 0x00;
+		public static readonly integer CHARACTER_DESIRED_SPEED = 1;
+		public static readonly integer CHARACTER_LENGTH = 3;
+		public static readonly integer CHARACTER_TYPE = 6;
+		public static readonly integer CHARACTER_MAX_ACCEL = 8;
+		public static readonly integer CHARACTER_MAX_ANGULAR_ACCEL = 11;
+		public static readonly integer CHARACTER_MAX_ANGULAR_SPEED = 10;
+		public static readonly integer CHARACTER_MAX_DECEL = 9;
+		public static readonly integer CHARACTER_RADIUS = 2;
+		public static readonly integer CHARACTER_TURN_SPEED_MULTIPLIER = 12;
+		public static readonly integer CHARACTER_TYPE_A = 0;
+		public static readonly integer CHARACTER_TYPE_B = 1;
+		public static readonly integer CHARACTER_TYPE_C = 2;
+		public static readonly integer CHARACTER_TYPE_D = 3;
+		public static readonly integer CHARACTER_TYPE_NONE = 4;
 
         public static readonly integer CLICK_ACTION_NONE = 0;
         public static readonly integer CLICK_ACTION_TOUCH = 0;
@@ -335,6 +356,8 @@ namespace LSLEditor
         public static readonly integer ESTATE_ACCESS_ALLOWED_GROUP_REMOVE = 32;
         public static readonly integer ESTATE_ACCESS_BANNED_AGENT_ADD = 64;
         public static readonly integer ESTATE_ACCESS_BANNED_AGENT_REMOVE = 128;
+
+		public static readonly integer FORCE_DIRECT_PATH = 1;
 
         public static readonly integer HTTP_BODY_MAXLENGTH = 2;
         public static readonly integer HTTP_BODY_TRUNCATED = 0;
@@ -653,7 +676,22 @@ namespace LSLEditor
         public static readonly integer PSYS_SRC_PATTERN_ANGLE_CONE = 8;
         public static readonly integer PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY = 16;
 
+		public static readonly integer PU_EVADE_HIDDEN = 0x07;
+		public static readonly integer PU_EVADE_SPOTTED = 0x08;
+		public static readonly integer PU_FAILURE_INVALID_GOAL = 0x03;
+		public static readonly integer PU_FAILURE_INVALID_START = 0x02;
+		public static readonly integer PU_FAILURE_NO_VALID_DESTINATION = 0x06;
+		public static readonly integer PU_FAILURE_OTHER = 1000000;
+		public static readonly integer PU_FAILURE_TARGET_GONE = 0x05;
+		public static readonly integer PU_FAILURE_UNREACHABLE = 0x04;
+		public static readonly integer PU_GOAL_REACHED = 0x01;
+		public static readonly integer PU_SLOWDOWN_DISTANCE_REACHED = 0x00;
+
         public static readonly integer PUBLIC_CHANNEL = 0;
+
+		public static readonly integer PURSUIT_FUZZ_FACTOR = 3;
+		public static readonly integer PURSUIT_INTERCEPT = 4;
+		public static readonly integer PURSUIT_OFFSET = 1;
 
 		public static readonly integer RC_DATA_FLAGS = 2;
 		public static readonly integer RC_DETECT_PHANTOM = 1;
@@ -684,6 +722,8 @@ namespace LSLEditor
         public static readonly integer REMOTE_DATA_CHANNEL = 1;
         public static readonly integer REMOTE_DATA_REQUEST = 2;
         public static readonly integer REMOTE_DATA_REPLY = 3;
+
+		public static readonly integer REQUIRE_LINE_OF_SIGHT = 2;
 
         public static readonly integer STATUS_PHYSICS = 1;
         public static readonly integer STATUS_ROTATE_X = 2;
@@ -718,6 +758,11 @@ namespace LSLEditor
 		public static readonly integer TOUCH_INVALID_FACE = 0xFFFFFFFF;
         public static readonly vector TOUCH_INVALID_TEXCOORD = new vector(-1.0, -1.0, 0.0);
 		public static readonly vector TOUCH_INVALID_VECTOR = new vector(0.0, 0.0, 0.0);
+
+		public static readonly integer TRAVERSAL_TYPE = 7;
+		public static readonly integer TRAVERSAL_TYPE_FAST = 1;
+		public static readonly integer TRAVERSAL_TYPE_NONE = 2;
+		public static readonly integer TRAVERSAL_TYPE_SLOW = 0;
 
         public static readonly integer TYPE_INTEGER = 1;
         public static readonly integer TYPE_FLOAT = 2;
@@ -1385,10 +1430,20 @@ namespace LSLEditor
             return dblA;
         }
 
+		public void llCreateCharacter(list Options)
+		{
+			Verbose("llCreateCharacter({0})", Options);
+		}
+
         public void llCreateLink(key target, integer simulator)
         {
             Verbose("CreateLink(" + target + "," + simulator + ")");
         }
+
+		public void llDeleteCharacter()
+		{
+			Verbose("llDeleteCharacter()");
+		}
 
         public list llDeleteSubList(list _src, integer _start, integer _end)
         {
@@ -1645,6 +1700,16 @@ namespace LSLEditor
             Verbose("Euler2Rot(" + v + ")=" + rot);
             return rot;
         }
+
+		public void llEvade(key TargetID, list Options)
+		{
+			Verbose("llEvade({0}, {1})", TargetID, Options);
+		}
+
+		public void llExecCharacterCmd(integer Command, list Options)
+		{
+			Verbose("llExecCharacterCmd({0}, {1})", Command, Options);
+		}
 
         public Float llFabs(Float val)
         {
