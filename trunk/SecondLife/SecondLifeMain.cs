@@ -162,6 +162,7 @@ namespace LSLEditor
         virtual public void not_at_target() { }
         virtual public void object_rez(key id) { }
         virtual public void on_rez(integer start_param) { }
+		virtual public void path_update(integer iType, list lReserved) { }
         virtual public void remote_data(integer event_type, key channel, key message_id, String sender, integer idata, String sdata) { }
         virtual public void run_time_permissions(integer permissions) { }
         virtual public void sensor(integer total_number) { }
