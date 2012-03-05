@@ -1737,6 +1737,11 @@ namespace LSLEditor
             return dblValue;
         }
 
+		public void llFleeFrom(vector Source, Float Distance, list Options)
+		{
+			Verbose("llFleeFrom({0}, {1}, {2})", Source, Distance, Options);
+		}
+
         public vector llGetAccel()
         {
             Verbose("GetAccel()");
@@ -1819,6 +1824,12 @@ namespace LSLEditor
             Verbose("GetCenterOfMass()");
             return vector.ZERO_VECTOR;
         }
+
+		public list llGetClosestNavPoint(vector Point, list Options)
+		{
+			Verbose("llGetClosestNavPoint({0}, {1})", Point, Options);
+			return new list();
+		}
 
         public vector llGetColor(integer face)
         {
@@ -3207,6 +3218,11 @@ namespace LSLEditor
             Verbose("MoveToTarget(" + target + "," + tau + ")");
         }
 
+		public void llNavigateTo(vector Location, list Options)
+		{
+			Verbose("llNavigateTo({0}, {1})", Location, Options);
+		}
+
         public void llOffsetTexture(Float offset_s, Float offset_t, integer face)
         {
             Verbose("OffsetTexture(" + offset_s + "," + offset_t + "," + face + ")");
@@ -3271,6 +3287,11 @@ namespace LSLEditor
             Verbose("PassTouches(" + pass + ")");
         }
 
+		public void llPatrolPoints(list Points, list Options)
+		{
+			Verbose("llPatrolPoints({0}, {1})", Points, Options);
+		}
+
         public void llPlaySound(String sound, Float volume)
         {
             try
@@ -3314,6 +3335,11 @@ namespace LSLEditor
         {
             Verbose("PreloadSound(" + sound + ")");
         }
+
+		public void llPursue(key TargetID, list Options)
+		{
+			Verbose("llPursue({0}, {1})", TargetID, Options);
+		}
 
         public void llPushObject(key id, vector impulse, vector angular_impulse, integer local)
         {
@@ -4184,6 +4210,11 @@ namespace LSLEditor
             Verbose("UnSit(" + id + ")");
         }
 
+		public void llUpdateCharacter(list Options)
+		{
+			Verbose("llUpdateCharacter({0})", Options);
+		}
+
         public Float llVecDist(vector a, vector b)
         {
             vector vecValue = new vector(a.x - b.x, a.y - b.y, a.z - b.z);
@@ -4211,6 +4242,11 @@ namespace LSLEditor
         {
             Verbose("VolumeDetect(" + detect + ")");
         }
+
+		public void llWanderWithin(vector Origin, Float Distance, list Options)
+		{
+			Verbose("llWanderWithin({0}, {1}, {2})", Origin, Distance, Options);
+		}
 
         public Float llWater(vector offset)
         {
