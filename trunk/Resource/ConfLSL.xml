@@ -2138,7 +2138,7 @@
 		-->
 
 		<Word name="llReleaseControls">
-			llReleaseControls(key avatar);
+			llReleaseControls();
 
 			Stop taking inputs from avatar.
 		</Word>
@@ -2594,7 +2594,7 @@
 		</Word>
 
 		<Word name="llSetHoverHeight">
-			llSetHoverHeight(float height, float water, float tau);
+			llSetHoverHeight(float height, integer water, float tau);
 
 			Critically damps to a height. The height is above ground
 			and water if water is TRUE. Only works with physics-enabled objects.
@@ -2614,7 +2614,7 @@
 			llSetKeyframedMotion(list lKeyframes, list lOptions);
 
 			Specify a list of times, positions, and orientations to be followed by an object. The object will be smoothly moved between key-frames by the simulator. Collisions with other nonphysical or keyframed objects will be ignored (no script events will fire and collision processing will not occur). Collisions with physical objects will be computed and reported, but the keyframed object will be unaffected by those collisions.
-			<Argument name="lKeyframes">Strided keyframe list of the form: position, orientation, time. Each keyframe is interpreted relative to the previous transform of the object.</Argument>
+			<Argument name="lKeyframes">Strided key-frame list of the form: position, orientation, time. Each key-frame is interpreted relative to the previous transform of the object.</Argument>
 			<Argument name="lOptions"></Argument>
 		</Word>
 
@@ -3789,8 +3789,8 @@
 			<Word name="ATTACH_LLLEG">
 				Attach to the avatar lower left leg.
 			</Word>
-			<Word name="ATTACH_LPEC">
-				Attach to the avatar left pectoral. (depreciated)
+			<Word name="ATTACH_LEFT_PEC">
+				Attach to the avatar left pectoral.
 			</Word>
 			<Word name="ATTACH_LSHOULDER">
 				Attach to the avatar left shoulder.
@@ -3836,8 +3836,8 @@
 			<Word name="ATTACH_RLLEG">
 				Attach to the avatar right lower leg.
 			</Word>
-			<Word name="ATTACH_RPEC">
-				Attach to the avatar right pectoral. (depreciated)
+			<Word name="ATTACH_RIGHT_PEC">
+				Attach to the avatar right pectoral.
 			</Word>
 			<Word name="ATTACH_RSHOULDER">
 				Attach to the avatar right shoulder.
@@ -4067,25 +4067,6 @@
 			<Word name="PSYS_PART_MAX_AGE" value="">
 				age in seconds of a particle at which it dies.
 			</Word>
-			<Word name="PSYS_PART_SRC_PATTERN_DROP" value="">
-				Drop particles at the source position.
-			</Word>
-			<Word name="PSYS_PART_SRC_PATTERN_EXPLODE" value="">
-				Shoot particles out in all directions,
-				using the burst parameters.
-			</Word>
-			<Word name="PSYS_PART_SRC_PATTERN_ANGLE" value="">
-				Shoot particles across a 2 dimensional area defined
-				by the arc created from
-				PSYS_SRC_OUTERANGLE.
-				There will be an open area defined by PSYS_SRC_INNERANGLE
-				within the larger arc.
-			</Word>
-			<Word name="PSYS_PART_SRC_PATTERN_ANGLE_CONE" value="">
-				Shoot particles out in a 3 dimensional cone with
-				an outer arc of PSYS_SRC_OUTERANGLE and an
-				inner open area defined by PSYS_SRC_INNERANGLE.
-			</Word>
 			<Word name="PSYS_PART_START_ALPHA" value="">
 				a float which determines the starting alpha of the object.
 			</Word>
@@ -4107,8 +4088,7 @@
 			</Word>
 
 			<Word name="PSYS_SRC_ACCEL" value="">
-				a vector &lt;x, y, z&gt; which is the acceleration
-				to apply on particles.
+				A vector &lt;x, y, z&gt; which is the acceleration to apply on particles.
 			</Word>
 			<Word name="PSYS_SRC_BURST_RATE" value="">
 				how often to release a particle burst (float seconds).
@@ -5012,7 +4992,7 @@
 			<Word name="PU_FAILURE_INVALID_GOAL" type="integer" value="0x03" status="beta">Goal is not on the navigation-mesh and cannot be reached.</Word>
 			<Word name="PU_FAILURE_INVALID_START" type="integer" value="0x02" status="beta">Character cannot navigate from the current location - e.g., the character is off the navmesh or too high above it.</Word>
 			<Word name="PU_FAILURE_NO_VALID_DESTINATION" type="integer" value="0x06" status="beta">There's no good place for the character to go - e.g., it is patrolling and all the patrol points are now unreachable.</Word>
-			<Word name="PU_FAILURE_OTHER" type="integer" value="1000000" />
+			<Word name="PU_FAILURE_OTHER" type="integer" value="1000000" status="beta" />
 			<Word name="PU_FAILURE_TARGET_GONE" type="integer" value="0x05" status="beta">Target (for llPursue or llEvade) can no longer be tracked - e.g., it left the region or is an avatar that is now more than about 30m outside the region.</Word>
 			<Word name="PU_FAILURE_UNREACHABLE" type="integer" value="0x04" status="beta">Goal is no longer reachable for some reason - e.g., an obstacle blocks the path.</Word>
 			<Word name="PU_GOAL_REACHED" type="integer" value="0x01" status="beta">Character has reached the goal and will stop or choose a new goal (if wandering).</Word>
