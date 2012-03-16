@@ -101,3 +101,4 @@ using System.Runtime.InteropServices;
 //[assembly: AssemblyKeyName("")]
 [assembly: AssemblyKeyFile("..\\..\\Resource\\test.snk")]
 [assembly: ComVisibleAttribute(false)]
+[assembly: AssemblyFileVersionAttribute("2.45.0.0")]
