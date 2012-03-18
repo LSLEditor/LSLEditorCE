@@ -125,12 +125,9 @@
       <DependentUpon>BugReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="BugReport\UploadBugReport.cs" />
-    <None Include="BZip2Decompress\BZip2.cs" />
-    <None Include="BZip2Decompress\BZip2Constants.cs" />
-    <None Include="BZip2Decompress\BZip2InputStream.cs" />
-    <None Include="BZip2Decompress\IChecksum.cs" />
-    <None Include="BZip2Decompress\MD5Verify.cs" />
-    <None Include="BZip2Decompress\StrangeCrc.cs" />
+    <Compile Include="BZip2Decompress\BZip2.cs" />
+    <Compile Include="BZip2Decompress\BZip2Constants.cs" />
+    <Compile Include="BZip2Decompress\BZip2InputStream.cs" />
     <Compile Include="Decompressor\ZipEntry.cs" />
     <Compile Include="Docking\AutoHideStripBase.cs">
       <SubType>Component</SubType>
@@ -237,6 +234,7 @@
     <Compile Include="Helpers\OutlineHelper.cs" />
     <Compile Include="Helpers\SendMyKeys.cs" />
     <Compile Include="Helpers\TextFileEncodingDetector.cs" />
+    <Compile Include="BZip2Decompress\IChecksum.cs" />
     <Compile Include="llTextBoxForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -417,6 +415,7 @@
       <DependentUpon>SvnAguments.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Svn.cs" />
+    <Compile Include="BZip2Decompress\StrangeCrc.cs" />
     <Compile Include="SyntaxError.cs">
       <SubType>Form</SubType>
     </Compile>

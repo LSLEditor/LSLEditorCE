@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace LSLEditor.BZip2Decompress 
+namespace LSLEditor.Decompressor 
 {
 	
 	/// <summary>

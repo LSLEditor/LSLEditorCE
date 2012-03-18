@@ -35,7 +35,7 @@
 // obligated to do so.  If you do not wish to do so, delete this
 // exception statement from your version.
 
-namespace LSLEditor.BZip2Decompress
+namespace LSLEditor.Decompressor
 {
 	
 	/// <summary>

@@ -4,9 +4,9 @@ using System.IO;
 // 	BZip2.Decompress(File.OpenRead("in"), File.Create("out"));
 
 
-namespace LSLEditor.BZip2Decompress
+namespace LSLEditor.Decompressor
 {
-	public sealed class Decompressor
+	public sealed class BZip2
 	{
 		public static void Decompress(Stream inStream, Stream outStream) 
 		{

@@ -38,7 +38,7 @@
 
 using System;
 
-namespace LSLEditor.BZip2Decompress 
+namespace LSLEditor.Decompressor 
 {
 	/// <summary>
 	/// Bzip2 checksum algorithm
