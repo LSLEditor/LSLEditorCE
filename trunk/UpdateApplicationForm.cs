@@ -48,6 +48,8 @@ using System.Reflection;
 using System.ComponentModel;
 using System.Windows.Forms;
 
+using LSLEditor.Decompressor;
+
 namespace LSLEditor
 {
 	public partial class UpdateApplicationForm : Form
@@ -267,6 +269,7 @@ namespace LSLEditor
 				web = wzip;
 			}
 			*/
+			strHashWeb = web.hash;
 
 			this.labelOurVersionString.Text = current.version.ToString();
 			this.labelLatestVersionString.Text = web.version.ToString();
@@ -433,7 +436,7 @@ namespace LSLEditor
 				switch (strExtension)
 				{
 					case ".bz2":
-						//BZip2Decompress.Decompressor.Decompress(File.OpenRead(strZipFile), File.Create(strNewFile));
+						Decompressor.BZip2.Decompress(File.OpenRead(strZipFile), File.Create(strNewFile));
 						break;
 					case ".gz":
 					case ".gzip":
