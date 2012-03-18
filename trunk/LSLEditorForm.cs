@@ -994,7 +994,7 @@ namespace LSLEditor
 				// this.panel1.Visible = false; // Simulator
 				// this.panel2.Visible = false; // right pane
 
-				string strVersion = Properties.Settings.Default.Version;
+				//string strVersion = Properties.Settings.Default.Version;
 
 				Size size = Properties.Settings.Default.LSLEditorSize;
 				Point location = Properties.Settings.Default.LSLEditorLocation;

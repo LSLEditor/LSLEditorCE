@@ -1069,15 +1069,6 @@ namespace LSLEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://lsleditor.sourceforge.net/check4update.php?")]
-        public string Update {
-            get {
-                return ((string)(this["Update"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://www.lsleditor.org/examples/")]
         public string Examples {
             get {
@@ -1100,15 +1091,6 @@ namespace LSLEditor.Properties {
         public string ConfCSharp {
             get {
                 return ((string)(this["ConfCSharp"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://lsleditor.sourceforge.net/update.php")]
-        public string UpdateManifest {
-            get {
-                return ((string)(this["UpdateManifest"]));
             }
         }
         
@@ -1208,15 +1190,6 @@ namespace LSLEditor.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2.45.0")]
-        public string Version {
-            get {
-                return ((string)(this["Version"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("UTF-8")]
@@ -1226,6 +1199,24 @@ namespace LSLEditor.Properties {
             }
             set {
                 this["OutputFormat"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+		[global::System.Configuration.DefaultSettingValueAttribute("http://lsleditor.sourceforge.net/check4update.php")]
+        public string Update {
+            get {
+                return ((string)(this["Update"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+		[global::System.Configuration.DefaultSettingValueAttribute("http://lsleditor.sourceforge.net/update.php")]
+        public string UpdateManifest {
+            get {
+                return ((string)(this["UpdateManifest"]));
             }
         }
     }

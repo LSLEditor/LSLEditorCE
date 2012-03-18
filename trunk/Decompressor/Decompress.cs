@@ -47,6 +47,7 @@ using System.IO.Compression;
 
 using System.Security.Cryptography;
 
+
 namespace LSLEditor.Decompressor
 {
 	public class MD5Verify
@@ -60,7 +61,6 @@ namespace LSLEditor.Decompressor
 			return BitConverter.ToString(hash).Replace("-", "").ToLower();
 		}
 	}
-
 
 	public sealed class Gzip
 	{

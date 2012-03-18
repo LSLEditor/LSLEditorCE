@@ -281,9 +281,6 @@
           }
         </Value>
     </Setting>
-    <Setting Name="Update" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://lsleditor.sourceforge.net/check4update.php?</Value>
-    </Setting>
     <Setting Name="Examples" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://www.lsleditor.org/examples/</Value>
     </Setting>
@@ -292,9 +289,6 @@
     </Setting>
     <Setting Name="ConfCSharp" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Resource.ConfCSharp.xml</Value>
-    </Setting>
-    <Setting Name="UpdateManifest" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://lsleditor.sourceforge.net/update.php</Value>
     </Setting>
     <Setting Name="ToolsOptions" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Resource.ToolsOptions.xml</Value>
@@ -326,11 +320,14 @@
     <Setting Name="VersionControlSVN" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="Version" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">2.45.0</Value>
-    </Setting>
     <Setting Name="OutputFormat" Type="System.String" Scope="User">
       <Value Profile="(Default)">UTF-8</Value>
+    </Setting>
+    <Setting Name="Update" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://a-w-d.dyndns.org:8080/lsleditor/check4update.php</Value>
+    </Setting>
+    <Setting Name="UpdateManifest" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://a-w-d.dyndns.org:8080/lsleditor/update.php</Value>
     </Setting>
   </Settings>
 </SettingsFile>
