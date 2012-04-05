@@ -42,6 +42,8 @@
 // ********
 // */
 using System;
+using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Text;
 
@@ -63,7 +65,7 @@ namespace LSLEditor
 		public static void Request(WebProxy proxy, SecondLife secondlife, string strUrl, SecondLife.list parameters, string postData, SecondLife.key key)
 		{
 			string strMethod = "GET";
-			string strContentType = "text/plain;charset=utf-8";
+			string strContentType = "text/plain; charset=utf-8";
 
 			for (int intI = 0; intI < parameters.Count; intI += 2)
 			{
@@ -94,7 +96,7 @@ namespace LSLEditor
 
 			wc.Headers.Add("Content-Type", strContentType);
 			wc.Headers.Add("Accept", "text/*");
-			wc.Headers.Add("Accept-Charset", "utf-8;q=1.0, *;q=0.5");
+			wc.Headers.Add("Accept-Charset", "utf-8; q=1.0, *; q=0.5");
 			wc.Headers.Add("Accept-Encoding", "deflate, gzip");
 			wc.Headers.Add("User-Agent", "Second Life LSL/1.19.0(12345) (http://secondlife.com)");
 
@@ -172,7 +174,9 @@ namespace LSLEditor
 			else
 			{
 				if (e.Result != null)
-					strResult = Encoding.ASCII.GetString(e.Result);
+				{
+					strResult = Encoding.UTF8.GetString(e.Result);
+				}
 			}
 			userState.secondlife.host.ExecuteSecondLife("http_response", userState.httpkey, (SecondLife.integer)intStatusCode, new SecondLife.list(), (SecondLife.String)strResult);
 		}
@@ -194,10 +198,22 @@ namespace LSLEditor
 			else
 			{
 				if (e.Result != null)
-					strResult = Encoding.ASCII.GetString(e.Result);
+				{
+					string strEncoding = ((System.Net.WebClient)sender).ResponseHeaders["Content-Encoding"];
+					if (strEncoding == "gzip")
+					{
+						GZipStream tempE = new GZipStream(new System.IO.MemoryStream(e.Result), CompressionMode.Decompress);
+
+						var sr = new StreamReader(tempE);
+						strResult = sr.ReadToEnd();
+					}
+					else
+					{
+						strResult = Encoding.UTF8.GetString(e.Result);
+					}
+				}
 			}
 			userState.secondlife.host.ExecuteSecondLife("http_response", userState.httpkey, (SecondLife.integer)intStatusCode, new SecondLife.list(), (SecondLife.String)strResult);
 		}
-
 	}
 }
