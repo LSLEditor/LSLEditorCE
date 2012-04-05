@@ -1204,7 +1204,7 @@ namespace LSLEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-		[global::System.Configuration.DefaultSettingValueAttribute("http://lsleditor.sourceforge.net/check4update.php")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://a-w-d.dyndns.org:8080/lsleditor/check4update.php")]
         public string Update {
             get {
                 return ((string)(this["Update"]));
@@ -1213,7 +1213,7 @@ namespace LSLEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-		[global::System.Configuration.DefaultSettingValueAttribute("http://lsleditor.sourceforge.net/update.php")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://a-w-d.dyndns.org:8080/lsleditor/update.php")]
         public string UpdateManifest {
             get {
                 return ((string)(this["UpdateManifest"]));
