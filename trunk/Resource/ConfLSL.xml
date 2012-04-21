@@ -708,8 +708,13 @@
 		<Word name="llGetAgentLanguage">
 			string llGetAgentLanguage( key avatar );
 
-			Returns a string that is the language code of the preferred
-			interface language of the user avatar.
+			Returns a string that is the language code of the preferred interface language of the user avatar.
+		</Word>
+
+		<Word name="llGetAgentList">
+			list llGetAgentList( integer Scope, list Options );
+			
+			Returns a list of agents from the specified scope (parcel, owner's parcel, region).
 		</Word>
 
 		<Word name="llGetAgentSize">
@@ -4662,6 +4667,10 @@
 
 		<WordsSubsection name="C.99. Miscellaneous constants.">
 			Constants that do not fit into any of the previously defined categories.
+			<Word name="AGENT_LIST_PARCEL" />
+			<Word name="AGENT_LIST_PARCEL_OWNER" />
+			<Word name="AGENT_LIST_REGION" />
+			
 			<Word name="CAMERA_ACTIVE" />
 			<Word name="CAMERA_BEHINDNESS_ANGLE" />
 			<Word name="CAMERA_BEHINDNESS_LAG" />
@@ -4959,6 +4968,7 @@
 			<Word name="PRIM_SHINY_NONE" />
 
 			<Word name="PRIM_SIZE" />
+			<Word name="PRIM_SLICE" />
 			<Word name="PRIM_TEMP_ON_REZ" />
 
 			<Word name="PRIM_TEXGEN" />
