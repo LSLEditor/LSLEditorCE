@@ -12,7 +12,7 @@
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
     <AssemblyName>LSLEditor</AssemblyName>
-    <AssemblyOriginatorKeyFile>testing.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>lsl-editor.pfx</AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
     <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
@@ -93,6 +93,12 @@
     <DebugType>none</DebugType>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>5CBB20152EC70EC13542B336790AF2E7AB2E1DEB</ManifestCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
@@ -717,6 +723,7 @@
     <Content Include="LSLEditor.rc" />
     <EmbeddedResource Include="Resource\ToolsOptions.xml" />
     <EmbeddedResource Include="Resource\thanks.gif" />
+    <None Include="lsl-editor.pfx" />
     <None Include="Test.snk" />
     <None Include="testing.pfx" />
     <None Include="Web References\org.lsleditor.www\Service1.disco" />
