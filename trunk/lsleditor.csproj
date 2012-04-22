@@ -12,7 +12,7 @@
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
     <AssemblyName>LSLEditor</AssemblyName>
-    <AssemblyOriginatorKeyFile>testing.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>lsl-editor.pfx</AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
     <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
@@ -93,6 +93,12 @@
     <DebugType>none</DebugType>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>5CBB20152EC70EC13542B336790AF2E7AB2E1DEB</ManifestCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
@@ -228,6 +234,8 @@
     <Compile Include="Docking\Win32\Enums.cs" />
     <Compile Include="Docking\Win32\NativeMethods.cs" />
     <Compile Include="Editor\KeyWords.cs" />
+    <None Include="582fd361b0616b6aa0b38e7cd7a80475.pem" />
+    <None Include="Certum-OS-Certificate.pfx" />
     <None Include="Editor\RoundCorners.cs" />
     <Compile Include="Decompressor\Decompress.cs" />
     <Compile Include="Editor\MsXsltContext.cs" />
@@ -717,6 +725,8 @@
     <Content Include="LSLEditor.rc" />
     <EmbeddedResource Include="Resource\ToolsOptions.xml" />
     <EmbeddedResource Include="Resource\thanks.gif" />
+    <None Include="lsl-editor.pfx" />
+    <None Include="Open Source Developer.cer" />
     <None Include="Test.snk" />
     <None Include="testing.pfx" />
     <None Include="Web References\org.lsleditor.www\Service1.disco" />
