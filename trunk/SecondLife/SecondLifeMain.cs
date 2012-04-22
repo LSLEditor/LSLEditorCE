@@ -230,6 +230,10 @@ namespace LSLEditor
 		public static readonly integer AGENT_BY_LEGACY_NAME = 0x1;
 		public static readonly integer AGENT_BY_USERNAME = 0x10;
 
+		public static readonly integer AGENT_LIST_PARCEL = 0x01;
+		public static readonly integer AGENT_LIST_PARCEL_OWNER = 0x02;
+		public static readonly integer AGENT_LIST_REGION = 0x04;
+
         public static readonly integer ATTACH_CHEST = 1;
         public static readonly integer ATTACH_HEAD = 2;
         public static readonly integer ATTACH_LSHOULDER = 3;
@@ -602,6 +606,7 @@ namespace LSLEditor
         public static readonly integer PRIM_SHINY_MEDIUM = 2;
         public static readonly integer PRIM_SHINY_NONE = 0;
         public static readonly integer PRIM_SIZE = 7;
+		public static readonly integer PRIM_SLICE = 35;
         public static readonly integer PRIM_TEMP_ON_REZ = 4;
         public static readonly integer PRIM_TEXGEN = 22;
         public static readonly integer PRIM_TEXGEN_DEFAULT = 0;
@@ -1760,6 +1765,12 @@ namespace LSLEditor
             Verbose("llGetAgentLanguage({0})=\"{1}\"", avatar, strLan);
             return strLan;
         }
+
+		public list llGetAgentList(integer Scope, list Options)
+		{
+			Verbose("llGetAgentList({0}, [{1}])", Scope, Options);
+			return new list();
+		}
 
         public vector llGetAgentSize(key id)
         {
