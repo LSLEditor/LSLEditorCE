@@ -4640,29 +4640,41 @@
 			<Word name="AVOID_DYNAMIC_OBSTACLES" type="integer" value="2" status="beta"></Word>
 			<Word name="CHARACTER_AVOIDANCE_MODE" type="integer" value="5" status="beta">Allows you to specify that a character should not try to avoid other characters, should not try to avoid dynamic obstacles (relatively fast moving objects and avatars), or both.</Word>
 			<Word name="CHARACTER_CMD_JUMP" type="integer" value="0x01" status="beta">Makes the character jump. Requires an additional parameter, the height to jump, between 0.1m and 2.0m. This must be provided as the first element of the llExecCharacterCmd option list.</Word>
+			<Word name="CHARACTER_CMD_SMOOTH_STOP" type="integer" value="2" status="beta" />
 			<Word name="CHARACTER_CMD_STOP" type="integer" value="0x00" status="beta">Stops any current pathfinding operation.</Word>
 			<Word name="CHARACTER_DESIRED_SPEED" type="integer" value="1" status="beta">Speed of pursuit in meters per second.</Word>
+			<Word name="CHARACTER_DESIRED_TURN_SPEED" type="integer" value="12" status="beta">The character&apos;s maximum speed while turning--note that this is only loosely enforced (i.e., a character may turn at higher speeds under certain conditions).</Word>
 			<Word name="CHARACTER_LENGTH" type="integer" value="3" status="beta">Set collision capsule length - cannot be less than two times the radius.</Word>
-			<Word name="CHARACTER_TYPE" type="integer" value="6" status="beta">Specifies which walk-ability coefficient will be used by this character.</Word>
-			<Word name="CHARACTER_MAX_ACCEL" type="integer" value="8" status="beta">The character's maximum acceleration rate.</Word>
-			<Word name="CHARACTER_MAX_ANGULAR_ACCEL" type="integer" value="11" status="beta">The character's maximum angular acceleration about the Z axis.</Word>
-			<Word name="CHARACTER_MAX_ANGULAR_SPEED" type="integer" value="10" status="beta">The character's maximum angular speed about the Z axis.</Word>
-			<Word name="CHARACTER_MAX_DECEL" type="integer" value="9" status="beta">The character's maximum deceleration rate.</Word>
+			<Word name="CHARACTER_MAX_ACCEL" type="integer" value="8" status="beta">The character&apos;s maximum acceleration rate.</Word>
+			<Word name="CHARACTER_MAX_DECEL" type="integer" value="9" status="beta">The character&apos;s maximum deceleration rate.</Word>
+			<Word name="CHARACTER_MAX_SPEED" type="integer" value="13" status="beta">The character&apos;s maximum speed.</Word>
+			<Word name="CHARACTER_MAX_TURN_RADIUS" type="integer" value="10" status="beta">The character&apos;s turn radius when travelling at CHARACTER_MAX_TURN_SPEED.</Word>
+			<Word name="CHARACTER_ORIENTATION" type="integer" value="4" status="beta">Valid options are: VERTICAL, HORIZONTAL.</Word>
 			<Word name="CHARACTER_RADIUS" type="integer" value="2" status="beta">Set collision capsule radius.</Word>
-			<Word name="CHARACTER_TURN_SPEED_MULTIPLIER" type="integer" value="12" status="beta">When a character has to make certain kinds of turns, this value is multiplied by the character's desired speed and the character is slowed down to the new value before being allowed to turn.</Word>
+			<Word name="CHARACTER_TYPE" type="integer" value="6" status="beta">Specifies which walk-ability coefficient will be used by this character.</Word>
 			<Word name="CHARACTER_TYPE_A" type="integer" value="0" status="beta" />
 			<Word name="CHARACTER_TYPE_B" type="integer" value="1" status="beta" />
 			<Word name="CHARACTER_TYPE_C" type="integer" value="2" status="beta" />
 			<Word name="CHARACTER_TYPE_D" type="integer" value="3" status="beta" />
 			<Word name="CHARACTER_TYPE_NONE" type="integer" value="4" status="beta" />
-			<Word name="PURSUIT_FUZZ_FACTOR" type="integer" value="3" status="beta">Selects a random destination near the offset.</Word>
-			<Word name="PURSUIT_INTERCEPT" type="integer" value="4" status="beta">Define whether the character attempts to predict the target's location.</Word>
-			<Word name="PURSUIT_OFFSET" type="integer" value="1" status="beta">Go to a position offset from the target.</Word>
-			<Word name="REQUIRE_LINE_OF_SIGHT" type="integer" value="2" status="beta">Define whether the character needs a line-of-sight to give chase.</Word>
+			<Word name="FORCE_DIRECT_PATH" type="integer" value="1" status="beta">Makes character navigate in a straight line toward pos. May be set to TRUE or FALSE.</Word>
+			<Word name="GET_NAV_POINT_RADIUS" type="integer" value="0" status="beta" />
+			<Word name="PATROL_PAUSE_AT_WAYPOINTS" type="integer" value="0" status="beta" />
+			<Word name="PURSUIT_GOAL_TOLERANCE" type="integer" value="0" status="beta" />
 			<Word name="TRAVERSAL_TYPE" type="integer" value="7" status="beta">One of TRAVERSAL_TYPE_FAST, TRAVERSAL_TYPE_SLOW, and TRAVERSAL_TYPE_NONE.</Word>
 			<Word name="TRAVERSAL_TYPE_FAST" type="integer" value="1" status="beta" />
 			<Word name="TRAVERSAL_TYPE_NONE" type="integer" value="2" status="beta" />
 			<Word name="TRAVERSAL_TYPE_SLOW" type="integer" value="0" status="beta" />
+			<Word name="WANDER_PAUSE_AT_WAYPOINTS" type="integer" value="0" status="beta"></Word>
+			<Word name="PURSUIT_FUZZ_FACTOR" type="integer" value="3" status="beta">Selects a random destination near the offset.</Word>
+			<Word name="PURSUIT_INTERCEPT" type="integer" value="4" status="beta">Define whether the character attempts to predict the target's location.</Word>
+			<Word name="PURSUIT_OFFSET" type="integer" value="1" status="beta">Go to a position offset from the target.</Word>
+			<Word name="REQUIRE_LINE_OF_SIGHT" type="integer" value="2" status="beta">Define whether the character needs a line-of-sight to give chase.</Word>
+
+
+			<Word name="CHARACTER_MAX_ANGULAR_ACCEL" type="integer" value="11" status="Unimplemented">The character's maximum angular acceleration about the Z axis.</Word>
+			<Word name="CHARACTER_MAX_ANGULAR_SPEED" type="integer" value="10" status="Unimplemented">The character's maximum angular speed about the Z axis.</Word>
+
 		</WordsSubsection>
 
 		<WordsSubsection name="C.99. Miscellaneous constants.">
@@ -5001,6 +5013,7 @@
 			<Word name="PU_EVADE_SPOTTED" type="integer" value="0x08" status="beta">Triggered when an llEvade character switches from hiding to running</Word>
 			<Word name="PU_FAILURE_INVALID_GOAL" type="integer" value="0x03" status="beta">Goal is not on the navigation-mesh and cannot be reached.</Word>
 			<Word name="PU_FAILURE_INVALID_START" type="integer" value="0x02" status="beta">Character cannot navigate from the current location - e.g., the character is off the navmesh or too high above it.</Word>
+			<Word name="PU_FAILURE_NO_NAVMESH" type="integer" value="0x09" status="beta">This is a fatal error reported to a character when there is no navmesh for the region. This usually indicates a server failure and users should file a bug report and include the time and region in which they received this message.</Word>
 			<Word name="PU_FAILURE_NO_VALID_DESTINATION" type="integer" value="0x06" status="beta">There's no good place for the character to go - e.g., it is patrolling and all the patrol points are now unreachable.</Word>
 			<Word name="PU_FAILURE_OTHER" type="integer" value="1000000" status="beta" />
 			<Word name="PU_FAILURE_TARGET_GONE" type="integer" value="0x05" status="beta">Target (for llPursue or llEvade) can no longer be tracked - e.g., it left the region or is an avatar that is now more than about 30m outside the region.</Word>
