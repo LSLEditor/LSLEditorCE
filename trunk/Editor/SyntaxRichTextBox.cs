@@ -914,6 +914,9 @@ namespace LSLEditor
 			{
 				string strTextToPaste = Clipboard.GetDataObject().GetData(DataFormats.Text, true).ToString().Replace("\r", "");
 				this.ColoredText = strTextToPaste;
+#if DEBUG
+				// TODO Add code to show encoding used in a dialogue or the status bar.
+#endif
 			}
 		}
 
