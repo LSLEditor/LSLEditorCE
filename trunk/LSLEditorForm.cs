@@ -190,7 +190,7 @@ namespace LSLEditor
 			}
 			catch (Exception exception)
 			{
-				MessageBox.Show("Error:" + OopsFormatter.ApplyFormatting(exception.Message), "Oops");
+				MessageBox.Show("Error: " + OopsFormatter.ApplyFormatting(exception.Message), "Oops");
 			}
 		}
 
@@ -296,20 +296,33 @@ namespace LSLEditor
 
 		private void Start(string[] args)
 		{
+            string fileFilterNotes = "Notecard files (*.txt)|*.txt|All files (*.*)|*.*";
+            string fileFilterScripts = "Secondlife script files (*.lsl)|*.lsl|All files (*.*)|*.*";
+            string fileFilterSolutions = "LSLEditor Solution File (*.sol)|*.sol|All Files (*.*)|*.*";
+
 			this.ConfLSL = GetXmlFromResource(Properties.Settings.Default.ConfLSL);
 			this.ConfCSharp = GetXmlFromResource(Properties.Settings.Default.ConfCSharp);
 
+            this.openFileDialog0.FileName = "";
+			this.openFileDialog0.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
+			this.openFileDialog0.Filter = fileFilterNotes;
+
+			this.saveFileDialog0.FileName = "";
+			this.saveFileDialog0.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
+            this.saveFileDialog0.Filter = fileFilterNotes;
+
+
 			this.openFileDialog1.FileName = "";
 			this.openFileDialog1.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
-			this.openFileDialog1.Filter = "Secondlife script files (*.lsl)|*.lsl|All files (*.*)|*.*";
+            this.openFileDialog1.Filter = fileFilterScripts;
 
 			this.saveFileDialog1.FileName = "";
 			this.saveFileDialog1.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
-			this.saveFileDialog1.Filter = "Secondlife script files (*.lsl)|*.lsl|All files (*.*)|*.*";
+            this.saveFileDialog1.Filter = fileFilterScripts;
 
 			this.openFileDialog2.Multiselect = false;
 			this.openFileDialog2.FileName = "";
-			this.openFileDialog2.Filter = "LSLEditor Solution File (*.sol)|*.sol|All Files (*.*)|*.*";
+            this.openFileDialog2.Filter = fileFilterSolutions;
 			this.openFileDialog2.InitialDirectory = Properties.Settings.Default.ProjectLocation;
 
 			
@@ -358,8 +371,8 @@ namespace LSLEditor
 								continue;
 							}
 							EditForm editForm = new EditForm(this);
-							editForm.LoadFile(strFileName);
-							editForm.TextBox.OnCursorPositionChanged += new SyntaxRichTextBox.CursorPositionChangedHandler(TextBox_OnCursorPositionChanged);
+                            editForm.LoadFile(strFileName);
+                            editForm.TextBox.OnCursorPositionChanged += new SyntaxRichTextBox.CursorPositionChangedHandler(TextBox_OnCursorPositionChanged);
 							AddForm(editForm);
 						}
 						if (blnRun)
@@ -567,7 +580,23 @@ namespace LSLEditor
 
 		}
 
-		private void ReadFile()
+		private void ReadNoteFiles()
+		{
+			this.openFileDialog0.Multiselect = true;
+			if (this.openFileDialog0.ShowDialog() == DialogResult.OK)
+			{
+				foreach (string strFileName in this.openFileDialog0.FileNames)
+				{
+					if (File.Exists(strFileName))
+					{
+						OpenFile(strFileName, Guid.NewGuid(), false);
+						UpdateRecentFileList(strFileName);
+					}
+				}
+			}
+		}
+
+		private void ReadScriptFiles()
 		{
 			this.openFileDialog1.Multiselect = true;
 			if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -1534,10 +1563,15 @@ namespace LSLEditor
 			this.newProjectToolStripMenuItem.Enabled = !blnVisible;
 		}
 
-		private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			ReadFile();
-		}
+        private void openNoteFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReadNoteFiles();
+        }
+
+        private void openScriptFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReadScriptFiles();
+        }
 
 		private void closeFileToolStripMenuItem_Click(object sender, EventArgs e)
 		{
