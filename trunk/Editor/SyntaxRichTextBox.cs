@@ -2176,28 +2176,38 @@ namespace LSLEditor
             return result;
         }
 
-		public void SaveCurrentFile(string strPath)
+        public void SaveCurrentFile(string strPath, Encoding enc)
 		{
 			try
 			{
-				Encoding enc = null;
+				//Encoding enc = null;
 				if (!Directory.Exists(Path.GetDirectoryName(strPath)))
 					Directory.CreateDirectory(Path.GetDirectoryName(strPath));
-				switch (Properties.Settings.Default.OutputFormat)
-				{
-					case "UTF8":
-						enc = Encoding.UTF8;
-						break;
-					case "Unicode":
-						enc = Encoding.Unicode;
-						break;
-					case "BigEndianUnicode":
-						enc = Encoding.BigEndianUnicode;
-						break;
-					default:
-						enc = Encoding.Default;
-						break;
-				}
+
+                /*
+                {
+                    switch (Properties.Settings.Default.OutputFormat)
+                    {
+                        case "UTF8":
+                            enc = Encoding.UTF8;
+                            break;
+                        case "Unicode":
+                            enc = Encoding.Unicode;
+                            break;
+                        case "BigEndianUnicode":
+                            enc = Encoding.BigEndianUnicode;
+                            break;
+                        default:
+                            enc = Encoding.Default;
+                            break;
+                    }
+                }
+                else
+                {
+                    enc = Encoding.UTF8;
+                }
+                 * */
+
                 StreamWriter sw;
                 if (enc != Encoding.UTF8)
                 {
@@ -2218,8 +2228,9 @@ namespace LSLEditor
 			}
 		}
 
-		public new void LoadFile(string path)
+		public new Encoding LoadFile(string path)
 		{
+            Encoding fileEncoding = null;
 			if (path.StartsWith("http://"))
 			{
 				System.Net.WebClient webClient = new System.Net.WebClient();
@@ -2230,14 +2241,21 @@ namespace LSLEditor
 				if (File.Exists(path))
 				{
 					// TODO needs to be refactored to read the file in once and pass the byte array to be checked.
-					Encoding fileEncoding = TextFileEncodingDetector.DetectTextFileEncoding(path, Encoding.UTF8);
-					StreamReader sr = new StreamReader(path, fileEncoding);
-					this.Text = sr.ReadToEnd();
-					sr.Close();
+					fileEncoding = TextFileEncodingDetector.DetectTextFileEncoding(path, Encoding.UTF8);
+                    try
+                    {
+                        StreamReader sr = new StreamReader(path, fileEncoding);
+                        this.Text = sr.ReadToEnd();
+                        sr.Close();
+                    }
+                    catch
+                    {
+                    }
 				}
 			}
 			// Fresh files can not be dirty
 			ClearUndoStack();
+            return fileEncoding;
 		}
 	}
 }
