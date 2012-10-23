@@ -289,7 +289,7 @@ namespace LSLEditor
 				this.FullPathName = Path.GetFileName(strPath);
 			else
 				this.FullPathName = strPath;
-			this.numberedTextBoxUC1.TextBox.LoadFile(strPath);
+			this.encodedAs = this.numberedTextBoxUC1.TextBox.LoadFile(strPath);
 
 			if (!this.IsScript)
 				return;

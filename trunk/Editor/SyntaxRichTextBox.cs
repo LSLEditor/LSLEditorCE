@@ -2228,8 +2228,9 @@ namespace LSLEditor
 			}
 		}
 
-		public new void LoadFile(string path)
+		public new Encoding LoadFile(string path)
 		{
+            Encoding fileEncoding = null;
 			if (path.StartsWith("http://"))
 			{
 				System.Net.WebClient webClient = new System.Net.WebClient();
@@ -2240,14 +2241,21 @@ namespace LSLEditor
 				if (File.Exists(path))
 				{
 					// TODO needs to be refactored to read the file in once and pass the byte array to be checked.
-					Encoding fileEncoding = TextFileEncodingDetector.DetectTextFileEncoding(path, Encoding.UTF8);
-					StreamReader sr = new StreamReader(path, fileEncoding);
-					this.Text = sr.ReadToEnd();
-					sr.Close();
+					fileEncoding = TextFileEncodingDetector.DetectTextFileEncoding(path, Encoding.UTF8);
+                    try
+                    {
+                        StreamReader sr = new StreamReader(path, fileEncoding);
+                        this.Text = sr.ReadToEnd();
+                        sr.Close();
+                    }
+                    catch
+                    {
+                    }
 				}
 			}
 			// Fresh files can not be dirty
 			ClearUndoStack();
+            return fileEncoding;
 		}
 	}
 }
