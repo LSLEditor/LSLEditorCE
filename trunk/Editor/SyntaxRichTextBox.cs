@@ -2176,28 +2176,38 @@ namespace LSLEditor
             return result;
         }
 
-		public void SaveCurrentFile(string strPath)
+        public void SaveCurrentFile(string strPath, Encoding enc)
 		{
 			try
 			{
-				Encoding enc = null;
+				//Encoding enc = null;
 				if (!Directory.Exists(Path.GetDirectoryName(strPath)))
 					Directory.CreateDirectory(Path.GetDirectoryName(strPath));
-				switch (Properties.Settings.Default.OutputFormat)
-				{
-					case "UTF8":
-						enc = Encoding.UTF8;
-						break;
-					case "Unicode":
-						enc = Encoding.Unicode;
-						break;
-					case "BigEndianUnicode":
-						enc = Encoding.BigEndianUnicode;
-						break;
-					default:
-						enc = Encoding.Default;
-						break;
-				}
+
+                /*
+                {
+                    switch (Properties.Settings.Default.OutputFormat)
+                    {
+                        case "UTF8":
+                            enc = Encoding.UTF8;
+                            break;
+                        case "Unicode":
+                            enc = Encoding.Unicode;
+                            break;
+                        case "BigEndianUnicode":
+                            enc = Encoding.BigEndianUnicode;
+                            break;
+                        default:
+                            enc = Encoding.Default;
+                            break;
+                    }
+                }
+                else
+                {
+                    enc = Encoding.UTF8;
+                }
+                 * */
+
                 StreamWriter sw;
                 if (enc != Encoding.UTF8)
                 {

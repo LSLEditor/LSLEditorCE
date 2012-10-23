@@ -132,16 +132,16 @@ namespace LSLEditor
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.releaseNotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFileDialog0 = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog0 = new System.Windows.Forms.SaveFileDialog();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openNoteFilesDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveNoteFilesDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openScriptFilesDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveScriptFilesDialog = new System.Windows.Forms.SaveFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.closeTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
-            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+            this.openSolutionFilesDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dockPanel = new LSLEditor.Docking.DockPanel();
             this.menuStrip1.SuspendLayout();
@@ -874,7 +874,7 @@ namespace LSLEditor
             //
             // openFileDialog1
             //
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openScriptFilesDialog.FileName = "openFileDialog1";
             //
             // statusStrip1
             //
@@ -907,7 +907,7 @@ namespace LSLEditor
             //
             // openFileDialog2
             //
-            this.openFileDialog2.FileName = "openFileDialog2";
+            this.openSolutionFilesDialog.FileName = "openFileDialog2";
             //
             // dockPanel
             //
@@ -1025,10 +1025,10 @@ namespace LSLEditor
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
 		private System.Windows.Forms.ToolStripMenuItem formatDocumentToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
-		private System.Windows.Forms.OpenFileDialog openFileDialog0;
-		private System.Windows.Forms.SaveFileDialog saveFileDialog0;
-		private System.Windows.Forms.OpenFileDialog openFileDialog1;
-		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+		private System.Windows.Forms.OpenFileDialog openNoteFilesDialog;
+		private System.Windows.Forms.SaveFileDialog saveNoteFilesDialog;
+		private System.Windows.Forms.OpenFileDialog openScriptFilesDialog;
+		private System.Windows.Forms.SaveFileDialog saveScriptFilesDialog;
 		private System.Windows.Forms.ToolStripMenuItem indexToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem formatSelectedTextToolStripMenuItem;
@@ -1079,7 +1079,7 @@ namespace LSLEditor
 		private System.Windows.Forms.ToolStripMenuItem pageSettingsToolStripMenuItem;
 		private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
 		private System.Windows.Forms.ToolStripMenuItem SaveAllToolStripMenuItem;
-        private System.Windows.Forms.OpenFileDialog openFileDialog2;
+        private System.Windows.Forms.OpenFileDialog openSolutionFilesDialog;
         private System.Windows.Forms.ToolStripMenuItem notecardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
         private System.Windows.Forms.ToolTip toolTip1;

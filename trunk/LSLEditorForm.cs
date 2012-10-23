@@ -303,27 +303,27 @@ namespace LSLEditor
 			this.ConfLSL = GetXmlFromResource(Properties.Settings.Default.ConfLSL);
 			this.ConfCSharp = GetXmlFromResource(Properties.Settings.Default.ConfCSharp);
 
-            this.openFileDialog0.FileName = "";
-			this.openFileDialog0.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
-			this.openFileDialog0.Filter = fileFilterNotes;
+            this.openNoteFilesDialog.FileName = "";
+			this.openNoteFilesDialog.Filter = fileFilterNotes;
+			this.openNoteFilesDialog.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
 
-			this.saveFileDialog0.FileName = "";
-			this.saveFileDialog0.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
-            this.saveFileDialog0.Filter = fileFilterNotes;
+			this.saveNoteFilesDialog.FileName = "";
+            this.saveNoteFilesDialog.Filter = fileFilterNotes;
+			this.saveNoteFilesDialog.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
 
 
-			this.openFileDialog1.FileName = "";
-			this.openFileDialog1.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
-            this.openFileDialog1.Filter = fileFilterScripts;
+			this.openScriptFilesDialog.FileName = "";
+            this.openScriptFilesDialog.Filter = fileFilterScripts;
+			this.openScriptFilesDialog.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
 
-			this.saveFileDialog1.FileName = "";
-			this.saveFileDialog1.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
-            this.saveFileDialog1.Filter = fileFilterScripts;
+			this.saveScriptFilesDialog.FileName = "";
+            this.saveScriptFilesDialog.Filter = fileFilterScripts;
+			this.saveScriptFilesDialog.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
 
-			this.openFileDialog2.Multiselect = false;
-			this.openFileDialog2.FileName = "";
-            this.openFileDialog2.Filter = fileFilterSolutions;
-			this.openFileDialog2.InitialDirectory = Properties.Settings.Default.ProjectLocation;
+			this.openSolutionFilesDialog.FileName = "";
+            this.openSolutionFilesDialog.Filter = fileFilterSolutions;
+			this.openSolutionFilesDialog.InitialDirectory = Properties.Settings.Default.ProjectLocation;
+			this.openSolutionFilesDialog.Multiselect = false;
 
 			
 			Version version = Assembly.GetExecutingAssembly().GetName().Version;
@@ -582,10 +582,10 @@ namespace LSLEditor
 
 		private void ReadNoteFiles()
 		{
-			this.openFileDialog0.Multiselect = true;
-			if (this.openFileDialog0.ShowDialog() == DialogResult.OK)
+			this.openNoteFilesDialog.Multiselect = true;
+			if (this.openNoteFilesDialog.ShowDialog() == DialogResult.OK)
 			{
-				foreach (string strFileName in this.openFileDialog0.FileNames)
+				foreach (string strFileName in this.openNoteFilesDialog.FileNames)
 				{
 					if (File.Exists(strFileName))
 					{
@@ -598,10 +598,10 @@ namespace LSLEditor
 
 		private void ReadScriptFiles()
 		{
-			this.openFileDialog1.Multiselect = true;
-			if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
+			this.openScriptFilesDialog.Multiselect = true;
+			if (this.openScriptFilesDialog.ShowDialog() == DialogResult.OK)
 			{
-				foreach (string strFileName in this.openFileDialog1.FileNames)
+				foreach (string strFileName in this.openScriptFilesDialog.FileNames)
 				{
 					if (File.Exists(strFileName))
 					{
@@ -623,12 +623,12 @@ namespace LSLEditor
 			DialogResult dialogresult = DialogResult.OK;
 			if (editForm.FullPathName == Properties.Settings.Default.ExampleName || blnSaveAs)
 			{
-				this.saveFileDialog1.FileName = editForm.FullPathName;
+                SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
+                saveDialog.FileName = editForm.FullPathName;
 				string strExtension = Path.GetExtension(editForm.FullPathName);
-				this.saveFileDialog1.Filter = "Secondlife script files (*" + strExtension + ")|*" + strExtension + "|All files (*.*)|*.*";
-				dialogresult = this.saveFileDialog1.ShowDialog();
-				if (dialogresult == DialogResult.OK) 
-					editForm.FullPathName = this.saveFileDialog1.FileName;
+                dialogresult = saveDialog.ShowDialog();
+				if (dialogresult == DialogResult.OK)
+                    editForm.FullPathName = saveDialog.FileName;
 			}
 			if (dialogresult == DialogResult.OK)
 			{
@@ -646,7 +646,9 @@ namespace LSLEditor
 			if (editForm == null)
 				return false;
 			// save as!!
-			return SaveFile(editForm,true);
+            // TODO: Refactor saveDialog to be a property of the form
+            SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
+            return SaveFile(editForm, true);
 		}
 
 
@@ -1067,9 +1069,12 @@ namespace LSLEditor
 					}
 					if (dialogResult == DialogResult.Yes)
 					{
+                        // TODO: Refactor saveDialog to be a property of the form
+                        SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
 						if(!SaveFile(editForm, false))
 							return false;
 					}
+
 					if (dialogResult == DialogResult.No)
 					{
 						editForm.Dirty = false;
@@ -1613,12 +1618,12 @@ namespace LSLEditor
 		#region SolutionExplorer
 		private void openProjectSolutionToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (this.openFileDialog2.ShowDialog(this) == DialogResult.OK)
+			if (this.openSolutionFilesDialog.ShowDialog(this) == DialogResult.OK)
 			{
-				if (File.Exists(this.openFileDialog2.FileName))
+				if (File.Exists(this.openSolutionFilesDialog.FileName))
 				{
 					if(CloseAllOpenWindows())
-						this.SolutionExplorer.OpenSolution(this.openFileDialog2.FileName);
+						this.SolutionExplorer.OpenSolution(this.openSolutionFilesDialog.FileName);
 				}
 			}
 		}
@@ -1822,7 +1827,7 @@ namespace LSLEditor
 			if (editForm != null)
 			{
 				this.saveToolStripMenuItem.Text = "Save " + editForm.ScriptName;
-				this.saveFileDialog1.FileName = editForm.ScriptName;
+				this.saveScriptFilesDialog.FileName = editForm.ScriptName;
 				this.saveToolStripMenuItem.Enabled = editForm.Dirty;
 				this.closeFileToolStripMenuItem.Enabled = true;
 			}
