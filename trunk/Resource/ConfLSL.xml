@@ -4671,7 +4671,8 @@
 			<Word name="PURSUIT_INTERCEPT" type="integer" value="4" status="beta">Define whether the character attempts to predict the target's location.</Word>
 			<Word name="PURSUIT_OFFSET" type="integer" value="1" status="beta">Go to a position offset from the target.</Word>
 			<Word name="REQUIRE_LINE_OF_SIGHT" type="integer" value="2" status="beta">Define whether the character needs a line-of-sight to give chase.</Word>
-
+			<Word name="HORIZONTAL" type="integer" value="1" />
+			<Word name="VERTICAL" type="integer" value="0"></Word>
 
 			<Word name="CHARACTER_MAX_ANGULAR_ACCEL" type="integer" value="11" status="Unimplemented">The character's maximum angular acceleration about the Z axis.</Word>
 			<Word name="CHARACTER_MAX_ANGULAR_SPEED" type="integer" value="10" status="Unimplemented">The character's maximum angular speed about the Z axis.</Word>
@@ -4740,7 +4741,6 @@
 			<Word name="ESTATE_ACCESS_BANNED_AGENT_ADD" value="64">Add the agent to this estate's Banned residents list.</Word>
 			<Word name="ESTATE_ACCESS_BANNED_AGENT_REMOVE" value="128">Remove the agent from this estate's Banned residents list.</Word>
 
-			<Word name="FORCE_DIRECT_PATH" type="integer" value="" status="beta"></Word>
 			<Word name="FRICTION">Used with llSetPhysicsMaterial to enable the friction value. Must be between 0.0 and 255.0</Word>
 			<Word name="GRAVITY_MULTIPLIER" value="8">Used with llSetPhysicsMaterial to enable the gravity multiplier value. Must be between -1.0 and +28.0</Word>
 
