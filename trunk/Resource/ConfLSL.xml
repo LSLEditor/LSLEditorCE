@@ -4674,9 +4674,6 @@
 			<Word name="HORIZONTAL" type="integer" value="1" />
 			<Word name="VERTICAL" type="integer" value="0"></Word>
 
-			<Word name="CHARACTER_MAX_ANGULAR_ACCEL" type="integer" value="11" status="Unimplemented">The character's maximum angular acceleration about the Z axis.</Word>
-			<Word name="CHARACTER_MAX_ANGULAR_SPEED" type="integer" value="10" status="Unimplemented">The character's maximum angular speed about the Z axis.</Word>
-
 		</WordsSubsection>
 
 		<WordsSubsection name="C.99. Miscellaneous constants.">
