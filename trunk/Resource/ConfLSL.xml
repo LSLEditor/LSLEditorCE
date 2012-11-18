@@ -308,12 +308,13 @@
 		</Word>
 
 		<Word name="llClearPrimMedia">
-			integer llClearPrimMedia( integer face );
+			integer llClearPrimMedia(integer Link, integer Face );
 
-			Clears (deletes) the media and all params from the given face.
+			Clears (deletes) the media and all params from the given Face.
 
 			Returns an integer that is a STATUS_* flag which details the success/failure of the operation.
-			<Argument name="face">face number</Argument>
+			<Argument name="Link">Link number</Argument>
+			<Argument name="Face">Face number</Argument>
 		</Word>
 
 		<Word name="llCloseRemoteDataChannel">

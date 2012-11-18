@@ -45,6 +45,7 @@ using System;
 using System.IO;
 using System.Xml;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
 using LSLEditor.Docking;
 using LSLEditor.Helpers;
@@ -59,6 +60,7 @@ namespace LSLEditor
 		private Guid m_Guid;
         // private bool sOutline = true;
 		public LSLEditorForm parent;
+        public Encoding encodedAs = null;
 
 		private const int WM_NCACTIVATE = 0x0086;
 		protected override void WndProc(ref Message m)
@@ -287,7 +289,7 @@ namespace LSLEditor
 				this.FullPathName = Path.GetFileName(strPath);
 			else
 				this.FullPathName = strPath;
-			this.numberedTextBoxUC1.TextBox.LoadFile(strPath);
+			this.encodedAs = this.numberedTextBoxUC1.TextBox.LoadFile(strPath);
 
 			if (!this.IsScript)
 				return;
@@ -317,12 +319,37 @@ namespace LSLEditor
 		public void SaveCurrentFile(string strPath)
 		{
 			this.FullPathName = strPath;
-			this.numberedTextBoxUC1.TextBox.SaveCurrentFile(strPath);
+            Encoding encodeAs = this.encodedAs;
+            if (this.IsScript && encodeAs == null)
+            {
+                switch (Properties.Settings.Default.OutputFormat)
+                {
+                    case "UTF8":
+                        encodeAs = Encoding.UTF8;
+                        break;
+                    case "Unicode":
+                        encodeAs = Encoding.Unicode;
+                        break;
+                    case "BigEndianUnicode":
+                        encodeAs = Encoding.BigEndianUnicode;
+                        break;
+                    default:
+                        encodeAs = Encoding.Default;
+                        break;
+                }
+            }
+            else if (encodeAs == null)
+            {
+                encodeAs = Encoding.UTF8;
+            }
+
+            this.numberedTextBoxUC1.TextBox.SaveCurrentFile(strPath, encodeAs);
+            this.encodedAs = encodeAs;
 		}
 
 		public void SaveCurrentFile()
 		{
-			this.numberedTextBoxUC1.TextBox.SaveCurrentFile(this.FullPathName);
+			this.SaveCurrentFile(this.FullPathName);
 		}
 
 		public bool Dirty

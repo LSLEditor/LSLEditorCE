@@ -1389,9 +1389,9 @@ namespace LSLEditor
             Verbose("ClearCameraParams()");
         }
 
-        public integer llClearLinkMedia(integer iFace)
+        public integer llClearLinkMedia(integer iLink, integer iFace)
         {
-            Verbose("ClearLinkMedia({0})={1}", iFace, true);
+            Verbose("ClearLinkMedia({0}, {1})={2}", iLink, iFace, true);
             return true;
         }
 
