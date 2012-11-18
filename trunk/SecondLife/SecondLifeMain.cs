@@ -247,6 +247,7 @@ namespace LSLEditor
         public static readonly integer ATTACH_MOUTH = 11;
         public static readonly integer ATTACH_CHIN = 12;
         public static readonly integer ATTACH_LEAR = 13;
+        public static readonly integer ATTACH_LEFT_PEC = 29;
         public static readonly integer ATTACH_REAR = 14;
         public static readonly integer ATTACH_LEYE = 15;
         public static readonly integer ATTACH_REYE = 16;
@@ -256,6 +257,7 @@ namespace LSLEditor
         public static readonly integer ATTACH_LUARM = 20;
         public static readonly integer ATTACH_LLARM = 21;
         public static readonly integer ATTACH_RHIP = 22;
+        public static readonly integer ATTACH_RIGHT_PEC = 30;
         public static readonly integer ATTACH_RULEG = 23;
         public static readonly integer ATTACH_RLLEG = 24;
         public static readonly integer ATTACH_LHIP = 25;
@@ -312,10 +314,11 @@ namespace LSLEditor
 		public static readonly integer CHARACTER_LENGTH = 3;
 		public static readonly integer CHARACTER_TYPE = 6;
 		public static readonly integer CHARACTER_MAX_ACCEL = 8;
-		public static readonly integer CHARACTER_MAX_ANGULAR_ACCEL = 11;
-		public static readonly integer CHARACTER_MAX_ANGULAR_SPEED = 10;
 		public static readonly integer CHARACTER_MAX_DECEL = 9;
-		public static readonly integer CHARACTER_RADIUS = 2;
+        public static readonly integer CHARACTER_MAX_SPEED = 13;
+        public static readonly integer CHARACTER_MAX_TURN_RADIUS = 10;
+        public static readonly integer CHARACTER_ORIENTATION = 4;
+        public static readonly integer CHARACTER_RADIUS = 2;
 		public static readonly integer CHARACTER_TYPE_A = 0;
 		public static readonly integer CHARACTER_TYPE_B = 1;
 		public static readonly integer CHARACTER_TYPE_C = 2;
@@ -368,6 +371,8 @@ namespace LSLEditor
         public static readonly integer HTTP_MIMETYPE = 1;
         public static readonly integer HTTP_VERBOSE_THROTTLE = 4;
         public static readonly integer HTTP_VERIFY_CERT = 3;
+
+        public static readonly integer HORIZONTAL = 1;
 
         public static readonly integer INVENTORY_ALL = -1;
         public static readonly integer INVENTORY_NONE = -1;
@@ -824,6 +829,8 @@ namespace LSLEditor
         public static readonly integer VEHICLE_TYPE_BOAT = 3;
         public static readonly integer VEHICLE_TYPE_AIRPLANE = 4;
         public static readonly integer VEHICLE_TYPE_BALLOON = 5;
+
+        public static readonly integer VERTICAL = 0;
 
         //public static readonly integer REGION_FLAG_RESTRICT_PUSHOBJECT=4194304;
 
