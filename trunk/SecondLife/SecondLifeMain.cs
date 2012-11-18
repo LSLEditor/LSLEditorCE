@@ -316,7 +316,6 @@ namespace LSLEditor
 		public static readonly integer CHARACTER_MAX_ANGULAR_SPEED = 10;
 		public static readonly integer CHARACTER_MAX_DECEL = 9;
 		public static readonly integer CHARACTER_RADIUS = 2;
-		public static readonly integer CHARACTER_TURN_SPEED_MULTIPLIER = 12;
 		public static readonly integer CHARACTER_TYPE_A = 0;
 		public static readonly integer CHARACTER_TYPE_B = 1;
 		public static readonly integer CHARACTER_TYPE_C = 2;
