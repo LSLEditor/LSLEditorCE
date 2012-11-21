@@ -301,7 +301,7 @@
 		</Word>
 
 		<Word name="llClearLinkMedia">
-			integer llClearLinkMedia(integer Face);
+			integer llClearLinkMedia(integer Link, integer Face);
 
 			Clears (deletes) the media and all parameters from the given prim face.
 			Returns an integer that is a STATUS_* flag which details the success/failure of the operation.
@@ -4640,6 +4640,7 @@
 		<WordsSubsection name="C.25. Character constants">
 			<Word name="AVOID_CHARACTERS" type="integer" value="1" status="beta"></Word>
 			<Word name="AVOID_DYNAMIC_OBSTACLES" type="integer" value="2" status="beta"></Word>
+			<Word name="CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES" type="integer" value="14">If set to false, character will not attempt to catch up on lost time when pathfinding performance is low, potentially providing more reliable movement (albeit while potentially appearing to be more stuttery). Default is true to match pre-existing behavior.</Word>
 			<Word name="CHARACTER_AVOIDANCE_MODE" type="integer" value="5" status="beta">Allows you to specify that a character should not try to avoid other characters, should not try to avoid dynamic obstacles (relatively fast moving objects and avatars), or both.</Word>
 			<Word name="CHARACTER_CMD_JUMP" type="integer" value="0x01" status="beta">Makes the character jump. Requires an additional parameter, the height to jump, between 0.1m and 2.0m. This must be provided as the first element of the llExecCharacterCmd option list.</Word>
 			<Word name="CHARACTER_CMD_SMOOTH_STOP" type="integer" value="2" status="beta" />
@@ -4748,6 +4749,7 @@
 
 			<Word name="HTTP_METHOD" />
 			<Word name="HTTP_MIMETYPE" />
+			<Word name="HTTP_PRAGMA_NO_CACHE" type="integer" value="6">Allows enabling/disbling of the "Pragma: no-cache" header.</Word>
 			<Word name="HTTP_VERBOSE_THROTTLE"></Word>
 			<Word name="HTTP_VERIFY_CERT" value="3" />
 
@@ -4775,6 +4777,7 @@
 			<Word name="LIST_STAT_SUM" />
 			<Word name="LIST_STAT_SUM_SQUARES" />
 
+			<Word name="OBJECT_ATTACHED_POINT" value="19">Gets the attachment point to which the object is attached.</Word>
 			<Word name="OBJECT_CREATOR" value="">
 				Gets the object's creator key.
 				If id is an avatar, a NULL_KEY is returned.
@@ -4792,7 +4795,9 @@
 				Gets an object's owner's key.
 				If id is group owned, a NULL_KEY is returned.
 			</Word>
+			<Word name="OBJECT_PATHFINDING_TYPE" type="integer" value="20">Returns the pathfinding setting of any object in the region. It returns an integer matching one of the OPT_* constants.</Word>
 			<Word name="OBJECT_POS" value="">Gets the object's position in region coordinates.</Word>
+			<Word name="OBJECT_ROOT" type="integer" value="18">Gets the id of the root prim of the object requested.</Word>
 			<Word name="OBJECT_ROT" value="">Gets the object's rotation.</Word>
 			<Word name="OBJECT_VELOCITY" value="">Gets the object's velocity.</Word>
 
@@ -4806,6 +4811,16 @@
 			<Word name="OBJECT_SCRIPT_TIME" value="12" />
 			<Word name="OBJECT_TOTAL_SCRIPT_COUNT" value="10" />
 			<Word name="OBJECT_UNKNOWN_DETAIL" value="-1" />
+			
+			<Word name="OPT_AVATAR" type="integer" value="1">Returned for avatars.</Word>
+			<Word name="OPT_CHARACTER" type="integer" value="2">Returned for pathfinding characters.</Word>
+			<Word name="OPT_EXCLUSION_VOLUME" type="integer" value="6">Returned for exclusion volumes.</Word>
+			<Word name="OPT_LEGACY_LINKSET" type="integer" value="0">Returned for movable obstacles, movable phantoms, physical, and volumedetect objects.</Word>
+			<Word name="OPT_MATERIAL_VOLUME" type="integer" value="5">Returned for material volumes.</Word>
+			<Word name="OPT_OTHER" type="integer" value="-1">Returned for attachments, Linden trees, and grass.</Word>
+			<Word name="OPT_STATIC_OBSTACLE" type="integer" value="4">Returned for static obstacles.</Word>
+			<Word name="OPT_WALKABLE" type="integer" value="3">Returned for walkable objects.</Word>
+			
 
 			<Word name="MASK_BASE" />
 			<Word name="MASK_EVERYONE" />
@@ -5058,6 +5073,8 @@
 			<Word name="REMOTE_DATA_REQUEST" />
 
 			<Word name="RESTITUTION" value="4">Used with llSetPhysicsMaterial to enable the density value. Must be between 0.0 and 1.0</Word>
+			
+			<Word name="SIM_STAT_PCT_CHARS_STEPPED" type="integer" value="0">Returns the % of pathfinding characters skipped each frame, averaged over the last minute.</Word>
 
 			<Word name="STRING_TRIM" />
 			<Word name="STRING_TRIM_HEAD" />
