@@ -222,6 +222,13 @@
 			<Argument name="attachment" wild="ATTACH_.*" />
 		</Word>
 
+		<Word name="llAttachToAvatarTemp">
+			void llAttachToAvatarTemp(integer AttachPoint);
+
+			As llAttachToAvatar, with the exception that the object will not create new inventory for the user, and will disappear on detach or disconnect.
+			<Argument name="attachment" wild="ATTACH_.*" />
+		</Word>
+
 		<Word name="llAvatarOnLinkSitTarget">
 			key llAvatarOnLinkSitTarget(integer iLinkNumber);
 
@@ -714,7 +721,7 @@
 
 		<Word name="llGetAgentList">
 			list llGetAgentList( integer Scope, list Options );
-			
+
 			Returns a list of agents from the specified scope (parcel, owner's parcel, region).
 		</Word>
 
@@ -1337,6 +1344,13 @@
 			integer llGetScriptState(string name);
 
 			Resets TRUE if script name is running
+		</Word>
+
+		<Word name="llGetSimStats">
+			float llGetSimStats(integer StatType);
+
+			Returns a float that is the requested statistic.
+			<Argument name="StatType" type="integer">Statistic type. Currently only SIM_STAT_PCT_CHARS_STEPPED is supported.</Argument>
 		</Word>
 
 		<Word name="llGetSimulatorHostname">
@@ -3126,6 +3140,27 @@
 			Remove target number tnumber.
 		</Word>
 
+		<Word name="llTeleportAgent">
+			void llTeleportAgent(key AgentID, string LandmarkName, vector Position, vector LookAtPoint)
+
+			Requests a teleport of avatar to a landmark stored in the object's inventory. If no landmark is provided (an empty string), the avatar is teleported to the location position in the current region. In either case, the avatar is turned to face the position given by look_at in local coordinates.
+			Requires the PERMISSION_TELEPORT permission. This function can only teleport the owner of the object.
+			<Argument name="AvatarID" type="key">UUID of avatar.</Argument>
+			<Argument name="LandmarkName" type="string">Name of landmark (in object contents), or empty string, to use.</Argument>
+			<Argument name="Position" type="vector">The position within the local region to teleport the avatar to, if no landmark was provided.</Argument>
+			<Argument name="LookAtPoint" type="vector">The position within the target region that the avatar should be turned to face upon arrival.</Argument>
+		</Word>
+
+		<Word name="llTeleportAgentGlobalCoords">
+			void llTeleportAgent(key AvatarID, string LandmarkName, vector Position, vector LookAtPoint)
+
+			Teleports an agent to set of a region_coordinates within a region at the specified global_coordinates. The agent lands facing the position defined by look_at local coordinates.
+			<Argument name="AvatarID" type="key">UUID of avatar.</Argument>
+			<Argument name="GlobalPosition" type="vector">Global coordinates of the destination region. Can be retrieved by using llRequestSimulatorData(region_name, DATA_SIM_POS).</Argument>
+			<Argument name="RegionPosition" type="vector">The position within the target region to teleport the avatar to, if no landmark was provided.</Argument>
+			<Argument name="LookAtPoint" type="vector">The position within the target region that the avatar should be turned to face upon arrival.</Argument>
+		</Word>
+
 		<Word name="llTeleportAgentHome">
 			llTeleportAgentHome(key id);
 
@@ -4683,7 +4718,7 @@
 			<Word name="AGENT_LIST_PARCEL" />
 			<Word name="AGENT_LIST_PARCEL_OWNER" />
 			<Word name="AGENT_LIST_REGION" />
-			
+
 			<Word name="CAMERA_ACTIVE" />
 			<Word name="CAMERA_BEHINDNESS_ANGLE" />
 			<Word name="CAMERA_BEHINDNESS_LAG" />
@@ -4811,7 +4846,7 @@
 			<Word name="OBJECT_SCRIPT_TIME" value="12" />
 			<Word name="OBJECT_TOTAL_SCRIPT_COUNT" value="10" />
 			<Word name="OBJECT_UNKNOWN_DETAIL" value="-1" />
-			
+
 			<Word name="OPT_AVATAR" type="integer" value="1">Returned for avatars.</Word>
 			<Word name="OPT_CHARACTER" type="integer" value="2">Returned for pathfinding characters.</Word>
 			<Word name="OPT_EXCLUSION_VOLUME" type="integer" value="6">Returned for exclusion volumes.</Word>
@@ -4820,7 +4855,6 @@
 			<Word name="OPT_OTHER" type="integer" value="-1">Returned for attachments, Linden trees, and grass.</Word>
 			<Word name="OPT_STATIC_OBSTACLE" type="integer" value="4">Returned for static obstacles.</Word>
 			<Word name="OPT_WALKABLE" type="integer" value="3">Returned for walkable objects.</Word>
-			
 
 			<Word name="MASK_BASE" />
 			<Word name="MASK_EVERYONE" />
@@ -5073,7 +5107,7 @@
 			<Word name="REMOTE_DATA_REQUEST" />
 
 			<Word name="RESTITUTION" value="4">Used with llSetPhysicsMaterial to enable the density value. Must be between 0.0 and 1.0</Word>
-			
+
 			<Word name="SIM_STAT_PCT_CHARS_STEPPED" type="integer" value="0">Returns the % of pathfinding characters skipped each frame, averaged over the last minute.</Word>
 
 			<Word name="STRING_TRIM" />
