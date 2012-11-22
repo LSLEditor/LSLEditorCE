@@ -54,7 +54,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("LSL-Editor for editing and compiling LSL scripts")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("")]
+[assembly: AssemblyProduct("LSL Editor")]
 [assembly: AssemblyCopyright("2006 - 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -70,7 +70,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("2.47.0.*")]
+[assembly: AssemblyVersion("2.47.1.0")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the
@@ -100,4 +100,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyName("")]
 [assembly: ComVisibleAttribute(false)]
-[assembly: AssemblyFileVersionAttribute("2.47.0.0")]
+[assembly: AssemblyFileVersionAttribute("2.47.1.5")]
