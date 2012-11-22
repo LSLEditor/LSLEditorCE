@@ -7,8 +7,7 @@
     <ProjectGuid>{59468D25-6E68-4113-B740-C6EF4695045B}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>App.ico</ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
     <AssemblyName>LSLEditor</AssemblyName>
@@ -630,6 +629,7 @@
     <EmbeddedResource Include="Images\Close-Active.gif" />
     <EmbeddedResource Include="Images\Close-Disabled.gif" />
     <EmbeddedResource Include="Images\Close-Inactive.gif" />
+    <Content Include="App.ico" />
     <Content Include="Docking\DockPanel.bmp" />
     <Content Include="Docking\Resources\DockIndicator_PaneDiamond.bmp" />
     <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Bottom.bmp" />
