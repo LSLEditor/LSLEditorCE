@@ -100,4 +100,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyName("")]
 [assembly: ComVisibleAttribute(false)]
-[assembly: AssemblyFileVersionAttribute("2.47.1.0")]
+[assembly: AssemblyFileVersionAttribute("2.47.1.5")]

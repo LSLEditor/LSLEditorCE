@@ -19,7 +19,7 @@
     <DelaySign>false</DelaySign>
     <OutputType>WinExe</OutputType>
     <RootNamespace>LSLEditor</RootNamespace>
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
     <StartupObject>LSLEditor.LSLEditorForm</StartupObject>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
