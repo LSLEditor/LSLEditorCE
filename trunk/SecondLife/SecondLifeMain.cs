@@ -247,6 +247,7 @@ namespace LSLEditor
         public static readonly integer ATTACH_MOUTH = 11;
         public static readonly integer ATTACH_CHIN = 12;
         public static readonly integer ATTACH_LEAR = 13;
+        public static readonly integer ATTACH_LEFT_PEC = 29;
         public static readonly integer ATTACH_REAR = 14;
         public static readonly integer ATTACH_LEYE = 15;
         public static readonly integer ATTACH_REYE = 16;
@@ -256,6 +257,7 @@ namespace LSLEditor
         public static readonly integer ATTACH_LUARM = 20;
         public static readonly integer ATTACH_LLARM = 21;
         public static readonly integer ATTACH_RHIP = 22;
+        public static readonly integer ATTACH_RIGHT_PEC = 30;
         public static readonly integer ATTACH_RULEG = 23;
         public static readonly integer ATTACH_RLLEG = 24;
         public static readonly integer ATTACH_LHIP = 25;
@@ -305,6 +307,7 @@ namespace LSLEditor
         public static readonly integer CHANGED_REGION_START = 1024;
 		public static readonly integer CHANGED_MEDIA = 2048;
 
+        public static readonly integer CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES = 14;
 		public static readonly integer CHARACTER_AVOIDANCE_MODE = 5;
 		public static readonly integer CHARACTER_CMD_JUMP = 0x01;
 		public static readonly integer CHARACTER_CMD_STOP = 0x00;
@@ -312,11 +315,11 @@ namespace LSLEditor
 		public static readonly integer CHARACTER_LENGTH = 3;
 		public static readonly integer CHARACTER_TYPE = 6;
 		public static readonly integer CHARACTER_MAX_ACCEL = 8;
-		public static readonly integer CHARACTER_MAX_ANGULAR_ACCEL = 11;
-		public static readonly integer CHARACTER_MAX_ANGULAR_SPEED = 10;
 		public static readonly integer CHARACTER_MAX_DECEL = 9;
-		public static readonly integer CHARACTER_RADIUS = 2;
-		public static readonly integer CHARACTER_TURN_SPEED_MULTIPLIER = 12;
+        public static readonly integer CHARACTER_MAX_SPEED = 13;
+        public static readonly integer CHARACTER_MAX_TURN_RADIUS = 10;
+        public static readonly integer CHARACTER_ORIENTATION = 4;
+        public static readonly integer CHARACTER_RADIUS = 2;
 		public static readonly integer CHARACTER_TYPE_A = 0;
 		public static readonly integer CHARACTER_TYPE_B = 1;
 		public static readonly integer CHARACTER_TYPE_C = 2;
@@ -367,8 +370,11 @@ namespace LSLEditor
         public static readonly integer HTTP_BODY_TRUNCATED = 0;
         public static readonly integer HTTP_METHOD = 0;
         public static readonly integer HTTP_MIMETYPE = 1;
+        public static readonly integer HTTP_PRAGMA_NO_CACHE = 6;
         public static readonly integer HTTP_VERBOSE_THROTTLE = 4;
         public static readonly integer HTTP_VERIFY_CERT = 3;
+
+        public static readonly integer HORIZONTAL = 1;
 
         public static readonly integer INVENTORY_ALL = -1;
         public static readonly integer INVENTORY_NONE = -1;
@@ -430,12 +436,15 @@ namespace LSLEditor
         public static readonly integer MASK_NEXT = 4;
         public static readonly integer MASK_OWNER = 1;
 
+        public static readonly integer OBJECT_ATTACHED_POINT = 19;
         public static readonly integer OBJECT_NAME = 1;
         public static readonly integer OBJECT_DESC = 2;
         public static readonly integer OBJECT_POS = 3;
+        public static readonly integer OBJECT_ROOT = 18;
         public static readonly integer OBJECT_ROT = 4;
         public static readonly integer OBJECT_VELOCITY = 5;
         public static readonly integer OBJECT_OWNER = 6;
+        public static readonly integer OBJECT_PATHFINDING_TYPE = 20;
         public static readonly integer OBJECT_GROUP = 7;
         public static readonly integer OBJECT_CREATOR = 8;
 
@@ -449,6 +458,15 @@ namespace LSLEditor
 		public static readonly integer OBJECT_SCRIPT_TIME = 12;
 		public static readonly integer OBJECT_TOTAL_SCRIPT_COUNT = 10;
 		public static readonly integer OBJECT_UNKNOWN_DETAIL = -1;
+
+        public static readonly integer OPT_AVATAR = 1;
+        public static readonly integer OPT_CHARACTER = 2;
+        public static readonly integer OPT_EXCLUSION_VOLUME = 6;
+        public static readonly integer OPT_LEGACY_LINKSET = 0;
+        public static readonly integer OPT_MATERIAL_VOLUME = 5;
+        public static readonly integer OPT_OTHER = -1;
+        public static readonly integer OPT_STATIC_OBSTACLE = 4;
+        public static readonly integer OPT_WALKABLE = 3;
 
         public static readonly integer PARCEL_COUNT_TOTAL = 0;
         public static readonly integer PARCEL_COUNT_OWNER = 1;
@@ -730,6 +748,8 @@ namespace LSLEditor
 
 		public static readonly integer REQUIRE_LINE_OF_SIGHT = 2;
 
+        public static readonly integer SIM_STAT_PCT_CHARS_STEPPED = 0;
+
         public static readonly integer STATUS_PHYSICS = 1;
         public static readonly integer STATUS_ROTATE_X = 2;
         public static readonly integer STATUS_ROTATE_Y = 4;
@@ -825,6 +845,8 @@ namespace LSLEditor
         public static readonly integer VEHICLE_TYPE_BOAT = 3;
         public static readonly integer VEHICLE_TYPE_AIRPLANE = 4;
         public static readonly integer VEHICLE_TYPE_BALLOON = 5;
+
+        public static readonly integer VERTICAL = 0;
 
         //public static readonly integer REGION_FLAG_RESTRICT_PUSHOBJECT=4194304;
 
@@ -1217,9 +1239,9 @@ namespace LSLEditor
             Verbose("AttachToAvatar(" + attachment + ")");
         }
 
-        public void llAttachToAvatar(key avatar, integer attachment)
+        public void llAttachToAvatarTemp(integer AttachPoint)
         {
-            Verbose("AttachToAvatar(" + avatar + "," + attachment + ")");
+            Verbose("llAttachToAvatarTemp(" + AttachPoint + ")");
         }
 
 		public key llAvatarOnLinkSitTarget(integer LinkNumber)
@@ -1389,9 +1411,9 @@ namespace LSLEditor
             Verbose("ClearCameraParams()");
         }
 
-        public integer llClearLinkMedia(integer iFace)
+        public integer llClearLinkMedia(integer iLink, integer iFace)
         {
-            Verbose("ClearLinkMedia({0})={1}", iFace, true);
+            Verbose("ClearLinkMedia({0}, {1})={2}", iLink, iFace, true);
             return true;
         }
 
@@ -2424,6 +2446,12 @@ namespace LSLEditor
         public integer llGetScriptState(String name)
         {
             Verbose("GetScriptState(" + name + ")");
+            return 0;
+        }
+
+        public float llGetSimStats(integer StatType)
+        {
+            Verbose("llGetSimStats(" + StatType + ")");
             return 0;
         }
 
@@ -4142,15 +4170,25 @@ namespace LSLEditor
             Verbose("TargetRemove(" + tnumber + ")");
         }
 
-        public void llTeleportAgentHome(key id)
+        public void llTeleportAgent(key AvatarID, string LandmarkName, vector LandingPoint, vector LookAtPoint)
         {
-            Verbose("TeleportAgentHome(" + id + ")");
+            Verbose("TeleportAgentHome({0}, \"{1}\", {2}, {3})", AvatarID, LandmarkName, LandingPoint, LookAtPoint);
+        }
+
+        public void llTeleportAgentGlobalCoords(key AvatarID, vector GlobalPosition, vector RegionPosition, vector LookAtPoint)
+        {
+            Verbose("TeleportAgentHome({0}, {1}, {2}, {3})", AvatarID, GlobalPosition, RegionPosition, LookAtPoint);
+        }
+
+        public void llTeleportAgentHome(key AvatarID)
+        {
+            Verbose("TeleportAgentHome({0})", AvatarID);
         }
 
         // 335
         public void llTextBox(key avatar, String message, integer chat_channel)
         {
-            Verbose("llTextBox({0},\"{1}\",{2})", avatar, message, chat_channel);
+            Verbose("llTextBox({0}, \"{1}\", {2})", avatar, message, chat_channel);
             host.llTextBox(avatar, message, chat_channel);
         }
 

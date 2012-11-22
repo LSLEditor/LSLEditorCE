@@ -222,6 +222,13 @@
 			<Argument name="attachment" wild="ATTACH_.*" />
 		</Word>
 
+		<Word name="llAttachToAvatarTemp">
+			void llAttachToAvatarTemp(integer AttachPoint);
+
+			As llAttachToAvatar, with the exception that the object will not create new inventory for the user, and will disappear on detach or disconnect.
+			<Argument name="attachment" wild="ATTACH_.*" />
+		</Word>
+
 		<Word name="llAvatarOnLinkSitTarget">
 			key llAvatarOnLinkSitTarget(integer iLinkNumber);
 
@@ -301,19 +308,20 @@
 		</Word>
 
 		<Word name="llClearLinkMedia">
-			integer llClearLinkMedia(integer Face);
+			integer llClearLinkMedia(integer Link, integer Face);
 
 			Clears (deletes) the media and all parameters from the given prim face.
 			Returns an integer that is a STATUS_* flag which details the success/failure of the operation.
 		</Word>
 
 		<Word name="llClearPrimMedia">
-			integer llClearPrimMedia( integer face );
+			integer llClearPrimMedia(integer Link, integer Face );
 
-			Clears (deletes) the media and all params from the given face.
+			Clears (deletes) the media and all params from the given Face.
 
 			Returns an integer that is a STATUS_* flag which details the success/failure of the operation.
-			<Argument name="face">face number</Argument>
+			<Argument name="Link">Link number</Argument>
+			<Argument name="Face">Face number</Argument>
 		</Word>
 
 		<Word name="llCloseRemoteDataChannel">
@@ -713,7 +721,7 @@
 
 		<Word name="llGetAgentList">
 			list llGetAgentList( integer Scope, list Options );
-			
+
 			Returns a list of agents from the specified scope (parcel, owner's parcel, region).
 		</Word>
 
@@ -1336,6 +1344,13 @@
 			integer llGetScriptState(string name);
 
 			Resets TRUE if script name is running
+		</Word>
+
+		<Word name="llGetSimStats">
+			float llGetSimStats(integer StatType);
+
+			Returns a float that is the requested statistic.
+			<Argument name="StatType" type="integer">Statistic type. Currently only SIM_STAT_PCT_CHARS_STEPPED is supported.</Argument>
 		</Word>
 
 		<Word name="llGetSimulatorHostname">
@@ -3125,6 +3140,27 @@
 			Remove target number tnumber.
 		</Word>
 
+		<Word name="llTeleportAgent">
+			void llTeleportAgent(key AgentID, string LandmarkName, vector Position, vector LookAtPoint)
+
+			Requests a teleport of avatar to a landmark stored in the object's inventory. If no landmark is provided (an empty string), the avatar is teleported to the location position in the current region. In either case, the avatar is turned to face the position given by look_at in local coordinates.
+			Requires the PERMISSION_TELEPORT permission. This function can only teleport the owner of the object.
+			<Argument name="AvatarID" type="key">UUID of avatar.</Argument>
+			<Argument name="LandmarkName" type="string">Name of landmark (in object contents), or empty string, to use.</Argument>
+			<Argument name="Position" type="vector">The position within the local region to teleport the avatar to, if no landmark was provided.</Argument>
+			<Argument name="LookAtPoint" type="vector">The position within the target region that the avatar should be turned to face upon arrival.</Argument>
+		</Word>
+
+		<Word name="llTeleportAgentGlobalCoords">
+			void llTeleportAgent(key AvatarID, string LandmarkName, vector Position, vector LookAtPoint)
+
+			Teleports an agent to set of a region_coordinates within a region at the specified global_coordinates. The agent lands facing the position defined by look_at local coordinates.
+			<Argument name="AvatarID" type="key">UUID of avatar.</Argument>
+			<Argument name="GlobalPosition" type="vector">Global coordinates of the destination region. Can be retrieved by using llRequestSimulatorData(region_name, DATA_SIM_POS).</Argument>
+			<Argument name="RegionPosition" type="vector">The position within the target region to teleport the avatar to, if no landmark was provided.</Argument>
+			<Argument name="LookAtPoint" type="vector">The position within the target region that the avatar should be turned to face upon arrival.</Argument>
+		</Word>
+
 		<Word name="llTeleportAgentHome">
 			llTeleportAgentHome(key id);
 
@@ -3726,6 +3762,7 @@
 				If this permission enabled, the object can successfully
 				call the llTakeControls libray call.
 			</Word>
+			<Word name="PERMISSION_TELEPORT" value="0x1000" />
 			<Word name="PERMISSION_TRACK_CAMERA" value="" />
 			<Word name="PERMISSION_TRIGGER_ANIMATION" value="">
 				If this permission is enabled, the object can successfully
@@ -4638,31 +4675,42 @@
 		<WordsSubsection name="C.25. Character constants">
 			<Word name="AVOID_CHARACTERS" type="integer" value="1" status="beta"></Word>
 			<Word name="AVOID_DYNAMIC_OBSTACLES" type="integer" value="2" status="beta"></Word>
+			<Word name="CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES" type="integer" value="14">If set to false, character will not attempt to catch up on lost time when pathfinding performance is low, potentially providing more reliable movement (albeit while potentially appearing to be more stuttery). Default is true to match pre-existing behavior.</Word>
 			<Word name="CHARACTER_AVOIDANCE_MODE" type="integer" value="5" status="beta">Allows you to specify that a character should not try to avoid other characters, should not try to avoid dynamic obstacles (relatively fast moving objects and avatars), or both.</Word>
 			<Word name="CHARACTER_CMD_JUMP" type="integer" value="0x01" status="beta">Makes the character jump. Requires an additional parameter, the height to jump, between 0.1m and 2.0m. This must be provided as the first element of the llExecCharacterCmd option list.</Word>
+			<Word name="CHARACTER_CMD_SMOOTH_STOP" type="integer" value="2" status="beta" />
 			<Word name="CHARACTER_CMD_STOP" type="integer" value="0x00" status="beta">Stops any current pathfinding operation.</Word>
 			<Word name="CHARACTER_DESIRED_SPEED" type="integer" value="1" status="beta">Speed of pursuit in meters per second.</Word>
+			<Word name="CHARACTER_DESIRED_TURN_SPEED" type="integer" value="12" status="beta">The character&apos;s maximum speed while turning--note that this is only loosely enforced (i.e., a character may turn at higher speeds under certain conditions).</Word>
 			<Word name="CHARACTER_LENGTH" type="integer" value="3" status="beta">Set collision capsule length - cannot be less than two times the radius.</Word>
-			<Word name="CHARACTER_TYPE" type="integer" value="6" status="beta">Specifies which walk-ability coefficient will be used by this character.</Word>
-			<Word name="CHARACTER_MAX_ACCEL" type="integer" value="8" status="beta">The character's maximum acceleration rate.</Word>
-			<Word name="CHARACTER_MAX_ANGULAR_ACCEL" type="integer" value="11" status="beta">The character's maximum angular acceleration about the Z axis.</Word>
-			<Word name="CHARACTER_MAX_ANGULAR_SPEED" type="integer" value="10" status="beta">The character's maximum angular speed about the Z axis.</Word>
-			<Word name="CHARACTER_MAX_DECEL" type="integer" value="9" status="beta">The character's maximum deceleration rate.</Word>
+			<Word name="CHARACTER_MAX_ACCEL" type="integer" value="8" status="beta">The character&apos;s maximum acceleration rate.</Word>
+			<Word name="CHARACTER_MAX_DECEL" type="integer" value="9" status="beta">The character&apos;s maximum deceleration rate.</Word>
+			<Word name="CHARACTER_MAX_SPEED" type="integer" value="13" status="beta">The character&apos;s maximum speed.</Word>
+			<Word name="CHARACTER_MAX_TURN_RADIUS" type="integer" value="10" status="beta">The character&apos;s turn radius when travelling at CHARACTER_MAX_TURN_SPEED.</Word>
+			<Word name="CHARACTER_ORIENTATION" type="integer" value="4" status="beta">Valid options are: VERTICAL, HORIZONTAL.</Word>
 			<Word name="CHARACTER_RADIUS" type="integer" value="2" status="beta">Set collision capsule radius.</Word>
-			<Word name="CHARACTER_TURN_SPEED_MULTIPLIER" type="integer" value="12" status="beta">When a character has to make certain kinds of turns, this value is multiplied by the character's desired speed and the character is slowed down to the new value before being allowed to turn.</Word>
+			<Word name="CHARACTER_TYPE" type="integer" value="6" status="beta">Specifies which walk-ability coefficient will be used by this character.</Word>
 			<Word name="CHARACTER_TYPE_A" type="integer" value="0" status="beta" />
 			<Word name="CHARACTER_TYPE_B" type="integer" value="1" status="beta" />
 			<Word name="CHARACTER_TYPE_C" type="integer" value="2" status="beta" />
 			<Word name="CHARACTER_TYPE_D" type="integer" value="3" status="beta" />
 			<Word name="CHARACTER_TYPE_NONE" type="integer" value="4" status="beta" />
-			<Word name="PURSUIT_FUZZ_FACTOR" type="integer" value="3" status="beta">Selects a random destination near the offset.</Word>
-			<Word name="PURSUIT_INTERCEPT" type="integer" value="4" status="beta">Define whether the character attempts to predict the target's location.</Word>
-			<Word name="PURSUIT_OFFSET" type="integer" value="1" status="beta">Go to a position offset from the target.</Word>
-			<Word name="REQUIRE_LINE_OF_SIGHT" type="integer" value="2" status="beta">Define whether the character needs a line-of-sight to give chase.</Word>
+			<Word name="FORCE_DIRECT_PATH" type="integer" value="1" status="beta">Makes character navigate in a straight line toward pos. May be set to TRUE or FALSE.</Word>
+			<Word name="GET_NAV_POINT_RADIUS" type="integer" value="0" status="beta" />
+			<Word name="PATROL_PAUSE_AT_WAYPOINTS" type="integer" value="0" status="beta" />
+			<Word name="PURSUIT_GOAL_TOLERANCE" type="integer" value="5" />
 			<Word name="TRAVERSAL_TYPE" type="integer" value="7" status="beta">One of TRAVERSAL_TYPE_FAST, TRAVERSAL_TYPE_SLOW, and TRAVERSAL_TYPE_NONE.</Word>
 			<Word name="TRAVERSAL_TYPE_FAST" type="integer" value="1" status="beta" />
 			<Word name="TRAVERSAL_TYPE_NONE" type="integer" value="2" status="beta" />
 			<Word name="TRAVERSAL_TYPE_SLOW" type="integer" value="0" status="beta" />
+			<Word name="WANDER_PAUSE_AT_WAYPOINTS" type="integer" value="0"></Word>
+			<Word name="PURSUIT_FUZZ_FACTOR" type="integer" value="3" status="beta">Selects a random destination near the offset.</Word>
+			<Word name="PURSUIT_INTERCEPT" type="integer" value="4" status="beta">Define whether the character attempts to predict the target's location.</Word>
+			<Word name="PURSUIT_OFFSET" type="integer" value="1" status="beta">Go to a position offset from the target.</Word>
+			<Word name="REQUIRE_LINE_OF_SIGHT" type="integer" value="2">Define whether the character needs a line-of-sight to give chase.</Word>
+			<Word name="HORIZONTAL" type="integer" value="1" />
+			<Word name="VERTICAL" type="integer" value="0"></Word>
+
 		</WordsSubsection>
 
 		<WordsSubsection name="C.99. Miscellaneous constants.">
@@ -4670,7 +4718,7 @@
 			<Word name="AGENT_LIST_PARCEL" />
 			<Word name="AGENT_LIST_PARCEL_OWNER" />
 			<Word name="AGENT_LIST_REGION" />
-			
+
 			<Word name="CAMERA_ACTIVE" />
 			<Word name="CAMERA_BEHINDNESS_ANGLE" />
 			<Word name="CAMERA_BEHINDNESS_LAG" />
@@ -4727,15 +4775,16 @@
 			<Word name="ESTATE_ACCESS_BANNED_AGENT_ADD" value="64">Add the agent to this estate's Banned residents list.</Word>
 			<Word name="ESTATE_ACCESS_BANNED_AGENT_REMOVE" value="128">Remove the agent from this estate's Banned residents list.</Word>
 
-			<Word name="FORCE_DIRECT_PATH" type="integer" value="" status="beta"></Word>
 			<Word name="FRICTION">Used with llSetPhysicsMaterial to enable the friction value. Must be between 0.0 and 255.0</Word>
 			<Word name="GRAVITY_MULTIPLIER" value="8">Used with llSetPhysicsMaterial to enable the gravity multiplier value. Must be between -1.0 and +28.0</Word>
 
 			<Word name="HTTP_BODY_MAXLENGTH" />
 			<Word name="HTTP_BODY_TRUNCATED" />
+			<Word name="HTTP_CUSTOM_HEADER" value="5">Usage: 'HTTP_CUSTOM_HEADER, string, string'. Add an extra custom HTTP header to the request. The first string is the name of the parameter to change, e.g. "Pragma", and the second string is the value, e.g. "no-cache".</Word>
 
 			<Word name="HTTP_METHOD" />
 			<Word name="HTTP_MIMETYPE" />
+			<Word name="HTTP_PRAGMA_NO_CACHE" type="integer" value="6">Allows enabling/disbling of the "Pragma: no-cache" header.</Word>
 			<Word name="HTTP_VERBOSE_THROTTLE"></Word>
 			<Word name="HTTP_VERIFY_CERT" value="3" />
 
@@ -4763,6 +4812,7 @@
 			<Word name="LIST_STAT_SUM" />
 			<Word name="LIST_STAT_SUM_SQUARES" />
 
+			<Word name="OBJECT_ATTACHED_POINT" value="19">Gets the attachment point to which the object is attached.</Word>
 			<Word name="OBJECT_CREATOR" value="">
 				Gets the object's creator key.
 				If id is an avatar, a NULL_KEY is returned.
@@ -4780,7 +4830,9 @@
 				Gets an object's owner's key.
 				If id is group owned, a NULL_KEY is returned.
 			</Word>
+			<Word name="OBJECT_PATHFINDING_TYPE" type="integer" value="20">Returns the pathfinding setting of any object in the region. It returns an integer matching one of the OPT_* constants.</Word>
 			<Word name="OBJECT_POS" value="">Gets the object's position in region coordinates.</Word>
+			<Word name="OBJECT_ROOT" type="integer" value="18">Gets the id of the root prim of the object requested.</Word>
 			<Word name="OBJECT_ROT" value="">Gets the object's rotation.</Word>
 			<Word name="OBJECT_VELOCITY" value="">Gets the object's velocity.</Word>
 
@@ -4794,6 +4846,25 @@
 			<Word name="OBJECT_SCRIPT_TIME" value="12" />
 			<Word name="OBJECT_TOTAL_SCRIPT_COUNT" value="10" />
 			<Word name="OBJECT_UNKNOWN_DETAIL" value="-1" />
+			
+			<Word name="OPT_AVATAR" type="integer" value="1">Returned for avatars.</Word>
+			<Word name="OPT_CHARACTER" type="integer" value="2">Returned for pathfinding characters.</Word>
+			<Word name="OPT_EXCLUSION_VOLUME" type="integer" value="6">Returned for exclusion volumes.</Word>
+			<Word name="OPT_LEGACY_LINKSET" type="integer" value="0">Returned for movable obstacles, movable phantoms, physical, and volumedetect objects.</Word>
+			<Word name="OPT_MATERIAL_VOLUME" type="integer" value="5">Returned for material volumes.</Word>
+			<Word name="OPT_OTHER" type="integer" value="-1">Returned for attachments, Linden trees, and grass.</Word>
+			<Word name="OPT_STATIC_OBSTACLE" type="integer" value="4">Returned for static obstacles.</Word>
+			<Word name="OPT_WALKABLE" type="integer" value="3">Returned for walkable objects.</Word>
+			
+
+			<Word name="OPT_AVATAR" type="integer" value="1">Returned for avatars.</Word>
+			<Word name="OPT_CHARACTER" type="integer" value="2">Returned for pathfinding characters.</Word>
+			<Word name="OPT_EXCLUSION_VOLUME" type="integer" value="6">Returned for exclusion volumes.</Word>
+			<Word name="OPT_LEGACY_LINKSET" type="integer" value="0">Returned for movable obstacles, movable phantoms, physical, and volumedetect objects.</Word>
+			<Word name="OPT_MATERIAL_VOLUME" type="integer" value="5">Returned for material volumes.</Word>
+			<Word name="OPT_OTHER" type="integer" value="-1">Returned for attachments, Linden trees, and grass.</Word>
+			<Word name="OPT_STATIC_OBSTACLE" type="integer" value="4">Returned for static obstacles.</Word>
+			<Word name="OPT_WALKABLE" type="integer" value="3">Returned for walkable objects.</Word>
 
 			<Word name="MASK_BASE" />
 			<Word name="MASK_EVERYONE" />
@@ -5001,6 +5072,7 @@
 			<Word name="PU_EVADE_SPOTTED" type="integer" value="0x08" status="beta">Triggered when an llEvade character switches from hiding to running</Word>
 			<Word name="PU_FAILURE_INVALID_GOAL" type="integer" value="0x03" status="beta">Goal is not on the navigation-mesh and cannot be reached.</Word>
 			<Word name="PU_FAILURE_INVALID_START" type="integer" value="0x02" status="beta">Character cannot navigate from the current location - e.g., the character is off the navmesh or too high above it.</Word>
+			<Word name="PU_FAILURE_NO_NAVMESH" type="integer" value="0x09" status="beta">This is a fatal error reported to a character when there is no navmesh for the region. This usually indicates a server failure and users should file a bug report and include the time and region in which they received this message.</Word>
 			<Word name="PU_FAILURE_NO_VALID_DESTINATION" type="integer" value="0x06" status="beta">There's no good place for the character to go - e.g., it is patrolling and all the patrol points are now unreachable.</Word>
 			<Word name="PU_FAILURE_OTHER" type="integer" value="1000000" status="beta" />
 			<Word name="PU_FAILURE_TARGET_GONE" type="integer" value="0x05" status="beta">Target (for llPursue or llEvade) can no longer be tracked - e.g., it left the region or is an avatar that is now more than about 30m outside the region.</Word>
@@ -5045,6 +5117,10 @@
 			<Word name="REMOTE_DATA_REQUEST" />
 
 			<Word name="RESTITUTION" value="4">Used with llSetPhysicsMaterial to enable the density value. Must be between 0.0 and 1.0</Word>
+			
+			<Word name="SIM_STAT_PCT_CHARS_STEPPED" type="integer" value="0">Returns the % of pathfinding characters skipped each frame, averaged over the last minute.</Word>
+
+			<Word name="SIM_STAT_PCT_CHARS_STEPPED" type="integer" value="0">Returns the % of pathfinding characters skipped each frame, averaged over the last minute.</Word>
 
 			<Word name="STRING_TRIM" />
 			<Word name="STRING_TRIM_HEAD" />
