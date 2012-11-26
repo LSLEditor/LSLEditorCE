@@ -323,11 +323,20 @@
     <Setting Name="OutputFormat" Type="System.String" Scope="User">
       <Value Profile="(Default)">UTF-8</Value>
     </Setting>
+#ifndef DEBUG
+    <Setting Name="Update" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://lsleditor.sourceforge.net/check4update.php</Value>
+    </Setting>
+    <Setting Name="UpdateManifest" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://lsleditor.sourceforge.net/update.php</Value>
+    </Setting>
+#elseif
     <Setting Name="Update" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://a-w-d.dyndns.org:8080/lsleditor/check4update.php</Value>
     </Setting>
     <Setting Name="UpdateManifest" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://a-w-d.dyndns.org:8080/lsleditor/update.php</Value>
     </Setting>
+#endif
   </Settings>
 </SettingsFile>
