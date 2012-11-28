@@ -1219,23 +1219,5 @@ namespace LSLEditor.Properties {
                 return ((string)(this["UpdateManifest"]));
             }
         }
-
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://a-w-d.dyndns.org:8080/lsleditor/check4update.php")]
-        public string Update1 {
-            get {
-                return ((string)(this["Update1"]));
-            }
-        }
-
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://a-w-d.dyndns.org:8080/lsleditor/update.php")]
-        public string UpdateManifest1 {
-            get {
-                return ((string)(this["UpdateManifest1"]));
-            }
-        }
     }
 }
