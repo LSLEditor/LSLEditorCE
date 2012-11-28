@@ -20,7 +20,7 @@
 // ********
 // * LSLEditor, a External editor for the LSL Language.
 // * Copyright (C) 2010 The LSLEditor Group.
-// 
+//
 // * This program is free software; you can redistribute it and/or
 // * modify it under the terms of the GNU General Public License
 // * as published by the Free Software Foundation; either version 2
@@ -36,7 +36,7 @@
 // * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 // ********
 // *
-// * The above copyright notice and this permission notice shall be included in all 
+// * The above copyright notice and this permission notice shall be included in all
 // * copies or substantial portions of the Software.
 // *
 // ********
@@ -87,7 +87,7 @@ namespace LSLEditor
 
 		private Browser browser;
 		private SimulatorConsole SimulatorConsole;
-        
+
 
 		public bool CancelClosing = false;
 
@@ -224,7 +224,7 @@ namespace LSLEditor
 				//		return null;
 				//	return this.tabControlExtended1.SelectedTab.Tag as Form;
 				}
-			}		
+			}
 		}
 
 		public void ActivateMdiForm(Form form)
@@ -264,8 +264,8 @@ namespace LSLEditor
 			}
 			else
 			{
-                
-                
+
+
 
 				//form.Visible = false;
 				//form.MdiParent = null;
@@ -276,8 +276,8 @@ namespace LSLEditor
 				//tabPage.Tag = form;
 				//form.Tag = tabPage;
 				// Was already commented out //tabPage.Controls.Add(form.Controls[0]);
-				
-                
+
+
                 //this.tabControlExtended1.TabPages.Add(tabPage);
 				//this.tabControlExtended1.SelectedTab = tabPage;
 			}
@@ -325,7 +325,7 @@ namespace LSLEditor
 			this.openSolutionFilesDialog.InitialDirectory = Properties.Settings.Default.ProjectLocation;
 			this.openSolutionFilesDialog.Multiselect = false;
 
-			
+
 			Version version = Assembly.GetExecutingAssembly().GetName().Version;
 			this.Text += " " + version.Major + "." + version.Minor;
 
@@ -338,7 +338,7 @@ namespace LSLEditor
 				if (Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location).Contains("beta"))
 					this.Text += " (BETA)";
 			}
-            
+
             //TODO: Fix close buttons on tabs
 			// enables close buttons on tab
 			//this.tabControlExtended1.SetDrawMode();
@@ -618,6 +618,9 @@ namespace LSLEditor
 			browser.ShowWebBrowser("Import Examples", Properties.Settings.Default.Examples);
 		}
 
+        /***
+         * Return value indicate whether file was saved or not.
+         */
 		public bool SaveFile(EditForm editForm, bool blnSaveAs)
 		{
 			DialogResult dialogresult = DialogResult.OK;
@@ -1039,7 +1042,7 @@ namespace LSLEditor
 					}
 				}
 
-				this.browserInWindowToolStripMenuItem.Checked = 
+				this.browserInWindowToolStripMenuItem.Checked =
 					Properties.Settings.Default.BrowserInWindow;
 
 				this.WikiSepBrowserstoolStripMenuItem.Checked =
@@ -1350,12 +1353,12 @@ namespace LSLEditor
 			this.toolStripStatusLabel1.Text = "";
 
 			//int intTabToDelete = (int)this.contextMenuStrip1.Tag;
-			
+
             if (intTabToDelete >= this.tabControlExtended1.TabCount)
 				return;
-			
+
             TabPage tabPage = this.tabControlExtended1.TabPages[intTabToDelete];
-			
+
             if (tabPage.Text.Contains("Browser"))
 			{
 				this.browser.Dispose();
@@ -1439,7 +1442,7 @@ namespace LSLEditor
                 int intTabToClose = this.tabControlExtended1.SelectedIndex;
 				if (intTabToClose >= 0)
 					CloseTab(intTabToClose);
-			
+
                  */
             }
 		}
@@ -1905,7 +1908,7 @@ namespace LSLEditor
             }
         }
 
-        
+
 
         private void toolStripMenuItem9_Click_1(object sender, EventArgs e)
         {

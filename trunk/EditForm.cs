@@ -480,7 +480,7 @@ namespace LSLEditor
 			{
 				DialogResult dialogResult = MessageBox.Show(this, @"Save """ + this.ScriptName + @"""?", "File has changed", MessageBoxButtons.YesNoCancel);
 				if (dialogResult == DialogResult.Yes)
-					e.Cancel = this.parent.SaveFile(this,false);
+					e.Cancel = !this.parent.SaveFile(this,false);
 				else
 					e.Cancel = (dialogResult == DialogResult.Cancel);
 			}

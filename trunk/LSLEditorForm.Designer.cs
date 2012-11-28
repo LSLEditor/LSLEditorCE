@@ -438,6 +438,9 @@ namespace LSLEditor
             // exitToolStripMenuItem
             //
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.ShortcutKeyDisplayString = "";
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.exitToolStripMenuItem.ShowShortcutKeys = false;
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
@@ -872,7 +875,7 @@ namespace LSLEditor
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             //
-            // openFileDialog1
+            // openScriptFilesDialog
             //
             this.openScriptFilesDialog.FileName = "openFileDialog1";
             //
@@ -905,7 +908,7 @@ namespace LSLEditor
             this.closeTabToolStripMenuItem.Text = "Close";
             this.closeTabToolStripMenuItem.Click += new System.EventHandler(this.closeTabToolStripMenuItem_Click);
             //
-            // openFileDialog2
+            // openSolutionFilesDialog
             //
             this.openSolutionFilesDialog.FileName = "openFileDialog2";
             //
