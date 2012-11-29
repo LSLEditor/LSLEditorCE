@@ -1203,11 +1203,20 @@ namespace LSLEditor
 
         public Float llAngleBetween(rotation a, rotation b)
         {
-            double Angle = 2 * Math.Acos((a.x * b.x + a.y * b.y + a.z * b.z + a.s * b.s)
-                              / Math.Sqrt((a.x * a.x + a.y * a.y + a.z * a.z + a.s * a.s) *
-                                       (b.x * b.x + b.y * b.y + b.z * b.z + b.s * b.s)));
-            Verbose("AngleBetween(" + a + "," + b + ")=" + Angle);
-            return Angle;
+            rotation r = b / a;                                                 // calculate the rotation between the two arguments as quaternion
+            double s2 = r.s * r.s;                                              // square of the s-element
+            double v2 = r.x * r.x + r.y * r.y + r.z * r.z;                      // sum of the squares of the v-elements
+
+            if (s2 < v2)                                                        // compare the s-component to the v-component
+            {
+                return 2.0 * Math.Acos(Math.Sqrt(s2 / (s2 + v2)));              // use arccos if the v-component is dominant
+            }
+            else if (v2 != 0)                                                   // make sure the v-component is non-zero
+            {
+                return 2.0 * Math.Asin(Math.Sqrt(v2 / (s2 + v2)));              // use arcsin if the s-component is dominant
+            }
+            return 0.0; // one or both arguments are scaled too small to be meaningful, or the values are the same, so return zero
+            // implementation taken from LSL Portal. http://wiki.secondlife.com/w/index.php?title=LlAngleBetween
         }
 
         public void llApplyImpulse(vector force, integer local)
