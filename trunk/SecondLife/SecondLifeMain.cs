@@ -4292,7 +4292,7 @@ namespace LSLEditor
             Verbose("VolumeDetect(" + detect + ")");
         }
 
-		public void llWanderWithin(vector Origin, Float Distance, list Options)
+		public void llWanderWithin(vector Origin, vector Distance, list Options)
 		{
 			Verbose("llWanderWithin({0}, {1}, {2})", Origin, Distance, Options);
 		}

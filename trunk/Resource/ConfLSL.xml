@@ -3281,7 +3281,7 @@
 			</Argument>
 		</Word>
 
-		<Word name="llWanderWithin" status="beta">
+		<Word name="llWanderWithin">
 			void llWanderWithin(vector Origin, float Distance, list Options);
 
 			Sets a character to wander about a central spot within a specified radius.
