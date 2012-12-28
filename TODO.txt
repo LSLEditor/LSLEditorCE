@@ -1,0 +1,5 @@
+LSL-Editor v3 porting TODO list
+The aim of this overhaul of the code-base is to make it multi-platform friendly and gain a better insight into the workings of all areas of the code. Hopefully this will lead to removal of any cruft and a leaner code-base.
+===============================
+1) Port window UI/control to GTK+.
+2) Clean up all the 'syntax' stuff. Alphabetise all constants, events, functions, etc.)
