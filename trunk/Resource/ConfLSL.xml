@@ -4831,9 +4831,14 @@
 				If id is group owned, a NULL_KEY is returned.
 			</Word>
 			<Word name="OBJECT_PATHFINDING_TYPE" type="integer" value="20">Returns the pathfinding setting of any object in the region. It returns an integer matching one of the OPT_* constants.</Word>
+			<Word name="OBJECT_PHANTOM" type="integer" value="22">Returns boolean, detailing if phantom is enabled or disabled on the object.
+				If id is an avatar or attachment, 0 is returned.</Word>
+			<Word name="OBJECT_PHYSICS" type="integer" value="21">Returns boolean, detailing if physics is enabled or disabled on the object.
+				If id is an avatar or attachment, 0 is returned.</Word>
 			<Word name="OBJECT_POS" value="">Gets the object's position in region coordinates.</Word>
 			<Word name="OBJECT_ROOT" type="integer" value="18">Gets the id of the root prim of the object requested.</Word>
 			<Word name="OBJECT_ROT" value="">Gets the object's rotation.</Word>
+			<Word name="OBJECT_TEMP_ON_REZ" type="integer" value="23">Returns boolean, detailing if temporary is enabled or disabled on the object.</Word>
 			<Word name="OBJECT_VELOCITY" value="">Gets the object's velocity.</Word>
 
 			<Word name="OBJECT_STREAMING_COST" value="15"></Word>

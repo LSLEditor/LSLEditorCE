@@ -447,6 +447,9 @@ namespace LSLEditor
         public static readonly integer OBJECT_PATHFINDING_TYPE = 20;
         public static readonly integer OBJECT_GROUP = 7;
         public static readonly integer OBJECT_CREATOR = 8;
+        public static readonly integer OBJECT_PHYSICS = 21;
+        public static readonly integer OBJECT_PHANTOM = 22;
+        public static readonly integer OBJECT_TEMP_ON_REZ = 23;
 
         public static readonly integer OBJECT_STREAMING_COST = 15;
         public static readonly integer OBJECT_PHYSICS_COST = 16;
