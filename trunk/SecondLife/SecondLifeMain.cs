@@ -1778,6 +1778,12 @@ namespace LSLEditor
             return dblValue;
         }
 
+        public key llGenerate()
+        {
+            Verbose("llGenerate()");
+            return key.NULL_KEY;
+        }
+
 		public void llFleeFrom(vector Source, Float Distance, list Options)
 		{
 			Verbose("llFleeFrom({0}, {1}, {2})", Source, Distance, Options);
