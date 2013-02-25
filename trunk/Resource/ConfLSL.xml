@@ -3794,6 +3794,9 @@
 			These constants are used to refer to attachment points
 			in calls to llAttachToAvatar.
 			Attachment Constants
+			<Word name="ATTACH_AVATAR_CENTER">
+				Attach to the avatar&apos;s geometric centre.
+			</Word>
 			<Word name="ATTACH_BACK">
 				Attach to the avatar back.
 			</Word>
@@ -3843,6 +3846,9 @@
 
 			<Word name="ATTACH_MOUTH">
 				Attach to the avatar mouth.
+			</Word>
+			<Word name="ATTACH_NECK">
+				Attach to the avatar&apos;s neck.
 			</Word>
 			<Word name="ATTACH_NOSE">
 				Attach to the avatar nose.

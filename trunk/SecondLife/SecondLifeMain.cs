@@ -234,7 +234,10 @@ namespace LSLEditor
 		public static readonly integer AGENT_LIST_PARCEL_OWNER = 0x02;
 		public static readonly integer AGENT_LIST_REGION = 0x04;
 
+        public static readonly integer ATTACH_AVATAR_CENTER = 40;
+        public static readonly integer ATTACH_BACK = 9;
         public static readonly integer ATTACH_CHEST = 1;
+        public static readonly integer ATTACH_CHIN = 12;
         public static readonly integer ATTACH_HEAD = 2;
         public static readonly integer ATTACH_LSHOULDER = 3;
         public static readonly integer ATTACH_RSHOULDER = 4;
@@ -242,10 +245,9 @@ namespace LSLEditor
         public static readonly integer ATTACH_RHAND = 6;
         public static readonly integer ATTACH_LFOOT = 7;
         public static readonly integer ATTACH_RFOOT = 8;
-        public static readonly integer ATTACH_BACK = 9;
         public static readonly integer ATTACH_PELVIS = 10;
         public static readonly integer ATTACH_MOUTH = 11;
-        public static readonly integer ATTACH_CHIN = 12;
+        public static readonly integer ATTACH_NECK = 39;
         public static readonly integer ATTACH_LEAR = 13;
         public static readonly integer ATTACH_LEFT_PEC = 29;
         public static readonly integer ATTACH_REAR = 14;
