@@ -1778,6 +1778,12 @@ namespace LSLEditor
             return dblValue;
         }
 
+        public key llGenerate()
+        {
+            Verbose("llGenerate()");
+            return key.NULL_KEY;
+        }
+
 		public void llFleeFrom(vector Source, Float Distance, list Options)
 		{
 			Verbose("llFleeFrom({0}, {1}, {2})", Source, Distance, Options);
@@ -4306,7 +4312,7 @@ namespace LSLEditor
             Verbose("VolumeDetect(" + detect + ")");
         }
 
-		public void llWanderWithin(vector Origin, Float Distance, list Options)
+		public void llWanderWithin(vector Origin, vector Distance, list Options)
 		{
 			Verbose("llWanderWithin({0}, {1}, {2})", Origin, Distance, Options);
 		}

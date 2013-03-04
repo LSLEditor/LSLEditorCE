@@ -700,6 +700,13 @@
 			Returns a pseudo-random number between [0, mag).
 		</Word>
 
+		<Word name="llGenerateKey">
+			key llGenerateKey();
+
+			Generates a key (SHA-1 hash) using UUID generation to create a unique key.\n
+			As the UUID produced is versioned, it should never return a value of NULL_KEY.\nThe specific UUID version is an implementation detail that has changed in the past and may change again in the future. Do not depend upon the UUID that is returned to be version 5 SHA-1 hash.
+		</Word>
+
 		<Word name="llGetAccel">
 			vector llGetAccel(void);
 
@@ -3281,7 +3288,7 @@
 			</Argument>
 		</Word>
 
-		<Word name="llWanderWithin" status="beta">
+		<Word name="llWanderWithin">
 			void llWanderWithin(vector Origin, float Distance, list Options);
 
 			Sets a character to wander about a central spot within a specified radius.
