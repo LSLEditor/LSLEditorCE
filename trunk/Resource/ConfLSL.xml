@@ -764,6 +764,12 @@
 			Returns a list of keys of all playing animations for avatar id.
 		</Word>
 
+		<Word name="llGetAnimationOverride">
+			string llGetAnimationOverride(string AnimationState);
+
+			Returns the name of the animation used for specified animation state.
+		</Word>
+
 		<Word name="llGetAttached">
 			integer llGetAttached(void);
 
@@ -2309,6 +2315,12 @@
 			• key id – avatar UUID
 		</Word>
 
+		<Word name="llResetAnimationOverride">
+			void llResetAnimationOverride(string AnimationState);
+
+			Resets the animation override of the specified animation state to the corresponding default value.
+		</Word>
+
 		<Word name="llResetLandBanList">
 			llResetLandBanList(void)
 
@@ -2533,6 +2545,12 @@
 			<Argument name="iLocal">If TRUE, the vForce is treated as a local directional vector instead of a regional directional vector.</Argument>
 		</Word>
 
+		<Word name="llSetAnimationOverride">
+			void llSetAnimationOverride(string AnimationState, string Animation);
+
+			Set the animation that will play for the given animation state.
+		</Word>
+
 		<Word name="llSetBuoyancy">
 			llSetBuoyancy(float buoyancy);
 
@@ -2578,7 +2596,7 @@
 		<Word name="llSetContentType">
 			void llSetContentType(key kRequestID, integer iCcontentType);
 
-			Set the Internet media type of an LSL HTTP server response. ContentType accepts the constants CONTENT_TYPE_TEXT and CONTENT_TYPE_HTML.
+			Set the Internet media type of an LSL HTTP server response. ContentType accepts the constants CONTENT_TYPE_ATOM, CONTENT_TYPE_FORM, CONTENT_TYPE_HTML, CONTENT_TYPE_JSON, CONTENT_TYPE_LLSD, CONTENT_TYPE_RSS, CONTENT_TYPE_TEXT, CONTENT_TYPE_XHTML, and CONTENT_TYPE_XML.
 		</Word>
 
 		<Word name="llSetDamage">
@@ -3759,6 +3777,7 @@
 			<Word name="PERMISSION_CHANGE_PERMISSIONS" value="">
 				(not yet implemented)
 			</Word>
+			<Word name="PERMISSION_OVERRIDE_ANIMATIONS" value="0x8000" />
 			<Word name="PERMISSION_RELEASE_OWNERSHIP" value="">
 				(not yet implemented)
 			</Word>
@@ -4772,7 +4791,16 @@
 				When the prim is touched, touch events are triggered"
 			</Word>
 
+			<Word name="CONTENT_TYPE_ATOM">"application/atom+xml"</Word>
+			<Word name="CONTENT_TYPE_FORM">"application/x-www-form-urlencoded"</Word>
 			<Word name="CONTENT_TYPE_HTML">"text/html", only valid for embedded browsers on content owned by the person viewing. Falls back to "text/plain" otherwise.</Word>
+			<Word name="CONTENT_TYPE_JSON">"application/json"</Word>
+			<Word name="CONTENT_TYPE_LLSD">"application/llsd+xml"</Word>
+			<Word name="CONTENT_TYPE_RSS">"application/rss+xml"</Word>
+			<Word name="CONTENT_TYPE_TEXT">"text/plain"</Word>
+			<Word name="CONTENT_TYPE_XHTML">"application/xhtml+xml"</Word>
+			<Word name="CONTENT_TYPE_XML">"application/xml"</Word>
+
 			<Word name="DEBUG_CHANNEL">
 				DEBUG_CHANNEL is an integer constant that, when passed to
 				llSay, llWhisper, or llShout as a channel parameter,
@@ -4864,7 +4892,7 @@
 			<Word name="OBJECT_SCRIPT_TIME" value="12" />
 			<Word name="OBJECT_TOTAL_SCRIPT_COUNT" value="10" />
 			<Word name="OBJECT_UNKNOWN_DETAIL" value="-1" />
-			
+
 			<Word name="OPT_AVATAR" type="integer" value="1">Returned for avatars.</Word>
 			<Word name="OPT_CHARACTER" type="integer" value="2">Returned for pathfinding characters.</Word>
 			<Word name="OPT_EXCLUSION_VOLUME" type="integer" value="6">Returned for exclusion volumes.</Word>
@@ -5125,7 +5153,7 @@
 			<Word name="REMOTE_DATA_REQUEST" />
 
 			<Word name="RESTITUTION" value="4">Used with llSetPhysicsMaterial to enable the density value. Must be between 0.0 and 1.0</Word>
-			
+
 			<Word name="SIM_STAT_PCT_CHARS_STEPPED" type="integer" value="0">Returns the % of pathfinding characters skipped each frame, averaged over the last minute.</Word>
 
 			<Word name="STRING_TRIM" />

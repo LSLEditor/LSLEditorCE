@@ -336,7 +336,17 @@ namespace LSLEditor
         public static readonly integer CLICK_ACTION_OPEN = 4;
         public static readonly integer CLICK_ACTION_PLAY = 5;
         public static readonly integer CLICK_ACTION_OPEN_MEDIA = 6;
+
+		public static readonly string CONTENT_TYPE_ATOM = "application/atom+xml";
+		public static readonly string CONTENT_TYPE_FORM = "application/x-www-form-urlencoded";
         public static readonly string CONTENT_TYPE_HTML = "text/html";
+		public static readonly string CONTENT_TYPE_JSON = "application/json";
+		public static readonly string CONTENT_TYPE_LLSD = "application/llsd+xml";
+		public static readonly string CONTENT_TYPE_RSS = "application/rss+xml";
+		public static readonly string CONTENT_TYPE_TEXT = "text/plain";
+		public static readonly string CONTENT_TYPE_XHTML = "application/xhtml+xml";
+		public static readonly string CONTENT_TYPE_XML = "application/xml";
+
         public static readonly integer CONTROL_FWD = 1;
         public static readonly integer CONTROL_BACK = 2;
         public static readonly integer CONTROL_LEFT = 4;
@@ -543,8 +553,9 @@ namespace LSLEditor
         public static readonly integer PERMISSION_CHANGE_LINKS = 128;
         public static readonly integer PERMISSION_CHANGE_JOINTS = 256;
         public static readonly integer PERMISSION_CHANGE_PERMISSIONS = 512;
-        public static readonly integer PERMISSION_TRACK_CAMERA = 1024;
         public static readonly integer PERMISSION_CONTROL_CAMERA = 2048;
+        public static readonly integer PERMISSION_OVERRIDE_ANIMATIONS = 0x8000;
+        public static readonly integer PERMISSION_TRACK_CAMERA = 1024;
 
         public static readonly integer PRIM_BUMP_BARK = 4;
         public static readonly integer PRIM_BUMP_BLOBS = 12;
@@ -1846,6 +1857,12 @@ namespace LSLEditor
         {
             Verbose("GetAnimationList(" + id + ")");
             return new list();
+        }
+
+        public String llGetAnimationOverride(String sAnimationState)
+        {
+            Verbose("GetAnimationOverride(" + sAnimationState + ")");
+            return "";
         }
 
         public integer llGetAttached()
@@ -3557,6 +3574,11 @@ namespace LSLEditor
             return kID;
         }
 
+        public void llResetAnimationOverride(String sAnimationState)
+        {
+            Verbose("llResetAnimationOverride({0})", sAnimationState);
+        }
+
         public void llResetLandBanList()
         {
             m_LandBanList = new Hashtable();
@@ -3759,6 +3781,11 @@ namespace LSLEditor
         public void llSetAngularVelocity(vector vForce, integer iLocal)
         {
             Verbose("llSetAngularVelocity(" + vForce + "," + iLocal + ")");
+        }
+
+        public void llSetAnimationOverride(String sAnimationState, String sAnimation)
+        {
+            Verbose("llSetAnimationOverride({0}, {1})", sAnimationState, sAnimation);
         }
 
         public void llSetBuoyancy(Float buoyancy)
