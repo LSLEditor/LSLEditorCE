@@ -251,8 +251,7 @@
 		<Word name="llClearCameraParams">
 			llClearCameraParams();
 
-			Resets all camera parameters to default values and turns
-			off scripted camera control.
+			Resets all camera parameters to default values and turns off scripted camera control.
 		</Word>
 
 		<Word name="llClearLinkMedia">
@@ -1558,6 +1557,34 @@
 			Encodes number as an 8-character Base64 string.
 		</Word>
 
+		<Word name="llJson2List">
+			list llJson2List( string sJSON );
+
+			This function takes a string representing JSON, and returns a list of the top level.
+			Returns a list made by parsing src, a string representing json.
+		</Word>
+
+		<Word name="llJsonGetValue">
+			string llJsonGetValue( string sJSON, list lSpecifiers );
+
+			Gets the value indicated by specifiers from the json string.
+			Returns a string made by parsing json, a string representing json and traversing as specified by specifiers.
+		</Word>
+
+		<Word name="llJsonSetValue">
+			string llJsonSetValue( string sJSON, list lSpecifiers, string sValue );
+
+			Returns a new JSON string which is string with the value indicated by specifiers set to value.
+			Returns a string
+		</Word>
+
+		<Word name="llJsonValueType">
+			string llJsonValueType( string sJSON, list lSpecifiers );
+
+			Gets the JSON type for the value in json at the location specifiers.
+			Returns the string specifying the type of the value at specifiers in json.
+		</Word>
+
 		<Word name="llKey2Name">
 			string llKey2Name(key id);
 
@@ -1602,6 +1629,13 @@
 			Returns the integer at index in the list src.
 		</Word>
 
+		<Word name="llList2Json">
+			string llList2Json( string sType, list lValues );
+
+			This function takes a list and returns a JSON string of that list as either a json object or json array.
+			Returns a string that is either values serialized as a JSON type, or if an error was encountered JSON_INVALID.
+		</Word>
+
 		<Word name="llList2Key">
 			key llList2Key(list src, integer index);
 
@@ -1611,8 +1645,8 @@
 		<Word name="llList2List">
 			list llList2List(list src, integer start, integer end);
 
-			Returns the slice of the list from startto end from the list
-			srcas a new list. The startand end parameters
+			Returns the slice of the list from start to end of the list
+			src as a new list. The start and end parameters
 			are inclusive, so 0,length-1 would copy the entire list and 0,0
 			would capture the first list entry. Using negative
 			numbers for startand/or end causes the index to count backwards
@@ -2103,12 +2137,6 @@
 			• key target
 			• integer channel – output channel, any integer value
 			• string msg – message to be transmitted
-		</Word>
-
-		<Word name="llReleaseCamera">
-			llReleaseCamera(key agent);
-
-			A FollowCam function that returns the camera to the key agent after permission to change it with llSetCameraParams has been granted via llRequestPermissions(agent_key, PERMISSION_CONTROL_CAMERA).
 		</Word>
 
 		<Word name="llReleaseControls">
@@ -4684,6 +4712,17 @@
 			<Word name="HORIZONTAL" type="integer" value="1" />
 			<Word name="VERTICAL" type="integer" value="0"></Word>
 
+		</WordsSubsection>
+
+		<WordsSubsection name="C.26 JSON constants">
+			<Word name="JSON_ARRAY" type="string" value="">U+FDD2</Word>
+			<Word name="JSON_FALSE" type="string" value="">U+FDD7</Word>
+			<Word name="JSON_INVALID" type="string" value="">U+FDD0</Word>
+			<Word name="JSON_NULL" type="string" value="">U+FDD5</Word>
+			<Word name="JSON_NUMBER" type="string" value="">U+FDD3</Word>
+			<Word name="JSON_OBJECT" type="string" value="">U+FDD1</Word>
+			<Word name="JSON_STRING" type="string" value="">U+FDD4</Word>
+			<Word name="JSON_TRUE" type="string" value="">>U+FDD6</Word>
 		</WordsSubsection>
 
 		<WordsSubsection name="C.99. Miscellaneous constants.">
