@@ -1,51 +1,3 @@
-<!--
-/**
-********
-*
-* ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
-* The code was donated on 4/28/2010 by Alphons van der Heijden
-* To Brandon'Dimentox Travanti' Husbands & Malcolm J. Kudra who in turn Liscense under the GPLv2.
-* In agreement with Alphons van der Heijden wishes.
-*
-* The community would like to thank Alphons for all of his hard work, blood sweat and tears.
-* Without his work the community would be stuck with crappy editors.
-*
-* The source code in this file ("Source Code") is provided by The LSLEditor Group
-* to you under the terms of the GNU General Public License, version 2.0
-* ("GPL"), unless you have obtained a separate licensing agreement
-* ("Other License"), formally executed by you and LSLEditor Group.  Terms of
-* the GPL can be found in the gplv2.txt document.
-*
-********
-* GPLv2 Header
-********
-* LSLEditor, a External editor for the LSL Language.
-* Copyright (C) 2010 The LSLEditor Group.
-
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 2
-* of the License, or (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program; if not, write to the Free Software
-* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-********
-*
-* The above copyright notice and this permission notice shall be included in all
-* copies or substantial portions of the Software.
-*
-********
-*/
-
-		ZERO_VECTOR "#663366"
-
--->
 <Conf color="#FFFFFF" slcolor="#C8D1CC">
 	<Words name="Comments" color="#FF7700" slcolor="#CC4D26">
 		<Word name="regex">//.*</Word>
@@ -85,12 +37,8 @@
 
 	<Words icon="States" name="States" color="#0000ff" slcolor="#801A4D">
 		<Word name="default">
-			All scripts must have a
-			<font color="blue">default</font>
-			state,
-			which also must be the first state entered when the script starts.
-			If another state is defined before the default state,
-			the compiler will report a syntax error.
+			All scripts must have a <font color="blue">default</font> state, which is the first state entered when the script starts.
+			If another state is defined before the default state, the compiler will report a syntax error.
 		</Word>
 
 		<Word name="state" />
@@ -946,9 +894,7 @@
 			If this is used to determine whether or not an inventory item
 			exists within the object, it will have the side effect of spamming chat.
 			<Argument name="item">inventory item</Argument>
-			<Argument name="mask" wild="MASK_.*">
-				MASK_BASE, MASK_OWNER,MASK_GROUP, MASK_EVERYONE or MASK_NEXT
-			</Argument>
+			<Argument name="mask" wild="MASK_*">MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE or MASK_NEXT</Argument>
 		</Word>
 
 		<Word name="llGetInventoryType">
@@ -2159,16 +2105,11 @@
 			• string msg – message to be transmitted
 		</Word>
 
-		<!--
-			<Word name="llReleaseCamera">
+		<Word name="llReleaseCamera">
 			llReleaseCamera(key agent);
 
-			A FollowCam function that returns the camera to the
-			key agent after permission to change it with
-			llSetCameraParams has been granted via
-			llRequestPermissions(agent_key, PERMISSION_CONTROL_CAMERA).
-			</Word>
-		-->
+			A FollowCam function that returns the camera to the key agent after permission to change it with llSetCameraParams has been granted via llRequestPermissions(agent_key, PERMISSION_CONTROL_CAMERA).
+		</Word>
 
 		<Word name="llReleaseControls">
 			llReleaseControls();
