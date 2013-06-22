@@ -401,6 +401,15 @@ namespace LSLEditor
         public static readonly integer INVENTORY_ANIMATION = 20;
         public static readonly integer INVENTORY_GESTURE = 21;
 
+        public static readonly string JSON_ARRAY    = "\uFDD2";
+        public static readonly string JSON_FALSE    = "\uFDD7";
+        public static readonly string JSON_INVALID  = "\uFDD0";
+        public static readonly string JSON_NULL     = "\uFDD5";
+        public static readonly string JSON_NUMBER   = "\uFDD3";
+        public static readonly string JSON_OBJECT   = "\uFDD1";
+        public static readonly string JSON_STRING   = "\uFDD4";
+        public static readonly string JSON_TRUE     = "\uFDD6";
+
         public static readonly integer KFM_CMD_PAUSE = 2;
         public static readonly integer KFM_CMD_PLAY = 0;
         public static readonly integer KFM_CMD_STOP = 1;
@@ -2743,6 +2752,38 @@ namespace LSLEditor
 				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// E0
 				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};	// F0
 
+        public list llJson2List(string sJSON)
+        {
+            //TODO implement conversion to list
+            list lJSON = new list();
+            Verbose("llJson2List({0})={1}", sJSON, lJSON);
+            return lJSON;
+        }
+
+        public string llJsonGetValue(string sJSON, list lSpecifiers)
+        {
+            //TODO determine return value from list
+            string sReturn = JSON_INVALID;
+            Verbose("llJsonGetValue({0}, {1})= {2}", sJSON, lSpecifiers, sReturn);
+            return sReturn;
+        }
+
+        public string llJsonSetValue(string sJSON, list lSpecifiers, string sValue)
+        {
+            //TODO determine return value
+            string sReturn = JSON_INVALID;
+            Verbose("llJsonGetValue({0}, {1}, {2})= {3}", sJSON, lSpecifiers, sValue, sReturn);
+            return sReturn;
+        }
+
+        public string llJsonValueType(string sJSON, list lSpecifiers)
+        {
+            //TODO determine return value
+            string sReturn = JSON_INVALID;
+            Verbose("llJsonGetValue({0}, {1})= {2}", sJSON, lSpecifiers, sReturn);
+            return sReturn;
+        }
+
         public String llKey2Name(key id)
         {
             string strName = "*unknown*";
@@ -2799,6 +2840,14 @@ namespace LSLEditor
                 result = (integer)src[index].ToString();
             Verbose("List2Integer({0},{1})={2}", src.ToVerboseString(), index, result);
             return result;
+        }
+
+        public string llList2Json(string sType, list lValues)
+        {
+            //TODO determine return value
+            string sReturn = JSON_INVALID;
+            Verbose("llList2Json({0}, {1})= {2}", sType, lValues, sReturn);
+            return sReturn;
         }
 
         public key llList2Key(list src, integer index)
