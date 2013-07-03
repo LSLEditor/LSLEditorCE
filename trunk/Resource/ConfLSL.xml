@@ -2320,6 +2320,18 @@
 			Sets the internal timer to zero.
 		</Word>
 
+		<Word name="llReturnObjectsByID">
+			integer llReturnObjectsByID(list ObjectIDs);
+
+			Return objects using their UUIDs
+		</Word>
+
+		<Word name="llReturnObjectsByOwner">
+			integer llReturnObjectsByOwner(key ID, integer Scope);
+
+			Return objects based upon their owner and a scope of parcel, parcel owner, or region.
+		</Word>
+
 		<Word name="llRezAtRoot">
 			llRezAtRoot(string inventory, vector pos, vector vel, rotation rot, integer param);
 
@@ -3764,6 +3776,7 @@
 				call llStartAnimation for the avatar that owns this
 				object.
 			</Word>
+			<Word name="PERMISSION_RETURN_OBJECTS" value="65536"></Word>
 		</WordsSubsection>
 
 		<WordsSubsection name="C.5. Inventory Constants">
@@ -4690,6 +4703,7 @@
 			<Word name="CHARACTER_MAX_TURN_RADIUS" type="integer" value="10" status="beta">The character&apos;s turn radius when travelling at CHARACTER_MAX_TURN_SPEED.</Word>
 			<Word name="CHARACTER_ORIENTATION" type="integer" value="4" status="beta">Valid options are: VERTICAL, HORIZONTAL.</Word>
 			<Word name="CHARACTER_RADIUS" type="integer" value="2" status="beta">Set collision capsule radius.</Word>
+			<Word name="CHARACTER_STAY_WITHIN_PARCEL" type="integer" value="15">Takes a boolean parameter. If TRUE, the character cannot voluntarilly leave the parcel, but can return to it.</Word>
 			<Word name="CHARACTER_TYPE" type="integer" value="6" status="beta">Specifies which walk-ability coefficient will be used by this character.</Word>
 			<Word name="CHARACTER_TYPE_A" type="integer" value="0" status="beta" />
 			<Word name="CHARACTER_TYPE_B" type="integer" value="1" status="beta" />
@@ -4711,7 +4725,6 @@
 			<Word name="REQUIRE_LINE_OF_SIGHT" type="integer" value="2">Define whether the character needs a line-of-sight to give chase.</Word>
 			<Word name="HORIZONTAL" type="integer" value="1" />
 			<Word name="VERTICAL" type="integer" value="0"></Word>
-
 		</WordsSubsection>
 
 		<WordsSubsection name="C.26 JSON constants">
@@ -4723,6 +4736,17 @@
 			<Word name="JSON_OBJECT" type="string" value="">U+FDD1</Word>
 			<Word name="JSON_STRING" type="string" value="">U+FDD4</Word>
 			<Word name="JSON_TRUE" type="string" value="">>U+FDD6</Word>
+		</WordsSubsection>
+
+		<WordsSubsection name="C.27 Parcel Return constants">
+			<Word name="ERR_GENERIC" type="integer" value="-1"></Word>
+			<Word name="ERR_MALFORMED_PARAMS" type="integer" value="-3"></Word>
+			<Word name="ERR_PARCEL_PERMISSIONS" type="integer" value="-2"></Word>
+			<Word name="ERR_RUNTIME_PERMISSIONS" type="integer" value="-4"></Word>
+			<Word name="ERR_THROTTLED" type="integer" value="-5"></Word>
+			<Word name="OBJECT_RETURN_PARCEL" type="integer" value="1"></Word>
+			<Word name="OBJECT_RETURN_PARCEL_OWNER" type="integer" value="2"></Word>
+			<Word name="OBJECT_RETURN_REGION" type="integer" value="4"></Word>
 		</WordsSubsection>
 
 		<WordsSubsection name="C.99. Miscellaneous constants.">

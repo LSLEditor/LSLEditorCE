@@ -322,6 +322,7 @@ namespace LSLEditor
         public static readonly integer CHARACTER_MAX_TURN_RADIUS = 10;
         public static readonly integer CHARACTER_ORIENTATION = 4;
         public static readonly integer CHARACTER_RADIUS = 2;
+        public static readonly integer CHARACTER_STAY_WITHIN_PARCEL = 15;
 		public static readonly integer CHARACTER_TYPE_A = 0;
 		public static readonly integer CHARACTER_TYPE_B = 1;
 		public static readonly integer CHARACTER_TYPE_C = 2;
@@ -368,6 +369,12 @@ namespace LSLEditor
         public static readonly integer DATA_SIM_RATING = 7;
 
         public static readonly integer DATA_PAYINFO = 8;
+
+        public static readonly integer ERR_GENERIC = -1;
+        public static readonly integer ERR_MALFORMED_PARAMS = -3;
+        public static readonly integer ERR_PARCEL_PERMISSIONS = -2;
+        public static readonly integer ERR_RUNTIME_PERMISSIONS = -4;
+        public static readonly integer ERR_THROTTLED = -5;
 
         public static readonly integer ESTATE_ACCESS_ALLOWED_AGENT_ADD = 4;
         public static readonly integer ESTATE_ACCESS_ALLOWED_AGENT_REMOVE = 8;
@@ -492,6 +499,10 @@ namespace LSLEditor
         public static readonly integer OPT_STATIC_OBSTACLE = 4;
         public static readonly integer OPT_WALKABLE = 3;
 
+        public static readonly integer OBJECT_RETURN_PARCEL = 1;
+        public static readonly integer OBJECT_RETURN_PARCEL_OWNER = 2;
+        public static readonly integer OBJECT_RETURN_REGION = 4;
+
         public static readonly integer PARCEL_COUNT_TOTAL = 0;
         public static readonly integer PARCEL_COUNT_OWNER = 1;
         public static readonly integer PARCEL_COUNT_GROUP = 2;
@@ -565,6 +576,7 @@ namespace LSLEditor
         public static readonly integer PERMISSION_CONTROL_CAMERA = 2048;
         public static readonly integer PERMISSION_OVERRIDE_ANIMATIONS = 0x8000;
         public static readonly integer PERMISSION_TRACK_CAMERA = 1024;
+        public static readonly integer PERMISSION_RETURN_OBJECTS = 65536;
 
         public static readonly integer PRIM_BUMP_BARK = 4;
         public static readonly integer PRIM_BUMP_BLOBS = 12;
@@ -906,7 +918,7 @@ namespace LSLEditor
         public ArrayList RandomShuffle(ArrayList collection)
         {
             // We have to copy all items anyway, and there isn't a way to produce the items
-            // on the fly that is linear. So copying to an array and shuffling it is an efficient as we can get.
+            // on the fly that is linear. So copying to an array and shuffling it is as efficient as we can get.
 
             if (collection == null)
                 throw new ArgumentNullException("collection");
@@ -3657,6 +3669,20 @@ namespace LSLEditor
         {
             Verbose("ResetTime()");
             m_DateTimeScriptStarted = DateTime.Now.ToUniversalTime();
+        }
+
+        public integer llReturnObjectsByID(list lObjects)
+        {
+            integer iReturned = ERR_GENERIC;
+            Verbose("llReturnObjectsByID({0})={1}", lObjects, iReturned);
+            return iReturned;
+        }
+
+        public integer llReturnObjectsByOwner(key kID, integer iScope)
+        {
+            integer iReturned = ERR_GENERIC;
+            Verbose("llReturnObjectsByOwner({0}, {1})={2}", kID, iScope, iReturned);
+            return iReturned;
         }
 
         public void llRezAtRoot(String inventory, vector pos, vector vel, rotation rot, integer param)
