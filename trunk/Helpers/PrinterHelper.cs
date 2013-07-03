@@ -385,13 +385,13 @@ namespace LSLEditor.Helpers
 			printmargins = printDoc.DefaultPageSettings.Margins;
 
 			// set default fonts
-			pagenofont = new Font("Tahoma", 8, FontStyle.Regular, GraphicsUnit.Point);
+			pagenofont = new Font("Tahoma", 10, FontStyle.Regular, GraphicsUnit.Point);
 			pagenocolor = Color.Black;
-			titlefont = new Font("Tahoma", 8, FontStyle.Bold, GraphicsUnit.Point);
+			titlefont = new Font("Tahoma", 10, FontStyle.Bold, GraphicsUnit.Point);
 			titlecolor = Color.Black;
-			subtitlefont = new Font("Tahoma", 8, FontStyle.Regular, GraphicsUnit.Point);
+			subtitlefont = new Font("Tahoma", 10, FontStyle.Regular, GraphicsUnit.Point);
 			subtitlecolor = Color.Black;
-			footerfont = new Font("Tahoma", 8, FontStyle.Regular, GraphicsUnit.Point);
+			footerfont = new Font("Tahoma", 10, FontStyle.Regular, GraphicsUnit.Point);
 			footercolor = Color.Black;
 
 			// set default string formats
@@ -460,13 +460,18 @@ namespace LSLEditor.Helpers
 			pd.AllowPrintToFile = false;
 
 			// show print dialog
-			if (DialogResult.OK == pd.ShowDialog())
-			{
-				SetupPrint(pd);
-				PrintPreviewDialog ppdialog = new PrintPreviewDialog();
-				ppdialog.Document = printDoc;
-				ppdialog.ShowDialog();
-			}
+            DialogResult result = pd.ShowDialog();
+            if (DialogResult.OK == result)
+            {
+                SetupPrint(pd);
+                PrintPreviewDialog ppdialog = new PrintPreviewDialog();
+                ppdialog.Document = printDoc;
+                ppdialog.ShowDialog();
+            }
+            else
+            {
+                //;
+            }
 		}
 
 		/// <summary>
