@@ -80,9 +80,9 @@ using LSLEditor.Docking;
 
 namespace LSLEditor
 {
-	public partial class LSLEditorForm : Form
-	{
-		public XmlDocument ConfLSL;
+    public partial class LSLEditorForm : Form
+    {
+        public XmlDocument ConfLSL;
 		public XmlDocument ConfCSharp;
 
 		private Browser browser;
@@ -106,6 +106,7 @@ namespace LSLEditor
 		public List<PermissionsForm> PermissionForms;
 
 		private UpdateApplicationForm updateApplicationForm;
+        private Helpers.PrinterHelper printer;
 
 		public SyntaxError SyntaxErrors;
 
@@ -756,28 +757,30 @@ namespace LSLEditor
 		private void printPreviewtoolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-
-			Helpers.PrinterHelper printer = new Helpers.PrinterHelper(pageSetupDialog1);
-			printer.Title = editForm.FullPathName;
-			printer.SubTitle = DateTime.Now.ToString("s");
-			printer.Footer = this.Text;
-			printer.PrintPreviewEditForm(editForm);
+            if (editForm != null)
+            {
+                printerHelp(editForm);
+                printer.PrintPreviewEditForm(editForm);
+            }
 		}
 
 		private void printToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-
-			Helpers.PrinterHelper printer = new Helpers.PrinterHelper(pageSetupDialog1);
-			printer.Title = editForm.FullPathName;
-			printer.SubTitle = DateTime.Now.ToString("s");
-			printer.Footer = this.Text;
-			printer.PrintEditForm(editForm);
+            if (editForm != null)
+            {
+                printerHelp(editForm);
+                printer.PrintEditForm(editForm);
+            }
 		}
+
+        private void printerHelp(EditForm editForm)
+        {
+            printer = new Helpers.PrinterHelper(pageSetupDialog1);
+            printer.Title = editForm.FullPathName;
+            printer.SubTitle = DateTime.Now.ToString("s");
+            printer.Footer = this.Text;
+        }
 		#endregion
 
 		private void copyToClipboardToolStripMenuItem_Click(object sender, EventArgs e)

@@ -70,7 +70,10 @@ namespace LSLEditor.Helpers
 		int intCharPrint;
 
 		// print document
-		PrintDocument printDoc = null;
+		PrintDocument docToPrint = null;
+
+        // print dialogue
+        PrintDialog pd = null;
 
 		// print status items
 		int fromPage = 0;
@@ -103,7 +106,7 @@ namespace LSLEditor.Helpers
 		public String Title
 		{
 			get { return title; }
-			set { title = value; printDoc.DocumentName = title; }
+			set { title = value; docToPrint.DocumentName = title; }
 		}
 
 		/// <summary>
@@ -371,18 +374,18 @@ namespace LSLEditor.Helpers
 		public PrinterHelper(PageSetupDialog pageSetupDialog)
 		{
 			// create print document
-			printDoc = new PrintDocument();
-			printDoc.PrintPage += new PrintPageEventHandler(printDoc_PrintPage);
+			docToPrint = new PrintDocument();
+			docToPrint.PrintPage += new PrintPageEventHandler(printDoc_PrintPage);
 
 			if (pageSetupDialog.PrinterSettings != null)
-				printDoc.PrinterSettings = pageSetupDialog.PrinterSettings;
+				docToPrint.PrinterSettings = pageSetupDialog.PrinterSettings;
 
 			if (pageSetupDialog.PageSettings != null)
-				printDoc.DefaultPageSettings = pageSetupDialog.PageSettings;
+				docToPrint.DefaultPageSettings = pageSetupDialog.PageSettings;
 			else
-				printDoc.DefaultPageSettings.Margins = new Margins(60, 80, 40, 40);
+				docToPrint.DefaultPageSettings.Margins = new Margins(60, 80, 40, 40);
 
-			printmargins = printDoc.DefaultPageSettings.Margins;
+			printmargins = docToPrint.DefaultPageSettings.Margins;
 
 			// set default fonts
 			pagenofont = new Font("Tahoma", 10, FontStyle.Regular, GraphicsUnit.Point);
@@ -415,27 +418,16 @@ namespace LSLEditor.Helpers
 		/// NOTE: Any changes to this method also need to be done in PrintPreviewEditForm
 		public void PrintEditForm(EditForm editForm)
 		{
-			// save the datagridview we're printing
-			this.editForm = editForm;
-			this.intCharFrom = 0;
-			this.intCharPrint = 0;
-			this.intCharTo = editForm.TextBox.Text.Length;
-
-			// create new print dialog
-			PrintDialog pd = new PrintDialog();
-			pd.Document = printDoc;
-			//printDoc.DefaultPageSettings.Margins = printmargins;
-			pd.AllowSelection = true;
-			pd.AllowSomePages = false;
-			pd.AllowCurrentPage = false;
-			pd.AllowPrintToFile = false;
+            saveFormData(editForm);
+            setupPrintDialogue();
 
 			// show print dialog
-			if (DialogResult.OK == pd.ShowDialog())
+			if (pd.ShowDialog() == DialogResult.OK)
 			{
 				SetupPrint(pd);
-				printDoc.Print();
+				docToPrint.Print();
 			}
+ 
 		}
 
 		/// <summary>
@@ -445,32 +437,16 @@ namespace LSLEditor.Helpers
 		/// NOTE: Any changes to this method also need to be done in PrintDataGridView
 		public void PrintPreviewEditForm(EditForm editForm)
 		{
-			// save the datagridview we're printing
-			this.editForm = editForm;
-			this.intCharFrom = 0;
-			this.intCharTo = editForm.TextBox.Text.Length;
-
-			// create new print dialog and set options
-			PrintDialog pd = new PrintDialog();
-			pd.Document = printDoc;
-			//printDoc.DefaultPageSettings.Margins = printmargins;
-			pd.AllowSelection = true;
-			pd.AllowSomePages = false;
-			pd.AllowCurrentPage = false;
-			pd.AllowPrintToFile = false;
+            saveFormData(editForm);
+            setupPrintDialogue();
 
 			// show print dialog
-            DialogResult result = pd.ShowDialog();
-            if (DialogResult.OK == result)
+			if (pd.ShowDialog() == DialogResult.OK)
             {
                 SetupPrint(pd);
                 PrintPreviewDialog ppdialog = new PrintPreviewDialog();
-                ppdialog.Document = printDoc;
+                ppdialog.Document = docToPrint;
                 ppdialog.ShowDialog();
-            }
-            else
-            {
-                //;
             }
 		}
 
@@ -487,21 +463,21 @@ namespace LSLEditor.Helpers
 			//-----------------------------------------------------------------
 
 			// check to see if we're doing landscape printing 
-			if (printDoc.DefaultPageSettings.Landscape)
+			if (docToPrint.DefaultPageSettings.Landscape)
 			{
 				// landscape: switch width and height
-				pageHeight = printDoc.DefaultPageSettings.PaperSize.Width;
-				pageWidth = printDoc.DefaultPageSettings.PaperSize.Height;
+				pageHeight = docToPrint.DefaultPageSettings.PaperSize.Width;
+				pageWidth = docToPrint.DefaultPageSettings.PaperSize.Height;
 			}
 			else
 			{
 				// portrait: keep width and height as expected
-				pageHeight = printDoc.DefaultPageSettings.PaperSize.Height;
-				pageWidth = printDoc.DefaultPageSettings.PaperSize.Width;
+				pageHeight = docToPrint.DefaultPageSettings.PaperSize.Height;
+				pageWidth = docToPrint.DefaultPageSettings.PaperSize.Width;
 			}
 
 			// save printer margins and calc print width
-			printmargins = printDoc.DefaultPageSettings.Margins;
+			printmargins = docToPrint.DefaultPageSettings.Margins;
 			printWidth = pageWidth - printmargins.Left - printmargins.Right;
 
 			// save print range 
@@ -704,5 +680,27 @@ namespace LSLEditor.Helpers
 				}
 			}
 		}
-	}
+
+        private void saveFormData(EditForm editForm)
+        {
+            // save the datagridview we're printing
+            this.editForm = editForm;
+            this.intCharFrom = 0;
+            this.intCharPrint = 0;
+            this.intCharTo = editForm.TextBox.Text.Length;
+        }
+
+        private void setupPrintDialogue()
+        {
+            // create new print dialog
+            pd = new PrintDialog();
+
+            pd.Document = docToPrint;
+            pd.AllowSelection = true;
+            pd.AllowSomePages = false;
+            pd.AllowCurrentPage = false;
+            pd.AllowPrintToFile = false;
+            pd.UseEXDialog = true;
+        }
+    }
 }
