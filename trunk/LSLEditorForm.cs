@@ -80,9 +80,9 @@ using LSLEditor.Docking;
 
 namespace LSLEditor
 {
-    public partial class LSLEditorForm : Form
-    {
-        public XmlDocument ConfLSL;
+	public partial class LSLEditorForm : Form
+	{
+		public XmlDocument ConfLSL;
 		public XmlDocument ConfCSharp;
 
 		private Browser browser;
@@ -91,7 +91,7 @@ namespace LSLEditor
 
 		public bool CancelClosing = false;
 
-        public Solution.SolutionExplorer m_SolutionExplorer;
+		public Solution.SolutionExplorer m_SolutionExplorer;
 
 		public GListBoxWindow GListBoxWindow;
 		public TooltipWindow TooltipMouse;
@@ -102,11 +102,11 @@ namespace LSLEditor
 		public GotoWindow GotoWindow;
 
 		public List<llDialogForm> llDialogForms;
-        public List<llTextBoxForm> llTextBoxForms;
+		public List<llTextBoxForm> llTextBoxForms;
 		public List<PermissionsForm> PermissionForms;
 
 		private UpdateApplicationForm updateApplicationForm;
-        private Helpers.PrinterHelper printer;
+		private Helpers.PrinterHelper printer;
 
 		public SyntaxError SyntaxErrors;
 
@@ -132,7 +132,7 @@ namespace LSLEditor
 		{
 			get
 			{
-                return this.m_SolutionExplorer;
+				return this.m_SolutionExplorer;
 			}
 		}
 
@@ -176,8 +176,8 @@ namespace LSLEditor
 
 			InitializeComponent();
 
-            m_SolutionExplorer = new LSLEditor.Solution.SolutionExplorer();
-            m_SolutionExplorer.parent = this;
+			m_SolutionExplorer = new LSLEditor.Solution.SolutionExplorer();
+			m_SolutionExplorer.parent = this;
 
 			InitRecentFileList();
 			InitRecentProjectList();
@@ -204,7 +204,7 @@ namespace LSLEditor
 
 				List<Form> children = new List<Form>();
 			//TODO: Find Child forms
-                //foreach (TabPage tabPage in this.tabControlExtended1.TabPages)
+				//foreach (TabPage tabPage in this.tabControlExtended1.TabPages)
 				//	children.Add(tabPage.Tag as Form);
 				return children.ToArray();
 			}
@@ -218,9 +218,9 @@ namespace LSLEditor
 					return this.ActiveMdiChild;
 				else
 				{
-                    //TODO: Get Active Mdi Form
-                    return null;
-                    //dockPanel.ActiveContent
+					//TODO: Get Active Mdi Form
+					return null;
+					//dockPanel.ActiveContent
 				//	if (this.tabControlExtended1.SelectedTab == null)
 				//		return null;
 				//	return this.tabControlExtended1.SelectedTab.Tag as Form;
@@ -236,7 +236,7 @@ namespace LSLEditor
 			}
 			else
 			{
-                //TODO: Activate the right Mdi Form
+				//TODO: Activate the right Mdi Form
 				/*for (int intI = 0; intI < this.tabControlExtended1.TabCount; intI++)
 				{
 					TabPage tabPage = this.tabControlExtended1.TabPages[intI];
@@ -260,8 +260,8 @@ namespace LSLEditor
 				//form.Show();
 				//ActivateMdiChild(form);
 
-                //TODO: add form in the right way
-                form.Show(dockPanel);
+				//TODO: add form in the right way
+				form.Show(dockPanel);
 			}
 			else
 			{
@@ -279,7 +279,7 @@ namespace LSLEditor
 				// Was already commented out //tabPage.Controls.Add(form.Controls[0]);
 
 
-                //this.tabControlExtended1.TabPages.Add(tabPage);
+				//this.tabControlExtended1.TabPages.Add(tabPage);
 				//this.tabControlExtended1.SelectedTab = tabPage;
 			}
 		}
@@ -297,32 +297,32 @@ namespace LSLEditor
 
 		private void Start(string[] args)
 		{
-            string fileFilterNotes = "Notecard files (*.txt)|*.txt|All files (*.*)|*.*";
-            string fileFilterScripts = "Secondlife script files (*.lsl)|*.lsl|All files (*.*)|*.*";
-            string fileFilterSolutions = "LSLEditor Solution File (*.sol)|*.sol|All Files (*.*)|*.*";
+			string fileFilterNotes = "Notecard files (*.txt)|*.txt|All files (*.*)|*.*";
+			string fileFilterScripts = "Secondlife script files (*.lsl)|*.lsl|All files (*.*)|*.*";
+			string fileFilterSolutions = "LSLEditor Solution File (*.sol)|*.sol|All Files (*.*)|*.*";
 
 			this.ConfLSL = GetXmlFromResource(Properties.Settings.Default.ConfLSL);
 			this.ConfCSharp = GetXmlFromResource(Properties.Settings.Default.ConfCSharp);
 
-            this.openNoteFilesDialog.FileName = "";
+			this.openNoteFilesDialog.FileName = "";
 			this.openNoteFilesDialog.Filter = fileFilterNotes;
 			this.openNoteFilesDialog.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
 
 			this.saveNoteFilesDialog.FileName = "";
-            this.saveNoteFilesDialog.Filter = fileFilterNotes;
+			this.saveNoteFilesDialog.Filter = fileFilterNotes;
 			this.saveNoteFilesDialog.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
 
 
 			this.openScriptFilesDialog.FileName = "";
-            this.openScriptFilesDialog.Filter = fileFilterScripts;
+			this.openScriptFilesDialog.Filter = fileFilterScripts;
 			this.openScriptFilesDialog.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
 
 			this.saveScriptFilesDialog.FileName = "";
-            this.saveScriptFilesDialog.Filter = fileFilterScripts;
+			this.saveScriptFilesDialog.Filter = fileFilterScripts;
 			this.saveScriptFilesDialog.InitialDirectory = Properties.Settings.Default.WorkingDirectory;
 
 			this.openSolutionFilesDialog.FileName = "";
-            this.openSolutionFilesDialog.Filter = fileFilterSolutions;
+			this.openSolutionFilesDialog.Filter = fileFilterSolutions;
 			this.openSolutionFilesDialog.InitialDirectory = Properties.Settings.Default.ProjectLocation;
 			this.openSolutionFilesDialog.Multiselect = false;
 
@@ -340,7 +340,7 @@ namespace LSLEditor
 					this.Text += " (BETA)";
 			}
 
-            //TODO: Fix close buttons on tabs
+			//TODO: Fix close buttons on tabs
 			// enables close buttons on tab
 			//this.tabControlExtended1.SetDrawMode();
 			//this.tabControlExtended1.OnTabClose += new EventHandler(tabControl1_OnTabClose);
@@ -372,8 +372,8 @@ namespace LSLEditor
 								continue;
 							}
 							EditForm editForm = new EditForm(this);
-                            editForm.LoadFile(strFileName);
-                            editForm.TextBox.OnCursorPositionChanged += new SyntaxRichTextBox.CursorPositionChangedHandler(TextBox_OnCursorPositionChanged);
+							editForm.LoadFile(strFileName);
+							editForm.TextBox.OnCursorPositionChanged += new SyntaxRichTextBox.CursorPositionChangedHandler(TextBox_OnCursorPositionChanged);
 							AddForm(editForm);
 						}
 						if (blnRun)
@@ -619,20 +619,20 @@ namespace LSLEditor
 			browser.ShowWebBrowser("Import Examples", Properties.Settings.Default.Examples);
 		}
 
-        /***
-         * Return value indicate whether file was saved or not.
-         */
+		/***
+		 * Return value indicate whether file was saved or not.
+		 */
 		public bool SaveFile(EditForm editForm, bool blnSaveAs)
 		{
 			DialogResult dialogresult = DialogResult.OK;
 			if (editForm.FullPathName == Properties.Settings.Default.ExampleName || blnSaveAs)
 			{
-                SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
-                saveDialog.FileName = editForm.FullPathName;
+				SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
+				saveDialog.FileName = editForm.FullPathName;
 				string strExtension = Path.GetExtension(editForm.FullPathName);
-                dialogresult = saveDialog.ShowDialog();
+				dialogresult = saveDialog.ShowDialog();
 				if (dialogresult == DialogResult.OK)
-                    editForm.FullPathName = saveDialog.FileName;
+					editForm.FullPathName = saveDialog.FileName;
 			}
 			if (dialogresult == DialogResult.OK)
 			{
@@ -650,9 +650,9 @@ namespace LSLEditor
 			if (editForm == null)
 				return false;
 			// save as!!
-            // TODO: Refactor saveDialog to be a property of the form
-            SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
-            return SaveFile(editForm, true);
+			// TODO: Refactor saveDialog to be a property of the form
+			SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
+			return SaveFile(editForm, true);
 		}
 
 
@@ -703,7 +703,7 @@ namespace LSLEditor
 			}
 			else
 			{
-                //TODO: find browser in childs
+				//TODO: find browser in childs
 				/*for (int intI = 0; intI < this.tabControlExtended1.TabCount; intI++)
 				{
 					TabPage tabPage = this.tabControlExtended1.TabPages[intI];
@@ -757,30 +757,30 @@ namespace LSLEditor
 		private void printPreviewtoolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-            if (editForm != null)
-            {
-                printerHelp(editForm);
-                printer.PrintPreviewEditForm(editForm);
-            }
+			if (editForm != null)
+			{
+				printerHelp(editForm);
+				printer.PrintPreviewEditForm(editForm);
+			}
 		}
 
 		private void printToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-            if (editForm != null)
-            {
-                printerHelp(editForm);
-                printer.PrintEditForm(editForm);
-            }
+			if (editForm != null)
+			{
+				printerHelp(editForm);
+				printer.PrintEditForm(editForm);
+			}
 		}
 
-        private void printerHelp(EditForm editForm)
-        {
-            printer = new Helpers.PrinterHelper(pageSetupDialog1);
-            printer.Title = editForm.FullPathName;
-            printer.SubTitle = DateTime.Now.ToString("s");
-            printer.Footer = this.Text;
-        }
+		private void printerHelp(EditForm editForm)
+		{
+			printer = new Helpers.PrinterHelper(pageSetupDialog1);
+			printer.Title = editForm.FullPathName;
+			printer.SubTitle = DateTime.Now.ToString("s");
+			printer.Footer = this.Text;
+		}
 		#endregion
 
 		private void copyToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
@@ -947,14 +947,14 @@ namespace LSLEditor
 
 			SetFontsOnWindows();
 
-            //TODO: Fix new file drop down
+			//TODO: Fix new file drop down
 			//this.solutionExplorer1.parent = this;
 			//this.solutionExplorer1.CreateNewFileDrowDownMenu(this.addNewFileToolStripMenuItem);
 			this.solutionExplorerToolStripMenuItem.Checked = Properties.Settings.Default.ShowSolutionExplorer;
 			ShowSolutionExplorer(this.solutionExplorerToolStripMenuItem.Checked);
 
 			this.llDialogForms = new List<llDialogForm>();
-            this.llTextBoxForms = new List<llTextBoxForm>();
+			this.llTextBoxForms = new List<llTextBoxForm>();
 			this.PermissionForms = new List<PermissionsForm>();
 
 			this.TooltipMouse.Tag = "";
@@ -963,7 +963,7 @@ namespace LSLEditor
 			this.TooltipListBox.XOffset = 200; // TODO, afhankelijk van toegepaste font
 			this.GListBoxWindow.Tag = "";
 
-            // This order equals with the KeyWordTypeEnum in KeyWords.cs
+			// This order equals with the KeyWordTypeEnum in KeyWords.cs
 			ImageList imageList = new ImageList();
 			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Unknown.gif"));
 			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Functions.gif"));
@@ -972,10 +972,10 @@ namespace LSLEditor
 			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Class.gif"));
 			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Vars.gif"));
 			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Properties.gif"));
-            imageList.Images.Add(new Bitmap(this.GetType(), "Images.States.gif"));
+			imageList.Images.Add(new Bitmap(this.GetType(), "Images.States.gif"));
 
 			this.GListBoxWindow.GListBox.ImageList = imageList;
-           // this.tvOutline.ImageList = imageList;
+		   // this.tvOutline.ImageList = imageList;
 
 			this.Move += new EventHandler(LSLEditorForm_SetPosition);
 			this.Resize += new EventHandler(LSLEditorForm_SetPosition);
@@ -1011,11 +1011,11 @@ namespace LSLEditor
 				df.Top = this.Top + 30;
 				df.Left = this.Right - df.Width - 5;
 			}
-            foreach(llTextBoxForm tbf in this.llTextBoxForms)
-            {
-                tbf.Left = this.Left + this.Width / 2 - tbf.Width / 2;
-                tbf.Top = this.Top + this.Height / 2 - tbf.Height / 2;
-            }
+			foreach(llTextBoxForm tbf in this.llTextBoxForms)
+			{
+				tbf.Left = this.Left + this.Width / 2 - tbf.Width / 2;
+				tbf.Top = this.Top + this.Height / 2 - tbf.Height / 2;
+			}
 			EditForm editForm = this.ActiveMdiForm as EditForm;
 			if (editForm != null)
 				editForm.TextBox.SetPosition(Screen.PrimaryScreen.WorkingArea);
@@ -1025,7 +1025,7 @@ namespace LSLEditor
 		{
 			try
 			{
-                //TODO: hmmm?
+				//TODO: hmmm?
 				//this.tabControlExtended1.Visible = false;
 
 				// this.panel1.Visible = false; // Simulator
@@ -1075,8 +1075,8 @@ namespace LSLEditor
 					}
 					if (dialogResult == DialogResult.Yes)
 					{
-                        // TODO: Refactor saveDialog to be a property of the form
-                        SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
+						// TODO: Refactor saveDialog to be a property of the form
+						SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
 						if(!SaveFile(editForm, false))
 							return false;
 					}
@@ -1227,9 +1227,9 @@ namespace LSLEditor
 
 			this.SimulatorConsole = new SimulatorConsole(this.SolutionExplorer, this.Children);
 
-            this.SimulatorConsole.Show(dockPanel);
-            //TODO: Show Simulator Console somewhere
-            //this.panel1.Controls.Clear();
+			this.SimulatorConsole.Show(dockPanel);
+			//TODO: Show Simulator Console somewhere
+			//this.panel1.Controls.Clear();
 			//this.panel1.Controls.Add(this.SimulatorConsole);
 			//this.panel1.Visible = true;
 			//this.splitter1.SplitPosition = Properties.Settings.Default.SimulatorSize.Height;
@@ -1237,7 +1237,7 @@ namespace LSLEditor
 
 		public void StopSimulator()
 		{
-            //TODO: Hide simulator? Or we could keep it like the debug output in VS
+			//TODO: Hide simulator? Or we could keep it like the debug output in VS
 			//this.panel1.Visible = false;
 			if (this.SimulatorConsole != null)
 			{
@@ -1250,7 +1250,7 @@ namespace LSLEditor
 
 		private bool SyntaxCheck(bool Silent)
 		{
-            //TODO: What do we hide on SyntaxCheck?
+			//TODO: What do we hide on SyntaxCheck?
 			//this.panel1.Visible = false;
 			InitSyntaxError();
 
@@ -1269,8 +1269,8 @@ namespace LSLEditor
 
 			if (this.SyntaxErrors.HasErrors)
 			{
-                this.SyntaxErrors.Show(dockPanel);
-                //TODO: Show errors somewhere in an output
+				this.SyntaxErrors.Show(dockPanel);
+				//TODO: Show errors somewhere in an output
 				//this.panel1.Controls.Clear();
 				//this.panel1.Controls.Add(this.SyntaxErrors);
 				//this.panel1.Visible = true;
@@ -1305,7 +1305,7 @@ namespace LSLEditor
 
 		private void splitter1_SplitterMoved(object sender, SplitterEventArgs e)
 		{
-            //TODO: Splitter moved? I Think this is depricated
+			//TODO: Splitter moved? I Think this is depricated
 			//if( this.splitter1.SplitPosition>50)
 			//	Properties.Settings.Default.SimulatorSize = new Size(this.splitter1.Width, this.splitter1.SplitPosition);
 		}
@@ -1350,19 +1350,19 @@ namespace LSLEditor
 
 		private void CloseTab(int intTabToDelete)
 		{
-            //TODO: Find a new way for closing tabs
-            /*
+			//TODO: Find a new way for closing tabs
+			/*
 			// reset toolstrip information
 			this.toolStripStatusLabel1.Text = "";
 
 			//int intTabToDelete = (int)this.contextMenuStrip1.Tag;
 
-            if (intTabToDelete >= this.tabControlExtended1.TabCount)
+			if (intTabToDelete >= this.tabControlExtended1.TabCount)
 				return;
 
-            TabPage tabPage = this.tabControlExtended1.TabPages[intTabToDelete];
+			TabPage tabPage = this.tabControlExtended1.TabPages[intTabToDelete];
 
-            if (tabPage.Text.Contains("Browser"))
+			if (tabPage.Text.Contains("Browser"))
 			{
 				this.browser.Dispose();
 				this.browser = null;
@@ -1396,7 +1396,7 @@ namespace LSLEditor
 				editForm = null;
 			}
 			this.tabControlExtended1.TabPages[intTabToDelete].Dispose();
-            */
+			*/
 			GC.Collect();
 		}
 
@@ -1440,14 +1440,14 @@ namespace LSLEditor
 			}
 			else
 			{
-                //TODO: Find a new way
+				//TODO: Find a new way
 				/*
-                int intTabToClose = this.tabControlExtended1.SelectedIndex;
+				int intTabToClose = this.tabControlExtended1.SelectedIndex;
 				if (intTabToClose >= 0)
 					CloseTab(intTabToClose);
 
-                 */
-            }
+				 */
+			}
 		}
 
 		private void closeActiveWindowToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1538,16 +1538,16 @@ namespace LSLEditor
 
 		public void ShowSolutionExplorer(bool blnVisible)
 		{
-            //TODO: We need another way to activate the Solution Explorer
+			//TODO: We need another way to activate the Solution Explorer
 			//this.panel2.Visible = blnVisible;
-            if (blnVisible)
-            {
-                m_SolutionExplorer.Show(dockPanel);
-            }
-            else
-            {
-                m_SolutionExplorer.Hide();
-            }
+			if (blnVisible)
+			{
+				m_SolutionExplorer.Show(dockPanel);
+			}
+			else
+			{
+				m_SolutionExplorer.Hide();
+			}
 			this.solutionExplorerToolStripMenuItem.Checked = blnVisible;
 			//this.tabControlExtended1.Refresh();
 		}
@@ -1574,15 +1574,15 @@ namespace LSLEditor
 			this.newProjectToolStripMenuItem.Enabled = !blnVisible;
 		}
 
-        private void openNoteFilesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ReadNoteFiles();
-        }
+		private void openNoteFilesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ReadNoteFiles();
+		}
 
-        private void openScriptFilesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ReadScriptFiles();
-        }
+		private void openScriptFilesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ReadScriptFiles();
+		}
 
 		private void closeFileToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -1787,7 +1787,7 @@ namespace LSLEditor
 
 		private void PluginsHandler(object sender, EventArgs e)
 		{
-            //TODO: What do we hide here?
+			//TODO: What do we hide here?
 			//this.panel1.Visible = false;
 
 			ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
@@ -1888,36 +1888,36 @@ namespace LSLEditor
 			NativeHelper.SendMyKeys.ClipBoardToApp("SecondLife", null);
 		}
 
-        private void outlineToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //old
-        }
+		private void outlineToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			//old
+		}
 
-        private void outlineToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
-        {
-            foreach (Form k in this.Children)
-            {
-                EditForm editForm = k as EditForm;
-                if (editForm == null)
-                    return;
-                if (outlineToolStripMenuItem.Checked)
-                {
-                    editForm.splitContainer1.Panel2Collapsed = false;
-                }
-                else
-                {
-                    editForm.splitContainer1.Panel2Collapsed = true;
-                }
-            }
-        }
+		private void outlineToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+		{
+			foreach (Form k in this.Children)
+			{
+				EditForm editForm = k as EditForm;
+				if (editForm == null)
+					return;
+				if (outlineToolStripMenuItem.Checked)
+				{
+					editForm.splitContainer1.Panel2Collapsed = false;
+				}
+				else
+				{
+					editForm.splitContainer1.Panel2Collapsed = true;
+				}
+			}
+		}
 
 
 
-        private void toolStripMenuItem9_Click_1(object sender, EventArgs e)
-        {
-            Browser browser = GetBrowser();
-            browser.ShowWebBrowser("LSLEditor QA", Properties.Settings.Default.qasite);
-        }
+		private void toolStripMenuItem9_Click_1(object sender, EventArgs e)
+		{
+			Browser browser = GetBrowser();
+			browser.ShowWebBrowser("LSLEditor QA", Properties.Settings.Default.qasite);
+		}
 
 
 	}

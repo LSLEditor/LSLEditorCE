@@ -20,7 +20,7 @@
 // ********
 // * LSLEditor, a External editor for the LSL Language.
 // * Copyright (C) 2010 The LSLEditor Group.
-// 
+//
 // * This program is free software; you can redistribute it and/or
 // * modify it under the terms of the GNU General Public License
 // * as published by the Free Software Foundation; either version 2
@@ -36,7 +36,7 @@
 // * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 // ********
 // *
-// * The above copyright notice and this permission notice shall be included in all 
+// * The above copyright notice and this permission notice shall be included in all
 // * copies or substantial portions of the Software.
 // *
 // ********
@@ -72,8 +72,8 @@ namespace LSLEditor.Helpers
 		// print document
 		PrintDocument docToPrint = null;
 
-        // print dialogue
-        PrintDialog pd = null;
+		// print dialogue
+		PrintDialog pd = null;
 
 		// print status items
 		int fromPage = 0;
@@ -130,8 +130,8 @@ namespace LSLEditor.Helpers
 		}
 
 		/// <summary>
-		/// Allow the user to override the title string alignment. Default value is 
-		/// Alignment - Near; 
+		/// Allow the user to override the title string alignment. Default value is
+		/// Alignment - Near;
 		/// </summary>
 		private StringAlignment titlealignment;
 		public StringAlignment TitleAlignment
@@ -186,8 +186,8 @@ namespace LSLEditor.Helpers
 		}
 
 		/// <summary>
-		/// Allow the user to override the subtitle string alignment. Default value is 
-		/// Alignment - Near; 
+		/// Allow the user to override the subtitle string alignment. Default value is
+		/// Alignment - Near;
 		/// </summary>
 		private StringAlignment subtitlealignment;
 		public StringAlignment SubTitleAlignment
@@ -242,8 +242,8 @@ namespace LSLEditor.Helpers
 		}
 
 		/// <summary>
-		/// Allow the user to override the footer string alignment. Default value is 
-		/// Alignment - Center; 
+		/// Allow the user to override the footer string alignment. Default value is
+		/// Alignment - Center;
 		/// </summary>
 		private StringAlignment footeralignment;
 		public StringAlignment FooterAlignment
@@ -305,8 +305,8 @@ namespace LSLEditor.Helpers
 		}
 
 		/// <summary>
-		/// Allow the user to override the page number string alignment. Default value is 
-		/// Alignment - Near; 
+		/// Allow the user to override the page number string alignment. Default value is
+		/// Alignment - Near;
 		/// </summary>
 		private StringAlignment pagenumberalignment;
 		public StringAlignment PaageNumberAlignment
@@ -418,8 +418,8 @@ namespace LSLEditor.Helpers
 		/// NOTE: Any changes to this method also need to be done in PrintPreviewEditForm
 		public void PrintEditForm(EditForm editForm)
 		{
-            saveFormData(editForm);
-            setupPrintDialogue();
+			saveFormData(editForm);
+			setupPrintDialogue();
 
 			// show print dialog
 			if (pd.ShowDialog() == DialogResult.OK)
@@ -427,7 +427,7 @@ namespace LSLEditor.Helpers
 				SetupPrint(pd);
 				docToPrint.Print();
 			}
- 
+
 		}
 
 		/// <summary>
@@ -437,17 +437,17 @@ namespace LSLEditor.Helpers
 		/// NOTE: Any changes to this method also need to be done in PrintDataGridView
 		public void PrintPreviewEditForm(EditForm editForm)
 		{
-            saveFormData(editForm);
-            setupPrintDialogue();
+			saveFormData(editForm);
+			setupPrintDialogue();
 
 			// show print dialog
 			if (pd.ShowDialog() == DialogResult.OK)
-            {
-                SetupPrint(pd);
-                PrintPreviewDialog ppdialog = new PrintPreviewDialog();
-                ppdialog.Document = docToPrint;
-                ppdialog.ShowDialog();
-            }
+			{
+				SetupPrint(pd);
+				PrintPreviewDialog ppdialog = new PrintPreviewDialog();
+				ppdialog.Document = docToPrint;
+				ppdialog.ShowDialog();
+			}
 		}
 
 		/// <summary>
@@ -462,7 +462,7 @@ namespace LSLEditor.Helpers
 			// save data from print dialog and document
 			//-----------------------------------------------------------------
 
-			// check to see if we're doing landscape printing 
+			// check to see if we're doing landscape printing
 			if (docToPrint.DefaultPageSettings.Landscape)
 			{
 				// landscape: switch width and height
@@ -480,7 +480,7 @@ namespace LSLEditor.Helpers
 			printmargins = docToPrint.DefaultPageSettings.Margins;
 			printWidth = pageWidth - printmargins.Left - printmargins.Right;
 
-			// save print range 
+			// save print range
 			printRange = pd.PrinterSettings.PrintRange;
 
 			// pages to print handles "some pages" option
@@ -681,26 +681,26 @@ namespace LSLEditor.Helpers
 			}
 		}
 
-        private void saveFormData(EditForm editForm)
-        {
-            // save the datagridview we're printing
-            this.editForm = editForm;
-            this.intCharFrom = 0;
-            this.intCharPrint = 0;
-            this.intCharTo = editForm.TextBox.Text.Length;
-        }
+		private void saveFormData(EditForm editForm)
+		{
+			// save the datagridview we're printing
+			this.editForm = editForm;
+			this.intCharFrom = 0;
+			this.intCharPrint = 0;
+			this.intCharTo = editForm.TextBox.Text.Length;
+		}
 
-        private void setupPrintDialogue()
-        {
-            // create new print dialog
-            pd = new PrintDialog();
+		private void setupPrintDialogue()
+		{
+			// create new print dialog
+			pd = new PrintDialog();
 
-            pd.Document = docToPrint;
-            pd.AllowSelection = true;
-            pd.AllowSomePages = false;
-            pd.AllowCurrentPage = false;
-            pd.AllowPrintToFile = false;
-            pd.UseEXDialog = true;
-        }
-    }
+			pd.Document = docToPrint;
+			pd.AllowSelection = true;
+			pd.AllowSomePages = false;
+			pd.AllowCurrentPage = false;
+			pd.AllowPrintToFile = false;
+			pd.UseEXDialog = true;
+		}
+	}
 }
