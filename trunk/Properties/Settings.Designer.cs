@@ -1046,6 +1046,36 @@ namespace LSLEditor.Properties {
             }
         }
 
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00000000-0000-0000-0000-000000000000")]
+        public string ParcelID
+        {
+            get
+            {
+                return ((string)(this["ParcelID"]));
+            }
+            set
+            {
+                this["ParcelID"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("512")]
+        public int ParcelSeeAvatars
+        {
+            get
+            {
+                return ((int)(this["ParcelSeeAvatars"]));
+            }
+            set
+            {
+                this["ParcelSeeAvatars"] = value;
+            }
+        }
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"
