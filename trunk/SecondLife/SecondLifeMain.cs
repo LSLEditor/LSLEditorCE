@@ -177,26 +177,26 @@ namespace LSLEditor
         #endregion
 
         #region all constants
-        public static readonly integer TRUE = 1;
-        public static readonly integer FALSE = 0;
+        public const int TRUE = 1;
+        public const int FALSE = 0;
 
-        public static readonly integer DENSITY = 1;
-        public static readonly integer FRICTION = 2;
-        public static readonly integer GRAVITY_MULTIPLIER = 8;
-        public static readonly integer RESTITUTION = 4;
+        public const int DENSITY = 1;
+        public const int FRICTION = 2;
+        public const int GRAVITY_MULTIPLIER = 8;
+        public const int RESTITUTION = 4;
 
-        public static readonly integer AGENT = 1;
-        public static readonly integer ACTIVE = 2;
-        public static readonly integer PASSIVE = 4;
-        public static readonly integer SCRIPTED = 8;
+        public const int AGENT = 1;
+        public const int ACTIVE = 2;
+        public const int PASSIVE = 4;
+        public const int SCRIPTED = 8;
 
-        public static readonly integer ANIM_ON = 1;
-        public static readonly integer LOOP = 2;
-        public static readonly integer REVERSE = 4;
-        public static readonly integer PING_PONG = 8;
-        public static readonly integer SMOOTH = 16;
-        public static readonly integer ROTATE = 32;
-        public static readonly integer SCALE = 64;
+        public const int ANIM_ON = 1;
+        public const int LOOP = 2;
+        public const int REVERSE = 4;
+        public const int PING_PONG = 8;
+        public const int SMOOTH = 16;
+        public const int ROTATE = 32;
+        public const int SCALE = 64;
 
         public static readonly Float PI = 3.1415926535897932384626;
         public static readonly Float TWO_PI = 2.0 * PI;
@@ -209,135 +209,135 @@ namespace LSLEditor
         public static readonly rotation ZERO_ROTATION = rotation.ZERO_ROTATION;
         public static readonly vector ZERO_VECTOR = vector.ZERO_VECTOR;
 
-        public static readonly integer ALL_SIDES = -1;
+        public const int ALL_SIDES = -1;
 
-        public static readonly integer DEBUG_CHANNEL = 2147483647;
+        public const int DEBUG_CHANNEL = 2147483647;
         public const string EOF = "\n\n\n";
 
-        public static readonly integer AGENT_FLYING = 1;
-        public static readonly integer AGENT_ATTACHMENTS = 2;
-        public static readonly integer AGENT_SCRIPTED = 4;
-        public static readonly integer AGENT_MOUSELOOK = 8;
-        public static readonly integer AGENT_SITTING = 16;
-        public static readonly integer AGENT_ON_OBJECT = 32;
-        public static readonly integer AGENT_AWAY = 64;
-        public static readonly integer AGENT_WALKING = 128;
-        public static readonly integer AGENT_IN_AIR = 256;
-        public static readonly integer AGENT_TYPING = 512;
-        public static readonly integer AGENT_CROUCHING = 1024;
-        public static readonly integer AGENT_BUSY = 2048;
-        public static readonly integer AGENT_ALWAYS_RUN = 4096;
-		public static readonly integer AGENT_AUTOPILOT = 0x2000;
-		public static readonly integer AGENT_BY_LEGACY_NAME = 0x1;
-		public static readonly integer AGENT_BY_USERNAME = 0x10;
+        public const int AGENT_FLYING = 1;
+        public const int AGENT_ATTACHMENTS = 2;
+        public const int AGENT_SCRIPTED = 4;
+        public const int AGENT_MOUSELOOK = 8;
+        public const int AGENT_SITTING = 16;
+        public const int AGENT_ON_OBJECT = 32;
+        public const int AGENT_AWAY = 64;
+        public const int AGENT_WALKING = 128;
+        public const int AGENT_IN_AIR = 256;
+        public const int AGENT_TYPING = 512;
+        public const int AGENT_CROUCHING = 1024;
+        public const int AGENT_BUSY = 2048;
+        public const int AGENT_ALWAYS_RUN = 4096;
+		public const int AGENT_AUTOPILOT = 0x2000;
+		public const int AGENT_BY_LEGACY_NAME = 0x1;
+		public const int AGENT_BY_USERNAME = 0x10;
 
-		public static readonly integer AGENT_LIST_PARCEL = 0x01;
-		public static readonly integer AGENT_LIST_PARCEL_OWNER = 0x02;
-		public static readonly integer AGENT_LIST_REGION = 0x04;
+		public const int AGENT_LIST_PARCEL = 0x01;
+		public const int AGENT_LIST_PARCEL_OWNER = 0x02;
+		public const int AGENT_LIST_REGION = 0x04;
 
-        public static readonly integer ATTACH_AVATAR_CENTER = 40;
-        public static readonly integer ATTACH_BACK = 9;
-        public static readonly integer ATTACH_CHEST = 1;
-        public static readonly integer ATTACH_CHIN = 12;
-        public static readonly integer ATTACH_HEAD = 2;
-        public static readonly integer ATTACH_LSHOULDER = 3;
-        public static readonly integer ATTACH_RSHOULDER = 4;
-        public static readonly integer ATTACH_LHAND = 5;
-        public static readonly integer ATTACH_RHAND = 6;
-        public static readonly integer ATTACH_LFOOT = 7;
-        public static readonly integer ATTACH_RFOOT = 8;
-        public static readonly integer ATTACH_PELVIS = 10;
-        public static readonly integer ATTACH_MOUTH = 11;
-        public static readonly integer ATTACH_NECK = 39;
-        public static readonly integer ATTACH_LEAR = 13;
-        public static readonly integer ATTACH_LEFT_PEC = 29;
-        public static readonly integer ATTACH_REAR = 14;
-        public static readonly integer ATTACH_LEYE = 15;
-        public static readonly integer ATTACH_REYE = 16;
-        public static readonly integer ATTACH_NOSE = 17;
-        public static readonly integer ATTACH_RUARM = 18;
-        public static readonly integer ATTACH_RLARM = 19;
-        public static readonly integer ATTACH_LUARM = 20;
-        public static readonly integer ATTACH_LLARM = 21;
-        public static readonly integer ATTACH_RHIP = 22;
-        public static readonly integer ATTACH_RIGHT_PEC = 30;
-        public static readonly integer ATTACH_RULEG = 23;
-        public static readonly integer ATTACH_RLLEG = 24;
-        public static readonly integer ATTACH_LHIP = 25;
-        public static readonly integer ATTACH_LULEG = 26;
-        public static readonly integer ATTACH_LLLEG = 27;
-        public static readonly integer ATTACH_BELLY = 28;
-        public static readonly integer ATTACH_RPEC = 29;
-        public static readonly integer ATTACH_LPEC = 30;
+        public const int ATTACH_AVATAR_CENTER = 40;
+        public const int ATTACH_BACK = 9;
+        public const int ATTACH_CHEST = 1;
+        public const int ATTACH_CHIN = 12;
+        public const int ATTACH_HEAD = 2;
+        public const int ATTACH_LSHOULDER = 3;
+        public const int ATTACH_RSHOULDER = 4;
+        public const int ATTACH_LHAND = 5;
+        public const int ATTACH_RHAND = 6;
+        public const int ATTACH_LFOOT = 7;
+        public const int ATTACH_RFOOT = 8;
+        public const int ATTACH_PELVIS = 10;
+        public const int ATTACH_MOUTH = 11;
+        public const int ATTACH_NECK = 39;
+        public const int ATTACH_LEAR = 13;
+        public const int ATTACH_LEFT_PEC = 29;
+        public const int ATTACH_REAR = 14;
+        public const int ATTACH_LEYE = 15;
+        public const int ATTACH_REYE = 16;
+        public const int ATTACH_NOSE = 17;
+        public const int ATTACH_RUARM = 18;
+        public const int ATTACH_RLARM = 19;
+        public const int ATTACH_LUARM = 20;
+        public const int ATTACH_LLARM = 21;
+        public const int ATTACH_RHIP = 22;
+        public const int ATTACH_RIGHT_PEC = 30;
+        public const int ATTACH_RULEG = 23;
+        public const int ATTACH_RLLEG = 24;
+        public const int ATTACH_LHIP = 25;
+        public const int ATTACH_LULEG = 26;
+        public const int ATTACH_LLLEG = 27;
+        public const int ATTACH_BELLY = 28;
+        public const int ATTACH_RPEC = 29;
+        public const int ATTACH_LPEC = 30;
 
-        public static readonly integer ATTACH_HUD_CENTER_2 = 31;
-        public static readonly integer ATTACH_HUD_TOP_RIGHT = 32;
-        public static readonly integer ATTACH_HUD_TOP_CENTER = 33;
-        public static readonly integer ATTACH_HUD_TOP_LEFT = 34;
-        public static readonly integer ATTACH_HUD_CENTER_1 = 35;
-        public static readonly integer ATTACH_HUD_BOTTOM_LEFT = 36;
-        public static readonly integer ATTACH_HUD_BOTTOM = 37;
-        public static readonly integer ATTACH_HUD_BOTTOM_RIGHT = 38;
+        public const int ATTACH_HUD_CENTER_2 = 31;
+        public const int ATTACH_HUD_TOP_RIGHT = 32;
+        public const int ATTACH_HUD_TOP_CENTER = 33;
+        public const int ATTACH_HUD_TOP_LEFT = 34;
+        public const int ATTACH_HUD_CENTER_1 = 35;
+        public const int ATTACH_HUD_BOTTOM_LEFT = 36;
+        public const int ATTACH_HUD_BOTTOM = 37;
+        public const int ATTACH_HUD_BOTTOM_RIGHT = 38;
 
-		public static readonly integer AVOID_CHARACTERS = 1;
-		public static readonly integer AVOID_DYNAMIC_OBSTACLES = 2;
+		public const int AVOID_CHARACTERS = 1;
+		public const int AVOID_DYNAMIC_OBSTACLES = 2;
 
-        public static readonly integer CAMERA_PITCH = 0;
-        public static readonly integer CAMERA_FOCUS_OFFSET = 1;
-        public static readonly integer CAMERA_POSITION_LAG = 5;
-        public static readonly integer CAMERA_FOCUS_LAG = 6;
-        public static readonly integer CAMERA_DISTANCE = 7;
-        public static readonly integer CAMERA_BEHINDNESS_ANGLE = 8;
-        public static readonly integer CAMERA_BEHINDNESS_LAG = 9;
-        public static readonly integer CAMERA_POSITION_THRESHOLD = 10;
-        public static readonly integer CAMERA_FOCUS_THRESHOLD = 11;
-        public static readonly integer CAMERA_ACTIVE = 12;
-        public static readonly integer CAMERA_POSITION = 13;
-        public static readonly integer CAMERA_FOCUS = 17;
-        public static readonly integer CAMERA_FOCUS_LOCKED = 22;
-        public static readonly integer CAMERA_POSITION_LOCKED = 21;
+        public const int CAMERA_PITCH = 0;
+        public const int CAMERA_FOCUS_OFFSET = 1;
+        public const int CAMERA_POSITION_LAG = 5;
+        public const int CAMERA_FOCUS_LAG = 6;
+        public const int CAMERA_DISTANCE = 7;
+        public const int CAMERA_BEHINDNESS_ANGLE = 8;
+        public const int CAMERA_BEHINDNESS_LAG = 9;
+        public const int CAMERA_POSITION_THRESHOLD = 10;
+        public const int CAMERA_FOCUS_THRESHOLD = 11;
+        public const int CAMERA_ACTIVE = 12;
+        public const int CAMERA_POSITION = 13;
+        public const int CAMERA_FOCUS = 17;
+        public const int CAMERA_FOCUS_LOCKED = 22;
+        public const int CAMERA_POSITION_LOCKED = 21;
 
-        public static readonly integer CHANGED_INVENTORY = 1;
-        public static readonly integer CHANGED_COLOR = 2;
-        public static readonly integer CHANGED_SHAPE = 4;
-        public static readonly integer CHANGED_SCALE = 8;
-        public static readonly integer CHANGED_TEXTURE = 16;
-        public static readonly integer CHANGED_LINK = 32;
-        public static readonly integer CHANGED_ALLOWED_DROP = 64;
-        public static readonly integer CHANGED_OWNER = 128;
-        public static readonly integer CHANGED_REGION = 256;
-        public static readonly integer CHANGED_TELEPORT = 512;
-        public static readonly integer CHANGED_REGION_START = 1024;
-		public static readonly integer CHANGED_MEDIA = 2048;
+        public const int CHANGED_INVENTORY = 1;
+        public const int CHANGED_COLOR = 2;
+        public const int CHANGED_SHAPE = 4;
+        public const int CHANGED_SCALE = 8;
+        public const int CHANGED_TEXTURE = 16;
+        public const int CHANGED_LINK = 32;
+        public const int CHANGED_ALLOWED_DROP = 64;
+        public const int CHANGED_OWNER = 128;
+        public const int CHANGED_REGION = 256;
+        public const int CHANGED_TELEPORT = 512;
+        public const int CHANGED_REGION_START = 1024;
+		public const int CHANGED_MEDIA = 2048;
 
-        public static readonly integer CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES = 14;
-		public static readonly integer CHARACTER_AVOIDANCE_MODE = 5;
-		public static readonly integer CHARACTER_CMD_JUMP = 0x01;
-		public static readonly integer CHARACTER_CMD_STOP = 0x00;
-		public static readonly integer CHARACTER_DESIRED_SPEED = 1;
-		public static readonly integer CHARACTER_LENGTH = 3;
-		public static readonly integer CHARACTER_TYPE = 6;
-		public static readonly integer CHARACTER_MAX_ACCEL = 8;
-		public static readonly integer CHARACTER_MAX_DECEL = 9;
-        public static readonly integer CHARACTER_MAX_SPEED = 13;
-        public static readonly integer CHARACTER_MAX_TURN_RADIUS = 10;
-        public static readonly integer CHARACTER_ORIENTATION = 4;
-        public static readonly integer CHARACTER_RADIUS = 2;
-        public static readonly integer CHARACTER_STAY_WITHIN_PARCEL = 15;
-		public static readonly integer CHARACTER_TYPE_A = 0;
-		public static readonly integer CHARACTER_TYPE_B = 1;
-		public static readonly integer CHARACTER_TYPE_C = 2;
-		public static readonly integer CHARACTER_TYPE_D = 3;
-		public static readonly integer CHARACTER_TYPE_NONE = 4;
+        public const int CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES = 14;
+		public const int CHARACTER_AVOIDANCE_MODE = 5;
+		public const int CHARACTER_CMD_JUMP = 0x01;
+		public const int CHARACTER_CMD_STOP = 0x00;
+		public const int CHARACTER_DESIRED_SPEED = 1;
+		public const int CHARACTER_LENGTH = 3;
+		public const int CHARACTER_TYPE = 6;
+		public const int CHARACTER_MAX_ACCEL = 8;
+		public const int CHARACTER_MAX_DECEL = 9;
+        public const int CHARACTER_MAX_SPEED = 13;
+        public const int CHARACTER_MAX_TURN_RADIUS = 10;
+        public const int CHARACTER_ORIENTATION = 4;
+        public const int CHARACTER_RADIUS = 2;
+        public const int CHARACTER_STAY_WITHIN_PARCEL = 15;
+		public const int CHARACTER_TYPE_A = 0;
+		public const int CHARACTER_TYPE_B = 1;
+		public const int CHARACTER_TYPE_C = 2;
+		public const int CHARACTER_TYPE_D = 3;
+		public const int CHARACTER_TYPE_NONE = 4;
 
-        public static readonly integer CLICK_ACTION_NONE = 0;
-        public static readonly integer CLICK_ACTION_TOUCH = 0;
-        public static readonly integer CLICK_ACTION_SIT = 1;
-        public static readonly integer CLICK_ACTION_BUY = 2;
-        public static readonly integer CLICK_ACTION_PAY = 3;
-        public static readonly integer CLICK_ACTION_OPEN = 4;
-        public static readonly integer CLICK_ACTION_PLAY = 5;
-        public static readonly integer CLICK_ACTION_OPEN_MEDIA = 6;
+        public const int CLICK_ACTION_NONE = 0;
+        public const int CLICK_ACTION_TOUCH = 0;
+        public const int CLICK_ACTION_SIT = 1;
+        public const int CLICK_ACTION_BUY = 2;
+        public const int CLICK_ACTION_PAY = 3;
+        public const int CLICK_ACTION_OPEN = 4;
+        public const int CLICK_ACTION_PLAY = 5;
+        public const int CLICK_ACTION_OPEN_MEDIA = 6;
 
 		public static readonly string CONTENT_TYPE_ATOM = "application/atom+xml";
 		public static readonly string CONTENT_TYPE_FORM = "application/x-www-form-urlencoded";
@@ -349,65 +349,65 @@ namespace LSLEditor
 		public static readonly string CONTENT_TYPE_XHTML = "application/xhtml+xml";
 		public static readonly string CONTENT_TYPE_XML = "application/xml";
 
-        public static readonly integer CONTROL_FWD = 1;
-        public static readonly integer CONTROL_BACK = 2;
-        public static readonly integer CONTROL_LEFT = 4;
-        public static readonly integer CONTROL_RIGHT = 8;
-        public static readonly integer CONTROL_ROT_LEFT = 256;
-        public static readonly integer CONTROL_ROT_RIGHT = 512;
-        public static readonly integer CONTROL_UP = 16;
-        public static readonly integer CONTROL_DOWN = 32;
-        public static readonly integer CONTROL_LBUTTON = 268435456;
-        public static readonly integer CONTROL_ML_LBUTTON = 1073741824;
+        public const int CONTROL_FWD = 1;
+        public const int CONTROL_BACK = 2;
+        public const int CONTROL_LEFT = 4;
+        public const int CONTROL_RIGHT = 8;
+        public const int CONTROL_ROT_LEFT = 256;
+        public const int CONTROL_ROT_RIGHT = 512;
+        public const int CONTROL_UP = 16;
+        public const int CONTROL_DOWN = 32;
+        public const int CONTROL_LBUTTON = 268435456;
+        public const int CONTROL_ML_LBUTTON = 1073741824;
 
-        public static readonly integer DATA_ONLINE = 1;
-        public static readonly integer DATA_NAME = 2;
-        public static readonly integer DATA_BORN = 3;
-        public static readonly integer DATA_RATING = 4;
+        public const int DATA_ONLINE = 1;
+        public const int DATA_NAME = 2;
+        public const int DATA_BORN = 3;
+        public const int DATA_RATING = 4;
 
-        public static readonly integer DATA_SIM_POS = 5;
-        public static readonly integer DATA_SIM_STATUS = 6;
-        public static readonly integer DATA_SIM_RATING = 7;
+        public const int DATA_SIM_POS = 5;
+        public const int DATA_SIM_STATUS = 6;
+        public const int DATA_SIM_RATING = 7;
 
-        public static readonly integer DATA_PAYINFO = 8;
+        public const int DATA_PAYINFO = 8;
 
-        public static readonly integer ERR_GENERIC = -1;
-        public static readonly integer ERR_MALFORMED_PARAMS = -3;
-        public static readonly integer ERR_PARCEL_PERMISSIONS = -2;
-        public static readonly integer ERR_RUNTIME_PERMISSIONS = -4;
-        public static readonly integer ERR_THROTTLED = -5;
+        public const int ERR_GENERIC = -1;
+        public const int ERR_MALFORMED_PARAMS = -3;
+        public const int ERR_PARCEL_PERMISSIONS = -2;
+        public const int ERR_RUNTIME_PERMISSIONS = -4;
+        public const int ERR_THROTTLED = -5;
 
-        public static readonly integer ESTATE_ACCESS_ALLOWED_AGENT_ADD = 4;
-        public static readonly integer ESTATE_ACCESS_ALLOWED_AGENT_REMOVE = 8;
-        public static readonly integer ESTATE_ACCESS_ALLOWED_GROUP_ADD = 16;
-        public static readonly integer ESTATE_ACCESS_ALLOWED_GROUP_REMOVE = 32;
-        public static readonly integer ESTATE_ACCESS_BANNED_AGENT_ADD = 64;
-        public static readonly integer ESTATE_ACCESS_BANNED_AGENT_REMOVE = 128;
+        public const int ESTATE_ACCESS_ALLOWED_AGENT_ADD = 4;
+        public const int ESTATE_ACCESS_ALLOWED_AGENT_REMOVE = 8;
+        public const int ESTATE_ACCESS_ALLOWED_GROUP_ADD = 16;
+        public const int ESTATE_ACCESS_ALLOWED_GROUP_REMOVE = 32;
+        public const int ESTATE_ACCESS_BANNED_AGENT_ADD = 64;
+        public const int ESTATE_ACCESS_BANNED_AGENT_REMOVE = 128;
 
-		public static readonly integer FORCE_DIRECT_PATH = 1;
+		public const int FORCE_DIRECT_PATH = 1;
 
-        public static readonly integer HTTP_BODY_MAXLENGTH = 2;
-        public static readonly integer HTTP_BODY_TRUNCATED = 0;
-        public static readonly integer HTTP_METHOD = 0;
-        public static readonly integer HTTP_MIMETYPE = 1;
-        public static readonly integer HTTP_PRAGMA_NO_CACHE = 6;
-        public static readonly integer HTTP_VERBOSE_THROTTLE = 4;
-        public static readonly integer HTTP_VERIFY_CERT = 3;
+        public const int HTTP_BODY_MAXLENGTH = 2;
+        public const int HTTP_BODY_TRUNCATED = 0;
+        public const int HTTP_METHOD = 0;
+        public const int HTTP_MIMETYPE = 1;
+        public const int HTTP_PRAGMA_NO_CACHE = 6;
+        public const int HTTP_VERBOSE_THROTTLE = 4;
+        public const int HTTP_VERIFY_CERT = 3;
 
-        public static readonly integer HORIZONTAL = 1;
+        public const int HORIZONTAL = 1;
 
-        public static readonly integer INVENTORY_ALL = -1;
-        public static readonly integer INVENTORY_NONE = -1;
-        public static readonly integer INVENTORY_TEXTURE = 0;
-        public static readonly integer INVENTORY_SOUND = 1;
-        public static readonly integer INVENTORY_LANDMARK = 3;
-        public static readonly integer INVENTORY_CLOTHING = 5;
-        public static readonly integer INVENTORY_OBJECT = 6;
-        public static readonly integer INVENTORY_NOTECARD = 7;
-        public static readonly integer INVENTORY_SCRIPT = 10;
-        public static readonly integer INVENTORY_BODYPART = 13;
-        public static readonly integer INVENTORY_ANIMATION = 20;
-        public static readonly integer INVENTORY_GESTURE = 21;
+        public const int INVENTORY_ALL = -1;
+        public const int INVENTORY_NONE = -1;
+        public const int INVENTORY_TEXTURE = 0;
+        public const int INVENTORY_SOUND = 1;
+        public const int INVENTORY_LANDMARK = 3;
+        public const int INVENTORY_CLOTHING = 5;
+        public const int INVENTORY_OBJECT = 6;
+        public const int INVENTORY_NOTECARD = 7;
+        public const int INVENTORY_SCRIPT = 10;
+        public const int INVENTORY_BODYPART = 13;
+        public const int INVENTORY_ANIMATION = 20;
+        public const int INVENTORY_GESTURE = 21;
 
         public static readonly string JSON_ARRAY    = "\uFDD2";
         public static readonly string JSON_FALSE    = "\uFDD7";
@@ -418,399 +418,399 @@ namespace LSLEditor
         public static readonly string JSON_STRING   = "\uFDD4";
         public static readonly string JSON_TRUE     = "\uFDD6";
 
-        public static readonly integer KFM_CMD_PAUSE = 2;
-        public static readonly integer KFM_CMD_PLAY = 0;
-        public static readonly integer KFM_CMD_STOP = 1;
-        public static readonly integer KFM_COMMAND = 0;
-        public static readonly integer KFM_DATA = 2;
-        public static readonly integer KFM_FORWARD = 0;
-        public static readonly integer KFM_LOOP = 1;
-        public static readonly integer KFM_MODE = 1;
-        public static readonly integer KFM_PING_PONG = 2;
-        public static readonly integer KFM_REVERSE = 2;
-        public static readonly integer KFM_ROTATION = 1;
-        public static readonly integer KFM_TRANSLATION = 2;
+        public const int KFM_CMD_PAUSE = 2;
+        public const int KFM_CMD_PLAY = 0;
+        public const int KFM_CMD_STOP = 1;
+        public const int KFM_COMMAND = 0;
+        public const int KFM_DATA = 2;
+        public const int KFM_FORWARD = 0;
+        public const int KFM_LOOP = 1;
+        public const int KFM_MODE = 1;
+        public const int KFM_PING_PONG = 2;
+        public const int KFM_REVERSE = 2;
+        public const int KFM_ROTATION = 1;
+        public const int KFM_TRANSLATION = 2;
 
-        public static readonly integer LAND_LEVEL = 0;
-        public static readonly integer LAND_RAISE = 1;
-        public static readonly integer LAND_LOWER = 2;
-        public static readonly integer LAND_SMOOTH = 3;
-        public static readonly integer LAND_NOISE = 4;
-        public static readonly integer LAND_REVERT = 5;
+        public const int LAND_LEVEL = 0;
+        public const int LAND_RAISE = 1;
+        public const int LAND_LOWER = 2;
+        public const int LAND_SMOOTH = 3;
+        public const int LAND_NOISE = 4;
+        public const int LAND_REVERT = 5;
 
-        public static readonly integer LAND_LARGE_BRUSH = 3;
-        public static readonly integer LAND_MEDIUM_BRUSH = 2;
-        public static readonly integer LAND_SMALL_BRUSH = 1;
+        public const int LAND_LARGE_BRUSH = 3;
+        public const int LAND_MEDIUM_BRUSH = 2;
+        public const int LAND_SMALL_BRUSH = 1;
 
-        public static readonly integer LINK_ROOT = 1;
-        public static readonly integer LINK_SET = -1;
-        public static readonly integer LINK_ALL_OTHERS = -2;
-        public static readonly integer LINK_ALL_CHILDREN = -3;
-        public static readonly integer LINK_THIS = -4;
+        public const int LINK_ROOT = 1;
+        public const int LINK_SET = -1;
+        public const int LINK_ALL_OTHERS = -2;
+        public const int LINK_ALL_CHILDREN = -3;
+        public const int LINK_THIS = -4;
 
-        public static readonly integer LIST_STAT_RANGE = 0;
-        public static readonly integer LIST_STAT_MIN = 1;
-        public static readonly integer LIST_STAT_MAX = 2;
-        public static readonly integer LIST_STAT_MEAN = 3;
-        public static readonly integer LIST_STAT_MEDIAN = 4;
-        public static readonly integer LIST_STAT_STD_DEV = 5;
-        public static readonly integer LIST_STAT_SUM = 6;
-        public static readonly integer LIST_STAT_SUM_SQUARES = 7;
-        public static readonly integer LIST_STAT_NUM_COUNT = 8;
-        public static readonly integer LIST_STAT_GEOMETRIC_MEAN = 9;
+        public const int LIST_STAT_RANGE = 0;
+        public const int LIST_STAT_MIN = 1;
+        public const int LIST_STAT_MAX = 2;
+        public const int LIST_STAT_MEAN = 3;
+        public const int LIST_STAT_MEDIAN = 4;
+        public const int LIST_STAT_STD_DEV = 5;
+        public const int LIST_STAT_SUM = 6;
+        public const int LIST_STAT_SUM_SQUARES = 7;
+        public const int LIST_STAT_NUM_COUNT = 8;
+        public const int LIST_STAT_GEOMETRIC_MEAN = 9;
 
-        public static readonly integer MASK_BASE = 0;
-        public static readonly integer MASK_EVERYONE = 3;
-        public static readonly integer MASK_GROUP = 2;
-        public static readonly integer MASK_NEXT = 4;
-        public static readonly integer MASK_OWNER = 1;
+        public const int MASK_BASE = 0;
+        public const int MASK_EVERYONE = 3;
+        public const int MASK_GROUP = 2;
+        public const int MASK_NEXT = 4;
+        public const int MASK_OWNER = 1;
 
-        public static readonly integer OBJECT_ATTACHED_POINT = 19;
-        public static readonly integer OBJECT_NAME = 1;
-        public static readonly integer OBJECT_DESC = 2;
-        public static readonly integer OBJECT_POS = 3;
-        public static readonly integer OBJECT_ROOT = 18;
-        public static readonly integer OBJECT_ROT = 4;
-        public static readonly integer OBJECT_VELOCITY = 5;
-        public static readonly integer OBJECT_OWNER = 6;
-        public static readonly integer OBJECT_PATHFINDING_TYPE = 20;
-        public static readonly integer OBJECT_GROUP = 7;
-        public static readonly integer OBJECT_CREATOR = 8;
-        public static readonly integer OBJECT_PHYSICS = 21;
-        public static readonly integer OBJECT_PHANTOM = 22;
-        public static readonly integer OBJECT_TEMP_ON_REZ = 23;
+        public const int OBJECT_ATTACHED_POINT = 19;
+        public const int OBJECT_NAME = 1;
+        public const int OBJECT_DESC = 2;
+        public const int OBJECT_POS = 3;
+        public const int OBJECT_ROOT = 18;
+        public const int OBJECT_ROT = 4;
+        public const int OBJECT_VELOCITY = 5;
+        public const int OBJECT_OWNER = 6;
+        public const int OBJECT_PATHFINDING_TYPE = 20;
+        public const int OBJECT_GROUP = 7;
+        public const int OBJECT_CREATOR = 8;
+        public const int OBJECT_PHYSICS = 21;
+        public const int OBJECT_PHANTOM = 22;
+        public const int OBJECT_TEMP_ON_REZ = 23;
 
-        public static readonly integer OBJECT_STREAMING_COST = 15;
-        public static readonly integer OBJECT_PHYSICS_COST = 16;
-        public static readonly integer OBJECT_SERVER_COST = 14;
-        public static readonly integer OBJECT_PRIM_EQUIVALENCE = 13;
+        public const int OBJECT_STREAMING_COST = 15;
+        public const int OBJECT_PHYSICS_COST = 16;
+        public const int OBJECT_SERVER_COST = 14;
+        public const int OBJECT_PRIM_EQUIVALENCE = 13;
 
-		public static readonly integer OBJECT_RUNNING_SCRIPT_COUNT = 9;
-		public static readonly integer OBJECT_SCRIPT_MEMORY = 11;
-		public static readonly integer OBJECT_SCRIPT_TIME = 12;
-		public static readonly integer OBJECT_TOTAL_SCRIPT_COUNT = 10;
-		public static readonly integer OBJECT_UNKNOWN_DETAIL = -1;
+		public const int OBJECT_RUNNING_SCRIPT_COUNT = 9;
+		public const int OBJECT_SCRIPT_MEMORY = 11;
+		public const int OBJECT_SCRIPT_TIME = 12;
+		public const int OBJECT_TOTAL_SCRIPT_COUNT = 10;
+		public const int OBJECT_UNKNOWN_DETAIL = -1;
 
-        public static readonly integer OPT_AVATAR = 1;
-        public static readonly integer OPT_CHARACTER = 2;
-        public static readonly integer OPT_EXCLUSION_VOLUME = 6;
-        public static readonly integer OPT_LEGACY_LINKSET = 0;
-        public static readonly integer OPT_MATERIAL_VOLUME = 5;
-        public static readonly integer OPT_OTHER = -1;
-        public static readonly integer OPT_STATIC_OBSTACLE = 4;
-        public static readonly integer OPT_WALKABLE = 3;
+        public const int OPT_AVATAR = 1;
+        public const int OPT_CHARACTER = 2;
+        public const int OPT_EXCLUSION_VOLUME = 6;
+        public const int OPT_LEGACY_LINKSET = 0;
+        public const int OPT_MATERIAL_VOLUME = 5;
+        public const int OPT_OTHER = -1;
+        public const int OPT_STATIC_OBSTACLE = 4;
+        public const int OPT_WALKABLE = 3;
 
-        public static readonly integer OBJECT_RETURN_PARCEL = 1;
-        public static readonly integer OBJECT_RETURN_PARCEL_OWNER = 2;
-        public static readonly integer OBJECT_RETURN_REGION = 4;
+        public const int OBJECT_RETURN_PARCEL = 1;
+        public const int OBJECT_RETURN_PARCEL_OWNER = 2;
+        public const int OBJECT_RETURN_REGION = 4;
 
-        public static readonly integer PARCEL_COUNT_TOTAL = 0;
-        public static readonly integer PARCEL_COUNT_OWNER = 1;
-        public static readonly integer PARCEL_COUNT_GROUP = 2;
-        public static readonly integer PARCEL_COUNT_OTHER = 3;
-        public static readonly integer PARCEL_COUNT_SELECTED = 4;
-        public static readonly integer PARCEL_COUNT_TEMP = 5;
+        public const int PARCEL_COUNT_TOTAL = 0;
+        public const int PARCEL_COUNT_OWNER = 1;
+        public const int PARCEL_COUNT_GROUP = 2;
+        public const int PARCEL_COUNT_OTHER = 3;
+        public const int PARCEL_COUNT_SELECTED = 4;
+        public const int PARCEL_COUNT_TEMP = 5;
 
-        public static readonly integer PARCEL_DETAILS_AREA = 4;
-        public static readonly integer PARCEL_DETAILS_DESC = 1;
-        public static readonly integer PARCEL_DETAILS_GROUP = 3;
-        public static readonly integer PARCEL_DETAILS_ID = 5;
-        public static readonly integer PARCEL_DETAILS_NAME = 0;
-        public static readonly integer PARCEL_DETAILS_OWNER = 2;
-        public static readonly integer PARCEL_DETAILS_SEE_AVATARS = 6;
+        public const int PARCEL_DETAILS_AREA = 4;
+        public const int PARCEL_DETAILS_DESC = 1;
+        public const int PARCEL_DETAILS_GROUP = 3;
+        public const int PARCEL_DETAILS_ID = 5;
+        public const int PARCEL_DETAILS_NAME = 0;
+        public const int PARCEL_DETAILS_OWNER = 2;
+        public const int PARCEL_DETAILS_SEE_AVATARS = 6;
 
-        public static readonly integer PARCEL_FLAG_ALLOW_FLY = 0x0000001;
-        public static readonly integer PARCEL_FLAG_ALLOW_SCRIPTS = 0x0000002;
-        public static readonly integer PARCEL_FLAG_ALLOW_LANDMARK = 0x0000008;
-        public static readonly integer PARCEL_FLAG_ALLOW_TERRAFORM = 0x0000010;
-        public static readonly integer PARCEL_FLAG_ALLOW_DAMAGE = 0x0000020;
-        public static readonly integer PARCEL_FLAG_ALLOW_CREATE_OBJECTS = 0x0000040;
-        public static readonly integer PARCEL_FLAG_USE_ACCESS_GROUP = 0x0000100;
-        public static readonly integer PARCEL_FLAG_USE_ACCESS_LIST = 0x0000200;
-        public static readonly integer PARCEL_FLAG_USE_BAN_LIST = 0x0000400;
-        public static readonly integer PARCEL_FLAG_USE_LAND_PASS_LIST = 0x0000800;
-        public static readonly integer PARCEL_FLAG_LOCAL_SOUND_ONLY = 0x0008000;
-        public static readonly integer PARCEL_FLAG_RESTRICT_PUSHOBJECT = 0x0200000;
-        public static readonly integer PARCEL_FLAG_ALLOW_GROUP_SCRIPTS = 0x2000000;
+        public const int PARCEL_FLAG_ALLOW_FLY = 0x0000001;
+        public const int PARCEL_FLAG_ALLOW_SCRIPTS = 0x0000002;
+        public const int PARCEL_FLAG_ALLOW_LANDMARK = 0x0000008;
+        public const int PARCEL_FLAG_ALLOW_TERRAFORM = 0x0000010;
+        public const int PARCEL_FLAG_ALLOW_DAMAGE = 0x0000020;
+        public const int PARCEL_FLAG_ALLOW_CREATE_OBJECTS = 0x0000040;
+        public const int PARCEL_FLAG_USE_ACCESS_GROUP = 0x0000100;
+        public const int PARCEL_FLAG_USE_ACCESS_LIST = 0x0000200;
+        public const int PARCEL_FLAG_USE_BAN_LIST = 0x0000400;
+        public const int PARCEL_FLAG_USE_LAND_PASS_LIST = 0x0000800;
+        public const int PARCEL_FLAG_LOCAL_SOUND_ONLY = 0x0008000;
+        public const int PARCEL_FLAG_RESTRICT_PUSHOBJECT = 0x0200000;
+        public const int PARCEL_FLAG_ALLOW_GROUP_SCRIPTS = 0x2000000;
 
-        public static readonly integer PARCEL_FLAG_ALLOW_CREATE_GROUP_OBJECTS = 0x4000000;
-        public static readonly integer PARCEL_FLAG_ALLOW_ALL_OBJECT_ENTRY = 0x8000000;
-        public static readonly integer PARCEL_FLAG_ALLOW_GROUP_OBJECT_ENTRY = 0x10000000;
+        public const int PARCEL_FLAG_ALLOW_CREATE_GROUP_OBJECTS = 0x4000000;
+        public const int PARCEL_FLAG_ALLOW_ALL_OBJECT_ENTRY = 0x8000000;
+        public const int PARCEL_FLAG_ALLOW_GROUP_OBJECT_ENTRY = 0x10000000;
 
-        public static readonly integer PARCEL_MEDIA_COMMAND_STOP = 0;
-        public static readonly integer PARCEL_MEDIA_COMMAND_PAUSE = 1;
-        public static readonly integer PARCEL_MEDIA_COMMAND_PLAY = 2;
-        public static readonly integer PARCEL_MEDIA_COMMAND_LOOP = 3;
-        public static readonly integer PARCEL_MEDIA_COMMAND_TEXTURE = 4;
-        public static readonly integer PARCEL_MEDIA_COMMAND_URL = 5;
-        public static readonly integer PARCEL_MEDIA_COMMAND_TIME = 6;
-        public static readonly integer PARCEL_MEDIA_COMMAND_AGENT = 7;
-        public static readonly integer PARCEL_MEDIA_COMMAND_UNLOAD = 8;
-        public static readonly integer PARCEL_MEDIA_COMMAND_AUTO_ALIGN = 9;
+        public const int PARCEL_MEDIA_COMMAND_STOP = 0;
+        public const int PARCEL_MEDIA_COMMAND_PAUSE = 1;
+        public const int PARCEL_MEDIA_COMMAND_PLAY = 2;
+        public const int PARCEL_MEDIA_COMMAND_LOOP = 3;
+        public const int PARCEL_MEDIA_COMMAND_TEXTURE = 4;
+        public const int PARCEL_MEDIA_COMMAND_URL = 5;
+        public const int PARCEL_MEDIA_COMMAND_TIME = 6;
+        public const int PARCEL_MEDIA_COMMAND_AGENT = 7;
+        public const int PARCEL_MEDIA_COMMAND_UNLOAD = 8;
+        public const int PARCEL_MEDIA_COMMAND_AUTO_ALIGN = 9;
 
-        public static readonly integer PARCEL_MEDIA_COMMAND_TYPE = 10;
-        public static readonly integer PARCEL_MEDIA_COMMAND_SIZE = 11;
-        public static readonly integer PARCEL_MEDIA_COMMAND_DESC = 12;
-        public static readonly integer PARCEL_MEDIA_COMMAND_LOOP_SET = 13;
+        public const int PARCEL_MEDIA_COMMAND_TYPE = 10;
+        public const int PARCEL_MEDIA_COMMAND_SIZE = 11;
+        public const int PARCEL_MEDIA_COMMAND_DESC = 12;
+        public const int PARCEL_MEDIA_COMMAND_LOOP_SET = 13;
 
-        public static readonly integer PAY_DEFAULT = -2;
-        public static readonly integer PAY_HIDE = -1;
+        public const int PAY_DEFAULT = -2;
+        public const int PAY_HIDE = -1;
 
-        public static readonly integer PAYMENT_INFO_ON_FILE = 1;
-        public static readonly integer PAYMENT_INFO_USED = 2;
+        public const int PAYMENT_INFO_ON_FILE = 1;
+        public const int PAYMENT_INFO_USED = 2;
 
-        public static readonly integer PERM_ALL = 2147483647;
-        public static readonly integer PERM_COPY = 32768;
-        public static readonly integer PERM_MODIFY = 16384;
-        public static readonly integer PERM_MOVE = 524288;
-        public static readonly integer PERM_TRANSFER = 8192;
+        public const int PERM_ALL = 2147483647;
+        public const int PERM_COPY = 32768;
+        public const int PERM_MODIFY = 16384;
+        public const int PERM_MOVE = 524288;
+        public const int PERM_TRANSFER = 8192;
 
-        public static readonly integer PERMISSION_DEBIT = 2;
-        public static readonly integer PERMISSION_TAKE_CONTROLS = 4;
-        public static readonly integer PERMISSION_REMAP_CONTROLS = 8;
-        public static readonly integer PERMISSION_TRIGGER_ANIMATION = 16;
-        public static readonly integer PERMISSION_ATTACH = 32;
-        public static readonly integer PERMISSION_RELEASE_OWNERSHIP = 64;
-        public static readonly integer PERMISSION_CHANGE_LINKS = 128;
-        public static readonly integer PERMISSION_CHANGE_JOINTS = 256;
-        public static readonly integer PERMISSION_CHANGE_PERMISSIONS = 512;
-        public static readonly integer PERMISSION_CONTROL_CAMERA = 2048;
-        public static readonly integer PERMISSION_OVERRIDE_ANIMATIONS = 0x8000;
-        public static readonly integer PERMISSION_TRACK_CAMERA = 1024;
-        public static readonly integer PERMISSION_RETURN_OBJECTS = 65536;
+        public const int PERMISSION_DEBIT = 2;
+        public const int PERMISSION_TAKE_CONTROLS = 4;
+        public const int PERMISSION_REMAP_CONTROLS = 8;
+        public const int PERMISSION_TRIGGER_ANIMATION = 16;
+        public const int PERMISSION_ATTACH = 32;
+        public const int PERMISSION_RELEASE_OWNERSHIP = 64;
+        public const int PERMISSION_CHANGE_LINKS = 128;
+        public const int PERMISSION_CHANGE_JOINTS = 256;
+        public const int PERMISSION_CHANGE_PERMISSIONS = 512;
+        public const int PERMISSION_CONTROL_CAMERA = 2048;
+        public const int PERMISSION_OVERRIDE_ANIMATIONS = 0x8000;
+        public const int PERMISSION_TRACK_CAMERA = 1024;
+        public const int PERMISSION_RETURN_OBJECTS = 65536;
 
-        public static readonly integer PRIM_BUMP_BARK = 4;
-        public static readonly integer PRIM_BUMP_BLOBS = 12;
-        public static readonly integer PRIM_BUMP_BRICKS = 5;
-        public static readonly integer PRIM_BUMP_BRIGHT = 1;
-        public static readonly integer PRIM_BUMP_CHECKER = 6;
-        public static readonly integer PRIM_BUMP_CONCRETE = 7;
-        public static readonly integer PRIM_BUMP_DARK = 2;
-        public static readonly integer PRIM_BUMP_DISKS = 10;
-        public static readonly integer PRIM_BUMP_GRAVEL = 11;
-        public static readonly integer PRIM_BUMP_LARGETILE = 14;
-        public static readonly integer PRIM_BUMP_NONE = 0;
-        public static readonly integer PRIM_BUMP_SHINY = 19;
-        public static readonly integer PRIM_BUMP_SIDING = 13;
-        public static readonly integer PRIM_BUMP_STONE = 9;
-        public static readonly integer PRIM_BUMP_STUCCO = 15;
-        public static readonly integer PRIM_BUMP_SUCTION = 16;
-        public static readonly integer PRIM_BUMP_TILE = 8;
-        public static readonly integer PRIM_BUMP_WEAVE = 17;
-        public static readonly integer PRIM_BUMP_WOOD = 3;
+        public const int PRIM_BUMP_BARK = 4;
+        public const int PRIM_BUMP_BLOBS = 12;
+        public const int PRIM_BUMP_BRICKS = 5;
+        public const int PRIM_BUMP_BRIGHT = 1;
+        public const int PRIM_BUMP_CHECKER = 6;
+        public const int PRIM_BUMP_CONCRETE = 7;
+        public const int PRIM_BUMP_DARK = 2;
+        public const int PRIM_BUMP_DISKS = 10;
+        public const int PRIM_BUMP_GRAVEL = 11;
+        public const int PRIM_BUMP_LARGETILE = 14;
+        public const int PRIM_BUMP_NONE = 0;
+        public const int PRIM_BUMP_SHINY = 19;
+        public const int PRIM_BUMP_SIDING = 13;
+        public const int PRIM_BUMP_STONE = 9;
+        public const int PRIM_BUMP_STUCCO = 15;
+        public const int PRIM_BUMP_SUCTION = 16;
+        public const int PRIM_BUMP_TILE = 8;
+        public const int PRIM_BUMP_WEAVE = 17;
+        public const int PRIM_BUMP_WOOD = 3;
 
-        public static readonly integer PRIM_CAST_SHADOWS = 24;
-        public static readonly integer PRIM_COLOR = 18;
-        public static readonly integer PRIM_DESC = 28;
-        public static readonly integer PRIM_FLEXIBLE = 21;
-        public static readonly integer PRIM_FULLBRIGHT = 20;
-        public static readonly integer PRIM_HOLE_CIRCLE = 16;
-        public static readonly integer PRIM_HOLE_DEFAULT = 0;
-        public static readonly integer PRIM_HOLE_SQUARE = 32;
-        public static readonly integer PRIM_HOLE_TRIANGLE = 48;
-		public static readonly integer PRIM_LINK_TARGET = 34;
-        public static readonly integer PRIM_MATERIAL = 2;
-        public static readonly integer PRIM_MATERIAL_FLESH = 4;
-        public static readonly integer PRIM_MATERIAL_GLASS = 2;
-        public static readonly integer PRIM_MATERIAL_LIGHT = 7;
-        public static readonly integer PRIM_MATERIAL_METAL = 1;
-        public static readonly integer PRIM_MATERIAL_PLASTIC = 5;
-        public static readonly integer PRIM_MATERIAL_RUBBER = 6;
-        public static readonly integer PRIM_MATERIAL_STONE = 0;
-        public static readonly integer PRIM_MATERIAL_WOOD = 3;
+        public const int PRIM_CAST_SHADOWS = 24;
+        public const int PRIM_COLOR = 18;
+        public const int PRIM_DESC = 28;
+        public const int PRIM_FLEXIBLE = 21;
+        public const int PRIM_FULLBRIGHT = 20;
+        public const int PRIM_HOLE_CIRCLE = 16;
+        public const int PRIM_HOLE_DEFAULT = 0;
+        public const int PRIM_HOLE_SQUARE = 32;
+        public const int PRIM_HOLE_TRIANGLE = 48;
+		public const int PRIM_LINK_TARGET = 34;
+        public const int PRIM_MATERIAL = 2;
+        public const int PRIM_MATERIAL_FLESH = 4;
+        public const int PRIM_MATERIAL_GLASS = 2;
+        public const int PRIM_MATERIAL_LIGHT = 7;
+        public const int PRIM_MATERIAL_METAL = 1;
+        public const int PRIM_MATERIAL_PLASTIC = 5;
+        public const int PRIM_MATERIAL_RUBBER = 6;
+        public const int PRIM_MATERIAL_STONE = 0;
+        public const int PRIM_MATERIAL_WOOD = 3;
 
-        public static readonly integer PRIM_MEDIA_ALT_IMAGE_ENABLE = 0;
-        public static readonly integer PRIM_MEDIA_AUTO_LOOP = 4;
-        public static readonly integer PRIM_MEDIA_AUTO_PLAY = 5;
-        public static readonly integer PRIM_MEDIA_AUTO_SCALE = 6;
-        public static readonly integer PRIM_MEDIA_AUTO_ZOOM = 7;
-        public static readonly integer PRIM_MEDIA_CONTROLS = 1;
-        public static readonly integer PRIM_MEDIA_CONTROLS_MINI = 1;
-        public static readonly integer PRIM_MEDIA_CONTROLS_STANDARD = 0;
-        public static readonly integer PRIM_MEDIA_CURRENT_URL = 2;
-        public static readonly integer PRIM_MEDIA_FIRST_CLICK_INTERACT = 8;
-        public static readonly integer PRIM_MEDIA_HEIGHT_PIXELS = 10;
-        public static readonly integer PRIM_MEDIA_HOME_URL = 3;
-        public static readonly integer PRIM_MEDIA_PERM_ANYONE = 4;
-        public static readonly integer PRIM_MEDIA_PERM_GROUP = 2;
-        public static readonly integer PRIM_MEDIA_PERM_NONE = 0;
-        public static readonly integer PRIM_MEDIA_PERM_OWNER = 1;
-        public static readonly integer PRIM_MEDIA_PERMS_CONTROL = 14;
-        public static readonly integer PRIM_MEDIA_PERMS_INTERACT = 13;
-        public static readonly integer PRIM_MEDIA_WHITELIST = 12;
-        public static readonly integer PRIM_MEDIA_WHITELIST_ENABLE = 11;
-        public static readonly integer PRIM_MEDIA_WIDTH_PIXELS = 9;
+        public const int PRIM_MEDIA_ALT_IMAGE_ENABLE = 0;
+        public const int PRIM_MEDIA_AUTO_LOOP = 4;
+        public const int PRIM_MEDIA_AUTO_PLAY = 5;
+        public const int PRIM_MEDIA_AUTO_SCALE = 6;
+        public const int PRIM_MEDIA_AUTO_ZOOM = 7;
+        public const int PRIM_MEDIA_CONTROLS = 1;
+        public const int PRIM_MEDIA_CONTROLS_MINI = 1;
+        public const int PRIM_MEDIA_CONTROLS_STANDARD = 0;
+        public const int PRIM_MEDIA_CURRENT_URL = 2;
+        public const int PRIM_MEDIA_FIRST_CLICK_INTERACT = 8;
+        public const int PRIM_MEDIA_HEIGHT_PIXELS = 10;
+        public const int PRIM_MEDIA_HOME_URL = 3;
+        public const int PRIM_MEDIA_PERM_ANYONE = 4;
+        public const int PRIM_MEDIA_PERM_GROUP = 2;
+        public const int PRIM_MEDIA_PERM_NONE = 0;
+        public const int PRIM_MEDIA_PERM_OWNER = 1;
+        public const int PRIM_MEDIA_PERMS_CONTROL = 14;
+        public const int PRIM_MEDIA_PERMS_INTERACT = 13;
+        public const int PRIM_MEDIA_WHITELIST = 12;
+        public const int PRIM_MEDIA_WHITELIST_ENABLE = 11;
+        public const int PRIM_MEDIA_WIDTH_PIXELS = 9;
 
-        public static readonly integer PRIM_NAME = 27;
-        public static readonly integer PRIM_OMEGA = 32;
-        public static readonly integer PRIM_PHANTOM = 5;
-        public static readonly integer PRIM_PHYSICS = 3;
-        public static readonly integer PRIM_PHYSICS_MATERIAL = 31;
-        public static readonly integer PRIM_PHYSICS_SHAPE_CONVEX = 2;
-        public static readonly integer PRIM_PHYSICS_SHAPE_NONE = 1;
-        public static readonly integer PRIM_PHYSICS_SHAPE_PRIM = 0;
-        public static readonly integer PRIM_PHYSICS_SHAPE_TYPE = 30;
-        public static readonly integer PRIM_POINT_LIGHT = 23;
-        public static readonly integer PRIM_POSITION = 6;
-        public static readonly integer PRIM_POS_LOCAL = 33;
-        public static readonly integer PRIM_ROTATION = 8;
-        public static readonly integer PRIM_ROT_LOCAL = 29;
-        public static readonly integer PRIM_SCULPT_FLAG_INVERT = 64;
-        public static readonly integer PRIM_SCULPT_FLAG_MIRROR = 128;
-        public static readonly integer PRIM_SHINY_HIGH = 3;
-        public static readonly integer PRIM_SHINY_LOW = 1;
-        public static readonly integer PRIM_SHINY_MEDIUM = 2;
-        public static readonly integer PRIM_SHINY_NONE = 0;
-        public static readonly integer PRIM_SIZE = 7;
-		public static readonly integer PRIM_SLICE = 35;
-        public static readonly integer PRIM_TEMP_ON_REZ = 4;
-        public static readonly integer PRIM_TEXGEN = 22;
-        public static readonly integer PRIM_TEXGEN_DEFAULT = 0;
-        public static readonly integer PRIM_TEXGEN_PLANAR = 1;
-        public static readonly integer PRIM_TEXT = 26;
-        public static readonly integer PRIM_TEXTURE = 17;
-        public static readonly integer PRIM_TYPE = 9;
+        public const int PRIM_NAME = 27;
+        public const int PRIM_OMEGA = 32;
+        public const int PRIM_PHANTOM = 5;
+        public const int PRIM_PHYSICS = 3;
+        public const int PRIM_PHYSICS_MATERIAL = 31;
+        public const int PRIM_PHYSICS_SHAPE_CONVEX = 2;
+        public const int PRIM_PHYSICS_SHAPE_NONE = 1;
+        public const int PRIM_PHYSICS_SHAPE_PRIM = 0;
+        public const int PRIM_PHYSICS_SHAPE_TYPE = 30;
+        public const int PRIM_POINT_LIGHT = 23;
+        public const int PRIM_POSITION = 6;
+        public const int PRIM_POS_LOCAL = 33;
+        public const int PRIM_ROTATION = 8;
+        public const int PRIM_ROT_LOCAL = 29;
+        public const int PRIM_SCULPT_FLAG_INVERT = 64;
+        public const int PRIM_SCULPT_FLAG_MIRROR = 128;
+        public const int PRIM_SHINY_HIGH = 3;
+        public const int PRIM_SHINY_LOW = 1;
+        public const int PRIM_SHINY_MEDIUM = 2;
+        public const int PRIM_SHINY_NONE = 0;
+        public const int PRIM_SIZE = 7;
+		public const int PRIM_SLICE = 35;
+        public const int PRIM_TEMP_ON_REZ = 4;
+        public const int PRIM_TEXGEN = 22;
+        public const int PRIM_TEXGEN_DEFAULT = 0;
+        public const int PRIM_TEXGEN_PLANAR = 1;
+        public const int PRIM_TEXT = 26;
+        public const int PRIM_TEXTURE = 17;
+        public const int PRIM_TYPE = 9;
 
-        public static readonly integer PRIM_TYPE_BOX = 0;
-        public static readonly integer PRIM_TYPE_CYLINDER = 1;
-        public static readonly integer PRIM_TYPE_PRISM = 2;
-        public static readonly integer PRIM_TYPE_SPHERE = 3;
-        public static readonly integer PRIM_TYPE_TORUS = 4;
-        public static readonly integer PRIM_TYPE_TUBE = 5;
-        public static readonly integer PRIM_TYPE_RING = 6;
-        public static readonly integer PRIM_TYPE_SCULPT = 7;
+        public const int PRIM_TYPE_BOX = 0;
+        public const int PRIM_TYPE_CYLINDER = 1;
+        public const int PRIM_TYPE_PRISM = 2;
+        public const int PRIM_TYPE_SPHERE = 3;
+        public const int PRIM_TYPE_TORUS = 4;
+        public const int PRIM_TYPE_TUBE = 5;
+        public const int PRIM_TYPE_RING = 6;
+        public const int PRIM_TYPE_SCULPT = 7;
 
-        public static readonly integer PRIM_GLOW = 25;
+        public const int PRIM_GLOW = 25;
 
-		public static readonly integer PRIM_SCULPT_TYPE_MASK = 7;
-        public static readonly integer PRIM_SCULPT_TYPE_SPHERE = 1;
-        public static readonly integer PRIM_SCULPT_TYPE_TORUS = 2;
-        public static readonly integer PRIM_SCULPT_TYPE_PLANE = 3;
-        public static readonly integer PRIM_SCULPT_TYPE_CYLINDER = 4;
+		public const int PRIM_SCULPT_TYPE_MASK = 7;
+        public const int PRIM_SCULPT_TYPE_SPHERE = 1;
+        public const int PRIM_SCULPT_TYPE_TORUS = 2;
+        public const int PRIM_SCULPT_TYPE_PLANE = 3;
+        public const int PRIM_SCULPT_TYPE_CYLINDER = 4;
 
-        public static readonly integer PROFILE_NONE = 0;
-        public static readonly integer PROFILE_SCRIPT_MEMORY = 1;
+        public const int PROFILE_NONE = 0;
+        public const int PROFILE_SCRIPT_MEMORY = 1;
 
-        public static readonly integer PSYS_PART_FLAGS = 0;
-        public static readonly integer PSYS_PART_INTERP_COLOR_MASK = 1;
-        public static readonly integer PSYS_PART_INTERP_SCALE_MASK = 2;
-        public static readonly integer PSYS_PART_BOUNCE_MASK = 4;
-        public static readonly integer PSYS_PART_WIND_MASK = 8;
-        public static readonly integer PSYS_PART_FOLLOW_SRC_MASK = 16;
-        public static readonly integer PSYS_PART_FOLLOW_VELOCITY_MASK = 32;
-        public static readonly integer PSYS_PART_TARGET_POS_MASK = 64;
-        public static readonly integer PSYS_PART_TARGET_LINEAR_MASK = 128;
-        public static readonly integer PSYS_PART_EMISSIVE_MASK = 256;
+        public const int PSYS_PART_FLAGS = 0;
+        public const int PSYS_PART_INTERP_COLOR_MASK = 1;
+        public const int PSYS_PART_INTERP_SCALE_MASK = 2;
+        public const int PSYS_PART_BOUNCE_MASK = 4;
+        public const int PSYS_PART_WIND_MASK = 8;
+        public const int PSYS_PART_FOLLOW_SRC_MASK = 16;
+        public const int PSYS_PART_FOLLOW_VELOCITY_MASK = 32;
+        public const int PSYS_PART_TARGET_POS_MASK = 64;
+        public const int PSYS_PART_TARGET_LINEAR_MASK = 128;
+        public const int PSYS_PART_EMISSIVE_MASK = 256;
 
-        public static readonly integer PSYS_PART_SRC_PATTERN_ANGLE = 0x04;
-        public static readonly integer PSYS_PART_SRC_PATTERN_ANGLE_CONE = 0x08;
-        public static readonly integer PSYS_PART_SRC_PATTERN_DROP = 0x01;
-        public static readonly integer PSYS_PART_SRC_PATTERN_EXPLODE = 0x02;
+        public const int PSYS_PART_SRC_PATTERN_ANGLE = 0x04;
+        public const int PSYS_PART_SRC_PATTERN_ANGLE_CONE = 0x08;
+        public const int PSYS_PART_SRC_PATTERN_DROP = 0x01;
+        public const int PSYS_PART_SRC_PATTERN_EXPLODE = 0x02;
 
-        public static readonly integer PSYS_PART_START_COLOR = 1;
-        public static readonly integer PSYS_PART_START_ALPHA = 2;
-        public static readonly integer PSYS_PART_END_COLOR = 3;
-        public static readonly integer PSYS_PART_END_ALPHA = 4;
-        public static readonly integer PSYS_PART_START_SCALE = 5;
-        public static readonly integer PSYS_PART_END_SCALE = 6;
-        public static readonly integer PSYS_PART_MAX_AGE = 7;
+        public const int PSYS_PART_START_COLOR = 1;
+        public const int PSYS_PART_START_ALPHA = 2;
+        public const int PSYS_PART_END_COLOR = 3;
+        public const int PSYS_PART_END_ALPHA = 4;
+        public const int PSYS_PART_START_SCALE = 5;
+        public const int PSYS_PART_END_SCALE = 6;
+        public const int PSYS_PART_MAX_AGE = 7;
 
-        public static readonly integer PSYS_SRC_ACCEL = 8;
-        public static readonly integer PSYS_SRC_PATTERN = 9;
-        public static readonly integer PSYS_SRC_INNERANGLE = 10;
-        public static readonly integer PSYS_SRC_OUTERANGLE = 11;
-        public static readonly integer PSYS_SRC_TEXTURE = 12;
-        public static readonly integer PSYS_SRC_BURST_RATE = 13;
-        public static readonly integer PSYS_SRC_BURST_PART_COUNT = 15;
-        public static readonly integer PSYS_SRC_BURST_RADIUS = 16;
-        public static readonly integer PSYS_SRC_BURST_SPEED_MIN = 17;
-        public static readonly integer PSYS_SRC_BURST_SPEED_MAX = 18;
-        public static readonly integer PSYS_SRC_MAX_AGE = 19;
-        public static readonly integer PSYS_SRC_TARGET_KEY = 20;
-        public static readonly integer PSYS_SRC_OMEGA = 21;
-        public static readonly integer PSYS_SRC_ANGLE_BEGIN = 22;
-        public static readonly integer PSYS_SRC_ANGLE_END = 23;
+        public const int PSYS_SRC_ACCEL = 8;
+        public const int PSYS_SRC_PATTERN = 9;
+        public const int PSYS_SRC_INNERANGLE = 10;
+        public const int PSYS_SRC_OUTERANGLE = 11;
+        public const int PSYS_SRC_TEXTURE = 12;
+        public const int PSYS_SRC_BURST_RATE = 13;
+        public const int PSYS_SRC_BURST_PART_COUNT = 15;
+        public const int PSYS_SRC_BURST_RADIUS = 16;
+        public const int PSYS_SRC_BURST_SPEED_MIN = 17;
+        public const int PSYS_SRC_BURST_SPEED_MAX = 18;
+        public const int PSYS_SRC_MAX_AGE = 19;
+        public const int PSYS_SRC_TARGET_KEY = 20;
+        public const int PSYS_SRC_OMEGA = 21;
+        public const int PSYS_SRC_ANGLE_BEGIN = 22;
+        public const int PSYS_SRC_ANGLE_END = 23;
 
-        public static readonly integer PSYS_SRC_PATTERN_DROP = 1;
-        public static readonly integer PSYS_SRC_PATTERN_EXPLODE = 2;
-        public static readonly integer PSYS_SRC_PATTERN_ANGLE = 4;
-        public static readonly integer PSYS_SRC_PATTERN_ANGLE_CONE = 8;
-        public static readonly integer PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY = 16;
+        public const int PSYS_SRC_PATTERN_DROP = 1;
+        public const int PSYS_SRC_PATTERN_EXPLODE = 2;
+        public const int PSYS_SRC_PATTERN_ANGLE = 4;
+        public const int PSYS_SRC_PATTERN_ANGLE_CONE = 8;
+        public const int PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY = 16;
 
-		public static readonly integer PU_EVADE_HIDDEN = 0x07;
-		public static readonly integer PU_EVADE_SPOTTED = 0x08;
-		public static readonly integer PU_FAILURE_INVALID_GOAL = 0x03;
-		public static readonly integer PU_FAILURE_INVALID_START = 0x02;
-		public static readonly integer PU_FAILURE_NO_VALID_DESTINATION = 0x06;
-		public static readonly integer PU_FAILURE_OTHER = 1000000;
-		public static readonly integer PU_FAILURE_TARGET_GONE = 0x05;
-		public static readonly integer PU_FAILURE_UNREACHABLE = 0x04;
-		public static readonly integer PU_GOAL_REACHED = 0x01;
-		public static readonly integer PU_SLOWDOWN_DISTANCE_REACHED = 0x00;
+		public const int PU_EVADE_HIDDEN = 0x07;
+		public const int PU_EVADE_SPOTTED = 0x08;
+		public const int PU_FAILURE_INVALID_GOAL = 0x03;
+		public const int PU_FAILURE_INVALID_START = 0x02;
+		public const int PU_FAILURE_NO_VALID_DESTINATION = 0x06;
+		public const int PU_FAILURE_OTHER = 1000000;
+		public const int PU_FAILURE_TARGET_GONE = 0x05;
+		public const int PU_FAILURE_UNREACHABLE = 0x04;
+		public const int PU_GOAL_REACHED = 0x01;
+		public const int PU_SLOWDOWN_DISTANCE_REACHED = 0x00;
 
-        public static readonly integer PUBLIC_CHANNEL = 0;
+        public const int PUBLIC_CHANNEL = 0;
 
-		public static readonly integer PURSUIT_FUZZ_FACTOR = 3;
-		public static readonly integer PURSUIT_INTERCEPT = 4;
-		public static readonly integer PURSUIT_OFFSET = 1;
+		public const int PURSUIT_FUZZ_FACTOR = 3;
+		public const int PURSUIT_INTERCEPT = 4;
+		public const int PURSUIT_OFFSET = 1;
 
-		public static readonly integer RC_DATA_FLAGS = 2;
-		public static readonly integer RC_DETECT_PHANTOM = 1;
-		public static readonly integer RC_GET_LINK_NUM = 4;
-		public static readonly integer RC_GET_NORMAL = 1;
-		public static readonly integer RC_GET_ROOT_KEY = 2;
-		public static readonly integer RC_MAX_HITS = 3;
-		public static readonly integer RC_REJECT_AGENTS = 1;
-		public static readonly integer RC_REJECT_LAND = 8;
-		public static readonly integer RC_REJECT_NONPHYSICAL = 4;
-		public static readonly integer RC_REJECT_PHYSICAL = 2;
-		public static readonly integer RC_REJECT_TYPES = 2;
-		public static readonly integer RCERR_CAST_TIME_EXCEEDED = -3;
-		public static readonly integer RCERR_SIM_PERF_LOW = -2;
-		public static readonly integer RCERR_UNKNOWN = -1;
+		public const int RC_DATA_FLAGS = 2;
+		public const int RC_DETECT_PHANTOM = 1;
+		public const int RC_GET_LINK_NUM = 4;
+		public const int RC_GET_NORMAL = 1;
+		public const int RC_GET_ROOT_KEY = 2;
+		public const int RC_MAX_HITS = 3;
+		public const int RC_REJECT_AGENTS = 1;
+		public const int RC_REJECT_LAND = 8;
+		public const int RC_REJECT_NONPHYSICAL = 4;
+		public const int RC_REJECT_PHYSICAL = 2;
+		public const int RC_REJECT_TYPES = 2;
+		public const int RCERR_CAST_TIME_EXCEEDED = -3;
+		public const int RCERR_SIM_PERF_LOW = -2;
+		public const int RCERR_UNKNOWN = -1;
 
 
-        public static readonly integer REGION_FLAG_ALLOW_DAMAGE = 1;
-        public static readonly integer REGION_FLAG_FIXED_SUN = 16;
-        public static readonly integer REGION_FLAG_BLOCK_TERRAFORM = 64;
-        public static readonly integer REGION_FLAG_SANDBOX = 256;
-        public static readonly integer REGION_FLAG_DISABLE_COLLISIONS = 4096;
-        public static readonly integer REGION_FLAG_DISABLE_PHYSICS = 16384;
-        public static readonly integer REGION_FLAG_BLOCK_FLY = 524288;
-        public static readonly integer REGION_FLAG_ALLOW_DIRECT_TELEPORT = 1048576;
-        public static readonly integer REGION_FLAG_RESTRICT_PUSHOBJECT = 4194304;
+        public const int REGION_FLAG_ALLOW_DAMAGE = 1;
+        public const int REGION_FLAG_FIXED_SUN = 16;
+        public const int REGION_FLAG_BLOCK_TERRAFORM = 64;
+        public const int REGION_FLAG_SANDBOX = 256;
+        public const int REGION_FLAG_DISABLE_COLLISIONS = 4096;
+        public const int REGION_FLAG_DISABLE_PHYSICS = 16384;
+        public const int REGION_FLAG_BLOCK_FLY = 524288;
+        public const int REGION_FLAG_ALLOW_DIRECT_TELEPORT = 1048576;
+        public const int REGION_FLAG_RESTRICT_PUSHOBJECT = 4194304;
 
-        public static readonly integer REMOTE_DATA_CHANNEL = 1;
-        public static readonly integer REMOTE_DATA_REQUEST = 2;
-        public static readonly integer REMOTE_DATA_REPLY = 3;
+        public const int REMOTE_DATA_CHANNEL = 1;
+        public const int REMOTE_DATA_REQUEST = 2;
+        public const int REMOTE_DATA_REPLY = 3;
 
-		public static readonly integer REQUIRE_LINE_OF_SIGHT = 2;
+		public const int REQUIRE_LINE_OF_SIGHT = 2;
 
-        public static readonly integer SIM_STAT_PCT_CHARS_STEPPED = 0;
+        public const int SIM_STAT_PCT_CHARS_STEPPED = 0;
 
-        public static readonly integer STATUS_PHYSICS = 1;
-        public static readonly integer STATUS_ROTATE_X = 2;
-        public static readonly integer STATUS_ROTATE_Y = 4;
-        public static readonly integer STATUS_ROTATE_Z = 8;
-        public static readonly integer STATUS_PHANTOM = 16;
-        public static readonly integer STATUS_SANDBOX = 32;
-        public static readonly integer STATUS_BLOCK_GRAB = 64;
-        public static readonly integer STATUS_BLOCK_GRAB_OBJECT = 1024;
-        public static readonly integer STATUS_DIE_AT_EDGE = 128;
-        public static readonly integer STATUS_RETURN_AT_EDGE = 256;
-        public static readonly integer STATUS_CAST_SHADOWS = 512;
-        public static readonly integer STATUS_BOUNDS_ERROR = 1002;
-        public static readonly integer STATUS_INTERNAL_ERROR = 1999;
-        public static readonly integer STATUS_MALFORMED_PARAMS = 1000;
-        public static readonly integer STATUS_NOT_FOUND = 1003;
-        public static readonly integer STATUS_NOT_SUPPORTED = 1004;
-        public static readonly integer STATUS_OK = 0;
-        public static readonly integer STATUS_TYPE_MISMATCH = 1001;
-        public static readonly integer STATUS_WHITELIST_FAILED = 2001;
+        public const int STATUS_PHYSICS = 1;
+        public const int STATUS_ROTATE_X = 2;
+        public const int STATUS_ROTATE_Y = 4;
+        public const int STATUS_ROTATE_Z = 8;
+        public const int STATUS_PHANTOM = 16;
+        public const int STATUS_SANDBOX = 32;
+        public const int STATUS_BLOCK_GRAB = 64;
+        public const int STATUS_BLOCK_GRAB_OBJECT = 1024;
+        public const int STATUS_DIE_AT_EDGE = 128;
+        public const int STATUS_RETURN_AT_EDGE = 256;
+        public const int STATUS_CAST_SHADOWS = 512;
+        public const int STATUS_BOUNDS_ERROR = 1002;
+        public const int STATUS_INTERNAL_ERROR = 1999;
+        public const int STATUS_MALFORMED_PARAMS = 1000;
+        public const int STATUS_NOT_FOUND = 1003;
+        public const int STATUS_NOT_SUPPORTED = 1004;
+        public const int STATUS_OK = 0;
+        public const int STATUS_TYPE_MISMATCH = 1001;
+        public const int STATUS_WHITELIST_FAILED = 2001;
 
-        public static readonly integer STRING_TRIM_HEAD = 1;
-        public static readonly integer STRING_TRIM_TAIL = 2;
-        public static readonly integer STRING_TRIM = 3;
+        public const int STRING_TRIM_HEAD = 1;
+        public const int STRING_TRIM_TAIL = 2;
+        public const int STRING_TRIM = 3;
 
         public static readonly key TEXTURE_BLANK = "5748decc-f629-461c-9a36-a35a221fe21f";
         public static readonly key TEXTURE_DEFAULT = "89556747-24cb-43ed-920b-47caed15465f";
@@ -818,75 +818,75 @@ namespace LSLEditor
         public static readonly key TEXTURE_TRANSPARENT = "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903";
         public static readonly key TEXTURE_MEDIA = "8b5fec65-8d8d-9dc5-cda8-8fdf2716e361";
 
-		public static readonly integer TOUCH_INVALID_FACE = 0xFFFFFFFF;
+		public const int TOUCH_INVALID_FACE = -1;
         public static readonly vector TOUCH_INVALID_TEXCOORD = new vector(-1.0, -1.0, 0.0);
 		public static readonly vector TOUCH_INVALID_VECTOR = new vector(0.0, 0.0, 0.0);
 
-		public static readonly integer TRAVERSAL_TYPE = 7;
-		public static readonly integer TRAVERSAL_TYPE_FAST = 1;
-		public static readonly integer TRAVERSAL_TYPE_NONE = 2;
-		public static readonly integer TRAVERSAL_TYPE_SLOW = 0;
+		public const int TRAVERSAL_TYPE = 7;
+		public const int TRAVERSAL_TYPE_FAST = 1;
+		public const int TRAVERSAL_TYPE_NONE = 2;
+		public const int TRAVERSAL_TYPE_SLOW = 0;
 
-        public static readonly integer TYPE_INTEGER = 1;
-        public static readonly integer TYPE_FLOAT = 2;
-        public static readonly integer TYPE_STRING = 3;
-        public static readonly integer TYPE_KEY = 4;
-        public static readonly integer TYPE_VECTOR = 5;
-        public static readonly integer TYPE_ROTATION = 6;
-        public static readonly integer TYPE_INVALID = 0;
+        public const int TYPE_INTEGER = 1;
+        public const int TYPE_FLOAT = 2;
+        public const int TYPE_STRING = 3;
+        public const int TYPE_KEY = 4;
+        public const int TYPE_VECTOR = 5;
+        public const int TYPE_ROTATION = 6;
+        public const int TYPE_INVALID = 0;
 
         public static readonly String URL_REQUEST_GRANTED = "URL_REQUEST_GRANTED";
         public static readonly String URL_REQUEST_DENIED = "URL_REQUEST_DENIED";
 
-        public static readonly integer VEHICLE_TYPE_NONE = 0;
+        public const int VEHICLE_TYPE_NONE = 0;
 
-        public static readonly integer VEHICLE_LINEAR_FRICTION_TIMESCALE = 16;
-        public static readonly integer VEHICLE_ANGULAR_FRICTION_TIMESCALE = 17;
-        public static readonly integer VEHICLE_LINEAR_MOTOR_DIRECTION = 18;
-        public static readonly integer VEHICLE_ANGULAR_MOTOR_DIRECTION = 19;
-        public static readonly integer VEHICLE_LINEAR_MOTOR_OFFSET = 20;
-        public static readonly integer VEHICLE_HOVER_HEIGHT = 24;
-        public static readonly integer VEHICLE_HOVER_EFFICIENCY = 25;
-        public static readonly integer VEHICLE_HOVER_TIMESCALE = 26;
-        public static readonly integer VEHICLE_BUOYANCY = 27;
-        public static readonly integer VEHICLE_LINEAR_DEFLECTION_EFFICIENCY = 28;
-        public static readonly integer VEHICLE_LINEAR_DEFLECTION_TIMESCALE = 29;
-        public static readonly integer VEHICLE_LINEAR_MOTOR_TIMESCALE = 30;
-        public static readonly integer VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE = 31;
-        public static readonly integer VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY = 32;
-        public static readonly integer VEHICLE_ANGULAR_DEFLECTION_TIMESCALE = 33;
-        public static readonly integer VEHICLE_ANGULAR_MOTOR_TIMESCALE = 34;
-        public static readonly integer VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE = 35;
-        public static readonly integer VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY = 36;
-        public static readonly integer VEHICLE_VERTICAL_ATTRACTION_TIMESCALE = 37;
-        public static readonly integer VEHICLE_BANKING_EFFICIENCY = 38;
-        public static readonly integer VEHICLE_BANKING_MIX = 39;
-        public static readonly integer VEHICLE_BANKING_TIMESCALE = 40;
-        public static readonly integer VEHICLE_REFERENCE_FRAME = 44;
+        public const int VEHICLE_LINEAR_FRICTION_TIMESCALE = 16;
+        public const int VEHICLE_ANGULAR_FRICTION_TIMESCALE = 17;
+        public const int VEHICLE_LINEAR_MOTOR_DIRECTION = 18;
+        public const int VEHICLE_ANGULAR_MOTOR_DIRECTION = 19;
+        public const int VEHICLE_LINEAR_MOTOR_OFFSET = 20;
+        public const int VEHICLE_HOVER_HEIGHT = 24;
+        public const int VEHICLE_HOVER_EFFICIENCY = 25;
+        public const int VEHICLE_HOVER_TIMESCALE = 26;
+        public const int VEHICLE_BUOYANCY = 27;
+        public const int VEHICLE_LINEAR_DEFLECTION_EFFICIENCY = 28;
+        public const int VEHICLE_LINEAR_DEFLECTION_TIMESCALE = 29;
+        public const int VEHICLE_LINEAR_MOTOR_TIMESCALE = 30;
+        public const int VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE = 31;
+        public const int VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY = 32;
+        public const int VEHICLE_ANGULAR_DEFLECTION_TIMESCALE = 33;
+        public const int VEHICLE_ANGULAR_MOTOR_TIMESCALE = 34;
+        public const int VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE = 35;
+        public const int VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY = 36;
+        public const int VEHICLE_VERTICAL_ATTRACTION_TIMESCALE = 37;
+        public const int VEHICLE_BANKING_EFFICIENCY = 38;
+        public const int VEHICLE_BANKING_MIX = 39;
+        public const int VEHICLE_BANKING_TIMESCALE = 40;
+        public const int VEHICLE_REFERENCE_FRAME = 44;
 
         // depricaded
-        public static readonly integer VEHICLE_FLAG_NO_FLY_UP = 1;
+        public const int VEHICLE_FLAG_NO_FLY_UP = 1;
 
-        public static readonly integer VEHICLE_FLAG_NO_DEFLECTION_UP = 1;
-        public static readonly integer VEHICLE_FLAG_LIMIT_ROLL_ONLY = 2;
-        public static readonly integer VEHICLE_FLAG_HOVER_WATER_ONLY = 4;
-        public static readonly integer VEHICLE_FLAG_HOVER_TERRAIN_ONLY = 8;
-        public static readonly integer VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT = 16;
-        public static readonly integer VEHICLE_FLAG_HOVER_UP_ONLY = 32;
-        public static readonly integer VEHICLE_FLAG_LIMIT_MOTOR_UP = 64;
-        public static readonly integer VEHICLE_FLAG_MOUSELOOK_STEER = 128;
-        public static readonly integer VEHICLE_FLAG_MOUSELOOK_BANK = 256;
-        public static readonly integer VEHICLE_FLAG_CAMERA_DECOUPLED = 512;
+        public const int VEHICLE_FLAG_NO_DEFLECTION_UP = 1;
+        public const int VEHICLE_FLAG_LIMIT_ROLL_ONLY = 2;
+        public const int VEHICLE_FLAG_HOVER_WATER_ONLY = 4;
+        public const int VEHICLE_FLAG_HOVER_TERRAIN_ONLY = 8;
+        public const int VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT = 16;
+        public const int VEHICLE_FLAG_HOVER_UP_ONLY = 32;
+        public const int VEHICLE_FLAG_LIMIT_MOTOR_UP = 64;
+        public const int VEHICLE_FLAG_MOUSELOOK_STEER = 128;
+        public const int VEHICLE_FLAG_MOUSELOOK_BANK = 256;
+        public const int VEHICLE_FLAG_CAMERA_DECOUPLED = 512;
 
-        public static readonly integer VEHICLE_TYPE_SLED = 1;
-        public static readonly integer VEHICLE_TYPE_CAR = 2;
-        public static readonly integer VEHICLE_TYPE_BOAT = 3;
-        public static readonly integer VEHICLE_TYPE_AIRPLANE = 4;
-        public static readonly integer VEHICLE_TYPE_BALLOON = 5;
+        public const int VEHICLE_TYPE_SLED = 1;
+        public const int VEHICLE_TYPE_CAR = 2;
+        public const int VEHICLE_TYPE_BOAT = 3;
+        public const int VEHICLE_TYPE_AIRPLANE = 4;
+        public const int VEHICLE_TYPE_BALLOON = 5;
 
-        public static readonly integer VERTICAL = 0;
+        public const int VERTICAL = 0;
 
-        //public static readonly integer REGION_FLAG_RESTRICT_PUSHOBJECT=4194304;
+        //public const int REGION_FLAG_RESTRICT_PUSHOBJECT=4194304;
 
         #endregion
 
@@ -1747,7 +1747,7 @@ namespace LSLEditor
 
         public void llEmail(String sAddress, String sSubject, String sMessage)
         {
-            Verbose("@llEmail(""{0}"", ""{1}"", ""{2}"")", sAddress, sSubject, sMessage);
+            Verbose(@"llEmail(""{0}"", ""{1}"", ""{2}"")", sAddress, sSubject, sMessage);
             host.Email(sAddress, sSubject, sMessage);
         }
 
@@ -1903,7 +1903,7 @@ namespace LSLEditor
         public String llGetAnimationOverride(String sAnimationState)
         {
             String sAnimation = "";
-            Verbose("llGetAnimationOverride(""{0}"")=""{1}""", sAnimationState, sAnimation);
+            Verbose(@"llGetAnimationOverride(""{0}"")=""{1}""", sAnimationState, sAnimation);
             return sAnimation;
         }
 
@@ -1949,245 +1949,255 @@ namespace LSLEditor
             return lClosetNavPoint;
 		}
 
-        public vector llGetColor(integer face)
+        public vector llGetColor(integer iFace)
         {
-            Verbose("llGetColor(" + face + ")");
-            return vector.ZERO_VECTOR;
+            vector vColour = vector.ZERO_VECTOR;
+            Verbose("llGetColor({0})={1}", iFace, vColour);
+            return vColour;
         }
 
         public key llGetCreator()
         {
-            key result = Properties.Settings.Default.AvatarKey;
-            Verbose("llGetCreator()={0}", result);
-            return result;
+            key kResult = Properties.Settings.Default.AvatarKey;
+            Verbose("llGetCreator()={0}", kResult);
+            return kResult;
         }
 
         public String llGetDate()
         {
-            string result = DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd");
-            Verbose("llGetDate()=" + result);
-            return result;
+            string sResult = DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd");
+            Verbose("llGetDate()={0}", sResult);
+            return sResult;
         }
 
         public string llGetDisplayName(key kAvatarID)
         {
-            string result = "";
-            Verbose("llGetDisplayName({0})={1}", kAvatarID, result);
-            return result;
+            string sResult = "";
+            Verbose("llGetDisplayName({0})={1}", kAvatarID, sResult);
+            return sResult;
         }
 
         public Float llGetEnergy()
         {
-            Float result = 1.23;
-            Verbose("llGetEnergy()={0}", result);
-            return result;
+            Float fResult = 1.23;
+            Verbose("llGetEnergy()={0}", fResult);
+            return fResult;
         }
 
         public string llGetEnv(string sDataRequest)
         {
-            string result;
+            string sResult;
             switch (sDataRequest)
             {
                 case "sim_channel":
-                    result = "Second Life Server";
+                    sResult = "Second Life Server";
                     break;
                 case "sim_version":
-                    result = "11.11.09.244706";
+                    sResult = "11.11.09.244706";
                     break;
                 default:
-                    result = "";
+                    sResult = "";
                     break;
             }
-            Verbose("llGetEnv({0})={1}", sDataRequest, result);
-            return result;
+            Verbose(@"llGetEnv(""{0}"")=""{1}""", sDataRequest, sResult);
+            return sResult;
         }
 
         public vector llGetForce()
         {
-            Verbose("llGetForce()");
-            return vector.ZERO_VECTOR;
+            vector vForce = vector.ZERO_VECTOR;
+            Verbose("llGetForce()={0}", vForce);
+            return vForce;
         }
 
         public integer llGetFreeMemory()
         {
-            Verbose("llGetFreeMemory()");
-            return 16000;
+            integer iFreeMemory = 16000;
+            Verbose("llGetFreeMemory()={0}", iFreeMemory);
+            return iFreeMemory;
         }
 
         public integer llGetFreeURLs()
         {
-            return 0;
+            integer iFreeURLs = 0;
+            Verbose("llGetFreeURLs()={0}", iFreeURLs);
+            return iFreeURLs;
         }
 
         public Float llGetGMTclock()
         {
-            Float result = DateTime.Now.ToUniversalTime().TimeOfDay.TotalSeconds;
-            Verbose("llGetGMTclock()={0}", result);
-            return result;
+            Float fResult = DateTime.Now.ToUniversalTime().TimeOfDay.TotalSeconds;
+            Verbose("llGetGMTclock()={0}", fResult);
+            return fResult;
         }
 
         public vector llGetGeometricCenter()
         {
-            vector result = ZERO_VECTOR;
-            Verbose("llGetGeometricCenter()={0}", result);
-            return result;
+            vector vResult = ZERO_VECTOR;
+            Verbose("llGetGeometricCenter()={0}", vResult);
+            return vResult;
         }
 
-        public String llGetHTTPHeader(key request_id, String header)
+        public String llGetHTTPHeader(key kRequestID, String sDesiredHeader)
         {
-            return "not-implemented";
+            String sResult = "not-implemented";
+            Verbose(@"llGetHTTPHeader({0}, ""{1}"")=""{2}""", kRequestID, sDesiredHeader, sResult);
+            return sResult;
         }
 
-        public key llGetInventoryCreator(String item)
+        public key llGetInventoryCreator(String sItem)
         {
-            key result = Properties.Settings.Default.AvatarKey;
-            Verbose(@"GetInventoryCreator(""{0}"")={1}", item, result);
-            return result;
+            key kAvatarID = Properties.Settings.Default.AvatarKey;
+            Verbose(@"GetInventoryCreator(""{0}"")={1}", sItem, kAvatarID);
+            return kAvatarID;
         }
 
-        public key llGetInventoryKey(String name)
+        public key llGetInventoryKey(String sItemName)
         {
-            key result = host.GetInventoryKey(name);
-            Verbose("llGetInventoryKey({0})={1}", name, result);
-            return result;
+            key kID = host.GetInventoryKey(sItemName);
+            Verbose(@"llGetInventoryKey(""{0}"")={1}", sItemName, kID);
+            return kID;
         }
 
-        public String llGetInventoryName(integer type, integer number)
+        public String llGetInventoryName(integer iItemType, integer iItemIndex)
         {
-            string result = host.GetInventoryName(type, number);
-            Verbose("llGetInventoryName({0},{1})={2}", type, number, result);
-            return result;
+            string sItemName = host.GetInventoryName(iItemType, iItemIndex);
+            Verbose(@"llGetInventoryName({0},{1})=""{2}""", iItemType, iItemIndex, sItemName);
+            return sItemName;
         }
 
-        public integer llGetInventoryNumber(integer type)
+        public integer llGetInventoryNumber(integer iType)
         {
-            int result = host.GetInventoryNumber(type);
-            Verbose("llGetInventoryNumber({0})={1}", type, result);
-            return result;
+            int iTypeCount = host.GetInventoryNumber(iType);
+            Verbose("llGetInventoryNumber({0})={1}", iType, iTypeCount);
+            return iTypeCount;
         }
 
-        public integer llGetInventoryPermMask(String item, integer mask)
+        public integer llGetInventoryPermMask(String sItemName, integer iPermMask)
         {
-            Verbose("llGetInventoryPermMask(" + item + "," + mask + ")");
-            return 0;
+            integer iPermissionState = 0;
+            Verbose(@"llGetInventoryPermMask(""{0}"", {1})={2}", sItemName, iPermMask, iPermissionState);
+            return iPermissionState;
         }
 
-        public integer llGetInventoryType(String name)
+        public integer llGetInventoryType(String sItemName)
         {
-            integer result = host.GetInventoryType(name);
-            Verbose("llGetInventoryType({0})={1}", name, result);
-            return result;
+            integer iItemType = host.GetInventoryType(sItemName);
+            Verbose(@"llGetInventoryType(""{0}"")={1}", sItemName, iItemType);
+            return iItemType;
         }
 
         public key llGetKey()
         {
-            key result = host.GetKey();
-            Verbose("llGetKey()=" + result.ToString());
-            return result;
+            key kID = host.GetKey();
+            Verbose(@"llGetKey()=""{0}""", kID.ToString());
+            return kID;
         }
 
-        public key llGetLandOwnerAt(vector pos)
+        public key llGetLandOwnerAt(vector vPosition)
         {
-            Verbose("llGetLandOwnerAt(" + pos + ")");
-            return new key(Guid.NewGuid());
+            key kAvatarID = new key(Guid.NewGuid());
+            Verbose("llGetLandOwnerAt({0})={1}", vPosition, kAvatarID);
+            return kAvatarID;
         }
 
-        public key llGetLinkKey(integer linknum)
+        public key llGetLinkKey(integer iLinkIndex)
         {
-            Verbose("llGetLinkKey(" + linknum + ")");
-            return new key(Guid.NewGuid());
+            key kID = new key(Guid.NewGuid());
+            Verbose("llGetLinkKey({0})={1}", iLinkIndex, kID);
+            return kID;
         }
 
         public list llGetLinkMedia(integer iLinkNumber, integer iFace, list lParameters)
         {
-            list result = new list();
-            Verbose("llGetLinkMedia({0}, {1}, {2})={3}", iLinkNumber, iFace, lParameters.ToString(), result);
-            return result;
+            list lMediaList = new list();
+            Verbose("llGetLinkMedia({0}, {1}, {2})={3}", iLinkNumber, iFace, lParameters.ToVerboseString(), lMediaList.ToVerboseString());
+            return lMediaList;
         }
 
-        public String llGetLinkName(integer linknum)
+        public String llGetLinkName(integer iLinkIndex)
         {
-            Verbose("llGetLinkName(" + linknum + ")");
-            return "";
+            String sLinkName = "";
+            Verbose(@"llGetLinkName({0})=""{1}""", iLinkIndex, sLinkName);
+            return sLinkName;
         }
 
         public integer llGetLinkNumber()
         {
-            Verbose("llGetLinkNumber()");
-            return 0;
+            integer iLinkIndex = 0;
+            Verbose("llGetLinkNumber()={0}", iLinkIndex);
+            return iLinkIndex;
         }
 
-        public integer llGetLinkNumberOfSides(integer link)
+        public integer llGetLinkNumberOfSides(integer iLinkIndex)
         {
-            integer result = 6;
-            Verbose("llGetLinkNumberOfSides()={" + link + "}", result);
-            return result;
+            integer iSides = 6;
+            Verbose("llGetLinkNumberOfSides({0})={1}", iLinkIndex, iSides);
+            return iSides;
         }
 
-        public list llGetLinkPrimitiveParams(integer link, list myparams)
+        public list llGetLinkPrimitiveParams(integer iLinkIndex, list lParametersRequested)
         {
-            Verbose("llGetLinkPrimitiveParams(" + link + "," + myparams.ToString() + ")");
-            return new list();
+            list lParametersReturned = new list();
+            Verbose("llGetLinkPrimitiveParams({0}, {1})={2}", iLinkIndex, lParametersRequested.ToVerboseString(), lParametersReturned);
+            return lParametersReturned;
         }
 
-        public integer llGetListEntryType(list src, integer index)
+        public integer llGetListEntryType(list lSource, integer iIndex)
         {
-            integer intReturn;
+            integer iEntryType;
 
-            if (index < 0)
-                index = src.Count + index;
-            if (index >= src.Count || index < 0)
-                intReturn = 0;
+            if (iIndex < 0)
+                iIndex = lSource.Count + iIndex;
+            if (iIndex >= lSource.Count || iIndex < 0)
+                iEntryType = 0;
             else
             {
-                switch (src[index].GetType().ToString().Replace("LSLEditor.SecondLife+", ""))
+                switch (lSource[iIndex].GetType().ToString().Replace("LSLEditor.SecondLife+", ""))
                 {
                     case "System.Double":
                     case "Float":
-                        intReturn = TYPE_FLOAT;
+                        iEntryType = TYPE_FLOAT;
                         break;
                     case "System.String":
                     case "String":
-                        intReturn = TYPE_STRING;
+                        iEntryType = TYPE_STRING;
                         break;
                     case "System.Int32":
                     case "integer":
-                        intReturn = TYPE_INTEGER;
+                        iEntryType = TYPE_INTEGER;
                         break;
                     case "key":
-                        intReturn = TYPE_KEY;
+                        iEntryType = TYPE_KEY;
                         break;
                     case "vector":
-                        intReturn = TYPE_VECTOR;
+                        iEntryType = TYPE_VECTOR;
                         break;
                     case "rotation":
-                        intReturn = TYPE_ROTATION;
+                        iEntryType = TYPE_ROTATION;
                         break;
                     default:
-                        intReturn = TYPE_INVALID;
+                        iEntryType = TYPE_INVALID;
                         break;
                 }
             }
-            Verbose("llGetListEntryType({0},{1})={2}", src.ToVerboseString(), index, intReturn);
-            return intReturn;
+            Verbose("llGetListEntryType({0},{1})={2}", lSource.ToVerboseString(), iIndex, iEntryType);
+            return iEntryType;
         }
 
-        public integer llGetListLength(list src)
+        public integer llGetListLength(list lSource)
         {
-            integer result = src.Count;
-            Verbose("llGetListLength({0})={1}", src.ToVerboseString(), result);
-            return result;
+            integer iLength = lSource.Count;
+            Verbose("llGetListLength({0})={1}", lSource.ToVerboseString(), iLength);
+            return iLength;
         }
 
-        public vector GetLocalPos()
+        public vector llGetLocalPos(Boolean bVerbose = true)
         {
-            // no verbose
-            return m_pos;
-        }
-
-        public vector llGetLocalPos()
-        {
-            Verbose("llGetLocalPos()={0}", m_pos);
+			if (bVerbose)
+			{
+				Verbose("llGetLocalPos()={0}", m_pos);
+			}
             return m_pos;
         }
 
@@ -2199,142 +2209,155 @@ namespace LSLEditor
 
         public Float llGetMass()
         {
-            Float result = 1.23;
-            Verbose("llGetMass()={0}", result);
-            return result;
+            Float fMass = 1.23;
+            Verbose("llGetMass()={0}", fMass);
+            return fMass;
         }
 
         public Float llGetMassMKS()
         {
-            Float result = 1.23;
-            Verbose("llGetMassMKS()={0}", result);
-            return result;
+            Float fMass = 1.23;
+            Verbose("llGetMassMKS()={0}", fMass);
+            return fMass;
         }
 
         public integer llGetMemoryLimit()
         {
-            return 65536;
+            integer iMaxMemory = 65536;
+            Verbose("llGetMemoryLimit()={0}", iMaxMemory);
+            return iMaxMemory;
         }
 
-        public void llGetNextEmail(String address, String subject)
+        public void llGetNextEmail(String sAddress, String sSubject)
         {
-            Verbose("llGetNextEmail(" + address + "," + subject + ")");
+            Verbose(@"llGetNextEmail(""{0}"", ""{1}"")", sAddress, sSubject);
         }
 
-        public key llGetNotecardLine(String name, integer line)
+        public key llGetNotecardLine(String sNoteName, integer iLineIndex)
         {
-            key k = host.GetNotecardLine(name, line);
-            Verbose(@"GetNotecardLine(""{0}"",{1})={2}", name, line, k);
-            return k;
+            key kID = host.GetNotecardLine(sNoteName, iLineIndex);
+            Verbose(@"GetNotecardLine(""{0}"", {1})={2}", sNoteName, iLineIndex, kID);
+            return kID;
         }
 
-        public key llGetNumberOfNotecardLines(String name)
+        public key llGetNumberOfNotecardLines(String sNoteName)
         {
-            key k = host.GetNumberOfNotecardLines(name);
-            Verbose(@"GetNumberOfNotecardLines(""{0}"")={1}", name, k);
-            return k;
+            key kID = host.GetNumberOfNotecardLines(sNoteName);
+            Verbose(@"GetNumberOfNotecardLines(""{0}"")={1}", sNoteName, kID);
+            return kID;
         }
 
         public integer llGetNumberOfPrims()
         {
-            integer result = 10;
-            Verbose("llGetNumberOfPrims()={0}", result);
-            return result;
+            integer iPrimCount = 10;
+            Verbose("llGetNumberOfPrims()={0}", iPrimCount);
+            return iPrimCount;
         }
 
         public integer llGetNumberOfSides()
         {
-            integer result = 6;
-            Verbose("llGetNumberOfSides()={0}", result);
-            return result;
+            integer iSideCount = 6;
+            Verbose("llGetNumberOfSides()={0}", iSideCount);
+            return iSideCount;
         }
 
         public String llGetObjectDesc()
         {
-            string result = host.GetObjectDescription();
-            Verbose("llGetObjectDesc()={0}", result);
-            return result;
+            string sDescription = host.GetObjectDescription();
+            Verbose(@"llGetObjectDesc()=""{0}""", sDescription);
+            return sDescription;
         }
 
-        public list llGetObjectDetails(key id, list _params)
+        public list llGetObjectDetails(key kID, list lObjectFlags)
         {
-            list result = new list();
-            for (int intI = 0; intI < _params.Count; intI++)
+            list lObjectDetails = new list();
+            for (int intI = 0; intI < lObjectFlags.Count; intI++)
             {
-                if (!(_params[intI] is integer))
+                if (!(lObjectFlags[intI] is integer))
                     continue;
-                switch ((int)(integer)_params[intI])
+                switch ((int)(integer)lObjectFlags[intI])
                 {
-                    case 1: //OBJECT_NAME:
-                        result.Add((SecondLife.String)host.GetObjectName(new Guid(id.guid)));
+                    case OBJECT_NAME:
+                        lObjectDetails.Add((SecondLife.String)host.GetObjectName(new Guid(kID.guid)));
                         break;
-                    case 2: //OBJECT_DESC:
-                        result.Add((SecondLife.String)host.GetObjectDescription(new Guid(id.guid)));
+                    case OBJECT_DESC:
+                        lObjectDetails.Add((SecondLife.String)host.GetObjectDescription(new Guid(kID.guid)));
                         break;
-                    case 3://OBJECT_POS:
+                    case OBJECT_POS:
+                        lObjectDetails.Add(llGetPos());
                         break;
-                    case 4://OBJECT_ROT:
+                    case OBJECT_ROT:
+                        lObjectDetails.Add(llGetRot());
                         break;
-                    case 5://OBJECT_VELOCITY:
+                    case OBJECT_VELOCITY:
+                        lObjectDetails.Add(llGetVel());
                         break;
-                    case 6://OBJECT_OWNER:
+                    case OBJECT_OWNER:
+                        lObjectDetails.Add(llGetOwner());
                         break;
-                    case 7://OBJECT_GROUP:
+                    case OBJECT_GROUP:
+                        lObjectDetails.Add(OBJECT_UNKNOWN_DETAIL);
                         break;
-                    case 8://OBJECT_CREATOR:
+                    case OBJECT_CREATOR:
+                        lObjectDetails.Add(llGetCreator());
                         break;
                     default:
+                        lObjectDetails.Add(OBJECT_UNKNOWN_DETAIL);
                         break;
                 }
             }
-            Verbose(@"llGetObjectDetails({0},{1})={2}", id, _params, result);
-            return result;
+            Verbose(@"llGetObjectDetails({0},{1})={2}", kID, lObjectFlags, lObjectDetails);
+            return lObjectDetails;
         }
 
-        public Float llGetObjectMass(key id)
+        public Float llGetObjectMass(key kID)
         {
-            Verbose("llGetObjectMass(" + id + ")");
-            return 0.0F;
+            Float fMass = 0.0F;
+            Verbose("llGetObjectMass({0})={1}", kID, fMass);
+            return fMass;
         }
 
         public String llGetObjectName()
         {
-            string result = host.GetObjectName();
-            Verbose("llGetObjectName()={0}", result);
-            return result;
+            string sObjectName = host.GetObjectName();
+            Verbose(@"llGetObjectName()=""{0}""", sObjectName);
+            return sObjectName;
         }
 
-        public integer llGetObjectPermMask(integer mask)
+        public integer llGetObjectPermMask(integer iRequestedMask)
         {
-            Verbose("llGetObjectPermMask(" + mask + ")");
-            return 0;
+            integer iRetunedMaskState = 0;
+            Verbose("llGetObjectPermMask({0})={1}", iRequestedMask, iRetunedMaskState);
+            return iRetunedMaskState;
         }
 
         // added 4 mei 2007
-        public integer llGetObjectPrimCount(key id)
+        public integer llGetObjectPrimCount(key kID)
         {
-            Verbose("llGetObjectPrimCount(" + id + ")");
-            return 0;
+            integer iPrimCount = 0;
+            Verbose("llGetObjectPrimCount({0})={1}", kID, iPrimCount);
+            return iPrimCount;
         }
 
         public vector llGetOmega()
         {
-            Verbose("llGetOmega()");
-            return vector.ZERO_VECTOR;
+            vector vOmega = vector.ZERO_VECTOR;
+            Verbose("llGetOmega()={0}", vOmega);
+            return vOmega;
         }
 
         public key llGetOwner()
         {
-            key k = new key(Properties.Settings.Default.AvatarKey);
-            Verbose("llGetOwner()=" + k);
-            return k;
+            key kID = new key(Properties.Settings.Default.AvatarKey);
+            Verbose("llGetOwner()={0}", kID);
+            return kID;
         }
 
-        public key llGetOwnerKey(key id)
+        public key llGetOwnerKey(key kID)
         {
-            key k = llGetOwner();
-            Verbose("llGetOwnerKey(" + id + ")=" + k);
-            return k;
+            key kAvatarID = llGetOwner(); // This is incorrect, as the owner of this object may not be the owner of kID
+            Verbose("llGetOwnerKey({0})={1}", kID, kAvatarID);
+            return kAvatarID;
         }
 
         /*
@@ -2344,175 +2367,189 @@ namespace LSLEditor
         PARCEL_DETAILS_GROUP  3  The parcel group's key.  (36 Characters)  key
         PARCEL_DETAILS_AREA  4  The parcel's area, in sqm.  (5 Characters)  integer
         */
-        public list llGetParcelDetails(vector pos, list details)
+        public list llGetParcelDetails(vector vPosition, list lRequestedDetails)
         {
-            list result = new list();
-            for (int intI = 0; intI < details.Count; intI++)
+            list lReturnedDetails = new list();
+            for (int intI = 0; intI < lRequestedDetails.Count; intI++)
             {
-                if (details[intI] is integer)
+                if (lRequestedDetails[intI] is integer)
                 {
-                    switch ((int)(integer)details[intI])
+                    switch ((int)(integer)lRequestedDetails[intI])
                     {
-                        case 0: // PARCEL_DETAILS_NAME:
-                            result.Add(Properties.Settings.Default.ParcelName);
+                        case PARCEL_DETAILS_NAME:
+                            lReturnedDetails.Add(Properties.Settings.Default.ParcelName);
                             break;
-                        case 1: // PARCEL_DETAILS_DESC:
-                            result.Add(Properties.Settings.Default.ParcelDescription);
+                        case PARCEL_DETAILS_DESC:
+                            lReturnedDetails.Add(Properties.Settings.Default.ParcelDescription);
                             break;
-                        case 2: //PARCEL_DETAILS_OWNER:
-                            result.Add(new key(Properties.Settings.Default.ParcelOwner));
+                        case PARCEL_DETAILS_OWNER:
+                            lReturnedDetails.Add(new key(Properties.Settings.Default.ParcelOwner));
                             break;
-                        case 3: //PARCEL_DETAILS_GROUP:
-                            result.Add(new key(Properties.Settings.Default.ParcelGroup));
+                        case PARCEL_DETAILS_GROUP:
+                            lReturnedDetails.Add(new key(Properties.Settings.Default.ParcelGroup));
                             break;
-                        case 4: // PARCEL_DETAILS_AREA:
-                            result.Add(new integer(Properties.Settings.Default.ParcelArea));
+                        case PARCEL_DETAILS_AREA:
+                            lReturnedDetails.Add(new integer(Properties.Settings.Default.ParcelArea));
+                            break;
+                        case PARCEL_DETAILS_ID:
+                            lReturnedDetails.Add(new integer(Properties.Settings.Default.ParcelID));
+                            break;
+                        case PARCEL_DETAILS_SEE_AVATARS:
+                            lReturnedDetails.Add(new integer(Properties.Settings.Default.ParcelSeeAvatars));
                             break;
                         default:
                             break;
                     }
                 }
             }
-            Verbose("llGetParcelDetails({0},{1})={2}", pos, details.ToVerboseString(), result.ToVerboseString());
-            return result;
+            Verbose("llGetParcelDetails({0}, {1})={2}", vPosition, lRequestedDetails.ToVerboseString(), lReturnedDetails.ToVerboseString());
+            return lReturnedDetails;
         }
 
-        public integer llGetParcelFlags(vector pos)
+        public integer llGetParcelFlags(vector vPosition)
         {
-            Verbose("llGetParcelFlags(" + pos + ")");
-            return 0;
+            integer iReturnedFlags = 0;
+            Verbose("llGetParcelFlags({0})={1}", vPosition, iReturnedFlags);
+            return iReturnedFlags;
         }
 
-        public integer llGetParcelMaxPrims(vector pos, integer sim_wide)
+		public integer llGetParcelMaxPrims(vector vPosition, integer iSimWide)
         {
-            Verbose("llGetParcelMaxPrims(" + pos + "," + sim_wide + ")");
-            return 0;
+            integer iMaxPrims = 0;
+            Verbose("llGetParcelMaxPrims({0}, {1})={2}", vPosition, iSimWide, iMaxPrims);
+            return iMaxPrims;
         }
 
 		public string llGetParcelMusicURL()
 		{
-			Verbose("llGetParcelMaxPrims()={1}", m_ParcelMusicURL);
+			Verbose(@"llGetParcelMaxPrims()=""{0}""", m_ParcelMusicURL);
 			return m_ParcelMusicURL;
 		}
 
-        public integer llGetParcelPrimCount(vector pos, integer category, integer sim_wide)
+        public integer llGetParcelPrimCount(vector vPosition, integer iCategory, integer iSimWide)
         {
-            Verbose("llGetParcelPrimCount(" + pos + "," + category + "," + sim_wide + ")");
-            return 0;
+            integer iPrimCount = 0;
+            Verbose("llGetParcelPrimCount({0}, {1}, {2})={3}", vPosition, iCategory, iSimWide, iPrimCount);
+            return iPrimCount;
         }
 
-        public list llGetParcelPrimOwners(vector pos)
+        public list llGetParcelPrimOwners(vector vPosition)
         {
-            list result = new list(new object[] { Properties.Settings.Default.AvatarKey, 10 });
-            Verbose("llGetParcelPrimOwners({0})={1}", pos, result);
-            return result;
+            list lOwners = new list(new object[] { Properties.Settings.Default.AvatarKey, 10 });
+            Verbose("llGetParcelPrimOwners({0})={1}", vPosition, lOwners);
+            return lOwners;
         }
 
         public integer llGetPermissions()
         {
-            integer perm =
-                PERMISSION_DEBIT
-            | PERMISSION_TAKE_CONTROLS
-            | PERMISSION_TRIGGER_ANIMATION
-            | PERMISSION_ATTACH
-            | PERMISSION_CHANGE_LINKS
-            | PERMISSION_TRACK_CAMERA
-            | PERMISSION_CONTROL_CAMERA;
-
-            Verbose("llGetPermissions()=" + perm);
-            return perm;
+			integer iPermissions = 0;
+            Verbose("llGetPermissions()={0}", iPermissions);
+            return iPermissions;
         }
 
         public key llGetPermissionsKey()
         {
-            Verbose("llGetPermissionsKey()");
-            return new key(Guid.NewGuid());
+			key kID = key.NULL_KEY;
+			Verbose("llGetPermissionsKey()={0}", kID);
+			return kID; 
         }
 
         public list llGetPhysicsMaterial()
         {
-            Verbose("llGetPhysicalMaterial()");
-            return new list();
+			list lMaterials = new list();
+			Verbose("llGetPhysicalMaterial()={0}", lMaterials);
+			return lMaterials;
         }
 
         public vector llGetPos()
         {
-            Verbose("llGetPos()=" + m_pos);
+            Verbose("llGetPos()={0}", m_pos);
             return m_pos;
         }
 
-        public list llGetPrimMediaParams(integer face, list myparams)
+        public list llGetPrimMediaParams(integer iFace, list lDesiredParams)
         {
-            Verbose("llGetPrimMediaParams(" + face + "," + myparams.ToString() + ")");
-            return new list();
+			list lReturnedParams = new list();
+			Verbose("llGetPrimMediaParams({0}, {1})={2}", iFace, lDesiredParams.ToVerboseString(), lReturnedParams.ToVerboseString());
+			return lReturnedParams;
         }
 
-        public list llGetPrimitiveParams(list myparams)
+		public list llGetPrimitiveParams(list lDesiredParams)
         {
-            Verbose("llGetPrimitiveParams(" + myparams.ToString() + ")");
-            return new list();
+			list lReturnedParams = new list();
+			Verbose("llGetPrimitiveParams({0})={1}", lDesiredParams.ToVerboseString(), lReturnedParams.ToVerboseString());
+			return lReturnedParams;
         }
 
         // 334
         public integer llGetRegionAgentCount()
         {
-            Verbose("llGetRegionAgentCount()");
-            return 0;
+			integer iAgentCount = 0;
+            Verbose("llGetRegionAgentCount()={0}", iAgentCount);
+            return iAgentCount;
         }
 
         public vector llGetRegionCorner()
         {
-            System.Drawing.Point point = Properties.Settings.Default.RegionCorner;
-            vector RegionCorner = new vector(point.X, point.Y, 0);
-            Verbose("llGetRegionCorner()" + RegionCorner);
-            return RegionCorner;
+            System.Drawing.Point pRegionCorner = Properties.Settings.Default.RegionCorner;
+            vector vRegionCorner = new vector(pRegionCorner.X, pRegionCorner.Y, 0);
+            Verbose("llGetRegionCorner()={0}", vRegionCorner);
+            return vRegionCorner;
         }
 
         public Float llGetRegionFPS()
         {
-            Verbose("llGetRegionFPS()=" + Properties.Settings.Default.RegionFPS);
-            return Properties.Settings.Default.RegionFPS;
+			Float fRegionFPS = Properties.Settings.Default.RegionFPS;
+			Verbose("llGetRegionFPS()={0}", fRegionFPS);
+			return fRegionFPS;
         }
 
         public integer llGetRegionFlags()
         {
-            Verbose("llGetRegionFlags()");
-            return 0;
+			integer iRegionFlags = 0;
+			Verbose("llGetRegionFlags()={0}", iRegionFlags);
+			return iRegionFlags;
         }
 
         public String llGetRegionName()
         {
-            Verbose("llGetRegionName()=" + Properties.Settings.Default.RegionName);
-            return Properties.Settings.Default.RegionName;
+			String sRegionName = Properties.Settings.Default.RegionName;
+			Verbose("llGetRegionName()={0}", sRegionName);
+			return sRegionName;
         }
 
         public Float llGetRegionTimeDilation()
         {
-            Verbose("llGetRegionTimeDilation()");
-            return 0.9;
+			Float fTimeDilation = 0.9F;
+            Verbose("llGetRegionTimeDilation()={0}", fTimeDilation);
+			return fTimeDilation;
         }
 
         public vector llGetRootPosition()
         {
-            Verbose("llGetRootPosition()");
-            return vector.ZERO_VECTOR;
+			vector vRootPosition = vector.ZERO_VECTOR;
+            Verbose("llGetRootPosition()={0}", vRootPosition);
+			return vRootPosition;
         }
 
         public rotation llGetRootRotation()
         {
-            Verbose("llGetRootRotation()");
-            return rotation.ZERO_ROTATION;
+			rotation vRootRotation = rotation.ZERO_ROTATION;
+			Verbose("llGetRootRotation()={0}", vRootRotation);
+			return vRootRotation;
         }
 
         public rotation llGetRot()
         {
-            Verbose("llGetRot()=" + m_rot);
+            Verbose("llGetRot()={0}", m_rot);
             return m_rot;
         }
 
         public integer llGetSPMaxMemory()
         {
-            return 65536;
+			integer iMaxSPMemory = 65536;
+			Verbose("llGetSPMaxMemory()={0}", iMaxSPMemory);
+			return iMaxSPMemory;
         }
 
         public vector llGetScale()
@@ -2523,48 +2560,52 @@ namespace LSLEditor
 
         public String llGetScriptName()
         {
-            string result = host.GetScriptName();
-            Verbose("llGetScriptName()=" + result);
-            return result;
+            string sScriptName = host.GetScriptName();
+            Verbose("llGetScriptName()={0}", sScriptName);
+            return sScriptName;
         }
 
-        public integer llGetScriptState(String name)
+		public integer llGetScriptState(String sScriptName)
         {
-            Verbose("llGetScriptState(" + name + ")");
-            return 0;
+			integer iScriptState = 0;
+			Verbose(@"llGetScriptState(""{0}"")={1}", sScriptName, iScriptState);
+            return iScriptState;
         }
 
-        public float llGetSimStats(integer StatType)
+        public float llGetSimStats(integer iStatType)
         {
-            Verbose("llGetSimStats(" + StatType + ")");
-            return 0;
+			float iSimStat = 0.0F;
+            Verbose("llGetSimStats({0})={1}", iStatType, iSimStat);
+			return iSimStat;
         }
 
         public String llGetSimulatorHostname()
         {
-            Verbose("llGetSimulatorHostname()");
-            return "";
+			String sSimHostName = "";
+            Verbose(@"llGetSimulatorHostname()=""{0}""", sSimHostName);
+			return sSimHostName;
         }
 
         public integer llGetStartParameter()
         {
-            Verbose("llGetStartParameter()=" + m_start_parameter);
+            Verbose("llGetStartParameter()={0}" + m_start_parameter);
             return m_start_parameter;
         }
 
-        public integer llGetStatus(integer status)
+        public integer llGetStatus(integer iRequestedStatus)
         {
-            Verbose("llGetStatus(" + status + ")");
-            return 0;
+			integer iStatus = 0;
+			Verbose("llGetStatus({0})={1}", iRequestedStatus, iStatus);
+			return iStatus;
         }
 
-        public String llGetSubString(String _src, integer _start, integer _end)
+        public String llGetSubString(String sSource, integer iStart, integer iEnd)
         {
-            string src = _src;
-            int start = _start;
-            int end = _end;
+            string src = sSource;
+            int start = iStart;
+            int end = iEnd;
 
-            StringBuilder result = new StringBuilder();
+            StringBuilder sResult = new StringBuilder();
 
             int intLength = src.Length;
 
@@ -2573,109 +2614,119 @@ namespace LSLEditor
                 if (start <= end)
                 {
                     for (int intI = start; intI <= end; intI++)
-                        result.Append(src[intI]);
+                        sResult.Append(src[intI]);
                 }
                 else // excluding
                 {
                     for (int intI = 0; intI <= end; intI++)
-                        result.Append(src[intI]);
+                        sResult.Append(src[intI]);
                     for (int intI = start; intI < intLength; intI++)
-                        result.Append(src[intI]);
+                        sResult.Append(src[intI]);
                 }
             }
-            Verbose(string.Format(@"GetSubString(""{0}"",{1},{2})=""{3}""", _src, _start, _end, result));
-            return result.ToString();
+            Verbose(string.Format(@"GetSubString(""{0}"", {1}, {2})=""{3}""", sSource, iStart, iEnd, sResult));
+            return sResult.ToString();
         }
 
         public vector llGetSunDirection()
         {
-            Verbose("llGetSunDirection()");
-            return vector.ZERO_VECTOR;
+			vector vSunDirection = vector.ZERO_VECTOR;
+			Verbose("llGetSunDirection()={0}", vSunDirection);
+			return vSunDirection;
         }
 
-        public String llGetTexture(integer face)
+        public String llGetTexture(integer iFace)
         {
-            Verbose("llGetTexture(" + face + ")");
-            return "";
+			String sTexture = "";
+            Verbose(@"llGetTexture({0})=""{1}""", iFace, sTexture);
+			return sTexture;
         }
 
-        public vector llGetTextureOffset(integer side)
+		public vector llGetTextureOffset(integer iFace)
         {
-            Verbose("llGetTextureOffset(" + side + ")");
-            return vector.ZERO_VECTOR;
+			vector vOffset = vector.ZERO_VECTOR;
+			Verbose("llGetTextureOffset({0})={1}", iFace, vOffset);
+            return vOffset;
         }
 
-        public Float llGetTextureRot(integer side)
+		public Float llGetTextureRot(integer iFace)
         {
-            Verbose("llGetTextureRot(" + side + ")");
-            return 0.0;
+			Float fTextureRot = 0.0;
+			Verbose("llGetTextureRot({0})={1}", iFace, fTextureRot);
+			return fTextureRot;
         }
 
-        public vector llGetTextureScale(integer side)
+        public vector llGetTextureScale(integer iFace)
         {
-            Verbose("llGetTextureScale(" + side + ")");
-            return vector.ZERO_VECTOR;
+			vector vScale = vector.ZERO_VECTOR;
+			Verbose("llGetTextureScale({0})={1}", iFace, vScale);
+			return vScale;
         }
 
         public Float llGetTime()
         {
             TimeSpan span = DateTime.Now.ToUniversalTime() - m_DateTimeScriptStarted;
-            Verbose("llGetTime()=" + span.TotalSeconds);
+            Verbose("llGetTime()={0}", span.TotalSeconds);
             return span.TotalSeconds;
         }
 
         public Float llGetTimeOfDay()
         {
-            Verbose("llGetTimeOfDay()");
             // dummy
-            return llGetTime();
+			Float fSeconds = llGetTime();
+            Verbose("llGetTimeOfDay()={0}", fSeconds);
+			return fSeconds;
         }
 
         public string llGetTimestamp()
         {
-            string strTimestamp = DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.ffffffZ", System.Globalization.DateTimeFormatInfo.InvariantInfo);
-            Verbose("llGetTimestamp()=" + strTimestamp);
-            return strTimestamp;
+            string sTimestamp = DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.ffffffZ", System.Globalization.DateTimeFormatInfo.InvariantInfo);
+            Verbose(@"llGetTimestamp()=""{0}""", sTimestamp);
+            return sTimestamp;
         }
 
         public vector llGetTorque()
         {
-            Verbose("llGetTorque()");
-            return vector.ZERO_VECTOR;
+			vector vTorque = vector.ZERO_VECTOR;
+			Verbose("llGetTorque()={0}", vTorque);
+			return vTorque;
         }
 
         public integer llGetUnixTime()
         {
-            DateTime date_time_base = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            TimeSpan span = DateTime.Now.ToUniversalTime() - date_time_base;
-            Verbose("llGetUnixTime()=" + span.TotalSeconds);
-            return (int)span.TotalSeconds;
+            DateTime dtUnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            TimeSpan tsSeconds = DateTime.Now.ToUniversalTime() - dtUnixEpoch;
+            Verbose("llGetUnixTime()={0}", (int)tsSeconds.TotalSeconds);
+            return (int)tsSeconds.TotalSeconds;
         }
 
         public integer llGetUsedMemory()
         {
-            return 65536;
+			integer iUsedMemory = 65536;
+			Verbose("llGetUsedMemory()={0}", iUsedMemory);
+			return iUsedMemory;
         }
 
         public string llGetUsername(key kAvatarID)
         {
             //TODO Find a dummy username.
-            string result = "";
-            Verbose("llGetUsername({0})={1}", kAvatarID, result);
-            return result;
+            string sUserName = "";
+            Verbose(@"llGetUsername({0})=""{1}""", kAvatarID, sUserName);
+            return sUserName;
         }
 
         public vector llGetVel()
         {
-            Verbose("llGetVel()");
-            return vector.ZERO_VECTOR;
+			vector vVelocity = vector.ZERO_VECTOR;
+			Verbose("llGetVel()={0}", vVelocity);
+			return vVelocity;
         }
 
         public Float llGetWallclock()
         {
-            Float result = (int)DateTime.Now.AddHours(-9.0).TimeOfDay.TotalSeconds;
-            Verbose("llGetWallclock()={0}", result);
-            return result;
+            Float fSeconds = (int)DateTime.Now.AddHours(-9.0).TimeOfDay.TotalSeconds;
+            Verbose("llGetWallclock()={0}", fSeconds);
+            return fSeconds;
         }
 
         public void llGiveInventory(key destination, String inventory)
