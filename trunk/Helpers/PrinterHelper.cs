@@ -20,7 +20,7 @@
 // ********
 // * LSLEditor, a External editor for the LSL Language.
 // * Copyright (C) 2010 The LSLEditor Group.
-// 
+//
 // * This program is free software; you can redistribute it and/or
 // * modify it under the terms of the GNU General Public License
 // * as published by the Free Software Foundation; either version 2
@@ -36,7 +36,7 @@
 // * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 // ********
 // *
-// * The above copyright notice and this permission notice shall be included in all 
+// * The above copyright notice and this permission notice shall be included in all
 // * copies or substantial portions of the Software.
 // *
 // ********
@@ -70,7 +70,10 @@ namespace LSLEditor.Helpers
 		int intCharPrint;
 
 		// print document
-		PrintDocument printDoc = null;
+		PrintDocument docToPrint = null;
+
+		// print dialogue
+		PrintDialog pd = null;
 
 		// print status items
 		int fromPage = 0;
@@ -103,7 +106,7 @@ namespace LSLEditor.Helpers
 		public String Title
 		{
 			get { return title; }
-			set { title = value; printDoc.DocumentName = title; }
+			set { title = value; docToPrint.DocumentName = title; }
 		}
 
 		/// <summary>
@@ -127,8 +130,8 @@ namespace LSLEditor.Helpers
 		}
 
 		/// <summary>
-		/// Allow the user to override the title string alignment. Default value is 
-		/// Alignment - Near; 
+		/// Allow the user to override the title string alignment. Default value is
+		/// Alignment - Near;
 		/// </summary>
 		private StringAlignment titlealignment;
 		public StringAlignment TitleAlignment
@@ -183,8 +186,8 @@ namespace LSLEditor.Helpers
 		}
 
 		/// <summary>
-		/// Allow the user to override the subtitle string alignment. Default value is 
-		/// Alignment - Near; 
+		/// Allow the user to override the subtitle string alignment. Default value is
+		/// Alignment - Near;
 		/// </summary>
 		private StringAlignment subtitlealignment;
 		public StringAlignment SubTitleAlignment
@@ -239,8 +242,8 @@ namespace LSLEditor.Helpers
 		}
 
 		/// <summary>
-		/// Allow the user to override the footer string alignment. Default value is 
-		/// Alignment - Center; 
+		/// Allow the user to override the footer string alignment. Default value is
+		/// Alignment - Center;
 		/// </summary>
 		private StringAlignment footeralignment;
 		public StringAlignment FooterAlignment
@@ -302,8 +305,8 @@ namespace LSLEditor.Helpers
 		}
 
 		/// <summary>
-		/// Allow the user to override the page number string alignment. Default value is 
-		/// Alignment - Near; 
+		/// Allow the user to override the page number string alignment. Default value is
+		/// Alignment - Near;
 		/// </summary>
 		private StringAlignment pagenumberalignment;
 		public StringAlignment PaageNumberAlignment
@@ -371,27 +374,27 @@ namespace LSLEditor.Helpers
 		public PrinterHelper(PageSetupDialog pageSetupDialog)
 		{
 			// create print document
-			printDoc = new PrintDocument();
-			printDoc.PrintPage += new PrintPageEventHandler(printDoc_PrintPage);
+			docToPrint = new PrintDocument();
+			docToPrint.PrintPage += new PrintPageEventHandler(printDoc_PrintPage);
 
 			if (pageSetupDialog.PrinterSettings != null)
-				printDoc.PrinterSettings = pageSetupDialog.PrinterSettings;
+				docToPrint.PrinterSettings = pageSetupDialog.PrinterSettings;
 
 			if (pageSetupDialog.PageSettings != null)
-				printDoc.DefaultPageSettings = pageSetupDialog.PageSettings;
+				docToPrint.DefaultPageSettings = pageSetupDialog.PageSettings;
 			else
-				printDoc.DefaultPageSettings.Margins = new Margins(60, 80, 40, 40);
+				docToPrint.DefaultPageSettings.Margins = new Margins(60, 80, 40, 40);
 
-			printmargins = printDoc.DefaultPageSettings.Margins;
+			printmargins = docToPrint.DefaultPageSettings.Margins;
 
 			// set default fonts
-			pagenofont = new Font("Tahoma", 8, FontStyle.Regular, GraphicsUnit.Point);
+			pagenofont = new Font("Tahoma", 10, FontStyle.Regular, GraphicsUnit.Point);
 			pagenocolor = Color.Black;
-			titlefont = new Font("Tahoma", 8, FontStyle.Bold, GraphicsUnit.Point);
+			titlefont = new Font("Tahoma", 10, FontStyle.Bold, GraphicsUnit.Point);
 			titlecolor = Color.Black;
-			subtitlefont = new Font("Tahoma", 8, FontStyle.Regular, GraphicsUnit.Point);
+			subtitlefont = new Font("Tahoma", 10, FontStyle.Regular, GraphicsUnit.Point);
 			subtitlecolor = Color.Black;
-			footerfont = new Font("Tahoma", 8, FontStyle.Regular, GraphicsUnit.Point);
+			footerfont = new Font("Tahoma", 10, FontStyle.Regular, GraphicsUnit.Point);
 			footercolor = Color.Black;
 
 			// set default string formats
@@ -415,27 +418,16 @@ namespace LSLEditor.Helpers
 		/// NOTE: Any changes to this method also need to be done in PrintPreviewEditForm
 		public void PrintEditForm(EditForm editForm)
 		{
-			// save the datagridview we're printing
-			this.editForm = editForm;
-			this.intCharFrom = 0;
-			this.intCharPrint = 0;
-			this.intCharTo = editForm.TextBox.Text.Length;
-
-			// create new print dialog
-			PrintDialog pd = new PrintDialog();
-			pd.Document = printDoc;
-			//printDoc.DefaultPageSettings.Margins = printmargins;
-			pd.AllowSelection = true;
-			pd.AllowSomePages = false;
-			pd.AllowCurrentPage = false;
-			pd.AllowPrintToFile = false;
+			saveFormData(editForm);
+			setupPrintDialogue();
 
 			// show print dialog
-			if (DialogResult.OK == pd.ShowDialog())
+			if (pd.ShowDialog() == DialogResult.OK)
 			{
 				SetupPrint(pd);
-				printDoc.Print();
+				docToPrint.Print();
 			}
+
 		}
 
 		/// <summary>
@@ -445,26 +437,15 @@ namespace LSLEditor.Helpers
 		/// NOTE: Any changes to this method also need to be done in PrintDataGridView
 		public void PrintPreviewEditForm(EditForm editForm)
 		{
-			// save the datagridview we're printing
-			this.editForm = editForm;
-			this.intCharFrom = 0;
-			this.intCharTo = editForm.TextBox.Text.Length;
-
-			// create new print dialog and set options
-			PrintDialog pd = new PrintDialog();
-			pd.Document = printDoc;
-			//printDoc.DefaultPageSettings.Margins = printmargins;
-			pd.AllowSelection = true;
-			pd.AllowSomePages = false;
-			pd.AllowCurrentPage = false;
-			pd.AllowPrintToFile = false;
+			saveFormData(editForm);
+			setupPrintDialogue();
 
 			// show print dialog
-			if (DialogResult.OK == pd.ShowDialog())
+			if (pd.ShowDialog() == DialogResult.OK)
 			{
 				SetupPrint(pd);
 				PrintPreviewDialog ppdialog = new PrintPreviewDialog();
-				ppdialog.Document = printDoc;
+				ppdialog.Document = docToPrint;
 				ppdialog.ShowDialog();
 			}
 		}
@@ -481,25 +462,25 @@ namespace LSLEditor.Helpers
 			// save data from print dialog and document
 			//-----------------------------------------------------------------
 
-			// check to see if we're doing landscape printing 
-			if (printDoc.DefaultPageSettings.Landscape)
+			// check to see if we're doing landscape printing
+			if (docToPrint.DefaultPageSettings.Landscape)
 			{
 				// landscape: switch width and height
-				pageHeight = printDoc.DefaultPageSettings.PaperSize.Width;
-				pageWidth = printDoc.DefaultPageSettings.PaperSize.Height;
+				pageHeight = docToPrint.DefaultPageSettings.PaperSize.Width;
+				pageWidth = docToPrint.DefaultPageSettings.PaperSize.Height;
 			}
 			else
 			{
 				// portrait: keep width and height as expected
-				pageHeight = printDoc.DefaultPageSettings.PaperSize.Height;
-				pageWidth = printDoc.DefaultPageSettings.PaperSize.Width;
+				pageHeight = docToPrint.DefaultPageSettings.PaperSize.Height;
+				pageWidth = docToPrint.DefaultPageSettings.PaperSize.Width;
 			}
 
 			// save printer margins and calc print width
-			printmargins = printDoc.DefaultPageSettings.Margins;
+			printmargins = docToPrint.DefaultPageSettings.Margins;
 			printWidth = pageWidth - printmargins.Left - printmargins.Right;
 
-			// save print range 
+			// save print range
 			printRange = pd.PrinterSettings.PrintRange;
 
 			// pages to print handles "some pages" option
@@ -698,6 +679,28 @@ namespace LSLEditor.Helpers
 
 				}
 			}
+		}
+
+		private void saveFormData(EditForm editForm)
+		{
+			// save the datagridview we're printing
+			this.editForm = editForm;
+			this.intCharFrom = 0;
+			this.intCharPrint = 0;
+			this.intCharTo = editForm.TextBox.Text.Length;
+		}
+
+		private void setupPrintDialogue()
+		{
+			// create new print dialog
+			pd = new PrintDialog();
+
+			pd.Document = docToPrint;
+			pd.AllowSelection = true;
+			pd.AllowSomePages = false;
+			pd.AllowCurrentPage = false;
+			pd.AllowPrintToFile = false;
+			pd.UseEXDialog = true;
 		}
 	}
 }

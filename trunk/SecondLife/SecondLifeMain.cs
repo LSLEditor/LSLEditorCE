@@ -234,7 +234,10 @@ namespace LSLEditor
 		public static readonly integer AGENT_LIST_PARCEL_OWNER = 0x02;
 		public static readonly integer AGENT_LIST_REGION = 0x04;
 
+        public static readonly integer ATTACH_AVATAR_CENTER = 40;
+        public static readonly integer ATTACH_BACK = 9;
         public static readonly integer ATTACH_CHEST = 1;
+        public static readonly integer ATTACH_CHIN = 12;
         public static readonly integer ATTACH_HEAD = 2;
         public static readonly integer ATTACH_LSHOULDER = 3;
         public static readonly integer ATTACH_RSHOULDER = 4;
@@ -242,10 +245,9 @@ namespace LSLEditor
         public static readonly integer ATTACH_RHAND = 6;
         public static readonly integer ATTACH_LFOOT = 7;
         public static readonly integer ATTACH_RFOOT = 8;
-        public static readonly integer ATTACH_BACK = 9;
         public static readonly integer ATTACH_PELVIS = 10;
         public static readonly integer ATTACH_MOUTH = 11;
-        public static readonly integer ATTACH_CHIN = 12;
+        public static readonly integer ATTACH_NECK = 39;
         public static readonly integer ATTACH_LEAR = 13;
         public static readonly integer ATTACH_LEFT_PEC = 29;
         public static readonly integer ATTACH_REAR = 14;
@@ -320,6 +322,7 @@ namespace LSLEditor
         public static readonly integer CHARACTER_MAX_TURN_RADIUS = 10;
         public static readonly integer CHARACTER_ORIENTATION = 4;
         public static readonly integer CHARACTER_RADIUS = 2;
+        public static readonly integer CHARACTER_STAY_WITHIN_PARCEL = 15;
 		public static readonly integer CHARACTER_TYPE_A = 0;
 		public static readonly integer CHARACTER_TYPE_B = 1;
 		public static readonly integer CHARACTER_TYPE_C = 2;
@@ -334,7 +337,17 @@ namespace LSLEditor
         public static readonly integer CLICK_ACTION_OPEN = 4;
         public static readonly integer CLICK_ACTION_PLAY = 5;
         public static readonly integer CLICK_ACTION_OPEN_MEDIA = 6;
+
+		public static readonly string CONTENT_TYPE_ATOM = "application/atom+xml";
+		public static readonly string CONTENT_TYPE_FORM = "application/x-www-form-urlencoded";
         public static readonly string CONTENT_TYPE_HTML = "text/html";
+		public static readonly string CONTENT_TYPE_JSON = "application/json";
+		public static readonly string CONTENT_TYPE_LLSD = "application/llsd+xml";
+		public static readonly string CONTENT_TYPE_RSS = "application/rss+xml";
+		public static readonly string CONTENT_TYPE_TEXT = "text/plain";
+		public static readonly string CONTENT_TYPE_XHTML = "application/xhtml+xml";
+		public static readonly string CONTENT_TYPE_XML = "application/xml";
+
         public static readonly integer CONTROL_FWD = 1;
         public static readonly integer CONTROL_BACK = 2;
         public static readonly integer CONTROL_LEFT = 4;
@@ -356,6 +369,12 @@ namespace LSLEditor
         public static readonly integer DATA_SIM_RATING = 7;
 
         public static readonly integer DATA_PAYINFO = 8;
+
+        public static readonly integer ERR_GENERIC = -1;
+        public static readonly integer ERR_MALFORMED_PARAMS = -3;
+        public static readonly integer ERR_PARCEL_PERMISSIONS = -2;
+        public static readonly integer ERR_RUNTIME_PERMISSIONS = -4;
+        public static readonly integer ERR_THROTTLED = -5;
 
         public static readonly integer ESTATE_ACCESS_ALLOWED_AGENT_ADD = 4;
         public static readonly integer ESTATE_ACCESS_ALLOWED_AGENT_REMOVE = 8;
@@ -388,6 +407,15 @@ namespace LSLEditor
         public static readonly integer INVENTORY_BODYPART = 13;
         public static readonly integer INVENTORY_ANIMATION = 20;
         public static readonly integer INVENTORY_GESTURE = 21;
+
+        public static readonly string JSON_ARRAY    = "\uFDD2";
+        public static readonly string JSON_FALSE    = "\uFDD7";
+        public static readonly string JSON_INVALID  = "\uFDD0";
+        public static readonly string JSON_NULL     = "\uFDD5";
+        public static readonly string JSON_NUMBER   = "\uFDD3";
+        public static readonly string JSON_OBJECT   = "\uFDD1";
+        public static readonly string JSON_STRING   = "\uFDD4";
+        public static readonly string JSON_TRUE     = "\uFDD6";
 
         public static readonly integer KFM_CMD_PAUSE = 2;
         public static readonly integer KFM_CMD_PLAY = 0;
@@ -471,6 +499,10 @@ namespace LSLEditor
         public static readonly integer OPT_STATIC_OBSTACLE = 4;
         public static readonly integer OPT_WALKABLE = 3;
 
+        public static readonly integer OBJECT_RETURN_PARCEL = 1;
+        public static readonly integer OBJECT_RETURN_PARCEL_OWNER = 2;
+        public static readonly integer OBJECT_RETURN_REGION = 4;
+
         public static readonly integer PARCEL_COUNT_TOTAL = 0;
         public static readonly integer PARCEL_COUNT_OWNER = 1;
         public static readonly integer PARCEL_COUNT_GROUP = 2;
@@ -541,8 +573,10 @@ namespace LSLEditor
         public static readonly integer PERMISSION_CHANGE_LINKS = 128;
         public static readonly integer PERMISSION_CHANGE_JOINTS = 256;
         public static readonly integer PERMISSION_CHANGE_PERMISSIONS = 512;
-        public static readonly integer PERMISSION_TRACK_CAMERA = 1024;
         public static readonly integer PERMISSION_CONTROL_CAMERA = 2048;
+        public static readonly integer PERMISSION_OVERRIDE_ANIMATIONS = 0x8000;
+        public static readonly integer PERMISSION_TRACK_CAMERA = 1024;
+        public static readonly integer PERMISSION_RETURN_OBJECTS = 65536;
 
         public static readonly integer PRIM_BUMP_BARK = 4;
         public static readonly integer PRIM_BUMP_BLOBS = 12;
@@ -884,7 +918,7 @@ namespace LSLEditor
         public ArrayList RandomShuffle(ArrayList collection)
         {
             // We have to copy all items anyway, and there isn't a way to produce the items
-            // on the fly that is linear. So copying to an array and shuffling it is an efficient as we can get.
+            // on the fly that is linear. So copying to an array and shuffling it is as efficient as we can get.
 
             if (collection == null)
                 throw new ArgumentNullException("collection");
@@ -1776,6 +1810,12 @@ namespace LSLEditor
             return dblValue;
         }
 
+        public key llGenerate()
+        {
+            Verbose("llGenerate()");
+            return key.NULL_KEY;
+        }
+
 		public void llFleeFrom(vector Source, Float Distance, list Options)
 		{
 			Verbose("llFleeFrom({0}, {1}, {2})", Source, Distance, Options);
@@ -1838,6 +1878,12 @@ namespace LSLEditor
         {
             Verbose("GetAnimationList(" + id + ")");
             return new list();
+        }
+
+        public String llGetAnimationOverride(String sAnimationState)
+        {
+            Verbose("GetAnimationOverride(" + sAnimationState + ")");
+            return "";
         }
 
         public integer llGetAttached()
@@ -2718,6 +2764,38 @@ namespace LSLEditor
 				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// E0
 				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};	// F0
 
+        public list llJson2List(string sJSON)
+        {
+            //TODO implement conversion to list
+            list lJSON = new list();
+            Verbose("llJson2List({0})={1}", sJSON, lJSON);
+            return lJSON;
+        }
+
+        public string llJsonGetValue(string sJSON, list lSpecifiers)
+        {
+            //TODO determine return value from list
+            string sReturn = JSON_INVALID;
+            Verbose("llJsonGetValue({0}, {1})= {2}", sJSON, lSpecifiers, sReturn);
+            return sReturn;
+        }
+
+        public string llJsonSetValue(string sJSON, list lSpecifiers, string sValue)
+        {
+            //TODO determine return value
+            string sReturn = JSON_INVALID;
+            Verbose("llJsonGetValue({0}, {1}, {2})= {3}", sJSON, lSpecifiers, sValue, sReturn);
+            return sReturn;
+        }
+
+        public string llJsonValueType(string sJSON, list lSpecifiers)
+        {
+            //TODO determine return value
+            string sReturn = JSON_INVALID;
+            Verbose("llJsonGetValue({0}, {1})= {2}", sJSON, lSpecifiers, sReturn);
+            return sReturn;
+        }
+
         public String llKey2Name(key id)
         {
             string strName = "*unknown*";
@@ -2774,6 +2852,14 @@ namespace LSLEditor
                 result = (integer)src[index].ToString();
             Verbose("List2Integer({0},{1})={2}", src.ToVerboseString(), index, result);
             return result;
+        }
+
+        public string llList2Json(string sType, list lValues)
+        {
+            //TODO determine return value
+            string sReturn = JSON_INVALID;
+            Verbose("llList2Json({0}, {1})= {2}", sType, lValues, sReturn);
+            return sReturn;
         }
 
         public key llList2Key(list src, integer index)
@@ -3549,6 +3635,11 @@ namespace LSLEditor
             return kID;
         }
 
+        public void llResetAnimationOverride(String sAnimationState)
+        {
+            Verbose("llResetAnimationOverride({0})", sAnimationState);
+        }
+
         public void llResetLandBanList()
         {
             m_LandBanList = new Hashtable();
@@ -3578,6 +3669,20 @@ namespace LSLEditor
         {
             Verbose("ResetTime()");
             m_DateTimeScriptStarted = DateTime.Now.ToUniversalTime();
+        }
+
+        public integer llReturnObjectsByID(list lObjects)
+        {
+            integer iReturned = ERR_GENERIC;
+            Verbose("llReturnObjectsByID({0})={1}", lObjects, iReturned);
+            return iReturned;
+        }
+
+        public integer llReturnObjectsByOwner(key kID, integer iScope)
+        {
+            integer iReturned = ERR_GENERIC;
+            Verbose("llReturnObjectsByOwner({0}, {1})={2}", kID, iScope, iReturned);
+            return iReturned;
         }
 
         public void llRezAtRoot(String inventory, vector pos, vector vel, rotation rot, integer param)
@@ -3751,6 +3856,11 @@ namespace LSLEditor
         public void llSetAngularVelocity(vector vForce, integer iLocal)
         {
             Verbose("llSetAngularVelocity(" + vForce + "," + iLocal + ")");
+        }
+
+        public void llSetAnimationOverride(String sAnimationState, String sAnimation)
+        {
+            Verbose("llSetAnimationOverride({0}, {1})", sAnimationState, sAnimation);
         }
 
         public void llSetBuoyancy(Float buoyancy)
@@ -4304,7 +4414,7 @@ namespace LSLEditor
             Verbose("VolumeDetect(" + detect + ")");
         }
 
-		public void llWanderWithin(vector Origin, Float Distance, list Options)
+		public void llWanderWithin(vector Origin, vector Distance, list Options)
 		{
 			Verbose("llWanderWithin({0}, {1}, {2})", Origin, Distance, Options);
 		}
