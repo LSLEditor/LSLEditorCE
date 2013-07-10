@@ -103,7 +103,7 @@ namespace LSLEditor
 			System.Drawing.Point point = Properties.Settings.Default.RegionCorner;
 			SecondLife.vector RegionCorner = new SecondLife.vector(point.X, point.Y, 0);
 
-			SecondLife.vector pos = secondlife.GetLocalPos();
+			SecondLife.vector pos = secondlife.llGetLocalPos(false);
 
 			wc.Headers.Add("X-SecondLife-Shard", Properties.Settings.Default.XSecondLifeShard);
 			wc.Headers.Add("X-SecondLife-Object-Name", secondlife.host.GetObjectName());
