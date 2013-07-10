@@ -1090,6 +1090,24 @@ namespace LSLEditor
                 return 0;
         }
 
+		static readonly int[] FastLookupBase64 =
+			{//  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 00
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 10
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,62, 0, 0, 0,63,	// 20
+				52,53,54,55,56,57,58,59,60,61, 0, 0, 0, 0, 0, 0,	// 30
+				 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,	// 40
+				15,16,17,18,19,20,21,22,23,24,25, 0, 0, 0, 0, 0,	// 50
+				 0,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,	// 60
+				41,42,43,44,45,46,47,48,49,50,51, 0, 0, 0, 0, 0,	// 70
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 80
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 90
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// A0
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// B0
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// C0
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// D0
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// E0
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};	// F0
         #endregion
 
         #region Math Functions
@@ -1323,7 +1341,7 @@ namespace LSLEditor
                 dSineHalfAngle * vUnitAxis.z,
                 dCosineHalfAngle);
 
-            Verbose("llAxisAngle2Rot({0},{1})={2}", vAxis, fAngle, rResult);
+            Verbose("llAxisAngle2Rot({0}, {1})={2}", vAxis, fAngle, rResult);
             return rResult;
         }
 
@@ -1729,7 +1747,7 @@ namespace LSLEditor
                     result.Append(sSeparator.ToString());
                 result.Append(lSource[intI].ToString());
             }
-            Verbose(@"DumpList2String({0},""{1}"")=""{2}""", lSource.ToVerboseString(), sSeparator, result.ToString());
+            Verbose(@"llDumpList2String({0},""{1}"")=""{2}""", lSource.ToVerboseString(), sSeparator, result.ToString());
             return result.ToString();
         }
 
@@ -2048,7 +2066,7 @@ namespace LSLEditor
         public key llGetInventoryCreator(String sItem)
         {
             key kAvatarID = Properties.Settings.Default.AvatarKey;
-            Verbose(@"GetInventoryCreator(""{0}"")={1}", sItem, kAvatarID);
+            Verbose(@"llGetInventoryCreator(""{0}"")={1}", sItem, kAvatarID);
             return kAvatarID;
         }
 
@@ -2062,7 +2080,7 @@ namespace LSLEditor
         public String llGetInventoryName(integer iItemType, integer iItemIndex)
         {
             string sItemName = host.GetInventoryName(iItemType, iItemIndex);
-            Verbose(@"llGetInventoryName({0},{1})=""{2}""", iItemType, iItemIndex, sItemName);
+            Verbose(@"llGetInventoryName({0}, {1})=""{2}""", iItemType, iItemIndex, sItemName);
             return sItemName;
         }
 
@@ -2181,7 +2199,7 @@ namespace LSLEditor
                         break;
                 }
             }
-            Verbose("llGetListEntryType({0},{1})={2}", lSource.ToVerboseString(), iIndex, iEntryType);
+            Verbose("llGetListEntryType({0}, {1})={2}", lSource.ToVerboseString(), iIndex, iEntryType);
             return iEntryType;
         }
 
@@ -2194,8 +2212,7 @@ namespace LSLEditor
 
         public vector llGetLocalPos(Boolean bVerbose = true)
         {
-			if (bVerbose)
-			{
+			if (bVerbose) {
 				Verbose("llGetLocalPos()={0}", m_pos);
 			}
             return m_pos;
@@ -2236,14 +2253,14 @@ namespace LSLEditor
         public key llGetNotecardLine(String sNoteName, integer iLineIndex)
         {
             key kID = host.GetNotecardLine(sNoteName, iLineIndex);
-            Verbose(@"GetNotecardLine(""{0}"", {1})={2}", sNoteName, iLineIndex, kID);
+            Verbose(@"llGetNotecardLine(""{0}"", {1})={2}", sNoteName, iLineIndex, kID);
             return kID;
         }
 
         public key llGetNumberOfNotecardLines(String sNoteName)
         {
             key kID = host.GetNumberOfNotecardLines(sNoteName);
-            Verbose(@"GetNumberOfNotecardLines(""{0}"")={1}", sNoteName, kID);
+            Verbose(@"llGetNumberOfNotecardLines(""{0}"")={1}", sNoteName, kID);
             return kID;
         }
 
@@ -2306,7 +2323,7 @@ namespace LSLEditor
                         break;
                 }
             }
-            Verbose(@"llGetObjectDetails({0},{1})={2}", kID, lObjectFlags, lObjectDetails);
+            Verbose(@"llGetObjectDetails({0}, {1})={2}", kID, lObjectFlags, lObjectDetails);
             return lObjectDetails;
         }
 
@@ -2729,118 +2746,103 @@ namespace LSLEditor
             return fSeconds;
         }
 
-        public void llGiveInventory(key destination, String inventory)
+        public void llGiveInventory(key kID, String sItemName)
         {
-            Verbose("llGiveInventory(" + destination + "," + inventory + ")");
+            Verbose(@"llGiveInventory({0}, ""{1}"")", kID, sItemName);
         }
 
-        public void llGiveInventoryList(key destination, String category, list inventory)
+        public void llGiveInventoryList(key kID, String sDirectory, list lInventory)
         {
-            Verbose("llGiveInventoryList(" + destination + "," + category + "," + inventory.ToString() + ")");
+            Verbose(@"llGiveInventoryList({0}, ""{1}"", {2})", kID, sDirectory, lInventory.ToVerboseString());
         }
 
-        public integer llGiveMoney(key destination, integer amount)
+        public integer llGiveMoney(key kAvatarID, integer iAmount)
         {
-            Verbose("llGiveMoney(" + destination + "," + amount + ")");
-            return 0;
+			Verbose("llGiveMoney({0}, {1})=0", kAvatarID, iAmount);
+			return 0;
         }
 
-        public Float llGround(vector offset)
+        public Float llGround(vector vOffset)
         {
-            Float ground = 25.0;
-            Verbose("llGround(" + offset + ")=" + ground);
-            return ground;
+            Float fHeight = 25.0;
+            Verbose("llGround({0})={1}", vOffset, fHeight);
+            return fHeight;
         }
 
-        public vector llGroundContour(vector offset)
+		public vector llGroundContour(vector vOffset)
         {
-            Verbose("llGroundContour(" + offset + ")");
-            return vector.ZERO_VECTOR;
+			vector vContour = vector.ZERO_VECTOR;
+			Verbose("llGroundContour({0})={1}", vOffset, vContour);
+			return vContour;
         }
 
-        public vector llGroundNormal(vector offset)
+        public vector llGroundNormal(vector vOffset)
         {
-            vector GroundNormal = new vector(0, 0, 1);
-            Verbose("llGroundNormal(" + offset + ")=" + GroundNormal);
-            return GroundNormal;
+            vector vGroundNormal = new vector(0.0, 0.0, 1.0);
+			Verbose("llGroundNormal({0})={1}", vOffset, vGroundNormal);
+            return vGroundNormal;
         }
 
-        public void llGroundRepel(Float height, integer water, Float tau)
+        public void llGroundRepel(Float fHeight, integer iWater, Float fTau)
         {
-            Verbose("llGroundRepel(" + height + "," + water + "," + tau + ")");
+			Verbose("llGroundRepel({0}, {1}, {2})", fHeight, iWater, fTau);
         }
 
-        public vector llGroundSlope(vector offset)
+        public vector llGroundSlope(vector vOffset)
         {
-            Verbose("llGroundSlope:" + offset);
-            return vector.ZERO_VECTOR;
+			vector vSlope = vector.ZERO_VECTOR;
+			Verbose("llGroundSlope({0})={1}" + vOffset, vSlope);
+			return vSlope;
         }
 
-        public key llHTTPRequest(String url, list parameters, String body)
+        public key llHTTPRequest(String sURL, list lParameters, String sBody)
         {
-            key result = host.Http(url, parameters, body);
-            Verbose(@"HTTPRequest(""{0}"",{1},""{2}"")=""{3}""", url, parameters.ToVerboseString(), body, result);
-            return result;
+            key kRequestID = host.Http(sURL, lParameters, sBody);
+            Verbose(@"llHTTPRequest(""{0}"", {1}, ""{2}"")=""{3}""", sURL, lParameters.ToVerboseString(), sBody, kRequestID);
+            return kRequestID;
         }
 
-        //348
-        public void llHTTPResponse(key request_id, integer status, String body)
+		public void llHTTPResponse(key kRequestID, integer iStatus, String sBody)
         {
+			Verbose(@"llHTTPResponse({0}, {1}, ""{2}"")", kRequestID, iStatus, sBody);
+		}
+
+        public String llInsertString(String sDestination, integer iIndex, String sSource)
+        {
+            string dst = sDestination;
+            string src = sSource;
+            int position = iIndex;
+            string sResult;
+
+			if (position < dst.Length) {
+				sResult = dst.Substring(0, position) + src + dst.Substring(position);
+			}
+			else if (position >= 0) {
+				sResult = dst + src;
+			}
+			else {
+				sResult = "**ERROR**";
+			}
+			Verbose(@"llInsertString(""{0}"", {1}, ""{2}"")=""{3}""", sDestination, iIndex, sSource, sResult);
+            return sResult;
         }
 
-        public String llInsertString(String _dst, integer _position, String _src)
+        public void llInstantMessage(key kAvatarID, String sMessage)
         {
-            string dst = _dst;
-            string src = _src;
-            int position = _position;
-            string result;
-
-            if (position < 0)
-                position = 0;
-
-            if (position < dst.Length)
-                result = dst.Substring(0, position) + src + dst.Substring(position);
-            else
-                result = dst + src;
-            Verbose(@"InsertString(""{0}"",{1},""{2}"")=""{3}""", dst, position, src, result);
-            return result;
+			Verbose(@"llInstantMessage({0}, ""{1}"")", kAvatarID, sMessage);
         }
 
-        public void llInstantMessage(key user, String message)
-        {
-            Verbose("llInstantMessage(" + user + "," + message + ")");
-        }
-
-        public String llIntegerToBase64(integer number)
+        public String llIntegerToBase64(integer iNumber)
         {
             byte[] data = new byte[4];
-            data[3] = (byte)(number & 0xff);
-            data[2] = (byte)((number >> 8) & 0xff);
-            data[1] = (byte)((number >> 16) & 0xff);
-            data[0] = (byte)((number >> 24) & 0xff);
-            string result = Convert.ToBase64String(data);
-            Verbose(@"IntegerToBase64({0})=""{1}""", number, result);
-            return result;
+            data[3] = (byte)(iNumber & 0xff);
+            data[2] = (byte)((iNumber >> 8) & 0xff);
+            data[1] = (byte)((iNumber >> 16) & 0xff);
+            data[0] = (byte)((iNumber >> 24) & 0xff);
+            string sResult = Convert.ToBase64String(data);
+            Verbose(@"llIntegerToBase64({0})=""{1}""", iNumber, sResult);
+            return sResult;
         }
-
-        static readonly int[] FastLookupBase64 =
-			{//  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 00
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 10
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,62, 0, 0, 0,63,	// 20
-				52,53,54,55,56,57,58,59,60,61, 0, 0, 0, 0, 0, 0,	// 30
-				 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,	// 40
-				15,16,17,18,19,20,21,22,23,24,25, 0, 0, 0, 0, 0,	// 50
-				 0,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,	// 60
-				41,42,43,44,45,46,47,48,49,50,51, 0, 0, 0, 0, 0,	// 70
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 80
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 90
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// A0
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// B0
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// C0
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// D0
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// E0
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};	// F0
 
         public list llJson2List(string sJSON)
         {
@@ -2874,18 +2876,19 @@ namespace LSLEditor
             return sReturn;
         }
 
-        public String llKey2Name(key id)
+        public String llKey2Name(key kID)
         {
-            string strName = "*unknown*";
-            if (Properties.Settings.Default.AvatarKey == id)
-                strName = Properties.Settings.Default.AvatarName;
-            Verbose("llKey2Name(" + id + ")=" + strName);
-            return strName;
+            string sAvatarName = "";
+			if (Properties.Settings.Default.AvatarKey == kID) {
+				sAvatarName = Properties.Settings.Default.AvatarName;
+			}
+            Verbose(@"llKey2Name({0})=""{1}""", kID, sAvatarName);
+            return sAvatarName;
         }
 
-        public void llLinkParticleSystem(integer link, list parameters)
+        public void llLinkParticleSystem(integer iLink, list lParameters)
         {
-            Verbose("llLinkParticleSystem(" + link + "," + parameters.ToString() + ")");
+			Verbose("llLinkParticleSystem({0}, {1})", iLink, lParameters.ToVerboseString());
         }
 
         public void llLinkSitTarget(integer iLinkNumber, vector vOffset, rotation rRotation)
@@ -2893,208 +2896,184 @@ namespace LSLEditor
             Verbose("llLinkSitTarget({0}, {1}, {2})", iLinkNumber, vOffset, rRotation);
         }
 
-        public String llList2CSV(list src)
+        public String llList2CSV(list lSource)
         {
-            StringBuilder result = new StringBuilder();
-            for (int intI = 0; intI < src.Count; intI++)
+            StringBuilder sCSV = new StringBuilder();
+            for (int intI = 0; intI < lSource.Count; intI++)
             {
-                if (intI > 0)
-                    result.Append(", ");
-                result.Append(src[intI].ToString());
+                if (intI > 0) sCSV.Append(", ");
+                sCSV.Append(lSource[intI].ToString());
             }
-            Verbose(@"List2CSV({0})=""{1}""", src.ToVerboseString(), result.ToString());
-            return result.ToString();
+            Verbose(@"llList2CSV({0})=""{1}""", lSource.ToVerboseString(), sCSV.ToString());
+            return sCSV.ToString();
+        }
+		
+        public Float llList2Float(list lSource, integer iIndex)
+        {
+            Float fResult;
+            if (iIndex < 0) iIndex = lSource.Count + iIndex;
+			if (iIndex >= lSource.Count || iIndex < 0) {
+				fResult = 0.0;
+			} else {
+				fResult = (Float)lSource[iIndex].ToString();
+			}
+            Verbose("llList2Float({0}, {1})={2}", lSource.ToVerboseString(), iIndex, fResult);
+            return fResult;
         }
 
-        public Float llList2Float(list src, integer index)
+        public integer llList2Integer(list lSrc, integer iIndex)
         {
-            Float result;
-            if (index < 0)
-                index = src.Count + index;
-            if (index >= src.Count || index < 0)
-                result = 0.0;
-            else
-                result = (Float)src[index].ToString();
-            Verbose("llList2Float({0},{1})={2}", src.ToVerboseString(), index, result);
-            return result;
-        }
-
-        public integer llList2Integer(list src, integer index)
-        {
-            integer result;
-            if (index < 0)
-                index = src.Count + index;
-            if (index >= src.Count || index < 0)
-                result = 0;
-            else
-                result = (integer)src[index].ToString();
-            Verbose("llList2Integer({0},{1})={2}", src.ToVerboseString(), index, result);
-            return result;
+            integer iResult;
+            if (iIndex < 0) iIndex = lSrc.Count + iIndex;
+			if (iIndex >= lSrc.Count || iIndex < 0) {
+				iResult = 0;
+			} else {
+				iResult = (integer)lSrc[iIndex].ToString();
+			}
+            Verbose("llList2Integer({0}, {1})={2}", lSrc.ToVerboseString(), iIndex, iResult);
+            return iResult;
         }
 
         public string llList2Json(string sType, list lValues)
         {
             //TODO determine return value
             string sReturn = JSON_INVALID;
-            Verbose("llList2Json({0}, {1})= {2}", sType, lValues, sReturn);
+            Verbose(@"llList2Json({0}, {1})=""{2}""", sType, lValues.ToVerboseString(), sReturn);
             return sReturn;
         }
 
-        public key llList2Key(list src, integer index)
+        public key llList2Key(list lSource, integer iIndex)
         {
-            key result;
-            if (index < 0)
-                index = src.Count + index;
-            if (index >= src.Count || index < 0)
-                result = NULL_KEY;
-            else
-                result = (key)src[index].ToString();
-            Verbose("llList2Key({0},{1})={2}", src.ToVerboseString(), index, result);
-            return result;
+            key kResult;
+            if (iIndex < 0) iIndex = lSource.Count + iIndex;
+			if (iIndex >= lSource.Count || iIndex < 0) {
+				kResult = key.NULL_KEY;
+			} else {
+				kResult = (key)lSource[iIndex].ToString();
+			}
+            Verbose("llList2Key({0}, {1})={2}", lSource.ToVerboseString(), iIndex, kResult);
+            return kResult;
         }
 
-        // ok
-        public list llList2List(list src, integer _start, integer _end)
+        public list llList2List(list lSource, integer iStart, integer iEnd)
         {
-            int intLength = src.Count;
+            int iLength = lSource.Count;
 
-            int start = _start;
-            int end = _end;
+            int start = iStart;
+            int end = iEnd;
 
-            list result = new list();
+            list lResult = new list();
 
-            if (CorrectIt(intLength, ref start, ref end))
+            if (CorrectIt(iLength, ref start, ref end))
             {
-                if (start <= end)
+				if (start <= end) {
+					for (int intI = start; intI <= end; intI++) lResult.Add(lSource[intI]);
+				} else { // excluding
+					for (int intI = 0; intI <= end; intI++) lResult.Add(lSource[intI]);
+					for (int intI = start; intI < iLength; intI++) lResult.Add(lSource[intI]);
+				}
+            }
+
+            Verbose(string.Format("List2List({0}, {1}, {2})={3}", lSource.ToVerboseString(), iStart, iEnd, lResult.ToVerboseString()));
+            return lResult;
+        }
+
+         public list llList2ListStrided(list lSource, integer iStart, integer iEnd, integer iStride)
+        {
+            int iLength = lSource.Count;
+
+            int start = iStart;
+            int end = iEnd;
+
+            list lTemp = new list();
+
+            if (CorrectIt(iLength, ref start, ref end))
+            {
+				if (start <= end) {
+					for (int intI = start; intI <= end; intI++) lTemp.Add(lSource[intI]);
+				} else // excluding
                 {
-                    for (int intI = start; intI <= end; intI++)
-                        result.Add(src[intI]);
-                }
-                else // excluding
-                {
-                    for (int intI = 0; intI <= end; intI++)
-                        result.Add(src[intI]);
-                    for (int intI = start; intI < intLength; intI++)
-                        result.Add(src[intI]);
-                }
+					for (int intI = 0; intI <= end; intI++) lTemp.Add(lSource[intI]);
+					for (int intI = start; intI < iLength; intI++) lTemp.Add(lSource[intI]);
+				}
             }
-
-            Verbose(string.Format(@"List2List(""{0}"",{1},{2})=""{3}""", src, _start, _end, result));
-            return result;
+            list lResult = new list();
+            string sRemark = "";
+			if (iStride <= 0) {
+				sRemark = " ** stride must be > 0 **";
+			} else {
+				if (start == 0) {
+					for (int intI = 0; intI < lTemp.Count; intI += iStride) lResult.Add(lTemp[intI]);
+				} else {
+					for (int intI = iStride - 1; intI < lTemp.Count; intI += iStride) lResult.Add(lTemp[intI]);
+				}
+			}
+            Verbose(@"llList2ListStrided({0}, {1}, {2}, {3})={4}{5}", lSource.ToVerboseString(), start, end, iStride, lResult.ToVerboseString(), sRemark);
+            return lResult;
         }
 
-        // ok
-        public list llList2ListStrided(list src, integer _start, integer _end, integer stride)
+        public rotation llList2Rot(list lSource, integer iIndex)
         {
-            int intLength = src.Count;
-
-            int start = _start;
-            int end = _end;
-
-            list temp = new list();
-
-            if (CorrectIt(intLength, ref start, ref end))
-            {
-                if (start <= end)
-                {
-                    for (int intI = start; intI <= end; intI++)
-                        temp.Add(src[intI]);
-                }
-                else // excluding
-                {
-                    for (int intI = 0; intI <= end; intI++)
-                        temp.Add(src[intI]);
-                    for (int intI = start; intI < intLength; intI++)
-                        temp.Add(src[intI]);
-                }
-            }
-            list result = new list();
-            string remark = "";
-            if (stride <= 0)
-            {
-                remark = " ** stride must be > 0 **";
-            }
-            else
-            {
-                if (start == 0)
-                    for (int intI = 0; intI < temp.Count; intI += stride)
-                        result.Add(temp[intI]);
-                else
-                    for (int intI = stride - 1; intI < temp.Count; intI += stride)
-                        result.Add(temp[intI]);
-            }
-            Verbose(@"List2ListStrided({0},{1},{2},{3})={4}{5}", src.ToVerboseString(), start, end, stride, result.ToVerboseString(), remark);
-            return result;
+            rotation rResult;
+            if (iIndex < 0) iIndex = lSource.Count + iIndex;
+			if (iIndex >= lSource.Count || iIndex < 0) {
+				rResult = ZERO_ROTATION;
+			} else {
+				if (lSource[iIndex] is rotation) {
+					rResult = (rotation)lSource[iIndex];
+				} else {
+					rResult = rotation.ZERO_ROTATION;
+				}
+			}
+            Verbose("llList2Rot({0}, {1})={2}", lSource.ToVerboseString(), iIndex, rResult);
+            return rResult;
         }
 
-        public rotation llList2Rot(list src, integer index)
+        public String llList2String(list lSource, integer iIndex)
         {
-            rotation result;
-            if (index < 0)
-                index = src.Count + index;
-            if (index >= src.Count || index < 0)
-                result = ZERO_ROTATION;
-            else
-            {
-                if (src[index] is rotation)
-                    result = (rotation)src[index];
-                else
-                    result = ZERO_ROTATION;
-            }
-            Verbose("llList2Rot({0},{1})={2}", src.ToVerboseString(), index, result);
-            return result;
+            String sResult;
+            if (iIndex < 0) iIndex = lSource.Count + iIndex;
+			if (iIndex >= lSource.Count || iIndex < 0) {
+				sResult = "";
+			} else {
+				sResult = (String)lSource[iIndex].ToString();
+			}
+            Verbose(@"llList2String({0}, {1})=""{2}""", lSource.ToVerboseString(), iIndex, sResult);
+            return sResult;
         }
 
-        public String llList2String(list src, integer index)
+        public vector llList2Vector(list lSource, integer iIndex)
         {
-            String result;
-            if (index < 0)
-                index = src.Count + index;
-            if (index >= src.Count || index < 0)
-                result = "";
-            else
-                result = (String)src[index].ToString();
-            Verbose("llList2String({0},{1})={2}", src.ToVerboseString(), index, result);
-            return result;
+            vector vResult;
+            if (iIndex < 0) iIndex = lSource.Count + iIndex;
+			if (iIndex >= lSource.Count || iIndex < 0) {
+				vResult = ZERO_VECTOR;
+			} else {
+				if (lSource[iIndex] is vector) {
+					vResult = (vector)lSource[iIndex];
+				} else {
+					vResult = vector.ZERO_VECTOR;
+				}
+			}
+            Verbose("llList2Vector({0}, {1})={2}", lSource.ToVerboseString(), iIndex, vResult);
+            return vResult;
         }
 
-        public vector llList2Vector(list src, integer index)
+        public integer llListFindList(list lSource, list lMatch)
         {
-            vector result;
-            if (index < 0)
-                index = src.Count + index;
-            if (index >= src.Count || index < 0)
-                result = ZERO_VECTOR;
-            else
-            {
-                if (src[index] is vector)
-                    result = (vector)src[index];
-                else
-                    result = ZERO_VECTOR;
-            }
-            Verbose("llList2Vector({0},{1})={2}", src.ToVerboseString(), index, result);
-            return result;
-        }
+            if (lSource.Count == 0) return -1;
+            if (lMatch.Count == 0)  return 0;
+            if (lMatch.Count > lSource.Count) return -1;
 
-        // ok, 27 mei 2007
-        public integer llListFindList(list src, list test)
-        {
-            if (src.Count == 0)
-                return -1;
-            if (test.Count == 0)
-                return 0;
-            if (test.Count > src.Count)
-                return -1;
-
-            int intReturn = -1;
-            for (int intI = 0; intI <= (src.Count - test.Count); intI++)
+            int iReturn = -1;
+            for (int intI = 0; intI <= (lSource.Count - lMatch.Count); intI++)
             {
-                if (test[0].Equals(src[intI]))
+                if (lMatch[0].Equals(lSource[intI]))
                 {
                     bool blnOkay = true;
-                    for (int intJ = 1; intJ < test.Count; intJ++)
+                    for (int intJ = 1; intJ < lMatch.Count; intJ++)
                     {
-                        if (!test[intJ].Equals(src[intI + intJ]))
+                        if (!lMatch[intJ].Equals(lSource[intI + intJ]))
                         {
                             blnOkay = false;
                             break;
@@ -3102,88 +3081,81 @@ namespace LSLEditor
                     }
                     if (blnOkay)
                     {
-                        intReturn = intI;
+                        iReturn = intI;
                         break;
                     }
                 }
             }
-            Verbose("llListFindList({0},{1}={2}", src.ToVerboseString(), test.ToVerboseString(), intReturn);
-            return intReturn;
+            Verbose("llListFindList({0}, {1}={2}", lSource.ToVerboseString(), lMatch.ToVerboseString(), iReturn);
+            return iReturn;
         }
 
-        // ok
-        public list llListInsertList(list dest, list src, int pos)
+        public list llListInsertList(list lDestination, list lSource, integer iIndex)
         {
-            int intLength = dest.Count;
-            list result = new list();
-            if (pos < 0)
-                pos = dest.Count + pos;
+            int intLength = lDestination.Count;
+            list lResult = new list();
+            if (iIndex < 0)
+                iIndex = lDestination.Count + iIndex;
 
-            for (int intI = 0; intI < Math.Min(pos, intLength); intI++)
-                result.Add(dest[intI]);
+            for (int intI = 0; intI < Math.Min(iIndex, intLength); intI++) lResult.Add(lDestination[intI]);
 
-            result.AddRange(src);
+            lResult.AddRange(lSource);
 
-            for (int intI = Math.Max(0, pos); intI < intLength; intI++)
-                result.Add(dest[intI]);
+            for (int intI = Math.Max(0, iIndex); intI < intLength; intI++) lResult.Add(lDestination[intI]);
 
-            Verbose("llListInsertList({0},{1},{2})={3}", dest.ToVerboseString(), src.ToVerboseString(), pos, result.ToVerboseString());
-            return result;
+            Verbose("llListInsertList({0}, {1}, {2})={3}", lDestination.ToVerboseString(), lSource.ToVerboseString(), iIndex, lResult.ToVerboseString());
+            return lResult;
         }
 
-        // ok
-        public list llListRandomize(list src, int stride)
+        public list llListRandomize(list lSource, integer iStride)
         {
-            list l;
-            ArrayList buckets = List2Buckets(src, stride);
-            if (buckets == null)
-                l = new list(src);
-            else
-                l = Buckets2List(RandomShuffle(buckets), stride);
-            Verbose("llListRandomize({0},{1})={2}", src.ToVerboseString(), stride, l.ToVerboseString());
-            return l;
+            list lResult;
+            ArrayList buckets = List2Buckets(lSource, iStride);
+			if (buckets == null) {
+				lResult = new list(lSource);
+			} else {
+				lResult = Buckets2List(RandomShuffle(buckets), iStride);
+			}
+            Verbose("llListRandomize({0}, {1})={2}", lSource.ToVerboseString(), iStride, lResult.ToVerboseString());
+            return lResult;
         }
 
         // TODO check this!!!
-        public list llListReplaceList(list dest, list src, int start, int end)
+        public list llListReplaceList(list lDestination, list lSource, integer iStart, integer iEnd)
         {
-            int intLength = dest.Count;
+            int intLength = lDestination.Count;
 
-            CorrectIt(intLength, ref start, ref end);
+			int intStart = iStart;
+			int intEnd = iEnd;
+			CorrectIt(intLength, ref intStart, ref intEnd);
 
-            list result = new list();
-            if (start <= end)
-            {
-                for (int intI = 0; intI < start; intI++)
-                    result.Add(dest[intI]);
-                result.AddRange(src);
-                for (int intI = end + 1; intI < intLength; intI++)
-                    result.Add(dest[intI]);
-            }
-            else
-            {
-                // where to add src?????
-                for (int intI = end; intI <= start; intI++)
-                    result.Add(dest[intI]);
-            }
-            Verbose("llListReplaceList({0},{1},{2},{3}={4}", dest.ToVerboseString(), src.ToVerboseString(), start, end, result.ToVerboseString());
-            return result;
+            list lResult = new list();
+			if (intStart <= intEnd) {
+				for (int intI = 0; intI < intStart; intI++) lResult.Add(lDestination[intI]);
+				lResult.AddRange(lSource);
+				for (int intI = intEnd + 1; intI < intLength; intI++) lResult.Add(lDestination[intI]);
+			} else {
+				// where to add src?????
+				for (int intI = intEnd; intI <= intStart; intI++) lResult.Add(lDestination[intI]);
+			}
+            Verbose("llListReplaceList({0}, {1}, {2}, {3}={4}", lDestination.ToVerboseString(), lSource.ToVerboseString(), intStart, intEnd, lResult.ToVerboseString());
+            return lResult;
         }
 
-        // ok
-        public list llListSort(list src, int stride, int ascending)
+        public list llListSort(list lSource, integer iStride, integer iAscending)
         {
-            list result;
-            ArrayList buckets = List2Buckets(src, stride);
-            if (buckets == null)
-                result = new list(src);
-            else
-            {
-                buckets.Sort(new BucketComparer(ascending));
-                result = Buckets2List(buckets, stride);
-            }
-            Verbose("llListSort({0},{1},{2})={3}", src.ToVerboseString(), stride, ascending, result.ToVerboseString());
-            return result;
+			int intAscending = iAscending;
+			int intStride = iStride;
+            list lResult;
+            ArrayList buckets = List2Buckets(lSource, intStride);
+			if (buckets == null) {
+				lResult = new list(lSource);
+			} else {
+				buckets.Sort(new BucketComparer(intAscending));
+				lResult = Buckets2List(buckets, intStride);
+			}
+            Verbose("llListSort({0}, {1}, {2})={3}", lSource.ToVerboseString(), iStride, iAscending, lResult.ToVerboseString());
+            return lResult;
         }
 
         /*
@@ -3198,201 +3170,197 @@ namespace LSLEditor
 8 LIST_STAT_NUM_COUNT  Retrieves the amount of float and integer elements. Theoretically similar to llGetListLength, except LL states that this function ignores all non-integer and non-float elements. Therefore, this is a useful tool for mixed lists of numbers and non-numbers.
 9 LIST_STAT_GEOMETRIC_MEAN  Calculates the geometric mean. All numbers must be greater than zero for this to work, according to LL.
          */
-        public Float llListStatistics(integer _operation, list _input)
+        public Float llListStatistics(integer iOperation, list lInput)
         {
-            double result = 0.0;
+            double dResult = 0.0;
             double rmin, rmax;
-            int operation = _operation;
-            List<double> input = GetListOfNumbers(_input);
+            int operation = iOperation;
+            List<double> input = GetListOfNumbers(lInput);
             if (input.Count > 0)
             {
                 switch (operation)
                 {
-                    case 0: // LIST_STAT_RANGE:
+                    case LIST_STAT_RANGE:
                         rmin = double.MaxValue;
                         rmax = double.MinValue;
-                        for (int intI = 0; intI < input.Count; intI++)
-                        {
-                            if (input[intI] < rmin)
-                                rmin = input[intI];
-                            if (input[intI] > rmax)
-                                rmax = input[intI];
+                        for (int intI = 0; intI < input.Count; intI++) {
+                            if (input[intI] < rmin) rmin = input[intI];
+                            if (input[intI] > rmax) rmax = input[intI];
                         }
-                        result = rmax - rmin;
+                        dResult = rmax - rmin;
                         break;
-                    case 1: //LIST_STAT_MIN:
-                        result = double.MaxValue;
-                        for (int intI = 0; intI < input.Count; intI++)
-                            if (input[intI] < result)
-                                result = input[intI];
+                    case LIST_STAT_MIN:
+                        dResult = double.MaxValue;
+						for (int intI = 0; intI < input.Count; intI++) {
+							if (input[intI] < dResult) dResult = input[intI];
+						}
                         break;
-                    case 2: //LIST_STAT_MAX:
-                        result = double.MinValue;
-                        for (int intI = 0; intI < input.Count; intI++)
-                            if (input[intI] > result)
-                                result = input[intI];
+                    case LIST_STAT_MAX:
+                        dResult = double.MinValue;
+						for (int intI = 0; intI < input.Count; intI++) {
+							if (input[intI] > dResult) dResult = input[intI];
+						}
                         break;
-                    case 3: //LIST_STAT_MEAN:
-                        for (int intI = 0; intI < input.Count; intI++)
-                            result += input[intI];
-                        result = result / input.Count;
+                    case LIST_STAT_MEAN:
+						for (int intI = 0; intI < input.Count; intI++) {
+							dResult += input[intI];
+						}
+                        dResult = dResult / input.Count;
                         break;
-                    case 4: //LIST_STAT_MEDIAN:
+                    case LIST_STAT_MEDIAN:
                         input.Sort();
-                        if (Math.Ceiling(input.Count * 0.5) == input.Count * 0.5)
-                            result = (input[(int)(input.Count * 0.5 - 1)] + input[(int)(input.Count * 0.5)]) / 2;
-                        else
-                            result = input[((int)(Math.Ceiling(input.Count * 0.5))) - 1];
+						if (Math.Ceiling(input.Count * 0.5) == input.Count * 0.5) {
+							dResult = (input[(int)(input.Count * 0.5 - 1)] + input[(int)(input.Count * 0.5)]) / 2;
+						} else {
+							dResult = input[((int)(Math.Ceiling(input.Count * 0.5))) - 1];
+						}
                         break;
-                    case 5: //LIST_STAT_STD_DEV:
-                        result = GetStandardDeviation(input.ToArray());
+                    case LIST_STAT_STD_DEV:
+                        dResult = GetStandardDeviation(input.ToArray());
                         break;
-                    case 6: //LIST_STAT_SUM:
-                        for (int intI = 0; intI < input.Count; intI++)
-                            result += input[intI];
+                    case LIST_STAT_SUM:
+						for (int intI = 0; intI < input.Count; intI++) {
+							dResult += input[intI];
+						}
                         break;
-                    case 7: //LIST_STAT_SUM_SQUARES:
-                        for (int intI = 0; intI < input.Count; intI++)
-                            result += input[intI] * input[intI];
+                    case LIST_STAT_SUM_SQUARES:
+						for (int intI = 0; intI < input.Count; intI++) {
+							dResult += input[intI] * input[intI];
+						}
                         //double av = GetAverage(input.ToArray());
                         //for (int intI = 0; intI < input.Count; intI++)
                         //	result += (av - input[intI]) * (av - input[intI]);
                         break;
-                    case 8: //LIST_STAT_NUM_COUNT:
-                        result = input.Count;
+                    case LIST_STAT_NUM_COUNT:
+                        dResult = input.Count;
                         break;
-                    case 9: //LIST_STAT_GEOMETRIC_MEAN:
-                        for (int intI = 0; intI < input.Count; intI++)
-                            input[intI] = Math.Log(input[intI]);
-                        result = Math.Exp(GetAverage(input.ToArray()));
+                    case LIST_STAT_GEOMETRIC_MEAN:
+						for (int intI = 0; intI < input.Count; intI++) {
+							input[intI] = Math.Log(input[intI]);
+						}
+                        dResult = Math.Exp(GetAverage(input.ToArray()));
                         break;
                     default:
                         break;
                 }
             }
-            Verbose("llListStatistics({0},{1})={2}", _operation, _input.ToString(), result);
-            return result;
+            Verbose("llListStatistics({0}, {1})={2}", iOperation, lInput.ToVerboseString(), dResult);
+            return dResult;
         }
 
-        public integer llListen(integer channel, String name, key id, String msg)
+        public integer llListen(integer iChannel, String sName, key kID, String sText)
         {
-            int intHandle = host.llListen(channel, name, id, msg);
-            Verbose(@"Listen(" + channel + @",""" + name + @"""," + id + @",""" + msg + @""")=" + intHandle);
+            int intHandle = host.llListen(iChannel, sName, kID, sText);
+            Verbose(@"llListen({0}, ""{1}"", {2}, {3})={4}", iChannel, sName, kID, sText, intHandle);
             return intHandle;
         }
 
-        public void llListenControl(integer number, integer active)
+        public void llListenControl(integer iHandle, integer iActive)
         {
-            Verbose("llListenControl(" + number + "," + active + ")");
-            host.llListenControl(number, active);
+            Verbose("llListenControl({0}, {1})", iHandle, iActive);
+            host.llListenControl(iHandle, iActive);
         }
 
-        public void llListenRemove(integer number)
+        public void llListenRemove(integer iHandle)
         {
-            Verbose("llListenRemove(" + number + ")");
-            host.llListenRemove(number);
+			Verbose("llListenRemove({0})", iHandle);
+            host.llListenRemove(iHandle);
         }
 
-        public void llLoadURL(key avatar_id, String message, String url)
+        public void llLoadURL(key kAvatarID, String sText, String sURL)
         {
-            Verbose("llLoadURL(" + avatar_id + "," + message + "," + url + ")");
-            string strUrl = url.ToString();
-            if (strUrl.StartsWith("http://"))
-                System.Diagnostics.Process.Start(strUrl);
+            Verbose(@"llLoadURL({0}, ""{1}"", ""{2}"")", kAvatarID, sText, sURL);
+            string strUrl = sURL.ToString();
+			if (strUrl.StartsWith("http://")) {
+				System.Diagnostics.Process.Start(strUrl);
+			}
         }
 
-        public Float llLog(Float val)
+        public Float llLog(Float fValue)
         {
             double dblA = 0.0;
-            if (val > 0.0)
-                dblA = Math.Log(val);
-            Verbose("llLog({0})={1}", val, dblA);
+			if (fValue > 0.0) {
+				dblA = Math.Log(fValue);
+			}
+            Verbose("llLog({0})={1}", fValue, dblA);
             return dblA;
         }
 
-        public Float llLog10(Float val)
+        public Float llLog10(Float fValue)
         {
             double dblA = 0.0;
-            if (val > 0.0)
-                dblA = Math.Log10(val);
-            Verbose("llLog10({0})={1}", val, dblA);
+			if (fValue > 0.0) {
+				dblA = Math.Log10(fValue);
+			}
+            Verbose("llLog10({0})={1}", fValue, dblA);
             return dblA;
         }
 
-        public void llLookAt(vector target, Float strength, Float damping)
+        public void llLookAt(vector vTarget, Float fStrength, Float fDamping)
         {
-            Verbose("llLookAt(" + target + "," + strength + "," + damping + ")");
+            Verbose("llLookAt(" + vTarget + "," + fStrength + "," + fDamping + ")");
         }
 
-        public void llLoopSound(String sound, Float volume)
+        public void llLoopSound(String sSound, Float sVolume)
         {
-            try
-            {
-                System.Media.SoundPlayer sp = host.GetSoundPlayer(sound);
-                sp.PlayLooping();
-            }
-            catch
-            {
-            }
-            Verbose("llLoopSound(" + sound + "," + volume + ")");
+			try {
+				System.Media.SoundPlayer sp = host.GetSoundPlayer(sSound);
+				sp.PlayLooping();
+			} catch {
+			}
+            Verbose("llLoopSound({0}, {1})", sSound, sVolume);
         }
 
-        public void llLoopSoundMaster(String sound, Float volume)
+        public void llLoopSoundMaster(String sSound, Float fVolume)
         {
-            try
-            {
-                System.Media.SoundPlayer sp = host.GetSoundPlayer(sound);
-                sp.PlayLooping();
-            }
-            catch
-            {
-            }
-            Verbose("llLoopSoundMaster(" + sound + "," + volume + ")");
+			try {
+				System.Media.SoundPlayer sp = host.GetSoundPlayer(sSound);
+				sp.PlayLooping();
+			} catch {
+			}
+			Verbose("llLoopSoundMaster({0}, {1})", sSound, fVolume);
         }
 
-        public void llLoopSoundSlave(String sound, Float volume)
+        public void llLoopSoundSlave(String sSound, Float fVolume)
         {
-            try
-            {
-                System.Media.SoundPlayer sp = host.GetSoundPlayer(sound);
-                sp.PlayLooping();
-            }
-            catch
-            {
-            }
-            Verbose("llLoopSoundSlave(" + sound + "," + volume + ")");
+			try {
+				System.Media.SoundPlayer sp = host.GetSoundPlayer(sSound);
+				sp.PlayLooping();
+			} catch {
+			}
+			Verbose("llLoopSoundSlave({0}, {1})", sSound, fVolume);
         }
 
         // ok
-        public String llMD5String(String src, integer nonce)
+        public String llMD5String(String sSource, integer iNonce)
         {
             System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
-            byte[] hash = md5.ComputeHash(Encoding.ASCII.GetBytes(src + ":" + nonce.ToString()));
-            StringBuilder sb = new StringBuilder();
+            byte[] hash = md5.ComputeHash(Encoding.ASCII.GetBytes(sSource + ":" + iNonce.ToString()));
+            StringBuilder sbResult = new StringBuilder();
             foreach (byte hex in hash)
-                sb.Append(hex.ToString("x2")); //convert to standard MD5 form
-            Verbose("llMD5String({0},{1})={2}", src, nonce, sb);
-            return sb.ToString();
+                sbResult.Append(hex.ToString("x2"));						//convert to standard MD5 form
+            Verbose("llMD5String({0}, {1})={2}", sSource, iNonce, sbResult);
+            return sbResult.ToString();
         }
 
-        public void llMakeExplosion(integer particles, Float scale, Float velocity, Float lifetime, Float arc, String texture, vector offset)
+        public void llMakeExplosion(integer iParticles, Float fScale, Float fVelocity, Float fLifetime, Float fArc, String sTexture, vector vOffset)
         {
-            Verbose("llMakeExplosion(" + particles + "," + scale + "," + velocity + "," + lifetime + "," + arc + "," + texture + "," + offset + ")");
+			Verbose(@"llMakeExplosion({0}, {1}, {2}, {3}, {4}, ""{5}"", {6})", iParticles, fScale, fVelocity, fLifetime, fArc, sTexture, vOffset);
         }
 
-        public void llMakeFire(integer particles, Float scale, Float velocity, Float lifetime, Float arc, String texture, vector offset)
+        public void llMakeFire(integer iParticles, Float fScale, Float fVelocity, Float fLifetime, Float fArc, String sTexture, vector vOffset)
         {
-            Verbose("llMakeFire(" + particles + "," + scale + "," + velocity + "," + lifetime + "," + arc + "," + texture + "," + offset + ")");
+			Verbose(@"llMakeFire({0}, {1}, {2}, {3}, {4}, ""{5}"", {6})", iParticles, fScale, fVelocity, fLifetime, fArc, sTexture, vOffset);
         }
 
-        public void llMakeFountain(integer particles, Float scale, Float velocity, Float lifetime, Float arc, String texture, vector offset)
+        public void llMakeFountain(integer iParticles, Float fScale, Float fVelocity, Float fLifetime, Float fArc, String sTexture, vector vOffset)
         {
-            Verbose("llMakeFountain(" + particles + "," + scale + "," + velocity + "," + lifetime + "," + arc + "," + texture + "," + offset + ")");
+			Verbose(@"llMakeFountain({0}, {1}, {2}, {3}, {4}, ""{5}"", {6})", iParticles, fScale, fVelocity, fLifetime, fArc, sTexture, vOffset);
         }
 
-        public void llMakeSmoke(integer particles, Float scale, Float velocity, Float lifetime, Float arc, String texture, vector offset)
+        public void llMakeSmoke(integer iParticles, Float fScale, Float fVelocity, Float fLifetime, Float fArc, String sTexture, vector vOffset)
         {
-            Verbose("llMakeSmoke(" + particles + "," + scale + "," + velocity + "," + lifetime + "," + arc + "," + texture + "," + offset + ")");
+			Verbose(@"llMakeSmoke({0}, {1}, {2}, {3}, {4}, ""{5}"", {6})", iParticles, fScale, fVelocity, fLifetime, fArc, sTexture, vOffset);
         }
 
         public void llManageEstateAccess(integer iAction, key kID)
@@ -3400,26 +3368,26 @@ namespace LSLEditor
             Verbose("llManageEstateAccess({0}, {1}", iAction, kID);
         }
 
-        public void llMapDestination(String simname, vector position, vector lookat)
+        public void llMapDestination(String sLandmark, vector vPosition, vector vLookat)
         {
-            Verbose("llMapDestination(" + simname + "," + position + "," + lookat + ")");
+			Verbose(@"llMapDestination({0}, {1}, {2})", sLandmark, vPosition, vLookat);
         }
 
-        public void llMessageLinked(integer linknum, integer num, String str, key id)
+        public void llMessageLinked(integer iLink, integer iValue, String sText, key kID)
         {
-            Verbose("llMessageLinked(" + linknum + "," + num + "," + str + "," + id + ")");
-            host.MessageLinked(linknum, num, str, id);
+			Verbose(@"llMessageLinked({0}, {1}, ""{2}"", {3})", iLink, iValue, sText, kID);
+            host.MessageLinked(iLink, iValue, sText, kID);
         }
 
-        public void llMinEventDelay(Float delay)
+        public void llMinEventDelay(Float fDelay)
         {
-            Verbose("llMinEventDelay(" + delay + ")");
+			Verbose("llMinEventDelay({0}", fDelay);
         }
 
         public integer llModPow(integer x, integer y, integer m)
         {
             integer result = ModPow2(x, y, m);
-            Verbose("llModPow({0},{1},{2})={3}", x, y, m, result);
+            Verbose("llModPow({0}, {1}, {2})={3}", x, y, m, result);
             return result;
         }
 
@@ -3475,7 +3443,7 @@ namespace LSLEditor
         public list llParseString2List(String src, list separators, list spacers)
         {
             list result = ParseString(src, separators, spacers, false);
-            Verbose("llParseString2List({0},{1},{2})={3}", src, separators.ToVerboseString(), spacers.ToVerboseString(), result.ToVerboseString());
+            Verbose("llParseString2List({0}, {1}, {2})={3}", src, separators.ToVerboseString(), spacers.ToVerboseString(), result.ToVerboseString());
             return result;
         }
 
@@ -3483,7 +3451,7 @@ namespace LSLEditor
         public list llParseStringKeepNulls(String src, list separators, list spacers)
         {
             list result = ParseString(src, separators, spacers, true);
-            Verbose("llParseStringKeepNulls({0},{1},{2})={3}", src, separators.ToVerboseString(), spacers.ToVerboseString(), result.ToVerboseString());
+            Verbose("llParseStringKeepNulls({0}, {1}, {2})={3}", src, separators.ToVerboseString(), spacers.ToVerboseString(), result.ToVerboseString());
             return result;
         }
 
@@ -3596,7 +3564,7 @@ namespace LSLEditor
         public void llRemoteDataReply(key channel, key message_id, String sdata, integer idata)
         {
             host.llRemoteDataReply(channel, message_id, sdata, idata);
-            Verbose("llRemoteDataReply({0},{1},{2},{3})", channel, message_id, sdata, idata);
+            Verbose("llRemoteDataReply({0}, {1}, {2}, {3})", channel, message_id, sdata, idata);
         }
 
         public void llRemoteDataSetRegion()
@@ -3897,7 +3865,7 @@ namespace LSLEditor
         public key llSendRemoteData(key channel, String dest, integer idata, String sdata)
         {
             key k = host.llSendRemoteData(channel, dest, idata, sdata);
-            Verbose("llSendRemoteData({0},{1},{2},{3})={4}", channel, dest, idata, sdata, k);
+            Verbose("llSendRemoteData({0}, {1}, {2}, {3})={4}", channel, dest, idata, sdata, k);
             return k;
         }
 
@@ -4304,14 +4272,14 @@ namespace LSLEditor
         public integer llStringLength(String src)
         {
             int intLength = ((string)src).Length;
-            Verbose(@"StringLength(""{0}"")={1}", src, intLength);
+            Verbose(@"llStringLength(""{0}"")={1}", src, intLength);
             return intLength;
         }
 
         public String llStringToBase64(String str)
         {
             string result = StringToBase64(str.ToString());
-            Verbose(@"StringToBase64(""{0}"")=""{1}""", str, result);
+            Verbose(@"llStringToBase64(""{0}"")=""{1}""", str, result);
             return result;
         }
 
@@ -4332,7 +4300,7 @@ namespace LSLEditor
         public integer llSubStringIndex(String source, String pattern)
         {
             int intIndexOf = ((string)source).IndexOf((string)pattern);
-            Verbose("llSubStringIndex({0},{1})={2}", source, pattern, intIndexOf);
+            Verbose("llSubStringIndex({0}, {1})={2}", source, pattern, intIndexOf);
             return intIndexOf;
         }
 
@@ -4528,7 +4496,7 @@ namespace LSLEditor
             for (int intI = 0; intI < intLength; intI++)
                 sb.Append((char)(S1[intI] ^ S2[intI]));
             string result = StringToBase64(sb.ToString());
-            Verbose(@"XorBase64StringsCorrect(""{0}"",""{1}"")=""{2}""", s1, s2, result);
+            Verbose(@"llXorBase64StringsCorrect(""{0}"",""{1}"")=""{2}""", s1, s2, result);
             return result;
         }
         #endregion

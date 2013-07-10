@@ -434,15 +434,15 @@ namespace LSLEditor
 
 		public int llListen(int channel, string name, SecondLife.key id, string message)
 		{
-			if (ListenFilterList.Count >= 64)
-			{
+			if (ListenFilterList.Count >= 64) {
 				Chat(this, 0, "LSLEditor", SecondLife.NULL_KEY, "Maximum of 64 listens!!!", CommunicationType.Shout);
 				return 0;
 			}
 			ListenFilter lf = new ListenFilter(channel, name, id, message);
 			ListenFilterList.Add(lf);
-			if (OnListenChannelsChanged != null)
+			if (OnListenChannelsChanged != null) {
 				OnListenChannelsChanged(this, null);
+			}
 			return lf.GetHashCode();
 		}
 
