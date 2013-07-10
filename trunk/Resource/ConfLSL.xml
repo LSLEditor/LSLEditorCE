@@ -1328,7 +1328,7 @@
 		</Word>
 
 		<Word name="llGetStaticPath">
-			list llGetStaticPath(vector Start, vector End, float Radius, list Params);
+			list llGetStaticPath(vector Start, vector End, float Radius, list Parameters);
 
 			Returns a list of position vectors indicating pathfinding waypoints between positions at start and end, for a character of a given radius. The waypoints this function returns are for the 'static' nav mesh, meaning that objects set to "movable obstacle" or "movable phantom" are ignored.
 		</Word>
