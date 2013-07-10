@@ -70,6 +70,7 @@ namespace LSLEditor
 
         private DateTime m_DateTimeScriptStarted;
 
+        private Boolean m_AllowDrop = false;
         private Hashtable m_LandPassList;
 
         private Hashtable m_LandBanList;
@@ -176,26 +177,26 @@ namespace LSLEditor
         #endregion
 
         #region all constants
-        public static readonly integer TRUE = 1;
-        public static readonly integer FALSE = 0;
+        public const int TRUE = 1;
+        public const int FALSE = 0;
 
-        public static readonly integer DENSITY = 1;
-        public static readonly integer FRICTION = 2;
-        public static readonly integer GRAVITY_MULTIPLIER = 8;
-        public static readonly integer RESTITUTION = 4;
+        public const int DENSITY = 1;
+        public const int FRICTION = 2;
+        public const int GRAVITY_MULTIPLIER = 8;
+        public const int RESTITUTION = 4;
 
-        public static readonly integer AGENT = 1;
-        public static readonly integer ACTIVE = 2;
-        public static readonly integer PASSIVE = 4;
-        public static readonly integer SCRIPTED = 8;
+        public const int AGENT = 1;
+        public const int ACTIVE = 2;
+        public const int PASSIVE = 4;
+        public const int SCRIPTED = 8;
 
-        public static readonly integer ANIM_ON = 1;
-        public static readonly integer LOOP = 2;
-        public static readonly integer REVERSE = 4;
-        public static readonly integer PING_PONG = 8;
-        public static readonly integer SMOOTH = 16;
-        public static readonly integer ROTATE = 32;
-        public static readonly integer SCALE = 64;
+        public const int ANIM_ON = 1;
+        public const int LOOP = 2;
+        public const int REVERSE = 4;
+        public const int PING_PONG = 8;
+        public const int SMOOTH = 16;
+        public const int ROTATE = 32;
+        public const int SCALE = 64;
 
         public static readonly Float PI = 3.1415926535897932384626;
         public static readonly Float TWO_PI = 2.0 * PI;
@@ -208,135 +209,135 @@ namespace LSLEditor
         public static readonly rotation ZERO_ROTATION = rotation.ZERO_ROTATION;
         public static readonly vector ZERO_VECTOR = vector.ZERO_VECTOR;
 
-        public static readonly integer ALL_SIDES = -1;
+        public const int ALL_SIDES = -1;
 
-        public static readonly integer DEBUG_CHANNEL = 2147483647;
+        public const int DEBUG_CHANNEL = 2147483647;
         public const string EOF = "\n\n\n";
 
-        public static readonly integer AGENT_FLYING = 1;
-        public static readonly integer AGENT_ATTACHMENTS = 2;
-        public static readonly integer AGENT_SCRIPTED = 4;
-        public static readonly integer AGENT_MOUSELOOK = 8;
-        public static readonly integer AGENT_SITTING = 16;
-        public static readonly integer AGENT_ON_OBJECT = 32;
-        public static readonly integer AGENT_AWAY = 64;
-        public static readonly integer AGENT_WALKING = 128;
-        public static readonly integer AGENT_IN_AIR = 256;
-        public static readonly integer AGENT_TYPING = 512;
-        public static readonly integer AGENT_CROUCHING = 1024;
-        public static readonly integer AGENT_BUSY = 2048;
-        public static readonly integer AGENT_ALWAYS_RUN = 4096;
-		public static readonly integer AGENT_AUTOPILOT = 0x2000;
-		public static readonly integer AGENT_BY_LEGACY_NAME = 0x1;
-		public static readonly integer AGENT_BY_USERNAME = 0x10;
+        public const int AGENT_FLYING = 1;
+        public const int AGENT_ATTACHMENTS = 2;
+        public const int AGENT_SCRIPTED = 4;
+        public const int AGENT_MOUSELOOK = 8;
+        public const int AGENT_SITTING = 16;
+        public const int AGENT_ON_OBJECT = 32;
+        public const int AGENT_AWAY = 64;
+        public const int AGENT_WALKING = 128;
+        public const int AGENT_IN_AIR = 256;
+        public const int AGENT_TYPING = 512;
+        public const int AGENT_CROUCHING = 1024;
+        public const int AGENT_BUSY = 2048;
+        public const int AGENT_ALWAYS_RUN = 4096;
+		public const int AGENT_AUTOPILOT = 0x2000;
+		public const int AGENT_BY_LEGACY_NAME = 0x1;
+		public const int AGENT_BY_USERNAME = 0x10;
 
-		public static readonly integer AGENT_LIST_PARCEL = 0x01;
-		public static readonly integer AGENT_LIST_PARCEL_OWNER = 0x02;
-		public static readonly integer AGENT_LIST_REGION = 0x04;
+		public const int AGENT_LIST_PARCEL = 0x01;
+		public const int AGENT_LIST_PARCEL_OWNER = 0x02;
+		public const int AGENT_LIST_REGION = 0x04;
 
-        public static readonly integer ATTACH_AVATAR_CENTER = 40;
-        public static readonly integer ATTACH_BACK = 9;
-        public static readonly integer ATTACH_CHEST = 1;
-        public static readonly integer ATTACH_CHIN = 12;
-        public static readonly integer ATTACH_HEAD = 2;
-        public static readonly integer ATTACH_LSHOULDER = 3;
-        public static readonly integer ATTACH_RSHOULDER = 4;
-        public static readonly integer ATTACH_LHAND = 5;
-        public static readonly integer ATTACH_RHAND = 6;
-        public static readonly integer ATTACH_LFOOT = 7;
-        public static readonly integer ATTACH_RFOOT = 8;
-        public static readonly integer ATTACH_PELVIS = 10;
-        public static readonly integer ATTACH_MOUTH = 11;
-        public static readonly integer ATTACH_NECK = 39;
-        public static readonly integer ATTACH_LEAR = 13;
-        public static readonly integer ATTACH_LEFT_PEC = 29;
-        public static readonly integer ATTACH_REAR = 14;
-        public static readonly integer ATTACH_LEYE = 15;
-        public static readonly integer ATTACH_REYE = 16;
-        public static readonly integer ATTACH_NOSE = 17;
-        public static readonly integer ATTACH_RUARM = 18;
-        public static readonly integer ATTACH_RLARM = 19;
-        public static readonly integer ATTACH_LUARM = 20;
-        public static readonly integer ATTACH_LLARM = 21;
-        public static readonly integer ATTACH_RHIP = 22;
-        public static readonly integer ATTACH_RIGHT_PEC = 30;
-        public static readonly integer ATTACH_RULEG = 23;
-        public static readonly integer ATTACH_RLLEG = 24;
-        public static readonly integer ATTACH_LHIP = 25;
-        public static readonly integer ATTACH_LULEG = 26;
-        public static readonly integer ATTACH_LLLEG = 27;
-        public static readonly integer ATTACH_BELLY = 28;
-        public static readonly integer ATTACH_RPEC = 29;
-        public static readonly integer ATTACH_LPEC = 30;
+        public const int ATTACH_AVATAR_CENTER = 40;
+        public const int ATTACH_BACK = 9;
+        public const int ATTACH_CHEST = 1;
+        public const int ATTACH_CHIN = 12;
+        public const int ATTACH_HEAD = 2;
+        public const int ATTACH_LSHOULDER = 3;
+        public const int ATTACH_RSHOULDER = 4;
+        public const int ATTACH_LHAND = 5;
+        public const int ATTACH_RHAND = 6;
+        public const int ATTACH_LFOOT = 7;
+        public const int ATTACH_RFOOT = 8;
+        public const int ATTACH_PELVIS = 10;
+        public const int ATTACH_MOUTH = 11;
+        public const int ATTACH_NECK = 39;
+        public const int ATTACH_LEAR = 13;
+        public const int ATTACH_LEFT_PEC = 29;
+        public const int ATTACH_REAR = 14;
+        public const int ATTACH_LEYE = 15;
+        public const int ATTACH_REYE = 16;
+        public const int ATTACH_NOSE = 17;
+        public const int ATTACH_RUARM = 18;
+        public const int ATTACH_RLARM = 19;
+        public const int ATTACH_LUARM = 20;
+        public const int ATTACH_LLARM = 21;
+        public const int ATTACH_RHIP = 22;
+        public const int ATTACH_RIGHT_PEC = 30;
+        public const int ATTACH_RULEG = 23;
+        public const int ATTACH_RLLEG = 24;
+        public const int ATTACH_LHIP = 25;
+        public const int ATTACH_LULEG = 26;
+        public const int ATTACH_LLLEG = 27;
+        public const int ATTACH_BELLY = 28;
+        public const int ATTACH_RPEC = 29;
+        public const int ATTACH_LPEC = 30;
 
-        public static readonly integer ATTACH_HUD_CENTER_2 = 31;
-        public static readonly integer ATTACH_HUD_TOP_RIGHT = 32;
-        public static readonly integer ATTACH_HUD_TOP_CENTER = 33;
-        public static readonly integer ATTACH_HUD_TOP_LEFT = 34;
-        public static readonly integer ATTACH_HUD_CENTER_1 = 35;
-        public static readonly integer ATTACH_HUD_BOTTOM_LEFT = 36;
-        public static readonly integer ATTACH_HUD_BOTTOM = 37;
-        public static readonly integer ATTACH_HUD_BOTTOM_RIGHT = 38;
+        public const int ATTACH_HUD_CENTER_2 = 31;
+        public const int ATTACH_HUD_TOP_RIGHT = 32;
+        public const int ATTACH_HUD_TOP_CENTER = 33;
+        public const int ATTACH_HUD_TOP_LEFT = 34;
+        public const int ATTACH_HUD_CENTER_1 = 35;
+        public const int ATTACH_HUD_BOTTOM_LEFT = 36;
+        public const int ATTACH_HUD_BOTTOM = 37;
+        public const int ATTACH_HUD_BOTTOM_RIGHT = 38;
 
-		public static readonly integer AVOID_CHARACTERS = 1;
-		public static readonly integer AVOID_DYNAMIC_OBSTACLES = 2;
+		public const int AVOID_CHARACTERS = 1;
+		public const int AVOID_DYNAMIC_OBSTACLES = 2;
 
-        public static readonly integer CAMERA_PITCH = 0;
-        public static readonly integer CAMERA_FOCUS_OFFSET = 1;
-        public static readonly integer CAMERA_POSITION_LAG = 5;
-        public static readonly integer CAMERA_FOCUS_LAG = 6;
-        public static readonly integer CAMERA_DISTANCE = 7;
-        public static readonly integer CAMERA_BEHINDNESS_ANGLE = 8;
-        public static readonly integer CAMERA_BEHINDNESS_LAG = 9;
-        public static readonly integer CAMERA_POSITION_THRESHOLD = 10;
-        public static readonly integer CAMERA_FOCUS_THRESHOLD = 11;
-        public static readonly integer CAMERA_ACTIVE = 12;
-        public static readonly integer CAMERA_POSITION = 13;
-        public static readonly integer CAMERA_FOCUS = 17;
-        public static readonly integer CAMERA_FOCUS_LOCKED = 22;
-        public static readonly integer CAMERA_POSITION_LOCKED = 21;
+        public const int CAMERA_PITCH = 0;
+        public const int CAMERA_FOCUS_OFFSET = 1;
+        public const int CAMERA_POSITION_LAG = 5;
+        public const int CAMERA_FOCUS_LAG = 6;
+        public const int CAMERA_DISTANCE = 7;
+        public const int CAMERA_BEHINDNESS_ANGLE = 8;
+        public const int CAMERA_BEHINDNESS_LAG = 9;
+        public const int CAMERA_POSITION_THRESHOLD = 10;
+        public const int CAMERA_FOCUS_THRESHOLD = 11;
+        public const int CAMERA_ACTIVE = 12;
+        public const int CAMERA_POSITION = 13;
+        public const int CAMERA_FOCUS = 17;
+        public const int CAMERA_FOCUS_LOCKED = 22;
+        public const int CAMERA_POSITION_LOCKED = 21;
 
-        public static readonly integer CHANGED_INVENTORY = 1;
-        public static readonly integer CHANGED_COLOR = 2;
-        public static readonly integer CHANGED_SHAPE = 4;
-        public static readonly integer CHANGED_SCALE = 8;
-        public static readonly integer CHANGED_TEXTURE = 16;
-        public static readonly integer CHANGED_LINK = 32;
-        public static readonly integer CHANGED_ALLOWED_DROP = 64;
-        public static readonly integer CHANGED_OWNER = 128;
-        public static readonly integer CHANGED_REGION = 256;
-        public static readonly integer CHANGED_TELEPORT = 512;
-        public static readonly integer CHANGED_REGION_START = 1024;
-		public static readonly integer CHANGED_MEDIA = 2048;
+        public const int CHANGED_INVENTORY = 1;
+        public const int CHANGED_COLOR = 2;
+        public const int CHANGED_SHAPE = 4;
+        public const int CHANGED_SCALE = 8;
+        public const int CHANGED_TEXTURE = 16;
+        public const int CHANGED_LINK = 32;
+        public const int CHANGED_ALLOWED_DROP = 64;
+        public const int CHANGED_OWNER = 128;
+        public const int CHANGED_REGION = 256;
+        public const int CHANGED_TELEPORT = 512;
+        public const int CHANGED_REGION_START = 1024;
+		public const int CHANGED_MEDIA = 2048;
 
-        public static readonly integer CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES = 14;
-		public static readonly integer CHARACTER_AVOIDANCE_MODE = 5;
-		public static readonly integer CHARACTER_CMD_JUMP = 0x01;
-		public static readonly integer CHARACTER_CMD_STOP = 0x00;
-		public static readonly integer CHARACTER_DESIRED_SPEED = 1;
-		public static readonly integer CHARACTER_LENGTH = 3;
-		public static readonly integer CHARACTER_TYPE = 6;
-		public static readonly integer CHARACTER_MAX_ACCEL = 8;
-		public static readonly integer CHARACTER_MAX_DECEL = 9;
-        public static readonly integer CHARACTER_MAX_SPEED = 13;
-        public static readonly integer CHARACTER_MAX_TURN_RADIUS = 10;
-        public static readonly integer CHARACTER_ORIENTATION = 4;
-        public static readonly integer CHARACTER_RADIUS = 2;
-        public static readonly integer CHARACTER_STAY_WITHIN_PARCEL = 15;
-		public static readonly integer CHARACTER_TYPE_A = 0;
-		public static readonly integer CHARACTER_TYPE_B = 1;
-		public static readonly integer CHARACTER_TYPE_C = 2;
-		public static readonly integer CHARACTER_TYPE_D = 3;
-		public static readonly integer CHARACTER_TYPE_NONE = 4;
+        public const int CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES = 14;
+		public const int CHARACTER_AVOIDANCE_MODE = 5;
+		public const int CHARACTER_CMD_JUMP = 0x01;
+		public const int CHARACTER_CMD_STOP = 0x00;
+		public const int CHARACTER_DESIRED_SPEED = 1;
+		public const int CHARACTER_LENGTH = 3;
+		public const int CHARACTER_TYPE = 6;
+		public const int CHARACTER_MAX_ACCEL = 8;
+		public const int CHARACTER_MAX_DECEL = 9;
+        public const int CHARACTER_MAX_SPEED = 13;
+        public const int CHARACTER_MAX_TURN_RADIUS = 10;
+        public const int CHARACTER_ORIENTATION = 4;
+        public const int CHARACTER_RADIUS = 2;
+        public const int CHARACTER_STAY_WITHIN_PARCEL = 15;
+		public const int CHARACTER_TYPE_A = 0;
+		public const int CHARACTER_TYPE_B = 1;
+		public const int CHARACTER_TYPE_C = 2;
+		public const int CHARACTER_TYPE_D = 3;
+		public const int CHARACTER_TYPE_NONE = 4;
 
-        public static readonly integer CLICK_ACTION_NONE = 0;
-        public static readonly integer CLICK_ACTION_TOUCH = 0;
-        public static readonly integer CLICK_ACTION_SIT = 1;
-        public static readonly integer CLICK_ACTION_BUY = 2;
-        public static readonly integer CLICK_ACTION_PAY = 3;
-        public static readonly integer CLICK_ACTION_OPEN = 4;
-        public static readonly integer CLICK_ACTION_PLAY = 5;
-        public static readonly integer CLICK_ACTION_OPEN_MEDIA = 6;
+        public const int CLICK_ACTION_NONE = 0;
+        public const int CLICK_ACTION_TOUCH = 0;
+        public const int CLICK_ACTION_SIT = 1;
+        public const int CLICK_ACTION_BUY = 2;
+        public const int CLICK_ACTION_PAY = 3;
+        public const int CLICK_ACTION_OPEN = 4;
+        public const int CLICK_ACTION_PLAY = 5;
+        public const int CLICK_ACTION_OPEN_MEDIA = 6;
 
 		public static readonly string CONTENT_TYPE_ATOM = "application/atom+xml";
 		public static readonly string CONTENT_TYPE_FORM = "application/x-www-form-urlencoded";
@@ -348,65 +349,65 @@ namespace LSLEditor
 		public static readonly string CONTENT_TYPE_XHTML = "application/xhtml+xml";
 		public static readonly string CONTENT_TYPE_XML = "application/xml";
 
-        public static readonly integer CONTROL_FWD = 1;
-        public static readonly integer CONTROL_BACK = 2;
-        public static readonly integer CONTROL_LEFT = 4;
-        public static readonly integer CONTROL_RIGHT = 8;
-        public static readonly integer CONTROL_ROT_LEFT = 256;
-        public static readonly integer CONTROL_ROT_RIGHT = 512;
-        public static readonly integer CONTROL_UP = 16;
-        public static readonly integer CONTROL_DOWN = 32;
-        public static readonly integer CONTROL_LBUTTON = 268435456;
-        public static readonly integer CONTROL_ML_LBUTTON = 1073741824;
+        public const int CONTROL_FWD = 1;
+        public const int CONTROL_BACK = 2;
+        public const int CONTROL_LEFT = 4;
+        public const int CONTROL_RIGHT = 8;
+        public const int CONTROL_ROT_LEFT = 256;
+        public const int CONTROL_ROT_RIGHT = 512;
+        public const int CONTROL_UP = 16;
+        public const int CONTROL_DOWN = 32;
+        public const int CONTROL_LBUTTON = 268435456;
+        public const int CONTROL_ML_LBUTTON = 1073741824;
 
-        public static readonly integer DATA_ONLINE = 1;
-        public static readonly integer DATA_NAME = 2;
-        public static readonly integer DATA_BORN = 3;
-        public static readonly integer DATA_RATING = 4;
+        public const int DATA_ONLINE = 1;
+        public const int DATA_NAME = 2;
+        public const int DATA_BORN = 3;
+        public const int DATA_RATING = 4;
 
-        public static readonly integer DATA_SIM_POS = 5;
-        public static readonly integer DATA_SIM_STATUS = 6;
-        public static readonly integer DATA_SIM_RATING = 7;
+        public const int DATA_SIM_POS = 5;
+        public const int DATA_SIM_STATUS = 6;
+        public const int DATA_SIM_RATING = 7;
 
-        public static readonly integer DATA_PAYINFO = 8;
+        public const int DATA_PAYINFO = 8;
 
-        public static readonly integer ERR_GENERIC = -1;
-        public static readonly integer ERR_MALFORMED_PARAMS = -3;
-        public static readonly integer ERR_PARCEL_PERMISSIONS = -2;
-        public static readonly integer ERR_RUNTIME_PERMISSIONS = -4;
-        public static readonly integer ERR_THROTTLED = -5;
+        public const int ERR_GENERIC = -1;
+        public const int ERR_MALFORMED_PARAMS = -3;
+        public const int ERR_PARCEL_PERMISSIONS = -2;
+        public const int ERR_RUNTIME_PERMISSIONS = -4;
+        public const int ERR_THROTTLED = -5;
 
-        public static readonly integer ESTATE_ACCESS_ALLOWED_AGENT_ADD = 4;
-        public static readonly integer ESTATE_ACCESS_ALLOWED_AGENT_REMOVE = 8;
-        public static readonly integer ESTATE_ACCESS_ALLOWED_GROUP_ADD = 16;
-        public static readonly integer ESTATE_ACCESS_ALLOWED_GROUP_REMOVE = 32;
-        public static readonly integer ESTATE_ACCESS_BANNED_AGENT_ADD = 64;
-        public static readonly integer ESTATE_ACCESS_BANNED_AGENT_REMOVE = 128;
+        public const int ESTATE_ACCESS_ALLOWED_AGENT_ADD = 4;
+        public const int ESTATE_ACCESS_ALLOWED_AGENT_REMOVE = 8;
+        public const int ESTATE_ACCESS_ALLOWED_GROUP_ADD = 16;
+        public const int ESTATE_ACCESS_ALLOWED_GROUP_REMOVE = 32;
+        public const int ESTATE_ACCESS_BANNED_AGENT_ADD = 64;
+        public const int ESTATE_ACCESS_BANNED_AGENT_REMOVE = 128;
 
-		public static readonly integer FORCE_DIRECT_PATH = 1;
+		public const int FORCE_DIRECT_PATH = 1;
 
-        public static readonly integer HTTP_BODY_MAXLENGTH = 2;
-        public static readonly integer HTTP_BODY_TRUNCATED = 0;
-        public static readonly integer HTTP_METHOD = 0;
-        public static readonly integer HTTP_MIMETYPE = 1;
-        public static readonly integer HTTP_PRAGMA_NO_CACHE = 6;
-        public static readonly integer HTTP_VERBOSE_THROTTLE = 4;
-        public static readonly integer HTTP_VERIFY_CERT = 3;
+        public const int HTTP_BODY_MAXLENGTH = 2;
+        public const int HTTP_BODY_TRUNCATED = 0;
+        public const int HTTP_METHOD = 0;
+        public const int HTTP_MIMETYPE = 1;
+        public const int HTTP_PRAGMA_NO_CACHE = 6;
+        public const int HTTP_VERBOSE_THROTTLE = 4;
+        public const int HTTP_VERIFY_CERT = 3;
 
-        public static readonly integer HORIZONTAL = 1;
+        public const int HORIZONTAL = 1;
 
-        public static readonly integer INVENTORY_ALL = -1;
-        public static readonly integer INVENTORY_NONE = -1;
-        public static readonly integer INVENTORY_TEXTURE = 0;
-        public static readonly integer INVENTORY_SOUND = 1;
-        public static readonly integer INVENTORY_LANDMARK = 3;
-        public static readonly integer INVENTORY_CLOTHING = 5;
-        public static readonly integer INVENTORY_OBJECT = 6;
-        public static readonly integer INVENTORY_NOTECARD = 7;
-        public static readonly integer INVENTORY_SCRIPT = 10;
-        public static readonly integer INVENTORY_BODYPART = 13;
-        public static readonly integer INVENTORY_ANIMATION = 20;
-        public static readonly integer INVENTORY_GESTURE = 21;
+        public const int INVENTORY_ALL = -1;
+        public const int INVENTORY_NONE = -1;
+        public const int INVENTORY_TEXTURE = 0;
+        public const int INVENTORY_SOUND = 1;
+        public const int INVENTORY_LANDMARK = 3;
+        public const int INVENTORY_CLOTHING = 5;
+        public const int INVENTORY_OBJECT = 6;
+        public const int INVENTORY_NOTECARD = 7;
+        public const int INVENTORY_SCRIPT = 10;
+        public const int INVENTORY_BODYPART = 13;
+        public const int INVENTORY_ANIMATION = 20;
+        public const int INVENTORY_GESTURE = 21;
 
         public static readonly string JSON_ARRAY    = "\uFDD2";
         public static readonly string JSON_FALSE    = "\uFDD7";
@@ -417,399 +418,399 @@ namespace LSLEditor
         public static readonly string JSON_STRING   = "\uFDD4";
         public static readonly string JSON_TRUE     = "\uFDD6";
 
-        public static readonly integer KFM_CMD_PAUSE = 2;
-        public static readonly integer KFM_CMD_PLAY = 0;
-        public static readonly integer KFM_CMD_STOP = 1;
-        public static readonly integer KFM_COMMAND = 0;
-        public static readonly integer KFM_DATA = 2;
-        public static readonly integer KFM_FORWARD = 0;
-        public static readonly integer KFM_LOOP = 1;
-        public static readonly integer KFM_MODE = 1;
-        public static readonly integer KFM_PING_PONG = 2;
-        public static readonly integer KFM_REVERSE = 2;
-        public static readonly integer KFM_ROTATION = 1;
-        public static readonly integer KFM_TRANSLATION = 2;
+        public const int KFM_CMD_PAUSE = 2;
+        public const int KFM_CMD_PLAY = 0;
+        public const int KFM_CMD_STOP = 1;
+        public const int KFM_COMMAND = 0;
+        public const int KFM_DATA = 2;
+        public const int KFM_FORWARD = 0;
+        public const int KFM_LOOP = 1;
+        public const int KFM_MODE = 1;
+        public const int KFM_PING_PONG = 2;
+        public const int KFM_REVERSE = 2;
+        public const int KFM_ROTATION = 1;
+        public const int KFM_TRANSLATION = 2;
 
-        public static readonly integer LAND_LEVEL = 0;
-        public static readonly integer LAND_RAISE = 1;
-        public static readonly integer LAND_LOWER = 2;
-        public static readonly integer LAND_SMOOTH = 3;
-        public static readonly integer LAND_NOISE = 4;
-        public static readonly integer LAND_REVERT = 5;
+        public const int LAND_LEVEL = 0;
+        public const int LAND_RAISE = 1;
+        public const int LAND_LOWER = 2;
+        public const int LAND_SMOOTH = 3;
+        public const int LAND_NOISE = 4;
+        public const int LAND_REVERT = 5;
 
-        public static readonly integer LAND_LARGE_BRUSH = 3;
-        public static readonly integer LAND_MEDIUM_BRUSH = 2;
-        public static readonly integer LAND_SMALL_BRUSH = 1;
+        public const int LAND_LARGE_BRUSH = 3;
+        public const int LAND_MEDIUM_BRUSH = 2;
+        public const int LAND_SMALL_BRUSH = 1;
 
-        public static readonly integer LINK_ROOT = 1;
-        public static readonly integer LINK_SET = -1;
-        public static readonly integer LINK_ALL_OTHERS = -2;
-        public static readonly integer LINK_ALL_CHILDREN = -3;
-        public static readonly integer LINK_THIS = -4;
+        public const int LINK_ROOT = 1;
+        public const int LINK_SET = -1;
+        public const int LINK_ALL_OTHERS = -2;
+        public const int LINK_ALL_CHILDREN = -3;
+        public const int LINK_THIS = -4;
 
-        public static readonly integer LIST_STAT_RANGE = 0;
-        public static readonly integer LIST_STAT_MIN = 1;
-        public static readonly integer LIST_STAT_MAX = 2;
-        public static readonly integer LIST_STAT_MEAN = 3;
-        public static readonly integer LIST_STAT_MEDIAN = 4;
-        public static readonly integer LIST_STAT_STD_DEV = 5;
-        public static readonly integer LIST_STAT_SUM = 6;
-        public static readonly integer LIST_STAT_SUM_SQUARES = 7;
-        public static readonly integer LIST_STAT_NUM_COUNT = 8;
-        public static readonly integer LIST_STAT_GEOMETRIC_MEAN = 9;
+        public const int LIST_STAT_RANGE = 0;
+        public const int LIST_STAT_MIN = 1;
+        public const int LIST_STAT_MAX = 2;
+        public const int LIST_STAT_MEAN = 3;
+        public const int LIST_STAT_MEDIAN = 4;
+        public const int LIST_STAT_STD_DEV = 5;
+        public const int LIST_STAT_SUM = 6;
+        public const int LIST_STAT_SUM_SQUARES = 7;
+        public const int LIST_STAT_NUM_COUNT = 8;
+        public const int LIST_STAT_GEOMETRIC_MEAN = 9;
 
-        public static readonly integer MASK_BASE = 0;
-        public static readonly integer MASK_EVERYONE = 3;
-        public static readonly integer MASK_GROUP = 2;
-        public static readonly integer MASK_NEXT = 4;
-        public static readonly integer MASK_OWNER = 1;
+        public const int MASK_BASE = 0;
+        public const int MASK_EVERYONE = 3;
+        public const int MASK_GROUP = 2;
+        public const int MASK_NEXT = 4;
+        public const int MASK_OWNER = 1;
 
-        public static readonly integer OBJECT_ATTACHED_POINT = 19;
-        public static readonly integer OBJECT_NAME = 1;
-        public static readonly integer OBJECT_DESC = 2;
-        public static readonly integer OBJECT_POS = 3;
-        public static readonly integer OBJECT_ROOT = 18;
-        public static readonly integer OBJECT_ROT = 4;
-        public static readonly integer OBJECT_VELOCITY = 5;
-        public static readonly integer OBJECT_OWNER = 6;
-        public static readonly integer OBJECT_PATHFINDING_TYPE = 20;
-        public static readonly integer OBJECT_GROUP = 7;
-        public static readonly integer OBJECT_CREATOR = 8;
-        public static readonly integer OBJECT_PHYSICS = 21;
-        public static readonly integer OBJECT_PHANTOM = 22;
-        public static readonly integer OBJECT_TEMP_ON_REZ = 23;
+        public const int OBJECT_ATTACHED_POINT = 19;
+        public const int OBJECT_NAME = 1;
+        public const int OBJECT_DESC = 2;
+        public const int OBJECT_POS = 3;
+        public const int OBJECT_ROOT = 18;
+        public const int OBJECT_ROT = 4;
+        public const int OBJECT_VELOCITY = 5;
+        public const int OBJECT_OWNER = 6;
+        public const int OBJECT_PATHFINDING_TYPE = 20;
+        public const int OBJECT_GROUP = 7;
+        public const int OBJECT_CREATOR = 8;
+        public const int OBJECT_PHYSICS = 21;
+        public const int OBJECT_PHANTOM = 22;
+        public const int OBJECT_TEMP_ON_REZ = 23;
 
-        public static readonly integer OBJECT_STREAMING_COST = 15;
-        public static readonly integer OBJECT_PHYSICS_COST = 16;
-        public static readonly integer OBJECT_SERVER_COST = 14;
-        public static readonly integer OBJECT_PRIM_EQUIVALENCE = 13;
+        public const int OBJECT_STREAMING_COST = 15;
+        public const int OBJECT_PHYSICS_COST = 16;
+        public const int OBJECT_SERVER_COST = 14;
+        public const int OBJECT_PRIM_EQUIVALENCE = 13;
 
-		public static readonly integer OBJECT_RUNNING_SCRIPT_COUNT = 9;
-		public static readonly integer OBJECT_SCRIPT_MEMORY = 11;
-		public static readonly integer OBJECT_SCRIPT_TIME = 12;
-		public static readonly integer OBJECT_TOTAL_SCRIPT_COUNT = 10;
-		public static readonly integer OBJECT_UNKNOWN_DETAIL = -1;
+		public const int OBJECT_RUNNING_SCRIPT_COUNT = 9;
+		public const int OBJECT_SCRIPT_MEMORY = 11;
+		public const int OBJECT_SCRIPT_TIME = 12;
+		public const int OBJECT_TOTAL_SCRIPT_COUNT = 10;
+		public const int OBJECT_UNKNOWN_DETAIL = -1;
 
-        public static readonly integer OPT_AVATAR = 1;
-        public static readonly integer OPT_CHARACTER = 2;
-        public static readonly integer OPT_EXCLUSION_VOLUME = 6;
-        public static readonly integer OPT_LEGACY_LINKSET = 0;
-        public static readonly integer OPT_MATERIAL_VOLUME = 5;
-        public static readonly integer OPT_OTHER = -1;
-        public static readonly integer OPT_STATIC_OBSTACLE = 4;
-        public static readonly integer OPT_WALKABLE = 3;
+        public const int OPT_AVATAR = 1;
+        public const int OPT_CHARACTER = 2;
+        public const int OPT_EXCLUSION_VOLUME = 6;
+        public const int OPT_LEGACY_LINKSET = 0;
+        public const int OPT_MATERIAL_VOLUME = 5;
+        public const int OPT_OTHER = -1;
+        public const int OPT_STATIC_OBSTACLE = 4;
+        public const int OPT_WALKABLE = 3;
 
-        public static readonly integer OBJECT_RETURN_PARCEL = 1;
-        public static readonly integer OBJECT_RETURN_PARCEL_OWNER = 2;
-        public static readonly integer OBJECT_RETURN_REGION = 4;
+        public const int OBJECT_RETURN_PARCEL = 1;
+        public const int OBJECT_RETURN_PARCEL_OWNER = 2;
+        public const int OBJECT_RETURN_REGION = 4;
 
-        public static readonly integer PARCEL_COUNT_TOTAL = 0;
-        public static readonly integer PARCEL_COUNT_OWNER = 1;
-        public static readonly integer PARCEL_COUNT_GROUP = 2;
-        public static readonly integer PARCEL_COUNT_OTHER = 3;
-        public static readonly integer PARCEL_COUNT_SELECTED = 4;
-        public static readonly integer PARCEL_COUNT_TEMP = 5;
+        public const int PARCEL_COUNT_TOTAL = 0;
+        public const int PARCEL_COUNT_OWNER = 1;
+        public const int PARCEL_COUNT_GROUP = 2;
+        public const int PARCEL_COUNT_OTHER = 3;
+        public const int PARCEL_COUNT_SELECTED = 4;
+        public const int PARCEL_COUNT_TEMP = 5;
 
-        public static readonly integer PARCEL_DETAILS_AREA = 4;
-        public static readonly integer PARCEL_DETAILS_DESC = 1;
-        public static readonly integer PARCEL_DETAILS_GROUP = 3;
-        public static readonly integer PARCEL_DETAILS_ID = 5;
-        public static readonly integer PARCEL_DETAILS_NAME = 0;
-        public static readonly integer PARCEL_DETAILS_OWNER = 2;
-        public static readonly integer PARCEL_DETAILS_SEE_AVATARS = 6;
+        public const int PARCEL_DETAILS_AREA = 4;
+        public const int PARCEL_DETAILS_DESC = 1;
+        public const int PARCEL_DETAILS_GROUP = 3;
+        public const int PARCEL_DETAILS_ID = 5;
+        public const int PARCEL_DETAILS_NAME = 0;
+        public const int PARCEL_DETAILS_OWNER = 2;
+        public const int PARCEL_DETAILS_SEE_AVATARS = 6;
 
-        public static readonly integer PARCEL_FLAG_ALLOW_FLY = 0x0000001;
-        public static readonly integer PARCEL_FLAG_ALLOW_SCRIPTS = 0x0000002;
-        public static readonly integer PARCEL_FLAG_ALLOW_LANDMARK = 0x0000008;
-        public static readonly integer PARCEL_FLAG_ALLOW_TERRAFORM = 0x0000010;
-        public static readonly integer PARCEL_FLAG_ALLOW_DAMAGE = 0x0000020;
-        public static readonly integer PARCEL_FLAG_ALLOW_CREATE_OBJECTS = 0x0000040;
-        public static readonly integer PARCEL_FLAG_USE_ACCESS_GROUP = 0x0000100;
-        public static readonly integer PARCEL_FLAG_USE_ACCESS_LIST = 0x0000200;
-        public static readonly integer PARCEL_FLAG_USE_BAN_LIST = 0x0000400;
-        public static readonly integer PARCEL_FLAG_USE_LAND_PASS_LIST = 0x0000800;
-        public static readonly integer PARCEL_FLAG_LOCAL_SOUND_ONLY = 0x0008000;
-        public static readonly integer PARCEL_FLAG_RESTRICT_PUSHOBJECT = 0x0200000;
-        public static readonly integer PARCEL_FLAG_ALLOW_GROUP_SCRIPTS = 0x2000000;
+        public const int PARCEL_FLAG_ALLOW_FLY = 0x0000001;
+        public const int PARCEL_FLAG_ALLOW_SCRIPTS = 0x0000002;
+        public const int PARCEL_FLAG_ALLOW_LANDMARK = 0x0000008;
+        public const int PARCEL_FLAG_ALLOW_TERRAFORM = 0x0000010;
+        public const int PARCEL_FLAG_ALLOW_DAMAGE = 0x0000020;
+        public const int PARCEL_FLAG_ALLOW_CREATE_OBJECTS = 0x0000040;
+        public const int PARCEL_FLAG_USE_ACCESS_GROUP = 0x0000100;
+        public const int PARCEL_FLAG_USE_ACCESS_LIST = 0x0000200;
+        public const int PARCEL_FLAG_USE_BAN_LIST = 0x0000400;
+        public const int PARCEL_FLAG_USE_LAND_PASS_LIST = 0x0000800;
+        public const int PARCEL_FLAG_LOCAL_SOUND_ONLY = 0x0008000;
+        public const int PARCEL_FLAG_RESTRICT_PUSHOBJECT = 0x0200000;
+        public const int PARCEL_FLAG_ALLOW_GROUP_SCRIPTS = 0x2000000;
 
-        public static readonly integer PARCEL_FLAG_ALLOW_CREATE_GROUP_OBJECTS = 0x4000000;
-        public static readonly integer PARCEL_FLAG_ALLOW_ALL_OBJECT_ENTRY = 0x8000000;
-        public static readonly integer PARCEL_FLAG_ALLOW_GROUP_OBJECT_ENTRY = 0x10000000;
+        public const int PARCEL_FLAG_ALLOW_CREATE_GROUP_OBJECTS = 0x4000000;
+        public const int PARCEL_FLAG_ALLOW_ALL_OBJECT_ENTRY = 0x8000000;
+        public const int PARCEL_FLAG_ALLOW_GROUP_OBJECT_ENTRY = 0x10000000;
 
-        public static readonly integer PARCEL_MEDIA_COMMAND_STOP = 0;
-        public static readonly integer PARCEL_MEDIA_COMMAND_PAUSE = 1;
-        public static readonly integer PARCEL_MEDIA_COMMAND_PLAY = 2;
-        public static readonly integer PARCEL_MEDIA_COMMAND_LOOP = 3;
-        public static readonly integer PARCEL_MEDIA_COMMAND_TEXTURE = 4;
-        public static readonly integer PARCEL_MEDIA_COMMAND_URL = 5;
-        public static readonly integer PARCEL_MEDIA_COMMAND_TIME = 6;
-        public static readonly integer PARCEL_MEDIA_COMMAND_AGENT = 7;
-        public static readonly integer PARCEL_MEDIA_COMMAND_UNLOAD = 8;
-        public static readonly integer PARCEL_MEDIA_COMMAND_AUTO_ALIGN = 9;
+        public const int PARCEL_MEDIA_COMMAND_STOP = 0;
+        public const int PARCEL_MEDIA_COMMAND_PAUSE = 1;
+        public const int PARCEL_MEDIA_COMMAND_PLAY = 2;
+        public const int PARCEL_MEDIA_COMMAND_LOOP = 3;
+        public const int PARCEL_MEDIA_COMMAND_TEXTURE = 4;
+        public const int PARCEL_MEDIA_COMMAND_URL = 5;
+        public const int PARCEL_MEDIA_COMMAND_TIME = 6;
+        public const int PARCEL_MEDIA_COMMAND_AGENT = 7;
+        public const int PARCEL_MEDIA_COMMAND_UNLOAD = 8;
+        public const int PARCEL_MEDIA_COMMAND_AUTO_ALIGN = 9;
 
-        public static readonly integer PARCEL_MEDIA_COMMAND_TYPE = 10;
-        public static readonly integer PARCEL_MEDIA_COMMAND_SIZE = 11;
-        public static readonly integer PARCEL_MEDIA_COMMAND_DESC = 12;
-        public static readonly integer PARCEL_MEDIA_COMMAND_LOOP_SET = 13;
+        public const int PARCEL_MEDIA_COMMAND_TYPE = 10;
+        public const int PARCEL_MEDIA_COMMAND_SIZE = 11;
+        public const int PARCEL_MEDIA_COMMAND_DESC = 12;
+        public const int PARCEL_MEDIA_COMMAND_LOOP_SET = 13;
 
-        public static readonly integer PAY_DEFAULT = -2;
-        public static readonly integer PAY_HIDE = -1;
+        public const int PAY_DEFAULT = -2;
+        public const int PAY_HIDE = -1;
 
-        public static readonly integer PAYMENT_INFO_ON_FILE = 1;
-        public static readonly integer PAYMENT_INFO_USED = 2;
+        public const int PAYMENT_INFO_ON_FILE = 1;
+        public const int PAYMENT_INFO_USED = 2;
 
-        public static readonly integer PERM_ALL = 2147483647;
-        public static readonly integer PERM_COPY = 32768;
-        public static readonly integer PERM_MODIFY = 16384;
-        public static readonly integer PERM_MOVE = 524288;
-        public static readonly integer PERM_TRANSFER = 8192;
+        public const int PERM_ALL = 2147483647;
+        public const int PERM_COPY = 32768;
+        public const int PERM_MODIFY = 16384;
+        public const int PERM_MOVE = 524288;
+        public const int PERM_TRANSFER = 8192;
 
-        public static readonly integer PERMISSION_DEBIT = 2;
-        public static readonly integer PERMISSION_TAKE_CONTROLS = 4;
-        public static readonly integer PERMISSION_REMAP_CONTROLS = 8;
-        public static readonly integer PERMISSION_TRIGGER_ANIMATION = 16;
-        public static readonly integer PERMISSION_ATTACH = 32;
-        public static readonly integer PERMISSION_RELEASE_OWNERSHIP = 64;
-        public static readonly integer PERMISSION_CHANGE_LINKS = 128;
-        public static readonly integer PERMISSION_CHANGE_JOINTS = 256;
-        public static readonly integer PERMISSION_CHANGE_PERMISSIONS = 512;
-        public static readonly integer PERMISSION_CONTROL_CAMERA = 2048;
-        public static readonly integer PERMISSION_OVERRIDE_ANIMATIONS = 0x8000;
-        public static readonly integer PERMISSION_TRACK_CAMERA = 1024;
-        public static readonly integer PERMISSION_RETURN_OBJECTS = 65536;
+        public const int PERMISSION_DEBIT = 2;
+        public const int PERMISSION_TAKE_CONTROLS = 4;
+        public const int PERMISSION_REMAP_CONTROLS = 8;
+        public const int PERMISSION_TRIGGER_ANIMATION = 16;
+        public const int PERMISSION_ATTACH = 32;
+        public const int PERMISSION_RELEASE_OWNERSHIP = 64;
+        public const int PERMISSION_CHANGE_LINKS = 128;
+        public const int PERMISSION_CHANGE_JOINTS = 256;
+        public const int PERMISSION_CHANGE_PERMISSIONS = 512;
+        public const int PERMISSION_CONTROL_CAMERA = 2048;
+        public const int PERMISSION_OVERRIDE_ANIMATIONS = 0x8000;
+        public const int PERMISSION_TRACK_CAMERA = 1024;
+        public const int PERMISSION_RETURN_OBJECTS = 65536;
 
-        public static readonly integer PRIM_BUMP_BARK = 4;
-        public static readonly integer PRIM_BUMP_BLOBS = 12;
-        public static readonly integer PRIM_BUMP_BRICKS = 5;
-        public static readonly integer PRIM_BUMP_BRIGHT = 1;
-        public static readonly integer PRIM_BUMP_CHECKER = 6;
-        public static readonly integer PRIM_BUMP_CONCRETE = 7;
-        public static readonly integer PRIM_BUMP_DARK = 2;
-        public static readonly integer PRIM_BUMP_DISKS = 10;
-        public static readonly integer PRIM_BUMP_GRAVEL = 11;
-        public static readonly integer PRIM_BUMP_LARGETILE = 14;
-        public static readonly integer PRIM_BUMP_NONE = 0;
-        public static readonly integer PRIM_BUMP_SHINY = 19;
-        public static readonly integer PRIM_BUMP_SIDING = 13;
-        public static readonly integer PRIM_BUMP_STONE = 9;
-        public static readonly integer PRIM_BUMP_STUCCO = 15;
-        public static readonly integer PRIM_BUMP_SUCTION = 16;
-        public static readonly integer PRIM_BUMP_TILE = 8;
-        public static readonly integer PRIM_BUMP_WEAVE = 17;
-        public static readonly integer PRIM_BUMP_WOOD = 3;
+        public const int PRIM_BUMP_BARK = 4;
+        public const int PRIM_BUMP_BLOBS = 12;
+        public const int PRIM_BUMP_BRICKS = 5;
+        public const int PRIM_BUMP_BRIGHT = 1;
+        public const int PRIM_BUMP_CHECKER = 6;
+        public const int PRIM_BUMP_CONCRETE = 7;
+        public const int PRIM_BUMP_DARK = 2;
+        public const int PRIM_BUMP_DISKS = 10;
+        public const int PRIM_BUMP_GRAVEL = 11;
+        public const int PRIM_BUMP_LARGETILE = 14;
+        public const int PRIM_BUMP_NONE = 0;
+        public const int PRIM_BUMP_SHINY = 19;
+        public const int PRIM_BUMP_SIDING = 13;
+        public const int PRIM_BUMP_STONE = 9;
+        public const int PRIM_BUMP_STUCCO = 15;
+        public const int PRIM_BUMP_SUCTION = 16;
+        public const int PRIM_BUMP_TILE = 8;
+        public const int PRIM_BUMP_WEAVE = 17;
+        public const int PRIM_BUMP_WOOD = 3;
 
-        public static readonly integer PRIM_CAST_SHADOWS = 24;
-        public static readonly integer PRIM_COLOR = 18;
-        public static readonly integer PRIM_DESC = 28;
-        public static readonly integer PRIM_FLEXIBLE = 21;
-        public static readonly integer PRIM_FULLBRIGHT = 20;
-        public static readonly integer PRIM_HOLE_CIRCLE = 16;
-        public static readonly integer PRIM_HOLE_DEFAULT = 0;
-        public static readonly integer PRIM_HOLE_SQUARE = 32;
-        public static readonly integer PRIM_HOLE_TRIANGLE = 48;
-		public static readonly integer PRIM_LINK_TARGET = 34;
-        public static readonly integer PRIM_MATERIAL = 2;
-        public static readonly integer PRIM_MATERIAL_FLESH = 4;
-        public static readonly integer PRIM_MATERIAL_GLASS = 2;
-        public static readonly integer PRIM_MATERIAL_LIGHT = 7;
-        public static readonly integer PRIM_MATERIAL_METAL = 1;
-        public static readonly integer PRIM_MATERIAL_PLASTIC = 5;
-        public static readonly integer PRIM_MATERIAL_RUBBER = 6;
-        public static readonly integer PRIM_MATERIAL_STONE = 0;
-        public static readonly integer PRIM_MATERIAL_WOOD = 3;
+        public const int PRIM_CAST_SHADOWS = 24;
+        public const int PRIM_COLOR = 18;
+        public const int PRIM_DESC = 28;
+        public const int PRIM_FLEXIBLE = 21;
+        public const int PRIM_FULLBRIGHT = 20;
+        public const int PRIM_HOLE_CIRCLE = 16;
+        public const int PRIM_HOLE_DEFAULT = 0;
+        public const int PRIM_HOLE_SQUARE = 32;
+        public const int PRIM_HOLE_TRIANGLE = 48;
+		public const int PRIM_LINK_TARGET = 34;
+        public const int PRIM_MATERIAL = 2;
+        public const int PRIM_MATERIAL_FLESH = 4;
+        public const int PRIM_MATERIAL_GLASS = 2;
+        public const int PRIM_MATERIAL_LIGHT = 7;
+        public const int PRIM_MATERIAL_METAL = 1;
+        public const int PRIM_MATERIAL_PLASTIC = 5;
+        public const int PRIM_MATERIAL_RUBBER = 6;
+        public const int PRIM_MATERIAL_STONE = 0;
+        public const int PRIM_MATERIAL_WOOD = 3;
 
-        public static readonly integer PRIM_MEDIA_ALT_IMAGE_ENABLE = 0;
-        public static readonly integer PRIM_MEDIA_AUTO_LOOP = 4;
-        public static readonly integer PRIM_MEDIA_AUTO_PLAY = 5;
-        public static readonly integer PRIM_MEDIA_AUTO_SCALE = 6;
-        public static readonly integer PRIM_MEDIA_AUTO_ZOOM = 7;
-        public static readonly integer PRIM_MEDIA_CONTROLS = 1;
-        public static readonly integer PRIM_MEDIA_CONTROLS_MINI = 1;
-        public static readonly integer PRIM_MEDIA_CONTROLS_STANDARD = 0;
-        public static readonly integer PRIM_MEDIA_CURRENT_URL = 2;
-        public static readonly integer PRIM_MEDIA_FIRST_CLICK_INTERACT = 8;
-        public static readonly integer PRIM_MEDIA_HEIGHT_PIXELS = 10;
-        public static readonly integer PRIM_MEDIA_HOME_URL = 3;
-        public static readonly integer PRIM_MEDIA_PERM_ANYONE = 4;
-        public static readonly integer PRIM_MEDIA_PERM_GROUP = 2;
-        public static readonly integer PRIM_MEDIA_PERM_NONE = 0;
-        public static readonly integer PRIM_MEDIA_PERM_OWNER = 1;
-        public static readonly integer PRIM_MEDIA_PERMS_CONTROL = 14;
-        public static readonly integer PRIM_MEDIA_PERMS_INTERACT = 13;
-        public static readonly integer PRIM_MEDIA_WHITELIST = 12;
-        public static readonly integer PRIM_MEDIA_WHITELIST_ENABLE = 11;
-        public static readonly integer PRIM_MEDIA_WIDTH_PIXELS = 9;
+        public const int PRIM_MEDIA_ALT_IMAGE_ENABLE = 0;
+        public const int PRIM_MEDIA_AUTO_LOOP = 4;
+        public const int PRIM_MEDIA_AUTO_PLAY = 5;
+        public const int PRIM_MEDIA_AUTO_SCALE = 6;
+        public const int PRIM_MEDIA_AUTO_ZOOM = 7;
+        public const int PRIM_MEDIA_CONTROLS = 1;
+        public const int PRIM_MEDIA_CONTROLS_MINI = 1;
+        public const int PRIM_MEDIA_CONTROLS_STANDARD = 0;
+        public const int PRIM_MEDIA_CURRENT_URL = 2;
+        public const int PRIM_MEDIA_FIRST_CLICK_INTERACT = 8;
+        public const int PRIM_MEDIA_HEIGHT_PIXELS = 10;
+        public const int PRIM_MEDIA_HOME_URL = 3;
+        public const int PRIM_MEDIA_PERM_ANYONE = 4;
+        public const int PRIM_MEDIA_PERM_GROUP = 2;
+        public const int PRIM_MEDIA_PERM_NONE = 0;
+        public const int PRIM_MEDIA_PERM_OWNER = 1;
+        public const int PRIM_MEDIA_PERMS_CONTROL = 14;
+        public const int PRIM_MEDIA_PERMS_INTERACT = 13;
+        public const int PRIM_MEDIA_WHITELIST = 12;
+        public const int PRIM_MEDIA_WHITELIST_ENABLE = 11;
+        public const int PRIM_MEDIA_WIDTH_PIXELS = 9;
 
-        public static readonly integer PRIM_NAME = 27;
-        public static readonly integer PRIM_OMEGA = 32;
-        public static readonly integer PRIM_PHANTOM = 5;
-        public static readonly integer PRIM_PHYSICS = 3;
-        public static readonly integer PRIM_PHYSICS_MATERIAL = 31;
-        public static readonly integer PRIM_PHYSICS_SHAPE_CONVEX = 2;
-        public static readonly integer PRIM_PHYSICS_SHAPE_NONE = 1;
-        public static readonly integer PRIM_PHYSICS_SHAPE_PRIM = 0;
-        public static readonly integer PRIM_PHYSICS_SHAPE_TYPE = 30;
-        public static readonly integer PRIM_POINT_LIGHT = 23;
-        public static readonly integer PRIM_POSITION = 6;
-        public static readonly integer PRIM_POS_LOCAL = 33;
-        public static readonly integer PRIM_ROTATION = 8;
-        public static readonly integer PRIM_ROT_LOCAL = 29;
-        public static readonly integer PRIM_SCULPT_FLAG_INVERT = 64;
-        public static readonly integer PRIM_SCULPT_FLAG_MIRROR = 128;
-        public static readonly integer PRIM_SHINY_HIGH = 3;
-        public static readonly integer PRIM_SHINY_LOW = 1;
-        public static readonly integer PRIM_SHINY_MEDIUM = 2;
-        public static readonly integer PRIM_SHINY_NONE = 0;
-        public static readonly integer PRIM_SIZE = 7;
-		public static readonly integer PRIM_SLICE = 35;
-        public static readonly integer PRIM_TEMP_ON_REZ = 4;
-        public static readonly integer PRIM_TEXGEN = 22;
-        public static readonly integer PRIM_TEXGEN_DEFAULT = 0;
-        public static readonly integer PRIM_TEXGEN_PLANAR = 1;
-        public static readonly integer PRIM_TEXT = 26;
-        public static readonly integer PRIM_TEXTURE = 17;
-        public static readonly integer PRIM_TYPE = 9;
+        public const int PRIM_NAME = 27;
+        public const int PRIM_OMEGA = 32;
+        public const int PRIM_PHANTOM = 5;
+        public const int PRIM_PHYSICS = 3;
+        public const int PRIM_PHYSICS_MATERIAL = 31;
+        public const int PRIM_PHYSICS_SHAPE_CONVEX = 2;
+        public const int PRIM_PHYSICS_SHAPE_NONE = 1;
+        public const int PRIM_PHYSICS_SHAPE_PRIM = 0;
+        public const int PRIM_PHYSICS_SHAPE_TYPE = 30;
+        public const int PRIM_POINT_LIGHT = 23;
+        public const int PRIM_POSITION = 6;
+        public const int PRIM_POS_LOCAL = 33;
+        public const int PRIM_ROTATION = 8;
+        public const int PRIM_ROT_LOCAL = 29;
+        public const int PRIM_SCULPT_FLAG_INVERT = 64;
+        public const int PRIM_SCULPT_FLAG_MIRROR = 128;
+        public const int PRIM_SHINY_HIGH = 3;
+        public const int PRIM_SHINY_LOW = 1;
+        public const int PRIM_SHINY_MEDIUM = 2;
+        public const int PRIM_SHINY_NONE = 0;
+        public const int PRIM_SIZE = 7;
+		public const int PRIM_SLICE = 35;
+        public const int PRIM_TEMP_ON_REZ = 4;
+        public const int PRIM_TEXGEN = 22;
+        public const int PRIM_TEXGEN_DEFAULT = 0;
+        public const int PRIM_TEXGEN_PLANAR = 1;
+        public const int PRIM_TEXT = 26;
+        public const int PRIM_TEXTURE = 17;
+        public const int PRIM_TYPE = 9;
 
-        public static readonly integer PRIM_TYPE_BOX = 0;
-        public static readonly integer PRIM_TYPE_CYLINDER = 1;
-        public static readonly integer PRIM_TYPE_PRISM = 2;
-        public static readonly integer PRIM_TYPE_SPHERE = 3;
-        public static readonly integer PRIM_TYPE_TORUS = 4;
-        public static readonly integer PRIM_TYPE_TUBE = 5;
-        public static readonly integer PRIM_TYPE_RING = 6;
-        public static readonly integer PRIM_TYPE_SCULPT = 7;
+        public const int PRIM_TYPE_BOX = 0;
+        public const int PRIM_TYPE_CYLINDER = 1;
+        public const int PRIM_TYPE_PRISM = 2;
+        public const int PRIM_TYPE_SPHERE = 3;
+        public const int PRIM_TYPE_TORUS = 4;
+        public const int PRIM_TYPE_TUBE = 5;
+        public const int PRIM_TYPE_RING = 6;
+        public const int PRIM_TYPE_SCULPT = 7;
 
-        public static readonly integer PRIM_GLOW = 25;
+        public const int PRIM_GLOW = 25;
 
-		public static readonly integer PRIM_SCULPT_TYPE_MASK = 7;
-        public static readonly integer PRIM_SCULPT_TYPE_SPHERE = 1;
-        public static readonly integer PRIM_SCULPT_TYPE_TORUS = 2;
-        public static readonly integer PRIM_SCULPT_TYPE_PLANE = 3;
-        public static readonly integer PRIM_SCULPT_TYPE_CYLINDER = 4;
+		public const int PRIM_SCULPT_TYPE_MASK = 7;
+        public const int PRIM_SCULPT_TYPE_SPHERE = 1;
+        public const int PRIM_SCULPT_TYPE_TORUS = 2;
+        public const int PRIM_SCULPT_TYPE_PLANE = 3;
+        public const int PRIM_SCULPT_TYPE_CYLINDER = 4;
 
-        public static readonly integer PROFILE_NONE = 0;
-        public static readonly integer PROFILE_SCRIPT_MEMORY = 1;
+        public const int PROFILE_NONE = 0;
+        public const int PROFILE_SCRIPT_MEMORY = 1;
 
-        public static readonly integer PSYS_PART_FLAGS = 0;
-        public static readonly integer PSYS_PART_INTERP_COLOR_MASK = 1;
-        public static readonly integer PSYS_PART_INTERP_SCALE_MASK = 2;
-        public static readonly integer PSYS_PART_BOUNCE_MASK = 4;
-        public static readonly integer PSYS_PART_WIND_MASK = 8;
-        public static readonly integer PSYS_PART_FOLLOW_SRC_MASK = 16;
-        public static readonly integer PSYS_PART_FOLLOW_VELOCITY_MASK = 32;
-        public static readonly integer PSYS_PART_TARGET_POS_MASK = 64;
-        public static readonly integer PSYS_PART_TARGET_LINEAR_MASK = 128;
-        public static readonly integer PSYS_PART_EMISSIVE_MASK = 256;
+        public const int PSYS_PART_FLAGS = 0;
+        public const int PSYS_PART_INTERP_COLOR_MASK = 1;
+        public const int PSYS_PART_INTERP_SCALE_MASK = 2;
+        public const int PSYS_PART_BOUNCE_MASK = 4;
+        public const int PSYS_PART_WIND_MASK = 8;
+        public const int PSYS_PART_FOLLOW_SRC_MASK = 16;
+        public const int PSYS_PART_FOLLOW_VELOCITY_MASK = 32;
+        public const int PSYS_PART_TARGET_POS_MASK = 64;
+        public const int PSYS_PART_TARGET_LINEAR_MASK = 128;
+        public const int PSYS_PART_EMISSIVE_MASK = 256;
 
-        public static readonly integer PSYS_PART_SRC_PATTERN_ANGLE = 0x04;
-        public static readonly integer PSYS_PART_SRC_PATTERN_ANGLE_CONE = 0x08;
-        public static readonly integer PSYS_PART_SRC_PATTERN_DROP = 0x01;
-        public static readonly integer PSYS_PART_SRC_PATTERN_EXPLODE = 0x02;
+        public const int PSYS_PART_SRC_PATTERN_ANGLE = 0x04;
+        public const int PSYS_PART_SRC_PATTERN_ANGLE_CONE = 0x08;
+        public const int PSYS_PART_SRC_PATTERN_DROP = 0x01;
+        public const int PSYS_PART_SRC_PATTERN_EXPLODE = 0x02;
 
-        public static readonly integer PSYS_PART_START_COLOR = 1;
-        public static readonly integer PSYS_PART_START_ALPHA = 2;
-        public static readonly integer PSYS_PART_END_COLOR = 3;
-        public static readonly integer PSYS_PART_END_ALPHA = 4;
-        public static readonly integer PSYS_PART_START_SCALE = 5;
-        public static readonly integer PSYS_PART_END_SCALE = 6;
-        public static readonly integer PSYS_PART_MAX_AGE = 7;
+        public const int PSYS_PART_START_COLOR = 1;
+        public const int PSYS_PART_START_ALPHA = 2;
+        public const int PSYS_PART_END_COLOR = 3;
+        public const int PSYS_PART_END_ALPHA = 4;
+        public const int PSYS_PART_START_SCALE = 5;
+        public const int PSYS_PART_END_SCALE = 6;
+        public const int PSYS_PART_MAX_AGE = 7;
 
-        public static readonly integer PSYS_SRC_ACCEL = 8;
-        public static readonly integer PSYS_SRC_PATTERN = 9;
-        public static readonly integer PSYS_SRC_INNERANGLE = 10;
-        public static readonly integer PSYS_SRC_OUTERANGLE = 11;
-        public static readonly integer PSYS_SRC_TEXTURE = 12;
-        public static readonly integer PSYS_SRC_BURST_RATE = 13;
-        public static readonly integer PSYS_SRC_BURST_PART_COUNT = 15;
-        public static readonly integer PSYS_SRC_BURST_RADIUS = 16;
-        public static readonly integer PSYS_SRC_BURST_SPEED_MIN = 17;
-        public static readonly integer PSYS_SRC_BURST_SPEED_MAX = 18;
-        public static readonly integer PSYS_SRC_MAX_AGE = 19;
-        public static readonly integer PSYS_SRC_TARGET_KEY = 20;
-        public static readonly integer PSYS_SRC_OMEGA = 21;
-        public static readonly integer PSYS_SRC_ANGLE_BEGIN = 22;
-        public static readonly integer PSYS_SRC_ANGLE_END = 23;
+        public const int PSYS_SRC_ACCEL = 8;
+        public const int PSYS_SRC_PATTERN = 9;
+        public const int PSYS_SRC_INNERANGLE = 10;
+        public const int PSYS_SRC_OUTERANGLE = 11;
+        public const int PSYS_SRC_TEXTURE = 12;
+        public const int PSYS_SRC_BURST_RATE = 13;
+        public const int PSYS_SRC_BURST_PART_COUNT = 15;
+        public const int PSYS_SRC_BURST_RADIUS = 16;
+        public const int PSYS_SRC_BURST_SPEED_MIN = 17;
+        public const int PSYS_SRC_BURST_SPEED_MAX = 18;
+        public const int PSYS_SRC_MAX_AGE = 19;
+        public const int PSYS_SRC_TARGET_KEY = 20;
+        public const int PSYS_SRC_OMEGA = 21;
+        public const int PSYS_SRC_ANGLE_BEGIN = 22;
+        public const int PSYS_SRC_ANGLE_END = 23;
 
-        public static readonly integer PSYS_SRC_PATTERN_DROP = 1;
-        public static readonly integer PSYS_SRC_PATTERN_EXPLODE = 2;
-        public static readonly integer PSYS_SRC_PATTERN_ANGLE = 4;
-        public static readonly integer PSYS_SRC_PATTERN_ANGLE_CONE = 8;
-        public static readonly integer PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY = 16;
+        public const int PSYS_SRC_PATTERN_DROP = 1;
+        public const int PSYS_SRC_PATTERN_EXPLODE = 2;
+        public const int PSYS_SRC_PATTERN_ANGLE = 4;
+        public const int PSYS_SRC_PATTERN_ANGLE_CONE = 8;
+        public const int PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY = 16;
 
-		public static readonly integer PU_EVADE_HIDDEN = 0x07;
-		public static readonly integer PU_EVADE_SPOTTED = 0x08;
-		public static readonly integer PU_FAILURE_INVALID_GOAL = 0x03;
-		public static readonly integer PU_FAILURE_INVALID_START = 0x02;
-		public static readonly integer PU_FAILURE_NO_VALID_DESTINATION = 0x06;
-		public static readonly integer PU_FAILURE_OTHER = 1000000;
-		public static readonly integer PU_FAILURE_TARGET_GONE = 0x05;
-		public static readonly integer PU_FAILURE_UNREACHABLE = 0x04;
-		public static readonly integer PU_GOAL_REACHED = 0x01;
-		public static readonly integer PU_SLOWDOWN_DISTANCE_REACHED = 0x00;
+		public const int PU_EVADE_HIDDEN = 0x07;
+		public const int PU_EVADE_SPOTTED = 0x08;
+		public const int PU_FAILURE_INVALID_GOAL = 0x03;
+		public const int PU_FAILURE_INVALID_START = 0x02;
+		public const int PU_FAILURE_NO_VALID_DESTINATION = 0x06;
+		public const int PU_FAILURE_OTHER = 1000000;
+		public const int PU_FAILURE_TARGET_GONE = 0x05;
+		public const int PU_FAILURE_UNREACHABLE = 0x04;
+		public const int PU_GOAL_REACHED = 0x01;
+		public const int PU_SLOWDOWN_DISTANCE_REACHED = 0x00;
 
-        public static readonly integer PUBLIC_CHANNEL = 0;
+        public const int PUBLIC_CHANNEL = 0;
 
-		public static readonly integer PURSUIT_FUZZ_FACTOR = 3;
-		public static readonly integer PURSUIT_INTERCEPT = 4;
-		public static readonly integer PURSUIT_OFFSET = 1;
+		public const int PURSUIT_FUZZ_FACTOR = 3;
+		public const int PURSUIT_INTERCEPT = 4;
+		public const int PURSUIT_OFFSET = 1;
 
-		public static readonly integer RC_DATA_FLAGS = 2;
-		public static readonly integer RC_DETECT_PHANTOM = 1;
-		public static readonly integer RC_GET_LINK_NUM = 4;
-		public static readonly integer RC_GET_NORMAL = 1;
-		public static readonly integer RC_GET_ROOT_KEY = 2;
-		public static readonly integer RC_MAX_HITS = 3;
-		public static readonly integer RC_REJECT_AGENTS = 1;
-		public static readonly integer RC_REJECT_LAND = 8;
-		public static readonly integer RC_REJECT_NONPHYSICAL = 4;
-		public static readonly integer RC_REJECT_PHYSICAL = 2;
-		public static readonly integer RC_REJECT_TYPES = 2;
-		public static readonly integer RCERR_CAST_TIME_EXCEEDED = -3;
-		public static readonly integer RCERR_SIM_PERF_LOW = -2;
-		public static readonly integer RCERR_UNKNOWN = -1;
+		public const int RC_DATA_FLAGS = 2;
+		public const int RC_DETECT_PHANTOM = 1;
+		public const int RC_GET_LINK_NUM = 4;
+		public const int RC_GET_NORMAL = 1;
+		public const int RC_GET_ROOT_KEY = 2;
+		public const int RC_MAX_HITS = 3;
+		public const int RC_REJECT_AGENTS = 1;
+		public const int RC_REJECT_LAND = 8;
+		public const int RC_REJECT_NONPHYSICAL = 4;
+		public const int RC_REJECT_PHYSICAL = 2;
+		public const int RC_REJECT_TYPES = 2;
+		public const int RCERR_CAST_TIME_EXCEEDED = -3;
+		public const int RCERR_SIM_PERF_LOW = -2;
+		public const int RCERR_UNKNOWN = -1;
 
 
-        public static readonly integer REGION_FLAG_ALLOW_DAMAGE = 1;
-        public static readonly integer REGION_FLAG_FIXED_SUN = 16;
-        public static readonly integer REGION_FLAG_BLOCK_TERRAFORM = 64;
-        public static readonly integer REGION_FLAG_SANDBOX = 256;
-        public static readonly integer REGION_FLAG_DISABLE_COLLISIONS = 4096;
-        public static readonly integer REGION_FLAG_DISABLE_PHYSICS = 16384;
-        public static readonly integer REGION_FLAG_BLOCK_FLY = 524288;
-        public static readonly integer REGION_FLAG_ALLOW_DIRECT_TELEPORT = 1048576;
-        public static readonly integer REGION_FLAG_RESTRICT_PUSHOBJECT = 4194304;
+        public const int REGION_FLAG_ALLOW_DAMAGE = 1;
+        public const int REGION_FLAG_FIXED_SUN = 16;
+        public const int REGION_FLAG_BLOCK_TERRAFORM = 64;
+        public const int REGION_FLAG_SANDBOX = 256;
+        public const int REGION_FLAG_DISABLE_COLLISIONS = 4096;
+        public const int REGION_FLAG_DISABLE_PHYSICS = 16384;
+        public const int REGION_FLAG_BLOCK_FLY = 524288;
+        public const int REGION_FLAG_ALLOW_DIRECT_TELEPORT = 1048576;
+        public const int REGION_FLAG_RESTRICT_PUSHOBJECT = 4194304;
 
-        public static readonly integer REMOTE_DATA_CHANNEL = 1;
-        public static readonly integer REMOTE_DATA_REQUEST = 2;
-        public static readonly integer REMOTE_DATA_REPLY = 3;
+        public const int REMOTE_DATA_CHANNEL = 1;
+        public const int REMOTE_DATA_REQUEST = 2;
+        public const int REMOTE_DATA_REPLY = 3;
 
-		public static readonly integer REQUIRE_LINE_OF_SIGHT = 2;
+		public const int REQUIRE_LINE_OF_SIGHT = 2;
 
-        public static readonly integer SIM_STAT_PCT_CHARS_STEPPED = 0;
+        public const int SIM_STAT_PCT_CHARS_STEPPED = 0;
 
-        public static readonly integer STATUS_PHYSICS = 1;
-        public static readonly integer STATUS_ROTATE_X = 2;
-        public static readonly integer STATUS_ROTATE_Y = 4;
-        public static readonly integer STATUS_ROTATE_Z = 8;
-        public static readonly integer STATUS_PHANTOM = 16;
-        public static readonly integer STATUS_SANDBOX = 32;
-        public static readonly integer STATUS_BLOCK_GRAB = 64;
-        public static readonly integer STATUS_BLOCK_GRAB_OBJECT = 1024;
-        public static readonly integer STATUS_DIE_AT_EDGE = 128;
-        public static readonly integer STATUS_RETURN_AT_EDGE = 256;
-        public static readonly integer STATUS_CAST_SHADOWS = 512;
-        public static readonly integer STATUS_BOUNDS_ERROR = 1002;
-        public static readonly integer STATUS_INTERNAL_ERROR = 1999;
-        public static readonly integer STATUS_MALFORMED_PARAMS = 1000;
-        public static readonly integer STATUS_NOT_FOUND = 1003;
-        public static readonly integer STATUS_NOT_SUPPORTED = 1004;
-        public static readonly integer STATUS_OK = 0;
-        public static readonly integer STATUS_TYPE_MISMATCH = 1001;
-        public static readonly integer STATUS_WHITELIST_FAILED = 2001;
+        public const int STATUS_PHYSICS = 1;
+        public const int STATUS_ROTATE_X = 2;
+        public const int STATUS_ROTATE_Y = 4;
+        public const int STATUS_ROTATE_Z = 8;
+        public const int STATUS_PHANTOM = 16;
+        public const int STATUS_SANDBOX = 32;
+        public const int STATUS_BLOCK_GRAB = 64;
+        public const int STATUS_BLOCK_GRAB_OBJECT = 1024;
+        public const int STATUS_DIE_AT_EDGE = 128;
+        public const int STATUS_RETURN_AT_EDGE = 256;
+        public const int STATUS_CAST_SHADOWS = 512;
+        public const int STATUS_BOUNDS_ERROR = 1002;
+        public const int STATUS_INTERNAL_ERROR = 1999;
+        public const int STATUS_MALFORMED_PARAMS = 1000;
+        public const int STATUS_NOT_FOUND = 1003;
+        public const int STATUS_NOT_SUPPORTED = 1004;
+        public const int STATUS_OK = 0;
+        public const int STATUS_TYPE_MISMATCH = 1001;
+        public const int STATUS_WHITELIST_FAILED = 2001;
 
-        public static readonly integer STRING_TRIM_HEAD = 1;
-        public static readonly integer STRING_TRIM_TAIL = 2;
-        public static readonly integer STRING_TRIM = 3;
+        public const int STRING_TRIM_HEAD = 1;
+        public const int STRING_TRIM_TAIL = 2;
+        public const int STRING_TRIM = 3;
 
         public static readonly key TEXTURE_BLANK = "5748decc-f629-461c-9a36-a35a221fe21f";
         public static readonly key TEXTURE_DEFAULT = "89556747-24cb-43ed-920b-47caed15465f";
@@ -817,75 +818,75 @@ namespace LSLEditor
         public static readonly key TEXTURE_TRANSPARENT = "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903";
         public static readonly key TEXTURE_MEDIA = "8b5fec65-8d8d-9dc5-cda8-8fdf2716e361";
 
-		public static readonly integer TOUCH_INVALID_FACE = 0xFFFFFFFF;
+		public const int TOUCH_INVALID_FACE = -1;
         public static readonly vector TOUCH_INVALID_TEXCOORD = new vector(-1.0, -1.0, 0.0);
 		public static readonly vector TOUCH_INVALID_VECTOR = new vector(0.0, 0.0, 0.0);
 
-		public static readonly integer TRAVERSAL_TYPE = 7;
-		public static readonly integer TRAVERSAL_TYPE_FAST = 1;
-		public static readonly integer TRAVERSAL_TYPE_NONE = 2;
-		public static readonly integer TRAVERSAL_TYPE_SLOW = 0;
+		public const int TRAVERSAL_TYPE = 7;
+		public const int TRAVERSAL_TYPE_FAST = 1;
+		public const int TRAVERSAL_TYPE_NONE = 2;
+		public const int TRAVERSAL_TYPE_SLOW = 0;
 
-        public static readonly integer TYPE_INTEGER = 1;
-        public static readonly integer TYPE_FLOAT = 2;
-        public static readonly integer TYPE_STRING = 3;
-        public static readonly integer TYPE_KEY = 4;
-        public static readonly integer TYPE_VECTOR = 5;
-        public static readonly integer TYPE_ROTATION = 6;
-        public static readonly integer TYPE_INVALID = 0;
+        public const int TYPE_INTEGER = 1;
+        public const int TYPE_FLOAT = 2;
+        public const int TYPE_STRING = 3;
+        public const int TYPE_KEY = 4;
+        public const int TYPE_VECTOR = 5;
+        public const int TYPE_ROTATION = 6;
+        public const int TYPE_INVALID = 0;
 
         public static readonly String URL_REQUEST_GRANTED = "URL_REQUEST_GRANTED";
         public static readonly String URL_REQUEST_DENIED = "URL_REQUEST_DENIED";
 
-        public static readonly integer VEHICLE_TYPE_NONE = 0;
+        public const int VEHICLE_TYPE_NONE = 0;
 
-        public static readonly integer VEHICLE_LINEAR_FRICTION_TIMESCALE = 16;
-        public static readonly integer VEHICLE_ANGULAR_FRICTION_TIMESCALE = 17;
-        public static readonly integer VEHICLE_LINEAR_MOTOR_DIRECTION = 18;
-        public static readonly integer VEHICLE_ANGULAR_MOTOR_DIRECTION = 19;
-        public static readonly integer VEHICLE_LINEAR_MOTOR_OFFSET = 20;
-        public static readonly integer VEHICLE_HOVER_HEIGHT = 24;
-        public static readonly integer VEHICLE_HOVER_EFFICIENCY = 25;
-        public static readonly integer VEHICLE_HOVER_TIMESCALE = 26;
-        public static readonly integer VEHICLE_BUOYANCY = 27;
-        public static readonly integer VEHICLE_LINEAR_DEFLECTION_EFFICIENCY = 28;
-        public static readonly integer VEHICLE_LINEAR_DEFLECTION_TIMESCALE = 29;
-        public static readonly integer VEHICLE_LINEAR_MOTOR_TIMESCALE = 30;
-        public static readonly integer VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE = 31;
-        public static readonly integer VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY = 32;
-        public static readonly integer VEHICLE_ANGULAR_DEFLECTION_TIMESCALE = 33;
-        public static readonly integer VEHICLE_ANGULAR_MOTOR_TIMESCALE = 34;
-        public static readonly integer VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE = 35;
-        public static readonly integer VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY = 36;
-        public static readonly integer VEHICLE_VERTICAL_ATTRACTION_TIMESCALE = 37;
-        public static readonly integer VEHICLE_BANKING_EFFICIENCY = 38;
-        public static readonly integer VEHICLE_BANKING_MIX = 39;
-        public static readonly integer VEHICLE_BANKING_TIMESCALE = 40;
-        public static readonly integer VEHICLE_REFERENCE_FRAME = 44;
+        public const int VEHICLE_LINEAR_FRICTION_TIMESCALE = 16;
+        public const int VEHICLE_ANGULAR_FRICTION_TIMESCALE = 17;
+        public const int VEHICLE_LINEAR_MOTOR_DIRECTION = 18;
+        public const int VEHICLE_ANGULAR_MOTOR_DIRECTION = 19;
+        public const int VEHICLE_LINEAR_MOTOR_OFFSET = 20;
+        public const int VEHICLE_HOVER_HEIGHT = 24;
+        public const int VEHICLE_HOVER_EFFICIENCY = 25;
+        public const int VEHICLE_HOVER_TIMESCALE = 26;
+        public const int VEHICLE_BUOYANCY = 27;
+        public const int VEHICLE_LINEAR_DEFLECTION_EFFICIENCY = 28;
+        public const int VEHICLE_LINEAR_DEFLECTION_TIMESCALE = 29;
+        public const int VEHICLE_LINEAR_MOTOR_TIMESCALE = 30;
+        public const int VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE = 31;
+        public const int VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY = 32;
+        public const int VEHICLE_ANGULAR_DEFLECTION_TIMESCALE = 33;
+        public const int VEHICLE_ANGULAR_MOTOR_TIMESCALE = 34;
+        public const int VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE = 35;
+        public const int VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY = 36;
+        public const int VEHICLE_VERTICAL_ATTRACTION_TIMESCALE = 37;
+        public const int VEHICLE_BANKING_EFFICIENCY = 38;
+        public const int VEHICLE_BANKING_MIX = 39;
+        public const int VEHICLE_BANKING_TIMESCALE = 40;
+        public const int VEHICLE_REFERENCE_FRAME = 44;
 
         // depricaded
-        public static readonly integer VEHICLE_FLAG_NO_FLY_UP = 1;
+        public const int VEHICLE_FLAG_NO_FLY_UP = 1;
 
-        public static readonly integer VEHICLE_FLAG_NO_DEFLECTION_UP = 1;
-        public static readonly integer VEHICLE_FLAG_LIMIT_ROLL_ONLY = 2;
-        public static readonly integer VEHICLE_FLAG_HOVER_WATER_ONLY = 4;
-        public static readonly integer VEHICLE_FLAG_HOVER_TERRAIN_ONLY = 8;
-        public static readonly integer VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT = 16;
-        public static readonly integer VEHICLE_FLAG_HOVER_UP_ONLY = 32;
-        public static readonly integer VEHICLE_FLAG_LIMIT_MOTOR_UP = 64;
-        public static readonly integer VEHICLE_FLAG_MOUSELOOK_STEER = 128;
-        public static readonly integer VEHICLE_FLAG_MOUSELOOK_BANK = 256;
-        public static readonly integer VEHICLE_FLAG_CAMERA_DECOUPLED = 512;
+        public const int VEHICLE_FLAG_NO_DEFLECTION_UP = 1;
+        public const int VEHICLE_FLAG_LIMIT_ROLL_ONLY = 2;
+        public const int VEHICLE_FLAG_HOVER_WATER_ONLY = 4;
+        public const int VEHICLE_FLAG_HOVER_TERRAIN_ONLY = 8;
+        public const int VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT = 16;
+        public const int VEHICLE_FLAG_HOVER_UP_ONLY = 32;
+        public const int VEHICLE_FLAG_LIMIT_MOTOR_UP = 64;
+        public const int VEHICLE_FLAG_MOUSELOOK_STEER = 128;
+        public const int VEHICLE_FLAG_MOUSELOOK_BANK = 256;
+        public const int VEHICLE_FLAG_CAMERA_DECOUPLED = 512;
 
-        public static readonly integer VEHICLE_TYPE_SLED = 1;
-        public static readonly integer VEHICLE_TYPE_CAR = 2;
-        public static readonly integer VEHICLE_TYPE_BOAT = 3;
-        public static readonly integer VEHICLE_TYPE_AIRPLANE = 4;
-        public static readonly integer VEHICLE_TYPE_BALLOON = 5;
+        public const int VEHICLE_TYPE_SLED = 1;
+        public const int VEHICLE_TYPE_CAR = 2;
+        public const int VEHICLE_TYPE_BOAT = 3;
+        public const int VEHICLE_TYPE_AIRPLANE = 4;
+        public const int VEHICLE_TYPE_BALLOON = 5;
 
-        public static readonly integer VERTICAL = 0;
+        public const int VERTICAL = 0;
 
-        //public static readonly integer REGION_FLAG_RESTRICT_PUSHOBJECT=4194304;
+        //public const int REGION_FLAG_RESTRICT_PUSHOBJECT=4194304;
 
         #endregion
 
@@ -1089,6 +1090,24 @@ namespace LSLEditor
                 return 0;
         }
 
+		static readonly int[] FastLookupBase64 =
+			{//  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 00
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 10
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,62, 0, 0, 0,63,	// 20
+				52,53,54,55,56,57,58,59,60,61, 0, 0, 0, 0, 0, 0,	// 30
+				 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,	// 40
+				15,16,17,18,19,20,21,22,23,24,25, 0, 0, 0, 0, 0,	// 50
+				 0,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,	// 60
+				41,42,43,44,45,46,47,48,49,50,51, 0, 0, 0, 0, 0,	// 70
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 80
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 90
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// A0
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// B0
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// C0
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// D0
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// E0
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};	// F0
         #endregion
 
         #region Math Functions
@@ -1170,7 +1189,6 @@ namespace LSLEditor
             return Math.Sqrt(topSum / (n * (n - 1)));
         }
 
-
         private double SafeDivide(double value1, double value2)
         {
             double ret = 0;
@@ -1192,50 +1210,50 @@ namespace LSLEditor
             else
                 return 0; // error
         }
-
         #endregion
 
         #region llFunctions
 
-        public integer llAbs(integer val)
+        public integer llAbs(integer fValue)
         {
-            int intA = (int)Math.Abs((long)val);
-            Verbose("Abs(" + val + ")=" + intA);
+            int intA = (int)Math.Abs((long)fValue);
+            Verbose("llAbs({0})={1}", fValue, intA);
             return intA;
         }
 
-        public Float llAcos(Float val)
+        public Float llAcos(Float fValue)
         {
-            double dblA = Math.Acos(val);
-            Verbose("Acos(" + val + ")=" + dblA);
+            double dblA = Math.Acos(fValue);
+            Verbose("llAcos({0})={1}", fValue, dblA);
             return dblA;
         }
 
-        public void llAddToLandBanList(key agent, Float hours)
+        public void llAddToLandBanList(key kID, Float fHours)
         {
-            Verbose("AddToLandBanList(" + agent + "," + hours + ")");
-            if (m_LandBanList.ContainsKey(agent))
-                m_LandBanList.Remove(agent);
-            m_LandBanList.Add(agent, hours);
+            Verbose("llAddToLandBanList({0}, {1})", kID, fHours);
+            if (m_LandBanList.ContainsKey(kID))
+                m_LandBanList.Remove(kID);
+            m_LandBanList.Add(kID, fHours);
         }
 
-        public void llAddToLandPassList(key avatar, Float hours)
+        public void llAddToLandPassList(key kID, Float fHours)
         {
-            Verbose("AddToLandPassList(" + avatar + "," + hours + ")");
-            if (m_LandPassList.ContainsKey(avatar))
-                m_LandPassList.Remove(avatar);
-            m_LandPassList.Add(avatar, hours);
+            Verbose("llAddToLandPassList({0}, {1})", kID, fHours);
+            if (m_LandPassList.ContainsKey(kID))
+                m_LandPassList.Remove(kID);
+            m_LandPassList.Add(kID, fHours);
         }
 
-        public void llAdjustSoundVolume(Float volume)
+        public void llAdjustSoundVolume(Float fVolume)
         {
-            Verbose("AdjustSoundVolume(" + volume + ")");
-            m_Volume = volume;
+            Verbose("llAdjustSoundVolume({0}), fVolume");
+            m_Volume = fVolume;
         }
 
-        public void llAllowInventoryDrop(integer add)
+        public void llAllowInventoryDrop(integer iAllowDrop)
         {
-            Verbose("AllowInventoryDrop(" + add + ")");
+            Verbose("llAllowInventoryDrop({0})", iAllowDrop);
+            m_AllowDrop = (Boolean)iAllowDrop;
         }
 
         public Float llAngleBetween(rotation a, rotation b)
@@ -1256,81 +1274,84 @@ namespace LSLEditor
             // implementation taken from LSL Portal. http://wiki.secondlife.com/w/index.php?title=LlAngleBetween
         }
 
-        public void llApplyImpulse(vector force, integer local)
+        public void llApplyImpulse(vector vForce, integer iLocal)
         {
-            Verbose("ApplyImpulse(" + force + "," + local + ")");
+            Verbose("llApplyImpulse({0}, {1}", vForce, iLocal);
         }
 
-        public void llApplyRotationalImpulse(vector force, integer local)
+        public void llApplyRotationalImpulse(vector vForce, integer iLocal)
         {
-            Verbose("ApplyRotationalImpulse(" + force + "," + local + ")");
+            Verbose("llApplyRotationalImpulse({0}, {1})", vForce, iLocal);
         }
 
-        public Float llAsin(Float val)
+        public Float llAsin(Float fValue)
         {
-            double dblA = Math.Asin(val);
-            Verbose("Asin(" + val + ")=" + dblA);
+            double dblA = Math.Asin(fValue);
+            Verbose("llAsin({0})={1}", fValue, dblA);
             return dblA;
         }
 
         public Float llAtan2(Float y, Float x)
         {
             double dblA = Math.Atan2(y, x);
-            Verbose("Atan2(" + y + "," + x + ")=" + dblA);
+            Verbose("llAtan2({0}, {1})={2}", y, x, dblA);
             return dblA;
         }
 
-        public void llAttachToAvatar(integer attachment)
+        public void llAttachToAvatar(integer iAttachPoint)
         {
-            Verbose("AttachToAvatar(" + attachment + ")");
+            Verbose("llAttachToAvatar({0})", iAttachPoint);
         }
 
-        public void llAttachToAvatarTemp(integer AttachPoint)
+        public void llAttachToAvatarTemp(integer iAttachPoint)
         {
-            Verbose("llAttachToAvatarTemp(" + AttachPoint + ")");
+            Verbose("llAttachToAvatarTemp({0})", iAttachPoint);
         }
 
-		public key llAvatarOnLinkSitTarget(integer LinkNumber)
+		public key llAvatarOnLinkSitTarget(integer iLinkNumber)
 		{
-			Verbose("llAvatarOnLinkSitTarget()");
-			return new key(Guid.NewGuid());
+            key kLinkUUID = new key(Guid.NewGuid());
+            Verbose("llAvatarOnLinkSitTarget({0}))={1}", iLinkNumber, kLinkUUID);
+			return kLinkUUID;
 		}
 
         public key llAvatarOnSitTarget()
         {
-            Verbose("AvatarOnSitTarget()");
-            return new key(Guid.NewGuid());
+            key kLinkUUID = new key(Guid.NewGuid());
+            Verbose("llAvatarOnSitTarget()={0}", kLinkUUID);
+            return kLinkUUID;
         }
 
-        public rotation llAxes2Rot(vector fwd, vector left, vector up)
+        public rotation llAxes2Rot(vector vForward, vector vLeft, vector vUp)
         {
-            Verbose("Axes2Rot(" + fwd + "," + left + "," + up + ")");
-            return rotation.ZERO_ROTATION;
+            rotation rRot = rotation.ZERO_ROTATION;
+            Verbose("llAxes2Rot({0}, {1}, {2})={3}", vForward, vLeft, +vUp, rRot);
+            return rRot;
         }
 
-        public rotation llAxisAngle2Rot(vector axis, Float angle)
+        public rotation llAxisAngle2Rot(vector vAxis, Float fAngle)
         {
-            vector unit_axis = llVecNorm(axis);
-            double sine_half_angle = Math.Sin(angle / 2);
-            double cosine_half_angle = Math.Cos(angle / 2);
+            vector vUnitAxis = llVecNorm(vAxis);
+            double dSineHalfAngle = Math.Sin(fAngle / 2);
+            double dCosineHalfAngle = Math.Cos(fAngle / 2);
 
-            rotation result = new rotation(
-                sine_half_angle * unit_axis.x,
-                sine_half_angle * unit_axis.y,
-                sine_half_angle * unit_axis.z,
-                cosine_half_angle);
+            rotation rResult = new rotation(
+                dSineHalfAngle * vUnitAxis.x,
+                dSineHalfAngle * vUnitAxis.y,
+                dSineHalfAngle * vUnitAxis.z,
+                dCosineHalfAngle);
 
-            Verbose("AxisAngle2Rot({0},{1})={2}", axis, angle, result);
-            return result;
+            Verbose("llAxisAngle2Rot({0}, {1})={2}", vAxis, fAngle, rResult);
+            return rResult;
         }
 
-        public integer llBase64ToInteger(String _str)
+        public integer llBase64ToInteger(String sString)
         {
-            int result;
+            int iResult;
 
             try
             {
-                string s = _str;
+                string s = sString;
                 byte[] data = new byte[4];
 
                 if (s.Length > 1)
@@ -1357,7 +1378,7 @@ namespace LSLEditor
                     data[0] |= (byte)(LookupBase64(s, 5) >> 4);
                 }
 
-                result = BitConverter.ToInt32(data, 0);
+                iResult = BitConverter.ToInt32(data, 0);
 
                 //0 12 34 56
                 //1 78 12 34
@@ -1371,40 +1392,40 @@ namespace LSLEditor
             }
             catch
             {
-                result = (new Random()).Next();
+                iResult = (new Random()).Next();
             }
-            Verbose(@"Base64ToInteger(""{0}"")={1}", _str, result);
-            return result;
+            Verbose(@"llBase64ToInteger(""{0}"")={1}", sString, iResult);
+            return iResult;
         }
 
-        public String llBase64ToString(String str)
+        public String llBase64ToString(String sString)
         {
-            string result = Base64ToString(str.ToString());
-            Verbose(@"Base64ToString(""{0}"")=""{1}""", str, result);
-            return result;
+            string sResult = Base64ToString(sString.ToString());
+            Verbose(@"llBase64ToString(""{0}"")=""{1}""", sString, sResult);
+            return sResult;
         }
 
         public void llBreakAllLinks()
         {
             host.llBreakAllLinks();
-            Verbose("BreakAllLinks()");
+            Verbose("llBreakAllLinks()");
         }
 
-        public void llBreakLink(integer linknum)
+        public void llBreakLink(integer iLinkNumber)
         {
-            host.llBreakLink(linknum);
-            Verbose("BreakLink({0})", linknum);
+            host.llBreakLink(iLinkNumber);
+            Verbose("llBreakLink({0})", iLinkNumber);
         }
 
-        public list llCSV2List(String _src)
+        public list llCSV2List(String sString)
         {
-            string src = _src;
-            list result = new list();
+            string sSource = sString;
+            list lResult = new list();
             StringBuilder sb = new StringBuilder();
             int WithinAngelBracket = 0;
-            for (int intI = 0; intI < src.Length; intI++)
+            for (int intI = 0; intI < sSource.Length; intI++)
             {
-                char chrC = src[intI];
+                char chrC = sSource[intI];
                 if (chrC == '<')
                     WithinAngelBracket++;
                 else if (chrC == '>')
@@ -1412,105 +1433,107 @@ namespace LSLEditor
 
                 if (WithinAngelBracket == 0 && chrC == ',')
                 {
-                    result.Add(sb.ToString());
+                    lResult.Add(sb.ToString());
                     sb = new StringBuilder();
                 }
                 else
                 {
-                    sb.Append(src[intI]);
+                    sb.Append(sSource[intI]);
                 }
             }
             // dont forget the last one
-            result.Add(sb.ToString());
+            lResult.Add(sb.ToString());
 
             // remove the first space, if any
-            for (int intI = 0; intI < result.Count; intI++)
+            for (int intI = 0; intI < lResult.Count; intI++)
             {
-                string strValue = result[intI].ToString();
+                string strValue = lResult[intI].ToString();
                 if (strValue == "")
                     continue;
                 if (strValue[0] == ' ')
-                    result[intI] = strValue.Substring(1);
+                    lResult[intI] = strValue.Substring(1);
             }
 
-            Verbose(@"CSV2List(""{0}"")={1}", src, result.ToVerboseString());
+            Verbose(@"llCSV2List(""{0}"")={1}", sSource, lResult.ToVerboseString());
 
-            return result;
+            return lResult;
         }
 
         public list llCastRay(vector vStart, vector vEnd, list lOptions)
         {
-            list result = new list();
-            Verbose("CastRay({0}, {1}, {2})={3}", vStart, vEnd, lOptions.ToString(), result);
-            return result;
+            list lResult = new list();
+            Verbose("llCastRay({0}, {1}, {2})={3}", vStart, vEnd, lOptions.ToVerboseString(), lResult.ToVerboseString());
+            return lResult;
         }
 
-        public integer llCeil(Float val)
+        public integer llCeil(Float fValue)
         {
-            int intA = (int)Math.Ceiling(val);
-            Verbose("Ceiling(" + val + ")=" + intA);
+            int intA = (int)Math.Ceiling(fValue);
+            Verbose("llCeiling({0})={1}", fValue, intA);
             return intA;
         }
 
         public void llClearCameraParams()
         {
-            Verbose("ClearCameraParams()");
+            Verbose("llClearCameraParams()");
         }
 
         public integer llClearLinkMedia(integer iLink, integer iFace)
         {
-            Verbose("ClearLinkMedia({0}, {1})={2}", iLink, iFace, true);
+            Verbose("llClearLinkMedia({0}, {1})={2}", iLink, iFace, true);
             return true;
         }
 
-        public integer llClearPrimMedia(integer face)
+        public integer llClearPrimMedia(integer iFace)
         {
-            Verbose("ClearPrimMedia(" + face + ")");
-            return 0;
+            integer iResult = 0;
+            Verbose("llClearPrimMedia({0})={1}", iFace, iResult);
+            return iResult;
         }
 
-        public void llCloseRemoteDataChannel(key channel)
+        public void llCloseRemoteDataChannel(key kChannel)
         {
-            host.llCloseRemoteDataChannel(channel);
-            Verbose("CloseRemoteDataChannel({0})", channel);
+            host.llCloseRemoteDataChannel(kChannel);
+            Verbose("llCloseRemoteDataChannel({0})", kChannel);
         }
 
-        public Float llCloud(vector offset)
+        public Float llCloud(vector vOffset)
         {
-            Verbose("Cloud({0})", offset);
-            return 0.0;
+            Float fResult = 0.0F;
+            Verbose("llCloud({0})={1}", vOffset, fResult);
+            return fResult;
         }
 
-        public void llCollisionFilter(String name, key id, integer accept)
+        public void llCollisionFilter(String sName, key kID, integer iAccept)
         {
-            Verbose("CollisionFilter(" + name + "," + id + "," + accept + ")");
+            Verbose(@"llCollisionFilter(""{0}"", {1}, {2})", sName, kID, iAccept);
         }
 
-        public void llCollisionSound(String impact_sound, Float impact_volume)
+        public void llCollisionSound(String sImpactSound, Float fImpactVolume)
         {
-            Verbose("CollisionSound(" + impact_sound + "," + impact_volume + ")");
+            Verbose(@"llCollisionSound(""{0}"", {1})", sImpactSound, + fImpactVolume);
         }
 
-        public void llCollisionSprite(String impact_sprite)
+        public void llCollisionSprite(String sImpactSprite)
         {
-            Verbose("CollisionSprite(" + impact_sprite + ")");
+            Verbose(@"llCollisionSprite(""{0}"")", sImpactSprite);
         }
 
-        public Float llCos(Float theta)
+        public Float llCos(Float fTheta)
         {
-            double dblA = Math.Cos(theta);
-            Verbose("Cos(" + theta + ")=" + dblA);
+            double dblA = Math.Cos(fTheta);
+            Verbose("llCos({0})={1}", fTheta, dblA);
             return dblA;
         }
 
-		public void llCreateCharacter(list Options)
+		public void llCreateCharacter(list lOptions)
 		{
-			Verbose("llCreateCharacter({0})", Options);
+            Verbose("llCreateCharacter({0})", lOptions.ToVerboseString());
 		}
 
-        public void llCreateLink(key target, integer simulator)
+        public void llCreateLink(key kID, integer iSimulator)
         {
-            Verbose("CreateLink(" + target + "," + simulator + ")");
+            Verbose("llCreateLink({0}, {1})", kID, iSimulator);
         }
 
 		public void llDeleteCharacter()
@@ -1518,14 +1541,14 @@ namespace LSLEditor
 			Verbose("llDeleteCharacter()");
 		}
 
-        public list llDeleteSubList(list _src, integer _start, integer _end)
+        public list llDeleteSubList(list lSource, integer iStart, integer iEnd)
         {
-            int intLength = _src.Count;
+            int intLength = lSource.Count;
 
-            int start = _start;
-            int end = _end;
+            int start = iStart;
+            int end = iEnd;
 
-            list src = new list(_src);
+            list src = new list(lSource);
 
             if (CorrectIt(intLength, ref start, ref end))
             {
@@ -1542,21 +1565,21 @@ namespace LSLEditor
                         src[intI] = null;
                 }
             }
-            list result = new list();
+            list lResult = new list();
             for (int intI = 0; intI < src.Count; intI++)
             {
                 if (src[intI] != null)
-                    result.Add(src[intI]);
+                    lResult.Add(src[intI]);
             }
-            Verbose(string.Format("DeleteSubList({0},{1},{2})={3}", _src.ToVerboseString(), _start, _end, result.ToVerboseString()));
-            return result;
+            Verbose(string.Format("llDeleteSubList({0}, {1}, {2})={3}", lSource.ToVerboseString(), iStart, iEnd, lResult.ToVerboseString()));
+            return lResult;
         }
 
-        public String llDeleteSubString(String _src, integer _start, integer _end)
+        public String llDeleteSubString(String sSource, integer iStart, integer iEnd)
         {
-            char[] src = _src.ToString().ToCharArray();
-            int start = _start;
-            int end = _end;
+            char[] src = sSource.ToString().ToCharArray();
+            int start = iStart;
+            int end = iEnd;
 
             int intLength = src.Length;
 
@@ -1582,125 +1605,131 @@ namespace LSLEditor
                     result.Append(src[intI]);
             }
 
-            Verbose(string.Format(@"DeleteSubString(""{0}"",{1},{2})=""{3}""", _src, _start, _end, result));
+            Verbose(string.Format(@"llDeleteSubString(""{0}"", {1}, {2})=""{3}""", sSource, iStart, iEnd, result));
             return result.ToString();
         }
 
         public void llDetachFromAvatar()
         {
-            Verbose("DetachFromAvatar()");
+            Verbose("llDetachFromAvatar()");
         }
 
-        public void llDetachFromAvatar(key avatar)
+        public vector llDetectedGrab(integer iIndex)
         {
-            Verbose("DetachFromAvatar({0})", avatar);
+            vector vCoords = vector.ZERO_VECTOR;
+            Verbose("llDetectedGrab({0})={1}", iIndex, vCoords);
+            return vCoords;
         }
 
-        public vector llDetectedGrab(integer number)
+        public integer llDetectedGroup(integer iIndex)
         {
-            Verbose("DetectedGrab(" + number + ")");
-            return vector.ZERO_VECTOR;
+            integer iDetected = 0;
+            Verbose("llDetectedGroup({0})={1}", iIndex, iDetected);
+            return iDetected;
         }
 
-        public integer llDetectedGroup(integer number)
+        public key llDetectedKey(integer iIndex)
         {
-            Verbose("DetectedGroup(" + number + ")");
-            return 0;
+            key kID = new key(Properties.Settings.Default.AvatarKey);
+            Verbose("llDetectedKey({0})={1}", iIndex, kID);
+            return kID;
         }
 
-        public key llDetectedKey(integer number)
+        public integer llDetectedLinkNumber(integer iLinkNumber)
         {
-            key k = new key(Properties.Settings.Default.AvatarKey);
-            Verbose("DetectedKey({0})={1}", number, k);
-            return k;
+            integer iDetected = 0;
+            Verbose("llDetectedLinkNumber({0})={1}", iLinkNumber, iDetected);
+            return iDetected;
         }
 
-        public integer llDetectedLinkNumber(integer number)
+        public String llDetectedName(integer iIndex)
         {
-            integer result = 0;
-            Verbose("DetectedLinkNumber({0})={1}", number, result);
-            return result;
+            string sResult = Properties.Settings.Default.AvatarName;
+            Verbose(@"llDetectedName({0})=""{1}""", iIndex, sResult);
+            return sResult;
         }
 
-        public String llDetectedName(integer number)
+        public key llDetectedOwner(integer iIndex)
         {
-            string result = Properties.Settings.Default.AvatarName;
-            Verbose("DetectedName({0})={1}", number, result);
-            return result;
+            key kID = new key(Properties.Settings.Default.AvatarKey);
+            Verbose("llDetectedOwner({0})={1}", iIndex, kID);
+            return kID;
         }
 
-        public key llDetectedOwner(integer number)
+        public vector llDetectedPos(integer iIndex)
         {
-            key result = new key(Properties.Settings.Default.AvatarKey);
-            Verbose("DetectedOwner({0})={1}", number, result);
-            return result;
+            vector vCoords = vector.ZERO_VECTOR;
+            Verbose("llDetectedPos({0})={1}", iIndex, vCoords);
+            return vCoords;
         }
 
-        public vector llDetectedPos(integer number)
+        public rotation llDetectedRot(integer iIndex)
         {
-            Verbose("DetectedPos(" + number + ")");
-            return vector.ZERO_VECTOR;
+            rotation rRotation = rotation.ZERO_ROTATION;
+            Verbose("llDetectedRot({0})={1}", iIndex, rRotation);
+            return rRotation;
         }
 
-        public rotation llDetectedRot(integer number)
+        public vector llDetectedTouchBinormal(integer iIndex)
         {
-            Verbose("DetectedRot(" + number + ")");
-            return rotation.ZERO_ROTATION;
+            vector vCoords = new vector();
+            Verbose("llDetectedTouchBinormal({0})={1}", iIndex, vCoords);
+            return vCoords;
         }
 
-        public vector llDetectedTouchBinormal(integer index)
+        public integer llDetectedTouchFace(integer iIndex)
         {
-            Verbose("llDetectedTouchBinormal({0})", index);
-            return new vector();
+            integer iFace = 0;
+            Verbose("llDetectedTouchFace({0})={1}", iIndex, iFace);
+            return iFace;
         }
 
-        public integer llDetectedTouchFace(integer index)
+        public vector llDetectedTouchNormal(integer iIndex)
         {
-            Verbose("llDetectedTouchFace({0})", index);
-            return 0;
+            vector vNormal = new vector();
+            Verbose("llDetectedTouchNormal({0})={1}", iIndex, vNormal);
+            return vNormal;
         }
 
-        public vector llDetectedTouchNormal(integer index)
+        public vector llDetectedTouchPos(integer iIndex)
         {
-            Verbose("llDetectedTouchNormal({0})", index);
-            return new vector();
+            vector vCoords = vector.ZERO_VECTOR;
+            Verbose("llDetectedTouchPos({0})={1}", iIndex, vCoords);
+            return vCoords;
         }
 
-        public vector llDetectedTouchPos(integer index)
+        public vector llDetectedTouchST(integer iIndex)
         {
-            Verbose("llDetectedTouchPos({0})", index);
-            return new vector();
+            vector vCoords = vector.ZERO_VECTOR;
+            Verbose("llDetectedTouchST({0})={1}", iIndex, vCoords);
+            return vCoords;
         }
 
-        public vector llDetectedTouchST(integer index)
+        public vector llDetectedTouchUV(integer iIndex)
         {
-            Verbose("llDetectedTouchST({0})", index);
-            return new vector();
+            vector vUV = vector.ZERO_VECTOR;
+            Verbose("llDetectedTouchUV({0})={1}", iIndex, vUV);
+            return vUV;
         }
 
-        public vector llDetectedTouchUV(integer index)
+        public integer llDetectedType(integer iIndex)
         {
-            Verbose("llDetectedTouchUV({0})", index);
-            return new vector();
+            integer iResult = AGENT;
+            Verbose("llDetectedType({0})={1}", iIndex, iResult);
+            return iResult;
         }
 
-        public integer llDetectedType(integer number)
+        public vector llDetectedVel(integer iIndex)
         {
-            integer result = AGENT;
-            Verbose("DetectedType({0})={1}", number, result);
-            return result;
+            vector vVelocity = vector.ZERO_VECTOR;
+            Verbose("llDetectedVel({0})={1}", iIndex, vVelocity);
+            return vVelocity;
         }
 
-        public vector llDetectedVel(integer number)
+        public void llDialog(key kID, String sMessage, list lButtons, integer iChannel)
         {
-            Verbose("DetectedVel(" + number + ")");
-            return vector.ZERO_VECTOR;
-        }
-
-        public void llDialog(key avatar, String message, list buttons, integer channel)
-        {
-            Verbose("Dialog({0},{1},{2},{3})", avatar, message, buttons.ToString(), channel);
-            host.llDialog(avatar, message, buttons, channel);
+            Verbose(@"llDialog({0}, ""{1}"", {2}, {3})", kID, sMessage, lButtons.ToVerboseString(), iChannel);
+            host.llDialog(kID, sMessage, lButtons, iChannel);
         }
 
         public void llDie()
@@ -1709,40 +1738,41 @@ namespace LSLEditor
             host.Die();
         }
 
-        public String llDumpList2String(list src, String separator)
+        public String llDumpList2String(list lSource, String sSeparator)
         {
             StringBuilder result = new StringBuilder();
-            for (int intI = 0; intI < src.Count; intI++)
+            for (int intI = 0; intI < lSource.Count; intI++)
             {
                 if (intI > 0)
-                    result.Append(separator.ToString());
-                result.Append(src[intI].ToString());
+                    result.Append(sSeparator.ToString());
+                result.Append(lSource[intI].ToString());
             }
-            Verbose(@"DumpList2String({0},""{1}"")=""{2}""", src.ToVerboseString(), separator, result.ToString());
+            Verbose(@"llDumpList2String({0},""{1}"")=""{2}""", lSource.ToVerboseString(), sSeparator, result.ToString());
             return result.ToString();
         }
 
-        public integer llEdgeOfWorld(vector pos, vector dir)
+        public integer llEdgeOfWorld(vector vPosition, vector vDirection)
         {
-            Verbose("EdgeOfWorld(" + pos + "," + dir + ")");
-            return 0;
+            integer iResult = 0;
+            Verbose("llEdgeOfWorld({0}, {1})={2}", vPosition, vDirection, iResult);
+            return iResult;
         }
 
-        public void llEjectFromLand(key pest)
+        public void llEjectFromLand(key kID)
         {
-            Verbose("EjectFromLand(" + pest + ")");
+            Verbose("llEjectFromLand({0})", kID);
         }
 
-        public void llEmail(String address, String subject, String message)
+        public void llEmail(String sAddress, String sSubject, String sMessage)
         {
-            Verbose("Email(" + address + "," + subject + "," + message + ")");
-            host.Email(address, subject, message);
+            Verbose(@"llEmail(""{0}"", ""{1}"", ""{2}"")", sAddress, sSubject, sMessage);
+            host.Email(sAddress, sSubject, sMessage);
         }
 
-        public String llEscapeURL(String url)
+        public String llEscapeURL(String sURL)
         {
             StringBuilder sb = new StringBuilder();
-            byte[] data = Encoding.UTF8.GetBytes(url.ToString());
+            byte[] data = Encoding.UTF8.GetBytes(sURL.ToString());
             for (int intI = 0; intI < data.Length; intI++)
             {
                 byte chrC = data[intI];
@@ -1753,7 +1783,7 @@ namespace LSLEditor
                 else
                     sb.AppendFormat("%{0:X2}", (int)chrC);
             }
-            Verbose(string.Format(@"EscapeURL(""{0}"")=""{1}""", url, sb.ToString()));
+            Verbose(string.Format(@"EscapeURL(""{0}"")=""{1}""", sURL, sb.ToString()));
             return sb.ToString();
         }
 
@@ -1766,12 +1796,12 @@ namespace LSLEditor
             double bw = Math.Cos(v.y);
             double cz = Math.Sin(v.z);
             double cw = Math.Cos(v.z);
-            rotation rot = new rotation(aw * by * cz + ax * bw * cw,
+            rotation rRotation = new rotation(aw * by * cz + ax * bw * cw,
                     aw * by * cw - ax * bw * cz,
                     aw * bw * cz + ax * by * cw,
                     aw * bw * cw - ax * by * cz);
-            Verbose("Euler2Rot(" + v + ")=" + rot);
-            return rot;
+            Verbose("llEuler2Rot({0})={1}", v, rRotation);
+            return rRotation;
         }
 
 		public void llEvade(key TargetID, list Options)
@@ -1784,530 +1814,567 @@ namespace LSLEditor
 			Verbose("llExecCharacterCmd({0}, {1})", Command, Options);
 		}
 
-        public Float llFabs(Float val)
+        public Float llFabs(Float fValue)
         {
-            double dblA = Math.Abs(val);
-            Verbose("Fabs(" + val + ")=" + dblA);
+            double dblA = Math.Abs(fValue);
+            Verbose("llFabs({0})={1}", fValue, dblA);
             return dblA;
         }
 
-        public integer llFloor(Float val)
+		public void llFleeFrom(vector vSource, Float fDistance, list lOptions)
+		{
+			Verbose("llFleeFrom({0}, {1}, {2})", vSource, fDistance, lOptions.ToVerboseString());
+		}
+
+        public integer llFloor(Float fValue)
         {
-            int intA = (int)Math.Floor(val);
-            Verbose("Floor(" + val + ")=" + intA);
+            int intA = (int)Math.Floor(fValue);
+            Verbose("llFloor({0})={1}", fValue, intA);
             return intA;
         }
 
-        public void llForceMouselook(integer mouselook)
+        public void llForceMouselook(integer iMouselook)
         {
-            Verbose("ForceMouselook(" + mouselook + ")");
+            Verbose("llForceMouselook({0})", iMouselook);
         }
 
-        public Float llFrand(Float max)
+        public Float llFrand(Float fMaximum)
         {
-            double dblValue = max * m_random.NextDouble();
-            Verbose("Frand(" + max + ")=" + dblValue);
+            double dblValue = fMaximum * m_random.NextDouble();
+            Verbose("llFrand({0})={1}", fMaximum, dblValue);
             return dblValue;
         }
 
-        public key llGenerate()
+        public key llGenerateKey()
         {
-            Verbose("llGenerate()");
-            return key.NULL_KEY;
+            key kID = new key(Guid.NewGuid());
+            Verbose("llGenerateKey()={0}", kID);
+            return kID;
         }
-
-		public void llFleeFrom(vector Source, Float Distance, list Options)
-		{
-			Verbose("llFleeFrom({0}, {1}, {2})", Source, Distance, Options);
-		}
 
         public vector llGetAccel()
         {
-            Verbose("GetAccel()");
-            return vector.ZERO_VECTOR;
+            vector vAcceleration = vector.ZERO_VECTOR;
+            Verbose("llGetAccel()={0}", vAcceleration);
+            return vAcceleration;
         }
 
-        public integer llGetAgentInfo(key id)
+        public integer llGetAgentInfo(key kID)
         {
-            Verbose("GetAgentInfo(" + id + ")");
-            return 0;
+            integer iAgentFlags = 0;
+            Verbose("llGetAgentInfo({0})={1}", kID, iAgentFlags);
+            return iAgentFlags;
         }
 
-        public String llGetAgentLanguage(key avatar)
+        public String llGetAgentLanguage(key kID)
         {
-            string strLan = "en-us";
-            Verbose("llGetAgentLanguage({0})=\"{1}\"", avatar, strLan);
-            return strLan;
+            string sLanguageCode = "en-us";
+            Verbose(@"llGetAgentLanguage({0})=""{1}""", kID, sLanguageCode);
+            return sLanguageCode;
         }
 
-		public list llGetAgentList(integer Scope, list Options)
+		public list llGetAgentList(integer iScope, list lOptions)
 		{
-			Verbose("llGetAgentList({0}, [{1}])", Scope, Options);
-			return new list();
+            list lAgents = new list();
+            Verbose("llGetAgentList({0}, [{1}])={2}", iScope, lOptions, lAgents.ToVerboseString());
+            return lAgents;
 		}
 
-        public vector llGetAgentSize(key id)
+        public vector llGetAgentSize(key kID)
         {
-            Verbose("GetAgentSize(" + id + ")");
-            return vector.ZERO_VECTOR;
+            vector vAgentSize = vector.ZERO_VECTOR;
+            Verbose("llGetAgentSize({0})={1}", kID, vAgentSize);
+            return vAgentSize;
         }
 
-        public Float llGetAlpha(integer face)
+        public Float llGetAlpha(integer iFace)
         {
-            Verbose("GetAlpha(" + face + ")");
-            return 0F;
+            Float fOpacity = 1.0F;
+            Verbose("llGetAlpha({0})={1}", iFace, fOpacity);
+            return fOpacity;
         }
 
         public Float llGetAndResetTime()
         {
             // get time
-            double time = llGetTime();
-            Verbose("GetAndResetTime()=" + time);
+            double dTime = llGetTime();
+            Verbose("llGetAndResetTime()=" + dTime);
             // reset time
             llResetTime();
-            return time;
+            return dTime;
         }
 
-        public String llGetAnimation(key id)
+        public String llGetAnimation(key kID)
         {
-            Verbose("GetAnimation(" + id + ")");
-            return "";
+            String sAnimation = "";
+            Verbose(@"llGetAnimation({0})=""{1}""", kID, sAnimation);
+            return sAnimation;
         }
 
-        public list llGetAnimationList(key id)
+        public list llGetAnimationList(key kID)
         {
-            Verbose("GetAnimationList(" + id + ")");
-            return new list();
+            list lAnimationList = new list();
+            Verbose("llGetAnimationList({0})={1}", kID, lAnimationList.ToVerboseString());
+            return lAnimationList;
         }
 
         public String llGetAnimationOverride(String sAnimationState)
         {
-            Verbose("GetAnimationOverride(" + sAnimationState + ")");
-            return "";
+            String sAnimation = "";
+            Verbose(@"llGetAnimationOverride(""{0}"")=""{1}""", sAnimationState, sAnimation);
+            return sAnimation;
         }
 
         public integer llGetAttached()
         {
-            Verbose("GetAttached()");
-            return 0;
+            integer iAttachPoint = 0;
+            Verbose("llGetAttached()={0}", iAttachPoint);
+            return iAttachPoint;
         }
 
-        public list llGetBoundingBox(key mobject)
+        public list llGetBoundingBox(key kID)
         {
-            Verbose("GetBoundingBox(" + mobject + ")");
-            return new list();
+            list lBoundingCoords = new list();
+            Verbose("llGetBoundingBox({0})={1}", kID, lBoundingCoords.ToVerboseString());
+            return lBoundingCoords;
         }
 
         public vector llGetCameraPos()
         {
-            Verbose("GetCameraPos()");
-            return vector.ZERO_VECTOR;
+            vector vCameraCoords = vector.ZERO_VECTOR;
+            Verbose("llGetCameraPos()={0}", vCameraCoords);
+            return vCameraCoords;
         }
 
         public rotation llGetCameraRot()
         {
-            Verbose("GetCameraRot()");
-            return rotation.ZERO_ROTATION;
+            rotation rCameraRotation = rotation.ZERO_ROTATION;
+            Verbose("llGetCameraRot()={0}", rCameraRotation);
+            return rCameraRotation;
         }
 
         public vector llGetCenterOfMass()
         {
-            Verbose("GetCenterOfMass()");
-            return vector.ZERO_VECTOR;
+            vector vCenterOfMass = vector.ZERO_VECTOR;
+            Verbose("llGetCenterOfMass()={0}", vCenterOfMass);
+            return vCenterOfMass;
         }
 
-		public list llGetClosestNavPoint(vector Point, list Options)
+		public list llGetClosestNavPoint(vector lPoint, list lOptions)
 		{
-			Verbose("llGetClosestNavPoint({0}, {1})", Point, Options);
-			return new list();
+            list lClosetNavPoint = new list();
+            Verbose("llGetClosestNavPoint({0}, {1})={2}", lPoint, lOptions.ToVerboseString(), lClosetNavPoint.ToVerboseString());
+            return lClosetNavPoint;
 		}
 
-        public vector llGetColor(integer face)
+        public vector llGetColor(integer iFace)
         {
-            Verbose("GetColor(" + face + ")");
-            return vector.ZERO_VECTOR;
+            vector vColour = vector.ZERO_VECTOR;
+            Verbose("llGetColor({0})={1}", iFace, vColour);
+            return vColour;
         }
 
         public key llGetCreator()
         {
-            key result = Properties.Settings.Default.AvatarKey;
-            Verbose("GetCreator()={0}", result);
-            return result;
+            key kResult = Properties.Settings.Default.AvatarKey;
+            Verbose("llGetCreator()={0}", kResult);
+            return kResult;
         }
 
         public String llGetDate()
         {
-            string result = DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd");
-            Verbose("GetDate()=" + result);
-            return result;
+            string sResult = DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd");
+            Verbose("llGetDate()={0}", sResult);
+            return sResult;
         }
 
         public string llGetDisplayName(key kAvatarID)
         {
-            string result = "";
-            Verbose("GetDisplayName({0})={1}", kAvatarID, result);
-            return result;
+            string sResult = "";
+            Verbose("llGetDisplayName({0})={1}", kAvatarID, sResult);
+            return sResult;
         }
 
         public Float llGetEnergy()
         {
-            Float result = 1.23;
-            Verbose("GetEnergy()={0}", result);
-            return result;
+            Float fResult = 1.23;
+            Verbose("llGetEnergy()={0}", fResult);
+            return fResult;
         }
 
         public string llGetEnv(string sDataRequest)
         {
-            string result;
+            string sResult;
             switch (sDataRequest)
             {
                 case "sim_channel":
-                    result = "Second Life Server";
+                    sResult = "Second Life Server";
                     break;
                 case "sim_version":
-                    result = "11.11.09.244706";
+                    sResult = "11.11.09.244706";
                     break;
                 default:
-                    result = "";
+                    sResult = "";
                     break;
             }
-            Verbose("GetEnv({0})={1}", sDataRequest, result);
-            return result;
+            Verbose(@"llGetEnv(""{0}"")=""{1}""", sDataRequest, sResult);
+            return sResult;
         }
 
         public vector llGetForce()
         {
-            Verbose("GetForce()");
-            return vector.ZERO_VECTOR;
+            vector vForce = vector.ZERO_VECTOR;
+            Verbose("llGetForce()={0}", vForce);
+            return vForce;
         }
 
         public integer llGetFreeMemory()
         {
-            Verbose("GetFreeMemory()");
-            return 16000;
+            integer iFreeMemory = 16000;
+            Verbose("llGetFreeMemory()={0}", iFreeMemory);
+            return iFreeMemory;
         }
 
         public integer llGetFreeURLs()
         {
-            return 0;
+            integer iFreeURLs = 0;
+            Verbose("llGetFreeURLs()={0}", iFreeURLs);
+            return iFreeURLs;
         }
 
         public Float llGetGMTclock()
         {
-            Float result = DateTime.Now.ToUniversalTime().TimeOfDay.TotalSeconds;
-            Verbose("GetGMTclock()={0}", result);
-            return result;
+            Float fResult = DateTime.Now.ToUniversalTime().TimeOfDay.TotalSeconds;
+            Verbose("llGetGMTclock()={0}", fResult);
+            return fResult;
         }
 
         public vector llGetGeometricCenter()
         {
-            vector result = ZERO_VECTOR;
-            Verbose("GetGeometricCenter()={0}", result);
-            return result;
+            vector vResult = ZERO_VECTOR;
+            Verbose("llGetGeometricCenter()={0}", vResult);
+            return vResult;
         }
 
-        public String llGetHTTPHeader(key request_id, String header)
+        public String llGetHTTPHeader(key kRequestID, String sDesiredHeader)
         {
-            return "not-implemented";
+            String sResult = "not-implemented";
+            Verbose(@"llGetHTTPHeader({0}, ""{1}"")=""{2}""", kRequestID, sDesiredHeader, sResult);
+            return sResult;
         }
 
-        public key llGetInventoryCreator(String item)
+        public key llGetInventoryCreator(String sItem)
         {
-            key result = Properties.Settings.Default.AvatarKey;
-            Verbose(@"GetInventoryCreator(""{0}"")={1}", item, result);
-            return result;
+            key kAvatarID = Properties.Settings.Default.AvatarKey;
+            Verbose(@"llGetInventoryCreator(""{0}"")={1}", sItem, kAvatarID);
+            return kAvatarID;
         }
 
-        public key llGetInventoryKey(String name)
+        public key llGetInventoryKey(String sItemName)
         {
-            key result = host.GetInventoryKey(name);
-            Verbose("GetInventoryKey({0})={1}", name, result);
-            return result;
+            key kID = host.GetInventoryKey(sItemName);
+            Verbose(@"llGetInventoryKey(""{0}"")={1}", sItemName, kID);
+            return kID;
         }
 
-        public String llGetInventoryName(integer type, integer number)
+        public String llGetInventoryName(integer iItemType, integer iItemIndex)
         {
-            string result = host.GetInventoryName(type, number);
-            Verbose("GetInventoryName({0},{1})={2}", type, number, result);
-            return result;
+            string sItemName = host.GetInventoryName(iItemType, iItemIndex);
+            Verbose(@"llGetInventoryName({0}, {1})=""{2}""", iItemType, iItemIndex, sItemName);
+            return sItemName;
         }
 
-        public integer llGetInventoryNumber(integer type)
+        public integer llGetInventoryNumber(integer iType)
         {
-            int result = host.GetInventoryNumber(type);
-            Verbose("GetInventoryNumber({0})={1}", type, result);
-            return result;
+            int iTypeCount = host.GetInventoryNumber(iType);
+            Verbose("llGetInventoryNumber({0})={1}", iType, iTypeCount);
+            return iTypeCount;
         }
 
-        public integer llGetInventoryPermMask(String item, integer mask)
+        public integer llGetInventoryPermMask(String sItemName, integer iPermMask)
         {
-            Verbose("GetInventoryPermMask(" + item + "," + mask + ")");
-            return 0;
+            integer iPermissionState = 0;
+            Verbose(@"llGetInventoryPermMask(""{0}"", {1})={2}", sItemName, iPermMask, iPermissionState);
+            return iPermissionState;
         }
 
-        public integer llGetInventoryType(String name)
+        public integer llGetInventoryType(String sItemName)
         {
-            integer result = host.GetInventoryType(name);
-            Verbose("GetInventoryType({0})={1}", name, result);
-            return result;
+            integer iItemType = host.GetInventoryType(sItemName);
+            Verbose(@"llGetInventoryType(""{0}"")={1}", sItemName, iItemType);
+            return iItemType;
         }
 
         public key llGetKey()
         {
-            key result = host.GetKey();
-            Verbose("GetKey()=" + result.ToString());
-            return result;
+            key kID = host.GetKey();
+            Verbose(@"llGetKey()=""{0}""", kID.ToString());
+            return kID;
         }
 
-        public key llGetLandOwnerAt(vector pos)
+        public key llGetLandOwnerAt(vector vPosition)
         {
-            Verbose("GetLandOwnerAt(" + pos + ")");
-            return new key(Guid.NewGuid());
+            key kAvatarID = new key(Guid.NewGuid());
+            Verbose("llGetLandOwnerAt({0})={1}", vPosition, kAvatarID);
+            return kAvatarID;
         }
 
-        public key llGetLinkKey(integer linknum)
+        public key llGetLinkKey(integer iLinkIndex)
         {
-            Verbose("GetLinkKey(" + linknum + ")");
-            return new key(Guid.NewGuid());
+            key kID = new key(Guid.NewGuid());
+            Verbose("llGetLinkKey({0})={1}", iLinkIndex, kID);
+            return kID;
         }
 
         public list llGetLinkMedia(integer iLinkNumber, integer iFace, list lParameters)
         {
-            list result = new list();
-            Verbose("GetLinkMedia({0}, {1}, {2})={3}", iLinkNumber, iFace, lParameters.ToString(), result);
-            return result;
+            list lMediaList = new list();
+            Verbose("llGetLinkMedia({0}, {1}, {2})={3}", iLinkNumber, iFace, lParameters.ToVerboseString(), lMediaList.ToVerboseString());
+            return lMediaList;
         }
 
-        public String llGetLinkName(integer linknum)
+        public String llGetLinkName(integer iLinkIndex)
         {
-            Verbose("GetLinkName(" + linknum + ")");
-            return "";
+            String sLinkName = "";
+            Verbose(@"llGetLinkName({0})=""{1}""", iLinkIndex, sLinkName);
+            return sLinkName;
         }
 
         public integer llGetLinkNumber()
         {
-            Verbose("GetLinkNumber()");
-            return 0;
+            integer iLinkIndex = 0;
+            Verbose("llGetLinkNumber()={0}", iLinkIndex);
+            return iLinkIndex;
         }
 
-        public integer llGetLinkNumberOfSides(integer link)
+        public integer llGetLinkNumberOfSides(integer iLinkIndex)
         {
-            integer result = 6;
-            Verbose("GetLinkNumberOfSides()={" + link + "}", result);
-            return result;
+            integer iSides = 6;
+            Verbose("llGetLinkNumberOfSides({0})={1}", iLinkIndex, iSides);
+            return iSides;
         }
 
-        public list llGetLinkPrimitiveParams(integer link, list myparams)
+        public list llGetLinkPrimitiveParams(integer iLinkIndex, list lParametersRequested)
         {
-            Verbose("GetLinkPrimitiveParams(" + link + "," + myparams.ToString() + ")");
-            return new list();
+            list lParametersReturned = new list();
+            Verbose("llGetLinkPrimitiveParams({0}, {1})={2}", iLinkIndex, lParametersRequested.ToVerboseString(), lParametersReturned);
+            return lParametersReturned;
         }
 
-        public integer llGetListEntryType(list src, integer index)
+        public integer llGetListEntryType(list lSource, integer iIndex)
         {
-            integer intReturn;
+            integer iEntryType;
 
-            if (index < 0)
-                index = src.Count + index;
-            if (index >= src.Count || index < 0)
-                intReturn = 0;
+            if (iIndex < 0)
+                iIndex = lSource.Count + iIndex;
+            if (iIndex >= lSource.Count || iIndex < 0)
+                iEntryType = 0;
             else
             {
-                switch (src[index].GetType().ToString().Replace("LSLEditor.SecondLife+", ""))
+                switch (lSource[iIndex].GetType().ToString().Replace("LSLEditor.SecondLife+", ""))
                 {
                     case "System.Double":
                     case "Float":
-                        intReturn = TYPE_FLOAT;
+                        iEntryType = TYPE_FLOAT;
                         break;
                     case "System.String":
                     case "String":
-                        intReturn = TYPE_STRING;
+                        iEntryType = TYPE_STRING;
                         break;
                     case "System.Int32":
                     case "integer":
-                        intReturn = TYPE_INTEGER;
+                        iEntryType = TYPE_INTEGER;
                         break;
                     case "key":
-                        intReturn = TYPE_KEY;
+                        iEntryType = TYPE_KEY;
                         break;
                     case "vector":
-                        intReturn = TYPE_VECTOR;
+                        iEntryType = TYPE_VECTOR;
                         break;
                     case "rotation":
-                        intReturn = TYPE_ROTATION;
+                        iEntryType = TYPE_ROTATION;
                         break;
                     default:
-                        intReturn = TYPE_INVALID;
+                        iEntryType = TYPE_INVALID;
                         break;
                 }
             }
-            Verbose("GetListEntryType({0},{1})={2}", src.ToVerboseString(), index, intReturn);
-            return intReturn;
+            Verbose("llGetListEntryType({0}, {1})={2}", lSource.ToVerboseString(), iIndex, iEntryType);
+            return iEntryType;
         }
 
-        public integer llGetListLength(list src)
+        public integer llGetListLength(list lSource)
         {
-            integer result = src.Count;
-            Verbose("GetListLength({0})={1}", src.ToVerboseString(), result);
-            return result;
+            integer iLength = lSource.Count;
+            Verbose("llGetListLength({0})={1}", lSource.ToVerboseString(), iLength);
+            return iLength;
         }
 
-        public vector GetLocalPos()
+        public vector llGetLocalPos(Boolean bVerbose = true)
         {
-            // no verbose
-            return m_pos;
-        }
-
-        public vector llGetLocalPos()
-        {
-            Verbose("GetLocalPos()={0}", m_pos);
+			if (bVerbose) {
+				Verbose("llGetLocalPos()={0}", m_pos);
+			}
             return m_pos;
         }
 
         public rotation llGetLocalRot()
         {
-            Verbose("GetLocalRot()={0}", m_rotlocal);
+            Verbose("llGetLocalRot()={0}", m_rotlocal);
             return m_rotlocal;
         }
 
         public Float llGetMass()
         {
-            Float result = 1.23;
-            Verbose("GetMass()={0}", result);
-            return result;
+            Float fMass = 1.23;
+            Verbose("llGetMass()={0}", fMass);
+            return fMass;
         }
 
         public Float llGetMassMKS()
         {
-            Float result = 1.23;
-            Verbose("llGetMassMKS()={0}", result);
-            return result;
+            Float fMass = 1.23;
+            Verbose("llGetMassMKS()={0}", fMass);
+            return fMass;
         }
 
         public integer llGetMemoryLimit()
         {
-            return 65536;
+            integer iMaxMemory = 65536;
+            Verbose("llGetMemoryLimit()={0}", iMaxMemory);
+            return iMaxMemory;
         }
 
-        public void llGetNextEmail(String address, String subject)
+        public void llGetNextEmail(String sAddress, String sSubject)
         {
-            Verbose("GetNextEmail(" + address + "," + subject + ")");
+            Verbose(@"llGetNextEmail(""{0}"", ""{1}"")", sAddress, sSubject);
         }
 
-        public key llGetNotecardLine(String name, integer line)
+        public key llGetNotecardLine(String sNoteName, integer iLineIndex)
         {
-            key k = host.GetNotecardLine(name, line);
-            Verbose(@"GetNotecardLine(""{0}"",{1})={2}", name, line, k);
-            return k;
+            key kID = host.GetNotecardLine(sNoteName, iLineIndex);
+            Verbose(@"llGetNotecardLine(""{0}"", {1})={2}", sNoteName, iLineIndex, kID);
+            return kID;
         }
 
-        public key llGetNumberOfNotecardLines(String name)
+        public key llGetNumberOfNotecardLines(String sNoteName)
         {
-            key k = host.GetNumberOfNotecardLines(name);
-            Verbose(@"GetNumberOfNotecardLines(""{0}"")={1}", name, k);
-            return k;
+            key kID = host.GetNumberOfNotecardLines(sNoteName);
+            Verbose(@"llGetNumberOfNotecardLines(""{0}"")={1}", sNoteName, kID);
+            return kID;
         }
 
         public integer llGetNumberOfPrims()
         {
-            integer result = 10;
-            Verbose("GetNumberOfPrims()={0}", result);
-            return result;
+            integer iPrimCount = 10;
+            Verbose("llGetNumberOfPrims()={0}", iPrimCount);
+            return iPrimCount;
         }
 
         public integer llGetNumberOfSides()
         {
-            integer result = 6;
-            Verbose("GetNumberOfSides()={0}", result);
-            return result;
+            integer iSideCount = 6;
+            Verbose("llGetNumberOfSides()={0}", iSideCount);
+            return iSideCount;
         }
 
         public String llGetObjectDesc()
         {
-            string result = host.GetObjectDescription();
-            Verbose("llGetObjectDesc()={0}", result);
-            return result;
+            string sDescription = host.GetObjectDescription();
+            Verbose(@"llGetObjectDesc()=""{0}""", sDescription);
+            return sDescription;
         }
 
-        public list llGetObjectDetails(key id, list _params)
+        public list llGetObjectDetails(key kID, list lObjectFlags)
         {
-            list result = new list();
-            for (int intI = 0; intI < _params.Count; intI++)
+            list lObjectDetails = new list();
+            for (int intI = 0; intI < lObjectFlags.Count; intI++)
             {
-                if (!(_params[intI] is integer))
+                if (!(lObjectFlags[intI] is integer))
                     continue;
-                switch ((int)(integer)_params[intI])
+                switch ((int)(integer)lObjectFlags[intI])
                 {
-                    case 1: //OBJECT_NAME:
-                        result.Add((SecondLife.String)host.GetObjectName(new Guid(id.guid)));
+                    case OBJECT_NAME:
+                        lObjectDetails.Add((SecondLife.String)host.GetObjectName(new Guid(kID.guid)));
                         break;
-                    case 2: //OBJECT_DESC:
-                        result.Add((SecondLife.String)host.GetObjectDescription(new Guid(id.guid)));
+                    case OBJECT_DESC:
+                        lObjectDetails.Add((SecondLife.String)host.GetObjectDescription(new Guid(kID.guid)));
                         break;
-                    case 3://OBJECT_POS:
+                    case OBJECT_POS:
+                        lObjectDetails.Add(llGetPos());
                         break;
-                    case 4://OBJECT_ROT:
+                    case OBJECT_ROT:
+                        lObjectDetails.Add(llGetRot());
                         break;
-                    case 5://OBJECT_VELOCITY:
+                    case OBJECT_VELOCITY:
+                        lObjectDetails.Add(llGetVel());
                         break;
-                    case 6://OBJECT_OWNER:
+                    case OBJECT_OWNER:
+                        lObjectDetails.Add(llGetOwner());
                         break;
-                    case 7://OBJECT_GROUP:
+                    case OBJECT_GROUP:
+                        lObjectDetails.Add(OBJECT_UNKNOWN_DETAIL);
                         break;
-                    case 8://OBJECT_CREATOR:
+                    case OBJECT_CREATOR:
+                        lObjectDetails.Add(llGetCreator());
                         break;
                     default:
+                        lObjectDetails.Add(OBJECT_UNKNOWN_DETAIL);
                         break;
                 }
             }
-            Verbose(@"llGetObjectDetails({0},{1})={2}", id, _params, result);
-            return result;
+            Verbose(@"llGetObjectDetails({0}, {1})={2}", kID, lObjectFlags, lObjectDetails);
+            return lObjectDetails;
         }
 
-        public Float llGetObjectMass(key id)
+        public Float llGetObjectMass(key kID)
         {
-            Verbose("GetObjectMass(" + id + ")");
-            return 0.0F;
+            Float fMass = 0.0F;
+            Verbose("llGetObjectMass({0})={1}", kID, fMass);
+            return fMass;
         }
 
         public String llGetObjectName()
         {
-            string result = host.GetObjectName();
-            Verbose("llGetObjectName()={0}", result);
-            return result;
+            string sObjectName = host.GetObjectName();
+            Verbose(@"llGetObjectName()=""{0}""", sObjectName);
+            return sObjectName;
         }
 
-        public integer llGetObjectPermMask(integer mask)
+        public integer llGetObjectPermMask(integer iRequestedMask)
         {
-            Verbose("GetObjectPermMask(" + mask + ")");
-            return 0;
+            integer iRetunedMaskState = 0;
+            Verbose("llGetObjectPermMask({0})={1}", iRequestedMask, iRetunedMaskState);
+            return iRetunedMaskState;
         }
 
         // added 4 mei 2007
-        public integer llGetObjectPrimCount(key id)
+        public integer llGetObjectPrimCount(key kID)
         {
-            Verbose("llGetObjectPrimCount(" + id + ")");
-            return 0;
+            integer iPrimCount = 0;
+            Verbose("llGetObjectPrimCount({0})={1}", kID, iPrimCount);
+            return iPrimCount;
         }
 
         public vector llGetOmega()
         {
-            Verbose("GetOmega()");
-            return vector.ZERO_VECTOR;
+            vector vOmega = vector.ZERO_VECTOR;
+            Verbose("llGetOmega()={0}", vOmega);
+            return vOmega;
         }
 
         public key llGetOwner()
         {
-            key k = new key(Properties.Settings.Default.AvatarKey);
-            Verbose("GetOwner()=" + k);
-            return k;
+            key kID = new key(Properties.Settings.Default.AvatarKey);
+            Verbose("llGetOwner()={0}", kID);
+            return kID;
         }
 
-        public key llGetOwnerKey(key id)
+        public key llGetOwnerKey(key kID)
         {
-            key k = llGetOwner();
-            Verbose("GetOwnerKey(" + id + ")=" + k);
-            return k;
+            key kAvatarID = llGetOwner(); // This is incorrect, as the owner of this object may not be the owner of kID
+            Verbose("llGetOwnerKey({0})={1}", kID, kAvatarID);
+            return kAvatarID;
         }
 
         /*
@@ -2317,227 +2384,252 @@ namespace LSLEditor
         PARCEL_DETAILS_GROUP  3  The parcel group's key.  (36 Characters)  key
         PARCEL_DETAILS_AREA  4  The parcel's area, in sqm.  (5 Characters)  integer
         */
-        public list llGetParcelDetails(vector pos, list details)
+        public list llGetParcelDetails(vector vPosition, list lRequestedDetails)
         {
-            list result = new list();
-            for (int intI = 0; intI < details.Count; intI++)
+            list lReturnedDetails = new list();
+            for (int intI = 0; intI < lRequestedDetails.Count; intI++)
             {
-                if (details[intI] is integer)
+                if (lRequestedDetails[intI] is integer)
                 {
-                    switch ((int)(integer)details[intI])
+                    switch ((int)(integer)lRequestedDetails[intI])
                     {
-                        case 0: // PARCEL_DETAILS_NAME:
-                            result.Add(Properties.Settings.Default.ParcelName);
+                        case PARCEL_DETAILS_NAME:
+                            lReturnedDetails.Add(Properties.Settings.Default.ParcelName);
                             break;
-                        case 1: // PARCEL_DETAILS_DESC:
-                            result.Add(Properties.Settings.Default.ParcelDescription);
+                        case PARCEL_DETAILS_DESC:
+                            lReturnedDetails.Add(Properties.Settings.Default.ParcelDescription);
                             break;
-                        case 2: //PARCEL_DETAILS_OWNER:
-                            result.Add(new key(Properties.Settings.Default.ParcelOwner));
+                        case PARCEL_DETAILS_OWNER:
+                            lReturnedDetails.Add(new key(Properties.Settings.Default.ParcelOwner));
                             break;
-                        case 3: //PARCEL_DETAILS_GROUP:
-                            result.Add(new key(Properties.Settings.Default.ParcelGroup));
+                        case PARCEL_DETAILS_GROUP:
+                            lReturnedDetails.Add(new key(Properties.Settings.Default.ParcelGroup));
                             break;
-                        case 4: // PARCEL_DETAILS_AREA:
-                            result.Add(new integer(Properties.Settings.Default.ParcelArea));
+                        case PARCEL_DETAILS_AREA:
+                            lReturnedDetails.Add(new integer(Properties.Settings.Default.ParcelArea));
+                            break;
+                        case PARCEL_DETAILS_ID:
+                            lReturnedDetails.Add(new integer(Properties.Settings.Default.ParcelID));
+                            break;
+                        case PARCEL_DETAILS_SEE_AVATARS:
+                            lReturnedDetails.Add(new integer(Properties.Settings.Default.ParcelSeeAvatars));
                             break;
                         default:
                             break;
                     }
                 }
             }
-            Verbose("llGetParcelDetails({0},{1})={2}", pos, details.ToVerboseString(), result.ToVerboseString());
-            return result;
+            Verbose("llGetParcelDetails({0}, {1})={2}", vPosition, lRequestedDetails.ToVerboseString(), lReturnedDetails.ToVerboseString());
+            return lReturnedDetails;
         }
 
-        public integer llGetParcelFlags(vector pos)
+        public integer llGetParcelFlags(vector vPosition)
         {
-            Verbose("GetParcelFlags(" + pos + ")");
-            return 0;
+            integer iReturnedFlags = 0;
+            Verbose("llGetParcelFlags({0})={1}", vPosition, iReturnedFlags);
+            return iReturnedFlags;
         }
 
-        public integer llGetParcelMaxPrims(vector pos, integer sim_wide)
+		public integer llGetParcelMaxPrims(vector vPosition, integer iSimWide)
         {
-            Verbose("llGetParcelMaxPrims(" + pos + "," + sim_wide + ")");
-            return 0;
+            integer iMaxPrims = 0;
+            Verbose("llGetParcelMaxPrims({0}, {1})={2}", vPosition, iSimWide, iMaxPrims);
+            return iMaxPrims;
         }
 
 		public string llGetParcelMusicURL()
 		{
-			Verbose("llGetParcelMaxPrims()={1}", m_ParcelMusicURL);
+			Verbose(@"llGetParcelMaxPrims()=""{0}""", m_ParcelMusicURL);
 			return m_ParcelMusicURL;
 		}
 
-        public integer llGetParcelPrimCount(vector pos, integer category, integer sim_wide)
+        public integer llGetParcelPrimCount(vector vPosition, integer iCategory, integer iSimWide)
         {
-            Verbose("llGetParcelPrimCount(" + pos + "," + category + "," + sim_wide + ")");
-            return 0;
+            integer iPrimCount = 0;
+            Verbose("llGetParcelPrimCount({0}, {1}, {2})={3}", vPosition, iCategory, iSimWide, iPrimCount);
+            return iPrimCount;
         }
 
-        public list llGetParcelPrimOwners(vector pos)
+        public list llGetParcelPrimOwners(vector vPosition)
         {
-            list result = new list(new object[] { Properties.Settings.Default.AvatarKey, 10 });
-            Verbose("llGetParcelPrimOwners({0})={1}", pos, result);
-            return result;
+            list lOwners = new list(new object[] { Properties.Settings.Default.AvatarKey, 10 });
+            Verbose("llGetParcelPrimOwners({0})={1}", vPosition, lOwners);
+            return lOwners;
         }
 
         public integer llGetPermissions()
         {
-            integer perm =
-                PERMISSION_DEBIT
-            | PERMISSION_TAKE_CONTROLS
-            | PERMISSION_TRIGGER_ANIMATION
-            | PERMISSION_ATTACH
-            | PERMISSION_CHANGE_LINKS
-            | PERMISSION_TRACK_CAMERA
-            | PERMISSION_CONTROL_CAMERA;
-
-            Verbose("GetPermissions()=" + perm);
-            return perm;
+			integer iPermissions = 0;
+            Verbose("llGetPermissions()={0}", iPermissions);
+            return iPermissions;
         }
 
         public key llGetPermissionsKey()
         {
-            Verbose("GetPermissionsKey()");
-            return new key(Guid.NewGuid());
+			key kID = key.NULL_KEY;
+			Verbose("llGetPermissionsKey()={0}", kID);
+			return kID; 
         }
 
         public list llGetPhysicsMaterial()
         {
-            Verbose("GetPhysicalMaterial()");
-            return new list();
+			list lMaterials = new list();
+			Verbose("llGetPhysicalMaterial()={0}", lMaterials);
+			return lMaterials;
         }
 
         public vector llGetPos()
         {
-            Verbose("GetPos()=" + m_pos);
+            Verbose("llGetPos()={0}", m_pos);
             return m_pos;
         }
 
-        public list llGetPrimMediaParams(integer face, list myparams)
+        public list llGetPrimMediaParams(integer iFace, list lDesiredParams)
         {
-            Verbose("GetPrimMediaParams(" + face + "," + myparams.ToString() + ")");
-            return new list();
+			list lReturnedParams = new list();
+			Verbose("llGetPrimMediaParams({0}, {1})={2}", iFace, lDesiredParams.ToVerboseString(), lReturnedParams.ToVerboseString());
+			return lReturnedParams;
         }
 
-        public list llGetPrimitiveParams(list myparams)
+		public list llGetPrimitiveParams(list lDesiredParams)
         {
-            Verbose("GetPrimitiveParams(" + myparams.ToString() + ")");
-            return new list();
+			list lReturnedParams = new list();
+			Verbose("llGetPrimitiveParams({0})={1}", lDesiredParams.ToVerboseString(), lReturnedParams.ToVerboseString());
+			return lReturnedParams;
         }
 
         // 334
         public integer llGetRegionAgentCount()
         {
-            Verbose("llGetRegionAgentCount()");
-            return 0;
+			integer iAgentCount = 0;
+            Verbose("llGetRegionAgentCount()={0}", iAgentCount);
+            return iAgentCount;
         }
 
         public vector llGetRegionCorner()
         {
-            System.Drawing.Point point = Properties.Settings.Default.RegionCorner;
-            vector RegionCorner = new vector(point.X, point.Y, 0);
-            Verbose("GetRegionCorner()" + RegionCorner);
-            return RegionCorner;
+            System.Drawing.Point pRegionCorner = Properties.Settings.Default.RegionCorner;
+            vector vRegionCorner = new vector(pRegionCorner.X, pRegionCorner.Y, 0);
+            Verbose("llGetRegionCorner()={0}", vRegionCorner);
+            return vRegionCorner;
         }
 
         public Float llGetRegionFPS()
         {
-            Verbose("GetRegionFPS()=" + Properties.Settings.Default.RegionFPS);
-            return Properties.Settings.Default.RegionFPS;
+			Float fRegionFPS = Properties.Settings.Default.RegionFPS;
+			Verbose("llGetRegionFPS()={0}", fRegionFPS);
+			return fRegionFPS;
         }
 
         public integer llGetRegionFlags()
         {
-            Verbose("GetRegionFlags()");
-            return 0;
+			integer iRegionFlags = 0;
+			Verbose("llGetRegionFlags()={0}", iRegionFlags);
+			return iRegionFlags;
         }
 
         public String llGetRegionName()
         {
-            Verbose("GetRegionName()=" + Properties.Settings.Default.RegionName);
-            return Properties.Settings.Default.RegionName;
+			String sRegionName = Properties.Settings.Default.RegionName;
+			Verbose("llGetRegionName()={0}", sRegionName);
+			return sRegionName;
         }
 
         public Float llGetRegionTimeDilation()
         {
-            Verbose("GetRegionTimeDilation()");
-            return 0.9;
+			Float fTimeDilation = 0.9F;
+            Verbose("llGetRegionTimeDilation()={0}", fTimeDilation);
+			return fTimeDilation;
         }
 
         public vector llGetRootPosition()
         {
-            Verbose("GetRootPosition()");
-            return vector.ZERO_VECTOR;
+			vector vRootPosition = vector.ZERO_VECTOR;
+            Verbose("llGetRootPosition()={0}", vRootPosition);
+			return vRootPosition;
         }
 
         public rotation llGetRootRotation()
         {
-            Verbose("GetRootRotation()");
-            return rotation.ZERO_ROTATION;
+			rotation vRootRotation = rotation.ZERO_ROTATION;
+			Verbose("llGetRootRotation()={0}", vRootRotation);
+			return vRootRotation;
         }
 
         public rotation llGetRot()
         {
-            Verbose("GetRot()=" + m_rot);
+            Verbose("llGetRot()={0}", m_rot);
             return m_rot;
         }
 
         public integer llGetSPMaxMemory()
         {
-            return 65536;
+			integer iMaxSPMemory = 65536;
+			Verbose("llGetSPMaxMemory()={0}", iMaxSPMemory);
+			return iMaxSPMemory;
         }
 
         public vector llGetScale()
         {
-            Verbose("GetScale()=" + m_scale);
+            Verbose("llGetScale()=" + m_scale);
             return m_scale;
         }
 
         public String llGetScriptName()
         {
-            string result = host.GetScriptName();
-            Verbose("GetScriptName()=" + result);
-            return result;
+            string sScriptName = host.GetScriptName();
+            Verbose("llGetScriptName()={0}", sScriptName);
+            return sScriptName;
         }
 
-        public integer llGetScriptState(String name)
+		public integer llGetScriptState(String sScriptName)
         {
-            Verbose("GetScriptState(" + name + ")");
-            return 0;
+			integer iScriptState = 0;
+			Verbose(@"llGetScriptState(""{0}"")={1}", sScriptName, iScriptState);
+            return iScriptState;
         }
 
-        public float llGetSimStats(integer StatType)
+        public float llGetSimStats(integer iStatType)
         {
-            Verbose("llGetSimStats(" + StatType + ")");
-            return 0;
+			float iSimStat = 0.0F;
+            Verbose("llGetSimStats({0})={1}", iStatType, iSimStat);
+			return iSimStat;
         }
 
         public String llGetSimulatorHostname()
         {
-            Verbose("GetSimulatorHostname()");
-            return "";
+			String sSimHostName = "";
+            Verbose(@"llGetSimulatorHostname()=""{0}""", sSimHostName);
+			return sSimHostName;
         }
 
         public integer llGetStartParameter()
         {
-            Verbose("GetStartParameter()=" + m_start_parameter);
+            Verbose("llGetStartParameter()={0}" + m_start_parameter);
             return m_start_parameter;
         }
 
-        public integer llGetStatus(integer status)
+		public list llGetStaticPath(vector vStart, vector vEnd, float fRadius, list lParameters)
+		{
+			list lReturn = new list();
+			Verbose("llGetStaticPath({0}, {1}, {2}, {3})={4}", vStart, vEnd, fRadius, lParameters.ToVerboseString(), lReturn.ToVerboseString());
+			return lReturn;
+		}
+
+        public integer llGetStatus(integer iRequestedStatus)
         {
-            Verbose("GetStatus(" + status + ")");
-            return 0;
+			integer iStatus = 0;
+			Verbose("llGetStatus({0})={1}", iRequestedStatus, iStatus);
+			return iStatus;
         }
 
-        public String llGetSubString(String _src, integer _start, integer _end)
+        public String llGetSubString(String sSource, integer iStart, integer iEnd)
         {
-            string src = _src;
-            int start = _start;
-            int end = _end;
+            string src = sSource;
+            int start = iStart;
+            int end = iEnd;
 
-            StringBuilder result = new StringBuilder();
+            StringBuilder sResult = new StringBuilder();
 
             int intLength = src.Length;
 
@@ -2546,223 +2638,218 @@ namespace LSLEditor
                 if (start <= end)
                 {
                     for (int intI = start; intI <= end; intI++)
-                        result.Append(src[intI]);
+                        sResult.Append(src[intI]);
                 }
                 else // excluding
                 {
                     for (int intI = 0; intI <= end; intI++)
-                        result.Append(src[intI]);
+                        sResult.Append(src[intI]);
                     for (int intI = start; intI < intLength; intI++)
-                        result.Append(src[intI]);
+                        sResult.Append(src[intI]);
                 }
             }
-            Verbose(string.Format(@"GetSubString(""{0}"",{1},{2})=""{3}""", _src, _start, _end, result));
-            return result.ToString();
+            Verbose(string.Format(@"GetSubString(""{0}"", {1}, {2})=""{3}""", sSource, iStart, iEnd, sResult));
+            return sResult.ToString();
         }
 
         public vector llGetSunDirection()
         {
-            Verbose("GetSunDirection()");
-            return vector.ZERO_VECTOR;
+			vector vSunDirection = vector.ZERO_VECTOR;
+			Verbose("llGetSunDirection()={0}", vSunDirection);
+			return vSunDirection;
         }
 
-        public String llGetTexture(integer face)
+        public String llGetTexture(integer iFace)
         {
-            Verbose("GetTexture(" + face + ")");
-            return "";
+			String sTexture = "";
+            Verbose(@"llGetTexture({0})=""{1}""", iFace, sTexture);
+			return sTexture;
         }
 
-        public vector llGetTextureOffset(integer side)
+		public vector llGetTextureOffset(integer iFace)
         {
-            Verbose("GetTextureOffset(" + side + ")");
-            return vector.ZERO_VECTOR;
+			vector vOffset = vector.ZERO_VECTOR;
+			Verbose("llGetTextureOffset({0})={1}", iFace, vOffset);
+            return vOffset;
         }
 
-        public Float llGetTextureRot(integer side)
+		public Float llGetTextureRot(integer iFace)
         {
-            Verbose("GetTextureRot(" + side + ")");
-            return 0.0;
+			Float fTextureRot = 0.0;
+			Verbose("llGetTextureRot({0})={1}", iFace, fTextureRot);
+			return fTextureRot;
         }
 
-        public vector llGetTextureScale(integer side)
+        public vector llGetTextureScale(integer iFace)
         {
-            Verbose("GetTextureScale(" + side + ")");
-            return vector.ZERO_VECTOR;
+			vector vScale = vector.ZERO_VECTOR;
+			Verbose("llGetTextureScale({0})={1}", iFace, vScale);
+			return vScale;
         }
 
         public Float llGetTime()
         {
             TimeSpan span = DateTime.Now.ToUniversalTime() - m_DateTimeScriptStarted;
-            Verbose("GetTime()=" + span.TotalSeconds);
+            Verbose("llGetTime()={0}", span.TotalSeconds);
             return span.TotalSeconds;
         }
 
         public Float llGetTimeOfDay()
         {
-            Verbose("GetTimeOfDay()");
             // dummy
-            return llGetTime();
+			Float fSeconds = llGetTime();
+            Verbose("llGetTimeOfDay()={0}", fSeconds);
+			return fSeconds;
         }
 
         public string llGetTimestamp()
         {
-            string strTimestamp = DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.ffffffZ", System.Globalization.DateTimeFormatInfo.InvariantInfo);
-            Verbose("GetTimestamp()=" + strTimestamp);
-            return strTimestamp;
+            string sTimestamp = DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.ffffffZ", System.Globalization.DateTimeFormatInfo.InvariantInfo);
+            Verbose(@"llGetTimestamp()=""{0}""", sTimestamp);
+            return sTimestamp;
         }
 
         public vector llGetTorque()
         {
-            Verbose("GetTorque()");
-            return vector.ZERO_VECTOR;
+			vector vTorque = vector.ZERO_VECTOR;
+			Verbose("llGetTorque()={0}", vTorque);
+			return vTorque;
         }
 
         public integer llGetUnixTime()
         {
-            DateTime date_time_base = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            TimeSpan span = DateTime.Now.ToUniversalTime() - date_time_base;
-            Verbose("GetUnixTime()=" + span.TotalSeconds);
-            return (int)span.TotalSeconds;
+            DateTime dtUnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            TimeSpan tsSeconds = DateTime.Now.ToUniversalTime() - dtUnixEpoch;
+            Verbose("llGetUnixTime()={0}", (int)tsSeconds.TotalSeconds);
+            return (int)tsSeconds.TotalSeconds;
         }
 
         public integer llGetUsedMemory()
         {
-            return 65536;
+			integer iUsedMemory = 65536;
+			Verbose("llGetUsedMemory()={0}", iUsedMemory);
+			return iUsedMemory;
         }
 
         public string llGetUsername(key kAvatarID)
         {
             //TODO Find a dummy username.
-            string result = "";
-            Verbose("GetUsername({0})={1}", kAvatarID, result);
-            return result;
+            string sUserName = "";
+            Verbose(@"llGetUsername({0})=""{1}""", kAvatarID, sUserName);
+            return sUserName;
         }
 
         public vector llGetVel()
         {
-            Verbose("GetVel()");
-            return vector.ZERO_VECTOR;
+			vector vVelocity = vector.ZERO_VECTOR;
+			Verbose("llGetVel()={0}", vVelocity);
+			return vVelocity;
         }
 
         public Float llGetWallclock()
         {
-            Float result = (int)DateTime.Now.AddHours(-9.0).TimeOfDay.TotalSeconds;
-            Verbose("GetWallclock()={0}", result);
-            return result;
+            Float fSeconds = (int)DateTime.Now.AddHours(-9.0).TimeOfDay.TotalSeconds;
+            Verbose("llGetWallclock()={0}", fSeconds);
+            return fSeconds;
         }
 
-        public void llGiveInventory(key destination, String inventory)
+        public void llGiveInventory(key kID, String sItemName)
         {
-            Verbose("GiveInventory(" + destination + "," + inventory + ")");
+            Verbose(@"llGiveInventory({0}, ""{1}"")", kID, sItemName);
         }
 
-        public void llGiveInventoryList(key destination, String category, list inventory)
+        public void llGiveInventoryList(key kID, String sDirectory, list lInventory)
         {
-            Verbose("GiveInventoryList(" + destination + "," + category + "," + inventory.ToString() + ")");
+            Verbose(@"llGiveInventoryList({0}, ""{1}"", {2})", kID, sDirectory, lInventory.ToVerboseString());
         }
 
-        public integer llGiveMoney(key destination, integer amount)
+        public integer llGiveMoney(key kAvatarID, integer iAmount)
         {
-            Verbose("GiveMoney(" + destination + "," + amount + ")");
-            return 0;
+			Verbose("llGiveMoney({0}, {1})=0", kAvatarID, iAmount);
+			return 0;
         }
 
-        public Float llGround(vector offset)
+        public Float llGround(vector vOffset)
         {
-            Float ground = 25.0;
-            Verbose("Ground(" + offset + ")=" + ground);
-            return ground;
+            Float fHeight = 25.0;
+            Verbose("llGround({0})={1}", vOffset, fHeight);
+            return fHeight;
         }
 
-        public vector llGroundContour(vector offset)
+		public vector llGroundContour(vector vOffset)
         {
-            Verbose("GroundContour(" + offset + ")");
-            return vector.ZERO_VECTOR;
+			vector vContour = vector.ZERO_VECTOR;
+			Verbose("llGroundContour({0})={1}", vOffset, vContour);
+			return vContour;
         }
 
-        public vector llGroundNormal(vector offset)
+        public vector llGroundNormal(vector vOffset)
         {
-            vector GroundNormal = new vector(0, 0, 1);
-            Verbose("GroundNormal(" + offset + ")=" + GroundNormal);
-            return GroundNormal;
+            vector vGroundNormal = new vector(0.0, 0.0, 1.0);
+			Verbose("llGroundNormal({0})={1}", vOffset, vGroundNormal);
+            return vGroundNormal;
         }
 
-        public void llGroundRepel(Float height, integer water, Float tau)
+        public void llGroundRepel(Float fHeight, integer iWater, Float fTau)
         {
-            Verbose("GroundRepel(" + height + "," + water + "," + tau + ")");
+			Verbose("llGroundRepel({0}, {1}, {2})", fHeight, iWater, fTau);
         }
 
-        public vector llGroundSlope(vector offset)
+        public vector llGroundSlope(vector vOffset)
         {
-            Verbose("GroundSlope:" + offset);
-            return vector.ZERO_VECTOR;
+			vector vSlope = vector.ZERO_VECTOR;
+			Verbose("llGroundSlope({0})={1}" + vOffset, vSlope);
+			return vSlope;
         }
 
-        public key llHTTPRequest(String url, list parameters, String body)
+        public key llHTTPRequest(String sURL, list lParameters, String sBody)
         {
-            key result = host.Http(url, parameters, body);
-            Verbose(@"HTTPRequest(""{0}"",{1},""{2}"")=""{3}""", url, parameters.ToVerboseString(), body, result);
-            return result;
+            key kRequestID = host.Http(sURL, lParameters, sBody);
+            Verbose(@"llHTTPRequest(""{0}"", {1}, ""{2}"")=""{3}""", sURL, lParameters.ToVerboseString(), sBody, kRequestID);
+            return kRequestID;
         }
 
-        //348
-        public void llHTTPResponse(key request_id, integer status, String body)
+		public void llHTTPResponse(key kRequestID, integer iStatus, String sBody)
         {
-        }
+			Verbose(@"llHTTPResponse({0}, {1}, ""{2}"")", kRequestID, iStatus, sBody);
+		}
 
-        public String llInsertString(String _dst, integer _position, String _src)
+        public String llInsertString(String sDestination, integer iIndex, String sSource)
         {
-            string dst = _dst;
-            string src = _src;
-            int position = _position;
-            string result;
+            string dst = sDestination;
+            string src = sSource;
+            int position = iIndex;
+            string sResult;
 
-            if (position < 0)
-                position = 0;
-
-            if (position < dst.Length)
-                result = dst.Substring(0, position) + src + dst.Substring(position);
-            else
-                result = dst + src;
-            Verbose(@"InsertString(""{0}"",{1},""{2}"")=""{3}""", dst, position, src, result);
-            return result;
+			if (position < dst.Length) {
+				sResult = dst.Substring(0, position) + src + dst.Substring(position);
+			}
+			else if (position >= 0) {
+				sResult = dst + src;
+			}
+			else {
+				sResult = "**ERROR**";
+			}
+			Verbose(@"llInsertString(""{0}"", {1}, ""{2}"")=""{3}""", sDestination, iIndex, sSource, sResult);
+            return sResult;
         }
 
-        public void llInstantMessage(key user, String message)
+        public void llInstantMessage(key kAvatarID, String sMessage)
         {
-            Verbose("InstantMessage(" + user + "," + message + ")");
+			Verbose(@"llInstantMessage({0}, ""{1}"")", kAvatarID, sMessage);
         }
 
-        public String llIntegerToBase64(integer number)
+        public String llIntegerToBase64(integer iNumber)
         {
             byte[] data = new byte[4];
-            data[3] = (byte)(number & 0xff);
-            data[2] = (byte)((number >> 8) & 0xff);
-            data[1] = (byte)((number >> 16) & 0xff);
-            data[0] = (byte)((number >> 24) & 0xff);
-            string result = Convert.ToBase64String(data);
-            Verbose(@"IntegerToBase64({0})=""{1}""", number, result);
-            return result;
+            data[3] = (byte)(iNumber & 0xff);
+            data[2] = (byte)((iNumber >> 8) & 0xff);
+            data[1] = (byte)((iNumber >> 16) & 0xff);
+            data[0] = (byte)((iNumber >> 24) & 0xff);
+            string sResult = Convert.ToBase64String(data);
+            Verbose(@"llIntegerToBase64({0})=""{1}""", iNumber, sResult);
+            return sResult;
         }
-
-        static readonly int[] FastLookupBase64 =
-			{//  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 00
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 10
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,62, 0, 0, 0,63,	// 20
-				52,53,54,55,56,57,58,59,60,61, 0, 0, 0, 0, 0, 0,	// 30
-				 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,	// 40
-				15,16,17,18,19,20,21,22,23,24,25, 0, 0, 0, 0, 0,	// 50
-				 0,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,	// 60
-				41,42,43,44,45,46,47,48,49,50,51, 0, 0, 0, 0, 0,	// 70
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 80
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 90
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// A0
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// B0
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// C0
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// D0
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// E0
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};	// F0
 
         public list llJson2List(string sJSON)
         {
@@ -2796,227 +2883,204 @@ namespace LSLEditor
             return sReturn;
         }
 
-        public String llKey2Name(key id)
+        public String llKey2Name(key kID)
         {
-            string strName = "*unknown*";
-            if (Properties.Settings.Default.AvatarKey == id)
-                strName = Properties.Settings.Default.AvatarName;
-            Verbose("Key2Name(" + id + ")=" + strName);
-            return strName;
+            string sAvatarName = "";
+			if (Properties.Settings.Default.AvatarKey == kID) {
+				sAvatarName = Properties.Settings.Default.AvatarName;
+			}
+            Verbose(@"llKey2Name({0})=""{1}""", kID, sAvatarName);
+            return sAvatarName;
         }
 
-        public void llLinkParticleSystem(integer link, list parameters)
+        public void llLinkParticleSystem(integer iLink, list lParameters)
         {
-            Verbose("LinkParticleSystem(" + link + "," + parameters.ToString() + ")");
+			Verbose("llLinkParticleSystem({0}, {1})", iLink, lParameters.ToVerboseString());
         }
 
         public void llLinkSitTarget(integer iLinkNumber, vector vOffset, rotation rRotation)
         {
-            Verbose("LinkSitTarget({0}, {1}, {2})", iLinkNumber, vOffset, rRotation);
+            Verbose("llLinkSitTarget({0}, {1}, {2})", iLinkNumber, vOffset, rRotation);
         }
 
-        public String llList2CSV(list src)
+        public String llList2CSV(list lSource)
         {
-            StringBuilder result = new StringBuilder();
-            for (int intI = 0; intI < src.Count; intI++)
+            StringBuilder sCSV = new StringBuilder();
+            for (int intI = 0; intI < lSource.Count; intI++)
             {
-                if (intI > 0)
-                    result.Append(", ");
-                result.Append(src[intI].ToString());
+                if (intI > 0) sCSV.Append(", ");
+                sCSV.Append(lSource[intI].ToString());
             }
-            Verbose(@"List2CSV({0})=""{1}""", src.ToVerboseString(), result.ToString());
-            return result.ToString();
+            Verbose(@"llList2CSV({0})=""{1}""", lSource.ToVerboseString(), sCSV.ToString());
+            return sCSV.ToString();
+        }
+		
+        public Float llList2Float(list lSource, integer iIndex)
+        {
+            Float fResult;
+            if (iIndex < 0) iIndex = lSource.Count + iIndex;
+			if (iIndex >= lSource.Count || iIndex < 0) {
+				fResult = 0.0;
+			} else {
+				fResult = (Float)lSource[iIndex].ToString();
+			}
+            Verbose("llList2Float({0}, {1})={2}", lSource.ToVerboseString(), iIndex, fResult);
+            return fResult;
         }
 
-        public Float llList2Float(list src, integer index)
+        public integer llList2Integer(list lSrc, integer iIndex)
         {
-            Float result;
-            if (index < 0)
-                index = src.Count + index;
-            if (index >= src.Count || index < 0)
-                result = 0.0;
-            else
-                result = (Float)src[index].ToString();
-            Verbose("List2Float({0},{1})={2}", src.ToVerboseString(), index, result);
-            return result;
-        }
-
-        public integer llList2Integer(list src, integer index)
-        {
-            integer result;
-            if (index < 0)
-                index = src.Count + index;
-            if (index >= src.Count || index < 0)
-                result = 0;
-            else
-                result = (integer)src[index].ToString();
-            Verbose("List2Integer({0},{1})={2}", src.ToVerboseString(), index, result);
-            return result;
+            integer iResult;
+            if (iIndex < 0) iIndex = lSrc.Count + iIndex;
+			if (iIndex >= lSrc.Count || iIndex < 0) {
+				iResult = 0;
+			} else {
+				iResult = (integer)lSrc[iIndex].ToString();
+			}
+            Verbose("llList2Integer({0}, {1})={2}", lSrc.ToVerboseString(), iIndex, iResult);
+            return iResult;
         }
 
         public string llList2Json(string sType, list lValues)
         {
             //TODO determine return value
             string sReturn = JSON_INVALID;
-            Verbose("llList2Json({0}, {1})= {2}", sType, lValues, sReturn);
+            Verbose(@"llList2Json({0}, {1})=""{2}""", sType, lValues.ToVerboseString(), sReturn);
             return sReturn;
         }
 
-        public key llList2Key(list src, integer index)
+        public key llList2Key(list lSource, integer iIndex)
         {
-            key result;
-            if (index < 0)
-                index = src.Count + index;
-            if (index >= src.Count || index < 0)
-                result = NULL_KEY;
-            else
-                result = (key)src[index].ToString();
-            Verbose("List2Key({0},{1})={2}", src.ToVerboseString(), index, result);
-            return result;
+            key kResult;
+            if (iIndex < 0) iIndex = lSource.Count + iIndex;
+			if (iIndex >= lSource.Count || iIndex < 0) {
+				kResult = key.NULL_KEY;
+			} else {
+				kResult = (key)lSource[iIndex].ToString();
+			}
+            Verbose("llList2Key({0}, {1})={2}", lSource.ToVerboseString(), iIndex, kResult);
+            return kResult;
         }
 
-        // ok
-        public list llList2List(list src, integer _start, integer _end)
+        public list llList2List(list lSource, integer iStart, integer iEnd)
         {
-            int intLength = src.Count;
+            int iLength = lSource.Count;
 
-            int start = _start;
-            int end = _end;
+            int start = iStart;
+            int end = iEnd;
 
-            list result = new list();
+            list lResult = new list();
 
-            if (CorrectIt(intLength, ref start, ref end))
+            if (CorrectIt(iLength, ref start, ref end))
             {
-                if (start <= end)
+				if (start <= end) {
+					for (int intI = start; intI <= end; intI++) lResult.Add(lSource[intI]);
+				} else { // excluding
+					for (int intI = 0; intI <= end; intI++) lResult.Add(lSource[intI]);
+					for (int intI = start; intI < iLength; intI++) lResult.Add(lSource[intI]);
+				}
+            }
+
+            Verbose(string.Format("List2List({0}, {1}, {2})={3}", lSource.ToVerboseString(), iStart, iEnd, lResult.ToVerboseString()));
+            return lResult;
+        }
+
+         public list llList2ListStrided(list lSource, integer iStart, integer iEnd, integer iStride)
+        {
+            int iLength = lSource.Count;
+
+            int start = iStart;
+            int end = iEnd;
+
+            list lTemp = new list();
+
+            if (CorrectIt(iLength, ref start, ref end))
+            {
+				if (start <= end) {
+					for (int intI = start; intI <= end; intI++) lTemp.Add(lSource[intI]);
+				} else // excluding
                 {
-                    for (int intI = start; intI <= end; intI++)
-                        result.Add(src[intI]);
-                }
-                else // excluding
-                {
-                    for (int intI = 0; intI <= end; intI++)
-                        result.Add(src[intI]);
-                    for (int intI = start; intI < intLength; intI++)
-                        result.Add(src[intI]);
-                }
+					for (int intI = 0; intI <= end; intI++) lTemp.Add(lSource[intI]);
+					for (int intI = start; intI < iLength; intI++) lTemp.Add(lSource[intI]);
+				}
             }
-
-            Verbose(string.Format(@"List2List(""{0}"",{1},{2})=""{3}""", src, _start, _end, result));
-            return result;
+            list lResult = new list();
+            string sRemark = "";
+			if (iStride <= 0) {
+				sRemark = " ** stride must be > 0 **";
+			} else {
+				if (start == 0) {
+					for (int intI = 0; intI < lTemp.Count; intI += iStride) lResult.Add(lTemp[intI]);
+				} else {
+					for (int intI = iStride - 1; intI < lTemp.Count; intI += iStride) lResult.Add(lTemp[intI]);
+				}
+			}
+            Verbose(@"llList2ListStrided({0}, {1}, {2}, {3})={4}{5}", lSource.ToVerboseString(), start, end, iStride, lResult.ToVerboseString(), sRemark);
+            return lResult;
         }
 
-        // ok
-        public list llList2ListStrided(list src, integer _start, integer _end, integer stride)
+        public rotation llList2Rot(list lSource, integer iIndex)
         {
-            int intLength = src.Count;
-
-            int start = _start;
-            int end = _end;
-
-            list temp = new list();
-
-            if (CorrectIt(intLength, ref start, ref end))
-            {
-                if (start <= end)
-                {
-                    for (int intI = start; intI <= end; intI++)
-                        temp.Add(src[intI]);
-                }
-                else // excluding
-                {
-                    for (int intI = 0; intI <= end; intI++)
-                        temp.Add(src[intI]);
-                    for (int intI = start; intI < intLength; intI++)
-                        temp.Add(src[intI]);
-                }
-            }
-            list result = new list();
-            string remark = "";
-            if (stride <= 0)
-            {
-                remark = " ** stride must be > 0 **";
-            }
-            else
-            {
-                if (start == 0)
-                    for (int intI = 0; intI < temp.Count; intI += stride)
-                        result.Add(temp[intI]);
-                else
-                    for (int intI = stride - 1; intI < temp.Count; intI += stride)
-                        result.Add(temp[intI]);
-            }
-            Verbose(@"List2ListStrided({0},{1},{2},{3})={4}{5}", src.ToVerboseString(), start, end, stride, result.ToVerboseString(), remark);
-            return result;
+            rotation rResult;
+            if (iIndex < 0) iIndex = lSource.Count + iIndex;
+			if (iIndex >= lSource.Count || iIndex < 0) {
+				rResult = ZERO_ROTATION;
+			} else {
+				if (lSource[iIndex] is rotation) {
+					rResult = (rotation)lSource[iIndex];
+				} else {
+					rResult = rotation.ZERO_ROTATION;
+				}
+			}
+            Verbose("llList2Rot({0}, {1})={2}", lSource.ToVerboseString(), iIndex, rResult);
+            return rResult;
         }
 
-        public rotation llList2Rot(list src, integer index)
+        public String llList2String(list lSource, integer iIndex)
         {
-            rotation result;
-            if (index < 0)
-                index = src.Count + index;
-            if (index >= src.Count || index < 0)
-                result = ZERO_ROTATION;
-            else
-            {
-                if (src[index] is rotation)
-                    result = (rotation)src[index];
-                else
-                    result = ZERO_ROTATION;
-            }
-            Verbose("List2Rot({0},{1})={2}", src.ToVerboseString(), index, result);
-            return result;
+            String sResult;
+            if (iIndex < 0) iIndex = lSource.Count + iIndex;
+			if (iIndex >= lSource.Count || iIndex < 0) {
+				sResult = "";
+			} else {
+				sResult = (String)lSource[iIndex].ToString();
+			}
+            Verbose(@"llList2String({0}, {1})=""{2}""", lSource.ToVerboseString(), iIndex, sResult);
+            return sResult;
         }
 
-        public String llList2String(list src, integer index)
+        public vector llList2Vector(list lSource, integer iIndex)
         {
-            String result;
-            if (index < 0)
-                index = src.Count + index;
-            if (index >= src.Count || index < 0)
-                result = "";
-            else
-                result = (String)src[index].ToString();
-            Verbose("List2String({0},{1})={2}", src.ToVerboseString(), index, result);
-            return result;
+            vector vResult;
+            if (iIndex < 0) iIndex = lSource.Count + iIndex;
+			if (iIndex >= lSource.Count || iIndex < 0) {
+				vResult = ZERO_VECTOR;
+			} else {
+				if (lSource[iIndex] is vector) {
+					vResult = (vector)lSource[iIndex];
+				} else {
+					vResult = vector.ZERO_VECTOR;
+				}
+			}
+            Verbose("llList2Vector({0}, {1})={2}", lSource.ToVerboseString(), iIndex, vResult);
+            return vResult;
         }
 
-        public vector llList2Vector(list src, integer index)
+        public integer llListFindList(list lSource, list lMatch)
         {
-            vector result;
-            if (index < 0)
-                index = src.Count + index;
-            if (index >= src.Count || index < 0)
-                result = ZERO_VECTOR;
-            else
-            {
-                if (src[index] is vector)
-                    result = (vector)src[index];
-                else
-                    result = ZERO_VECTOR;
-            }
-            Verbose("List2Vector({0},{1})={2}", src.ToVerboseString(), index, result);
-            return result;
-        }
+            if (lSource.Count == 0) return -1;
+            if (lMatch.Count == 0)  return 0;
+            if (lMatch.Count > lSource.Count) return -1;
 
-        // ok, 27 mei 2007
-        public integer llListFindList(list src, list test)
-        {
-            if (src.Count == 0)
-                return -1;
-            if (test.Count == 0)
-                return 0;
-            if (test.Count > src.Count)
-                return -1;
-
-            int intReturn = -1;
-            for (int intI = 0; intI <= (src.Count - test.Count); intI++)
+            int iReturn = -1;
+            for (int intI = 0; intI <= (lSource.Count - lMatch.Count); intI++)
             {
-                if (test[0].Equals(src[intI]))
+                if (lMatch[0].Equals(lSource[intI]))
                 {
                     bool blnOkay = true;
-                    for (int intJ = 1; intJ < test.Count; intJ++)
+                    for (int intJ = 1; intJ < lMatch.Count; intJ++)
                     {
-                        if (!test[intJ].Equals(src[intI + intJ]))
+                        if (!lMatch[intJ].Equals(lSource[intI + intJ]))
                         {
                             blnOkay = false;
                             break;
@@ -3024,88 +3088,81 @@ namespace LSLEditor
                     }
                     if (blnOkay)
                     {
-                        intReturn = intI;
+                        iReturn = intI;
                         break;
                     }
                 }
             }
-            Verbose("ListFindList({0},{1}={2}", src.ToVerboseString(), test.ToVerboseString(), intReturn);
-            return intReturn;
+            Verbose("llListFindList({0}, {1}={2}", lSource.ToVerboseString(), lMatch.ToVerboseString(), iReturn);
+            return iReturn;
         }
 
-        // ok
-        public list llListInsertList(list dest, list src, int pos)
+        public list llListInsertList(list lDestination, list lSource, integer iIndex)
         {
-            int intLength = dest.Count;
-            list result = new list();
-            if (pos < 0)
-                pos = dest.Count + pos;
+            int intLength = lDestination.Count;
+            list lResult = new list();
+            if (iIndex < 0)
+                iIndex = lDestination.Count + iIndex;
 
-            for (int intI = 0; intI < Math.Min(pos, intLength); intI++)
-                result.Add(dest[intI]);
+            for (int intI = 0; intI < Math.Min(iIndex, intLength); intI++) lResult.Add(lDestination[intI]);
 
-            result.AddRange(src);
+            lResult.AddRange(lSource);
 
-            for (int intI = Math.Max(0, pos); intI < intLength; intI++)
-                result.Add(dest[intI]);
+            for (int intI = Math.Max(0, iIndex); intI < intLength; intI++) lResult.Add(lDestination[intI]);
 
-            Verbose("ListInsertList({0},{1},{2})={3}", dest.ToVerboseString(), src.ToVerboseString(), pos, result.ToVerboseString());
-            return result;
+            Verbose("llListInsertList({0}, {1}, {2})={3}", lDestination.ToVerboseString(), lSource.ToVerboseString(), iIndex, lResult.ToVerboseString());
+            return lResult;
         }
 
-        // ok
-        public list llListRandomize(list src, int stride)
+        public list llListRandomize(list lSource, integer iStride)
         {
-            list l;
-            ArrayList buckets = List2Buckets(src, stride);
-            if (buckets == null)
-                l = new list(src);
-            else
-                l = Buckets2List(RandomShuffle(buckets), stride);
-            Verbose("ListRandomize({0},{1})={2}", src.ToVerboseString(), stride, l.ToVerboseString());
-            return l;
+            list lResult;
+            ArrayList buckets = List2Buckets(lSource, iStride);
+			if (buckets == null) {
+				lResult = new list(lSource);
+			} else {
+				lResult = Buckets2List(RandomShuffle(buckets), iStride);
+			}
+            Verbose("llListRandomize({0}, {1})={2}", lSource.ToVerboseString(), iStride, lResult.ToVerboseString());
+            return lResult;
         }
 
         // TODO check this!!!
-        public list llListReplaceList(list dest, list src, int start, int end)
+        public list llListReplaceList(list lDestination, list lSource, integer iStart, integer iEnd)
         {
-            int intLength = dest.Count;
+            int intLength = lDestination.Count;
 
-            CorrectIt(intLength, ref start, ref end);
+			int intStart = iStart;
+			int intEnd = iEnd;
+			CorrectIt(intLength, ref intStart, ref intEnd);
 
-            list result = new list();
-            if (start <= end)
-            {
-                for (int intI = 0; intI < start; intI++)
-                    result.Add(dest[intI]);
-                result.AddRange(src);
-                for (int intI = end + 1; intI < intLength; intI++)
-                    result.Add(dest[intI]);
-            }
-            else
-            {
-                // where to add src?????
-                for (int intI = end; intI <= start; intI++)
-                    result.Add(dest[intI]);
-            }
-            Verbose("ListReplaceList({0},{1},{2},{3}={4}", dest.ToVerboseString(), src.ToVerboseString(), start, end, result.ToVerboseString());
-            return result;
+            list lResult = new list();
+			if (intStart <= intEnd) {
+				for (int intI = 0; intI < intStart; intI++) lResult.Add(lDestination[intI]);
+				lResult.AddRange(lSource);
+				for (int intI = intEnd + 1; intI < intLength; intI++) lResult.Add(lDestination[intI]);
+			} else {
+				// where to add src?????
+				for (int intI = intEnd; intI <= intStart; intI++) lResult.Add(lDestination[intI]);
+			}
+            Verbose("llListReplaceList({0}, {1}, {2}, {3}={4}", lDestination.ToVerboseString(), lSource.ToVerboseString(), intStart, intEnd, lResult.ToVerboseString());
+            return lResult;
         }
 
-        // ok
-        public list llListSort(list src, int stride, int ascending)
+        public list llListSort(list lSource, integer iStride, integer iAscending)
         {
-            list result;
-            ArrayList buckets = List2Buckets(src, stride);
-            if (buckets == null)
-                result = new list(src);
-            else
-            {
-                buckets.Sort(new BucketComparer(ascending));
-                result = Buckets2List(buckets, stride);
-            }
-            Verbose("ListSort({0},{1},{2})={3}", src.ToVerboseString(), stride, ascending, result.ToVerboseString());
-            return result;
+			int intAscending = iAscending;
+			int intStride = iStride;
+            list lResult;
+            ArrayList buckets = List2Buckets(lSource, intStride);
+			if (buckets == null) {
+				lResult = new list(lSource);
+			} else {
+				buckets.Sort(new BucketComparer(intAscending));
+				lResult = Buckets2List(buckets, intStride);
+			}
+            Verbose("llListSort({0}, {1}, {2})={3}", lSource.ToVerboseString(), iStride, iAscending, lResult.ToVerboseString());
+            return lResult;
         }
 
         /*
@@ -3120,201 +3177,197 @@ namespace LSLEditor
 8 LIST_STAT_NUM_COUNT  Retrieves the amount of float and integer elements. Theoretically similar to llGetListLength, except LL states that this function ignores all non-integer and non-float elements. Therefore, this is a useful tool for mixed lists of numbers and non-numbers.
 9 LIST_STAT_GEOMETRIC_MEAN  Calculates the geometric mean. All numbers must be greater than zero for this to work, according to LL.
          */
-        public Float llListStatistics(integer _operation, list _input)
+        public Float llListStatistics(integer iOperation, list lInput)
         {
-            double result = 0.0;
+            double dResult = 0.0;
             double rmin, rmax;
-            int operation = _operation;
-            List<double> input = GetListOfNumbers(_input);
+            int operation = iOperation;
+            List<double> input = GetListOfNumbers(lInput);
             if (input.Count > 0)
             {
                 switch (operation)
                 {
-                    case 0: // LIST_STAT_RANGE:
+                    case LIST_STAT_RANGE:
                         rmin = double.MaxValue;
                         rmax = double.MinValue;
-                        for (int intI = 0; intI < input.Count; intI++)
-                        {
-                            if (input[intI] < rmin)
-                                rmin = input[intI];
-                            if (input[intI] > rmax)
-                                rmax = input[intI];
+                        for (int intI = 0; intI < input.Count; intI++) {
+                            if (input[intI] < rmin) rmin = input[intI];
+                            if (input[intI] > rmax) rmax = input[intI];
                         }
-                        result = rmax - rmin;
+                        dResult = rmax - rmin;
                         break;
-                    case 1: //LIST_STAT_MIN:
-                        result = double.MaxValue;
-                        for (int intI = 0; intI < input.Count; intI++)
-                            if (input[intI] < result)
-                                result = input[intI];
+                    case LIST_STAT_MIN:
+                        dResult = double.MaxValue;
+						for (int intI = 0; intI < input.Count; intI++) {
+							if (input[intI] < dResult) dResult = input[intI];
+						}
                         break;
-                    case 2: //LIST_STAT_MAX:
-                        result = double.MinValue;
-                        for (int intI = 0; intI < input.Count; intI++)
-                            if (input[intI] > result)
-                                result = input[intI];
+                    case LIST_STAT_MAX:
+                        dResult = double.MinValue;
+						for (int intI = 0; intI < input.Count; intI++) {
+							if (input[intI] > dResult) dResult = input[intI];
+						}
                         break;
-                    case 3: //LIST_STAT_MEAN:
-                        for (int intI = 0; intI < input.Count; intI++)
-                            result += input[intI];
-                        result = result / input.Count;
+                    case LIST_STAT_MEAN:
+						for (int intI = 0; intI < input.Count; intI++) {
+							dResult += input[intI];
+						}
+                        dResult = dResult / input.Count;
                         break;
-                    case 4: //LIST_STAT_MEDIAN:
+                    case LIST_STAT_MEDIAN:
                         input.Sort();
-                        if (Math.Ceiling(input.Count * 0.5) == input.Count * 0.5)
-                            result = (input[(int)(input.Count * 0.5 - 1)] + input[(int)(input.Count * 0.5)]) / 2;
-                        else
-                            result = input[((int)(Math.Ceiling(input.Count * 0.5))) - 1];
+						if (Math.Ceiling(input.Count * 0.5) == input.Count * 0.5) {
+							dResult = (input[(int)(input.Count * 0.5 - 1)] + input[(int)(input.Count * 0.5)]) / 2;
+						} else {
+							dResult = input[((int)(Math.Ceiling(input.Count * 0.5))) - 1];
+						}
                         break;
-                    case 5: //LIST_STAT_STD_DEV:
-                        result = GetStandardDeviation(input.ToArray());
+                    case LIST_STAT_STD_DEV:
+                        dResult = GetStandardDeviation(input.ToArray());
                         break;
-                    case 6: //LIST_STAT_SUM:
-                        for (int intI = 0; intI < input.Count; intI++)
-                            result += input[intI];
+                    case LIST_STAT_SUM:
+						for (int intI = 0; intI < input.Count; intI++) {
+							dResult += input[intI];
+						}
                         break;
-                    case 7: //LIST_STAT_SUM_SQUARES:
-                        for (int intI = 0; intI < input.Count; intI++)
-                            result += input[intI] * input[intI];
+                    case LIST_STAT_SUM_SQUARES:
+						for (int intI = 0; intI < input.Count; intI++) {
+							dResult += input[intI] * input[intI];
+						}
                         //double av = GetAverage(input.ToArray());
                         //for (int intI = 0; intI < input.Count; intI++)
                         //	result += (av - input[intI]) * (av - input[intI]);
                         break;
-                    case 8: //LIST_STAT_NUM_COUNT:
-                        result = input.Count;
+                    case LIST_STAT_NUM_COUNT:
+                        dResult = input.Count;
                         break;
-                    case 9: //LIST_STAT_GEOMETRIC_MEAN:
-                        for (int intI = 0; intI < input.Count; intI++)
-                            input[intI] = Math.Log(input[intI]);
-                        result = Math.Exp(GetAverage(input.ToArray()));
+                    case LIST_STAT_GEOMETRIC_MEAN:
+						for (int intI = 0; intI < input.Count; intI++) {
+							input[intI] = Math.Log(input[intI]);
+						}
+                        dResult = Math.Exp(GetAverage(input.ToArray()));
                         break;
                     default:
                         break;
                 }
             }
-            Verbose("ListStatistics({0},{1})={2}", _operation, _input.ToString(), result);
-            return result;
+            Verbose("llListStatistics({0}, {1})={2}", iOperation, lInput.ToVerboseString(), dResult);
+            return dResult;
         }
 
-        public integer llListen(integer channel, String name, key id, String msg)
+        public integer llListen(integer iChannel, String sName, key kID, String sText)
         {
-            int intHandle = host.llListen(channel, name, id, msg);
-            Verbose(@"Listen(" + channel + @",""" + name + @"""," + id + @",""" + msg + @""")=" + intHandle);
+            int intHandle = host.llListen(iChannel, sName, kID, sText);
+            Verbose(@"llListen({0}, ""{1}"", {2}, {3})={4}", iChannel, sName, kID, sText, intHandle);
             return intHandle;
         }
 
-        public void llListenControl(integer number, integer active)
+        public void llListenControl(integer iHandle, integer iActive)
         {
-            Verbose("ListenControl(" + number + "," + active + ")");
-            host.llListenControl(number, active);
+            Verbose("llListenControl({0}, {1})", iHandle, iActive);
+            host.llListenControl(iHandle, iActive);
         }
 
-        public void llListenRemove(integer number)
+        public void llListenRemove(integer iHandle)
         {
-            Verbose("ListenRemove(" + number + ")");
-            host.llListenRemove(number);
+			Verbose("llListenRemove({0})", iHandle);
+            host.llListenRemove(iHandle);
         }
 
-        public void llLoadURL(key avatar_id, String message, String url)
+        public void llLoadURL(key kAvatarID, String sText, String sURL)
         {
-            Verbose("LoadURL(" + avatar_id + "," + message + "," + url + ")");
-            string strUrl = url.ToString();
-            if (strUrl.StartsWith("http://"))
-                System.Diagnostics.Process.Start(strUrl);
+            Verbose(@"llLoadURL({0}, ""{1}"", ""{2}"")", kAvatarID, sText, sURL);
+            string strUrl = sURL.ToString();
+			if (strUrl.StartsWith("http://")) {
+				System.Diagnostics.Process.Start(strUrl);
+			}
         }
 
-        public Float llLog(Float val)
+        public Float llLog(Float fValue)
         {
             double dblA = 0.0;
-            if (val > 0.0)
-                dblA = Math.Log(val);
-            Verbose("llLog({0})={1}", val, dblA);
+			if (fValue > 0.0) {
+				dblA = Math.Log(fValue);
+			}
+            Verbose("llLog({0})={1}", fValue, dblA);
             return dblA;
         }
 
-        public Float llLog10(Float val)
+        public Float llLog10(Float fValue)
         {
             double dblA = 0.0;
-            if (val > 0.0)
-                dblA = Math.Log10(val);
-            Verbose("llLog10({0})={1}", val, dblA);
+			if (fValue > 0.0) {
+				dblA = Math.Log10(fValue);
+			}
+            Verbose("llLog10({0})={1}", fValue, dblA);
             return dblA;
         }
 
-        public void llLookAt(vector target, Float strength, Float damping)
+        public void llLookAt(vector vTarget, Float fStrength, Float fDamping)
         {
-            Verbose("LookAt(" + target + "," + strength + "," + damping + ")");
+            Verbose("llLookAt(" + vTarget + "," + fStrength + "," + fDamping + ")");
         }
 
-        public void llLoopSound(String sound, Float volume)
+        public void llLoopSound(String sSound, Float sVolume)
         {
-            try
-            {
-                System.Media.SoundPlayer sp = host.GetSoundPlayer(sound);
-                sp.PlayLooping();
-            }
-            catch
-            {
-            }
-            Verbose("LoopSound(" + sound + "," + volume + ")");
+			try {
+				System.Media.SoundPlayer sp = host.GetSoundPlayer(sSound);
+				sp.PlayLooping();
+			} catch {
+			}
+            Verbose("llLoopSound({0}, {1})", sSound, sVolume);
         }
 
-        public void llLoopSoundMaster(String sound, Float volume)
+        public void llLoopSoundMaster(String sSound, Float fVolume)
         {
-            try
-            {
-                System.Media.SoundPlayer sp = host.GetSoundPlayer(sound);
-                sp.PlayLooping();
-            }
-            catch
-            {
-            }
-            Verbose("LoopSoundMaster(" + sound + "," + volume + ")");
+			try {
+				System.Media.SoundPlayer sp = host.GetSoundPlayer(sSound);
+				sp.PlayLooping();
+			} catch {
+			}
+			Verbose("llLoopSoundMaster({0}, {1})", sSound, fVolume);
         }
 
-        public void llLoopSoundSlave(String sound, Float volume)
+        public void llLoopSoundSlave(String sSound, Float fVolume)
         {
-            try
-            {
-                System.Media.SoundPlayer sp = host.GetSoundPlayer(sound);
-                sp.PlayLooping();
-            }
-            catch
-            {
-            }
-            Verbose("LoopSoundSlave(" + sound + "," + volume + ")");
+			try {
+				System.Media.SoundPlayer sp = host.GetSoundPlayer(sSound);
+				sp.PlayLooping();
+			} catch {
+			}
+			Verbose("llLoopSoundSlave({0}, {1})", sSound, fVolume);
         }
 
         // ok
-        public String llMD5String(String src, integer nonce)
+        public String llMD5String(String sSource, integer iNonce)
         {
             System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
-            byte[] hash = md5.ComputeHash(Encoding.ASCII.GetBytes(src + ":" + nonce.ToString()));
-            StringBuilder sb = new StringBuilder();
+            byte[] hash = md5.ComputeHash(Encoding.ASCII.GetBytes(sSource + ":" + iNonce.ToString()));
+            StringBuilder sbResult = new StringBuilder();
             foreach (byte hex in hash)
-                sb.Append(hex.ToString("x2")); //convert to standard MD5 form
-            Verbose("MD5String({0},{1})={2}", src, nonce, sb);
-            return sb.ToString();
+                sbResult.Append(hex.ToString("x2"));						//convert to standard MD5 form
+            Verbose("llMD5String({0}, {1})={2}", sSource, iNonce, sbResult);
+            return sbResult.ToString();
         }
 
-        public void llMakeExplosion(integer particles, Float scale, Float velocity, Float lifetime, Float arc, String texture, vector offset)
+        public void llMakeExplosion(integer iParticles, Float fScale, Float fVelocity, Float fLifetime, Float fArc, String sTexture, vector vOffset)
         {
-            Verbose("MakeExplosion(" + particles + "," + scale + "," + velocity + "," + lifetime + "," + arc + "," + texture + "," + offset + ")");
+			Verbose(@"llMakeExplosion({0}, {1}, {2}, {3}, {4}, ""{5}"", {6})", iParticles, fScale, fVelocity, fLifetime, fArc, sTexture, vOffset);
         }
 
-        public void llMakeFire(integer particles, Float scale, Float velocity, Float lifetime, Float arc, String texture, vector offset)
+        public void llMakeFire(integer iParticles, Float fScale, Float fVelocity, Float fLifetime, Float fArc, String sTexture, vector vOffset)
         {
-            Verbose("MakeFire(" + particles + "," + scale + "," + velocity + "," + lifetime + "," + arc + "," + texture + "," + offset + ")");
+			Verbose(@"llMakeFire({0}, {1}, {2}, {3}, {4}, ""{5}"", {6})", iParticles, fScale, fVelocity, fLifetime, fArc, sTexture, vOffset);
         }
 
-        public void llMakeFountain(integer particles, Float scale, Float velocity, Float lifetime, Float arc, String texture, vector offset)
+        public void llMakeFountain(integer iParticles, Float fScale, Float fVelocity, Float fLifetime, Float fArc, String sTexture, vector vOffset)
         {
-            Verbose("MakeFountain(" + particles + "," + scale + "," + velocity + "," + lifetime + "," + arc + "," + texture + "," + offset + ")");
+			Verbose(@"llMakeFountain({0}, {1}, {2}, {3}, {4}, ""{5}"", {6})", iParticles, fScale, fVelocity, fLifetime, fArc, sTexture, vOffset);
         }
 
-        public void llMakeSmoke(integer particles, Float scale, Float velocity, Float lifetime, Float arc, String texture, vector offset)
+        public void llMakeSmoke(integer iParticles, Float fScale, Float fVelocity, Float fLifetime, Float fArc, String sTexture, vector vOffset)
         {
-            Verbose("MakeSmoke(" + particles + "," + scale + "," + velocity + "," + lifetime + "," + arc + "," + texture + "," + offset + ")");
+			Verbose(@"llMakeSmoke({0}, {1}, {2}, {3}, {4}, ""{5}"", {6})", iParticles, fScale, fVelocity, fLifetime, fArc, sTexture, vOffset);
         }
 
         public void llManageEstateAccess(integer iAction, key kID)
@@ -3322,37 +3375,37 @@ namespace LSLEditor
             Verbose("llManageEstateAccess({0}, {1}", iAction, kID);
         }
 
-        public void llMapDestination(String simname, vector position, vector lookat)
+        public void llMapDestination(String sLandmark, vector vPosition, vector vLookat)
         {
-            Verbose("MapDestination(" + simname + "," + position + "," + lookat + ")");
+			Verbose(@"llMapDestination({0}, {1}, {2})", sLandmark, vPosition, vLookat);
         }
 
-        public void llMessageLinked(integer linknum, integer num, String str, key id)
+        public void llMessageLinked(integer iLink, integer iValue, String sText, key kID)
         {
-            Verbose("MessageLinked(" + linknum + "," + num + "," + str + "," + id + ")");
-            host.MessageLinked(linknum, num, str, id);
+			Verbose(@"llMessageLinked({0}, {1}, ""{2}"", {3})", iLink, iValue, sText, kID);
+            host.MessageLinked(iLink, iValue, sText, kID);
         }
 
-        public void llMinEventDelay(Float delay)
+        public void llMinEventDelay(Float fDelay)
         {
-            Verbose("MinEventDelay(" + delay + ")");
+			Verbose("llMinEventDelay({0}", fDelay);
         }
 
         public integer llModPow(integer x, integer y, integer m)
         {
             integer result = ModPow2(x, y, m);
-            Verbose("llModPow({0},{1},{2})={3}", x, y, m, result);
+            Verbose("llModPow({0}, {1}, {2})={3}", x, y, m, result);
             return result;
         }
 
         public void llModifyLand(integer action, integer size)
         {
-            Verbose("ModifyLand(" + action + "," + size + ")");
+            Verbose("llModifyLand(" + action + "," + size + ")");
         }
 
         public void llMoveToTarget(vector target, Float tau)
         {
-            Verbose("MoveToTarget(" + target + "," + tau + ")");
+            Verbose("llMoveToTarget(" + target + "," + tau + ")");
         }
 
 		public void llNavigateTo(vector Location, list Options)
@@ -3362,18 +3415,18 @@ namespace LSLEditor
 
         public void llOffsetTexture(Float offset_s, Float offset_t, integer face)
         {
-            Verbose("OffsetTexture(" + offset_s + "," + offset_t + "," + face + ")");
+            Verbose("llOffsetTexture(" + offset_s + "," + offset_t + "," + face + ")");
         }
 
         public void llOpenRemoteDataChannel()
         {
             host.llOpenRemoteDataChannel();
-            Verbose("OpenRemoteDataChannel()");
+            Verbose("llOpenRemoteDataChannel()");
         }
 
         public integer llOverMyLand(key id)
         {
-            Verbose("OverMyLand(" + id + ")");
+            Verbose("llOverMyLand(" + id + ")");
             return integer.TRUE;
         }
 
@@ -3384,12 +3437,12 @@ namespace LSLEditor
 
         public void llParcelMediaCommandList(list command_list)
         {
-            Verbose("ParcelMediaCommandList(" + command_list.ToString() + ")");
+            Verbose("llParcelMediaCommandList(" + command_list.ToString() + ")");
         }
 
         public list llParcelMediaQuery(list query_list)
         {
-            Verbose("ParcelMediaQuery(" + query_list.ToString() + ")");
+            Verbose("llParcelMediaQuery(" + query_list.ToString() + ")");
             return new list();
         }
 
@@ -3397,7 +3450,7 @@ namespace LSLEditor
         public list llParseString2List(String src, list separators, list spacers)
         {
             list result = ParseString(src, separators, spacers, false);
-            Verbose("llParseString2List({0},{1},{2})={3}", src, separators.ToVerboseString(), spacers.ToVerboseString(), result.ToVerboseString());
+            Verbose("llParseString2List({0}, {1}, {2})={3}", src, separators.ToVerboseString(), spacers.ToVerboseString(), result.ToVerboseString());
             return result;
         }
 
@@ -3405,23 +3458,23 @@ namespace LSLEditor
         public list llParseStringKeepNulls(String src, list separators, list spacers)
         {
             list result = ParseString(src, separators, spacers, true);
-            Verbose("llParseStringKeepNulls({0},{1},{2})={3}", src, separators.ToVerboseString(), spacers.ToVerboseString(), result.ToVerboseString());
+            Verbose("llParseStringKeepNulls({0}, {1}, {2})={3}", src, separators.ToVerboseString(), spacers.ToVerboseString(), result.ToVerboseString());
             return result;
         }
 
         public void llParticleSystem(list parameters)
         {
-            Verbose("ParticleSystem(" + parameters.ToString() + ")");
+            Verbose("llParticleSystem(" + parameters.ToString() + ")");
         }
 
         public void llPassCollisions(integer pass)
         {
-            Verbose("PassCollisions(" + pass + ")");
+            Verbose("llPassCollisions(" + pass + ")");
         }
 
         public void llPassTouches(integer pass)
         {
-            Verbose("PassTouches(" + pass + ")");
+            Verbose("llPassTouches(" + pass + ")");
         }
 
 		public void llPatrolPoints(list Points, list Options)
@@ -3435,11 +3488,11 @@ namespace LSLEditor
             {
                 System.Media.SoundPlayer sp = host.GetSoundPlayer(sound);
                 sp.Play();
-                Verbose("PlaySound(" + sound + "," + volume + ")");
+                Verbose("llPlaySound(" + sound + "," + volume + ")");
             }
             catch (Exception exception)
             {
-                Verbose("PlaySound(" + sound + "," + volume + ") **" + exception.Message);
+                Verbose("llPlaySound(" + sound + "," + volume + ") **" + exception.Message);
             }
         }
 
@@ -3453,24 +3506,24 @@ namespace LSLEditor
             catch
             {
             }
-            Verbose("PlaySoundSlave(" + sound + "," + volume + ")");
+            Verbose("llPlaySoundSlave(" + sound + "," + volume + ")");
         }
 
         public void llPointAt(vector pos)
         {
-            Verbose("PointAt(" + pos + ")");
+            Verbose("llPointAt(" + pos + ")");
         }
 
         public Float llPow(Float baze, Float exp)
         {
             double dblA = Math.Pow(baze, exp);
-            Verbose("Pow(" + baze + "," + exp + ")=" + dblA);
+            Verbose("llPow(" + baze + "," + exp + ")=" + dblA);
             return dblA;
         }
 
         public void llPreloadSound(String sound)
         {
-            Verbose("PreloadSound(" + sound + ")");
+            Verbose("llPreloadSound(" + sound + ")");
         }
 
 		public void llPursue(key TargetID, list Options)
@@ -3480,7 +3533,7 @@ namespace LSLEditor
 
         public void llPushObject(key id, vector impulse, vector angular_impulse, integer local)
         {
-            Verbose("PushObject(" + id + "," + impulse + "," + angular_impulse + "," + local + ")");
+            Verbose("llPushObject(" + id + "," + impulse + "," + angular_impulse + "," + local + ")");
         }
 
         public void llRegionSay(integer channel, String text)
@@ -3491,23 +3544,23 @@ namespace LSLEditor
 
         public void llRegionSayTo(key kTargetID, integer iChannel, string iText)
         {
-            Verbose("RegionSayTo({0}, {1}, {2})", kTargetID, iChannel, iText);
+            Verbose("llRegionSayTo({0}, {1}, {2})", kTargetID, iChannel, iText);
         }
 
         public void llReleaseCamera(key agent)
         {
-            Verbose("ReleaseCamera(" + agent + ")");
+            Verbose("llReleaseCamera(" + agent + ")");
         }
 
         public void llReleaseControls()
         {
-            Verbose("ReleaseControls()");
+            Verbose("llReleaseControls()");
             this.host.ReleaseControls();
         }
 
         public void llReleaseControls(key avatar)
         {
-            Verbose("ReleaseControls(" + avatar + ")");
+            Verbose("llReleaseControls(" + avatar + ")");
         }
 
         //347
@@ -3518,34 +3571,34 @@ namespace LSLEditor
         public void llRemoteDataReply(key channel, key message_id, String sdata, integer idata)
         {
             host.llRemoteDataReply(channel, message_id, sdata, idata);
-            Verbose("RemoteDataReply({0},{1},{2},{3})", channel, message_id, sdata, idata);
+            Verbose("llRemoteDataReply({0}, {1}, {2}, {3})", channel, message_id, sdata, idata);
         }
 
         public void llRemoteDataSetRegion()
         {
-            Verbose("RemoteDataSetRegion()");
+            Verbose("llRemoteDataSetRegion()");
         }
 
         public void llRemoteLoadScript(key target, String name, integer running, integer param)
         {
-            Verbose("RemoteLoadScript(" + target + "," + name + "," + running + "," + param + ")");
+            Verbose("llRemoteLoadScript(" + target + "," + name + "," + running + "," + param + ")");
         }
 
         public void llRemoteLoadScriptPin(key target, String name, integer pin, integer running, integer start_param)
         {
-            Verbose("RemoteLoadScriptPin(" + target + "," + name + "," + pin + "," + running + "," + start_param + ")");
+            Verbose("llRemoteLoadScriptPin(" + target + "," + name + "," + pin + "," + running + "," + start_param + ")");
         }
 
         public void llRemoveFromLandBanList(key avatar)
         {
-            Verbose("RemoveFromLandBanList(" + avatar + ")");
+            Verbose("llRemoveFromLandBanList(" + avatar + ")");
             if (m_LandBanList.ContainsKey(avatar))
                 m_LandBanList.Remove(avatar);
         }
 
         public void llRemoveFromLandPassList(key avatar)
         {
-            Verbose("RemoveFromLandPassList(" + avatar + ")");
+            Verbose("llRemoveFromLandPassList(" + avatar + ")");
             if (m_LandPassList.ContainsKey(avatar))
                 m_LandPassList.Remove(avatar);
         }
@@ -3553,12 +3606,12 @@ namespace LSLEditor
         public void llRemoveInventory(String inventory)
         {
             host.RemoveInventory(inventory);
-            Verbose("RemoveInventory(" + inventory + ")");
+            Verbose("llRemoveInventory(" + inventory + ")");
         }
 
         public void llRemoveVehicleFlags(integer flags)
         {
-            Verbose("RemoveVehicleFlags(" + flags + ")");
+            Verbose("llRemoveVehicleFlags(" + flags + ")");
         }
 
         public key llRequestAgentData(key id, integer data)
@@ -3591,20 +3644,20 @@ namespace LSLEditor
         {
             key kID = new key(Guid.NewGuid());
             string strData = "dummyDisplay Name";
-            Verbose("RequestDisplayName({0})={1}", kAvatarID, kID);
+            Verbose("llRequestDisplayName({0})={1}", kAvatarID, kID);
             host.ExecuteSecondLife("dataserver", kID, (SecondLife.String)strData);
             return kID;
         }
 
         public key llRequestInventoryData(String name)
         {
-            Verbose("RequestInventoryData(" + name + ")");
+            Verbose("llRequestInventoryData(" + name + ")");
             return new key(Guid.NewGuid());
         }
 
         public void llRequestPermissions(key avatar, integer perm)
         {
-            Verbose("RequestPermissions(" + avatar + "," + perm + ")");
+            Verbose("llRequestPermissions(" + avatar + "," + perm + ")");
             this.host.llRequestPermissions(avatar, perm);
         }
 
@@ -3616,7 +3669,7 @@ namespace LSLEditor
 
         public key llRequestSimulatorData(String simulator, integer data)
         {
-            Verbose("RequestSimulatorData(" + simulator + "," + data + ")");
+            Verbose("llRequestSimulatorData(" + simulator + "," + data + ")");
             return NULL_KEY;
         }
 
@@ -3630,7 +3683,7 @@ namespace LSLEditor
         {
             key kID = new key(Guid.NewGuid());
             string strData = "dummyUser Name";
-            Verbose("RequestDisplayName({0})={1}", kAvatarID, kID);
+            Verbose("llRequestDisplayName({0})={1}", kAvatarID, kID);
             host.ExecuteSecondLife("dataserver", kID, (SecondLife.String)strData);
             return kID;
         }
@@ -3654,12 +3707,12 @@ namespace LSLEditor
 
         public void llResetOtherScript(String name)
         {
-            Verbose("ResetOtherScript(" + name + ")");
+            Verbose("llResetOtherScript(" + name + ")");
         }
 
         public void llResetScript()
         {
-            Verbose("ResetScript()");
+            Verbose("llResetScript()");
             host.Reset();
             System.Threading.Thread.Sleep(1000);
             System.Windows.Forms.MessageBox.Show("If you see this, something wrong in llResetScript()", "Oops...");
@@ -3667,7 +3720,7 @@ namespace LSLEditor
 
         public void llResetTime()
         {
-            Verbose("ResetTime()");
+            Verbose("llResetTime()");
             m_DateTimeScriptStarted = DateTime.Now.ToUniversalTime();
         }
 
@@ -3687,25 +3740,25 @@ namespace LSLEditor
 
         public void llRezAtRoot(String inventory, vector pos, vector vel, rotation rot, integer param)
         {
-            Verbose("RezAtRoot(" + inventory + "," + pos + "," + vel + "," + rot + "," + param + ")");
+            Verbose("llRezAtRoot(" + inventory + "," + pos + "," + vel + "," + rot + "," + param + ")");
         }
 
         public void llRezObject(String inventory, vector pos, vector vel, rotation rot, integer param)
         {
-            Verbose("RezObject(" + inventory + "," + pos + "," + vel + "," + rot + "," + param + ")");
+            Verbose("llRezObject(" + inventory + "," + pos + "," + vel + "," + rot + "," + param + ")");
             object_rez(new key(Guid.NewGuid()));
             on_rez(param);
         }
 
         public Float llRot2Angle(rotation rot)
         {
-            Verbose("Rot2Angle(" + rot + ")");
+            Verbose("llRot2Angle(" + rot + ")");
             return 0F;
         }
 
         public vector llRot2Axis(rotation rot)
         {
-            Verbose("Rot2Axis(" + rot + ")");
+            Verbose("llRot2Axis(" + rot + ")");
             return ZERO_VECTOR;
         }
 
@@ -3727,7 +3780,7 @@ namespace LSLEditor
                 else
                     v = new vector(0, -PI_BY_TWO, Math.Atan2((r.z * r.s + r.x * r.y), 0.5 - t.x - t.z));
             }
-            Verbose("Rot2Euler(" + r + ")=" + v);
+            Verbose("llRot2Euler(" + r + ")=" + v);
             return v;
         }
 
@@ -3735,7 +3788,7 @@ namespace LSLEditor
         {
             vector v = new vector(1.0 / (rot.x * rot.x + rot.y * rot.y + rot.z * rot.z + rot.s * rot.s), 0, 0);
             vector result = v * rot;
-            Verbose("Rot2Fwd({0})={1}", rot, result);
+            Verbose("llRot2Fwd({0})={1}", rot, result);
             return result;
         }
 
@@ -3757,41 +3810,41 @@ namespace LSLEditor
 
         public void llRotateTexture(Float radians, integer face)
         {
-            Verbose("RotateTexture(" + radians + "," + face + ")");
+            Verbose("llRotateTexture(" + radians + "," + face + ")");
         }
 
         public rotation llRotBetween(vector a, vector b)
         {
-            Verbose("RotBetween(" + a + "," + b + ")");
+            Verbose("llRotBetween(" + a + "," + b + ")");
             return ZERO_ROTATION;
         }
 
         public void llRotLookAt(rotation rot, Float strength, Float damping)
         {
-            Verbose("RotLookAt(" + rot + "," + strength + "," + damping + ")");
+            Verbose("llRotLookAt(" + rot + "," + strength + "," + damping + ")");
         }
 
         public integer llRotTarget(rotation rot, Float error)
         {
-            Verbose("RotTarget(" + rot + "," + error + ")");
+            Verbose("llRotTarget(" + rot + "," + error + ")");
             return 0;
         }
 
         public void llRotTargetRemove(integer number)
         {
-            Verbose("RotTargetRemove(" + number + ")");
+            Verbose("llRotTargetRemove(" + number + ")");
         }
 
         public integer llRound(Float val)
         {
             int intA = (int)Math.Round(val);
-            Verbose("Round(" + val + ")=" + intA);
+            Verbose("llRound(" + val + ")=" + intA);
             return intA;
         }
 
         public integer llSameGroup(key id)
         {
-            Verbose("SameGroup(" + id + ")");
+            Verbose("llSameGroup(" + id + ")");
             return 0;
         }
 
@@ -3802,24 +3855,24 @@ namespace LSLEditor
 
         public void llScaleTexture(Float scale_s, Float scale_t, integer face)
         {
-            Verbose("ScaleTexture(" + scale_s + "," + scale_t + "," + face + ")");
+            Verbose("llScaleTexture(" + scale_s + "," + scale_t + "," + face + ")");
         }
 
         public integer llScriptDanger(vector pos)
         {
-            Verbose("ScriptDanger(" + pos + ")");
+            Verbose("llScriptDanger(" + pos + ")");
             return 0;
         }
 
         public void llScriptProfiler(integer iState)
         {
-            Verbose("ScriptProfiler(" + iState + ")");
+            Verbose("llScriptProfiler(" + iState + ")");
         }
 
         public key llSendRemoteData(key channel, String dest, integer idata, String sdata)
         {
             key k = host.llSendRemoteData(channel, dest, idata, sdata);
-            Verbose("SendRemoteData({0},{1},{2},{3})={4}", channel, dest, idata, sdata, k);
+            Verbose("llSendRemoteData({0}, {1}, {2}, {3})={4}", channel, dest, idata, sdata, k);
             return k;
         }
 
@@ -3833,13 +3886,13 @@ namespace LSLEditor
 
         public void llSensorRemove()
         {
-            Verbose("SensorRemove()");
+            Verbose("llSensorRemove()");
             host.sensor_timer.Stop();
         }
 
         public void llSensorRepeat(String name, key id, integer type, Float range, Float arc, Float rate)
         {
-            Verbose("SensorRepeat(" + name + "," + id + "," + type + "," + range + "," + arc + "," + rate + ")");
+            Verbose("llSensorRepeat(" + name + "," + id + "," + type + "," + range + "," + arc + "," + rate + ")");
             host.sensor_timer.Stop();
             if (rate > 0)
             {
@@ -3850,7 +3903,7 @@ namespace LSLEditor
 
         public void llSetAlpha(Float alpha, integer face)
         {
-            Verbose("SetAlpha(" + alpha + "," + face + ")");
+            Verbose("llSetAlpha(" + alpha + "," + face + ")");
         }
 
         public void llSetAngularVelocity(vector vForce, integer iLocal)
@@ -3865,22 +3918,22 @@ namespace LSLEditor
 
         public void llSetBuoyancy(Float buoyancy)
         {
-            Verbose("SetBuoyancy(" + buoyancy + ")");
+            Verbose("llSetBuoyancy(" + buoyancy + ")");
         }
 
         public void llSetCameraAtOffset(vector offset)
         {
-            Verbose("SetCameraAtOffset(" + offset + ")");
+            Verbose("llSetCameraAtOffset(" + offset + ")");
         }
 
         public void llSetCameraEyeOffset(vector offset)
         {
-            Verbose("SetCameraEyeOffset(" + offset + ")");
+            Verbose("llSetCameraEyeOffset(" + offset + ")");
         }
 
         public void llSetCameraParams(list rules)
         {
-            Verbose("SetCameraParams(" + rules.ToString() + ")");
+            Verbose("llSetCameraParams(" + rules.ToString() + ")");
         }
 
         public void llSetClickAction(integer action)
@@ -3890,7 +3943,7 @@ namespace LSLEditor
 
         public void llSetColor(vector color, integer face)
         {
-            Verbose("SetColor(" + color + "," + face + ")");
+            Verbose("llSetColor(" + color + "," + face + ")");
         }
 
 		public void llSetContentType(key HTTPRequestID, integer ContentType)
@@ -3900,37 +3953,37 @@ namespace LSLEditor
 
         public void llSetDamage(Float damage)
         {
-            Verbose("SetDamage(" + damage + ")");
+            Verbose("llSetDamage(" + damage + ")");
         }
 
         public void llSetForce(vector force, integer local)
         {
-            Verbose("SetForce(" + force + "," + local + ")");
+            Verbose("llSetForce(" + force + "," + local + ")");
         }
 
         public void llSetForceAndTorque(vector force, vector torque, integer local)
         {
-            Verbose("SetForceAndTorque(" + force + "," + torque + "," + local + ")");
+            Verbose("llSetForceAndTorque(" + force + "," + torque + "," + local + ")");
         }
 
         public void llSetHoverHeight(Float height, Float water, Float tau)
         {
-            Verbose("SetHoverHeight(" + height + "," + water + "," + tau + ")");
+            Verbose("llSetHoverHeight(" + height + "," + water + "," + tau + ")");
         }
 
         public void llSetInventoryPermMask(String item, integer mask, integer value)
         {
-            Verbose("SetInventoryPermMask(" + item + "," + mask + "," + value + ")");
+            Verbose("llSetInventoryPermMask(" + item + "," + mask + "," + value + ")");
         }
 
         public void llSetKeyframedMotion(list lKeyframes, list lOptions)
         {
-            Verbose("SetKeyframedMotion({0}, {1})", lKeyframes, lOptions.ToString());
+            Verbose("llSetKeyframedMotion({0}, {1})", lKeyframes, lOptions.ToString());
         }
 
         public void llSetLinkAlpha(integer linknumber, Float alpha, integer face)
         {
-            Verbose("SetLinkAlpha(" + linknumber + "," + alpha + "," + face + ")");
+            Verbose("llSetLinkAlpha(" + linknumber + "," + alpha + "," + face + ")");
         }
 
 		public void llSetLinkCamera(integer LinkNumber, vector EyeOffset, vector LookOffset)
@@ -3940,12 +3993,12 @@ namespace LSLEditor
 
         public void llSetLinkColor(integer linknumber, vector color, integer face)
         {
-            Verbose("SetLinkColor(" + linknumber + "," + color + "," + face + ")");
+            Verbose("llSetLinkColor(" + linknumber + "," + color + "," + face + ")");
         }
 
         public integer llSetLinkMedia(integer iLink, integer iFace, list lParams)
         {
-            Verbose("SetLinkMedia(" + iLink + "," + iFace + "," + lParams.ToString() + ")");
+            Verbose("llSetLinkMedia(" + iLink + "," + iFace + "," + lParams.ToString() + ")");
             return STATUS_OK;
         }
 
@@ -3966,18 +4019,18 @@ namespace LSLEditor
 
         public void llSetLinkTextureAnim(integer link, integer mode, integer face, integer sizex, integer sizey, Float start, Float length, Float rate)
         {
-            Verbose("SetLinkTextureAnim(" + link + "," + mode + "," + face + "," + sizex + "," + sizey + "," + start + "," + length + "," + rate + ")");
+            Verbose("llSetLinkTextureAnim(" + link + "," + mode + "," + face + "," + sizex + "," + sizey + "," + start + "," + length + "," + rate + ")");
         }
 
         public void llSetLocalRot(rotation rot)
         {
             this.m_rotlocal = rot;
-            Verbose("SetLocalRot(" + rot + ")");
+            Verbose("llSetLocalRot(" + rot + ")");
         }
 
         public integer llSetMemoryLimit(integer iLimit)
         {
-            Verbose("SetMemoryLimit(" + iLimit + ")");
+            Verbose("llSetMemoryLimit(" + iLimit + ")");
             return true;
         }
 
@@ -3995,40 +4048,40 @@ namespace LSLEditor
 
         public void llSetObjectPermMask(integer mask, integer value)
         {
-            Verbose("SetObjectPermMask(" + mask + "," + value + ")");
+            Verbose("llSetObjectPermMask(" + mask + "," + value + ")");
         }
 
         public void llSetParcelMusicURL(String url)
         {
-            Verbose("SetParcelMusicURL(" + url + ")");
+            Verbose("llSetParcelMusicURL(" + url + ")");
 			m_ParcelMusicURL = url;
         }
 
         public void llSetPayPrice(integer price, list quick_pay_buttons)
         {
-            Verbose("SetPayPrice(" + price + "," + quick_pay_buttons.ToString() + ")");
+            Verbose("llSetPayPrice(" + price + "," + quick_pay_buttons.ToString() + ")");
         }
 
         public void llSetPhysicsMaterial(integer material_bits, Float gravity_multiplier, Float restitution, Float friction, Float density)
         {
-            Verbose("SetPhysicsMaterial(" + material_bits + "," + gravity_multiplier + "," + restitution + "," + friction + "," + density + ")");
+            Verbose("llSetPhysicsMaterial(" + material_bits + "," + gravity_multiplier + "," + restitution + "," + friction + "," + density + ")");
         }
 
         public void llSetPos(vector pos)
         {
-            Verbose("SetPos(" + pos + ")");
+            Verbose("llSetPos(" + pos + ")");
             m_pos = pos;
         }
 
         public integer llSetPrimMediaParams(integer face, list myparams)
         {
-            Verbose("SetPrimMediaParams(" + face + "," + myparams.ToString() + ")");
+            Verbose("llSetPrimMediaParams(" + face + "," + myparams.ToString() + ")");
             return 0;
         }
 
         public void llSetPrimitiveParams(list rule)
         {
-            Verbose("SetPrimitiveParams(" + rule.ToString() + ")");
+            Verbose("llSetPrimitiveParams(" + rule.ToString() + ")");
         }
 
 		public integer llSetRegionPos(vector Position)
@@ -4040,66 +4093,66 @@ namespace LSLEditor
 
         public void llSetRemoteScriptAccessPin(integer pin)
         {
-            Verbose("SetRemoteScriptAccessPin(" + pin + ")");
+            Verbose("llSetRemoteScriptAccessPin(" + pin + ")");
         }
 
         public void llSetRot(rotation rot)
         {
-            Verbose("SetRot(" + rot + ")");
+            Verbose("llSetRot(" + rot + ")");
             m_rot = rot;
         }
 
         public void llSetScale(vector scale)
         {
-            Verbose("SetScale(" + scale + ")");
+            Verbose("llSetScale(" + scale + ")");
             m_scale = scale;
         }
 
         public void llSetScriptState(String name, integer run)
         {
-            Verbose("SetScriptState(" + name + "," + run + ")");
+            Verbose("llSetScriptState(" + name + "," + run + ")");
         }
 
         public void llSetSitText(String text)
         {
-            Verbose("SetSitText(" + text + ")");
+            Verbose("llSetSitText(" + text + ")");
             m_SitText = text;
         }
 
         public void llSetSoundQueueing(integer queue)
         {
-            Verbose("SetSoundQueueing(" + queue + ")");
+            Verbose("llSetSoundQueueing(" + queue + ")");
         }
 
         public void llSetSoundRadius(Float radius)
         {
             m_SoundRadius = radius;
-            Verbose("SetSoundRadius(" + m_SoundRadius + ")");
+            Verbose("llSetSoundRadius(" + m_SoundRadius + ")");
         }
 
         public void llSetStatus(integer status, integer value)
         {
-            Verbose("SetStatus(" + status + "," + value + ")");
+            Verbose("llSetStatus(" + status + "," + value + ")");
         }
 
         public void llSetText(String text, vector color, Float alpha)
         {
-            Verbose("SetText(" + text + "," + color + "," + alpha + ")");
+            Verbose("llSetText(" + text + "," + color + "," + alpha + ")");
         }
 
         public void llSetTexture(String texture, integer face)
         {
-            Verbose("SetTexture(" + texture + "," + face + ")");
+            Verbose("llSetTexture(" + texture + "," + face + ")");
         }
 
         public void llSetTextureAnim(integer mode, integer face, integer sizex, integer sizey, Float start, Float length, Float rate)
         {
-            Verbose("SetTextureAnim(" + mode + "," + face + "," + sizex + "," + sizey + "," + start + "," + length + "," + rate + ")");
+            Verbose("llSetTextureAnim(" + mode + "," + face + "," + sizex + "," + sizey + "," + start + "," + length + "," + rate + ")");
         }
 
         public void llSetTimerEvent(Float sec)
         {
-            Verbose("SetTimerEvent(" + sec + ")");
+            Verbose("llSetTimerEvent(" + sec + ")");
             host.timer.Stop();
             if (sec > 0)
             {
@@ -4110,42 +4163,42 @@ namespace LSLEditor
 
         public void llSetTorque(vector torque, integer local)
         {
-            Verbose("SetTorque(" + torque + "," + local + ")");
+            Verbose("llSetTorque(" + torque + "," + local + ")");
         }
 
         public void llSetTouchText(String text)
         {
-            Verbose("SetTouchText(" + text + ")");
+            Verbose("llSetTouchText(" + text + ")");
         }
 
         public void llSetVehicleFlags(integer flags)
         {
-            Verbose("SetVehicleFlags(" + flags + ")");
+            Verbose("llSetVehicleFlags(" + flags + ")");
         }
 
         public void llSetVehicleFloatParam(integer param_name, Float param_value)
         {
-            Verbose("SetVehicledoubleParam(" + param_name + "," + param_value + ")");
+            Verbose("llSetVehicledoubleParam(" + param_name + "," + param_value + ")");
         }
 
         public void llSetVehicleRotationParam(integer param_name, rotation param_value)
         {
-            Verbose("SetVehicleRotationParam(" + param_name + "," + param_value + ")");
+            Verbose("llSetVehicleRotationParam(" + param_name + "," + param_value + ")");
         }
 
         public void llSetVehicleType(integer type)
         {
-            Verbose("SetVehicleType(" + type + ")");
+            Verbose("llSetVehicleType(" + type + ")");
         }
 
         public void llSetVehicleVectorParam(integer param_name, vector param_value)
         {
-            Verbose("SetVehicleVectorParam(" + param_name + "," + param_value + ")");
+            Verbose("llSetVehicleVectorParam(" + param_name + "," + param_value + ")");
         }
 
         public void llSetVelocity(vector vForce, integer iLocal)
         {
-            Verbose("SetVelocity({0}, {1})", vForce, iLocal);
+            Verbose("llSetVelocity({0}, {1})", vForce, iLocal);
         }
 
         // 343
@@ -4166,74 +4219,74 @@ namespace LSLEditor
         public Float llSin(Float theta)
         {
             double dblA = Math.Sin(theta);
-            Verbose("Sin(" + theta + ")=" + dblA);
+            Verbose("llSin(" + theta + ")=" + dblA);
             return dblA;
         }
 
         public void llSitTarget(vector offset, rotation rot)
         {
-            Verbose("SitTarget(" + offset + "," + rot + ")");
+            Verbose("llSitTarget(" + offset + "," + rot + ")");
         }
 
         public void llSleep(Float sec)
         {
-            Verbose("Sleep(" + sec + ")");
+            Verbose("llSleep(" + sec + ")");
             System.Threading.Thread.Sleep((int)Math.Round(sec * 1000));
         }
 
         public Float llSqrt(Float val)
         {
             double dblA = Math.Sqrt(val);
-            Verbose("Sqrt(" + val + ")=" + dblA);
+            Verbose("llSqrt(" + val + ")=" + dblA);
             return dblA;
         }
 
         public void llStartAnimation(String anim)
         {
-            Verbose("StartAnimation(" + anim + ")");
+            Verbose("llStartAnimation(" + anim + ")");
         }
 
         public void llStopAnimation(String anim)
         {
-            Verbose("StopAnimation(" + anim + ")");
+            Verbose("llStopAnimation(" + anim + ")");
         }
 
         public void llStopHover()
         {
-            Verbose("StopHover()");
+            Verbose("llStopHover()");
         }
 
         public void llStopLookAt()
         {
-            Verbose("StopLookAt()");
+            Verbose("llStopLookAt()");
         }
 
         public void llStopMoveToTarget()
         {
-            Verbose("StopMoveToTarget()");
+            Verbose("llStopMoveToTarget()");
         }
 
         public void llStopPointAt()
         {
-            Verbose("StopPointAt()");
+            Verbose("llStopPointAt()");
         }
 
         public void llStopSound()
         {
-            Verbose("StopSound()");
+            Verbose("llStopSound()");
         }
 
         public integer llStringLength(String src)
         {
             int intLength = ((string)src).Length;
-            Verbose(@"StringLength(""{0}"")={1}", src, intLength);
+            Verbose(@"llStringLength(""{0}"")={1}", src, intLength);
             return intLength;
         }
 
         public String llStringToBase64(String str)
         {
             string result = StringToBase64(str.ToString());
-            Verbose(@"StringToBase64(""{0}"")=""{1}""", str, result);
+            Verbose(@"llStringToBase64(""{0}"")=""{1}""", str, result);
             return result;
         }
 
@@ -4254,57 +4307,57 @@ namespace LSLEditor
         public integer llSubStringIndex(String source, String pattern)
         {
             int intIndexOf = ((string)source).IndexOf((string)pattern);
-            Verbose("SubStringIndex({0},{1})={2}", source, pattern, intIndexOf);
+            Verbose("llSubStringIndex({0}, {1})={2}", source, pattern, intIndexOf);
             return intIndexOf;
         }
 
         public void llTakeCamera(key avatar)
         {
-            Verbose("TakeCamera(" + avatar + ")");
+            Verbose("llTakeCamera(" + avatar + ")");
         }
 
         public void llTakeControls(integer controls, integer accept, integer pass_on)
         {
-            Verbose("TakeControls(" + controls + "," + accept + "," + pass_on + ")");
+            Verbose("llTakeControls(" + controls + "," + accept + "," + pass_on + ")");
             this.host.TakeControls(controls, accept, pass_on);
         }
 
         public Float llTan(Float theta)
         {
             double dblA = Math.Tan(theta);
-            Verbose("Tan(" + theta + ")=" + dblA);
+            Verbose("llTan(" + theta + ")=" + dblA);
             return dblA;
         }
 
         public integer llTarget(vector position, Float range)
         {
-            Verbose("Target(" + position + "," + range + ")");
+            Verbose("llTarget(" + position + "," + range + ")");
             return 0;
         }
 
         public void llTargetOmega(vector axis, Float spinrate, Float gain)
         {
-            Verbose("TargetOmega(" + axis + "," + spinrate + "," + gain + ")");
+            Verbose("llTargetOmega(" + axis + "," + spinrate + "," + gain + ")");
         }
 
         public void llTargetRemove(integer tnumber)
         {
-            Verbose("TargetRemove(" + tnumber + ")");
+            Verbose("llTargetRemove(" + tnumber + ")");
         }
 
         public void llTeleportAgent(key AvatarID, string LandmarkName, vector LandingPoint, vector LookAtPoint)
         {
-            Verbose("TeleportAgentHome({0}, \"{1}\", {2}, {3})", AvatarID, LandmarkName, LandingPoint, LookAtPoint);
+            Verbose("llTeleportAgentHome({0}, \"{1}\", {2}, {3})", AvatarID, LandmarkName, LandingPoint, LookAtPoint);
         }
 
         public void llTeleportAgentGlobalCoords(key AvatarID, vector GlobalPosition, vector RegionPosition, vector LookAtPoint)
         {
-            Verbose("TeleportAgentHome({0}, {1}, {2}, {3})", AvatarID, GlobalPosition, RegionPosition, LookAtPoint);
+            Verbose("llTeleportAgentHome({0}, {1}, {2}, {3})", AvatarID, GlobalPosition, RegionPosition, LookAtPoint);
         }
 
         public void llTeleportAgentHome(key AvatarID)
         {
-            Verbose("TeleportAgentHome({0})", AvatarID);
+            Verbose("llTeleportAgentHome({0})", AvatarID);
         }
 
         // 335
@@ -4317,14 +4370,14 @@ namespace LSLEditor
         public String llToLower(String src)
         {
             string strTemp = ((string)src).ToLower();
-            Verbose("ToLower(" + src + ")=" + strTemp);
+            Verbose("llToLower(" + src + ")=" + strTemp);
             return strTemp;
         }
 
         public String llToUpper(String src)
         {
             string strTemp = ((string)src).ToUpper();
-            Verbose("ToUpper(" + src + ")=" + strTemp);
+            Verbose("llToUpper(" + src + ")=" + strTemp);
             return strTemp;
         }
 
@@ -4332,19 +4385,19 @@ namespace LSLEditor
         {
             key kID = new key(Guid.NewGuid());
             string strData = kPayee.ToString() + "," + iAmount.ToString();
-            Verbose("TransferLindenDollars(" + kPayee + "," + iAmount + ")");
+            Verbose("llTransferLindenDollars(" + kPayee + "," + iAmount + ")");
             host.ExecuteSecondLife("transaction_result", kID, true, (SecondLife.String)strData);
             return kID;
         }
 
         public void llTriggerSound(String sound, Float volume)
         {
-            Verbose("TriggerSound(" + sound + "," + volume + ")");
+            Verbose("llTriggerSound(" + sound + "," + volume + ")");
         }
 
         public void llTriggerSoundLimited(String sound, Float volume, vector tne, vector bsw)
         {
-            Verbose("TriggerSoundLimited(" + sound + "," + volume + "," + tne + "," + bsw + ")");
+            Verbose("llTriggerSoundLimited(" + sound + "," + volume + "," + tne + "," + bsw + ")");
         }
 
         public String llUnescapeURL(String url)
@@ -4378,7 +4431,7 @@ namespace LSLEditor
 
         public void llUnSit(key id)
         {
-            Verbose("UnSit(" + id + ")");
+            Verbose("llUnSit(" + id + ")");
         }
 
 		public void llUpdateCharacter(list Options)
@@ -4390,14 +4443,14 @@ namespace LSLEditor
         {
             vector vecValue = new vector(a.x - b.x, a.y - b.y, a.z - b.z);
             double dblMag = llVecMag(vecValue);
-            Verbose("VecDist(" + a + "," + b + ")=" + dblMag);
+            Verbose("llVecDist(" + a + "," + b + ")=" + dblMag);
             return dblMag;
         }
 
         public Float llVecMag(vector vec)
         {
             double dblValue = Math.Sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
-            Verbose("VecMag(" + vec + ")=" + dblValue);
+            Verbose("llVecMag(" + vec + ")=" + dblValue);
             return dblValue;
         }
 
@@ -4405,13 +4458,13 @@ namespace LSLEditor
         {
             double dblMag = llVecMag(vec);
             vector vecValue = new vector(vec.x / dblMag, vec.y / dblMag, vec.z / dblMag);
-            Verbose("VecNorm(" + vec + ")=" + vecValue);
+            Verbose("llVecNorm(" + vec + ")=" + vecValue);
             return vecValue;
         }
 
         public void llVolumeDetect(integer detect)
         {
-            Verbose("VolumeDetect(" + detect + ")");
+            Verbose("llVolumeDetect(" + detect + ")");
         }
 
 		public void llWanderWithin(vector Origin, vector Distance, list Options)
@@ -4421,7 +4474,7 @@ namespace LSLEditor
 
         public Float llWater(vector offset)
         {
-            Verbose("Water(" + offset + ")");
+            Verbose("llWater(" + offset + ")");
             return 0F;
         }
 
@@ -4432,14 +4485,28 @@ namespace LSLEditor
 
         public vector llWind(vector offset)
         {
-            Verbose("Wind(" + offset + ")");
+            Verbose("llWind(" + offset + ")");
             return vector.ZERO_VECTOR;
         }
 
-        public String llXorBase64StringsCorrect(String s1, String s2)
+		public String llXorBase64(String sText1, String sText2)
+		{
+			string sResult = "";
+			Verbose(@"llXorBase64(""{0}"",""{1}"")=""{2}""", sText1, sText2, sResult);
+			return sResult;
+		}
+
+		public String llXorBase64Strings(String sText1, String sText2)
+		{
+			string sResult = "";
+			Verbose(@"llXorBase64Strings(""{0}"",""{1}"")=""{2}""", sText1, sText2, sResult);
+			return sResult;
+		}
+
+        public String llXorBase64StringsCorrect(String sText1, String sText2)
         {
-            string S1 = Base64ToString(s1.ToString());
-            string S2 = Base64ToString(s2.ToString());
+			string S1 = Base64ToString(sText1.ToString());
+            string S2 = Base64ToString(sText2.ToString());
             int intLength = S1.Length;
             if (S2.Length == 0)
                 S2 = " ";
@@ -4449,9 +4516,9 @@ namespace LSLEditor
             StringBuilder sb = new StringBuilder();
             for (int intI = 0; intI < intLength; intI++)
                 sb.Append((char)(S1[intI] ^ S2[intI]));
-            string result = StringToBase64(sb.ToString());
-            Verbose(@"XorBase64StringsCorrect(""{0}"",""{1}"")=""{2}""", s1, s2, result);
-            return result;
+            string sResult = StringToBase64(sb.ToString());
+            Verbose(@"llXorBase64StringsCorrect(""{0}"",""{1}"")=""{2}""", sText1, sText2, sResult);
+            return sResult;
         }
         #endregion
     }
