@@ -3403,31 +3403,31 @@ namespace LSLEditor
 			Verbose("llMinEventDelay({0}", fDelay);
         }
 
-        public integer llModPow(integer x, integer y, integer m)
+        public integer llModPow(integer iValue1, integer iValue2, integer iModulus)
         {
-            integer result = ModPow2(x, y, m);
-            Verbose("llModPow({0}, {1}, {2})={3}", x, y, m, result);
-            return result;
+            integer iResult = ModPow2(iValue1, iValue2, iModulus);
+            Verbose("llModPow({0}, {1}, {2})={3}", iValue1, iValue2, iModulus, iResult);
+            return iResult;
         }
 
-        public void llModifyLand(integer action, integer size)
+        public void llModifyLand(integer iAction, integer iSize)
         {
-            Verbose("llModifyLand(" + action + "," + size + ")");
+			Verbose("llModifyLand({0}, {1})", iAction, iSize);
         }
 
-        public void llMoveToTarget(vector target, Float tau)
+        public void llMoveToTarget(vector vTarget, Float fTau)
         {
-            Verbose("llMoveToTarget(" + target + "," + tau + ")");
+			Verbose("llMoveToTarget({0}, {1})", vTarget, fTau);
         }
 
-		public void llNavigateTo(vector Location, list Options)
+		public void llNavigateTo(vector vLocation, list lOptions)
 		{
-			Verbose("llNavigateTo({0}, {1})", Location, Options);
+			Verbose("llNavigateTo({0}, {1})", vLocation, lOptions);
 		}
 
-        public void llOffsetTexture(Float offset_s, Float offset_t, integer face)
+        public void llOffsetTexture(Float fOffsetS, Float fOffsetT, integer iFace)
         {
-            Verbose("llOffsetTexture(" + offset_s + "," + offset_t + "," + face + ")");
+			Verbose("llOffsetTexture({0}, {1}, {2})", fOffsetS, fOffsetT, iFace);
         }
 
         public void llOpenRemoteDataChannel()
@@ -3436,132 +3436,130 @@ namespace LSLEditor
             Verbose("llOpenRemoteDataChannel()");
         }
 
-        public integer llOverMyLand(key id)
+        public integer llOverMyLand(key kID)
         {
-            Verbose("llOverMyLand(" + id + ")");
-            return integer.TRUE;
+			integer iResult = integer.TRUE;
+			Verbose("llOverMyLand({0})={1}", kID, iResult);
+            return iResult;
         }
 
-        public void llOwnerSay(String message)
+        public void llOwnerSay(String sText)
         {
-            Chat(0, message, CommunicationType.OwnerSay);
+            Chat(0, sText, CommunicationType.OwnerSay);
         }
 
-        public void llParcelMediaCommandList(list command_list)
+        public void llParcelMediaCommandList(list lCommands)
         {
-            Verbose("llParcelMediaCommandList(" + command_list.ToString() + ")");
+			Verbose("llParcelMediaCommandList({0})", lCommands.ToVerboseString());
         }
 
-        public list llParcelMediaQuery(list query_list)
+        public list llParcelMediaQuery(list lQuery)
         {
-            Verbose("llParcelMediaQuery(" + query_list.ToString() + ")");
-            return new list();
+			list lResult = new list();
+            Verbose("llParcelMediaQuery({0})={1})", lQuery.ToVerboseString(), lResult.ToVerboseString());
+			return lResult;
         }
 
         // 21 sep 2007, check this
-        public list llParseString2List(String src, list separators, list spacers)
+        public list llParseString2List(String sSource, list lSseparators, list lSpacers)
         {
-            list result = ParseString(src, separators, spacers, false);
-            Verbose("llParseString2List({0}, {1}, {2})={3}", src, separators.ToVerboseString(), spacers.ToVerboseString(), result.ToVerboseString());
-            return result;
+            list lResult = ParseString(sSource, lSseparators, lSpacers, false);
+            Verbose(@"llParseString2List(""{0}"", {1}, {2})={3}", sSource, lSseparators.ToVerboseString(), lSpacers.ToVerboseString(), lResult.ToVerboseString());
+            return lResult;
         }
 
         // 21 sep 2007, check this, first check 3 oct 2007, last element=="" is added also
-        public list llParseStringKeepNulls(String src, list separators, list spacers)
+        public list llParseStringKeepNulls(String sSource, list lSeparators, list lSpacers)
         {
-            list result = ParseString(src, separators, spacers, true);
-            Verbose("llParseStringKeepNulls({0}, {1}, {2})={3}", src, separators.ToVerboseString(), spacers.ToVerboseString(), result.ToVerboseString());
-            return result;
+            list lResult = ParseString(sSource, lSeparators, lSpacers, true);
+            Verbose(@"llParseStringKeepNulls(""{0}"", {1}, {2})={3}", sSource, lSeparators.ToVerboseString(), lSpacers.ToVerboseString(), lResult.ToVerboseString());
+            return lResult;
         }
 
-        public void llParticleSystem(list parameters)
+        public void llParticleSystem(list lParameters)
         {
-            Verbose("llParticleSystem(" + parameters.ToString() + ")");
+			Verbose("llParticleSystem({0})", lParameters.ToVerboseString());
         }
 
-        public void llPassCollisions(integer pass)
+        public void llPassCollisions(integer iPassFlag)
         {
-            Verbose("llPassCollisions(" + pass + ")");
+			Verbose("llPassCollisions({0})", iPassFlag);
         }
 
-        public void llPassTouches(integer pass)
+		public void llPassTouches(integer iPassFlag)
         {
-            Verbose("llPassTouches(" + pass + ")");
+			Verbose("llPassTouches({0})", iPassFlag);
         }
 
-		public void llPatrolPoints(list Points, list Options)
+		public void llPatrolPoints(list lPoints, list lOptions)
 		{
-			Verbose("llPatrolPoints({0}, {1})", Points, Options);
+			Verbose("llPatrolPoints({0}, {1})", lPoints, lOptions);
 		}
 
-        public void llPlaySound(String sound, Float volume)
+        public void llPlaySound(String sSoundName, Float fVolume)
         {
-            try
-            {
-                System.Media.SoundPlayer sp = host.GetSoundPlayer(sound);
+            try {
+                System.Media.SoundPlayer sp = host.GetSoundPlayer(sSoundName);
                 sp.Play();
-                Verbose("llPlaySound(" + sound + "," + volume + ")");
-            }
-            catch (Exception exception)
-            {
-                Verbose("llPlaySound(" + sound + "," + volume + ") **" + exception.Message);
+				Verbose("llPlaySound({0}, {1})", sSoundName, fVolume);
+            } catch (Exception exception) {
+				Verbose("llPlaySound({0}, {1}) **{2}", sSoundName, fVolume, exception.Message);
             }
         }
 
-        public void llPlaySoundSlave(String sound, Float volume)
+        public void llPlaySoundSlave(String sSoundName, Float fVolume)
         {
-            try
-            {
-                System.Media.SoundPlayer sp = host.GetSoundPlayer(sound);
-                sp.Play();
-            }
-            catch
-            {
-            }
-            Verbose("llPlaySoundSlave(" + sound + "," + volume + ")");
+			try {
+				System.Media.SoundPlayer sp = host.GetSoundPlayer(sSoundName);
+				sp.Play();
+			} catch {
+			}
+			Verbose("llPlaySoundSlave({0}, {1})", sSoundName, fVolume);
         }
 
-        public void llPointAt(vector pos)
+        public void llPointAt(vector vTarget)
         {
-            Verbose("llPointAt(" + pos + ")");
+			Verbose("llPointAt({0})", vTarget);
         }
 
-        public Float llPow(Float baze, Float exp)
+        public Float llPow(Float fBase, Float fExponent)
         {
-            double dblA = Math.Pow(baze, exp);
-            Verbose("llPow(" + baze + "," + exp + ")=" + dblA);
+            double dblA = Math.Pow(fBase, fExponent);
+			Verbose("llPow({0}, {1})={2}", fBase, fExponent, dblA);
             return dblA;
         }
 
-        public void llPreloadSound(String sound)
+        public void llPreloadSound(String sSoundName)
         {
-            Verbose("llPreloadSound(" + sound + ")");
+			Verbose("llPreloadSound({0})", sSoundName);
         }
 
-		public void llPursue(key TargetID, list Options)
+		public void llPursue(key kTargetID, list lOptions)
 		{
-			Verbose("llPursue({0}, {1})", TargetID, Options);
+			Verbose("llPursue({0}, {1})", kTargetID, lOptions);
 		}
 
-        public void llPushObject(key id, vector impulse, vector angular_impulse, integer local)
+        public void llPushObject(key kID, vector vImpulse, vector vAngularImpulse, integer iLocalFlag)
         {
-            Verbose("llPushObject(" + id + "," + impulse + "," + angular_impulse + "," + local + ")");
+			Verbose("llPushObject({0}, {1}, {2}, {3})", kID, vImpulse, vAngularImpulse, iLocalFlag);
         }
 
-        public void llRegionSay(integer channel, String text)
+        public void llRegionSay(integer iChannel, String sText)
         {
-            if (channel != 0)
-                Chat(channel, text, CommunicationType.RegionSay);
+			if (iChannel != 0) {
+				Chat(iChannel, sText, CommunicationType.RegionSay);
+			}
+			Verbose(@"llRegionSay({0}, ""{1}"")", iChannel, sText);
         }
 
-        public void llRegionSayTo(key kTargetID, integer iChannel, string iText)
+        public void llRegionSayTo(key kTargetID, integer iChannel, String sText)
         {
-            Verbose("llRegionSayTo({0}, {1}, {2})", kTargetID, iChannel, iText);
+            Verbose(@"llRegionSayTo({0}, {1}, ""{2}"")", kTargetID, iChannel, sText);
         }
 
-        public void llReleaseCamera(key agent)
+        public void llReleaseCamera(key kID)
         {
-            Verbose("llReleaseCamera(" + agent + ")");
+			Verbose("llReleaseCamera({0})", kID);
         }
 
         public void llReleaseControls()
@@ -3570,20 +3568,20 @@ namespace LSLEditor
             this.host.ReleaseControls();
         }
 
-        public void llReleaseControls(key avatar)
+        public void llReleaseControls(key kAvatarID)
         {
-            Verbose("llReleaseControls(" + avatar + ")");
+			Verbose("llReleaseControls({0})", kAvatarID);
         }
 
-        //347
-        public void llReleaseURL(string url)
+        public void llReleaseURL(string sURL)
         {
-        }
+			Verbose(@"llReleaseURL(""{0}"")", sURL);
+		}
 
-        public void llRemoteDataReply(key channel, key message_id, String sdata, integer idata)
+        public void llRemoteDataReply(key kChannel, key kMessageID, String sData, integer iData)
         {
-            host.llRemoteDataReply(channel, message_id, sdata, idata);
-            Verbose("llRemoteDataReply({0}, {1}, {2}, {3})", channel, message_id, sdata, idata);
+            host.llRemoteDataReply(kChannel, kMessageID, sData, iData);
+            Verbose("llRemoteDataReply({0}, {1}, {2}, {3})", kChannel, kMessageID, sData, iData);
         }
 
         public void llRemoteDataSetRegion()
@@ -3591,92 +3589,97 @@ namespace LSLEditor
             Verbose("llRemoteDataSetRegion()");
         }
 
-        public void llRemoteLoadScript(key target, String name, integer running, integer param)
+        public void llRemoteLoadScript(key kTargetID, String sName, integer iRunningFlag, integer iStartParameter)
         {
-            Verbose("llRemoteLoadScript(" + target + "," + name + "," + running + "," + param + ")");
+			Verbose(@"llRemoteLoadScript({0}, ""{1}"", {2}, {3})", kTargetID, sName, iRunningFlag, iStartParameter);
         }
 
-        public void llRemoteLoadScriptPin(key target, String name, integer pin, integer running, integer start_param)
+        public void llRemoteLoadScriptPin(key kTargetID, String sName, integer iPIN, integer iRunningFlag, integer iStartParameter)
         {
-            Verbose("llRemoteLoadScriptPin(" + target + "," + name + "," + pin + "," + running + "," + start_param + ")");
+            Verbose(@"llRemoteLoadScriptPin({0}, ""{1}"", {2}, {3}, {4})", kTargetID, sName, iPIN, iRunningFlag, iStartParameter);
         }
 
-        public void llRemoveFromLandBanList(key avatar)
+        public void llRemoveFromLandBanList(key kAvatarID)
         {
-            Verbose("llRemoveFromLandBanList(" + avatar + ")");
-            if (m_LandBanList.ContainsKey(avatar))
-                m_LandBanList.Remove(avatar);
+			Verbose("llRemoveFromLandBanList({0})", kAvatarID);
+			if (m_LandBanList.ContainsKey(kAvatarID)) {
+				m_LandBanList.Remove(kAvatarID);
+			}
         }
 
-        public void llRemoveFromLandPassList(key avatar)
+        public void llRemoveFromLandPassList(key kAvatarID)
         {
-            Verbose("llRemoveFromLandPassList(" + avatar + ")");
-            if (m_LandPassList.ContainsKey(avatar))
-                m_LandPassList.Remove(avatar);
+			Verbose("llRemoveFromLandPassList({0})", kAvatarID);
+            if (m_LandPassList.ContainsKey(kAvatarID)) {
+				m_LandPassList.Remove(kAvatarID);
+			}
         }
 
-        public void llRemoveInventory(String inventory)
+        public void llRemoveInventory(String sInventoryItem)
         {
-            host.RemoveInventory(inventory);
-            Verbose("llRemoveInventory(" + inventory + ")");
+            host.RemoveInventory(sInventoryItem);
+			Verbose("llRemoveInventory({0})", sInventoryItem);
         }
 
-        public void llRemoveVehicleFlags(integer flags)
+        public void llRemoveVehicleFlags(integer iFlags)
         {
-            Verbose("llRemoveVehicleFlags(" + flags + ")");
+			Verbose("llRemoveVehicleFlags({0})", iFlags);
         }
 
-        public key llRequestAgentData(key id, integer data)
+        public key llRequestAgentData(key kID, integer iDataConstant)
         {
-            key k = new key(Guid.NewGuid());
+            key kResult = new key(Guid.NewGuid());
 
             string strData = "***";
-            switch ((int)data)
+            switch ((int)iDataConstant)
             {
-                case 1: // DATA_ONLINE
+                case DATA_ONLINE:
                     break;
-                case 2: // DATA_NAME
+                case DATA_NAME:
                     strData = Properties.Settings.Default.AvatarName;
                     break;
-                case 3: // DATA_BORN
+                case DATA_BORN:
                     strData = DateTime.Now.ToString("yyyy-MM-dd");
                     break;
-                case 4: // DATA_RATING
+                case DATA_RATING:
                     break;
-                case 8: // DATA_PAYINFO
+                case DATA_PAYINFO:
                     break;
                 default:
                     break;
             }
-            host.ExecuteSecondLife("dataserver", k, (SecondLife.String)strData);
-            return k;
+            host.ExecuteSecondLife("dataserver", kResult, (SecondLife.String)strData);
+            return kResult;
         }
 
         public key llRequestDisplayName(key kAvatarID)
         {
             key kID = new key(Guid.NewGuid());
             string strData = "dummyDisplay Name";
-            Verbose("llRequestDisplayName({0})={1}", kAvatarID, kID);
             host.ExecuteSecondLife("dataserver", kID, (SecondLife.String)strData);
+            Verbose("llRequestDisplayName({0})={1}", kAvatarID, kID);
             return kID;
         }
 
-        public key llRequestInventoryData(String name)
+        public key llRequestInventoryData(String sName)
         {
-            Verbose("llRequestInventoryData(" + name + ")");
-            return new key(Guid.NewGuid());
+			key kResult = new key(Guid.NewGuid());
+			Verbose(@"llRequestInventoryData(""{0}"")={1}", sName, kResult);
+            return kResult;
         }
 
-        public void llRequestPermissions(key avatar, integer perm)
+        public void llRequestPermissions(key kAvatarID, integer iPermissionFlags)
         {
-            Verbose("llRequestPermissions(" + avatar + "," + perm + ")");
-            this.host.llRequestPermissions(avatar, perm);
+			Verbose("llRequestPermissions({0}, {1})", kAvatarID, iPermissionFlags);
+            this.host.llRequestPermissions(kAvatarID, iPermissionFlags);
         }
 
         //346
         public key llRequestSecureURL()
         {
-            return new key();
+			key kResult = new key(Guid.NewGuid());
+			Verbose("llRequestPermissions()={02}", kResult);
+			return kResult;
         }
 
         public key llRequestSimulatorData(String simulator, integer data)
