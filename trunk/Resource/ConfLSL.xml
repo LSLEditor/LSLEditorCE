@@ -1327,6 +1327,12 @@
 			returns 0.
 		</Word>
 
+		<Word name="llGetStaticPath">
+			list llGetStaticPath(vector Start, vector End, float Radius, list Parameters);
+
+			Returns a list of position vectors indicating pathfinding waypoints between positions at start and end, for a character of a given radius. The waypoints this function returns are for the 'static' nav mesh, meaning that objects set to "movable obstacle" or "movable phantom" are ignored.
+		</Word>
+
 		<Word name="llGetStatus">
 			integer llGetStatus(integer status);
 
@@ -3303,7 +3309,7 @@
 		</Word>
 
 		<Word name="llWhisper">
-			llWhisper(integer channel, string text);
+			void llWhisper(integer channel, string text);
 
 			Whisper text on channel. Channel 0 is the public chat channel that
 			all avatars see as chat text. Channels 1 to 2,147,483,648 are
@@ -3317,11 +3323,11 @@
 			Returns the wind velocity below the object position + offset.
 		</Word>
 
-		<Word name="llXorBase64StringsCorrect">
-			string llXorBase64StringsCorrect(string s1, string s2)
+		<Word name="llXorBase64">
+			string llXorBase64(string sText1, string sText2);
 
-			Performs an xor on two Base64 strings and returns a Base64 string.
-			s2 repeats if it is shorter than s1.
+			Performs an XOR on two Base64 strings and returns a Base64 string.
+			sText2 repeats if it is shorter than sText1.
 			This function is for encrypting data. Put your data in s1 and
 			your key in s2 to encrypt or put the encrypted data into s1
 			with the same key in s2 to decrypt again.
@@ -4687,8 +4693,9 @@
 		</WordsSubsection>
 
 		<WordsSubsection name="C.25. Character constants">
-			<Word name="AVOID_CHARACTERS" type="integer" value="1" status="beta"></Word>
-			<Word name="AVOID_DYNAMIC_OBSTACLES" type="integer" value="2" status="beta"></Word>
+			<Word name="AVOID_CHARACTERS" type="integer" value="1"></Word>
+			<Word name="AVOID_DYNAMIC_OBSTACLES" type="integer" value="2"></Word>
+			<Word name="AVOID_NONE" type="integer" value="0"></Word>
 			<Word name="CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES" type="integer" value="14">If set to false, character will not attempt to catch up on lost time when pathfinding performance is low, potentially providing more reliable movement (albeit while potentially appearing to be more stuttery). Default is true to match pre-existing behavior.</Word>
 			<Word name="CHARACTER_AVOIDANCE_MODE" type="integer" value="5" status="beta">Allows you to specify that a character should not try to avoid other characters, should not try to avoid dynamic obstacles (relatively fast moving objects and avatars), or both.</Word>
 			<Word name="CHARACTER_CMD_JUMP" type="integer" value="0x01" status="beta">Makes the character jump. Requires an additional parameter, the height to jump, between 0.1m and 2.0m. This must be provided as the first element of the llExecCharacterCmd option list.</Word>
@@ -4858,21 +4865,18 @@
 			<Word name="LIST_STAT_SUM_SQUARES" />
 
 			<Word name="OBJECT_ATTACHED_POINT" value="19">Gets the attachment point to which the object is attached.</Word>
-			<Word name="OBJECT_CREATOR" value="">
-				Gets the object's creator key.
+			<Word name="OBJECT_CHARACTER_TIME" value="17"></Word>
+			<Word name="OBJECT_CREATOR" value="8">Gets the object's creator key.
 				If id is an avatar, a NULL_KEY is returned.
 			</Word>
-			<Word name="OBJECT_DESC" value="">
-				Gets the object's description.
+			<Word name="OBJECT_DESC" value="">Gets the object's description.
 				If id is an avatar, an empty string is returned.
 			</Word>
-			<Word name="OBJECT_GROUP" value="">
-				Gets the prims's group key.
+			<Word name="OBJECT_GROUP" value="">Gets the prims's group key.
 				If id is an avatar, a NULL_KEY is returned.
 			</Word>
 			<Word name="OBJECT_NAME" value="">Gets the object's name.</Word>
-			<Word name="OBJECT_OWNER" value="">
-				Gets an object's owner's key.
+			<Word name="OBJECT_OWNER" value="">Gets an object's owner's key.
 				If id is group owned, a NULL_KEY is returned.
 			</Word>
 			<Word name="OBJECT_PATHFINDING_TYPE" type="integer" value="20">Returns the pathfinding setting of any object in the region. It returns an integer matching one of the OPT_* constants.</Word>
@@ -5108,14 +5112,16 @@
 			<Word name="PROFILE_NONE">Disables profiling</Word>
 			<Word name="PROFILE_SCRIPT_MEMORY">Enables memory profiling</Word>
 
-			<Word name="PU_EVADE_HIDDEN" type="integer" value="0x07" status="beta">Triggered when an llEvade character thinks it has hidden from its pursuer.</Word>
-			<Word name="PU_EVADE_SPOTTED" type="integer" value="0x08" status="beta">Triggered when an llEvade character switches from hiding to running</Word>
+			<Word name="PU_EVADE_HIDDEN" type="integer" value="0x07">Triggered when an llEvade character thinks it has hidden from its pursuer.</Word>
+			<Word name="PU_EVADE_SPOTTED" type="integer" value="0x08">Triggered when an llEvade character switches from hiding to running</Word>
+			<Word name="PU_FAILURE_DYNAMIC_PATHFINDING_DISABLED" type="integer" value="10"></Word>
 			<Word name="PU_FAILURE_INVALID_GOAL" type="integer" value="0x03" status="beta">Goal is not on the navigation-mesh and cannot be reached.</Word>
 			<Word name="PU_FAILURE_INVALID_START" type="integer" value="0x02" status="beta">Character cannot navigate from the current location - e.g., the character is off the navmesh or too high above it.</Word>
 			<Word name="PU_FAILURE_NO_NAVMESH" type="integer" value="0x09" status="beta">This is a fatal error reported to a character when there is no navmesh for the region. This usually indicates a server failure and users should file a bug report and include the time and region in which they received this message.</Word>
 			<Word name="PU_FAILURE_NO_VALID_DESTINATION" type="integer" value="0x06" status="beta">There's no good place for the character to go - e.g., it is patrolling and all the patrol points are now unreachable.</Word>
 			<Word name="PU_FAILURE_OTHER" type="integer" value="1000000" status="beta" />
 			<Word name="PU_FAILURE_TARGET_GONE" type="integer" value="0x05" status="beta">Target (for llPursue or llEvade) can no longer be tracked - e.g., it left the region or is an avatar that is now more than about 30m outside the region.</Word>
+			<Word name="PU_FAILURE_PARCEL_UNREACHABLE" type="integer" value="11"></Word>
 			<Word name="PU_FAILURE_UNREACHABLE" type="integer" value="0x04" status="beta">Goal is no longer reachable for some reason - e.g., an obstacle blocks the path.</Word>
 			<Word name="PU_GOAL_REACHED" type="integer" value="0x01" status="beta">Character has reached the goal and will stop or choose a new goal (if wandering).</Word>
 			<Word name="PU_SLOWDOWN_DISTANCE_REACHED" type="integer" value="0x00" status="beta">Character is near current goal.</Word>
@@ -5190,6 +5196,7 @@
 		<Word name="llStopPointAt" />
 		<Word name="llTakeCamera" />
 		<Word name="llXorBase64Strings" />
+		<Word name="llXorBase64StringsCorrect" />
 	</Words>
 
 
