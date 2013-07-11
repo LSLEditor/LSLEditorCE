@@ -3309,7 +3309,7 @@
 		</Word>
 
 		<Word name="llWhisper">
-			llWhisper(integer channel, string text);
+			void llWhisper(integer channel, string text);
 
 			Whisper text on channel. Channel 0 is the public chat channel that
 			all avatars see as chat text. Channels 1 to 2,147,483,648 are
@@ -3323,11 +3323,11 @@
 			Returns the wind velocity below the object position + offset.
 		</Word>
 
-		<Word name="llXorBase64StringsCorrect">
-			string llXorBase64StringsCorrect(string s1, string s2)
+		<Word name="llXorBase64">
+			string llXorBase64(string sText1, string sText2);
 
-			Performs an xor on two Base64 strings and returns a Base64 string.
-			s2 repeats if it is shorter than s1.
+			Performs an XOR on two Base64 strings and returns a Base64 string.
+			sText2 repeats if it is shorter than sText1.
 			This function is for encrypting data. Put your data in s1 and
 			your key in s2 to encrypt or put the encrypted data into s1
 			with the same key in s2 to decrypt again.
@@ -5196,6 +5196,7 @@
 		<Word name="llStopPointAt" />
 		<Word name="llTakeCamera" />
 		<Word name="llXorBase64Strings" />
+		<Word name="llXorBase64StringsCorrect" />
 	</Words>
 
 

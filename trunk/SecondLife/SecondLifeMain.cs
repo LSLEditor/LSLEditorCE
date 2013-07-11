@@ -92,8 +92,18 @@ namespace LSLEditor
 
         #endregion
 
-        #region constructor
-        public SecondLife()
+		#region Properties
+
+		public vector GetLocalPos
+		{
+			// TODO change this to use a call to llGetLocalPos specifying NOT to be Verbose. After all functions have been changed to allow verbose/silent option.
+			get { return m_pos; }
+		}
+
+		#endregion
+
+		#region constructor
+		public SecondLife()
         {
             host = null;
             m_random = new Random();
@@ -279,6 +289,7 @@ namespace LSLEditor
         public const int ATTACH_HUD_BOTTOM = 37;
         public const int ATTACH_HUD_BOTTOM_RIGHT = 38;
 
+		public const int AVOID_NONE = 0;
 		public const int AVOID_CHARACTERS = 1;
 		public const int AVOID_DYNAMIC_OBSTACLES = 2;
 
@@ -466,6 +477,7 @@ namespace LSLEditor
         public const int MASK_OWNER = 1;
 
         public const int OBJECT_ATTACHED_POINT = 19;
+		public const int OBJECT_CHARACTER_TIME = 17;
         public const int OBJECT_NAME = 1;
         public const int OBJECT_DESC = 2;
         public const int OBJECT_POS = 3;
@@ -739,6 +751,8 @@ namespace LSLEditor
 
 		public const int PU_EVADE_HIDDEN = 0x07;
 		public const int PU_EVADE_SPOTTED = 0x08;
+		public const int PU_FAILURE_DYNAMIC_PATHFINDING_DISABLED = 10;
+		public const int PU_FAILURE_PARCEL_UNREACHABLE = 11;
 		public const int PU_FAILURE_INVALID_GOAL = 0x03;
 		public const int PU_FAILURE_INVALID_START = 0x02;
 		public const int PU_FAILURE_NO_VALID_DESTINATION = 0x06;
@@ -2210,11 +2224,9 @@ namespace LSLEditor
             return iLength;
         }
 
-        public vector llGetLocalPos(Boolean bVerbose = true)
+        public vector llGetLocalPos()
         {
-			if (bVerbose) {
-				Verbose("llGetLocalPos()={0}", m_pos);
-			}
+			Verbose("llGetLocalPos()={0}", m_pos);
             return m_pos;
         }
 
@@ -2609,7 +2621,7 @@ namespace LSLEditor
             return m_start_parameter;
         }
 
-		public list llGetStaticPath(vector vStart, vector vEnd, float fRadius, list lParameters)
+		public list llGetStaticPath(vector vStart, vector vEnd, Float fRadius, list lParameters)
 		{
 			list lReturn = new list();
 			Verbose("llGetStaticPath({0}, {1}, {2}, {3})={4}", vStart, vEnd, fRadius, lParameters.ToVerboseString(), lReturn.ToVerboseString());
