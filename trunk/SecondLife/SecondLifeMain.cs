@@ -1322,10 +1322,10 @@ namespace LSLEditor
             Verbose("llAttachToAvatarTemp({0})", iAttachPoint);
         }
 
-		public key llAvatarOnLinkSitTarget(integer iLinkNumber)
+		public key llAvatarOnLinkSitTarget(integer iLinkIndex)
 		{
             key kLinkUUID = new key(Guid.NewGuid());
-            Verbose("llAvatarOnLinkSitTarget({0}))={1}", iLinkNumber, kLinkUUID);
+            Verbose("llAvatarOnLinkSitTarget({0}))={1}", iLinkIndex, kLinkUUID);
 			return kLinkUUID;
 		}
 
@@ -1425,10 +1425,10 @@ namespace LSLEditor
             Verbose("llBreakAllLinks()");
         }
 
-        public void llBreakLink(integer iLinkNumber)
+        public void llBreakLink(integer iLinkIndex)
         {
-            host.llBreakLink(iLinkNumber);
-            Verbose("llBreakLink({0})", iLinkNumber);
+            host.llBreakLink(iLinkIndex);
+            Verbose("llBreakLink({0})", iLinkIndex);
         }
 
         public list llCSV2List(String sString)
@@ -1649,10 +1649,10 @@ namespace LSLEditor
             return kID;
         }
 
-        public integer llDetectedLinkNumber(integer iLinkNumber)
+        public integer llDetectedLinkNumber(integer iLinkIndex)
         {
             integer iDetected = 0;
-            Verbose("llDetectedLinkNumber({0})={1}", iLinkNumber, iDetected);
+            Verbose("llDetectedLinkNumber({0})={1}", iLinkIndex, iDetected);
             return iDetected;
         }
 
@@ -2140,10 +2140,10 @@ namespace LSLEditor
             return kID;
         }
 
-        public list llGetLinkMedia(integer iLinkNumber, integer iFace, list lParameters)
+        public list llGetLinkMedia(integer iLinkIndex, integer iFace, list lParameters)
         {
             list lMediaList = new list();
-            Verbose("llGetLinkMedia({0}, {1}, {2})={3}", iLinkNumber, iFace, lParameters.ToVerboseString(), lMediaList.ToVerboseString());
+            Verbose("llGetLinkMedia({0}, {1}, {2})={3}", iLinkIndex, iFace, lParameters.ToVerboseString(), lMediaList.ToVerboseString());
             return lMediaList;
         }
 
@@ -2910,9 +2910,9 @@ namespace LSLEditor
 			Verbose("llLinkParticleSystem({0}, {1})", iLink, lParameters.ToVerboseString());
         }
 
-        public void llLinkSitTarget(integer iLinkNumber, vector vOffset, rotation rRotation)
+        public void llLinkSitTarget(integer iLinkIndex, vector vOffset, rotation rRotation)
         {
-            Verbose("llLinkSitTarget({0}, {1}, {2})", iLinkNumber, vOffset, rRotation);
+            Verbose("llLinkSitTarget({0}, {1}, {2})", iLinkIndex, vOffset, rRotation);
         }
 
         public String llList2CSV(list lSource)
@@ -3317,7 +3317,7 @@ namespace LSLEditor
 
         public void llLookAt(vector vTarget, Float fStrength, Float fDamping)
         {
-            Verbose("llLookAt(" + vTarget + "," + fStrength + "," + fDamping + ")");
+            Verbose("llLookAt({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7})", vTarget, fStrength, fDamping);
         }
 
         public void llLoopSound(String sSound, Float sVolume)
@@ -3678,21 +3678,24 @@ namespace LSLEditor
         public key llRequestSecureURL()
         {
 			key kResult = new key(Guid.NewGuid());
-			Verbose("llRequestPermissions()={02}", kResult);
+			Verbose("llRequestPermissions()={0}", kResult);
 			return kResult;
         }
 
-        public key llRequestSimulatorData(String simulator, integer data)
+        public key llRequestSimulatorData(String sSimulator, integer iData)
         {
-            Verbose("llRequestSimulatorData(" + simulator + "," + data + ")");
-            return NULL_KEY;
+			key kResult = new key(Guid.NewGuid());
+			Verbose(@"llRequestSimulatorData(""{0}"", {1})={2}", sSimulator, iData, kResult);
+            return kResult;
         }
 
         //345
         public key llRequestURL()
         {
-            return new key();
-        }
+			key kResult = new key(Guid.NewGuid());
+			Verbose("llRequestURL()={0}", kResult);
+			return kResult;
+		}
 
         public key llRequestUsername(key kAvatarID)
         {
@@ -3720,9 +3723,9 @@ namespace LSLEditor
             Verbose("llResetLandPassList()");
         }
 
-        public void llResetOtherScript(String name)
+        public void llResetOtherScript(String sScriptName)
         {
-            Verbose("llResetOtherScript(" + name + ")");
+			Verbose("llResetOtherScript({0})", sScriptName);
         }
 
         public void llResetScript()
@@ -3753,150 +3756,155 @@ namespace LSLEditor
             return iReturned;
         }
 
-        public void llRezAtRoot(String inventory, vector pos, vector vel, rotation rot, integer param)
+        public void llRezAtRoot(String sInventoryItem, vector vPosition, vector vVelocity, rotation rRotation, integer iParameter)
         {
-            Verbose("llRezAtRoot(" + inventory + "," + pos + "," + vel + "," + rot + "," + param + ")");
+			Verbose(@"llRezAtRoot(""{0}"", {1}, {2}, {3}, {4})", sInventoryItem, vPosition, vVelocity, rRotation, iParameter);
         }
 
-        public void llRezObject(String inventory, vector pos, vector vel, rotation rot, integer param)
+        public void llRezObject(String sInventoryItem, vector vPosition, vector vVelocity, rotation rRotation, integer iParameter)
         {
-            Verbose("llRezObject(" + inventory + "," + pos + "," + vel + "," + rot + "," + param + ")");
+			Verbose(@"llRezObject(""{0}"", {1}, {2}, {3}, {4})", sInventoryItem, vPosition, vVelocity, rRotation, iParameter);
             object_rez(new key(Guid.NewGuid()));
-            on_rez(param);
+            on_rez(iParameter);
         }
 
-        public Float llRot2Angle(rotation rot)
+        public Float llRot2Angle(rotation rRotation)
         {
-            Verbose("llRot2Angle(" + rot + ")");
-            return 0F;
+			Float fAngle = 0.0F;
+			Verbose("llRot2Angle({0})={1}", rRotation, fAngle);
+			return fAngle;
         }
 
-        public vector llRot2Axis(rotation rot)
+        public vector llRot2Axis(rotation rRotation)
         {
-            Verbose("llRot2Axis(" + rot + ")");
-            return ZERO_VECTOR;
+			vector vAxis = vector.ZERO_VECTOR;
+			Verbose("llRot2Axis({0})={1})", rRotation, vAxis);
+			return vAxis;
         }
 
-        public vector llRot2Euler(rotation r)
+        public vector llRot2Euler(rotation rRotation)
         {
             // http://rpgstats.com/wiki/index.php?title=LibraryRotationFunctions
-            rotation t = new rotation(r.x * r.x, r.y * r.y, r.z * r.z, r.s * r.s);
+            rotation t = new rotation(rRotation.x * rRotation.x, rRotation.y * rRotation.y, rRotation.z * rRotation.z, rRotation.s * rRotation.s);
             double m = (t.x + t.y + t.z + t.s);
-            vector v = new vector(0, 0, 0);
-            if (m != 0)
-            {
-                double n = 2 * (r.y * r.s + r.x * r.z);
+            vector vEuler = new vector(0, 0, 0);
+            if (m != 0) {
+                double n = 2 * (rRotation.y * rRotation.s + rRotation.x * rRotation.z);
                 double p = m * m - n * n;
                 if (p > 0)
-                    v = new vector(Math.Atan2(2.0 * (r.x * r.s - r.y * r.z), (-t.x - t.y + t.z + t.s)),
-                    Math.Atan2(n, Math.Sqrt(p)), Math.Atan2(2.0 * (r.z * r.s - r.x * r.y), (t.x - t.y - t.z + t.s)));
+                    vEuler = new vector(Math.Atan2(2.0 * (rRotation.x * rRotation.s - rRotation.y * rRotation.z), (-t.x - t.y + t.z + t.s)),
+                    Math.Atan2(n, Math.Sqrt(p)), Math.Atan2(2.0 * (rRotation.z * rRotation.s - rRotation.x * rRotation.y), (t.x - t.y - t.z + t.s)));
                 else if (n > 0)
-                    v = new vector(0, PI_BY_TWO, Math.Atan2((r.z * r.s + r.x * r.y), 0.5 - t.x - t.z));
+                    vEuler = new vector(0, PI_BY_TWO, Math.Atan2((rRotation.z * rRotation.s + rRotation.x * rRotation.y), 0.5 - t.x - t.z));
                 else
-                    v = new vector(0, -PI_BY_TWO, Math.Atan2((r.z * r.s + r.x * r.y), 0.5 - t.x - t.z));
+                    vEuler = new vector(0, -PI_BY_TWO, Math.Atan2((rRotation.z * rRotation.s + rRotation.x * rRotation.y), 0.5 - t.x - t.z));
             }
-            Verbose("llRot2Euler(" + r + ")=" + v);
-            return v;
+			Verbose("llRot2Euler({0})={1}", rRotation, vEuler);
+            return vEuler;
         }
 
-        public vector llRot2Fwd(rotation rot)
+        public vector llRot2Fwd(rotation rRotation)
         {
-            vector v = new vector(1.0 / (rot.x * rot.x + rot.y * rot.y + rot.z * rot.z + rot.s * rot.s), 0, 0);
-            vector result = v * rot;
-            Verbose("llRot2Fwd({0})={1}", rot, result);
-            return result;
+            vector v = new vector(1.0 / (rRotation.x * rRotation.x + rRotation.y * rRotation.y + rRotation.z * rRotation.z + rRotation.s * rRotation.s), 0, 0);
+            vector vResult = v * rRotation;
+            Verbose("llRot2Fwd({0})={1}", rRotation, vResult);
+            return vResult;
         }
 
-        public vector llRot2Left(rotation rot)
+        public vector llRot2Left(rotation rRotation)
         {
-            vector v = new vector(0, 1.0 / (rot.x * rot.x + rot.y * rot.y + rot.z * rot.z + rot.s * rot.s), 0);
-            vector result = v * rot;
-            Verbose("llRot2Left({0})={1}", rot, result);
-            return result;
+            vector v = new vector(0, 1.0 / (rRotation.x * rRotation.x + rRotation.y * rRotation.y + rRotation.z * rRotation.z + rRotation.s * rRotation.s), 0);
+            vector vResult = v * rRotation;
+            Verbose("llRot2Left({0})={1}", rRotation, vResult);
+            return vResult;
         }
 
-        public vector llRot2Up(rotation rot)
+        public vector llRot2Up(rotation rRotation)
         {
-            vector v = new vector(0, 0, 1.0 / (rot.x * rot.x + rot.y * rot.y + rot.z * rot.z + rot.s * rot.s));
-            vector result = v * rot;
-            Verbose("llRot2Left({0})={1}", rot, result);
-            return result;
+            vector v = new vector(0, 0, 1.0 / (rRotation.x * rRotation.x + rRotation.y * rRotation.y + rRotation.z * rRotation.z + rRotation.s * rRotation.s));
+            vector vResult = v * rRotation;
+            Verbose("llRot2Left({0})={1}", rRotation, vResult);
+            return vResult;
         }
 
-        public void llRotateTexture(Float radians, integer face)
+        public void llRotateTexture(Float fRadians, integer iFace)
         {
-            Verbose("llRotateTexture(" + radians + "," + face + ")");
+			Verbose("llRotateTexture({0}, {1})", fRadians, iFace);
         }
 
-        public rotation llRotBetween(vector a, vector b)
+        public rotation llRotBetween(vector vDirection1, vector vDirection2)
         {
-            Verbose("llRotBetween(" + a + "," + b + ")");
-            return ZERO_ROTATION;
+			rotation rResult = rotation.ZERO_ROTATION;
+			Verbose("llRotBetween({0}, {1})={2}", vDirection1, vDirection2, rResult);
+            return rResult;
         }
 
-        public void llRotLookAt(rotation rot, Float strength, Float damping)
+        public void llRotLookAt(rotation rRotation, Float fStrength, Float fDamping)
         {
-            Verbose("llRotLookAt(" + rot + "," + strength + "," + damping + ")");
+			Verbose("llRotLookAt({0}, {1}, {2})", rRotation, fStrength, fDamping);
         }
 
-        public integer llRotTarget(rotation rot, Float error)
+        public integer llRotTarget(rotation rRotation, Float fError)
         {
-            Verbose("llRotTarget(" + rot + "," + error + ")");
-            return 0;
+			integer iHandle = 0;
+			Verbose("llRotTarget({0}, {1})={2})", rRotation, fError, iHandle);
+			return iHandle;
         }
 
-        public void llRotTargetRemove(integer number)
+        public void llRotTargetRemove(integer iHandle)
         {
-            Verbose("llRotTargetRemove(" + number + ")");
+			Verbose("llRotTargetRemove({0})", iHandle);
         }
 
-        public integer llRound(Float val)
+        public integer llRound(Float fValue)
         {
-            int intA = (int)Math.Round(val);
-            Verbose("llRound(" + val + ")=" + intA);
+            int intA = (int)Math.Round(fValue);
+			Verbose("llRound({0})={1})=", fValue, intA);
             return intA;
         }
 
-        public integer llSameGroup(key id)
+        public integer llSameGroup(key kID)
         {
-            Verbose("llSameGroup(" + id + ")");
-            return 0;
+			integer iFlag = 0;
+            Verbose("llSameGroup({0})={1})", kID, iFlag);
+            return iFlag;
         }
 
-        public void llSay(integer channel, String text)
+        public void llSay(integer iChannel, String sText)
         {
-            Chat(channel, text, CommunicationType.Say);
+            Chat(iChannel, sText, CommunicationType.Say);
         }
 
-        public void llScaleTexture(Float scale_s, Float scale_t, integer face)
+        public void llScaleTexture(Float fScaleS, Float fScaleT, integer iFace)
         {
-            Verbose("llScaleTexture(" + scale_s + "," + scale_t + "," + face + ")");
+			Verbose("llScaleTexture({0}, {1}, {2})", fScaleS, fScaleT, iFace);
         }
 
-        public integer llScriptDanger(vector pos)
+        public integer llScriptDanger(vector vPosition)
         {
-            Verbose("llScriptDanger(" + pos + ")");
-            return 0;
+			integer iFlag = 0;
+			Verbose("llScriptDanger({0})={1}", vPosition, iFlag);
+            return iFlag;
         }
 
         public void llScriptProfiler(integer iState)
         {
-            Verbose("llScriptProfiler(" + iState + ")");
+            Verbose("llScriptProfiler({0})", iState);
         }
 
-        public key llSendRemoteData(key channel, String dest, integer idata, String sdata)
+        public key llSendRemoteData(key kChannel, String sDestination, integer iData, String sData)
         {
-            key k = host.llSendRemoteData(channel, dest, idata, sdata);
-            Verbose("llSendRemoteData({0}, {1}, {2}, {3})={4}", channel, dest, idata, sdata, k);
-            return k;
+            key kID = host.llSendRemoteData(kChannel, sDestination, iData, sData);
+            Verbose("llSendRemoteData({0}, {1}, {2}, {3})={4}", kChannel, sDestination, iData, sData, kID);
+            return kID;
         }
 
-        public void llSensor(String name, key id, integer type, Float range, Float arc)
+        public void llSensor(String sName, key kID, integer iType, Float fRange, Float fArc)
         {
-            Verbose("llSensor()");
+            Verbose(@"llSensor(""{0}"", {1}, {2}, {3}, {4})", sName, kID, iType, fRange, fArc);
             host.sensor_timer.Stop();
-            integer total_number = 1;
-            host.ExecuteSecondLife("sensor", total_number);
+            integer iTotalNumber = 1;
+            host.ExecuteSecondLife("sensor", iTotalNumber);
         }
 
         public void llSensorRemove()
@@ -3905,25 +3913,24 @@ namespace LSLEditor
             host.sensor_timer.Stop();
         }
 
-        public void llSensorRepeat(String name, key id, integer type, Float range, Float arc, Float rate)
+        public void llSensorRepeat(String sName, key kID, integer iType, Float fRange, Float fArc, Float fRate)
         {
-            Verbose("llSensorRepeat(" + name + "," + id + "," + type + "," + range + "," + arc + "," + rate + ")");
+            Verbose(@"llSensorRepeat(""{0}"", {1}, {2}, {3}, {4}, {5})", sName, kID, iType, fRange, fArc, fRate);
             host.sensor_timer.Stop();
-            if (rate > 0)
-            {
-                host.sensor_timer.Interval = (int)Math.Round(rate * 1000);
+            if (fRate > 0) {
+                host.sensor_timer.Interval = (int)Math.Round(fRate * 1000);
                 host.sensor_timer.Start();
             }
         }
 
-        public void llSetAlpha(Float alpha, integer face)
+        public void llSetAlpha(Float fOpacity, integer iFace)
         {
-            Verbose("llSetAlpha(" + alpha + "," + face + ")");
+			Verbose("llSetAlpha({0}, {1})", fOpacity, iFace);
         }
 
         public void llSetAngularVelocity(vector vForce, integer iLocal)
         {
-            Verbose("llSetAngularVelocity(" + vForce + "," + iLocal + ")");
+			Verbose("llSetAngularVelocity({0}, {1})", vForce, iLocal);
         }
 
         public void llSetAnimationOverride(String sAnimationState, String sAnimation)
@@ -3931,284 +3938,288 @@ namespace LSLEditor
             Verbose("llSetAnimationOverride({0}, {1})", sAnimationState, sAnimation);
         }
 
-        public void llSetBuoyancy(Float buoyancy)
+        public void llSetBuoyancy(Float fBuoyancy)
         {
-            Verbose("llSetBuoyancy(" + buoyancy + ")");
+            Verbose("llSetBuoyancy({0})", fBuoyancy);
         }
 
-        public void llSetCameraAtOffset(vector offset)
+        public void llSetCameraAtOffset(vector vOffset)
         {
-            Verbose("llSetCameraAtOffset(" + offset + ")");
+            Verbose("llSetCameraAtOffset({0})", vOffset);
         }
 
-        public void llSetCameraEyeOffset(vector offset)
+        public void llSetCameraEyeOffset(vector vOffset)
         {
-            Verbose("llSetCameraEyeOffset(" + offset + ")");
+            Verbose("llSetCameraEyeOffset({0})", vOffset);
         }
 
-        public void llSetCameraParams(list rules)
+        public void llSetCameraParams(list lRules)
         {
-            Verbose("llSetCameraParams(" + rules.ToString() + ")");
+            Verbose("llSetCameraParams({0})", lRules.ToVerboseString());
         }
 
-        public void llSetClickAction(integer action)
+        public void llSetClickAction(integer iAction)
         {
-            Verbose("llSetClickAction({0})", action);
+            Verbose("llSetClickAction({0})", iAction);
         }
 
-        public void llSetColor(vector color, integer face)
+        public void llSetColor(vector vColour, integer iFace)
         {
-            Verbose("llSetColor(" + color + "," + face + ")");
+			Verbose("llSetColor({0}, {1})", vColour, iFace);
         }
 
-		public void llSetContentType(key HTTPRequestID, integer ContentType)
+		public void llSetContentType(key kHTTPRequestID, integer iContentType)
 		{
-			Verbose("llSetContentType(" + HTTPRequestID + "," + ContentType + ")");
+			Verbose("llSetContentType({0}, {1})", kHTTPRequestID, iContentType);
 		}
 
-        public void llSetDamage(Float damage)
+        public void llSetDamage(Float fDamage)
         {
-            Verbose("llSetDamage(" + damage + ")");
+            Verbose("llSetDamage({0})", fDamage);
         }
 
-        public void llSetForce(vector force, integer local)
+        public void llSetForce(vector vForce, integer iLocal)
         {
-            Verbose("llSetForce(" + force + "," + local + ")");
+            Verbose("llSetForce({0}, {1})", vForce, iLocal);
         }
 
-        public void llSetForceAndTorque(vector force, vector torque, integer local)
+        public void llSetForceAndTorque(vector vForce, vector vTorque, integer iLocal)
         {
-            Verbose("llSetForceAndTorque(" + force + "," + torque + "," + local + ")");
+            Verbose("llSetForceAndTorque({0}, {1}, {2})", vForce, vTorque, iLocal);
         }
 
-        public void llSetHoverHeight(Float height, Float water, Float tau)
+        public void llSetHoverHeight(Float fHeight, Float fWater, Float fTau)
         {
-            Verbose("llSetHoverHeight(" + height + "," + water + "," + tau + ")");
+            Verbose("llSetHoverHeight({0}, {1}, {2})", fHeight, fWater, fTau);
         }
 
-        public void llSetInventoryPermMask(String item, integer mask, integer value)
+        public void llSetInventoryPermMask(String sItem, integer iMask, integer iValue)
         {
-            Verbose("llSetInventoryPermMask(" + item + "," + mask + "," + value + ")");
+            Verbose(@"llSetInventoryPermMask(""{0}"", {1}, {2})", sItem, iMask, iValue);
         }
 
         public void llSetKeyframedMotion(list lKeyframes, list lOptions)
         {
-            Verbose("llSetKeyframedMotion({0}, {1})", lKeyframes, lOptions.ToString());
+            Verbose("llSetKeyframedMotion({0}, {1})", lKeyframes.ToVerboseString(), lOptions.ToVerboseString());
         }
 
-        public void llSetLinkAlpha(integer linknumber, Float alpha, integer face)
+        public void llSetLinkAlpha(integer iLinkIndex, Float fAlpha, integer iFace)
         {
-            Verbose("llSetLinkAlpha(" + linknumber + "," + alpha + "," + face + ")");
+            Verbose("llSetLinkAlpha({0}, {1}, {2})", iLinkIndex, fAlpha, iFace);
         }
 
-		public void llSetLinkCamera(integer LinkNumber, vector EyeOffset, vector LookOffset)
+		public void llSetLinkCamera(integer iLinkIndex, vector vEyeOffset, vector vLookOffset)
 		{
-			Verbose("llSetLinkCamera(" + LinkNumber + "," + EyeOffset + "," + LookOffset + ")");
+			Verbose("llSetLinkCamera({0}, {1}, {2})", iLinkIndex, vEyeOffset, vLookOffset);
 		}
 
-        public void llSetLinkColor(integer linknumber, vector color, integer face)
+        public void llSetLinkColor(integer iLinkIndex, vector vColour, integer iFace)
         {
-            Verbose("llSetLinkColor(" + linknumber + "," + color + "," + face + ")");
+            Verbose("llSetLinkColor({0}, {1}, {2})", iLinkIndex, vColour, iFace);
         }
 
-        public integer llSetLinkMedia(integer iLink, integer iFace, list lParams)
+		public integer llSetLinkMedia(integer iLinkIndex, integer iFace, list lParameters)
         {
-            Verbose("llSetLinkMedia(" + iLink + "," + iFace + "," + lParams.ToString() + ")");
-            return STATUS_OK;
+			integer iResult = STATUS_OK;
+			Verbose("llSetLinkMedia({0}, {1}, {2})={3}", iLinkIndex, iFace, lParameters.ToVerboseString(), iResult);
+			return iResult;
         }
 
-        public void llSetLinkPrimitiveParams(integer linknumber, list rules)
+        public void llSetLinkPrimitiveParams(integer iLinkIndex, list lRules)
         {
-            Verbose("llSetLinkPrimitiveParams({0},[{1}])", linknumber, rules);
+            Verbose("llSetLinkPrimitiveParams({0}, {1})", iLinkIndex, lRules.ToVerboseString());
         }
 
-        public void llSetLinkPrimitiveParamsFast(integer linknumber, list rules)
+        public void llSetLinkPrimitiveParamsFast(integer iLinkIndex, list lRules)
         {
-            Verbose("llSetLinkPrimitiveParamsFast({0},[{1}])", linknumber, rules);
+            Verbose("llSetLinkPrimitiveParamsFast({0}, {1})", iLinkIndex, lRules.ToVerboseString());
         }
 
-        public void llSetLinkTexture(integer linknumber, String texture, integer face)
+        public void llSetLinkTexture(integer iLinkIndex, String sTexture, integer iFace)
         {
-            Verbose(@"llSetLinkTexture({0},""{1}"",{2})", linknumber, texture, face);
+            Verbose(@"llSetLinkTexture({0}, ""{1}"", {2})", iLinkIndex, sTexture, iFace);
         }
 
-        public void llSetLinkTextureAnim(integer link, integer mode, integer face, integer sizex, integer sizey, Float start, Float length, Float rate)
+        public void llSetLinkTextureAnim(integer iLinkIndex, integer iMode, integer iFace, integer iSizeX, integer iSizeY, Float fStart, Float fLength, Float fRate)
         {
-            Verbose("llSetLinkTextureAnim(" + link + "," + mode + "," + face + "," + sizex + "," + sizey + "," + start + "," + length + "," + rate + ")");
+            Verbose("llSetLinkTextureAnim({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7})", iLinkIndex, iMode, iFace, iSizeX, iSizeY, fStart, fLength, fRate);
         }
 
-        public void llSetLocalRot(rotation rot)
+        public void llSetLocalRot(rotation rRotation)
         {
-            this.m_rotlocal = rot;
-            Verbose("llSetLocalRot(" + rot + ")");
+            this.m_rotlocal = rRotation;
+            Verbose("llSetLocalRot({0})", rRotation);
         }
 
         public integer llSetMemoryLimit(integer iLimit)
         {
-            Verbose("llSetMemoryLimit(" + iLimit + ")");
-            return true;
+			integer iResult = true;
+			Verbose("llSetMemoryLimit({0})=(1)", iLimit, iResult);
+            return iResult;
         }
 
-        public void llSetObjectDesc(String description)
+        public void llSetObjectDesc(String sDescription)
         {
-            Verbose("llSetObjectDesc({0})", description);
-            host.SetObjectDescription(description);
+            Verbose(@"llSetObjectDesc(""{0}"")", sDescription);
+            host.SetObjectDescription(sDescription);
         }
 
-        public void llSetObjectName(String name)
+        public void llSetObjectName(String sName)
         {
-            Verbose("llSetObjectName({0})", name);
-            host.SetObjectName(name);
+            Verbose(@"llSetObjectName(""{0}"")", sName);
+            host.SetObjectName(sName);
         }
 
-        public void llSetObjectPermMask(integer mask, integer value)
+        public void llSetObjectPermMask(integer iMaskConstant, integer iValue)
         {
-            Verbose("llSetObjectPermMask(" + mask + "," + value + ")");
+            Verbose("llSetObjectPermMask({0}, {1})", iMaskConstant, iValue);
         }
 
-        public void llSetParcelMusicURL(String url)
+        public void llSetParcelMusicURL(String sURL)
         {
-            Verbose("llSetParcelMusicURL(" + url + ")");
-			m_ParcelMusicURL = url;
+            Verbose(@"llSetParcelMusicURL(""{0}"")", sURL);
+			m_ParcelMusicURL = sURL;
         }
 
-        public void llSetPayPrice(integer price, list quick_pay_buttons)
+        public void llSetPayPrice(integer iPrice, list lButtons)
         {
-            Verbose("llSetPayPrice(" + price + "," + quick_pay_buttons.ToString() + ")");
+			Verbose("llSetPayPrice({0}, {1})", iPrice, lButtons.ToVerboseString());
         }
 
-        public void llSetPhysicsMaterial(integer material_bits, Float gravity_multiplier, Float restitution, Float friction, Float density)
+        public void llSetPhysicsMaterial(integer iMaterialBits, Float fGravityMultiplier, Float fRestitution, Float fFriction, Float fDensity)
         {
-            Verbose("llSetPhysicsMaterial(" + material_bits + "," + gravity_multiplier + "," + restitution + "," + friction + "," + density + ")");
+            Verbose("llSetPhysicsMaterial({0}, {1}, {2}, {3}, {4})", iMaterialBits, fGravityMultiplier, fRestitution, fFriction, fDensity);
         }
 
-        public void llSetPos(vector pos)
+        public void llSetPos(vector vPosition)
         {
-            Verbose("llSetPos(" + pos + ")");
-            m_pos = pos;
+            Verbose("llSetPos({0})", vPosition);
+            m_pos = vPosition;
         }
 
-        public integer llSetPrimMediaParams(integer face, list myparams)
+        public integer llSetPrimMediaParams(integer iFace, list lParameters)
         {
-            Verbose("llSetPrimMediaParams(" + face + "," + myparams.ToString() + ")");
-            return 0;
+			integer iResult = 0;
+			Verbose("llSetPrimMediaParams({0}, {1})={2}", iFace, lParameters.ToVerboseString(), iResult);
+            return iResult;
         }
 
-        public void llSetPrimitiveParams(list rule)
+        public void llSetPrimitiveParams(list lRule)
         {
-            Verbose("llSetPrimitiveParams(" + rule.ToString() + ")");
+			Verbose("llSetPrimitiveParams({0})", lRule.ToVerboseString());
         }
 
-		public integer llSetRegionPos(vector Position)
+		public integer llSetRegionPos(vector vPosition)
 		{
-			Verbose("llSetRegionPos(" + Position + ")");
-			m_pos = Position;
-			return true;
+			integer iResult = true;
+			Verbose("llSetRegionPos({0})={1}", vPosition, iResult);
+			m_pos = vPosition;
+			return iResult;
 		}
 
-        public void llSetRemoteScriptAccessPin(integer pin)
+        public void llSetRemoteScriptAccessPin(integer iPIN)
         {
-            Verbose("llSetRemoteScriptAccessPin(" + pin + ")");
+            Verbose("llSetRemoteScriptAccessPin({0})", iPIN);
         }
 
-        public void llSetRot(rotation rot)
+        public void llSetRot(rotation rRotation)
         {
-            Verbose("llSetRot(" + rot + ")");
-            m_rot = rot;
+            Verbose("llSetRot({0})", rRotation);
+            m_rot = rRotation;
         }
 
-        public void llSetScale(vector scale)
+        public void llSetScale(vector vScale)
         {
-            Verbose("llSetScale(" + scale + ")");
-            m_scale = scale;
+            Verbose("llSetScale({0})", vScale);
+            m_scale = vScale;
         }
 
-        public void llSetScriptState(String name, integer run)
+        public void llSetScriptState(String sName, integer iRunState)
         {
-            Verbose("llSetScriptState(" + name + "," + run + ")");
+            Verbose(@"llSetScriptState(""{0}"", {1})", sName, iRunState);
         }
 
-        public void llSetSitText(String text)
+        public void llSetSitText(String sText)
         {
-            Verbose("llSetSitText(" + text + ")");
-            m_SitText = text;
+            Verbose(@"llSetSitText(""{0}"")", sText);
+            m_SitText = sText;
         }
 
-        public void llSetSoundQueueing(integer queue)
+        public void llSetSoundQueueing(integer iQueueFlag)
         {
-            Verbose("llSetSoundQueueing(" + queue + ")");
+            Verbose("llSetSoundQueueing({0})", iQueueFlag);
         }
 
-        public void llSetSoundRadius(Float radius)
+        public void llSetSoundRadius(Float fRadius)
         {
-            m_SoundRadius = radius;
-            Verbose("llSetSoundRadius(" + m_SoundRadius + ")");
+            m_SoundRadius = fRadius;
+			Verbose("llSetSoundRadius({0})", fRadius);
         }
 
-        public void llSetStatus(integer status, integer value)
+        public void llSetStatus(integer iStatusConstant, integer iValue)
         {
-            Verbose("llSetStatus(" + status + "," + value + ")");
+            Verbose("llSetStatus({0}, {1})", iStatusConstant, iValue);
         }
 
-        public void llSetText(String text, vector color, Float alpha)
+        public void llSetText(String sText, vector vColour, Float fOpacity)
         {
-            Verbose("llSetText(" + text + "," + color + "," + alpha + ")");
+            Verbose(@"llSetText(""{0}"", {1}, {2})", sText, vColour, fOpacity);
         }
 
-        public void llSetTexture(String texture, integer face)
+        public void llSetTexture(String sTextureName, integer iFace)
         {
-            Verbose("llSetTexture(" + texture + "," + face + ")");
+            Verbose(@"llSetTexture(""{0}"", {1})", sTextureName, iFace);
         }
 
-        public void llSetTextureAnim(integer mode, integer face, integer sizex, integer sizey, Float start, Float length, Float rate)
+        public void llSetTextureAnim(integer iMode, integer iFace, integer iSizeX, integer iSizeY, Float fStart, Float fLength, Float fRate)
         {
-            Verbose("llSetTextureAnim(" + mode + "," + face + "," + sizex + "," + sizey + "," + start + "," + length + "," + rate + ")");
+            Verbose("llSetTextureAnim({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7})", iMode, iFace, iSizeX, iSizeY, fStart, fLength, fRate);
         }
 
-        public void llSetTimerEvent(Float sec)
+        public void llSetTimerEvent(Float fSeconds)
         {
-            Verbose("llSetTimerEvent(" + sec + ")");
+            Verbose("llSetTimerEvent({0})", fSeconds);
             host.timer.Stop();
-            if (sec > 0)
+            if (fSeconds > 0)
             {
-                host.timer.Interval = (int)Math.Round(sec * 1000);
+                host.timer.Interval = (int)Math.Round(fSeconds * 1000);
                 host.timer.Start();
             }
         }
 
-        public void llSetTorque(vector torque, integer local)
+        public void llSetTorque(vector vTorque, integer iLocal)
         {
-            Verbose("llSetTorque(" + torque + "," + local + ")");
+            Verbose("llSetTorque({0}, {1})", vTorque, iLocal);
         }
 
-        public void llSetTouchText(String text)
+        public void llSetTouchText(String sText)
         {
-            Verbose("llSetTouchText(" + text + ")");
+            Verbose(@"llSetTouchText(""{0}"")", sText);
         }
 
-        public void llSetVehicleFlags(integer flags)
+        public void llSetVehicleFlags(integer iVehicleFlagConstants)
         {
-            Verbose("llSetVehicleFlags(" + flags + ")");
+            Verbose("llSetVehicleFlags({0})", iVehicleFlagConstants);
         }
 
-        public void llSetVehicleFloatParam(integer param_name, Float param_value)
+        public void llSetVehicleFloatParam(integer iParameterName, Float fParameterValue)
         {
-            Verbose("llSetVehicledoubleParam(" + param_name + "," + param_value + ")");
+			Verbose("llSetVehicledoubleParam({0}, {1})", iParameterName, fParameterValue);
         }
 
-        public void llSetVehicleRotationParam(integer param_name, rotation param_value)
+        public void llSetVehicleRotationParam(integer iParameterName, rotation fParameterValue)
         {
-            Verbose("llSetVehicleRotationParam(" + param_name + "," + param_value + ")");
+			Verbose("llSetVehicleRotationParam({0}, {1})", iParameterName, fParameterValue);
         }
 
-        public void llSetVehicleType(integer type)
+        public void llSetVehicleType(integer iTypeConstant)
         {
-            Verbose("llSetVehicleType(" + type + ")");
+            Verbose("llSetVehicleType({0})", iTypeConstant);
         }
 
-        public void llSetVehicleVectorParam(integer param_name, vector param_value)
+		public void llSetVehicleVectorParam(integer iParameterName, vector vParameterValue)
         {
-            Verbose("llSetVehicleVectorParam(" + param_name + "," + param_value + ")");
+			Verbose("llSetVehicleVectorParam({0}, {1})", iParameterName, vParameterValue);
         }
 
         public void llSetVelocity(vector vForce, integer iLocal)
@@ -4216,54 +4227,53 @@ namespace LSLEditor
             Verbose("llSetVelocity({0}, {1})", vForce, iLocal);
         }
 
-        // 343
-        public String llSHA1String(String src)
+        public String llSHA1String(String sSource)
         {
-            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(src.ToString());
+            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(sSource.ToString());
             System.Security.Cryptography.SHA1CryptoServiceProvider cryptoTransformSHA1 = new System.Security.Cryptography.SHA1CryptoServiceProvider();
-            string hash = BitConverter.ToString(cryptoTransformSHA1.ComputeHash(buffer)).Replace("-", "");
-            Verbose("llSHA1String(\"{0}\")=\"{1}\"", src, hash);
-            return hash;
+            string sHash = BitConverter.ToString(cryptoTransformSHA1.ComputeHash(buffer)).Replace("-", "");
+            Verbose(@"llSHA1String(""{0"")=""{1}""", sSource, sHash);
+            return sHash;
         }
 
-        public void llShout(integer channel, String text)
+        public void llShout(integer iChannel, String sText)
         {
-            Chat(channel, text, CommunicationType.Shout);
+            Chat(iChannel, sText, CommunicationType.Shout);
         }
 
-        public Float llSin(Float theta)
+        public Float llSin(Float fTheta)
         {
-            double dblA = Math.Sin(theta);
-            Verbose("llSin(" + theta + ")=" + dblA);
+            double dblA = Math.Sin(fTheta);
+			Verbose("llSin({0})={1}", fTheta, dblA);
             return dblA;
         }
 
-        public void llSitTarget(vector offset, rotation rot)
+        public void llSitTarget(vector vOffset, rotation rRotation)
         {
-            Verbose("llSitTarget(" + offset + "," + rot + ")");
+            Verbose("llSitTarget({0}, {1})", vOffset, rRotation);
         }
 
-        public void llSleep(Float sec)
+        public void llSleep(Float fSeconds)
         {
-            Verbose("llSleep(" + sec + ")");
-            System.Threading.Thread.Sleep((int)Math.Round(sec * 1000));
+            Verbose("llSleep({0})", fSeconds);
+            System.Threading.Thread.Sleep((int)Math.Round(fSeconds * 1000));
         }
 
-        public Float llSqrt(Float val)
+        public Float llSqrt(Float fValue)
         {
-            double dblA = Math.Sqrt(val);
-            Verbose("llSqrt(" + val + ")=" + dblA);
+            double dblA = Math.Sqrt(fValue);
+			Verbose("llSqrt({0})={1}", fValue, dblA);
             return dblA;
         }
 
-        public void llStartAnimation(String anim)
+        public void llStartAnimation(String sAnimationName)
         {
-            Verbose("llStartAnimation(" + anim + ")");
+            Verbose(@"llStartAnimation(""{0}"")", sAnimationName);
         }
 
-        public void llStopAnimation(String anim)
+		public void llStopAnimation(String sAnimationName)
         {
-            Verbose("llStopAnimation(" + anim + ")");
+			Verbose(@"llStopAnimation(""{0}"")", sAnimationName);
         }
 
         public void llStopHover()
@@ -4291,108 +4301,110 @@ namespace LSLEditor
             Verbose("llStopSound()");
         }
 
-        public integer llStringLength(String src)
+        public integer llStringLength(String sSource)
         {
-            int intLength = ((string)src).Length;
-            Verbose(@"llStringLength(""{0}"")={1}", src, intLength);
+            int intLength = ((string)sSource).Length;
+            Verbose(@"llStringLength(""{0}"")={1}", sSource, intLength);
             return intLength;
         }
 
-        public String llStringToBase64(String str)
+        public String llStringToBase64(String sText)
         {
-            string result = StringToBase64(str.ToString());
-            Verbose(@"llStringToBase64(""{0}"")=""{1}""", str, result);
-            return result;
+            string sResult = StringToBase64(sText.ToString());
+            Verbose(@"llStringToBase64(""{0}"")=""{1}""", sText, sResult);
+            return sResult;
         }
 
-        public String llStringTrim(String text, integer trim_type)
+        public String llStringTrim(String sText, integer iTrimType)
         {
-            string strResult = text.ToString();
+            string strResult = sText.ToString();
 
-            if ((trim_type & STRING_TRIM_HEAD) != 0)
-                strResult = strResult.TrimStart();
+			if ((iTrimType & STRING_TRIM_HEAD) != 0) {
+				strResult = strResult.TrimStart();
+			}
 
-            if ((trim_type & STRING_TRIM_TAIL) != 0)
-                strResult = strResult.TrimEnd();
+			if ((iTrimType & STRING_TRIM_TAIL) != 0) {
+				strResult = strResult.TrimEnd();
+			}
 
-            Verbose(@"llStringTrim(""{0}"",{1})=""{2}""", text, trim_type, strResult);
+            Verbose(@"llStringTrim(""{0}"", {1})=""{2}""", sText, iTrimType, strResult);
             return strResult;
         }
 
-        public integer llSubStringIndex(String source, String pattern)
+        public integer llSubStringIndex(String sSource, String sPattern)
         {
-            int intIndexOf = ((string)source).IndexOf((string)pattern);
-            Verbose("llSubStringIndex({0}, {1})={2}", source, pattern, intIndexOf);
-            return intIndexOf;
+            int intIndex = ((string)sSource).IndexOf((string)sPattern);
+            Verbose("llSubStringIndex({0}, {1})={2}", sSource, sPattern, intIndex);
+            return intIndex;
         }
 
-        public void llTakeCamera(key avatar)
+        public void llTakeCamera(key kAvatarID)
         {
-            Verbose("llTakeCamera(" + avatar + ")");
+            Verbose("llTakeCamera({0})", kAvatarID);
         }
 
-        public void llTakeControls(integer controls, integer accept, integer pass_on)
+        public void llTakeControls(integer iControls, integer iAcceptFlag, integer iPassOnFlag)
         {
-            Verbose("llTakeControls(" + controls + "," + accept + "," + pass_on + ")");
-            this.host.TakeControls(controls, accept, pass_on);
+            Verbose("llTakeControls({0}, {1}), {2})", iControls, iAcceptFlag, iPassOnFlag);
+            this.host.TakeControls(iControls, iAcceptFlag, iPassOnFlag);
         }
 
-        public Float llTan(Float theta)
+        public Float llTan(Float fTheta)
         {
-            double dblA = Math.Tan(theta);
-            Verbose("llTan(" + theta + ")=" + dblA);
+            double dblA = Math.Tan(fTheta);
+			Verbose("llTan({0})={1}", fTheta, dblA);
             return dblA;
         }
 
-        public integer llTarget(vector position, Float range)
+        public integer llTarget(vector vPosition, Float fRange)
         {
-            Verbose("llTarget(" + position + "," + range + ")");
-            return 0;
+			integer iResult = 0;
+			Verbose("llTarget({0}, {1})={2}", vPosition, fRange, iResult);
+			return iResult;
         }
 
-        public void llTargetOmega(vector axis, Float spinrate, Float gain)
+        public void llTargetOmega(vector vAxis, Float fSpinRate, Float fGain)
         {
-            Verbose("llTargetOmega(" + axis + "," + spinrate + "," + gain + ")");
+            Verbose("llTargetOmega({0}, {1}, {2})", vAxis, fSpinRate, fGain);
         }
 
-        public void llTargetRemove(integer tnumber)
+        public void llTargetRemove(integer iTargetHandle)
         {
-            Verbose("llTargetRemove(" + tnumber + ")");
+            Verbose("llTargetRemove({0})", iTargetHandle);
         }
 
-        public void llTeleportAgent(key AvatarID, string LandmarkName, vector LandingPoint, vector LookAtPoint)
+        public void llTeleportAgent(key kAvatarID, String sLandmarkName, vector vLandingPoint, vector vLookAtPoint)
         {
-            Verbose("llTeleportAgentHome({0}, \"{1}\", {2}, {3})", AvatarID, LandmarkName, LandingPoint, LookAtPoint);
+            Verbose(@"llTeleportAgentHome({0}, ""{1}"", {2}, {3})", kAvatarID, sLandmarkName, vLandingPoint, vLookAtPoint);
         }
 
-        public void llTeleportAgentGlobalCoords(key AvatarID, vector GlobalPosition, vector RegionPosition, vector LookAtPoint)
+        public void llTeleportAgentGlobalCoords(key kAvatarID, vector vGlobalPosition, vector vRegionPosition, vector iLookAtPoint)
         {
-            Verbose("llTeleportAgentHome({0}, {1}, {2}, {3})", AvatarID, GlobalPosition, RegionPosition, LookAtPoint);
+            Verbose("llTeleportAgentHome({0}, {1}, {2}, {3})", kAvatarID, vGlobalPosition, vRegionPosition, iLookAtPoint);
         }
 
-        public void llTeleportAgentHome(key AvatarID)
+        public void llTeleportAgentHome(key kAvatarID)
         {
-            Verbose("llTeleportAgentHome({0})", AvatarID);
+            Verbose("llTeleportAgentHome({0})", kAvatarID);
         }
 
-        // 335
-        public void llTextBox(key avatar, String message, integer chat_channel)
+        public void llTextBox(key kAvatar, String sText, integer iChannel)
         {
-            Verbose("llTextBox({0}, \"{1}\", {2})", avatar, message, chat_channel);
-            host.llTextBox(avatar, message, chat_channel);
+            Verbose(@"llTextBox({0}, ""{1}"", {2})", kAvatar, sText, iChannel);
+            host.llTextBox(kAvatar, sText, iChannel);
         }
 
-        public String llToLower(String src)
+        public String llToLower(String sText)
         {
-            string strTemp = ((string)src).ToLower();
-            Verbose("llToLower(" + src + ")=" + strTemp);
+            string strTemp = ((string)sText).ToLower();
+			Verbose(@"llToLower(""{0}"")=""{1}""", sText, strTemp);
             return strTemp;
         }
 
-        public String llToUpper(String src)
+        public String llToUpper(String sText)
         {
-            string strTemp = ((string)src).ToUpper();
-            Verbose("llToUpper(" + src + ")=" + strTemp);
+            string strTemp = ((string)sText).ToUpper();
+            Verbose(@"llToUpper(""{0}"")=""{1}""", sText, strTemp);
             return strTemp;
         }
 
@@ -4400,24 +4412,24 @@ namespace LSLEditor
         {
             key kID = new key(Guid.NewGuid());
             string strData = kPayee.ToString() + "," + iAmount.ToString();
-            Verbose("llTransferLindenDollars(" + kPayee + "," + iAmount + ")");
+            Verbose("llTransferLindenDollars({0}, {1})", kPayee, iAmount);
             host.ExecuteSecondLife("transaction_result", kID, true, (SecondLife.String)strData);
             return kID;
         }
 
-        public void llTriggerSound(String sound, Float volume)
+        public void llTriggerSound(String sSoundName, Float fVolume)
         {
-            Verbose("llTriggerSound(" + sound + "," + volume + ")");
+            Verbose(@"llTriggerSound(""{0}"", {1})", sSoundName, fVolume);
         }
 
-        public void llTriggerSoundLimited(String sound, Float volume, vector tne, vector bsw)
+        public void llTriggerSoundLimited(String sSoundName, Float fVolume, vector vBoxNE, vector vBoxSW)
         {
-            Verbose("llTriggerSoundLimited(" + sound + "," + volume + "," + tne + "," + bsw + ")");
+            Verbose("llTriggerSoundLimited({0}, {1}, {2}, {3})", sSoundName, fVolume, vBoxNE, vBoxSW);
         }
 
-        public String llUnescapeURL(String url)
+        public String llUnescapeURL(String sURL)
         {
-            byte[] data = Encoding.UTF8.GetBytes(url.ToString());
+            byte[] data = Encoding.UTF8.GetBytes(sURL.ToString());
             List<byte> list = new List<byte>();
             for (int intI = 0; intI < data.Length; intI++)
             {
@@ -4440,68 +4452,70 @@ namespace LSLEditor
             if (intLen < 0)
                 intLen = data.Length;
             string strTmp = Encoding.UTF8.GetString(data, 0, intLen);
-            Verbose(string.Format(@"llUnescapeURL(""{0}"")=""{1}""", url, strTmp));
+            Verbose(string.Format(@"llUnescapeURL(""{0}"")=""{1}""", sURL, strTmp));
             return strTmp;
         }
 
-        public void llUnSit(key id)
+        public void llUnSit(key kAvatarID)
         {
-            Verbose("llUnSit(" + id + ")");
+            Verbose("llUnSit({0})", kAvatarID);
         }
 
-		public void llUpdateCharacter(list Options)
+		public void llUpdateCharacter(list lOptions)
 		{
-			Verbose("llUpdateCharacter({0})", Options);
+			Verbose("llUpdateCharacter({0})", lOptions.ToVerboseString());
 		}
 
-        public Float llVecDist(vector a, vector b)
+        public Float llVecDist(vector vPostionA, vector vPositionB)
         {
-            vector vecValue = new vector(a.x - b.x, a.y - b.y, a.z - b.z);
+            vector vecValue = new vector(vPostionA.x - vPositionB.x, vPostionA.y - vPositionB.y, vPostionA.z - vPositionB.z);
             double dblMag = llVecMag(vecValue);
-            Verbose("llVecDist(" + a + "," + b + ")=" + dblMag);
+			Verbose("llVecDist({0}, {1})={2}", vPostionA, vPositionB, dblMag);
             return dblMag;
         }
 
-        public Float llVecMag(vector vec)
+        public Float llVecMag(vector vVector)
         {
-            double dblValue = Math.Sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
-            Verbose("llVecMag(" + vec + ")=" + dblValue);
+            double dblValue = Math.Sqrt(vVector.x * vVector.x + vVector.y * vVector.y + vVector.z * vVector.z);
+            Verbose("llVecMag({0})={1}", vVector, dblValue);
             return dblValue;
         }
 
-        public vector llVecNorm(vector vec)
+        public vector llVecNorm(vector vVector)
         {
-            double dblMag = llVecMag(vec);
-            vector vecValue = new vector(vec.x / dblMag, vec.y / dblMag, vec.z / dblMag);
-            Verbose("llVecNorm(" + vec + ")=" + vecValue);
+            double dblMag = llVecMag(vVector);
+            vector vecValue = new vector(vVector.x / dblMag, vVector.y / dblMag, vVector.z / dblMag);
+			Verbose("llVecNorm({0})={1}", vVector, vecValue);
             return vecValue;
         }
 
-        public void llVolumeDetect(integer detect)
+        public void llVolumeDetect(integer iDetectFlag)
         {
-            Verbose("llVolumeDetect(" + detect + ")");
+            Verbose("llVolumeDetect({0})", iDetectFlag);
         }
 
-		public void llWanderWithin(vector Origin, vector Distance, list Options)
+		public void llWanderWithin(vector vOrigin, vector vDistance, list lOptions)
 		{
-			Verbose("llWanderWithin({0}, {1}, {2})", Origin, Distance, Options);
+			Verbose("llWanderWithin({0}, {1}, {2})", vOrigin, vDistance, lOptions.ToVerboseString());
 		}
 
-        public Float llWater(vector offset)
+        public Float llWater(vector vOffset)
         {
-            Verbose("llWater(" + offset + ")");
-            return 0F;
+			Float fWaterLevel = 0.0F;
+			Verbose("llWater({0})={1}", vOffset, fWaterLevel);
+			return fWaterLevel;
         }
 
-        public void llWhisper(integer channel, String text)
+        public void llWhisper(integer iChannel, String sText)
         {
-            Chat(channel, text, CommunicationType.Whisper);
+            Chat(iChannel, sText, CommunicationType.Whisper);
         }
 
-        public vector llWind(vector offset)
+        public vector llWind(vector vOffset)
         {
-            Verbose("llWind(" + offset + ")");
-            return vector.ZERO_VECTOR;
+			vector vDirection = vector.ZERO_VECTOR;
+			Verbose("llWind({0})={1}", vOffset, vDirection);
+			return vDirection;
         }
 
 		public String llXorBase64(String sText1, String sText2)
