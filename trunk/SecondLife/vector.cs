@@ -232,7 +232,7 @@ namespace LSLEditor
 				} else if (Math.Abs(v1.z - v2.z) > EqualityTolerence) {
 					bResult = false;
 				}
-				return true;
+				return bResult;
 			}
 
 			public static bool operator !=(vector v1, vector v2)
