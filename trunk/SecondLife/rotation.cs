@@ -56,8 +56,7 @@ namespace LSLEditor
 			{
 				get
 				{
-					if (m_x == null)
-						m_x = (Float)0;
+					if (m_x == null) m_x = (Float)0;
 					return (Float)m_x;
 				}
 				set
@@ -70,8 +69,7 @@ namespace LSLEditor
 			{
 				get
 				{
-					if (m_y == null)
-						m_y = (Float)0;
+					if (m_y == null) m_y = (Float)0;
 					return (Float)m_y;
 				}
 				set
@@ -84,8 +82,7 @@ namespace LSLEditor
 			{
 				get
 				{
-					if (m_z == null)
-						m_z = (Float)0;
+					if (m_z == null) m_z = (Float)0;
 					return (Float)m_z;
 				}
 				set
@@ -98,8 +95,7 @@ namespace LSLEditor
 			{
 				get
 				{
-					if (m_s == null)
-						m_s = (Float)0;
+					if (m_s == null) m_s = (Float)0;
 					return (Float)m_s;
 				}
 				set
@@ -137,8 +133,7 @@ namespace LSLEditor
 					RegexOptions.IgnorePatternWhitespace |
 					RegexOptions.Compiled);
 				Match m = regex.Match(a);
-				if (m.Success)
-				{
+				if (m.Success) {
 					this.m_x = new Float(m.Groups["x"].Value);
 					this.m_y = new Float(m.Groups["y"].Value);
 					this.m_z = new Float(m.Groups["z"].Value);
@@ -158,10 +153,11 @@ namespace LSLEditor
 
 			public static explicit operator String(rotation rot)
 			{
-				if ((object)rot == null)
+				if ((object)rot == null) {
 					return ZERO_ROTATION.ToString();
-				else
+				} else {
 					return rot.ToString();
+				}
 			}
 
 			// 23 feb 2008
@@ -220,19 +216,19 @@ namespace LSLEditor
 
 			public static bool operator ==(rotation r1, rotation r2)
 			{
-				if ((object)r1 == null)
-					r1 = ZERO_ROTATION;
-				if ((object)r2 == null)
-					r2 = ZERO_ROTATION;
-				if (Math.Abs(r1.x - r2.x) > EqualityTolerence)
-					return false;
-				if (Math.Abs(r1.y - r2.y) > EqualityTolerence)
-					return false;
-				if (Math.Abs(r1.z - r2.z) > EqualityTolerence)
-					return false;
-				if (Math.Abs(r1.s - r2.s) > EqualityTolerence)
-					return false;
-				return true;
+				bool bReturn = true;
+				if ((object)r1 == null) r1 = ZERO_ROTATION;
+				if ((object)r2 == null) r2 = ZERO_ROTATION;
+				if (Math.Abs(r1.x - r2.x) > EqualityTolerence) {
+					bReturn = false;
+				} else if (Math.Abs(r1.y - r2.y) > EqualityTolerence) {
+					bReturn = false;
+				} else if (Math.Abs(r1.z - r2.z) > EqualityTolerence) {
+					bReturn = false;
+				} else if (Math.Abs(r1.s - r2.s) > EqualityTolerence) {
+					bReturn = false;
+				}
+				return bReturn;
 			}
 
 			public static bool operator !=(rotation r, rotation s)
@@ -242,19 +238,23 @@ namespace LSLEditor
 
 			public static bool operator true(rotation r)
 			{
-				if ((object)r == null)
+				if ((object)r == null) {
 					return false;
-				if (r.x == 0 && r.y == 0 && r.z == 0 && r.s == 1)
+				}
+				if (r.x == 0 && r.y == 0 && r.z == 0 && r.s == 1) {
 					return false;
+				}
 				return true;
 			}
 
 			public static bool operator false(rotation r)
 			{
-				if ((object)r == null)
+				if ((object)r == null) {
 					return true;
-				if (r.x == 0 && r.y == 0 && r.z == 0 && r.s == 1)
+				}
+				if (r.x == 0 && r.y == 0 && r.z == 0 && r.s == 1) {
 					return true;
+				}
 				return false;
 			}
 
@@ -266,12 +266,9 @@ namespace LSLEditor
 
 			public override bool Equals(object obj)
 			{
-				try
-				{
+				try {
 					return (this == (rotation)obj);
-				}
-				catch
-				{
+				} catch {
 					return false;
 				}
 			}

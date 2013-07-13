@@ -202,11 +202,11 @@ namespace LSLEditor
 				if (strLine == null)
 					break;
 				
-                int intSplit = strLine.IndexOf("=");
+				int intSplit = strLine.IndexOf("=");
 				if (intSplit < 0)
 					continue;
 				
-                string strName = strLine.Substring(0, intSplit);
+				string strName = strLine.Substring(0, intSplit);
 				string strValue = strLine.Substring(intSplit + 1);
 
 				//All hashes are of the uncompressed file. However, different archives may contain different versions.
@@ -224,7 +224,7 @@ namespace LSLEditor
 					case "BZipUrl":
 						bzip.uri = strValue;
 						break;
-                    case "GZipVersion":
+					case "GZipVersion":
 						gzip = new versionInfo(strValue);
 						break;
 					case "GZipHash":
@@ -242,7 +242,7 @@ namespace LSLEditor
 					case "ZipUrl":
 						wzip.uri = strValue;
 						break;
-                    case "HelpHash":
+					case "HelpHash":
 						strHelpHashWeb = strValue;
 						break;
 					case "HelpUrl2":

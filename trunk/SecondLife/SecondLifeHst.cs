@@ -66,17 +66,17 @@ namespace LSLEditor
 
 	public class SecondLifeHostMessageLinkedEventArgs : EventArgs
 	{
-		public SecondLife.integer linknum;
-		public SecondLife.integer num;
-		public SecondLife.String str;
-		public SecondLife.key id;
+		public SecondLife.integer iLinkIndex;
+		public SecondLife.integer iNumber;
+		public SecondLife.String sText;
+		public SecondLife.key kID;
 
-		public SecondLifeHostMessageLinkedEventArgs(SecondLife.integer linknum, SecondLife.integer num, SecondLife.String str, SecondLife.key id)
+		public SecondLifeHostMessageLinkedEventArgs(SecondLife.integer iLinkIndex, SecondLife.integer iNumber, SecondLife.String sText, SecondLife.key kID)
 		{
-			this.linknum = linknum;
-			this.num = num;
-			this.str = str;
-			this.id = id;
+			this.iLinkIndex = iLinkIndex;
+			this.iNumber = iNumber;
+			this.sText = sText;
+			this.kID = kID;
 		}
 	}
 
@@ -179,12 +179,10 @@ namespace LSLEditor
 
 		private void StateWatch()
 		{
-			while (true)
-			{
+			while (true) {
 				this.StateChanged.WaitOne();
 				this.taskQueue.Start(); // is implicit Stop() old Queue
-				if (this.CurrentStateName != this.NewStateName)
-				{
+				if (this.CurrentStateName != this.NewStateName) {
 					this.CurrentStateName = this.NewStateName;
 					ExecuteSecondLife("state_exit");
 
@@ -196,56 +194,55 @@ namespace LSLEditor
 
 		public void State(string strStateName, bool blnForce)
 		{
-			if (this.CompiledAssembly == null)
-				return;
-			if (blnForce)
-				this.CurrentStateName = "";
-			this.NewStateName = strStateName;
-			this.StateChanged.Set();
+			if (this.CompiledAssembly != null) {
+				if (blnForce) {
+					this.CurrentStateName = "";
+				}
+				this.NewStateName = strStateName;
+				this.StateChanged.Set();
+			}
 		}
 
 		private void SetState()
 		{
-			if (CompiledAssembly == null)
-				return;
-			secondLife = CompiledAssembly.CreateInstance("LSLEditor.State_" + CurrentStateName) as SecondLife;
+			if (CompiledAssembly != null) {
+				secondLife = CompiledAssembly.CreateInstance("LSLEditor.State_" + CurrentStateName) as SecondLife;
 
-			if (secondLife == null)
-			{
-				MessageBox.Show("State " + CurrentStateName+" does not exist!");
-				return;
+				if (secondLife == null) {
+					MessageBox.Show("State " + CurrentStateName + " does not exist!");
+					return;
+				}
+
+				ListenFilterList = new List<ListenFilter>();
+
+				LinkList = new List<Link>();
+
+				// Make friends
+				secondLife.host = this;
+
+				// Update runtime userinterface by calling event handler
+				if (OnStateChange != null) {
+					OnStateChange(this, new SecondLifeHostEventArgs(CurrentStateName));
+				}
+
+				ExecuteSecondLife("state_entry");
 			}
-
-			ListenFilterList = new List<ListenFilter>();
-
-			LinkList = new List<Link>();
-
-			// Make friends
-			secondLife.host = this;
-
-			// Update runtime userinterface by calling event handler
-			if (OnStateChange != null)
-				OnStateChange(this, new SecondLifeHostEventArgs(CurrentStateName));
-
-			ExecuteSecondLife("state_entry");
 		}
 
 		public string GetArgumentsFromMethod(string strName)
 		{
-			if (this.secondLife == null)
-				return "";
-			MethodInfo mi = secondLife.GetType().GetMethod(strName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-			if (mi == null)
-				return "";
-
-			int intI = 0;
 			string strArgs = "";
-			foreach (ParameterInfo pi in mi.GetParameters())
-			{
-				if (intI > 0)
-					strArgs += ",";
-				strArgs += pi.ParameterType.ToString() + " " + pi.Name;
-				intI++;
+			if (this.secondLife != null) {
+				MethodInfo mi = secondLife.GetType().GetMethod(strName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+				if (mi != null) {
+					int intI = 0;
+					foreach (ParameterInfo pi in mi.GetParameters()) {
+						if (intI > 0)
+							strArgs += ",";
+						strArgs += pi.ParameterType.ToString() + " " + pi.Name;
+						intI++;
+					}
+				}
 			}
 			return strArgs;
 		}
@@ -256,10 +253,8 @@ namespace LSLEditor
 			sb.Append("*** ");
 			sb.Append(strEventName);
 			sb.Append('(');
-			for (int intI = 0; intI < args.Length; intI++)
-			{
-				if (intI > 0)
-					sb.Append(',');
+			for (int intI = 0; intI < args.Length; intI++) {
+				if (intI > 0) sb.Append(',');
 				sb.Append(args[intI].ToString());
 			}
 			sb.Append(")");
@@ -268,21 +263,18 @@ namespace LSLEditor
 
 		public void ExecuteSecondLife(string strName, params object[] args)
 		{
-			if (secondLife == null)
-				return;
+			if (secondLife != null) {
+				VerboseEvent(strName, args);
 
-			VerboseEvent(strName, args);
-
-			this.taskQueue.Invoke(secondLife, strName, args);
+				this.taskQueue.Invoke(secondLife, strName, args);
+			}
 		}
 
 		public ArrayList GetEvents()
 		{
 			ArrayList ar = new ArrayList();
-			if (secondLife != null)
-			{
-				foreach (MethodInfo mi in secondLife.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
-				{
+			if (secondLife != null) {
+				foreach (MethodInfo mi in secondLife.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)) {
 					ar.Add(mi.Name);
 				}
 			}
@@ -292,17 +284,18 @@ namespace LSLEditor
 
 		public void Reset()
 		{
-			if (OnReset != null)
+			if (OnReset != null) {
 				OnReset(this, new EventArgs());
+			}
 		}
 
 		public void Die()
 		{
-			if (OnDie != null)
+			if (OnDie != null) {
 				OnDie(this, new EventArgs());
+			}
 
-			if (secondLife != null)
-			{
+			if (secondLife != null) {
 				// stop all timers
 				this.timer.Stop();
 				this.sensor_timer.Stop();
@@ -313,26 +306,21 @@ namespace LSLEditor
 
 				this.secondLife = null;
 			}
-
 		}
 
 		public void Dispose()
 		{
-			if (taskQueue != null)
-			{
+			if (taskQueue != null) {
 				this.taskQueue.Stop();
 				this.taskQueue.Dispose();
 				this.taskQueue = null;
 			}
-			if (listXmlRpc != null)
-			{
-				foreach (XMLRPC xmlRpc in listXmlRpc)
-				{
+			if (listXmlRpc != null) {
+				foreach (XMLRPC xmlRpc in listXmlRpc) {
 					xmlRpc.CloseChannel();
 				}
 			}
-			if (secondLife != null)
-			{
+			if (secondLife != null) {
 				this.timer.Stop();
 				this.sensor_timer.Stop();
 				this.mainForm = null;
@@ -364,10 +352,8 @@ namespace LSLEditor
 
 		public void llBreakLink(int linknum)
 		{
-			foreach (Link link in this.LinkList)
-			{
-				if (link.number == linknum)
-				{
+			foreach (Link link in this.LinkList) {
+				if (link.number == linknum) {
 					this.LinkList.Remove(link);
 					break;
 				}
@@ -381,8 +367,7 @@ namespace LSLEditor
 		public string[] GetListenChannels() // for GroupboxEvent
 		{
 			List<string> list = new List<string>();
-			foreach (ListenFilter lf in ListenFilterList)
-			{
+			foreach (ListenFilter lf in ListenFilterList) {
 				list.Add(lf.channel.ToString());
 			}
 			return list.ToArray();
@@ -407,11 +392,9 @@ namespace LSLEditor
 
 		public void llListenControl(int number, int active)
 		{
-			for (int intI = 0; intI < ListenFilterList.Count; intI++)
-			{
+			for (int intI = 0; intI < ListenFilterList.Count; intI++) {
 				ListenFilter lf = ListenFilterList[intI];
-				if (lf.GetHashCode() == number)
-				{
+				if (lf.GetHashCode() == number) {
 					lf.active = (active == 1);
 					ListenFilterList[intI] = lf;
 					break;
@@ -421,11 +404,9 @@ namespace LSLEditor
 
 		public void llListenRemove(int intHandle)
 		{
-			for (int intI = 0; intI < ListenFilterList.Count; intI++)
-			{
+			for (int intI = 0; intI < ListenFilterList.Count; intI++) {
 				ListenFilter lf = ListenFilterList[intI];
-				if (lf.GetHashCode() == intHandle)
-				{
+				if (lf.GetHashCode() == intHandle) {
 					ListenFilterList.RemoveAt(intI);
 					break;
 				}
@@ -450,18 +431,12 @@ namespace LSLEditor
 		{
 			ListenFilter lfToCheck = new ListenFilter(channel, name, id, message);
 
-			foreach (ListenFilter lf in ListenFilterList)
-			{
-				if (!lf.active)
-					continue;
-				if (lf.channel != lfToCheck.channel)
-					continue;
-				if (lf.name != "" && lf.name != lfToCheck.name)
-					continue;
-				if (lf.id != Guid.Empty.ToString() && lf.id!="" && lf.id != lfToCheck.id)
-					continue;
-				if (lf.message != "" && lf.message != lfToCheck.message)
-					continue;
+			foreach (ListenFilter lf in ListenFilterList) {
+				if (!lf.active) continue;
+				if (lf.channel != lfToCheck.channel) continue;
+				if (lf.name != "" && lf.name != lfToCheck.name) continue;
+				if (lf.id != Guid.Empty.ToString() && lf.id != "" && lf.id != lfToCheck.id) continue;
+				if (lf.message != "" && lf.message != lfToCheck.message) continue;
 				return true;
 			}
 			return false;
@@ -470,10 +445,11 @@ namespace LSLEditor
 		// sink listen
 		public void Listen(SecondLifeHostChatEventArgs e)
 		{
-			if (secondLife == null)
-				return;
-			if (CheckListenFilter(e.channel, e.name, e.id, e.message))
-				ExecuteSecondLife("listen", e.channel, e.name, e.id, e.message);
+			if (secondLife != null) {
+				if (CheckListenFilter(e.channel, e.name, e.id, e.message)) {
+					ExecuteSecondLife("listen", e.channel, e.name, e.id, e.message);
+				}
+			}
 		}
 
 		#endregion
@@ -481,98 +457,99 @@ namespace LSLEditor
 		// raise
 		public void Chat(object sender, int channel, string name, SecondLife.key id, string message, CommunicationType how)
 		{
-			if (OnChat != null)
+			if (OnChat != null) {
 				OnChat(sender, new SecondLifeHostChatEventArgs(channel, name, id, message, how));
+			}
 		}
 
 		// raise
-		public void MessageLinked(SecondLife.integer linknum, SecondLife.integer num, SecondLife.String str, SecondLife.key id)
+		public void MessageLinked(SecondLife.integer iLlinkIndex, SecondLife.integer iNumber, SecondLife.String sText, SecondLife.key kID)
 		{
-			if (OnMessageLinked != null)
-				OnMessageLinked(this, new SecondLifeHostMessageLinkedEventArgs(linknum, num, str, id));
+			if (OnMessageLinked != null) {
+				OnMessageLinked(this, new SecondLifeHostMessageLinkedEventArgs(iLlinkIndex, iNumber, sText, kID));
+			}
 		}
 
 		// sink
 		public void LinkMessage(SecondLifeHostMessageLinkedEventArgs e)
 		{
-			ExecuteSecondLife("link_message", e.linknum, e.num, e.str, e.id);
+			ExecuteSecondLife("link_message", e.iLinkIndex, e.iNumber, e.sText, e.kID);
 		}
 
 
 		public SecondLife.key Http(string Url, SecondLife.list Parameters, string Body)
 		{
-			if (secondLife == null)
-				return SecondLife.NULL_KEY;
+			SecondLife.key Key = SecondLife.NULL_KEY;
+			if (secondLife != null) {
+				System.Net.WebProxy proxy = null;
+				if (Properties.Settings.Default.ProxyServer != "") {
+					proxy = new System.Net.WebProxy(Properties.Settings.Default.ProxyServer.Replace("http://", ""));
+				}
 
-			System.Net.WebProxy proxy = null;
-			if (Properties.Settings.Default.ProxyServer != "")
-				proxy = new System.Net.WebProxy(Properties.Settings.Default.ProxyServer.Replace("http://", ""));
+				if (Properties.Settings.Default.ProxyUserid != "" && proxy != null) {
+					proxy.Credentials = new System.Net.NetworkCredential(Properties.Settings.Default.ProxyUserid, Properties.Settings.Default.ProxyPassword);
+				}
 
-			if (Properties.Settings.Default.ProxyUserid != "" && proxy != null)
-				proxy.Credentials = new System.Net.NetworkCredential(Properties.Settings.Default.ProxyUserid, Properties.Settings.Default.ProxyPassword);
-
-			SecondLife.key Key = new SecondLife.key(Guid.NewGuid());
-			//WebRequestClass a = new WebRequestClass(proxy, secondLife, Url, Parameters, Body, Key);
-			try
-			{
-				HTTPRequest.Request(proxy, secondLife, Url, Parameters, Body, Key);
-			}
-			catch(Exception exception)
-			{
-				VerboseMessage(exception.Message);
+				Key = new SecondLife.key(Guid.NewGuid());
+				//WebRequestClass a = new WebRequestClass(proxy, secondLife, Url, Parameters, Body, Key);
+				try {
+					HTTPRequest.Request(proxy, secondLife, Url, Parameters, Body, Key);
+				} catch (Exception exception) {
+					VerboseMessage(exception.Message);
+				}
 			}
 			return Key;
 		}
 
 		public void Email(string To, string Subject, string Body)
 		{
-			if (secondLife == null)
-				return;
+			if (secondLife != null) {
+				SmtpClient client = new SmtpClient();
+				client.SmtpServer = Properties.Settings.Default.EmailServer;
 
-			SmtpClient client = new SmtpClient();
-			client.SmtpServer = Properties.Settings.Default.EmailServer;
+				string strName = GetObjectName();
+				string strObjectName = string.Format("Object-Name: {0}", strName);
 
-			string strName = GetObjectName();
-			string strObjectName = string.Format("Object-Name: {0}", strName);
+				SecondLife.vector RegionCorner = secondLife.llGetRegionCorner();
+				string strRegionName = secondLife.llGetRegionName();
+				string strRegion = string.Format("Region: {0} ({1},{2})", strRegionName, RegionCorner.x, RegionCorner.y);
 
-			SecondLife.vector RegionCorner = secondLife.llGetRegionCorner();
-			string strRegionName = secondLife.llGetRegionName();
-			string strRegion = string.Format("Region: {0} ({1},{2})", strRegionName, RegionCorner.x, RegionCorner.y);
+				SecondLife.vector pos = secondLife.llGetPos();
+				string strPosition = string.Format("Local-Position: ({0},{1},{2})", (int)pos.x, (int)pos.y, (int)pos.z);
 
-			SecondLife.vector pos = secondLife.llGetPos();
-			string strPosition = string.Format("Local-Position: ({0},{1},{2})", (int)pos.x, (int)pos.y, (int)pos.z);
+				string strPrefix = strObjectName + "\r\n";
+				strPrefix += strRegion + "\r\n";
+				strPrefix += strPosition + "\r\n\r\n";
 
-			string strPrefix = strObjectName + "\r\n";
-			strPrefix += strRegion + "\r\n";
-			strPrefix += strPosition + "\r\n\r\n";
+				MailMessage msg = new MailMessage();
+				msg.To = To;
+				msg.Subject = Subject;
+				msg.Body = strPrefix + Body;
+				msg.From = Properties.Settings.Default.EmailAddress;
+				msg.Headers.Add("Reply-to", msg.From);
 
-			MailMessage msg = new MailMessage();
-			msg.To = To;
-			msg.Subject = Subject;
-			msg.Body = strPrefix + Body;
-			msg.From = Properties.Settings.Default.EmailAddress;
-			msg.Headers.Add("Reply-to", msg.From);
+				//MailAttachment myAttachment = new MailAttachment(strAttachmentFile);
+				//msg.Attachments.Add(myAttachment);
 
-			//MailAttachment myAttachment = new MailAttachment(strAttachmentFile);
-			//msg.Attachments.Add(myAttachment);
-
-			VerboseMessage(client.Send(msg));
+				VerboseMessage(client.Send(msg));
+			}
 		}
 
 		public void VerboseMessage(string Message)
 		{
-			if (OnVerboseMessage != null)
+			if (OnVerboseMessage != null) {
 				OnVerboseMessage(this, new SecondLifeHostEventArgs(Message));
+			}
 		}
 
 		delegate void ShowDialogDelegate(SecondLifeHost host,
 			SecondLife.String objectName,
 			SecondLife.key k,
 			SecondLife.String name,
-			SecondLife.String message, 
+			SecondLife.String message,
 			SecondLife.list buttons,
 			SecondLife.integer channel);
-		private void Dialog(SecondLifeHost host, 
+		private void Dialog(SecondLifeHost host,
 			SecondLife.String objectName,
 			SecondLife.key k,
 			SecondLife.String name,
@@ -589,68 +566,62 @@ namespace LSLEditor
 
 		public void llDialog(SecondLife.key avatar, SecondLife.String message, SecondLife.list buttons, SecondLife.integer channel)
 		{
-			if (message.ToString().Length >= 512)
-			{
+			if (message.ToString().Length >= 512) {
 				VerboseMessage("llDialog: message too long, must be less than 512 characters");
 				return;
 			}
-			if (message.ToString().Length == 0)
-			{
+			if (message.ToString().Length == 0) {
 				VerboseMessage("llDialog: must supply a message");
 				return;
 			}
-			for (int intI = 0; intI < buttons.Count; intI++)
-			{
-				if (buttons[intI].ToString() == "")
-				{
+			for (int intI = 0; intI < buttons.Count; intI++) {
+				if (buttons[intI].ToString() == "") {
 					VerboseMessage("llDialog: all buttons must have label strings");
 					return;
 				}
-				if (buttons[intI].ToString().Length > 24)
-				{
+				if (buttons[intI].ToString().Length > 24) {
 					VerboseMessage("llDialog:Button Labels can not have more than 24 characters");
 					return;
 				}
 			}
 
-			if (buttons.Count == 0)
+			if (buttons.Count == 0) {
 				buttons = new SecondLife.list(new string[] { "OK" });
+			}
 
 			this.mainForm.Invoke(new ShowDialogDelegate(Dialog), this, (SecondLife.String)GetObjectName(), secondLife.llGetOwner(), (SecondLife.String)Properties.Settings.Default.AvatarName, message, buttons, channel);
 		}
-        delegate void ShowTextBoxDelegate(SecondLifeHost host,
-            SecondLife.String objectName,
-            SecondLife.key k,
-            SecondLife.String name,
-            SecondLife.String message,
-            SecondLife.integer channel);
-        private void TextBox(SecondLifeHost host,
-            SecondLife.String objectName,
-            SecondLife.key k,
-            SecondLife.String name,
-            SecondLife.String message,
-            SecondLife.integer channel)
-        {
-            llTextBoxForm TextBoxForm = new llTextBoxForm(host, objectName, k, name, message, channel);
-            TextBoxForm.Left = this.mainForm.Left + this.mainForm.Width / 2 - TextBoxForm.Width / 2;
-            TextBoxForm.Top = this.mainForm.Top + this.mainForm.Height / 2 - TextBoxForm.Height / 2;
-            TextBoxForm.Show(this.mainForm);
-            this.mainForm.llTextBoxForms.Add(TextBoxForm);
-        }
-        public void llTextBox(SecondLife.key avatar, SecondLife.String message, SecondLife.integer channel)
-        {
-            if (message.ToString().Length >= 512)
-            {
-                VerboseMessage("llTextBox: message too long, must be less than 512 characters");
-                return;
-            }
-            if (message.ToString().Length == 0)
-            {
-                VerboseMessage("llTextBos: must supply a message");
-                return;
-            }
-            this.mainForm.Invoke(new ShowTextBoxDelegate(TextBox), this, (SecondLife.String)GetObjectName(), secondLife.llGetOwner(), (SecondLife.String)Properties.Settings.Default.AvatarName, message, channel);
-        }
+		delegate void ShowTextBoxDelegate(SecondLifeHost host,
+			SecondLife.String objectName,
+			SecondLife.key k,
+			SecondLife.String name,
+			SecondLife.String message,
+			SecondLife.integer channel);
+		private void TextBox(SecondLifeHost host,
+			SecondLife.String objectName,
+			SecondLife.key k,
+			SecondLife.String name,
+			SecondLife.String message,
+			SecondLife.integer channel)
+		{
+			llTextBoxForm TextBoxForm = new llTextBoxForm(host, objectName, k, name, message, channel);
+			TextBoxForm.Left = this.mainForm.Left + this.mainForm.Width / 2 - TextBoxForm.Width / 2;
+			TextBoxForm.Top = this.mainForm.Top + this.mainForm.Height / 2 - TextBoxForm.Height / 2;
+			TextBoxForm.Show(this.mainForm);
+			this.mainForm.llTextBoxForms.Add(TextBoxForm);
+		}
+		public void llTextBox(SecondLife.key avatar, SecondLife.String message, SecondLife.integer channel)
+		{
+			if (message.ToString().Length >= 512) {
+				VerboseMessage("llTextBox: message too long, must be less than 512 characters");
+				return;
+			}
+			if (message.ToString().Length == 0) {
+				VerboseMessage("llTextBos: must supply a message");
+				return;
+			}
+			this.mainForm.Invoke(new ShowTextBoxDelegate(TextBox), this, (SecondLife.String)GetObjectName(), secondLife.llGetOwner(), (SecondLife.String)Properties.Settings.Default.AvatarName, message, channel);
+		}
 
 		public void SetPermissions(SecondLife.integer intPermissions)
 		{
@@ -681,12 +652,12 @@ namespace LSLEditor
 
 		public void llRequestPermissions(SecondLife.key agent, SecondLife.integer intPermissions)
 		{
-			this.mainForm.Invoke(new RequestPermissionsDelegate(RequestPermissions), 
+			this.mainForm.Invoke(new RequestPermissionsDelegate(RequestPermissions),
 				this,
-				(SecondLife.String)GetObjectName(), 
-				secondLife.llGetOwner(), 
-				(SecondLife.String)Properties.Settings.Default.AvatarName, 
-				agent, 
+				(SecondLife.String)GetObjectName(),
+				secondLife.llGetOwner(),
+				(SecondLife.String)Properties.Settings.Default.AvatarName,
+				agent,
 				intPermissions);
 		}
 
@@ -694,26 +665,22 @@ namespace LSLEditor
 
 		public void SendControl(Keys keys)
 		{
-			if (m_intControls < 0)
-				return;
-			if (this.secondLife == null)
-				return;
+			if (m_intControls >= 0 || this.secondLife != null) {
+				// check againt m_intControls TODO!!!!!
+				int held = 0;
+				int change = 0;
 
-			// check againt m_intControls TODO!!!!!
+				if ((keys & Keys.Up) == Keys.Up)
+					held |= SecondLife.CONTROL_UP;
+				if ((keys & Keys.Down) == Keys.Down)
+					held |= SecondLife.CONTROL_DOWN;
+				if ((keys & Keys.Left) == Keys.Left)
+					held |= SecondLife.CONTROL_LEFT;
+				if ((keys & Keys.Right) == Keys.Right)
+					held |= SecondLife.CONTROL_RIGHT;
 
-			int held = 0;
-			int change = 0;
-
-			if ((keys & Keys.Up) == Keys.Up)
-				held |= SecondLife.CONTROL_UP;
-			if ((keys & Keys.Down) == Keys.Down)
-				held |= SecondLife.CONTROL_DOWN;
-			if ((keys & Keys.Left) == Keys.Left)
-				held |= SecondLife.CONTROL_LEFT;
-			if ((keys & Keys.Right) == Keys.Right)
-				held |= SecondLife.CONTROL_RIGHT;
-
-			ExecuteSecondLife("control", (SecondLife.key)Properties.Settings.Default.AvatarKey, (SecondLife.integer)held, (SecondLife.integer)change);
+				ExecuteSecondLife("control", (SecondLife.key)Properties.Settings.Default.AvatarKey, (SecondLife.integer)held, (SecondLife.integer)change);
+			}
 		}
 
 		public void TakeControls(int intControls, int accept, int pass_on)
@@ -732,11 +699,9 @@ namespace LSLEditor
 			StreamReader sr = new StreamReader(strPath);
 			int intI = 0;
 			string strData = SecondLife.EOF;
-			while (!sr.EndOfStream)
-			{
+			while (!sr.EndOfStream) {
 				string strLine = sr.ReadLine();
-				if (intI == line)
-				{
+				if (intI == line) {
 					strData = strLine;
 					break;
 				}
@@ -749,10 +714,10 @@ namespace LSLEditor
 		public SecondLife.key GetNotecardLine(string name, int line)
 		{
 			string strPath = mainForm.SolutionExplorer.GetPath(this.guid, name);
-			if(strPath == string.Empty)
+			if (strPath == string.Empty) {
 				strPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), name);
-			if (!File.Exists(strPath))
-			{
+			}
+			if (!File.Exists(strPath)) {
 				VerboseMessage("Notecard: " + strPath + " not found");
 				taskQueue.Invoke(secondLife, "llSay", (SecondLife.integer)0, (SecondLife.String)("Couldn't find notecard " + name));
 				return SecondLife.NULL_KEY;
@@ -767,8 +732,7 @@ namespace LSLEditor
 		{
 			StreamReader sr = new StreamReader(strPath);
 			int intI = 0;
-			while (!sr.EndOfStream)
-			{
+			while (!sr.EndOfStream) {
 				string strLine = sr.ReadLine();
 				intI++;
 			}
@@ -780,11 +744,11 @@ namespace LSLEditor
 		public SecondLife.key GetNumberOfNotecardLines(string name)
 		{
 			string strPath = mainForm.SolutionExplorer.GetPath(this.guid, name);
-			if (strPath == string.Empty)
+			if (strPath == string.Empty) {
 				strPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), name);
+			}
 
-			if (!File.Exists(strPath))
-			{
+			if (!File.Exists(strPath)) {
 				VerboseMessage("Notecard: " + strPath + " not found");
 				taskQueue.Invoke(secondLife, "llSay", (SecondLife.integer)0, (SecondLife.String)("Couldn't find notecard " + name));
 				return SecondLife.NULL_KEY;
@@ -800,8 +764,9 @@ namespace LSLEditor
 		private List<XMLRPC> listXmlRpc;
 		public void llOpenRemoteDataChannel()
 		{
-			if (listXmlRpc == null)
+			if (listXmlRpc == null) {
 				listXmlRpc = new List<XMLRPC>();
+			}
 			XMLRPC xmlRpc = new XMLRPC();
 			xmlRpc.OnRequest += new XMLRPC.RequestEventHandler(xmlRpc_OnRequest);
 			xmlRpc.OpenChannel(listXmlRpc.Count);
@@ -830,27 +795,23 @@ namespace LSLEditor
 
 		public void llCloseRemoteDataChannel(SecondLife.key channel)
 		{
-			if (listXmlRpc == null)
-				return;
-			foreach (XMLRPC xmlRpc in listXmlRpc)
-			{
-				if (xmlRpc.guid == channel.guid)
-				{
-					xmlRpc.CloseChannel();
-					break;
+			if (listXmlRpc != null) {
+				foreach (XMLRPC xmlRpc in listXmlRpc) {
+					if (xmlRpc.guid == channel.guid) {
+						xmlRpc.CloseChannel();
+						break;
+					}
 				}
 			}
 		}
 		public void llRemoteDataReply(SecondLife.key channel, SecondLife.key message_id, string sdata, int idata)
 		{
-			if (listXmlRpc == null)
-				return;
-			foreach (XMLRPC xmlRpc in listXmlRpc)
-			{
-				if (xmlRpc.guid == channel.guid)
-				{
-					xmlRpc.RemoteDataReply(channel.guid, message_id.guid, sdata, idata);
-					break;
+			if (listXmlRpc != null) {
+				foreach (XMLRPC xmlRpc in listXmlRpc) {
+					if (xmlRpc.guid == channel.guid) {
+						xmlRpc.RemoteDataReply(channel.guid, message_id.guid, sdata, idata);
+						break;
+					}
 				}
 			}
 		}
@@ -880,10 +841,7 @@ namespace LSLEditor
 		public string GetObjectName(Guid guid)
 		{
 			string strObjectName = mainForm.SolutionExplorer.GetObjectName(guid);
-			if (strObjectName != string.Empty)
-				return strObjectName;
-			else
-				return this.ObjectName;
+			return strObjectName != string.Empty ? strObjectName : this.ObjectName;
 		}
 
 		public string GetObjectName()
@@ -893,17 +851,19 @@ namespace LSLEditor
 
 		public void SetObjectName(string name)
 		{
-			if (!mainForm.SolutionExplorer.SetObjectName(this.guid, name))
+			if (!mainForm.SolutionExplorer.SetObjectName(this.guid, name)) {
 				ObjectName = name;
+			}
 		}
 
 		public string GetObjectDescription(Guid guid)
 		{
 			string strObjectDescription = mainForm.SolutionExplorer.GetObjectDescription(guid);
-			if (strObjectDescription != string.Empty)
+			if (strObjectDescription != string.Empty) {
 				return strObjectDescription;
-			else
+			} else {
 				return this.ObjectDescription;
+			}
 		}
 
 		public string GetObjectDescription()
@@ -913,43 +873,49 @@ namespace LSLEditor
 
 		public void SetObjectDescription(string description)
 		{
-			if (!mainForm.SolutionExplorer.SetObjectDescription(this.guid, description))
+			if (!mainForm.SolutionExplorer.SetObjectDescription(this.guid, description)) {
 				this.ObjectDescription = description;
+			}
 		}
 
 		public string GetScriptName()
 		{
 			string strScriptName = mainForm.SolutionExplorer.GetScriptName(this.guid);
-			if (strScriptName == string.Empty)
+			if (strScriptName == string.Empty) {
 				strScriptName = this.FullPath;
-			if (Properties.Settings.Default.llGetScriptName)
+			}
+			if (Properties.Settings.Default.llGetScriptName) {
 				strScriptName = Path.GetFileNameWithoutExtension(strScriptName);
-			else
+			} else {
 				strScriptName = Path.GetFileName(strScriptName);
+			}
 			return strScriptName;
 		}
 
 		public SecondLife.key GetKey()
 		{
 			string strGuid = mainForm.SolutionExplorer.GetKey(this.guid);
-			if (strGuid == string.Empty)
+			if (strGuid == string.Empty) {
 				return new SecondLife.key(this.guid);
+			}
 			return new SecondLife.key(strGuid);
 		}
 
 		public SecondLife.String GetInventoryName(SecondLife.integer type, SecondLife.integer number)
 		{
 			string strInventoryName = mainForm.SolutionExplorer.GetInventoryName(this.guid, type, number);
-			if (strInventoryName == string.Empty)
+			if (strInventoryName == string.Empty) {
 				return "**GetInventoryName only works in SolutionExplorer**";
+			}
 			return strInventoryName;
 		}
 
 		public SecondLife.key GetInventoryKey(SecondLife.String name)
 		{
 			string strInventoryKey = mainForm.SolutionExplorer.GetInventoryKey(this.guid, name);
-			if (strInventoryKey == string.Empty)
+			if (strInventoryKey == string.Empty) {
 				return new SecondLife.key(Guid.Empty);
+			}
 			return new SecondLife.key(strInventoryKey);
 		}
 
@@ -963,16 +929,17 @@ namespace LSLEditor
 			return mainForm.SolutionExplorer.GetInventoryType(this.guid, name);
 		}
 
-        public void RemoveInventory(SecondLife.String name)
-        {
-            mainForm.SolutionExplorer.RemoveInventory(this.guid, name);
-        }
+		public void RemoveInventory(SecondLife.String name)
+		{
+			mainForm.SolutionExplorer.RemoveInventory(this.guid, name);
+		}
 
 		public System.Media.SoundPlayer GetSoundPlayer(string sound)
 		{
 			string strPath = mainForm.SolutionExplorer.GetPath(this.guid, sound);
-			if (strPath == string.Empty)
+			if (strPath == string.Empty) {
 				strPath = sound;
+			}
 			return new System.Media.SoundPlayer(strPath);
 		}
 

@@ -70,94 +70,85 @@ namespace LSLEditor
 			{
 				get
 				{
-					if (this.value == null)
-						this.value = new ArrayList();
+					if (this.value == null) this.value = new ArrayList();
 					return this.value.Count;
 				}
 			}
 
 			public void AddRange(list c)
 			{
-				if(this.value == null)
-					this.value = new ArrayList();
+				if (this.value == null) this.value = new ArrayList();
 				this.value.AddRange(c.ToArray());
 			}
 
 			public void Add(object value)
 			{
-				if (this.value == null)
-					this.value = new ArrayList();
+				if (this.value == null) this.value = new ArrayList();
 				string strType = value.GetType().ToString();
-				if (value is string)
+				if (value is string) {
 					this.value.Add((String)value.ToString());
-				else if (value is int)
+				} else if (value is int) {
 					this.value.Add(new integer((int)value));
-				else if (value is uint)
+				} else if (value is uint) {
 					this.value.Add(new integer((int)(uint)value));
-				else if (value is double)
+				} else if (value is double) {
 					this.value.Add(new Float((double)value));
-				else
+				} else {
 					this.value.Add(value);
+				}
 			}
 
 			public object this[int index]
 			{
 				get
 				{
-					if (this.value == null)
-						this.value = new ArrayList();
+					if (this.value == null) this.value = new ArrayList();
 					return this.value[index];
 				}
 				set
 				{
-					if (this.value == null)
-						this.value = new ArrayList();
+					if (this.value == null) this.value = new ArrayList();
 					this.value[index] = value;
 				}
 			}
 
 			public void Insert(int index, object value)
 			{
-				if (this.value == null)
-					this.value = new ArrayList();
+				if (this.value == null) this.value = new ArrayList();
 
-				if (this.value == null)
-					this.value = new ArrayList();
+				if (this.value == null) this.value = new ArrayList();
 				string strType = value.GetType().ToString();
-				if (value is string)
+				if (value is string) {
 					this.value.Insert(index, (String)value.ToString());
-				else if (value is int)
+				} else if (value is int) {
 					this.value.Insert(index, new integer((int)value));
-				else if (value is uint)
+				} else if (value is uint) {
 					this.value.Insert(index, new integer((int)(uint)value));
-				else if (value is double)
+				} else if (value is double) {
 					this.value.Insert(index, new Float((double)value));
-				else
+				} else {
 					this.value.Insert(index, value);
+				}
 			}
 
 			public object[] ToArray()
 			{
-				if (this.value == null)
-					this.value = new ArrayList();
+				if (this.value == null) this.value = new ArrayList();
 				return this.value.ToArray();
 			}
 
 			public static list operator +(list a, list b)
 			{
 				list l = new list();
-				if((object)a != null)
-					l.AddRange(a);
-				if ((object)b != null)
-					l.AddRange(b);
+				if ((object)a != null) l.AddRange(a);
+				if ((object)b != null) l.AddRange(b);
 				return l;
 			}
 
 			public static list operator +(object b, list a)
 			{
 				list l = new list();
-				if ((object)a != null)
-					l.AddRange(a);
+				if ((object)a != null) l.AddRange(a);
 				l.Insert(0, b);
 				return l;
 			}
@@ -165,8 +156,7 @@ namespace LSLEditor
 			public static list operator +(list a, object b)
 			{
 				list l = new list();
-				if ((object)a != null)
-					l.AddRange(a);
+				if ((object)a != null) l.AddRange(a);
 				l.Add(b);
 				return l;
 			}
@@ -235,50 +225,50 @@ namespace LSLEditor
 
 			public static integer operator ==(list l, list m)
 			{
-				if (l.Count != m.Count)
-					return FALSE;
-				for (int intI = 0; intI < l.Count; intI++)
-					if (!l[intI].Equals(m[intI]))
-						return FALSE;
-				return TRUE;
+				int iResult = TRUE;
+				if (l.Count != m.Count) {
+					iResult = FALSE;
+				} else {
+					for (int intI = 0; intI < l.Count; intI++) {
+						if (!l[intI].Equals(m[intI])) {
+							iResult = FALSE;
+							break;
+						}
+					}
+				}
+				return iResult;
 			}
 
 			public static integer operator !=(list l, list m)
 			{
-				int intDifferent=0;
-				if (m.Count == 0) // shortcut
-					return l.Count;
-				for (int intI = 0; intI < l.Count; intI++)
-				{
-					bool blnFound = false;
-					for (int intJ = 0; intJ < m.Count; intJ++)
-					{
-						if (l[intI].Equals(m[intJ]))
-						{
-							blnFound = true;
-							break;
+				int intDifferent = 0;
+				if (m.Count == 0) {// shortcut
+					intDifferent = l.Count;
+				} else {
+					for (int intI = 0; intI < l.Count; intI++) {
+						bool blnFound = false;
+						for (int intJ = 0; intJ < m.Count; intJ++) {
+							if (l[intI].Equals(m[intJ])) {
+								blnFound = true;
+								break;
+							}
 						}
+						if (!blnFound) intDifferent++;
 					}
-					if(!blnFound)
-						intDifferent++;
 				}
 				return intDifferent;
 			}
 
 			public static bool operator true(list x)
 			{
-				if ((object)x == null)
-					return false;
-				return (x.value.Count != 0);
+				return (object)x == null ? false : (x.value.Count != 0);
 			}
 
 			// Definitely false operator. Returns true if the operand is 
 			// ==0, false otherwise:
 			public static bool operator false(list x)
 			{
-				if ((object)x == null)
-					return true;
-				return (x.value.Count == 0);
+				return (object)x == null ? true : (x.value.Count == 0);
 			}
 
 
@@ -295,19 +285,19 @@ namespace LSLEditor
 
 			public string ToVerboseString()
 			{
-				if (this.value == null)
+				if (this.value == null) {
 					this.value = new ArrayList();
+				}
 
 				StringBuilder sb = new StringBuilder();
 				sb.Append('[');
-				for (int intI = 0; intI < this.value.Count; intI++)
-				{
-					if(intI>0)
-						sb.Append(',');
-					if((this.value[intI] is string) && Properties.Settings.Default.QuotesListVerbose)
-						sb.Append("\""+this.value[intI].ToString()+"\"");
-					else
+				for (int intI = 0; intI < this.value.Count; intI++) {
+					if (intI > 0) sb.Append(',');
+					if ((this.value[intI] is string) && Properties.Settings.Default.QuotesListVerbose) {
+						sb.Append("\"" + this.value[intI].ToString() + "\"");
+					} else {
 						sb.Append(this.value[intI].ToString());
+					}
 				}
 				sb.Append(']');
 				return sb.ToString();
@@ -315,33 +305,25 @@ namespace LSLEditor
 
 			public override string ToString()
 			{
-				if (this.value == null)
-					this.value = new ArrayList();
+				if (this.value == null) this.value = new ArrayList();
 				StringBuilder sb = new StringBuilder();
-				for (int intI = 0; intI < this.value.Count; intI++)
-				{
-					if (this.value[intI] is vector)
-					{
+				for (int intI = 0; intI < this.value.Count; intI++) {
+					if (this.value[intI] is vector) {
 						vector v = (vector)this.value[intI];
 						sb.AppendFormat(new System.Globalization.CultureInfo("en-us"), "<{0:0.000000}, {1:0.000000}, {2:0.000000}>", (double)v.x, (double)v.y, (double)v.z);
-					}
-					else if (this.value[intI] is rotation)
-					{
+					} else if (this.value[intI] is rotation) {
 						rotation r = (rotation)this.value[intI];
 						sb.AppendFormat(new System.Globalization.CultureInfo("en-us"), "<{0:0.000000}, {1:0.000000}, {2:0.000000}, {3:0.000000}>", (double)r.x, (double)r.y, (double)r.z, (double)r.s);
-					}
-					else
+					} else {
 						sb.Append(this.value[intI].ToString());
+					}
 				}
 				return sb.ToString();
 			}
 
 			public static explicit operator String(list l)
 			{
-				if ((object)l == null)
-					return "";
-				else
-					return l.ToString();
+				return (object)l == null ? "" : l.ToString();
 			}
 
 		}

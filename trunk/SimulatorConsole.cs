@@ -148,7 +148,7 @@ namespace LSLEditor
 
 			List<Guid> list;
 
-			int intLinkNum = e.linknum;
+			int intLinkNum = e.iLinkIndex;
 			switch (intLinkNum)
 			{
 				case 1: // LINK_ROOT  , root prim in linked set (but not in a single prim, which is 0)

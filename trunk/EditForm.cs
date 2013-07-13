@@ -58,9 +58,9 @@ namespace LSLEditor
 
 		private string m_FullPathName;
 		private Guid m_Guid;
-        // private bool sOutline = true;
+		// private bool sOutline = true;
 		public LSLEditorForm parent;
-        public Encoding encodedAs = null;
+		public Encoding encodedAs = null;
 
 		private const int WM_NCACTIVATE = 0x0086;
 		protected override void WndProc(ref Message m)
@@ -141,7 +141,7 @@ namespace LSLEditor
 
 			this.Icon = lslEditorForm.Icon;
 			this.parent = lslEditorForm;
-            this.numberedTextBoxUC1.TextBox.setEditform(this);
+			this.numberedTextBoxUC1.TextBox.setEditform(this);
 			this.numberedTextBoxUC1.TextBox.Init(this.parent, this.parent.ConfLSL);
 			this.numberedTextBoxUC1.TextBox.OnDirtyChanged += new IsDirtyHandler(TextBox_OnDirtyChanged);
 
@@ -149,25 +149,25 @@ namespace LSLEditor
 			this.Resize += new EventHandler(EditForm_Position);
 
 			this.Layout += new LayoutEventHandler(EditForm_Layout);
-            ImageList imageList = new ImageList();
-            imageList.Images.Add(new Bitmap(this.GetType(), "Images.Unknown.gif"));
-            imageList.Images.Add(new Bitmap(this.GetType(), "Images.Functions.gif"));
-            imageList.Images.Add(new Bitmap(this.GetType(), "Images.Events.gif"));
-            imageList.Images.Add(new Bitmap(this.GetType(), "Images.Constants.gif"));
-            imageList.Images.Add(new Bitmap(this.GetType(), "Images.Class.gif"));
-            imageList.Images.Add(new Bitmap(this.GetType(), "Images.Vars.gif"));
-            imageList.Images.Add(new Bitmap(this.GetType(), "Images.Properties.gif"));
-            imageList.Images.Add(new Bitmap(this.GetType(), "Images.States.gif"));
+			ImageList imageList = new ImageList();
+			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Unknown.gif"));
+			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Functions.gif"));
+			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Events.gif"));
+			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Constants.gif"));
+			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Class.gif"));
+			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Vars.gif"));
+			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Properties.gif"));
+			imageList.Images.Add(new Bitmap(this.GetType(), "Images.States.gif"));
 
-            this.tvOutline.ImageList = imageList;
-            if (lslEditorForm.outlineToolStripMenuItem.Checked)
-            {
-                splitContainer1.Panel2Collapsed = false;
-            }
-            else
-            {
-                splitContainer1.Panel2Collapsed = true;
-            }
+			this.tvOutline.ImageList = imageList;
+			if (lslEditorForm.outlineToolStripMenuItem.Checked)
+			{
+				splitContainer1.Panel2Collapsed = false;
+			}
+			else
+			{
+				splitContainer1.Panel2Collapsed = true;
+			}
 			SetFont();
 		}
 
@@ -199,7 +199,7 @@ namespace LSLEditor
 				tabPage.Text = this.Text;
 
 			this.parent.OnDirtyChanged(this.numberedTextBoxUC1.TextBox.Dirty);
-        }
+		}
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -319,32 +319,32 @@ namespace LSLEditor
 		public void SaveCurrentFile(string strPath)
 		{
 			this.FullPathName = strPath;
-            Encoding encodeAs = this.encodedAs;
-            if (this.IsScript && encodeAs == null)
-            {
-                switch (Properties.Settings.Default.OutputFormat)
-                {
-                    case "UTF8":
-                        encodeAs = Encoding.UTF8;
-                        break;
-                    case "Unicode":
-                        encodeAs = Encoding.Unicode;
-                        break;
-                    case "BigEndianUnicode":
-                        encodeAs = Encoding.BigEndianUnicode;
-                        break;
-                    default:
-                        encodeAs = Encoding.Default;
-                        break;
-                }
-            }
-            else if (encodeAs == null)
-            {
-                encodeAs = Encoding.UTF8;
-            }
+			Encoding encodeAs = this.encodedAs;
+			if (this.IsScript && encodeAs == null)
+			{
+				switch (Properties.Settings.Default.OutputFormat)
+				{
+					case "UTF8":
+						encodeAs = Encoding.UTF8;
+						break;
+					case "Unicode":
+						encodeAs = Encoding.Unicode;
+						break;
+					case "BigEndianUnicode":
+						encodeAs = Encoding.BigEndianUnicode;
+						break;
+					default:
+						encodeAs = Encoding.Default;
+						break;
+				}
+			}
+			else if (encodeAs == null)
+			{
+				encodeAs = Encoding.UTF8;
+			}
 
-            this.numberedTextBoxUC1.TextBox.SaveCurrentFile(strPath, encodeAs);
-            this.encodedAs = encodeAs;
+			this.numberedTextBoxUC1.TextBox.SaveCurrentFile(strPath, encodeAs);
+			this.encodedAs = encodeAs;
 		}
 
 		public void SaveCurrentFile()
@@ -492,44 +492,44 @@ namespace LSLEditor
 			//this.disableCompilesyntaxCheckToolStripMenuItem.Checked = !this.disableCompilesyntaxCheckToolStripMenuItem.Checked;
 		}
 
-        private void tvOutline_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            this.parent.BeginInvoke(new TreeNodeMouseClickEventHandler(
-                delegate(object sender2, TreeNodeMouseClickEventArgs e2)
-                {
-                    if (e.Node.Tag is Helpers.OutlineHelper)
-                    {
-                        Helpers.OutlineHelper ohOutline = (Helpers.OutlineHelper)e.Node.Tag;
-                        if (ohOutline.line < this.TextBox.Lines.Length)
-                        {
-                            //editForm.Focus();
-                            //editForm.TextBox.Select();
-                            //editForm.TextBox.Goto(ohOutline.line + 1);
+		private void tvOutline_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+		{
+			this.parent.BeginInvoke(new TreeNodeMouseClickEventHandler(
+				delegate(object sender2, TreeNodeMouseClickEventArgs e2)
+				{
+					if (e.Node.Tag is Helpers.OutlineHelper)
+					{
+						Helpers.OutlineHelper ohOutline = (Helpers.OutlineHelper)e.Node.Tag;
+						if (ohOutline.line < this.TextBox.Lines.Length)
+						{
+							//editForm.Focus();
+							//editForm.TextBox.Select();
+							//editForm.TextBox.Goto(ohOutline.line + 1);
 
-                            //TextBox.Focus();
-                            this.TextBox.Select();
-                            this.TextBox.SelectionStart = this.TextBox.GetFirstCharIndexFromLine(ohOutline.line);
-                            
+							//TextBox.Focus();
+							this.TextBox.Select();
+							this.TextBox.SelectionStart = this.TextBox.GetFirstCharIndexFromLine(ohOutline.line);
+							
 
-                        }
-                    }
-                }), sender, e);
-        }
+						}
+					}
+				}), sender, e);
+		}
 
-        private void tvOutline_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            
-            //this.TextBox.Select
-        }
+		private void tvOutline_AfterSelect(object sender, TreeViewEventArgs e)
+		{
+			
+			//this.TextBox.Select
+		}
 
-        private void splitContainer1_Click(object sender, EventArgs e)
-        {
+		private void splitContainer1_Click(object sender, EventArgs e)
+		{
 
-        }
+		}
 
-        private void tvOutline_VisibleChanged(object sender, EventArgs e)
-        {
-            this.tvOutline.ExpandAll();
-        }
+		private void tvOutline_VisibleChanged(object sender, EventArgs e)
+		{
+			this.tvOutline.ExpandAll();
+		}
 	}
 }
