@@ -55,7 +55,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("LSL Editor")]
-[assembly: AssemblyCopyright("2006 - 2012")]
+[assembly: AssemblyCopyright("2006 - 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -69,7 +69,8 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
-
+//
+// LSL-Editor uses the Major.Minor.Bugfix.Build format.
 [assembly: AssemblyVersion("2.999.999.1")]
 
 //
