@@ -74,7 +74,7 @@ namespace LSLEditor
 		private void About_Load(object sender, EventArgs e)
 		{
 			string strExeFileName = Path.GetFileName(Assembly.GetExecutingAssembly().CodeBase);
-			this.webBrowser1.Navigate("res://" + strExeFileName + "/"+ Properties.Settings.Default.About);
+			this.webBrowser1.Navigate("res://" + strExeFileName + "/" + Properties.Settings.Default.About);
 		}
 	}
 }

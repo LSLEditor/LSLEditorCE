@@ -69,46 +69,37 @@ namespace LSLEditor
 		{
 			WebBrowser axWebBrowser1 = sender as WebBrowser;
 			ToolStripStatusLabel status = axWebBrowser1.Tag as ToolStripStatusLabel;
-			if (status == null)
-				return;
-			status.Text = axWebBrowser1.StatusText;
+			if (status != null) {
+				status.Text = axWebBrowser1.StatusText;
+			}
 		}
-
 
 		private void axWebBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
 		{
 			string strUrl = e.Url.ToString();
-			if (strUrl.EndsWith(".lsl"))
-			{
+			if (strUrl.EndsWith(".lsl")) {
 				e.Cancel = true;
-				if (MessageBox.Show("Import LSL script?", "Import script", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
-					return;
+				if (MessageBox.Show("Import LSL script?", "Import script", MessageBoxButtons.OKCancel) != DialogResult.Cancel) {
+					WebBrowser axWebBrowser1 = sender as WebBrowser;
+					axWebBrowser1.Stop();
 
-				WebBrowser axWebBrowser1 = sender as WebBrowser;
-				axWebBrowser1.Stop();
-
-				this.lslEditorForm.OpenFile(strUrl,Guid.NewGuid());
+					this.lslEditorForm.OpenFile(strUrl, Guid.NewGuid());
+				}
 			}
 		}
 
 		public void ShowWebBrowser(string strTabName, string strUrl)
 		{
 			WebBrowser axWebBrowser1 = null;
-			try
-			{
-				if (!Properties.Settings.Default.HelpNewTab)
-				{
+			try {
+				if (!Properties.Settings.Default.HelpNewTab) {
 					TabPage tabPage = this.tabControl1.TabPages[0];
 					tabPage.Text = strTabName + "    ";
 					axWebBrowser1 = tabPage.Controls[0] as WebBrowser;
 				}
-			}
-			catch
-			{
-			}
+			} catch { }
 
-			if (axWebBrowser1 == null)
-			{
+			if (axWebBrowser1 == null) {
 				TabPage tabPage = new TabPage(strTabName + "    ");
 				tabPage.BackColor = Color.White;
 
@@ -117,7 +108,7 @@ namespace LSLEditor
 				ToolStripStatusLabel toolStripStatusLabel1 = new ToolStripStatusLabel();
 				StatusStrip statusStrip1 = new StatusStrip();
 
-				statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1});
+				statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1 });
 				statusStrip1.Location = new System.Drawing.Point(0, 318);
 				statusStrip1.Name = "statusStrip1";
 				statusStrip1.Size = new System.Drawing.Size(584, 22);
@@ -148,26 +139,23 @@ namespace LSLEditor
 		private void closeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			int intTabToClose = (int)this.contextMenuStrip1.Tag;
-			if (intTabToClose >= this.tabControl1.TabCount)
-				return;
-			this.tabControl1.TabPages.RemoveAt(intTabToClose);
+			if (intTabToClose < this.tabControl1.TabCount) {
+				this.tabControl1.TabPages.RemoveAt(intTabToClose);
+			}
 		}
 
 		private void tabControl1_MouseDown(object sender, MouseEventArgs e)
 		{
 			TabControl tabControl = sender as TabControl;
-			if (tabControl == null)
-				return;
-			if (e.Button == MouseButtons.Right)
-			{
-				for (int intI = 0; intI < tabControl.TabCount; intI++)
-				{
-					Rectangle rt = tabControl.GetTabRect(intI);
-					if (e.X > rt.Left && e.X < rt.Right
-						&& e.Y > rt.Top && e.Y < rt.Bottom)
-					{
-						this.contextMenuStrip1.Tag = intI;
-						this.contextMenuStrip1.Show(this.tabControl1, new Point(e.X, e.Y));
+			if (tabControl != null) {
+				if (e.Button == MouseButtons.Right) {
+					for (int intI = 0; intI < tabControl.TabCount; intI++) {
+						Rectangle rt = tabControl.GetTabRect(intI);
+						if (e.X > rt.Left && e.X < rt.Right
+							&& e.Y > rt.Top && e.Y < rt.Bottom) {
+							this.contextMenuStrip1.Tag = intI;
+							this.contextMenuStrip1.Show(this.tabControl1, new Point(e.X, e.Y));
+						}
 					}
 				}
 			}

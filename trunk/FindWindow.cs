@@ -89,14 +89,12 @@ namespace LSLEditor
 			set
 			{
 				this.label1.Text = ""; // clear out message
-				if (value != "")
-				{
+				if (value != "") {
 					this.comboBoxFind.Text = value;
-				}
-				else
-				{
-					if (this.comboBoxFind.Items.Count > 0)
+				} else {
+					if (this.comboBoxFind.Items.Count > 0) {
 						this.comboBoxFind.SelectedIndex = this.comboBoxFind.Items.Count - 1;
+					}
 				}
 			}
 		}
@@ -106,17 +104,16 @@ namespace LSLEditor
 			string strText = comboBox.Text;
 			bool Found = false;
 
-			foreach (string strC in comboBox.Items)
-			{
-				if (strC == strText)
-				{
+			foreach (string strC in comboBox.Items) {
+				if (strC == strText) {
 					Found = true;
 					break;
 				}
 			}
 
-			if (!Found)
+			if (!Found) {
 				comboBox.Items.Add(strText);
+			}
 			return Found;
 		}
 
@@ -124,40 +121,35 @@ namespace LSLEditor
 		{
 			this.label1.Text = "";
 			EditForm editForm = this.lslEditForm.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
+			if (editForm != null) {
+				if (!UpdateComboBox(this.comboBoxFind)) {
+					editForm.TextBox.SelectionLength = 0;
+					editForm.TextBox.SelectionStart = 0;
+				}
 
-			if (!UpdateComboBox(this.comboBoxFind))
-			{
-				editForm.TextBox.SelectionLength = 0;
-				editForm.TextBox.SelectionStart = 0;
-			}
+				RichTextBoxFinds options = RichTextBoxFinds.None;
 
-			RichTextBoxFinds options = RichTextBoxFinds.None;
+				if (this.checkBoxMatchCase.Checked) options |= RichTextBoxFinds.MatchCase;
+				if (this.checkBoxReverse.Checked) options |= RichTextBoxFinds.Reverse;
+				if (this.checkBoxWholeWord.Checked) options |= RichTextBoxFinds.WholeWord;
 
-			if (this.checkBoxMatchCase.Checked) options |= RichTextBoxFinds.MatchCase;
-			if (this.checkBoxReverse.Checked) options |= RichTextBoxFinds.Reverse;
-			if (this.checkBoxWholeWord.Checked) options |= RichTextBoxFinds.WholeWord;
+				if (this.checkBoxReverse.Checked) {
+					intStart = 0; // start cant change ;-)
+					intEnd = editForm.TextBox.SelectionStart;
+				} else {
+					intStart = editForm.TextBox.SelectionStart + editForm.TextBox.SelectionLength;
+					if (intStart == editForm.TextBox.Text.Length) {
+						intStart = 0;
+					}
+					intEnd = editForm.TextBox.Text.Length - 1; // length can change!!
+				}
 
-			if (this.checkBoxReverse.Checked)
-			{
-				intStart = 0; // start cant change ;-)
-				intEnd = editForm.TextBox.SelectionStart;
-			}
-			else
-			{
-				intStart = editForm.TextBox.SelectionStart + editForm.TextBox.SelectionLength;
-				if (intStart == editForm.TextBox.Text.Length)
-					intStart = 0;
-				intEnd = editForm.TextBox.Text.Length - 1; // length can change!!
-			}
-
-			string strFind = this.comboBoxFind.Text;
-			int intIndex = editForm.Find(strFind, intStart, intEnd, options);
-			if (intIndex < 0)
-			{
-				this.label1.Text = "Not found...";
-				return;
+				string strFind = this.comboBoxFind.Text;
+				int intIndex = editForm.Find(strFind, intStart, intEnd, options);
+				if (intIndex < 0) {
+					this.label1.Text = "Not found...";
+					return;
+				}
 			}
 		}
 
@@ -169,15 +161,11 @@ namespace LSLEditor
 
 		private void comboBoxFind_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.Return)
-			{
-				if (this.Replace.Enabled)
-				{
+			if (e.KeyCode == Keys.Return) {
+				if (this.Replace.Enabled) {
 					this.comboBoxReplace.Focus();
 					e.SuppressKeyPress = true;
-				}
-				else
-				{
+				} else {
 					Find();
 					e.SuppressKeyPress = true;
 				}
@@ -187,30 +175,26 @@ namespace LSLEditor
 		private void Replace_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.lslEditForm.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
+			if (editForm != null) {
+				UpdateComboBox(this.comboBoxReplace);
 
-			UpdateComboBox(this.comboBoxReplace);
+				if (editForm.TextBox.SelectionLength > 0) {
+					string strReplacement = this.comboBoxReplace.Text;
+					editForm.TextBox.ReplaceSelectedText(strReplacement);
+				}
 
-			if (editForm.TextBox.SelectionLength > 0)
-			{
-				string strReplacement = this.comboBoxReplace.Text;
-				editForm.TextBox.ReplaceSelectedText(strReplacement);
+				Find();
+				this.Focus();
 			}
-
-			Find();
-			this.Focus();
 		}
 
 		// WildCardToRegex not used!!
 		private string WildCardToRegex(string strWildCard)
 		{
 			StringBuilder sb = new StringBuilder(strWildCard.Length + 8);
-			for (int intI = 0; intI < strWildCard.Length; intI++)
-			{
+			for (int intI = 0; intI < strWildCard.Length; intI++) {
 				char chrC = strWildCard[intI];
-				switch (chrC)
-				{
+				switch (chrC) {
 					case '*':
 						sb.Append(".*");
 						break;
@@ -233,42 +217,41 @@ namespace LSLEditor
 		private void ReplaceAll_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.lslEditForm.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
+			if (editForm == null) {
+				UpdateComboBox(this.comboBoxReplace);
 
-			UpdateComboBox(this.comboBoxReplace);
+				string strPattern;
+				string strFind = Regex.Escape(this.comboBoxFind.Text);
+				string strReplacement = this.comboBoxReplace.Text;
+				string strSourceCode = editForm.SourceCode;
 
-			string strPattern;
-			string strFind = Regex.Escape(this.comboBoxFind.Text);
-			string strReplacement = this.comboBoxReplace.Text;
-			string strSourceCode = editForm.SourceCode;
+				RegexOptions regexOptions = RegexOptions.Compiled;
+				if (!this.checkBoxMatchCase.Checked) {
+					regexOptions |= RegexOptions.IgnoreCase;
+				}
+				if (this.checkBoxWholeWord.Checked) {
+					strPattern = @"\b" + strFind + @"\b";
+				} else {
+					strPattern = strFind;
+				}
 
-			RegexOptions regexOptions = RegexOptions.Compiled;
-			if (!this.checkBoxMatchCase.Checked)
-				regexOptions |= RegexOptions.IgnoreCase;
-			if (this.checkBoxWholeWord.Checked)
-				strPattern = @"\b" + strFind + @"\b";
-			else
-				strPattern = strFind;
+				Regex regex = new Regex(strPattern, regexOptions);
 
-			Regex regex = new Regex(strPattern, regexOptions);
-
-			int intCount = 0;
-			foreach(Match m in regex.Matches(strSourceCode))
-			{
-				if (m.Value.Length > 0)
-					intCount++;
+				int intCount = 0;
+				foreach (Match m in regex.Matches(strSourceCode)) {
+					if (m.Value.Length > 0) {
+						intCount++;
+					}
+				}
+				if (intCount == 0) {
+					MessageBox.Show("No matches found");
+				} else {
+					if (MessageBox.Show("There are " + intCount + " occurences, replace them all?", "Find and Replace", MessageBoxButtons.YesNoCancel) == DialogResult.Yes) {
+						editForm.SourceCode = regex.Replace(strSourceCode, strReplacement);
+					}
+				}
+				this.Focus();
 			}
-			if (intCount == 0)
-			{
-				MessageBox.Show("No matches found");
-			}
-			else
-			{
-				if (MessageBox.Show("There are " + intCount + " occurences, replace them all?", "Find and Replace", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
-					editForm.SourceCode = regex.Replace(strSourceCode, strReplacement);
-			}
-			this.Focus();
 		}
 
 		private void FindWindow_FormClosing(object sender, FormClosingEventArgs e)
@@ -281,22 +264,19 @@ namespace LSLEditor
 
 		private void FindWindow_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyData == Keys.Escape)
-			{
+			if (e.KeyData == Keys.Escape) {
 				this.Visible = false;
 				e.SuppressKeyPress = true;
 				e.Handled = true;
 			}
 
-			if (e.KeyCode == Keys.Return)
-			{
+			if (e.KeyCode == Keys.Return) {
 				Find();
 				e.SuppressKeyPress = true;
 				this.Focus();
 			}
 
-			if (e.KeyCode == Keys.F3)
-			{
+			if (e.KeyCode == Keys.F3) {
 				Find();
 				e.SuppressKeyPress = true;
 				this.Focus();
@@ -309,7 +289,5 @@ namespace LSLEditor
 		{
 			this.comboBoxFind.Focus();
 		}
-
-
 	}
 }

@@ -58,7 +58,7 @@ namespace LSLEditor
 		private string OwnerName;
 		private SecondLife.key id;
 
-		public llDialogForm(SecondLifeHost host, SecondLife.String strObjectName, SecondLife.key id, SecondLife.String strOwner, SecondLife.String strMessage, SecondLife.list buttons,  SecondLife.integer intChannel)
+		public llDialogForm(SecondLifeHost host, SecondLife.String strObjectName, SecondLife.key id, SecondLife.String strOwner, SecondLife.String strMessage, SecondLife.list buttons, SecondLife.integer intChannel)
 		{
 			InitializeComponent();
 
@@ -68,21 +68,19 @@ namespace LSLEditor
 			this.ObjectName = strObjectName;
 			this.id = id;
 
-			for (int intI = 1; intI <= 12; intI++)
-			{
+			for (int intI = 1; intI <= 12; intI++) {
 				Button button = this.Controls["Button" + intI] as Button;
 				button.Visible = false;
 			}
 
-			this.label1.Text = strOwner + "'s '" + strObjectName +"'";
-			this.label2.Text = strMessage.ToString().Replace("&","&&");
+			this.label1.Text = strOwner + "'s '" + strObjectName + "'";
+			this.label2.Text = strMessage.ToString().Replace("&", "&&");
 
-			for (int intI = 1; intI <= buttons.Count; intI++)
-			{
+			for (int intI = 1; intI <= buttons.Count; intI++) {
 				Button button = this.Controls["Button" + intI] as Button;
 				if (button == null)
 					continue;
-				button.Text = buttons[intI - 1].ToString().Replace("&","&&");
+				button.Text = buttons[intI - 1].ToString().Replace("&", "&&");
 				button.Visible = true;
 				button.Click += new EventHandler(button_Click);
 			}
@@ -91,10 +89,10 @@ namespace LSLEditor
 		void button_Click(object sender, EventArgs e)
 		{
 			Button button = sender as Button;
-			if (button == null)
-				return;
-			host.Chat(this,this.Channel, this.OwnerName, this.id, button.Text.Replace("&&","&"), CommunicationType.Say);
-			this.Close();
+			if (button != null) {
+				host.Chat(this, this.Channel, this.OwnerName, this.id, button.Text.Replace("&&", "&"), CommunicationType.Say);
+				this.Close();
+			}
 		}
 
 		private void button13_Click(object sender, EventArgs e)
