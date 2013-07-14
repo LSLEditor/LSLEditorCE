@@ -1,4 +1,4 @@
-// /**
+﻿// /**
 // ********
 // *
 // * ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
@@ -69,7 +69,7 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
-
+// We use a Major.Minor.Bugfix.Build pattern.
 [assembly: AssemblyVersion("2.999.999.2")]
 
 //
