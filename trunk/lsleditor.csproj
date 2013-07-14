@@ -870,6 +870,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>"$(FrameworkSDKDir)Bin\rc.exe" /r "$(ProjectDir)$(TargetName).rc"</PreBuildEvent>
-    <PostBuildEvent>E:\Dev\C#\AssemblyRevisionIncrement\bin\Release\AssemblyRevisionIncrementer.exe /t="$(SolutionDir)\Properties\AssemblyInfo.cs"</PostBuildEvent>
+    <PostBuildEvent>$(SolutionDir)\..\build\AssemblyRevisionIncrementer.exe /t="$(SolutionDir)\Properties\AssemblyInfo.cs"</PostBuildEvent>
   </PropertyGroup>
 </Project>
