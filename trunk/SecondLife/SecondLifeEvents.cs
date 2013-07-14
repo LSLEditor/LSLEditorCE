@@ -50,41 +50,41 @@ namespace LSLEditor
 	public partial class SecondLife
 	{
 		#region events as virtuals, if one is used, use override
-		virtual public void at_rot_target(integer number, rotation target_rotation, rotation our_rotation) { }
-		virtual public void at_target(integer tnum, vector targetpos, vector ourpos) { }
-		virtual public void attach(key attached) { }
-		virtual public void changed(integer changed) { }
-		virtual public void collision(integer total_number) { }
-		virtual public void collision_end(integer total_number) { }
-		virtual public void collision_start(integer total_number) { }
-		virtual public void control(key name, integer levels, integer edges) { }
-		virtual public void dataserver(key requested, String data) { }
-		virtual public void email(String time, String address, String subject, String body, integer remaining) { }
-		virtual public void http_response(key request_id, integer status, list metadata, String body) { }
-		virtual public void http_request(key request_id, String method, String body) { }
-		virtual public void land_collision(vector position) { }
-		virtual public void land_collision_end(vector position) { }
-		virtual public void land_collision_start(vector position) { }
-		virtual public void link_message(integer sender_number, integer number, String message, key id) { }
-		virtual public void listen(integer channel, String name, key id, String message) { }
-		virtual public void money(key giver, integer amount) { }
+		virtual public void at_rot_target(integer iHandle, rotation rTargetRotation, rotation rCurrentRotation) { }
+		virtual public void at_target(integer iHandle, vector vTargetPosition, vector vCurrrentPosition) { }
+		virtual public void attach(key kAttached) { }
+		virtual public void changed(integer iChangedFlags) { }
+		virtual public void collision(integer iCollisionCount) { }
+		virtual public void collision_end(integer iCollisionCount) { }
+		virtual public void collision_start(integer iCollisionCount) { }
+		virtual public void control(key kID, integer iLevels, integer iEdges) { }
+		virtual public void dataserver(key kRequestID, String sData) { }
+		virtual public void email(String sTime, String sAddress, String sSubject, String sBody, integer iRemaining) { }
+		virtual public void http_response(key kRequestID, integer iStatus, list lMetadata, String sBody) { }
+		virtual public void http_request(key kRequestID, String sMethod, String sBody) { }
+		virtual public void land_collision(vector vPosition) { }
+		virtual public void land_collision_end(vector vPosition) { }
+		virtual public void land_collision_start(vector vPosition) { }
+		virtual public void link_message(integer iSenderLinkIndex, integer iNumber, String sText, key kID) { }
+		virtual public void listen(integer iChannel, String sName, key kID, String sText) { }
+		virtual public void money(key kPayerID, integer iAmount) { }
 		virtual public void moving_end() { }
 		virtual public void moving_start() { }
 		virtual public void no_sensor() { }
 		virtual public void not_at_rot_target() { }
 		virtual public void not_at_target() { }
-		virtual public void object_rez(key id) { }
-		virtual public void on_rez(integer start_param) { }
+		virtual public void object_rez(key kID) { }
+		virtual public void on_rez(integer iStartParameter) { }
 		virtual public void path_update(integer iType, list lReserved) { }
-		virtual public void remote_data(integer event_type, key channel, key message_id, String sender, integer idata, String sdata) { }
-		virtual public void run_time_permissions(integer permissions) { }
-		virtual public void sensor(integer total_number) { }
+		virtual public void remote_data(integer iEventType, key kChannelID, key kMessageID, String sSender, integer iData, String sData) { }
+		virtual public void run_time_permissions(integer iPermissionsFlags) { }
+		virtual public void sensor(integer iSensedCount) { }
 		virtual public void state_entry() { }
 		virtual public void state_exit() { }
 		virtual public void timer() { }
-		virtual public void touch(integer total_number) { }
-		virtual public void touch_end(integer total_number) { }
-		virtual public void touch_start(integer total_number) { }
+		virtual public void touch(integer iTouchesCount) { }
+		virtual public void touch_end(integer iTouchesCount) { }
+		virtual public void touch_start(integer iTouchesCount) { }
 		virtual public void transaction_result(key kID, integer iSuccess, String sMessage) { }
 		#endregion
 	}

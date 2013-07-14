@@ -150,76 +150,76 @@ namespace LSLEditor
 		#region Helper Functions
 
 		#region List Functions
-
-		private bool CorrectIt(int length, ref int start, ref int end)
+		private bool CorrectIt(int intLength, ref int intStart, ref int intEnd)
 		{
-			if (start < 0) {
-				start = length + start;
+			bool bResult = true;
+			if (intStart < 0) {
+				intStart = intLength + intStart;
 			}
 
-			if (end < 0) {
-				end = length + end;
+			if (intEnd < 0) {
+				intEnd = intLength + intEnd;
 			}
 
-			if (start <= end) {
-				if (start >= length) {
-					return false;
+			if (intStart <= intEnd) {
+				if (intStart >= intLength) {
+					bResult = false;
 				}
-				if (end < 0) {
-					return false;
+				if (intEnd < 0) {
+					bResult = false;
 				}
 			}
 
-			start = Math.Max(0, start);
-			end = Math.Min(length - 1, end);
+			intStart = Math.Max(0, intStart);
+			intEnd = Math.Min(intLength - 1, intEnd);
 
-			return true;
+			return bResult;
 		}
 
-		public ArrayList RandomShuffle(ArrayList collection)
+		public ArrayList RandomShuffle(ArrayList alCollection)
 		{
 			// We have to copy all items anyway, and there isn't a way to produce the items
 			// on the fly that is linear. So copying to an array and shuffling it is as efficient as we can get.
 
-			if (collection == null) {
+			if (alCollection == null) {
 				throw new ArgumentNullException("collection");
 			}
 
-			int count = collection.Count;
-			for (int i = count - 1; i >= 1; --i) {
+			int intCount = alCollection.Count;
+			for (int i = intCount - 1; i >= 1; --i) {
 				// Pick an random number 0 through i inclusive.
 				int j = m_random.Next(i + 1);
 
 				// Swap array[i] and array[j]
-				object temp = collection[i];
-				collection[i] = collection[j];
-				collection[j] = temp;
+				object temp = alCollection[i];
+				alCollection[i] = alCollection[j];
+				alCollection[j] = temp;
 			}
-			return collection;
+			return alCollection;
 		}
 
-		private ArrayList List2Buckets(list src, int stride)
+		private ArrayList List2Buckets(list lSource, int intStride)
 		{
-			ArrayList buckets = null;
-			if ((src.Count % stride) == 0 && stride <= src.Count) {
-				buckets = new ArrayList();
-				for (int intI = 0; intI < src.Count; intI += stride) {
-					object[] bucket = new object[stride];
-					for (int intJ = 0; intJ < stride; intJ++) {
-						bucket[intJ] = src[intI + intJ];
+			ArrayList alBuckets = null;
+			if ((lSource.Count % intStride) == 0 && intStride <= lSource.Count) {
+				alBuckets = new ArrayList();
+				for (int intI = 0; intI < lSource.Count; intI += intStride) {
+					object[] bucket = new object[intStride];
+					for (int intJ = 0; intJ < intStride; intJ++) {
+						bucket[intJ] = lSource[intI + intJ];
 					}
-					buckets.Add(bucket);
+					alBuckets.Add(bucket);
 				}
 			}
-			return buckets;
+			return alBuckets;
 		}
 
-		private list Buckets2List(ArrayList buckets, int stride)
+		private list Buckets2List(ArrayList alBuckets, int intStride)
 		{
-			object[] items = new object[buckets.Count * stride];
-			for (int intI = 0; intI < buckets.Count; intI++) {
-				for (int intJ = 0; intJ < stride; intJ++) {
-					items[intI * stride + intJ] = ((object[])buckets[intI])[intJ];
+			object[] items = new object[alBuckets.Count * intStride];
+			for (int intI = 0; intI < alBuckets.Count; intI++) {
+				for (int intJ = 0; intJ < intStride; intJ++) {
+					items[intI * intStride + intJ] = ((object[])alBuckets[intI])[intJ];
 				}
 			}
 			return new list(items);
@@ -227,19 +227,20 @@ namespace LSLEditor
 
 		private class BucketComparer : IComparer
 		{
-			private integer ascending;
+			private integer iAscending;
 			public BucketComparer(integer ascending)
 			{
-				this.ascending = ascending;
+				this.iAscending = ascending;
 			}
 			public int Compare(object x, object y)
 			{
+				int iResult = 0;
+				object A, B;
+
 				object[] xx = x as object[];
 				object[] yy = y as object[];
 
-				object A, B;
-
-				if (ascending == TRUE) {
+				if (iAscending == TRUE) {
 					A = xx[0];
 					B = yy[0];
 				} else {
@@ -250,40 +251,36 @@ namespace LSLEditor
 				string strType = A.GetType().ToString();
 
 				if (((A is string) && (B is string)) || ((A is SecondLife.String) && (B is SecondLife.String))) {
-					return string.Compare(A.ToString(), B.ToString());
+					iResult = string.Compare(A.ToString(), B.ToString());
+				} else if ((A is SecondLife.integer) && (B is SecondLife.integer)) {
+					iResult = SecondLife.integer.Compare((SecondLife.integer)A, (SecondLife.integer)B);
+				} else if ((A is SecondLife.Float) && (B is SecondLife.Float)) {
+					iResult = SecondLife.Float.Compare((SecondLife.Float)A, (SecondLife.Float)B);
 				}
 
-				if ((A is SecondLife.integer) && (B is SecondLife.integer)) {
-					return SecondLife.integer.Compare((SecondLife.integer)A, (SecondLife.integer)B);
-				}
-
-				if ((A is SecondLife.Float) && (B is SecondLife.Float)) {
-					return SecondLife.Float.Compare((SecondLife.Float)A, (SecondLife.Float)B);
-				}
-
-				return 0;
+				return iResult;
 			}
 		}
 		#endregion
 
 		#region String Functions
-		private list ParseString(String src, list separators, list spacers, bool blnKeepNulls)
+		private list ParseString(String sSource, list lSeparators, list lSpacers, bool blnKeepNulls)
 		{
-			list result = new list();
+			list lResult = new list();
 			int intFrom = 0;
-			string s = src;
+			string s = sSource;
 			for (int intI = 0; intI < s.Length; intI++) {
 				string strTmp = s.Substring(intI);
 				bool blnFound = false;
-				for (int intJ = 0; intJ < separators.Count; intJ++) {
-					string strSeparator = separators[intJ].ToString();
+				for (int intJ = 0; intJ < lSeparators.Count; intJ++) {
+					string strSeparator = lSeparators[intJ].ToString();
 					if (strSeparator.Length == 0) {
 						continue; // check this
 					}
 					if (strTmp.IndexOf(strSeparator) == 0) {
 						string strBefore = s.Substring(intFrom, intI - intFrom);
 						if (strBefore != "" || blnKeepNulls) {
-							result.Add(strBefore);
+							lResult.Add(strBefore);
 						}
 						intI += strSeparator.Length - 1;
 						intFrom = intI + 1;
@@ -294,17 +291,17 @@ namespace LSLEditor
 
 				if (blnFound) continue;
 
-				for (int intJ = 0; intJ < spacers.Count; intJ++) {
-					string strSpacer = spacers[intJ].ToString();
+				for (int intJ = 0; intJ < lSpacers.Count; intJ++) {
+					string strSpacer = lSpacers[intJ].ToString();
 					if (strSpacer.Length == 0) {
 						continue; // check this
 					}
 					if (strTmp.IndexOf(strSpacer) == 0) {
 						string strBefore = s.Substring(intFrom, intI - intFrom);
 						if (strBefore != "" || blnKeepNulls) {
-							result.Add(strBefore);
+							lResult.Add(strBefore);
 						}
-						result.Add(strSpacer);
+						lResult.Add(strSpacer);
 						intI += strSpacer.Length - 1;
 						intFrom = intI + 1;
 						break;
@@ -313,20 +310,20 @@ namespace LSLEditor
 			}
 			string strLast = s.Substring(intFrom);
 			if (strLast != "" || blnKeepNulls) {
-				result.Add(strLast);
+				lResult.Add(strLast);
 			}
-			return result;
+			return lResult;
 		}
 
-		private string StringToBase64(string str)
+		private string StringToBase64(string strText)
 		{
-			byte[] data = Encoding.UTF8.GetBytes(str);
+			byte[] data = Encoding.UTF8.GetBytes(strText);
 			return Convert.ToBase64String(data);
 		}
 
-		private string Base64ToString(string str)
+		private string Base64ToString(string strText)
 		{
-			byte[] data = Convert.FromBase64String(str);
+			byte[] data = Convert.FromBase64String(strText);
 			int intLen = Array.IndexOf(data, (byte)0x00);
 			if (intLen < 0) {
 				intLen = data.Length;
@@ -336,17 +333,18 @@ namespace LSLEditor
 
 		private int LookupBase64(string s, int intIndex)
 		{
+			int intReturn = 0;
 			if (intIndex < s.Length) {
-				int intReturn = FastLookupBase64[s[intIndex]];
+				intReturn = FastLookupBase64[s[intIndex]];
 				if (intReturn == 0) {
 					if (s[intIndex] != 'A') {
 						throw new Exception();
 					}
 				}
-				return intReturn;
 			} else {
-				return 0;
+				intReturn = 0;
 			}
+			return intReturn;
 		}
 
 		static readonly int[] FastLookupBase64 =
@@ -370,50 +368,50 @@ namespace LSLEditor
 		#endregion
 
 		#region Math Functions
-		private integer ModPow1(integer a, integer b, integer c)
+		private integer ModPow1(integer iA, integer iB, integer iC)
 		{
-			return (int)Math.Pow((int)a, (int)b & (int)0xffff) % (int)c;
+			return (int)Math.Pow((int)iA, (int)iB & (int)0xffff) % (int)iC;
 		}
 
-		private integer ModPow2(integer x, integer y, integer m)
+		private integer ModPow2(integer iValueX, integer iValueY, integer iModulus)
 		{
-			if (!x) return 0;
-			integer k = 1 + (int)Math.Ceiling(Math.Log(Math.Abs(x)) / 0.69314718055994530941723212145818);//ceil(log2(x))
+			if (!iValueX) return 0;
+			integer k = 1 + (int)Math.Ceiling(Math.Log(Math.Abs(iValueX)) / 0.69314718055994530941723212145818);	//ceil(log2(x))
 			integer w = 32;
 			integer p = w / k;
-			integer r = y / p;
-			integer f = y % p;
+			integer r = iValueY / p;
+			integer f = iValueY % p;
 			integer z = 1;
-			if (r) z = ModPow2(ModPow1(x, p, m), r, m);
-			if (f) z = (z * ModPow1(x, f, m)) % m;
+			if (r) z = ModPow2(ModPow1(iValueX, p, iModulus), r, iModulus);
+			if (f) z = (z * ModPow1(iValueX, f, iModulus)) % iModulus;
 			return z;
 		}
 		#endregion Math Functions
 
-		private List<double> GetListOfNumbers(list input)
+		private List<double> GetListOfNumbers(list lInput)
 		{
-			List<double> result = new List<double>();
-			for (int intI = 0; intI < input.Count; intI++) {
-				object objI = input[intI];
+			List<double> lResult = new List<double>();
+			for (int intI = 0; intI < lInput.Count; intI++) {
+				object objI = lInput[intI];
 				string strType = objI.GetType().ToString().Replace("LSLEditor.SecondLife+", "");
 				switch (strType) {
 					case "Float":
-						result.Add(Convert.ToDouble((Float)objI));
+						lResult.Add(Convert.ToDouble((Float)objI));
 						break;
 					case "System.Int32":
-						result.Add(Convert.ToDouble((int)objI));
+						lResult.Add(Convert.ToDouble((int)objI));
 						break;
 					case "System.Double":
-						result.Add(Convert.ToDouble((double)objI));
+						lResult.Add(Convert.ToDouble((double)objI));
 						break;
 					case "integer":
-						result.Add(Convert.ToDouble((integer)objI));
+						lResult.Add(Convert.ToDouble((integer)objI));
 						break;
 					default:
 						break;
 				}
 			}
-			return result;
+			return lResult;
 		}
 
 		private double GetAverage(double[] data)
@@ -427,37 +425,40 @@ namespace LSLEditor
 			} catch (Exception) { throw; }
 		}
 
-		public double GetStandardDeviation(double[] num)
+		public double GetStandardDeviation(double[] dblNumbers)
 		{
-			double Sum = 0.0, SumOfSqrs = 0.0;
-			for (int i = 0; i < num.Length; i++) {
-				Sum += num[i];
-				SumOfSqrs += Math.Pow(num[i], 2);
+			double dblSum = 0.0, dblSumOfSqrs = 0.0;
+			for (int i = 0; i < dblNumbers.Length; i++) {
+				dblSum += dblNumbers[i];
+				dblSumOfSqrs += Math.Pow(dblNumbers[i], 2);
 			}
-			double topSum = (num.Length * SumOfSqrs) - (Math.Pow(Sum, 2));
-			double n = (double)num.Length;
-			return Math.Sqrt(topSum / (n * (n - 1)));
+			double dblTopSum = (dblNumbers.Length * dblSumOfSqrs) - (Math.Pow(dblSum, 2));
+			double dblN = (double)dblNumbers.Length;
+			return Math.Sqrt(dblTopSum / (dblN * (dblN - 1)));
 		}
 
-		private double SafeDivide(double value1, double value2)
+		private double SafeDivide(double dblValue1, double dblValue2)
 		{
-			double ret = 0;
+			double dblResult = 0;
 			try {
-				if ((value1 == 0) || (value2 == 0)) { return ret; }
-				ret = value1 / value2;
+				if ((dblValue1 != 0) && (dblValue2 != 0)) {
+					dblResult = dblValue1 / dblValue2;
+				}
 			} catch { }
-			return ret;
+			return dblResult;
 		}
 
 		private byte HexToInt(byte b)
 		{
+			byte bResult;
 			if (b >= '0' && b <= '9') {
-				return (byte)(b - '0');
+				bResult = (byte)(b - '0');
 			} else if ((b >= 'a' && b <= 'f') || (b >= 'A' && b <= 'F')) {
-				return (byte)((b & 0x5f) - 0x37);
+				bResult = (byte)((b & 0x5f) - 0x37);
 			} else {
-				return 0; // error
+				bResult = 0; // error
 			}
+			return bResult;
 		}
 		#endregion
 	}
