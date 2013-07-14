@@ -849,7 +849,7 @@
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
       <Visible>False</Visible>
       <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
-      <Install>false</Install>
+      <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
       <Visible>False</Visible>
@@ -859,7 +859,7 @@
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5</ProductName>
-      <Install>true</Install>
+      <Install>false</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
@@ -870,6 +870,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>"$(FrameworkSDKDir)Bin\rc.exe" /r "$(ProjectDir)$(TargetName).rc"</PreBuildEvent>
-    <PostBuildEvent>E:\Dev\C#\AssemblyRevisionIncrement\bin\Release\AssemblyRevisionIncrementer.exe /t="$(SolutionDir)\Properties\AssemblyInfo.cs"</PostBuildEvent>
+    <PostBuildEvent>$(SolutionDir)\..\build\AssemblyRevisionIncrementer.exe /t="$(SolutionDir)\Properties\AssemblyInfo.cs"</PostBuildEvent>
   </PropertyGroup>
 </Project>
