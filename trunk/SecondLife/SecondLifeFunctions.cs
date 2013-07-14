@@ -67,16 +67,18 @@ namespace LSLEditor
 		public void llAddToLandBanList(key kID, Float fHours)
 		{
 			Verbose("llAddToLandBanList({0}, {1})", kID, fHours);
-			if (m_LandBanList.ContainsKey(kID))
+			if (m_LandBanList.ContainsKey(kID)) {
 				m_LandBanList.Remove(kID);
+			}
 			m_LandBanList.Add(kID, fHours);
 		}
 
 		public void llAddToLandPassList(key kID, Float fHours)
 		{
 			Verbose("llAddToLandPassList({0}, {1})", kID, fHours);
-			if (m_LandPassList.ContainsKey(kID))
+			if (m_LandPassList.ContainsKey(kID)) {
 				m_LandPassList.Remove(kID);
+			}
 			m_LandPassList.Add(kID, fHours);
 		}
 
@@ -386,8 +388,9 @@ namespace LSLEditor
 			}
 			list lResult = new list();
 			for (int intI = 0; intI < src.Count; intI++) {
-				if (src[intI] != null)
+				if (src[intI] != null) {
 					lResult.Add(src[intI]);
+				}
 			}
 			Verbose(string.Format("llDeleteSubList({0}, {1}, {2})={3}", lSource.ToVerboseString(), iStart, iEnd, lResult.ToVerboseString()));
 			return lResult;
@@ -403,20 +406,24 @@ namespace LSLEditor
 
 			if (CorrectIt(intLength, ref start, ref end)) {
 				if (start <= end) {
-					for (int intI = start; intI <= end; intI++)
+					for (int intI = start; intI <= end; intI++) {
 						src[intI] = '\0';
+					}
 				} else // excluding
                 {
-					for (int intI = 0; intI <= end; intI++)
+					for (int intI = 0; intI <= end; intI++) {
 						src[intI] = '\0';
-					for (int intI = start; intI < intLength; intI++)
+					}
+					for (int intI = start; intI < intLength; intI++) {
 						src[intI] = '\0';
+					}
 				}
 			}
 			StringBuilder result = new StringBuilder();
 			for (int intI = 0; intI < src.Length; intI++) {
-				if (src[intI] != '\0')
+				if (src[intI] != '\0') {
 					result.Append(src[intI]);
+				}
 			}
 
 			Verbose(string.Format(@"llDeleteSubString(""{0}"", {1}, {2})=""{3}""", sSource, iStart, iEnd, result));
@@ -556,8 +563,9 @@ namespace LSLEditor
 		{
 			StringBuilder result = new StringBuilder();
 			for (int intI = 0; intI < lSource.Count; intI++) {
-				if (intI > 0)
+				if (intI > 0) {
 					result.Append(sSeparator.ToString());
+				}
 				result.Append(lSource[intI].ToString());
 			}
 			Verbose(@"llDumpList2String({0},""{1}"")=""{2}""", lSource.ToVerboseString(), sSeparator, result.ToString());
@@ -588,12 +596,11 @@ namespace LSLEditor
 			byte[] data = Encoding.UTF8.GetBytes(sURL.ToString());
 			for (int intI = 0; intI < data.Length; intI++) {
 				byte chrC = data[intI];
-				if ((chrC >= 'a' && chrC <= 'z') ||
-					(chrC >= 'A' && chrC <= 'Z') ||
-					(chrC >= '0' && chrC <= '9'))
+				if ((chrC >= 'a' && chrC <= 'z') || (chrC >= 'A' && chrC <= 'Z') || (chrC >= '0' && chrC <= '9')) {
 					sb.Append((char)chrC);
-				else
+				} else {
 					sb.AppendFormat("%{0:X2}", (int)chrC);
+				}
 			}
 			Verbose(string.Format(@"EscapeURL(""{0}"")=""{1}""", sURL, sb.ToString()));
 			return sb.ToString();
@@ -709,11 +716,11 @@ namespace LSLEditor
 		public Float llGetAndResetTime()
 		{
 			// get time
-			double dTime = llGetTime();
-			Verbose("llGetAndResetTime()=" + dTime);
+			double dblTime = llGetTime();
+			Verbose("llGetAndResetTime()=" + dblTime);
 			// reset time
 			llResetTime();
-			return dTime;
+			return dblTime;
 		}
 
 		public String llGetAnimation(key kID)
@@ -976,11 +983,12 @@ namespace LSLEditor
 		{
 			integer iEntryType;
 
-			if (iIndex < 0)
+			if (iIndex < 0) {
 				iIndex = lSource.Count + iIndex;
-			if (iIndex >= lSource.Count || iIndex < 0)
+			}
+			if (iIndex >= lSource.Count || iIndex < 0) {
 				iEntryType = 0;
-			else {
+			} else {
 				switch (lSource[iIndex].GetType().ToString().Replace("LSLEditor.SecondLife+", "")) {
 					case "System.Double":
 					case "Float":
@@ -1096,8 +1104,9 @@ namespace LSLEditor
 		{
 			list lObjectDetails = new list();
 			for (int intI = 0; intI < lObjectFlags.Count; intI++) {
-				if (!(lObjectFlags[intI] is integer))
+				if (!(lObjectFlags[intI] is integer)) {
 					continue;
+				}
 				switch ((int)(integer)lObjectFlags[intI]) {
 					case OBJECT_NAME:
 						lObjectDetails.Add((SecondLife.String)host.GetObjectName(new Guid(kID.guid)));
@@ -1177,7 +1186,7 @@ namespace LSLEditor
 
 		public key llGetOwnerKey(key kID)
 		{
-			key kAvatarID = llGetOwner(); // This is incorrect, as the owner of this object may not be the owner of kID
+			key kAvatarID = llGetOwner();	// This is incorrect, as the owner of this object may not be the owner of kID
 			Verbose("llGetOwnerKey({0})={1}", kID, kAvatarID);
 			return kAvatarID;
 		}
@@ -1439,12 +1448,13 @@ namespace LSLEditor
 				if (start <= end) {
 					for (int intI = start; intI <= end; intI++)
 						sResult.Append(src[intI]);
-				} else // excluding
-                {
-					for (int intI = 0; intI <= end; intI++)
+				} else {// excluding
+					for (int intI = 0; intI <= end; intI++) {
 						sResult.Append(src[intI]);
-					for (int intI = start; intI < intLength; intI++)
+					}
+					for (int intI = start; intI < intLength; intI++) {
 						sResult.Append(src[intI]);
+					}
 				}
 			}
 			Verbose(string.Format(@"GetSubString(""{0}"", {1}, {2})=""{3}""", sSource, iStart, iEnd, sResult));
@@ -1615,15 +1625,15 @@ namespace LSLEditor
 
 		public String llInsertString(String sDestination, integer iIndex, String sSource)
 		{
-			string dst = sDestination;
-			string src = sSource;
-			int position = iIndex;
+			string strDestination = sDestination;
+			string strSource = sSource;
+			int intPosition = iIndex;
 			string sResult;
 
-			if (position < dst.Length) {
-				sResult = dst.Substring(0, position) + src + dst.Substring(position);
-			} else if (position >= 0) {
-				sResult = dst + src;
+			if (intPosition < strDestination.Length) {
+				sResult = strDestination.Substring(0, intPosition) + strSource + strDestination.Substring(intPosition);
+			} else if (intPosition >= 0) {
+				sResult = strDestination + strSource;
 			} else {
 				sResult = "**ERROR**";
 			}
@@ -1784,18 +1794,17 @@ namespace LSLEditor
 		{
 			int iLength = lSource.Count;
 
-			int start = iStart;
-			int end = iEnd;
+			int intStart = iStart;
+			int intEnd = iEnd;
 
 			list lTemp = new list();
 
-			if (CorrectIt(iLength, ref start, ref end)) {
-				if (start <= end) {
-					for (int intI = start; intI <= end; intI++) lTemp.Add(lSource[intI]);
-				} else // excluding
-                {
-					for (int intI = 0; intI <= end; intI++) lTemp.Add(lSource[intI]);
-					for (int intI = start; intI < iLength; intI++) lTemp.Add(lSource[intI]);
+			if (CorrectIt(iLength, ref intStart, ref intEnd)) {
+				if (intStart <= intEnd) {
+					for (int intI = intStart; intI <= intEnd; intI++) lTemp.Add(lSource[intI]);
+				} else {	// excluding
+					for (int intI = 0; intI <= intEnd; intI++) lTemp.Add(lSource[intI]);
+					for (int intI = intStart; intI < iLength; intI++) lTemp.Add(lSource[intI]);
 				}
 			}
 			list lResult = new list();
@@ -1803,13 +1812,13 @@ namespace LSLEditor
 			if (iStride <= 0) {
 				sRemark = " ** stride must be > 0 **";
 			} else {
-				if (start == 0) {
+				if (intStart == 0) {
 					for (int intI = 0; intI < lTemp.Count; intI += iStride) lResult.Add(lTemp[intI]);
 				} else {
 					for (int intI = iStride - 1; intI < lTemp.Count; intI += iStride) lResult.Add(lTemp[intI]);
 				}
 			}
-			Verbose(@"llList2ListStrided({0}, {1}, {2}, {3})={4}{5}", lSource.ToVerboseString(), start, end, iStride, lResult.ToVerboseString(), sRemark);
+			Verbose(@"llList2ListStrided({0}, {1}, {2}, {3})={4}{5}", lSource.ToVerboseString(), intStart, intEnd, iStride, lResult.ToVerboseString(), sRemark);
 			return lResult;
 		}
 
@@ -1890,8 +1899,9 @@ namespace LSLEditor
 		{
 			int intLength = lDestination.Count;
 			list lResult = new list();
-			if (iIndex < 0)
+			if (iIndex < 0) {
 				iIndex = lDestination.Count + iIndex;
+			}
 
 			for (int intI = 0; intI < Math.Min(iIndex, intLength); intI++) lResult.Add(lDestination[intI]);
 
@@ -2131,8 +2141,9 @@ namespace LSLEditor
 			System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
 			byte[] hash = md5.ComputeHash(Encoding.ASCII.GetBytes(sSource + ":" + iNonce.ToString()));
 			StringBuilder sbResult = new StringBuilder();
-			foreach (byte hex in hash)
+			foreach (byte hex in hash) {
 				sbResult.Append(hex.ToString("x2"));						//convert to standard MD5 form
+			}
 			Verbose("llMD5String({0}, {1})={2}", sSource, iNonce, sbResult);
 			return sbResult.ToString();
 		}
@@ -2565,13 +2576,14 @@ namespace LSLEditor
 			if (m != 0) {
 				double n = 2 * (rRotation.y * rRotation.s + rRotation.x * rRotation.z);
 				double p = m * m - n * n;
-				if (p > 0)
+				if (p > 0) {
 					vEuler = new vector(Math.Atan2(2.0 * (rRotation.x * rRotation.s - rRotation.y * rRotation.z), (-t.x - t.y + t.z + t.s)),
 					Math.Atan2(n, Math.Sqrt(p)), Math.Atan2(2.0 * (rRotation.z * rRotation.s - rRotation.x * rRotation.y), (t.x - t.y - t.z + t.s)));
-				else if (n > 0)
+				} else if (n > 0) {
 					vEuler = new vector(0, PI_BY_TWO, Math.Atan2((rRotation.z * rRotation.s + rRotation.x * rRotation.y), 0.5 - t.x - t.z));
-				else
+				} else {
 					vEuler = new vector(0, -PI_BY_TWO, Math.Atan2((rRotation.z * rRotation.s + rRotation.x * rRotation.y), 0.5 - t.x - t.z));
+				}
 			}
 			Verbose("llRot2Euler({0})={1}", rRotation, vEuler);
 			return vEuler;
@@ -3207,10 +3219,11 @@ namespace LSLEditor
 			for (int intI = 0; intI < data.Length; intI++) {
 				byte chrC = data[intI];
 				if (chrC == (byte)'%') {
-					if (intI < (data.Length - 2))
+					if (intI < (data.Length - 2)) {
 						list.Add((byte)
 							(HexToInt(data[intI + 1]) << 4
 							| HexToInt(data[intI + 2])));
+					}
 					intI += 2;
 				} else {
 					list.Add(chrC);
@@ -3218,8 +3231,9 @@ namespace LSLEditor
 			}
 			data = list.ToArray();
 			int intLen = Array.IndexOf(data, (byte)0x0);
-			if (intLen < 0)
+			if (intLen < 0) {
 				intLen = data.Length;
+			}
 			string strTmp = Encoding.UTF8.GetString(data, 0, intLen);
 			Verbose(string.Format(@"llUnescapeURL(""{0}"")=""{1}""", sURL, strTmp));
 			return strTmp;
@@ -3306,14 +3320,17 @@ namespace LSLEditor
 			string S1 = Base64ToString(sText1.ToString());
 			string S2 = Base64ToString(sText2.ToString());
 			int intLength = S1.Length;
-			if (S2.Length == 0)
+			if (S2.Length == 0) {
 				S2 = " ";
-			while (S2.Length < intLength)
+			}
+			while (S2.Length < intLength) {
 				S2 += S2;
+			}
 			S2 = S2.Substring(0, intLength);
 			StringBuilder sb = new StringBuilder();
-			for (int intI = 0; intI < intLength; intI++)
+			for (int intI = 0; intI < intLength; intI++) {
 				sb.Append((char)(S1[intI] ^ S2[intI]));
+			}
 			string sResult = StringToBase64(sb.ToString());
 			Verbose(@"llXorBase64StringsCorrect(""{0}"",""{1}"")=""{2}""", sText1, sText2, sResult);
 			return sResult;
