@@ -42,19 +42,21 @@
 // ********
 // */
 using System;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
 
-
-//
+/*
 // (C) 2006,2007 Alphons van der Heijden
 // mail: alphons@heijden.com
-//
+ */
 
 namespace LSLEditor
 {
+	/// <summary>
+	/// Enumeration of Communication Types that the host understands
+	/// </summary>
 	public enum CommunicationType
 	{
 		Whisper, Say, Shout, OwnerSay, RegionSay, RegionSayTo
@@ -62,80 +64,109 @@ namespace LSLEditor
 
 	public partial class SecondLife
 	{
-		// Make friends with my host
-		public SecondLifeHost host;
+		/// <summary>
+		/// Holds the host object.
+		/// </summary>
+		private SecondLifeHost slhHost;
 
 		#region members
-		// Random generator
-		private Random m_random;
+		/// <summary>
+		/// Random generator.
+		/// </summary>
+		private Random rdmRandom;
 
-		private DateTime m_DateTimeScriptStarted;
+		/// <summary>
+		/// Holds the time of the script starting execution.
+		/// </summary>
+		private DateTime dtDateTimeScriptStarted;
 
-		private Boolean m_AllowDrop = false;
-		private Hashtable m_LandPassList;
+		/// <summary>
+		/// Contains a boolean value indicating wether this object accepts other items to be dropped into it.
+		/// </summary>
+		private bool blnAllowDrop = false;
 
-		private Hashtable m_LandBanList;
+		/// <summary>
+		/// Contains a list of keys of avatars that may enter a parcel.
+		/// </summary>
+		private Hashtable htLandPassList;
 
-		private Float m_Volume;
+		/// <summary>
+		/// Contains a list of keys of avatars that may NOT enter a parcel.
+		/// </summary>
+		private Hashtable htLandBanList;
 
-		private String m_ObjectName;
-		private String m_ParcelMusicURL;
-		private vector m_pos;
-		private rotation m_rot;
-		private rotation m_rotlocal;
-		private vector m_scale;
-		private String m_SitText;
-		private Float m_SoundRadius;
+		/// <summary>
+		/// Volume of sound played by this prim.
+		/// </summary>
+		private Float fVolume;
 
-		private vector m_RegionCorner;
+		private String sObjectName;
+		private String sParcelMusicURL;
+		private vector vPosition;
+		private rotation rRotation;
+		private rotation rRotationlocal;
+		private vector vScale;
+		private String sSitText;
+		private Float fSoundRadius;
 
-		private integer m_start_parameter;
+		private vector vRegionCorner;
 
+		private integer iStartParameter;
+
+		#endregion
+
+		#region Constructor
+		/// <summary>
+		/// Initialises the <see cref="SecondLife"/> class.
+		/// </summary>
+		public SecondLife()
+		{
+			this.host = null;
+			rdmRandom = new Random();
+			dtDateTimeScriptStarted = DateTime.Now.ToUniversalTime();
+			htLandPassList = new Hashtable();
+			htLandBanList = new Hashtable();
+			fVolume = 0.0;
+			sObjectName = null;
+			vPosition = new vector(127, 128, 20);
+			rRotation = rotation.ZERO_ROTATION;
+			rRotationlocal = rotation.ZERO_ROTATION;
+			vScale = vector.ZERO_VECTOR;
+			sSitText = "sittext";
+			fSoundRadius = 1.0;
+			iStartParameter = 0;
+
+			vRegionCorner = vector.ZERO_VECTOR;
+		}
 		#endregion
 
 		#region Properties
 		public vector GetLocalPos
 		{
 			// TODO change this to use a call to llGetLocalPos specifying NOT to be Verbose. After all functions have been changed to allow verbose/silent option.
-			get { return m_pos; }
+			get { return vPosition; }
 		}
-		#endregion
-
-		#region constructor
-		public SecondLife()
+		
+		public SecondLifeHost host
 		{
-			host = null;
-			m_random = new Random();
-			m_DateTimeScriptStarted = DateTime.Now.ToUniversalTime();
-			m_LandPassList = new Hashtable();
-			m_LandBanList = new Hashtable();
-			m_Volume = 0.0;
-			m_ObjectName = null;
-			m_pos = new vector(127, 128, 20);
-			m_rot = rotation.ZERO_ROTATION;
-			m_rotlocal = rotation.ZERO_ROTATION;
-			m_scale = vector.ZERO_VECTOR;
-			m_SitText = "sittext";
-			m_SoundRadius = 1.0;
-			m_start_parameter = 0;
-
-			m_RegionCorner = vector.ZERO_VECTOR;
+			get { return this.slhHost; }
+			set { this.slhHost = value; }
 		}
 		#endregion
-
+		
 		#region internal routines
 		private void Verbose(string strLine, params object[] parameters)
 		{
 			if (parameters.Length == 0) {
 				host.VerboseMessage(strLine);
 			} else {
-				host.VerboseMessage(string.Format(strLine, parameters));
+				this.host.VerboseMessage(string.Format(strLine, parameters));
 			}
 		}
 
 		private void Chat(integer iChannel, string sText, CommunicationType ctHow)
 		{
-			host.Chat(host, iChannel, host.GetObjectName(), host.GetKey(), sText, ctHow);
+			this.host.Chat(this.host, iChannel, this.host.GetObjectName(), this.host.GetKey(), sText, ctHow);
 		}
 
 		public void state(string strStateName)
@@ -178,8 +209,9 @@ namespace LSLEditor
 
 		public ArrayList RandomShuffle(ArrayList alCollection)
 		{
-			// We have to copy all items anyway, and there isn't a way to produce the items
-			// on the fly that is linear. So copying to an array and shuffling it is as efficient as we can get.
+			/* We have to copy all items anyway, and there isn't a way to produce the items
+			   on the fly that is linear. So copying to an array and shuffling it is as efficient as we can get.
+			 */
 
 			if (alCollection == null) {
 				throw new ArgumentNullException("collection");
@@ -188,7 +220,7 @@ namespace LSLEditor
 			int intCount = alCollection.Count;
 			for (int i = intCount - 1; i >= 1; --i) {
 				// Pick an random number 0 through i inclusive.
-				int j = m_random.Next(i + 1);
+				int j = rdmRandom.Next(i + 1);
 
 				// Swap array[i] and array[j]
 				object temp = alCollection[i];
@@ -225,37 +257,46 @@ namespace LSLEditor
 			return new list(items);
 		}
 
+		/// <summary>
+		/// Implements the Comparer Interface for our custom types (Float, Integer, and String).
+		/// </summary>
 		private class BucketComparer : IComparer
 		{
 			private integer iAscending;
+
+			/// <summary>
+			/// Initialises the <see cref="BucketComparer"/> class.
+			/// </summary>
+			/// <param name="ascending"></param>
 			public BucketComparer(integer ascending)
 			{
 				this.iAscending = ascending;
 			}
+
 			public int Compare(object x, object y)
 			{
 				int iResult = 0;
-				object A, B;
+				object objA, objB;
 
 				object[] xx = x as object[];
 				object[] yy = y as object[];
 
 				if (iAscending == TRUE) {
-					A = xx[0];
-					B = yy[0];
+					objA = xx[0];
+					objB = yy[0];
 				} else {
-					B = xx[0];
-					A = yy[0];
+					objB = xx[0];
+					objA = yy[0];
 				}
 
-				string strType = A.GetType().ToString();
+				string strType = objA.GetType().ToString();
 
-				if (((A is string) && (B is string)) || ((A is SecondLife.String) && (B is SecondLife.String))) {
-					iResult = string.Compare(A.ToString(), B.ToString());
-				} else if ((A is SecondLife.integer) && (B is SecondLife.integer)) {
-					iResult = SecondLife.integer.Compare((SecondLife.integer)A, (SecondLife.integer)B);
-				} else if ((A is SecondLife.Float) && (B is SecondLife.Float)) {
-					iResult = SecondLife.Float.Compare((SecondLife.Float)A, (SecondLife.Float)B);
+				if (((objA is string) && (objB is string)) || ((objA is SecondLife.String) && (objB is SecondLife.String))) {
+					iResult = string.Compare(objA.ToString(), objB.ToString());
+				} else if ((objA is SecondLife.integer) && (objB is SecondLife.integer)) {
+					iResult = SecondLife.integer.Compare((SecondLife.integer)objA, (SecondLife.integer)objB);
+				} else if ((objA is SecondLife.Float) && (objB is SecondLife.Float)) {
+					iResult = SecondLife.Float.Compare((SecondLife.Float)objA, (SecondLife.Float)objB);
 				}
 
 				return iResult;
@@ -289,7 +330,9 @@ namespace LSLEditor
 					}
 				}
 
-				if (blnFound) continue;
+				if (blnFound) {
+					continue;
+				}
 
 				for (int intJ = 0; intJ < lSpacers.Count; intJ++) {
 					string strSpacer = lSpacers[intJ].ToString();
@@ -347,24 +390,25 @@ namespace LSLEditor
 			return intReturn;
 		}
 
-		static readonly int[] FastLookupBase64 =
-			{//  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 00
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 10
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,62, 0, 0, 0,63,	// 20
-				52,53,54,55,56,57,58,59,60,61, 0, 0, 0, 0, 0, 0,	// 30
-				 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,	// 40
-				15,16,17,18,19,20,21,22,23,24,25, 0, 0, 0, 0, 0,	// 50
-				 0,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,	// 60
-				41,42,43,44,45,46,47,48,49,50,51, 0, 0, 0, 0, 0,	// 70
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 80
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// 90
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// A0
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// B0
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// C0
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// D0
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	// E0
-				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};	// F0
+////[SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1204:StaticElementsMustAppearBeforeInstanceElements", Justification = "Stays with other string functions.")]
+		private static readonly int[] FastLookupBase64 =
+			{ // 0   1   2   3   4   5   6   7   8   9   A   B   C   D   E   F
+				 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,	  // 00
+				 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,	  // 10
+				 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 62,  0,  0,  0, 63,	  // 20
+				52, 53, 54, 55, 56, 57, 58, 59, 60, 61,  0,  0,  0,  0,  0,  0,	  // 30
+				 0,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14,	  // 40
+				15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,  0,  0,  0,  0,  0,	  // 50
+				 0, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,	  // 60
+				41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,  0,  0,  0,  0,  0,	  // 70
+				 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,	  // 80
+				 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,	  // 90
+				 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,	  // A0
+				 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,	  // B0
+				 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,	  // C0
+				 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,	  // D0
+				 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,	  // E0
+				 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 }; // F0
 		#endregion
 
 		#region Math Functions
@@ -375,16 +419,23 @@ namespace LSLEditor
 
 		private integer ModPow2(integer iValueX, integer iValueY, integer iModulus)
 		{
-			if (!iValueX) return 0;
-			integer k = 1 + (int)Math.Ceiling(Math.Log(Math.Abs(iValueX)) / 0.69314718055994530941723212145818);	//ceil(log2(x))
-			integer w = 32;
-			integer p = w / k;
-			integer r = iValueY / p;
-			integer f = iValueY % p;
-			integer z = 1;
-			if (r) z = ModPow2(ModPow1(iValueX, p, iModulus), r, iModulus);
-			if (f) z = (z * ModPow1(iValueX, f, iModulus)) % iModulus;
-			return z;
+			integer iResult = 0;
+			if (iValueX != 0) {
+				integer k = 1 + (int)Math.Ceiling(Math.Log(Math.Abs(iValueX)) / 0.69314718055994530941723212145818);	// ceil(log2(x))
+				integer w = 32;
+				integer p = w / k;
+				integer r = iValueY / p;
+				integer f = iValueY % p;
+				integer z = 1;
+				if (r) {
+					z = ModPow2(ModPow1(iValueX, p, iModulus), r, iModulus);
+				}
+				if (f) {
+					z = (z * ModPow1(iValueX, f, iModulus)) % iModulus;
+				}
+				iResult = z;
+			}
+			return iResult;
 		}
 		#endregion Math Functions
 
@@ -417,12 +468,14 @@ namespace LSLEditor
 		private double GetAverage(double[] data)
 		{
 			try {
-				double DataTotal = 0;
+				double dblDataTotal = 0;
 				for (int i = 0; i < data.Length; i++) {
-					DataTotal += data[i];
+					dblDataTotal += data[i];
 				}
-				return SafeDivide(DataTotal, data.Length);
-			} catch (Exception) { throw; }
+				return SafeDivide(dblDataTotal, data.Length);
+			} catch (Exception) {
+				throw;
+			}
 		}
 
 		public double GetStandardDeviation(double[] dblNumbers)
@@ -432,7 +485,7 @@ namespace LSLEditor
 				dblSum += dblNumbers[i];
 				dblSumOfSqrs += Math.Pow(dblNumbers[i], 2);
 			}
-			double dblTopSum = (dblNumbers.Length * dblSumOfSqrs) - (Math.Pow(dblSum, 2));
+			double dblTopSum = (dblNumbers.Length * dblSumOfSqrs) - Math.Pow(dblSum, 2);
 			double dblN = (double)dblNumbers.Length;
 			return Math.Sqrt(dblTopSum / (dblN * (dblN - 1)));
 		}
@@ -444,7 +497,8 @@ namespace LSLEditor
 				if ((dblValue1 != 0) && (dblValue2 != 0)) {
 					dblResult = dblValue1 / dblValue2;
 				}
-			} catch { }
+			} catch {
+			}
 			return dblResult;
 		}
 

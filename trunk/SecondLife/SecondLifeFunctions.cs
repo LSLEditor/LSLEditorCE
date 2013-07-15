@@ -67,31 +67,31 @@ namespace LSLEditor
 		public void llAddToLandBanList(key kID, Float fHours)
 		{
 			Verbose("llAddToLandBanList({0}, {1})", kID, fHours);
-			if (m_LandBanList.ContainsKey(kID)) {
-				m_LandBanList.Remove(kID);
+			if (htLandBanList.ContainsKey(kID)) {
+				htLandBanList.Remove(kID);
 			}
-			m_LandBanList.Add(kID, fHours);
+			htLandBanList.Add(kID, fHours);
 		}
 
 		public void llAddToLandPassList(key kID, Float fHours)
 		{
 			Verbose("llAddToLandPassList({0}, {1})", kID, fHours);
-			if (m_LandPassList.ContainsKey(kID)) {
-				m_LandPassList.Remove(kID);
+			if (htLandPassList.ContainsKey(kID)) {
+				htLandPassList.Remove(kID);
 			}
-			m_LandPassList.Add(kID, fHours);
+			htLandPassList.Add(kID, fHours);
 		}
 
 		public void llAdjustSoundVolume(Float fVolume)
 		{
 			Verbose("llAdjustSoundVolume({0}), fVolume");
-			m_Volume = fVolume;
+			this.fVolume = fVolume;
 		}
 
 		public void llAllowInventoryDrop(integer iAllowDrop)
 		{
 			Verbose("llAllowInventoryDrop({0})", iAllowDrop);
-			m_AllowDrop = (Boolean)iAllowDrop;
+			blnAllowDrop = (Boolean)iAllowDrop;
 		}
 
 		public Float llAngleBetween(rotation a, rotation b)
@@ -659,7 +659,7 @@ namespace LSLEditor
 
 		public Float llFrand(Float fMaximum)
 		{
-			double dblValue = fMaximum * m_random.NextDouble();
+			double dblValue = fMaximum * rdmRandom.NextDouble();
 			Verbose("llFrand({0})={1}", fMaximum, dblValue);
 			return dblValue;
 		}
@@ -1029,14 +1029,14 @@ namespace LSLEditor
 
 		public vector llGetLocalPos()
 		{
-			Verbose("llGetLocalPos()={0}", m_pos);
-			return m_pos;
+			Verbose("llGetLocalPos()={0}", vPosition);
+			return vPosition;
 		}
 
 		public rotation llGetLocalRot()
 		{
-			Verbose("llGetLocalRot()={0}", m_rotlocal);
-			return m_rotlocal;
+			Verbose("llGetLocalRot()={0}", rRotationlocal);
+			return rRotationlocal;
 		}
 
 		public Float llGetMass()
@@ -1250,8 +1250,8 @@ namespace LSLEditor
 
 		public string llGetParcelMusicURL()
 		{
-			Verbose(@"llGetParcelMaxPrims()=""{0}""", m_ParcelMusicURL);
-			return m_ParcelMusicURL;
+			Verbose(@"llGetParcelMaxPrims()=""{0}""", sParcelMusicURL);
+			return sParcelMusicURL;
 		}
 
 		public integer llGetParcelPrimCount(vector vPosition, integer iCategory, integer iSimWide)
@@ -1291,8 +1291,8 @@ namespace LSLEditor
 
 		public vector llGetPos()
 		{
-			Verbose("llGetPos()={0}", m_pos);
-			return m_pos;
+			Verbose("llGetPos()={0}", vPosition);
+			return vPosition;
 		}
 
 		public list llGetPrimMediaParams(integer iFace, list lDesiredParams)
@@ -1369,8 +1369,8 @@ namespace LSLEditor
 
 		public rotation llGetRot()
 		{
-			Verbose("llGetRot()={0}", m_rot);
-			return m_rot;
+			Verbose("llGetRot()={0}", rRotation);
+			return rRotation;
 		}
 
 		public integer llGetSPMaxMemory()
@@ -1382,8 +1382,8 @@ namespace LSLEditor
 
 		public vector llGetScale()
 		{
-			Verbose("llGetScale()=" + m_scale);
-			return m_scale;
+			Verbose("llGetScale()=" + vScale);
+			return vScale;
 		}
 
 		public String llGetScriptName()
@@ -1416,8 +1416,8 @@ namespace LSLEditor
 
 		public integer llGetStartParameter()
 		{
-			Verbose("llGetStartParameter()={0}" + m_start_parameter);
-			return m_start_parameter;
+			Verbose("llGetStartParameter()={0}" + iStartParameter);
+			return iStartParameter;
 		}
 
 		public list llGetStaticPath(vector vStart, vector vEnd, Float fRadius, list lParameters)
@@ -1498,7 +1498,7 @@ namespace LSLEditor
 
 		public Float llGetTime()
 		{
-			TimeSpan span = DateTime.Now.ToUniversalTime() - m_DateTimeScriptStarted;
+			TimeSpan span = DateTime.Now.ToUniversalTime() - dtDateTimeScriptStarted;
 			Verbose("llGetTime()={0}", span.TotalSeconds);
 			return span.TotalSeconds;
 		}
@@ -2388,16 +2388,16 @@ namespace LSLEditor
 		public void llRemoveFromLandBanList(key kAvatarID)
 		{
 			Verbose("llRemoveFromLandBanList({0})", kAvatarID);
-			if (m_LandBanList.ContainsKey(kAvatarID)) {
-				m_LandBanList.Remove(kAvatarID);
+			if (htLandBanList.ContainsKey(kAvatarID)) {
+				htLandBanList.Remove(kAvatarID);
 			}
 		}
 
 		public void llRemoveFromLandPassList(key kAvatarID)
 		{
 			Verbose("llRemoveFromLandPassList({0})", kAvatarID);
-			if (m_LandPassList.ContainsKey(kAvatarID)) {
-				m_LandPassList.Remove(kAvatarID);
+			if (htLandPassList.ContainsKey(kAvatarID)) {
+				htLandPassList.Remove(kAvatarID);
 			}
 		}
 
@@ -2498,13 +2498,13 @@ namespace LSLEditor
 
 		public void llResetLandBanList()
 		{
-			m_LandBanList = new Hashtable();
+			htLandBanList = new Hashtable();
 			Verbose("llResetLandBanList()");
 		}
 
 		public void llResetLandPassList()
 		{
-			m_LandPassList = new Hashtable();
+			htLandPassList = new Hashtable();
 			Verbose("llResetLandPassList()");
 		}
 
@@ -2524,7 +2524,7 @@ namespace LSLEditor
 		public void llResetTime()
 		{
 			Verbose("llResetTime()");
-			m_DateTimeScriptStarted = DateTime.Now.ToUniversalTime();
+			dtDateTimeScriptStarted = DateTime.Now.ToUniversalTime();
 		}
 
 		public integer llReturnObjectsByID(list lObjects)
@@ -2833,7 +2833,7 @@ namespace LSLEditor
 
 		public void llSetLocalRot(rotation rRotation)
 		{
-			this.m_rotlocal = rRotation;
+			this.rRotationlocal = rRotation;
 			Verbose("llSetLocalRot({0})", rRotation);
 		}
 
@@ -2864,7 +2864,7 @@ namespace LSLEditor
 		public void llSetParcelMusicURL(String sURL)
 		{
 			Verbose(@"llSetParcelMusicURL(""{0}"")", sURL);
-			m_ParcelMusicURL = sURL;
+			sParcelMusicURL = sURL;
 		}
 
 		public void llSetPayPrice(integer iPrice, list lButtons)
@@ -2880,7 +2880,7 @@ namespace LSLEditor
 		public void llSetPos(vector vPosition)
 		{
 			Verbose("llSetPos({0})", vPosition);
-			m_pos = vPosition;
+			this.vPosition = vPosition;
 		}
 
 		public integer llSetPrimMediaParams(integer iFace, list lParameters)
@@ -2899,7 +2899,7 @@ namespace LSLEditor
 		{
 			integer iResult = true;
 			Verbose("llSetRegionPos({0})={1}", vPosition, iResult);
-			m_pos = vPosition;
+			this.vPosition = vPosition;
 			return iResult;
 		}
 
@@ -2911,13 +2911,13 @@ namespace LSLEditor
 		public void llSetRot(rotation rRotation)
 		{
 			Verbose("llSetRot({0})", rRotation);
-			m_rot = rRotation;
+			this.rRotation = rRotation;
 		}
 
 		public void llSetScale(vector vScale)
 		{
 			Verbose("llSetScale({0})", vScale);
-			m_scale = vScale;
+			this.vScale = vScale;
 		}
 
 		public void llSetScriptState(String sName, integer iRunState)
@@ -2928,7 +2928,7 @@ namespace LSLEditor
 		public void llSetSitText(String sText)
 		{
 			Verbose(@"llSetSitText(""{0}"")", sText);
-			m_SitText = sText;
+			sSitText = sText;
 		}
 
 		public void llSetSoundQueueing(integer iQueueFlag)
@@ -2938,7 +2938,7 @@ namespace LSLEditor
 
 		public void llSetSoundRadius(Float fRadius)
 		{
-			m_SoundRadius = fRadius;
+			fSoundRadius = fRadius;
 			Verbose("llSetSoundRadius({0})", fRadius);
 		}
 

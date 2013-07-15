@@ -42,18 +42,23 @@
 // ********
 // */
 using System;
+using System.ComponentModel;
 using System.IO;
 using System.Reflection;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace LSLEditor
 {
+	/// <summary>About dialogue box form.</summary>
 	public partial class About : Form
 	{
+		/// <summary>
+		/// Initialises a new instance of the <see cref="About" /> class.
+		/// </summary>
+		/// <param name="parent">The parent form.</param>
 		public About(LSLEditorForm parent)
 		{
-			InitializeComponent();
+			this.InitializeComponent();
 
 			this.Icon = parent.Icon;
 
@@ -61,16 +66,31 @@ namespace LSLEditor
 			this.label2.Text = strVersion;
 		}
 
+		/// <summary>
+		/// OK/Close button.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void button1_Click(object sender, EventArgs e)
 		{
 			this.Close();
 		}
 
+		/// <summary>
+		/// Link to SourceForge page.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			System.Diagnostics.Process.Start(Properties.Settings.Default.ContactUrl);
 		}
 
+		/// <summary>
+		/// Loads the page.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void About_Load(object sender, EventArgs e)
 		{
 			string strExeFileName = Path.GetFileName(Assembly.GetExecutingAssembly().CodeBase);
