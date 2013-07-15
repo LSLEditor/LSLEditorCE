@@ -1,4 +1,4 @@
-﻿// /**
+// /**
 // ********
 // *
 // * ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden

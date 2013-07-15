@@ -251,6 +251,9 @@
     </Compile>
     <Compile Include="Plugins\Generic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecondLife\SecondLifeConstants.cs" />
+    <Compile Include="SecondLife\SecondLifeEvents.cs" />
+    <Compile Include="SecondLife\SecondLifeFunctions.cs" />
     <Compile Include="Solution\GuidProperty.cs">
       <SubType>Form</SubType>
     </Compile>
