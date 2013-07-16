@@ -49,6 +49,10 @@ using System.Text;
 
 namespace LSLEditor
 {
+	/// <summary>
+	/// This part of the SecondLife class contains the LSL function definitions.
+	/// </summary>
+	[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "These are all LSL functions, the documentation is in the LSL Wiki.")]
 	public partial class SecondLife
 	{
 		public integer llAbs(integer fValue)
@@ -100,7 +104,7 @@ namespace LSLEditor
 			Float fResult = 0.0F;
 			rotation r = b / a;												// calculate the rotation between the two arguments as quaternion
 			double s2 = r.s * r.s;											// square of the s-element
-			double v2 = r.x * r.x + r.y * r.y + r.z * r.z;					// sum of the squares of the v-elements
+			double v2 = (r.x * r.x) + (r.y * r.y) + (r.z * r.z);			// sum of the squares of the v-elements
 
 			if (s2 < v2) {													// compare the s-component to the v-component
 				fResult = 2.0 * Math.Acos(Math.Sqrt(s2 / (s2 + v2)));		// use arccos if the v-component is dominant
@@ -202,7 +206,7 @@ namespace LSLEditor
 
 				if (s.Length > 3) {
 					data[1] = (byte)((LookupBase64(s, 2) & 0x7) << 6);
-					data[1] |= (byte)(LookupBase64(s, 3));
+					data[1] |= (byte)LookupBase64(s, 3);
 				}
 
 				if (s.Length > 5) {
@@ -212,15 +216,15 @@ namespace LSLEditor
 
 				iResult = BitConverter.ToInt32(data, 0);
 
-				//0 12 34 56
-				//1 78 12 34
-				//2 56 78 12
-				//3 34 56 78
+				// 0 12 34 56
+				// 1 78 12 34
+				// 2 56 78 12
+				// 3 34 56 78
 
-				//4 12 34 56
-				//5 78 12 34
-				//6 56 78 12
-				//7 34 56 78
+				// 4 12 34 56
+				// 5 78 12 34
+				// 6 56 78 12
+				// 7 34 56 78
 			} catch {
 				iResult = (new Random()).Next();
 			}
@@ -252,31 +256,35 @@ namespace LSLEditor
 			string sSource = sString;
 			list lResult = new list();
 			StringBuilder sb = new StringBuilder();
-			int WithinAngelBracket = 0;
+			int intWithinAngelBracket = 0;
 			for (int intI = 0; intI < sSource.Length; intI++) {
 				char chrC = sSource[intI];
-				if (chrC == '<')
-					WithinAngelBracket++;
-				else if (chrC == '>')
-					WithinAngelBracket--;
+				if (chrC == '<') {
+					intWithinAngelBracket++;
+				} else if (chrC == '>') {
+					intWithinAngelBracket--;
+				}
 
-				if (WithinAngelBracket == 0 && chrC == ',') {
+				if (intWithinAngelBracket == 0 && chrC == ',') {
 					lResult.Add(sb.ToString());
 					sb = new StringBuilder();
 				} else {
 					sb.Append(sSource[intI]);
 				}
 			}
+
 			// dont forget the last one
 			lResult.Add(sb.ToString());
 
 			// remove the first space, if any
 			for (int intI = 0; intI < lResult.Count; intI++) {
 				string strValue = lResult[intI].ToString();
-				if (strValue == "")
+				if (strValue == "") {
 					continue;
-				if (strValue[0] == ' ')
+				}
+				if (strValue[0] == ' ') {
 					lResult[intI] = strValue.Substring(1);
+				}
 			}
 
 			Verbose(@"llCSV2List(""{0}"")={1}", sSource, lResult.ToVerboseString());
@@ -377,14 +385,16 @@ namespace LSLEditor
 
 			if (CorrectIt(intLength, ref start, ref end)) {
 				if (start <= end) {
-					for (int intI = start; intI <= end; intI++)
+					for (int intI = start; intI <= end; intI++) {
 						src[intI] = null;
-				} else // excluding
-                {
-					for (int intI = 0; intI <= end; intI++)
+					}
+				} else { // excluding
+					for (int intI = 0; intI <= end; intI++) {
 						src[intI] = null;
-					for (int intI = start; intI < intLength; intI++)
+					}
+					for (int intI = start; intI < intLength; intI++) {
 						src[intI] = null;
+					}
 				}
 			}
 			list lResult = new list();
@@ -410,8 +420,7 @@ namespace LSLEditor
 					for (int intI = start; intI <= end; intI++) {
 						src[intI] = '\0';
 					}
-				} else // excluding
-                {
+				} else { // excluding
 					for (int intI = 0; intI <= end; intI++) {
 						src[intI] = '\0';
 					}
@@ -616,22 +625,23 @@ namespace LSLEditor
 			double bw = Math.Cos(v.y);
 			double cz = Math.Sin(v.z);
 			double cw = Math.Cos(v.z);
-			rotation rRotation = new rotation(aw * by * cz + ax * bw * cw,
-					aw * by * cw - ax * bw * cz,
-					aw * bw * cz + ax * by * cw,
-					aw * bw * cw - ax * by * cz);
+			rotation rRotation = new rotation(
+				(aw * by * cz) + (ax * bw * cw),
+				(aw * by * cw) - (ax * bw * cz),
+				(aw * bw * cz) + (ax * by * cw),
+				(aw * bw * cw) - (ax * by * cz));
 			Verbose("llEuler2Rot({0})={1}", v, rRotation);
 			return rRotation;
 		}
 
-		public void llEvade(key TargetID, list Options)
+		public void llEvade(key kTargetID, list lOptions)
 		{
-			Verbose("llEvade({0}, {1})", TargetID, Options);
+			Verbose("llEvade({0}, {1})", kTargetID, lOptions);
 		}
 
-		public void llExecCharacterCmd(integer Command, list Options)
+		public void llExecCharacterCmd(integer iCommand, list lOptions)
 		{
-			Verbose("llExecCharacterCmd({0}, {1})", Command, Options);
+			Verbose("llExecCharacterCmd({0}, {1})", iCommand, lOptions.ToVerboseString());
 		}
 
 		public Float llFabs(Float fValue)
@@ -719,6 +729,7 @@ namespace LSLEditor
 			// get time
 			double dblTime = llGetTime();
 			Verbose("llGetAndResetTime()=" + dblTime);
+
 			// reset time
 			llResetTime();
 			return dblTime;
@@ -1447,9 +1458,10 @@ namespace LSLEditor
 
 			if (CorrectIt(intLength, ref start, ref end)) {
 				if (start <= end) {
-					for (int intI = start; intI <= end; intI++)
+					for (int intI = start; intI <= end; intI++) {
 						sResult.Append(src[intI]);
-				} else {// excluding
+					}
+				} else { // excluding
 					for (int intI = 0; intI <= end; intI++) {
 						sResult.Append(src[intI]);
 					}
@@ -1543,7 +1555,7 @@ namespace LSLEditor
 
 		public string llGetUsername(key kAvatarID)
 		{
-			//TODO Find a dummy username.
+			// TODO Find a dummy username.
 			string sUserName = "";
 			Verbose(@"llGetUsername({0})=""{1}""", kAvatarID, sUserName);
 			return sUserName;
@@ -1661,7 +1673,7 @@ namespace LSLEditor
 
 		public list llJson2List(string sJSON)
 		{
-			//TODO implement conversion to list
+			// TODO implement conversion to list
 			list lJSON = new list();
 			Verbose("llJson2List({0})={1}", sJSON, lJSON);
 			return lJSON;
@@ -1669,7 +1681,7 @@ namespace LSLEditor
 
 		public string llJsonGetValue(string sJSON, list lSpecifiers)
 		{
-			//TODO determine return value from list
+			// TODO determine return value from list
 			string sReturn = JSON_INVALID;
 			Verbose("llJsonGetValue({0}, {1})= {2}", sJSON, lSpecifiers, sReturn);
 			return sReturn;
@@ -1677,7 +1689,7 @@ namespace LSLEditor
 
 		public string llJsonSetValue(string sJSON, list lSpecifiers, string sValue)
 		{
-			//TODO determine return value
+			// TODO determine return value
 			string sReturn = JSON_INVALID;
 			Verbose("llJsonGetValue({0}, {1}, {2})= {3}", sJSON, lSpecifiers, sValue, sReturn);
 			return sReturn;
@@ -1685,7 +1697,7 @@ namespace LSLEditor
 
 		public string llJsonValueType(string sJSON, list lSpecifiers)
 		{
-			//TODO determine return value
+			// TODO determine return value
 			string sReturn = JSON_INVALID;
 			Verbose("llJsonGetValue({0}, {1})= {2}", sJSON, lSpecifiers, sReturn);
 			return sReturn;
@@ -1715,7 +1727,9 @@ namespace LSLEditor
 		{
 			StringBuilder sCSV = new StringBuilder();
 			for (int intI = 0; intI < lSource.Count; intI++) {
-				if (intI > 0) sCSV.Append(", ");
+				if (intI > 0) {
+					sCSV.Append(", ");
+				}
 				sCSV.Append(lSource[intI].ToString());
 			}
 			Verbose(@"llList2CSV({0})=""{1}""", lSource.ToVerboseString(), sCSV.ToString());
@@ -1725,7 +1739,9 @@ namespace LSLEditor
 		public Float llList2Float(list lSource, integer iIndex)
 		{
 			Float fResult;
-			if (iIndex < 0) iIndex = lSource.Count + iIndex;
+			if (iIndex < 0) {
+				iIndex = lSource.Count + iIndex;
+			}
 			if (iIndex >= lSource.Count || iIndex < 0) {
 				fResult = 0.0;
 			} else {
@@ -1738,7 +1754,9 @@ namespace LSLEditor
 		public integer llList2Integer(list lSrc, integer iIndex)
 		{
 			integer iResult;
-			if (iIndex < 0) iIndex = lSrc.Count + iIndex;
+			if (iIndex < 0) {
+				iIndex = lSrc.Count + iIndex;
+			}
 			if (iIndex >= lSrc.Count || iIndex < 0) {
 				iResult = 0;
 			} else {
@@ -1750,7 +1768,7 @@ namespace LSLEditor
 
 		public string llList2Json(string sType, list lValues)
 		{
-			//TODO determine return value
+			// TODO determine return value
 			string sReturn = JSON_INVALID;
 			Verbose(@"llList2Json({0}, {1})=""{2}""", sType, lValues.ToVerboseString(), sReturn);
 			return sReturn;
@@ -1759,7 +1777,9 @@ namespace LSLEditor
 		public key llList2Key(list lSource, integer iIndex)
 		{
 			key kResult;
-			if (iIndex < 0) iIndex = lSource.Count + iIndex;
+			if (iIndex < 0) { 
+				iIndex = lSource.Count + iIndex;
+			}
 			if (iIndex >= lSource.Count || iIndex < 0) {
 				kResult = key.NULL_KEY;
 			} else {
@@ -1780,10 +1800,16 @@ namespace LSLEditor
 
 			if (CorrectIt(iLength, ref start, ref end)) {
 				if (start <= end) {
-					for (int intI = start; intI <= end; intI++) lResult.Add(lSource[intI]);
+					for (int intI = start; intI <= end; intI++) {
+						lResult.Add(lSource[intI]);
+					}
 				} else { // excluding
-					for (int intI = 0; intI <= end; intI++) lResult.Add(lSource[intI]);
-					for (int intI = start; intI < iLength; intI++) lResult.Add(lSource[intI]);
+					for (int intI = 0; intI <= end; intI++) {
+						lResult.Add(lSource[intI]);
+					}
+					for (int intI = start; intI < iLength; intI++) {
+						lResult.Add(lSource[intI]);
+					}
 				}
 			}
 
@@ -1802,10 +1828,16 @@ namespace LSLEditor
 
 			if (CorrectIt(iLength, ref intStart, ref intEnd)) {
 				if (intStart <= intEnd) {
-					for (int intI = intStart; intI <= intEnd; intI++) lTemp.Add(lSource[intI]);
+					for (int intI = intStart; intI <= intEnd; intI++) {
+						lTemp.Add(lSource[intI]);
+					}
 				} else {	// excluding
-					for (int intI = 0; intI <= intEnd; intI++) lTemp.Add(lSource[intI]);
-					for (int intI = intStart; intI < iLength; intI++) lTemp.Add(lSource[intI]);
+					for (int intI = 0; intI <= intEnd; intI++) {
+						lTemp.Add(lSource[intI]);
+					}
+					for (int intI = intStart; intI < iLength; intI++) {
+						lTemp.Add(lSource[intI]);
+					}
 				}
 			}
 			list lResult = new list();
@@ -1814,9 +1846,13 @@ namespace LSLEditor
 				sRemark = " ** stride must be > 0 **";
 			} else {
 				if (intStart == 0) {
-					for (int intI = 0; intI < lTemp.Count; intI += iStride) lResult.Add(lTemp[intI]);
+					for (int intI = 0; intI < lTemp.Count; intI += iStride) {
+						lResult.Add(lTemp[intI]);
+					}
 				} else {
-					for (int intI = iStride - 1; intI < lTemp.Count; intI += iStride) lResult.Add(lTemp[intI]);
+					for (int intI = iStride - 1; intI < lTemp.Count; intI += iStride) {
+						lResult.Add(lTemp[intI]);
+					}
 				}
 			}
 			Verbose(@"llList2ListStrided({0}, {1}, {2}, {3})={4}{5}", lSource.ToVerboseString(), intStart, intEnd, iStride, lResult.ToVerboseString(), sRemark);
@@ -1826,7 +1862,9 @@ namespace LSLEditor
 		public rotation llList2Rot(list lSource, integer iIndex)
 		{
 			rotation rResult;
-			if (iIndex < 0) iIndex = lSource.Count + iIndex;
+			if (iIndex < 0) {
+				iIndex = lSource.Count + iIndex;
+			}
 			if (iIndex >= lSource.Count || iIndex < 0) {
 				rResult = ZERO_ROTATION;
 			} else {
@@ -1843,7 +1881,9 @@ namespace LSLEditor
 		public String llList2String(list lSource, integer iIndex)
 		{
 			String sResult;
-			if (iIndex < 0) iIndex = lSource.Count + iIndex;
+			if (iIndex < 0) {
+				iIndex = lSource.Count + iIndex;
+			}
 			if (iIndex >= lSource.Count || iIndex < 0) {
 				sResult = "";
 			} else {
@@ -1856,7 +1896,9 @@ namespace LSLEditor
 		public vector llList2Vector(list lSource, integer iIndex)
 		{
 			vector vResult;
-			if (iIndex < 0) iIndex = lSource.Count + iIndex;
+			if (iIndex < 0) {
+				iIndex = lSource.Count + iIndex;
+			}
 			if (iIndex >= lSource.Count || iIndex < 0) {
 				vResult = ZERO_VECTOR;
 			} else {
@@ -1872,9 +1914,15 @@ namespace LSLEditor
 
 		public integer llListFindList(list lSource, list lMatch)
 		{
-			if (lSource.Count == 0) return -1;
-			if (lMatch.Count == 0) return 0;
-			if (lMatch.Count > lSource.Count) return -1;
+			if (lSource.Count == 0) {
+				return -1;
+			}
+			if (lMatch.Count == 0) {
+				return 0;
+			}
+			if (lMatch.Count > lSource.Count) {
+				return -1;
+			}
 
 			int iReturn = -1;
 			for (int intI = 0; intI <= (lSource.Count - lMatch.Count); intI++) {
@@ -1904,11 +1952,15 @@ namespace LSLEditor
 				iIndex = lDestination.Count + iIndex;
 			}
 
-			for (int intI = 0; intI < Math.Min(iIndex, intLength); intI++) lResult.Add(lDestination[intI]);
+			for (int intI = 0; intI < Math.Min(iIndex, intLength); intI++) {
+				lResult.Add(lDestination[intI]);
+			}
 
 			lResult.AddRange(lSource);
 
-			for (int intI = Math.Max(0, iIndex); intI < intLength; intI++) lResult.Add(lDestination[intI]);
+			for (int intI = Math.Max(0, iIndex); intI < intLength; intI++) {
+				lResult.Add(lDestination[intI]);
+			}
 
 			Verbose("llListInsertList({0}, {1}, {2})={3}", lDestination.ToVerboseString(), lSource.ToVerboseString(), iIndex, lResult.ToVerboseString());
 			return lResult;
@@ -1938,12 +1990,18 @@ namespace LSLEditor
 
 			list lResult = new list();
 			if (intStart <= intEnd) {
-				for (int intI = 0; intI < intStart; intI++) lResult.Add(lDestination[intI]);
+				for (int intI = 0; intI < intStart; intI++) {
+					lResult.Add(lDestination[intI]);
+				}
 				lResult.AddRange(lSource);
-				for (int intI = intEnd + 1; intI < intLength; intI++) lResult.Add(lDestination[intI]);
+				for (int intI = intEnd + 1; intI < intLength; intI++) {
+					lResult.Add(lDestination[intI]);
+				}
 			} else {
 				// where to add src?????
-				for (int intI = intEnd; intI <= intStart; intI++) lResult.Add(lDestination[intI]);
+				for (int intI = intEnd; intI <= intStart; intI++) {
+					lResult.Add(lDestination[intI]);
+				}
 			}
 			Verbose("llListReplaceList({0}, {1}, {2}, {3}={4}", lDestination.ToVerboseString(), lSource.ToVerboseString(), intStart, intEnd, lResult.ToVerboseString());
 			return lResult;
@@ -1989,21 +2047,29 @@ namespace LSLEditor
 						rmin = double.MaxValue;
 						rmax = double.MinValue;
 						for (int intI = 0; intI < input.Count; intI++) {
-							if (input[intI] < rmin) rmin = input[intI];
-							if (input[intI] > rmax) rmax = input[intI];
+							if (input[intI] < rmin) {
+								rmin = input[intI];
+							}
+							if (input[intI] > rmax) {
+								rmax = input[intI];
+							}
 						}
 						dResult = rmax - rmin;
 						break;
 					case LIST_STAT_MIN:
 						dResult = double.MaxValue;
 						for (int intI = 0; intI < input.Count; intI++) {
-							if (input[intI] < dResult) dResult = input[intI];
+							if (input[intI] < dResult) {
+								dResult = input[intI];
+							}
 						}
 						break;
 					case LIST_STAT_MAX:
 						dResult = double.MinValue;
 						for (int intI = 0; intI < input.Count; intI++) {
-							if (input[intI] > dResult) dResult = input[intI];
+							if (input[intI] > dResult) {
+								dResult = input[intI];
+							}
 						}
 						break;
 					case LIST_STAT_MEAN:
@@ -2015,7 +2081,7 @@ namespace LSLEditor
 					case LIST_STAT_MEDIAN:
 						input.Sort();
 						if (Math.Ceiling(input.Count * 0.5) == input.Count * 0.5) {
-							dResult = (input[(int)(input.Count * 0.5 - 1)] + input[(int)(input.Count * 0.5)]) / 2;
+							dResult = input[(int)((input.Count * 0.5) - 1)] + (input[(int)(input.Count * 0.5)] / 2);
 						} else {
 							dResult = input[((int)(Math.Ceiling(input.Count * 0.5))) - 1];
 						}
@@ -2032,8 +2098,8 @@ namespace LSLEditor
 						for (int intI = 0; intI < input.Count; intI++) {
 							dResult += input[intI] * input[intI];
 						}
-						//double av = GetAverage(input.ToArray());
-						//for (int intI = 0; intI < input.Count; intI++)
+						////double av = GetAverage(input.ToArray());
+						////for (int intI = 0; intI < input.Count; intI++)
 						//	result += (av - input[intI]) * (av - input[intI]);
 						break;
 					case LIST_STAT_NUM_COUNT:
@@ -2143,7 +2209,7 @@ namespace LSLEditor
 			byte[] hash = md5.ComputeHash(Encoding.ASCII.GetBytes(sSource + ":" + iNonce.ToString()));
 			StringBuilder sbResult = new StringBuilder();
 			foreach (byte hex in hash) {
-				sbResult.Append(hex.ToString("x2"));						//convert to standard MD5 form
+				sbResult.Append(hex.ToString("x2"));						// convert to standard MD5 form
 			}
 			Verbose("llMD5String({0}, {1})={2}", sSource, iNonce, sbResult);
 			return sbResult.ToString();
@@ -2460,7 +2526,6 @@ namespace LSLEditor
 			this.host.llRequestPermissions(kAvatarID, iPermissionFlags);
 		}
 
-		//346
 		public key llRequestSecureURL()
 		{
 			key kResult = new key(Guid.NewGuid());
@@ -2475,7 +2540,6 @@ namespace LSLEditor
 			return kResult;
 		}
 
-		//345
 		public key llRequestURL()
 		{
 			key kResult = new key(Guid.NewGuid());
@@ -2572,18 +2636,20 @@ namespace LSLEditor
 		{
 			// http://rpgstats.com/wiki/index.php?title=LibraryRotationFunctions
 			rotation t = new rotation(rRotation.x * rRotation.x, rRotation.y * rRotation.y, rRotation.z * rRotation.z, rRotation.s * rRotation.s);
-			double m = (t.x + t.y + t.z + t.s);
+			double m = t.x + t.y + t.z + t.s;
 			vector vEuler = new vector(0, 0, 0);
 			if (m != 0) {
-				double n = 2 * (rRotation.y * rRotation.s + rRotation.x * rRotation.z);
-				double p = m * m - n * n;
+				double n = 2 * ((rRotation.y * rRotation.s) + (rRotation.x * rRotation.z));
+				double p = (m * m) - (n * n);
 				if (p > 0) {
-					vEuler = new vector(Math.Atan2(2.0 * (rRotation.x * rRotation.s - rRotation.y * rRotation.z), (-t.x - t.y + t.z + t.s)),
-					Math.Atan2(n, Math.Sqrt(p)), Math.Atan2(2.0 * (rRotation.z * rRotation.s - rRotation.x * rRotation.y), (t.x - t.y - t.z + t.s)));
+					vEuler = new vector(
+						Math.Atan2(2.0 * ((rRotation.x * rRotation.s) - (rRotation.y * rRotation.z)), -t.x - t.y + t.z + t.s),
+						Math.Atan2(n, Math.Sqrt(p)),
+						Math.Atan2(2.0 * ((rRotation.z * rRotation.s) - (rRotation.x * rRotation.y)), t.x - t.y - t.z + t.s));
 				} else if (n > 0) {
-					vEuler = new vector(0, PI_BY_TWO, Math.Atan2((rRotation.z * rRotation.s + rRotation.x * rRotation.y), 0.5 - t.x - t.z));
+					vEuler = new vector(0, PI_BY_TWO, Math.Atan2((rRotation.z * rRotation.s) + (rRotation.x * rRotation.y), 0.5 - t.x - t.z));
 				} else {
-					vEuler = new vector(0, -PI_BY_TWO, Math.Atan2((rRotation.z * rRotation.s + rRotation.x * rRotation.y), 0.5 - t.x - t.z));
+					vEuler = new vector(0, -PI_BY_TWO, Math.Atan2((rRotation.z * rRotation.s) + (rRotation.x * rRotation.y), 0.5 - t.x - t.z));
 				}
 			}
 			Verbose("llRot2Euler({0})={1}", rRotation, vEuler);
@@ -2592,7 +2658,7 @@ namespace LSLEditor
 
 		public vector llRot2Fwd(rotation rRotation)
 		{
-			vector v = new vector(1.0 / (rRotation.x * rRotation.x + rRotation.y * rRotation.y + rRotation.z * rRotation.z + rRotation.s * rRotation.s), 0, 0);
+			vector v = new vector(1.0 / ((rRotation.x * rRotation.x) + (rRotation.y * rRotation.y) + (rRotation.z * rRotation.z) + (rRotation.s * rRotation.s)), 0, 0);
 			vector vResult = v * rRotation;
 			Verbose("llRot2Fwd({0})={1}", rRotation, vResult);
 			return vResult;
@@ -2600,7 +2666,7 @@ namespace LSLEditor
 
 		public vector llRot2Left(rotation rRotation)
 		{
-			vector v = new vector(0, 1.0 / (rRotation.x * rRotation.x + rRotation.y * rRotation.y + rRotation.z * rRotation.z + rRotation.s * rRotation.s), 0);
+			vector v = new vector(0, 1.0 / ((rRotation.x * rRotation.x) + (rRotation.y * rRotation.y) + (rRotation.z * rRotation.z) + (rRotation.s * rRotation.s)), 0);
 			vector vResult = v * rRotation;
 			Verbose("llRot2Left({0})={1}", rRotation, vResult);
 			return vResult;
@@ -2608,7 +2674,7 @@ namespace LSLEditor
 
 		public vector llRot2Up(rotation rRotation)
 		{
-			vector v = new vector(0, 0, 1.0 / (rRotation.x * rRotation.x + rRotation.y * rRotation.y + rRotation.z * rRotation.z + rRotation.s * rRotation.s));
+			vector v = new vector(0, 0, 1.0 / ((rRotation.x * rRotation.x) + (rRotation.y * rRotation.y) + (rRotation.z * rRotation.z) + (rRotation.s * rRotation.s)));
 			vector vResult = v * rRotation;
 			Verbose("llRot2Left({0})={1}", rRotation, vResult);
 			return vResult;
@@ -3260,7 +3326,7 @@ namespace LSLEditor
 
 		public Float llVecMag(vector vVector)
 		{
-			double dblValue = Math.Sqrt(vVector.x * vVector.x + vVector.y * vVector.y + vVector.z * vVector.z);
+			double dblValue = Math.Sqrt((vVector.x * vVector.x) + (vVector.y * vVector.y) + (vVector.z * vVector.z));
 			Verbose("llVecMag({0})={1}", vVector, dblValue);
 			return dblValue;
 		}
@@ -3318,19 +3384,19 @@ namespace LSLEditor
 
 		public String llXorBase64StringsCorrect(String sText1, String sText2)
 		{
-			string S1 = Base64ToString(sText1.ToString());
-			string S2 = Base64ToString(sText2.ToString());
-			int intLength = S1.Length;
-			if (S2.Length == 0) {
-				S2 = " ";
+			string strS1 = Base64ToString(sText1.ToString());
+			string strS2 = Base64ToString(sText2.ToString());
+			int intLength = strS1.Length;
+			if (strS2.Length == 0) {
+				strS2 = " ";
 			}
-			while (S2.Length < intLength) {
-				S2 += S2;
+			while (strS2.Length < intLength) {
+				strS2 += strS2;
 			}
-			S2 = S2.Substring(0, intLength);
+			strS2 = strS2.Substring(0, intLength);
 			StringBuilder sb = new StringBuilder();
 			for (int intI = 0; intI < intLength; intI++) {
-				sb.Append((char)(S1[intI] ^ S2[intI]));
+				sb.Append((char)(strS1[intI] ^ strS2[intI]));
 			}
 			string sResult = StringToBase64(sb.ToString());
 			Verbose(@"llXorBase64StringsCorrect(""{0}"",""{1}"")=""{2}""", sText1, sText2, sResult);

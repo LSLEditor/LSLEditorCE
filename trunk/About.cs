@@ -43,19 +43,23 @@
 // */
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
 namespace LSLEditor
 {
-	/// <summary>About dialogue box form.</summary>
+	/// <summary>
+	/// About dialogue box form.
+	/// </summary>
 	public partial class About : Form
 	{
 		/// <summary>
 		/// Initialises a new instance of the <see cref="About" /> class.
 		/// </summary>
 		/// <param name="parent">The parent form.</param>
+		[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1642:ConstructorSummaryDocumentationMustBeginWithStandardText", Justification = "Reviewed.")]
 		public About(LSLEditorForm parent)
 		{
 			this.InitializeComponent();
