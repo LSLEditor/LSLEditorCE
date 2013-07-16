@@ -69,7 +69,6 @@ using LSLEditor.Docking;
 
 // At the bottom of the form there are
 
-
 // 1) tabcontrol1 , holding tabbed documents
 // 2) splitter1, for increasing simulator window
 // 3) panel1 , holding simulator or listview for compiler errors
@@ -114,16 +113,12 @@ namespace LSLEditor
 		private const int WM_NCACTIVATE = 0x0086;
 		protected override void WndProc(ref Message m)
 		{
-			if (m.Msg == WM_NCACTIVATE)
-			{
-				if (m.LParam != IntPtr.Zero)
-				{
+			if (m.Msg == WM_NCACTIVATE) {
+				if (m.LParam != IntPtr.Zero) {
 					m.WParam = new IntPtr(1);
 				}
-			}
-			else
-			{
-				try { curProc.MaxWorkingSet = curProc.MaxWorkingSet; } catch {}
+			} else {
+				try { curProc.MaxWorkingSet = curProc.MaxWorkingSet; } catch { }
 			}
 			base.WndProc(ref m);
 		}
@@ -138,15 +133,18 @@ namespace LSLEditor
 
 		private void SetDefaultProperties()
 		{
-			if (Properties.Settings.Default.FontEditor == null)
+			if (Properties.Settings.Default.FontEditor == null) {
 				Properties.Settings.Default.FontEditor = new Font("Courier New", 9.75F, FontStyle.Regular);
+			}
 
-			if (Properties.Settings.Default.FontTooltips == null)
+			if (Properties.Settings.Default.FontTooltips == null) {
 				Properties.Settings.Default.FontTooltips = new Font(SystemFonts.MessageBoxFont.Name, 9.75F, FontStyle.Regular);
+			}
 
 			string strLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-			if (Properties.Settings.Default.ProjectLocation == "")
+			if (Properties.Settings.Default.ProjectLocation == "") {
 				Properties.Settings.Default.ProjectLocation = strLocation;
+			}
 		}
 
 		public LSLEditorForm(string[] args)
@@ -154,17 +152,14 @@ namespace LSLEditor
 			Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US", false);
 			Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US", false);
 
-			if (args.Length == 1)
-			{
-				if (args[0] == "/reset")
-				{
+			if (args.Length == 1) {
+				if (args[0] == "/reset") {
 					Properties.Settings.Default.Reset();
 					Properties.Settings.Default.CallUpgrade = false;
 				}
 			}
 
-			if (Properties.Settings.Default.CallUpgrade)
-			{
+			if (Properties.Settings.Default.CallUpgrade) {
 				Properties.Settings.Default.Upgrade();
 				Properties.Settings.Default.CallUpgrade = false;
 			}
@@ -185,12 +180,9 @@ namespace LSLEditor
 
 			SetupChildForms();
 
-			try
-			{
+			try {
 				Start(args);
-			}
-			catch (Exception exception)
-			{
+			} catch (Exception exception) {
 				MessageBox.Show("Error: " + OopsFormatter.ApplyFormatting(exception.Message), "Oops");
 			}
 		}
@@ -199,11 +191,12 @@ namespace LSLEditor
 		{
 			get
 			{
-				if (this.IsMdiContainer)
+				if (this.IsMdiContainer) {
 					return this.MdiChildren;
+				}
 
 				List<Form> children = new List<Form>();
-			//TODO: Find Child forms
+				//TODO: Find Child forms
 				//foreach (TabPage tabPage in this.tabControlExtended1.TabPages)
 				//	children.Add(tabPage.Tag as Form);
 				return children.ToArray();
@@ -214,28 +207,26 @@ namespace LSLEditor
 		{
 			get
 			{
-				if (this.IsMdiContainer)
-					return this.ActiveMdiChild;
-				else
-				{
+				Form form = null;
+				if (this.IsMdiContainer) {
+					form = this.ActiveMdiChild;
+				} else {
 					//TODO: Get Active Mdi Form
-					return null;
+					//return null;
 					//dockPanel.ActiveContent
-				//	if (this.tabControlExtended1.SelectedTab == null)
-				//		return null;
-				//	return this.tabControlExtended1.SelectedTab.Tag as Form;
+					//	if (this.tabControlExtended1.SelectedTab == null)
+					//		return null;
+					//	return this.tabControlExtended1.SelectedTab.Tag as Form;
 				}
+				return form;
 			}
 		}
 
 		public void ActivateMdiForm(Form form)
 		{
-			if (this.IsMdiContainer)
-			{
+			if (this.IsMdiContainer) {
 				this.ActivateMdiChild(form);
-			}
-			else
-			{
+			} else {
 				//TODO: Activate the right Mdi Form
 				/*for (int intI = 0; intI < this.tabControlExtended1.TabCount; intI++)
 				{
@@ -253,8 +244,7 @@ namespace LSLEditor
 
 		public void AddForm(DockContent form)
 		{
-			if (this.IsMdiContainer)
-			{
+			if (this.IsMdiContainer) {
 				//form.MdiParent = this;
 				//form.Tag = null;
 				//form.Show();
@@ -262,12 +252,7 @@ namespace LSLEditor
 
 				//TODO: add form in the right way
 				form.Show(dockPanel);
-			}
-			else
-			{
-
-
-
+			} else {
 				//form.Visible = false;
 				//form.MdiParent = null;
 				//TabPage tabPage = new TabPage(form.Text+"   ");
@@ -330,14 +315,12 @@ namespace LSLEditor
 			Version version = Assembly.GetExecutingAssembly().GetName().Version;
 			this.Text += " " + version.Major + "." + version.Minor;
 
-			if (System.Diagnostics.Debugger.IsAttached)
-			{
+			if (System.Diagnostics.Debugger.IsAttached) {
 				this.Text += " (ALPHA)";
-			}
-			else
-			{
-				if (Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location).Contains("beta"))
+			} else {
+				if (Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location).Contains("beta")) {
 					this.Text += " (BETA)";
+				}
 			}
 
 			//TODO: Fix close buttons on tabs
@@ -345,29 +328,18 @@ namespace LSLEditor
 			//this.tabControlExtended1.SetDrawMode();
 			//this.tabControlExtended1.OnTabClose += new EventHandler(tabControl1_OnTabClose);
 
-			if (args.Length == 0)
-			{
+			if (args.Length == 0) {
 				NewFile();
-			}
-			else
-			{
-				if (args[0] == "/reset")
-				{
+			} else {
+				if (args[0] == "/reset") {
 					NewFile();
-				}
-				else
-				{
-					if (Path.GetExtension(args[0]) == ".sol")
-					{
+				} else {
+					if (Path.GetExtension(args[0]) == ".sol") {
 						this.SolutionExplorer.OpenSolution(args[0]);
-					}
-					else
-					{
+					} else {
 						bool blnRun = false;
-						foreach (string strFileName in args)
-						{
-							if (strFileName == "/run")
-							{
+						foreach (string strFileName in args) {
+							if (strFileName == "/run") {
 								blnRun = true;
 								continue;
 							}
@@ -376,8 +348,7 @@ namespace LSLEditor
 							editForm.TextBox.OnCursorPositionChanged += new SyntaxRichTextBox.CursorPositionChangedHandler(TextBox_OnCursorPositionChanged);
 							AddForm(editForm);
 						}
-						if (blnRun)
-						{
+						if (blnRun) {
 							this.stopToolStripMenuItem.Enabled = true;
 							StartSimulator();
 						}
@@ -394,10 +365,11 @@ namespace LSLEditor
 		private XmlDocument GetXmlFromResource(string strName)
 		{
 			XmlDocument xml = new XmlDocument();
-			Stream resource = Assembly.GetExecutingAssembly().GetManifestResourceStream(this.GetType().Namespace + "."+strName);
+			Stream resource = Assembly.GetExecutingAssembly().GetManifestResourceStream(this.GetType().Namespace + "." + strName);
 
-			if (resource != null)
+			if (resource != null) {
 				xml.Load(resource);
+			}
 			return xml;
 		}
 
@@ -425,18 +397,16 @@ namespace LSLEditor
 		public EditForm OpenFile(string strPath, Guid guid, bool blnIsScript)
 		{
 			EditForm editForm = null;
-			if (this.Children.Length > 0)
-			{
+			if (this.Children.Length > 0) {
 				editForm = this.Children[0] as EditForm;
-				if (editForm != null && !editForm.IsDisposed)
-				{
-					if (editForm.ScriptName != Properties.Settings.Default.ExampleName || editForm.Dirty)
+				if (editForm != null && !editForm.IsDisposed) {
+					if (editForm.ScriptName != Properties.Settings.Default.ExampleName || editForm.Dirty) {
 						editForm = null;
+					}
 				}
 			}
 
-			if (editForm == null)
-			{
+			if (editForm == null) {
 				editForm = new EditForm(this);
 				editForm.TextBox.OnCursorPositionChanged += new SyntaxRichTextBox.CursorPositionChangedHandler(TextBox_OnCursorPositionChanged);
 				AddForm(editForm);
@@ -461,33 +431,34 @@ namespace LSLEditor
 
 		private void OpenFile(string strFileName)
 		{
-			OpenFile(strFileName, Guid.Empty , true);
+			OpenFile(strFileName, Guid.Empty, true);
 		}
 
 		private string ClippedPath(string strPath)
 		{
-			if (strPath.Length < Properties.Settings.Default.PathClipLength)
-				return strPath;
-
-			string strRoot = Path.GetPathRoot(strPath);
-			string strTmp = "";
-			while (strTmp.Length < Properties.Settings.Default.PathClipLength)
-			{
-				strTmp = Path.Combine(Path.GetFileName(strPath) , strTmp);
-				strPath = Path.GetDirectoryName(strPath);
-				if (strPath == strRoot || strPath == null)
-					break;
+			string strResult = strPath;
+			if (Properties.Settings.Default.PathClipLength < strPath.Length) {
+				string strRoot = Path.GetPathRoot(strPath);
+				string strTmp = "";
+				while (strTmp.Length < Properties.Settings.Default.PathClipLength) {
+					strTmp = Path.Combine(Path.GetFileName(strPath), strTmp);
+					strPath = Path.GetDirectoryName(strPath);
+					if (strPath == strRoot || strPath == null) {
+						break;
+					}
+				}
+				strResult = Path.Combine(Path.Combine(strRoot, "..."), strTmp);
 			}
-			return Path.Combine(Path.Combine(strRoot, "..."), strTmp);
+			return strPath;
 		}
 
 		private void InitRecentFileList()
 		{
-			if (Properties.Settings.Default.RecentFileList == null)
+			if (Properties.Settings.Default.RecentFileList == null) {
 				Properties.Settings.Default.RecentFileList = new System.Collections.Specialized.StringCollection();
+			}
 			int intLen = Properties.Settings.Default.RecentFileList.Count;
-			for (int intI = 0; intI < intLen; intI++)
-			{
+			for (int intI = 0; intI < intLen; intI++) {
 				ToolStripMenuItem tsmi = new ToolStripMenuItem(ClippedPath(Properties.Settings.Default.RecentFileList[intI]));
 				tsmi.Tag = Properties.Settings.Default.RecentFileList[intI];
 				this.recentFileToolStripMenuItem.DropDownItems.Add(tsmi);
@@ -496,11 +467,11 @@ namespace LSLEditor
 
 		private void InitRecentProjectList()
 		{
-			if (Properties.Settings.Default.RecentProjectList == null)
+			if (Properties.Settings.Default.RecentProjectList == null) {
 				Properties.Settings.Default.RecentProjectList = new System.Collections.Specialized.StringCollection();
+			}
 			int intLen = Properties.Settings.Default.RecentProjectList.Count;
-			for (int intI = 0; intI < intLen; intI++)
-			{
+			for (int intI = 0; intI < intLen; intI++) {
 				ToolStripMenuItem tsmi = new ToolStripMenuItem(ClippedPath(Properties.Settings.Default.RecentProjectList[intI]));
 				tsmi.Tag = Properties.Settings.Default.RecentProjectList[intI];
 				this.recentProjectToolStripMenuItem.DropDownItems.Add(tsmi);
@@ -510,21 +481,21 @@ namespace LSLEditor
 		private void InitPluginsList()
 		{
 			// erase old plugins
-			for (int intI = this.toolsStripMenuItem.DropDownItems.Count - 1; intI > 0; intI--)
+			for (int intI = this.toolsStripMenuItem.DropDownItems.Count - 1; intI > 0; intI--) {
 				this.toolsStripMenuItem.DropDownItems.RemoveAt(intI);
+			}
 
-			if (Properties.Settings.Default.Plugins == null)
-				return;
-
-			ToolStripMenuItem tsmi;
-			EventHandler handler = new EventHandler(this.PluginsHandler);
-			foreach (string strPlugin in Properties.Settings.Default.Plugins)
-			{
-				if(strPlugin.ToLower().Contains("lslint"))
-					tsmi = new ToolStripMenuItem(strPlugin, null, handler, Keys.F7);
-				else
-					tsmi = new ToolStripMenuItem(strPlugin, null, handler);
-				this.toolsStripMenuItem.DropDownItems.Add(tsmi);
+			if (Properties.Settings.Default.Plugins != null) {
+				ToolStripMenuItem tsmi;
+				EventHandler handler = new EventHandler(this.PluginsHandler);
+				foreach (string strPlugin in Properties.Settings.Default.Plugins) {
+					if (strPlugin.ToLower().Contains("lslint")) {
+						tsmi = new ToolStripMenuItem(strPlugin, null, handler, Keys.F7);
+					} else {
+						tsmi = new ToolStripMenuItem(strPlugin, null, handler);
+					}
+					this.toolsStripMenuItem.DropDownItems.Add(tsmi);
+				}
 			}
 		}
 
@@ -535,17 +506,14 @@ namespace LSLEditor
 			this.recentFileToolStripMenuItem.DropDownItems.Insert(0, tsmi);
 			Properties.Settings.Default.RecentFileList.Insert(0, strPath);
 			int intListLen = Properties.Settings.Default.RecentFileList.Count;
-			for (int intI = intListLen - 1; intI > 0; intI--)
-			{
-				if (strPath.ToLower() == Properties.Settings.Default.RecentFileList[intI].ToLower())
-				{
+			for (int intI = intListLen - 1; intI > 0; intI--) {
+				if (strPath.ToLower() == Properties.Settings.Default.RecentFileList[intI].ToLower()) {
 					this.recentFileToolStripMenuItem.DropDownItems.RemoveAt(intI);
 					Properties.Settings.Default.RecentFileList.RemoveAt(intI);
 				}
 			}
 			int intLen = Properties.Settings.Default.RecentFileMax;
-			if (this.recentFileToolStripMenuItem.DropDownItems.Count > intLen)
-			{
+			if (this.recentFileToolStripMenuItem.DropDownItems.Count > intLen) {
 				this.recentFileToolStripMenuItem.DropDownItems.RemoveAt(intLen);
 				Properties.Settings.Default.RecentFileList.RemoveAt(intLen);
 			}
@@ -556,25 +524,21 @@ namespace LSLEditor
 			ToolStripMenuItem tsmi = new ToolStripMenuItem(ClippedPath(strPath));
 			tsmi.Tag = strPath;
 
-			if (AddToList)
-			{
+			if (AddToList) {
 				this.recentProjectToolStripMenuItem.DropDownItems.Insert(0, tsmi);
 				Properties.Settings.Default.RecentProjectList.Insert(0, strPath);
 			}
 
 			int intListLen = Properties.Settings.Default.RecentProjectList.Count;
-			for (int intI = intListLen - 1; intI > 0; intI--)
-			{
-				if (strPath.ToLower() == Properties.Settings.Default.RecentProjectList[intI].ToLower())
-				{
+			for (int intI = intListLen - 1; intI > 0; intI--) {
+				if (strPath.ToLower() == Properties.Settings.Default.RecentProjectList[intI].ToLower()) {
 					this.recentProjectToolStripMenuItem.DropDownItems.RemoveAt(intI);
 					Properties.Settings.Default.RecentProjectList.RemoveAt(intI);
 				}
 			}
 
 			int intLen = Properties.Settings.Default.RecentProjectMax;
-			if (this.recentProjectToolStripMenuItem.DropDownItems.Count > intLen)
-			{
+			if (this.recentProjectToolStripMenuItem.DropDownItems.Count > intLen) {
 				this.recentProjectToolStripMenuItem.DropDownItems.RemoveAt(intLen);
 				Properties.Settings.Default.RecentProjectList.RemoveAt(intLen);
 			}
@@ -584,12 +548,9 @@ namespace LSLEditor
 		private void ReadNoteFiles()
 		{
 			this.openNoteFilesDialog.Multiselect = true;
-			if (this.openNoteFilesDialog.ShowDialog() == DialogResult.OK)
-			{
-				foreach (string strFileName in this.openNoteFilesDialog.FileNames)
-				{
-					if (File.Exists(strFileName))
-					{
+			if (this.openNoteFilesDialog.ShowDialog() == DialogResult.OK) {
+				foreach (string strFileName in this.openNoteFilesDialog.FileNames) {
+					if (File.Exists(strFileName)) {
 						OpenFile(strFileName, Guid.NewGuid(), false);
 						UpdateRecentFileList(strFileName);
 					}
@@ -600,12 +561,9 @@ namespace LSLEditor
 		private void ReadScriptFiles()
 		{
 			this.openScriptFilesDialog.Multiselect = true;
-			if (this.openScriptFilesDialog.ShowDialog() == DialogResult.OK)
-			{
-				foreach (string strFileName in this.openScriptFilesDialog.FileNames)
-				{
-					if (File.Exists(strFileName))
-					{
+			if (this.openScriptFilesDialog.ShowDialog() == DialogResult.OK) {
+				foreach (string strFileName in this.openScriptFilesDialog.FileNames) {
+					if (File.Exists(strFileName)) {
 						OpenFile(strFileName, Guid.NewGuid());
 						UpdateRecentFileList(strFileName);
 					}
@@ -625,17 +583,16 @@ namespace LSLEditor
 		public bool SaveFile(EditForm editForm, bool blnSaveAs)
 		{
 			DialogResult dialogresult = DialogResult.OK;
-			if (editForm.FullPathName == Properties.Settings.Default.ExampleName || blnSaveAs)
-			{
+			if (editForm.FullPathName == Properties.Settings.Default.ExampleName || blnSaveAs) {
 				SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
 				saveDialog.FileName = editForm.FullPathName;
 				string strExtension = Path.GetExtension(editForm.FullPathName);
 				dialogresult = saveDialog.ShowDialog();
-				if (dialogresult == DialogResult.OK)
+				if (dialogresult == DialogResult.OK) {
 					editForm.FullPathName = saveDialog.FileName;
+				}
 			}
-			if (dialogresult == DialogResult.OK)
-			{
+			if (dialogresult == DialogResult.OK) {
 				editForm.SaveCurrentFile();
 				UpdateRecentFileList(editForm.FullPathName);
 				return true;
@@ -646,23 +603,24 @@ namespace LSLEditor
 		// save file of active MDI child, if any
 		private bool SaveActiveFile()
 		{
+			bool blnResult = false;
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return false;
-			// save as!!
-			// TODO: Refactor saveDialog to be a property of the form
-			SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
-			return SaveFile(editForm, true);
+			if (editForm != null) {
+				// save as!!
+				// TODO: Refactor saveDialog to be a property of the form
+				SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
+				blnResult = SaveFile(editForm, true);
+			}
+			return blnResult;
 		}
-
 
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			editForm.SaveCurrentFile();
-			this.Focus();
+			if (editForm != null) {
+				editForm.SaveCurrentFile();
+				this.Focus();
+			}
 		}
 
 		private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -672,37 +630,30 @@ namespace LSLEditor
 
 		private Browser GetBrowser()
 		{
-			if (this.browser == null || this.browser.IsDisposed)
-			{
+			if (this.browser == null || this.browser.IsDisposed) {
 				this.browser = new Browser(this);
-				if (Properties.Settings.Default.BrowserLocation != Point.Empty)
-				{
+				if (Properties.Settings.Default.BrowserLocation != Point.Empty) {
 					this.browser.StartPosition = FormStartPosition.Manual;
 					this.browser.Location = Properties.Settings.Default.BrowserLocation;
 				}
-				if (Properties.Settings.Default.BrowserSize != Size.Empty)
+				if (Properties.Settings.Default.BrowserSize != Size.Empty) {
 					this.browser.Size = Properties.Settings.Default.BrowserSize;
+				}
 				this.browser.SizeChanged += new EventHandler(browser_SizeChanged);
 				this.browser.LocationChanged += new EventHandler(browser_LocationChanged);
-				if (this.browserInWindowToolStripMenuItem.Checked)
-				{
+				if (this.browserInWindowToolStripMenuItem.Checked) {
 					this.browser.MdiParent = null;
 					this.browser.Show();
-				}
-				else
-				{
+				} else {
 					AddForm(this.browser);
 					//this.browser.MdiParent = this;
 				}
 			}
 			this.browser.Activate();
 
-			if (this.IsMdiContainer)
-			{
+			if (this.IsMdiContainer) {
 				this.ActivateMdiChild(this.browser);
-			}
-			else
-			{
+			} else {
 				//TODO: find browser in childs
 				/*for (int intI = 0; intI < this.tabControlExtended1.TabCount; intI++)
 				{
@@ -735,20 +686,17 @@ namespace LSLEditor
 		{
 			// Initialize the dialog's PrinterSettings property to hold user
 			// defined printer settings.
-				pageSetupDialog1.PageSettings =
-					new System.Drawing.Printing.PageSettings();
+			pageSetupDialog1.PageSettings = new System.Drawing.Printing.PageSettings();
 
 			// Initialize dialog's PrinterSettings property to hold user
 			// set printer settings.
-				pageSetupDialog1.PrinterSettings =
-					new System.Drawing.Printing.PrinterSettings();
+			pageSetupDialog1.PrinterSettings = new System.Drawing.Printing.PrinterSettings();
 
 			//Do not show the network in the printer dialog.
 			pageSetupDialog1.ShowNetwork = false;
 
 			//Show the dialog storing the result.
-			if (pageSetupDialog1.ShowDialog() != DialogResult.OK)
-			{
+			if (pageSetupDialog1.ShowDialog() != DialogResult.OK) {
 				pageSetupDialog1.PageSettings = null;
 				pageSetupDialog1.PrinterSettings = null;
 			}
@@ -757,8 +705,7 @@ namespace LSLEditor
 		private void printPreviewtoolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm != null)
-			{
+			if (editForm != null) {
 				printerHelp(editForm);
 				printer.PrintPreviewEditForm(editForm);
 			}
@@ -767,8 +714,7 @@ namespace LSLEditor
 		private void printToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm != null)
-			{
+			if (editForm != null) {
 				printerHelp(editForm);
 				printer.PrintEditForm(editForm);
 			}
@@ -786,9 +732,9 @@ namespace LSLEditor
 		private void copyToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			editForm.TextBox.ToClipBoard();
+			if (editForm != null) {
+				editForm.TextBox.ToClipBoard();
+			}
 		}
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -799,84 +745,82 @@ namespace LSLEditor
 		private void undoToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			editForm.TextBox.Undo();
+			if (editForm != null) {
+				editForm.TextBox.Undo();
+			}
 		}
 
 		private void redoToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			editForm.TextBox.Redo();
+			if (editForm != null) {
+				editForm.TextBox.Redo();
+			}
 		}
 
 		private void cutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			editForm.TextBox.Cut();
+			if (editForm != null) {
+				editForm.TextBox.Cut();
+			}
 		}
 
 		private void copyToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			editForm.TextBox.Copy();
+			if (editForm != null) {
+				editForm.TextBox.Copy();
+			}
 		}
 
 		private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			editForm.TextBox.Paste();
+			if (editForm != null) {
+				editForm.TextBox.Paste();
+			}
 		}
 
 		private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			editForm.TextBox.Delete();
+			if (editForm != null) {
+				editForm.TextBox.Delete();
+			}
 		}
 
 		private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			editForm.TextBox.SelectAll();
+			if (editForm != null) {
+				editForm.TextBox.SelectAll();
+			}
 		}
 
 		private void formatDocumentToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			editForm.TextBox.FormatDocument();
+			if (editForm != null) {
+				editForm.TextBox.FormatDocument();
+			}
 		}
 
 		private void formatSelectedTextToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			editForm.TextBox.AutoFormatSelectedText();
+			if (editForm != null) {
+				editForm.TextBox.AutoFormatSelectedText();
+			}
 		}
 
 
 		private void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm != null)
-			{
+			if (editForm != null) {
 				ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
-				if (tsmi != null)
-				{
+				if (tsmi != null) {
 					tsmi.Checked = !tsmi.Checked;
 					editForm.TextBox.WordWrap = tsmi.Checked;
 				}
@@ -912,11 +856,13 @@ namespace LSLEditor
 			Font listBoxFont;
 			Font toolTipFont;
 
-			if (Properties.Settings.Default.FontEditor == null)
+			if (Properties.Settings.Default.FontEditor == null) {
 				Properties.Settings.Default.FontEditor = new Font("Courier New", 9.75F, FontStyle.Regular);
+			}
 
-			if (Properties.Settings.Default.FontTooltips == null)
+			if (Properties.Settings.Default.FontTooltips == null) {
 				Properties.Settings.Default.FontTooltips = new Font(SystemFonts.MessageBoxFont.Name, 9.75F, FontStyle.Regular);
+			}
 
 			toolTipFont = Properties.Settings.Default.FontTooltips;
 			listBoxFont = Properties.Settings.Default.FontEditor;
@@ -926,11 +872,11 @@ namespace LSLEditor
 			this.TooltipListBox.Font = toolTipFont;
 			this.GListBoxWindow.Font = listBoxFont;
 
-			foreach (Form form in this.Children)
-			{
+			foreach (Form form in this.Children) {
 				EditForm editForm = form as EditForm;
-				if (editForm == null || editForm.IsDisposed)
+				if (editForm == null || editForm.IsDisposed) {
 					continue;
+				}
 				editForm.SetFont();
 			}
 		}
@@ -975,7 +921,7 @@ namespace LSLEditor
 			imageList.Images.Add(new Bitmap(this.GetType(), "Images.States.gif"));
 
 			this.GListBoxWindow.GListBox.ImageList = imageList;
-		   // this.tvOutline.ImageList = imageList;
+			// this.tvOutline.ImageList = imageList;
 
 			this.Move += new EventHandler(LSLEditorForm_SetPosition);
 			this.Resize += new EventHandler(LSLEditorForm_SetPosition);
@@ -987,44 +933,43 @@ namespace LSLEditor
 		void GListBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm != null)
+			if (editForm != null) {
 				editForm.TextBox.ShowTooltipOnListBox();
+			}
 		}
 
 		void GListBox_DoubleClick(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm != null)
+			if (editForm != null) {
 				editForm.TextBox.InsertSelectedWord();
+			}
 
 		}
 
 		private void LSLEditorForm_SetPosition(object sender, EventArgs e)
 		{
-			foreach (PermissionsForm pf in this.PermissionForms)
-			{
+			foreach (PermissionsForm pf in this.PermissionForms) {
 				pf.Top = this.Top + 30;
 				pf.Left = this.Right - pf.Width - 5;
 			}
-			foreach(llDialogForm df in this.llDialogForms)
-			{
+			foreach (llDialogForm df in this.llDialogForms) {
 				df.Top = this.Top + 30;
 				df.Left = this.Right - df.Width - 5;
 			}
-			foreach(llTextBoxForm tbf in this.llTextBoxForms)
-			{
+			foreach (llTextBoxForm tbf in this.llTextBoxForms) {
 				tbf.Left = this.Left + this.Width / 2 - tbf.Width / 2;
 				tbf.Top = this.Top + this.Height / 2 - tbf.Height / 2;
 			}
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm != null)
+			if (editForm != null) {
 				editForm.TextBox.SetPosition(Screen.PrimaryScreen.WorkingArea);
+			}
 		}
 
 		private void LoadProperties()
 		{
-			try
-			{
+			try {
 				//TODO: hmmm?
 				//this.tabControlExtended1.Visible = false;
 
@@ -1036,53 +981,45 @@ namespace LSLEditor
 				Size size = Properties.Settings.Default.LSLEditorSize;
 				Point location = Properties.Settings.Default.LSLEditorLocation;
 				Rectangle rect = new Rectangle(location, size);
-				if(Screen.PrimaryScreen.WorkingArea.Contains(rect))
-				{
-					if (size.Width > 100 && size.Height > 100)
-					{
+				if (Screen.PrimaryScreen.WorkingArea.Contains(rect)) {
+					if (size.Width > 100 && size.Height > 100) {
 						this.Location = location;
 						this.Size = size;
 					}
 				}
 
-				this.browserInWindowToolStripMenuItem.Checked =
-					Properties.Settings.Default.BrowserInWindow;
+				this.browserInWindowToolStripMenuItem.Checked = Properties.Settings.Default.BrowserInWindow;
 
-				this.WikiSepBrowserstoolStripMenuItem.Checked =
-					Properties.Settings.Default.WikiSeperateBrowser;
+				this.WikiSepBrowserstoolStripMenuItem.Checked = Properties.Settings.Default.WikiSeperateBrowser;
 
-			}
-			catch(Exception exception)
-			{
+			} catch (Exception exception) {
 				MessageBox.Show("Error Properties: " + OopsFormatter.ApplyFormatting(exception.Message), "Oops, but continue");
 			}
 		}
 
+		// TODO cleanup multiple return points
 		public bool CloseAllOpenWindows()
 		{
-			foreach (Form form in this.Children)
-			{
+			foreach (Form form in this.Children) {
 				EditForm editForm = form as EditForm;
-				if (editForm == null || editForm.IsDisposed)
+				if (editForm == null || editForm.IsDisposed) {
 					continue;
+				}
 				ActivateMdiForm(editForm);
-				if (editForm.Dirty)
-				{
+				if (editForm.Dirty) {
 					DialogResult dialogResult = MessageBox.Show(this, @"Save """ + editForm.ScriptName + @"""?", "File has changed", MessageBoxButtons.YesNoCancel);
-					if (dialogResult == DialogResult.Cancel)
-					{
+					if (dialogResult == DialogResult.Cancel) {
 						return false;
 					}
-					if (dialogResult == DialogResult.Yes)
-					{
+					if (dialogResult == DialogResult.Yes) {
 						// TODO: Refactor saveDialog to be a property of the form
 						SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
-						if(!SaveFile(editForm, false))
+						if (!SaveFile(editForm, false)) {
 							return false;
+						}
 					}
 
-					if (dialogResult == DialogResult.No)
-					{
+					if (dialogResult == DialogResult.No) {
 						editForm.Dirty = false;
 					}
 				}
@@ -1091,59 +1028,50 @@ namespace LSLEditor
 			return true;
 		}
 
+		// TODO cleanup multiple return points
 		private void LSLEditorForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			try
-			{
+			try {
 				Properties.Settings.Default.LSLEditorSize = this.Size;
 				Properties.Settings.Default.LSLEditorLocation = this.Location;
 
 				Properties.Settings.Default.Save();
 
-				if (this.IsMdiContainer)
-				{
+				if (this.IsMdiContainer) {
 					// this is set by any EditForm close
 					e.Cancel = this.CancelClosing;
 					return;
 				}
 
-				if (this.SolutionExplorer != null & !this.SolutionExplorer.IsDisposed)
-				{
+				if (this.SolutionExplorer != null & !this.SolutionExplorer.IsDisposed) {
 					this.SolutionExplorer.CloseSolution();
 				}
 
 				e.Cancel = !CloseAllOpenWindows();
 
-			}
-			catch
-			{
-			}
+			} catch { }
 		}
 
 
 		private void helpKeywordToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-
-			Point dummy;
-			string strKeyWord = editForm.TextBox.GetCurrentKeyWord(false, out dummy);
-			ShowHelpOnKeyWord(strKeyWord);
+			if (editForm != null) {
+				Point dummy;
+				string strKeyWord = editForm.TextBox.GetCurrentKeyWord(false, out dummy);
+				ShowHelpOnKeyWord(strKeyWord);
+			}
 		}
 
+		// TODO cleanup multiple return points
 		private void ShowHelpOnKeyWord(string strKeyWord)
 		{
-			if (Properties.Settings.Default.HelpOffline)
-			{
+			if (Properties.Settings.Default.HelpOffline) {
 				string strHelpFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), Properties.Settings.Default.HelpOfflineFile);
-				if (!File.Exists(strHelpFile))
-				{
-					if (MessageBox.Show("No Offline help, use Online Wiki?", "Offline Help fails", MessageBoxButtons.OKCancel,MessageBoxIcon.Question) != DialogResult.OK)
+				if (!File.Exists(strHelpFile)) {
+					if (MessageBox.Show("No Offline help, use Online Wiki?", "Offline Help fails", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK)
 						return;
-				}
-				else
-				{
+				} else {
 					if (strKeyWord == "")
 						Help.ShowHelp(this, strHelpFile);
 					else
@@ -1154,15 +1082,13 @@ namespace LSLEditor
 
 			string strUrl = Properties.Settings.Default.Help + strKeyWord;
 
-			if (strKeyWord == "")
+			if (strKeyWord == "") {
 				strKeyWord = "Help";
-
-			if (Properties.Settings.Default.WikiSeperateBrowser)
-			{
-				System.Diagnostics.Process.Start(strUrl);
 			}
-			else
-			{
+
+			if (Properties.Settings.Default.WikiSeperateBrowser) {
+				System.Diagnostics.Process.Start(strUrl);
+			} else {
 				Browser browser = GetBrowser();
 				browser.ShowWebBrowser(strKeyWord, strUrl);
 			}
@@ -1190,8 +1116,7 @@ namespace LSLEditor
 		private void InitSyntaxError()
 		{
 			// information out of every script
-			if (this.SyntaxErrors == null)
-			{
+			if (this.SyntaxErrors == null) {
 				this.SyntaxErrors = new SyntaxError();
 				this.SyntaxErrors.OnSyntaxError += new SyntaxError.SyntaxErrorHandler(SyntaxErrors_OnSyntaxError);
 				this.SyntaxErrors.Dock = DockStyle.Fill;
@@ -1202,51 +1127,47 @@ namespace LSLEditor
 		private void SyntaxErrors_OnSyntaxError(object sender, SyntaxError.SyntaxErrorEventArgs e)
 		{
 			EditForm editForm = null;
-			foreach (Form form in this.Children)
-			{
+			foreach (Form form in this.Children) {
 				editForm = form as EditForm;
-				if (editForm == null || editForm.IsDisposed)
+				if (editForm == null || editForm.IsDisposed) {
 					continue;
-				if (editForm.FullPathName == e.FullPathName)
-				{
+				}
+				if (editForm.FullPathName == e.FullPathName) {
 					ActivateMdiForm(editForm);
 					editForm.TextBox.Goto(e.Line, e.Char);
 					editForm.Focus();
 					return;
 				}
 			}
-			editForm = OpenFile(e.FullPathName,e.EditFormGuid,e.IsScript);
+			editForm = OpenFile(e.FullPathName, e.EditFormGuid, e.IsScript);
 			editForm.TextBox.Goto(e.Line, e.Char);
 			editForm.Focus();
 		}
 
 		private void StartSimulator()
 		{
-			if (!SyntaxCheck(true))
-				return;
+			if (SyntaxCheck(true)) {
+				this.SimulatorConsole = new SimulatorConsole(this.SolutionExplorer, this.Children);
 
-			this.SimulatorConsole = new SimulatorConsole(this.SolutionExplorer, this.Children);
-
-			this.SimulatorConsole.Show(dockPanel);
-			//TODO: Show Simulator Console somewhere
-			//this.panel1.Controls.Clear();
-			//this.panel1.Controls.Add(this.SimulatorConsole);
-			//this.panel1.Visible = true;
-			//this.splitter1.SplitPosition = Properties.Settings.Default.SimulatorSize.Height;
+				this.SimulatorConsole.Show(dockPanel);
+				//TODO: Show Simulator Console somewhere
+				//this.panel1.Controls.Clear();
+				//this.panel1.Controls.Add(this.SimulatorConsole);
+				//this.panel1.Visible = true;
+				//this.splitter1.SplitPosition = Properties.Settings.Default.SimulatorSize.Height;
+			}
 		}
 
 		public void StopSimulator()
 		{
 			//TODO: Hide simulator? Or we could keep it like the debug output in VS
 			//this.panel1.Visible = false;
-			if (this.SimulatorConsole != null)
-			{
+			if (this.SimulatorConsole != null) {
 				this.SimulatorConsole.Stop();
 				this.SimulatorConsole.Dispose();
 			}
 			this.SimulatorConsole = null;
 		}
-
 
 		private bool SyntaxCheck(bool Silent)
 		{
@@ -1254,35 +1175,34 @@ namespace LSLEditor
 			//this.panel1.Visible = false;
 			InitSyntaxError();
 
-			foreach (Form form in this.Children)
-			{
+			foreach (Form form in this.Children) {
 				EditForm editForm = form as EditForm;
-				if (editForm == null || editForm.IsDisposed)
+				if (editForm == null || editForm.IsDisposed) {
 					continue;
-				if (Properties.Settings.Default.AutoSaveOnDebug)
-				{
-					if (editForm.Dirty)
+				}
+				if (Properties.Settings.Default.AutoSaveOnDebug) {
+					if (editForm.Dirty) {
 						editForm.SaveCurrentFile();
+					}
 				}
 				editForm.SyntaxCheck();
 			}
 
-			if (this.SyntaxErrors.HasErrors)
-			{
+			bool blnResult = false;
+			if (this.SyntaxErrors.HasErrors) {
 				this.SyntaxErrors.Show(dockPanel);
 				//TODO: Show errors somewhere in an output
 				//this.panel1.Controls.Clear();
 				//this.panel1.Controls.Add(this.SyntaxErrors);
 				//this.panel1.Visible = true;
 				//this.splitter1.SplitPosition = Properties.Settings.Default.SimulatorSize.Height;
-				return false;
-			}
-			else
-			{
-				if (!Silent)
+			} else {
+				if (!Silent) {
 					MessageBox.Show("LSL Syntax seems OK", "LSL Syntax Checker", MessageBoxButtons.OK, MessageBoxIcon.Information);
-				return true;
+				}
+				blnResult = true;
 			}
+			return blnResult;
 		}
 
 		private void releaseNotesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1321,18 +1241,15 @@ namespace LSLEditor
 		private void tabControlExtended1_MouseDown(object sender, MouseEventArgs e)
 		{
 			TabControl tabControl = sender as TabControl;
-			if (tabControl == null)
-				return;
-			if (e.Button == MouseButtons.Right)
-			{
-				for (int intI = 0; intI < tabControl.TabCount; intI++)
-				{
-					Rectangle rt = tabControl.GetTabRect(intI);
-					if (e.X > rt.Left && e.X < rt.Right
-						&& e.Y > rt.Top && e.Y < rt.Bottom)
-					{
-						this.contextMenuStrip1.Tag = intI;
-						this.contextMenuStrip1.Show(tabControl, new Point(e.X, e.Y));
+			if (tabControl != null) {
+				if (e.Button == MouseButtons.Right) {
+					for (int intI = 0; intI < tabControl.TabCount; intI++) {
+						Rectangle rt = tabControl.GetTabRect(intI);
+						if (e.X > rt.Left && e.X < rt.Right
+							&& e.Y > rt.Top && e.Y < rt.Bottom) {
+							this.contextMenuStrip1.Tag = intI;
+							this.contextMenuStrip1.Show(tabControl, new Point(e.X, e.Y));
+						}
 					}
 				}
 			}
@@ -1340,11 +1257,11 @@ namespace LSLEditor
 
 		private bool IsInSolutionExplorer(Guid guid)
 		{
-			if (this.SolutionExplorer == null || this.SolutionExplorer.IsDisposed)
-				return false;
-			if (this.SolutionExplorer.GetKey(guid) == null)
-				return false;
-			return true;
+			bool blnResult = true;
+			if (this.SolutionExplorer == null || this.SolutionExplorer.IsDisposed || this.SolutionExplorer.GetKey(guid) == null) {
+				blnResult = false;
+			}
+			return blnResult;
 
 		}
 
@@ -1415,31 +1332,27 @@ namespace LSLEditor
 		private void toolStripMenuItem1_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			if (GotoWindow == null || GotoWindow.IsDisposed)
-			{
-				GotoWindow = new GotoWindow(this);
-				if (Properties.Settings.Default.GotoLocation != Point.Empty)
-				{
-					GotoWindow.StartPosition = FormStartPosition.Manual;
-					GotoWindow.Location = Properties.Settings.Default.GotoLocation;
+			if (editForm != null) {
+				if (GotoWindow == null || GotoWindow.IsDisposed) {
+					GotoWindow = new GotoWindow(this);
+					if (Properties.Settings.Default.GotoLocation != Point.Empty) {
+						GotoWindow.StartPosition = FormStartPosition.Manual;
+						GotoWindow.Location = Properties.Settings.Default.GotoLocation;
+					}
+					GotoWindow.LocationChanged += new EventHandler(gotoForm_LocationChanged);
 				}
-				GotoWindow.LocationChanged += new EventHandler(gotoForm_LocationChanged);
+				GotoWindow.Show(this);
 			}
-			GotoWindow.Show(this);
 		}
 
 
 		public void CloseActiveWindow()
 		{
-			if (this.IsMdiContainer)
-			{
-				if(this.ActiveMdiForm!=null && !this.ActiveMdiForm.IsDisposed)
+			if (this.IsMdiContainer) {
+				if (this.ActiveMdiForm != null && !this.ActiveMdiForm.IsDisposed) {
 					this.ActiveMdiForm.Close();
-			}
-			else
-			{
+				}
+			} else {
 				//TODO: Find a new way
 				/*
 				int intTabToClose = this.tabControlExtended1.SelectedIndex;
@@ -1464,8 +1377,7 @@ namespace LSLEditor
 		private void LSLEditorForm_Load(object sender, EventArgs e)
 		{
 			LoadProperties();
-			if (Properties.Settings.Default.CheckForUpdates)
-			{
+			if (Properties.Settings.Default.CheckForUpdates) {
 				updateApplicationForm = new UpdateApplicationForm();
 				updateApplicationForm.Icon = this.Icon;
 				updateApplicationForm.OnUpdateAvailable += new EventHandler(updateApplicationForm_OnUpdateAvailable);
@@ -1481,42 +1393,43 @@ namespace LSLEditor
 		private void commentInToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			editForm.TextBox.MultiLineComment(true);
+			if (editForm != null) {
+				editForm.TextBox.MultiLineComment(true);
+			}
 
 		}
 
 		private void uncommentingSelectedTextToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			editForm.TextBox.MultiLineComment(false);
+			if (editForm != null) {
+				editForm.TextBox.MultiLineComment(false);
+			}
 
 		}
 
 		private void FindandReplace(bool blnReplaceAlso)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			if (findWindow == null || findWindow.IsDisposed)
-			{
-				findWindow = new FindWindow(this);
-				findWindow.LocationChanged += new EventHandler(findForm_LocationChanged);
+			if (editForm != null) {
+				if (findWindow == null || findWindow.IsDisposed) {
+					findWindow = new FindWindow(this);
+					findWindow.LocationChanged += new EventHandler(findForm_LocationChanged);
+				}
+				Rectangle rect = new Rectangle(this.Location, this.Size);
+				if (rect.Contains(Properties.Settings.Default.FindLocation)) {
+					findWindow.Location = Properties.Settings.Default.FindLocation;
+				} else {
+					findWindow.Location = this.Location;
+				}
+				Point dummy;
+				findWindow.ReplaceAlso = blnReplaceAlso;
+				findWindow.KeyWord = editForm.TextBox.GetCurrentKeyWord(false, out dummy);
+				if (findWindow.Visible == false) {
+					findWindow.Show(this);
+				}
+				findWindow.FindFocus();
 			}
-			Rectangle rect = new Rectangle(this.Location, this.Size);
-			if (rect.Contains(Properties.Settings.Default.FindLocation))
-				findWindow.Location = Properties.Settings.Default.FindLocation;
-			else
-				findWindow.Location = this.Location;
-			Point dummy;
-			findWindow.ReplaceAlso = blnReplaceAlso;
-			findWindow.KeyWord = editForm.TextBox.GetCurrentKeyWord(false, out dummy);
-			if (findWindow.Visible == false)
-				findWindow.Show(this);
-			findWindow.FindFocus();
 		}
 
 		private void replaceToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1531,8 +1444,9 @@ namespace LSLEditor
 
 		private void findNextToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (findWindow != null && !findWindow.IsDisposed)
+			if (findWindow != null && !findWindow.IsDisposed) {
 				findWindow.Find();
+			}
 		}
 
 
@@ -1540,12 +1454,9 @@ namespace LSLEditor
 		{
 			//TODO: We need another way to activate the Solution Explorer
 			//this.panel2.Visible = blnVisible;
-			if (blnVisible)
-			{
+			if (blnVisible) {
 				m_SolutionExplorer.Show(dockPanel);
-			}
-			else
-			{
+			} else {
 				m_SolutionExplorer.Hide();
 			}
 			this.solutionExplorerToolStripMenuItem.Checked = blnVisible;
@@ -1592,14 +1503,13 @@ namespace LSLEditor
 		private void recentFileToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
 		{
 			ToolStripMenuItem tsmi = e.ClickedItem as ToolStripMenuItem;
-			if (tsmi == null)
-				return;
+			if (tsmi != null) {
+				this.fileStripMenuItem.HideDropDown();
 
-			this.fileStripMenuItem.HideDropDown();
-
-			string strPath = tsmi.Tag.ToString();
-			OpenFile(strPath, Guid.NewGuid());
-			UpdateRecentFileList(strPath);
+				string strPath = tsmi.Tag.ToString();
+				OpenFile(strPath, Guid.NewGuid());
+				UpdateRecentFileList(strPath);
+			}
 		}
 
 		private void makeBugReporttoolStripMenuItem_Click(object sender, EventArgs e)
@@ -1624,12 +1534,11 @@ namespace LSLEditor
 		#region SolutionExplorer
 		private void openProjectSolutionToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (this.openSolutionFilesDialog.ShowDialog(this) == DialogResult.OK)
-			{
-				if (File.Exists(this.openSolutionFilesDialog.FileName))
-				{
-					if(CloseAllOpenWindows())
+			if (this.openSolutionFilesDialog.ShowDialog(this) == DialogResult.OK) {
+				if (File.Exists(this.openSolutionFilesDialog.FileName)) {
+					if (CloseAllOpenWindows()) {
 						this.SolutionExplorer.OpenSolution(this.openSolutionFilesDialog.FileName);
+					}
 				}
 			}
 		}
@@ -1637,8 +1546,9 @@ namespace LSLEditor
 		private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			NewProject np = new NewProject(this);
-			if (np.ShowDialog(this) == DialogResult.OK)
+			if (np.ShowDialog(this) == DialogResult.OK) {
 				CloseAllOpenWindows();
+			}
 
 		}
 
@@ -1661,52 +1571,45 @@ namespace LSLEditor
 		{
 			this.SolutionExplorer.AddNewObject();
 		}
-
 		#endregion SolutionExplorer
 
 		private void recentProjectToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
 		{
 			ToolStripMenuItem tsmi = e.ClickedItem as ToolStripMenuItem;
-			if (tsmi == null)
-				return;
+			if (tsmi != null) {
+				this.fileStripMenuItem.HideDropDown();
 
-			this.fileStripMenuItem.HideDropDown();
-
-			if (CloseAllOpenWindows())
-			{
-				string strPath = tsmi.Tag.ToString();
-				this.SolutionExplorer.OpenSolution(strPath);
+				if (CloseAllOpenWindows()) {
+					string strPath = tsmi.Tag.ToString();
+					this.SolutionExplorer.OpenSolution(strPath);
+				}
 			}
 		}
 
 		private void LSLEditorForm_DragEnter(object sender, DragEventArgs e)
 		{
-			if (e.Data.GetDataPresent(DataFormats.FileDrop))
+			if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
 				e.Effect = DragDropEffects.Copy;
-			else
+			} else {
 				e.Effect = DragDropEffects.None;
+			}
 		}
 
 		private delegate void DelegateOpenFile(string s);
 		private void LSLEditorForm_DragDrop(object sender, DragEventArgs e)
 		{
-			try
-			{
+			try {
 				DelegateOpenFile delegateOpenFile = new DelegateOpenFile(OpenFile);
 				Array allFiles = (Array)e.Data.GetData(DataFormats.FileDrop);
-				if (allFiles == null)
-					return;
+				if (allFiles != null) {
+					for (int intI = 0; intI < allFiles.Length; intI++) {
+						string strFileName = allFiles.GetValue(intI).ToString();
+						this.BeginInvoke(delegateOpenFile, new object[] { strFileName });
+					}
 
-				for (int intI = 0; intI < allFiles.Length; intI++)
-				{
-					string strFileName = allFiles.GetValue(intI).ToString();
-					this.BeginInvoke(delegateOpenFile, new object[] { strFileName });
+					this.Activate(); // in the case Explorer overlaps this form
 				}
-
-				this.Activate(); // in the case Explorer overlaps this form
-			}
-			catch
-			{
+			} catch {
 				// Error in DragDrop function (dont show messagebox, explorer is waiting
 			}
 		}
@@ -1740,19 +1643,13 @@ namespace LSLEditor
 
 			Plugins.LSLint lslint = new Plugins.LSLint();
 
-			if (lslint.SyntaxCheck(this))
-			{
-				if (lslint.HasErrors)
-				{
+			if (lslint.SyntaxCheck(this)) {
+				if (lslint.HasErrors) {
 					this.SyntaxErrors.Show(dockPanel);
-				}
-				else
-				{
+				} else {
 					MessageBox.Show("LSL Syntax seems OK", "LSLint Syntax Checker", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				}
-			}
-			else
-			{
+			} else {
 				MessageBox.Show("LSLint:" + lslint.ExceptionMessage, "LSLint plugin", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -1764,15 +1661,12 @@ namespace LSLEditor
 
 		private void SvnPlugin()
 		{
-			if (File.Exists(Svn.Executable))
-			{
+			if (File.Exists(Svn.Executable)) {
 				Properties.Settings.Default.VersionControl = true;
 				Properties.Settings.Default.VersionControlSVN = true;
 				Properties.Settings.Default.SvnExe = Svn.Executable;
 				MessageBox.Show("SVN is installed and can be used in the solution explorer", "SVN information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			}
-			else
-			{
+			} else {
 				Properties.Settings.Default.VersionControl = false;
 				Properties.Settings.Default.VersionControlSVN = false;
 				MessageBox.Show("SVN is NOT installed (can not find svn binary)", "SVN information", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1791,36 +1685,35 @@ namespace LSLEditor
 			//this.panel1.Visible = false;
 
 			ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
-			if (tsmi == null)
-				return;
-
-			switch (tsmi.Text.ToLower())
-			{
-				case "lslint":
-					LSLint();
-					break;
-				case "particles":
-					Particles();
-					break;
-				case "svn (version control)":
-					SvnPlugin();
-					break;
-				default:
-					GenericPlugin(tsmi.Text);
-					//MessageBox.Show("Unknown plugin", "LSLEditor plugins warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-					break;
+			if (tsmi != null) {
+				switch (tsmi.Text.ToLower()) {
+					case "lslint":
+						LSLint();
+						break;
+					case "particles":
+						Particles();
+						break;
+					case "svn (version control)":
+						SvnPlugin();
+						break;
+					default:
+						GenericPlugin(tsmi.Text);
+						//MessageBox.Show("Unknown plugin", "LSLEditor plugins warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						break;
+				}
 			}
 		}
 
 		private void SaveAllToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			foreach (Form form in this.Children)
-			{
+			foreach (Form form in this.Children) {
 				EditForm editForm = form as EditForm;
-				if (editForm == null || editForm.IsDisposed)
+				if (editForm == null || editForm.IsDisposed) {
 					continue;
-				if (editForm.Dirty)
+				}
+				if (editForm.Dirty) {
 					editForm.SaveCurrentFile();
+				}
 			}
 			// save it all, also solution explorer file
 			if (this.SolutionExplorer != null & !this.SolutionExplorer.IsDisposed)
@@ -1830,15 +1723,12 @@ namespace LSLEditor
 		private void SetupFileMenu()
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm != null)
-			{
+			if (editForm != null) {
 				this.saveToolStripMenuItem.Text = "Save " + editForm.ScriptName;
 				this.saveScriptFilesDialog.FileName = editForm.ScriptName;
 				this.saveToolStripMenuItem.Enabled = editForm.Dirty;
 				this.closeFileToolStripMenuItem.Enabled = true;
-			}
-			else
-			{
+			} else {
 				this.closeFileToolStripMenuItem.Enabled = false;
 			}
 		}
@@ -1847,8 +1737,9 @@ namespace LSLEditor
 		{
 			SetupFileMenu();
 			EditForm ef = this.ActiveMdiForm as EditForm;
-			if (ef != null)
+			if (ef != null) {
 				ef.SetFocus();
+			}
 		}
 
 		private void LSLEditorForm_MdiChildActivate(object sender, EventArgs e)
@@ -1882,10 +1773,10 @@ namespace LSLEditor
 		{
 			//NativeHelper.SendMyKeys.PasteTextToApp("hello", "SecondLife", null);
 			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			editForm.TextBox.ToClipBoard();
-			NativeHelper.SendMyKeys.ClipBoardToApp("SecondLife", null);
+			if (editForm != null) {
+				editForm.TextBox.ToClipBoard();
+				NativeHelper.SendMyKeys.ClipBoardToApp("SecondLife", null);
+			}
 		}
 
 		private void outlineToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1895,30 +1786,22 @@ namespace LSLEditor
 
 		private void outlineToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
 		{
-			foreach (Form k in this.Children)
-			{
+			foreach (Form k in this.Children) {
 				EditForm editForm = k as EditForm;
-				if (editForm == null)
-					return;
-				if (outlineToolStripMenuItem.Checked)
-				{
-					editForm.splitContainer1.Panel2Collapsed = false;
-				}
-				else
-				{
-					editForm.splitContainer1.Panel2Collapsed = true;
+				if (editForm == null) {
+					if (outlineToolStripMenuItem.Checked) {
+						editForm.splitContainer1.Panel2Collapsed = false;
+					} else {
+						editForm.splitContainer1.Panel2Collapsed = true;
+					}
 				}
 			}
 		}
-
-
 
 		private void toolStripMenuItem9_Click_1(object sender, EventArgs e)
 		{
 			Browser browser = GetBrowser();
 			browser.ShowWebBrowser("LSLEditor QA", Properties.Settings.Default.qasite);
 		}
-
-
 	}
 }

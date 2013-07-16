@@ -1992,28 +1992,28 @@ namespace LSLEditor.Solution
 			return typeSL;
 		}
 
-        private delegate void DelegateRemoveInventory(Guid guid, SecondLife.String name);
-        public void RemoveInventory(Guid guid, SecondLife.String name)
-        {
-            if (this.treeView1.InvokeRequired)
-            {
-                this.treeView1.Invoke(new DelegateRemoveInventory(RemoveInventory), new object[] { guid, name });
-                return;
-            }
+		private delegate void DelegateRemoveInventory(Guid guid, SecondLife.String name);
+		public void RemoveInventory(Guid guid, SecondLife.String name)
+		{
+			if (this.treeView1.InvokeRequired)
+			{
+				this.treeView1.Invoke(new DelegateRemoveInventory(RemoveInventory), new object[] { guid, name });
+				return;
+			}
 
-            TreeNode treeNode = FindGuid(this.treeView1.TopNode, guid);
-            if (treeNode == null)
-                return;
-            TreeNode parent = treeNode.Parent;
-            for (int i = 0; i < parent.Nodes.Count; ++i)
-            {
-                if (parent.Nodes[i].Text == name)
-                {
-                    parent.Nodes.RemoveAt(i);
-                    return;
-                }
-            }
-        }
+			TreeNode treeNode = FindGuid(this.treeView1.TopNode, guid);
+			if (treeNode == null)
+				return;
+			TreeNode parent = treeNode.Parent;
+			for (int i = 0; i < parent.Nodes.Count; ++i)
+			{
+				if (parent.Nodes[i].Text == name)
+				{
+					parent.Nodes.RemoveAt(i);
+					return;
+				}
+			}
+		}
 		private delegate string DelegateGetInventoryName(Guid guid, int type, int number);
 		public string GetInventoryName(Guid guid, int type, int number)
 		{
@@ -2441,7 +2441,7 @@ namespace LSLEditor.Solution
 					break;
 			}
 		}
-    }
+	}
 	public class NodeSorter : System.Collections.IComparer
 	{
 		public int Compare(object x, object y)

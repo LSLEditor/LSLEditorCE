@@ -72,28 +72,35 @@ namespace LSLEditor
 
 			StringBuilder sb = new StringBuilder();
 
-			if ((intPermissions & SecondLife.PERMISSION_DEBIT) == SecondLife.PERMISSION_DEBIT)
+			if ((intPermissions & SecondLife.PERMISSION_DEBIT) == SecondLife.PERMISSION_DEBIT) {
 				sb.AppendLine("Take Linden dollars (L$) from you");
+			}
 
-			if ((intPermissions & SecondLife.PERMISSION_TAKE_CONTROLS) == SecondLife.PERMISSION_TAKE_CONTROLS)
+			if ((intPermissions & SecondLife.PERMISSION_TAKE_CONTROLS) == SecondLife.PERMISSION_TAKE_CONTROLS) {
 				sb.AppendLine("Act on your control inputs");
+			}
 
-			if ((intPermissions & SecondLife.PERMISSION_TRIGGER_ANIMATION) == SecondLife.PERMISSION_TRIGGER_ANIMATION)
+			if ((intPermissions & SecondLife.PERMISSION_TRIGGER_ANIMATION) == SecondLife.PERMISSION_TRIGGER_ANIMATION) {
 				sb.AppendLine("Animate your avatar");
+			}
 
-			if ((intPermissions & SecondLife.PERMISSION_ATTACH) == SecondLife.PERMISSION_ATTACH)
+			if ((intPermissions & SecondLife.PERMISSION_ATTACH) == SecondLife.PERMISSION_ATTACH) {
 				sb.AppendLine("Attach to your avatar");
+			}
 
-			if ((intPermissions & SecondLife.PERMISSION_CHANGE_LINKS) == SecondLife.PERMISSION_CHANGE_LINKS)
+			if ((intPermissions & SecondLife.PERMISSION_CHANGE_LINKS) == SecondLife.PERMISSION_CHANGE_LINKS) {
 				sb.AppendLine("Link and delink from other objects");
+			}
 
-			if ((intPermissions & SecondLife.PERMISSION_TRACK_CAMERA) == SecondLife.PERMISSION_TRACK_CAMERA)
+			if ((intPermissions & SecondLife.PERMISSION_TRACK_CAMERA) == SecondLife.PERMISSION_TRACK_CAMERA) {
 				sb.AppendLine("Track your camera");
+			}
 
-			if ((intPermissions & SecondLife.PERMISSION_CONTROL_CAMERA) == SecondLife.PERMISSION_CONTROL_CAMERA)
+			if ((intPermissions & SecondLife.PERMISSION_CONTROL_CAMERA) == SecondLife.PERMISSION_CONTROL_CAMERA) {
 				sb.AppendLine("Control your camera");
+			}
 
-			this.label1.Text = "'"+strObjectName+"', an object owned by '"+strOwner + "',\nwould like to:";
+			this.label1.Text = "'" + strObjectName + "', an object owned by '" + strOwner + "',\nwould like to:";
 			this.label2.Text = sb.ToString();
 		}
 

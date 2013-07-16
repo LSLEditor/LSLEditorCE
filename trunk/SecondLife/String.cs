@@ -80,7 +80,7 @@ namespace LSLEditor
 
 			public static explicit operator String(float i)
 			{
-				return new String(string.Format("{0:0.000000}",i));
+				return new String(string.Format("{0:0.000000}", i));
 			}
 
 			public static implicit operator string(String s)
@@ -100,19 +100,16 @@ namespace LSLEditor
 
 			public static bool operator !=(String x, String y)
 			{
-				return !(x==y);
+				return !(x == y);
 			}
 
 			// Public overrides
 
 			public override bool Equals(object o)
 			{
-				try
-				{
+				try {
 					return (bool)(this.value == o.ToString());
-				}
-				catch
-				{
+				} catch {
 					return false;
 				}
 			}
@@ -124,8 +121,9 @@ namespace LSLEditor
 
 			public override string ToString()
 			{
-				if (this.value == null)
+				if (this.value == null) {
 					this.value = "";
+				}
 				return this.value;
 			}
 

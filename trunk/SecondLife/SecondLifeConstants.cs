@@ -280,6 +280,7 @@ namespace LSLEditor
 		public const int INVENTORY_ANIMATION = 20;
 		public const int INVENTORY_GESTURE = 21;
 
+		public const int JSON_APPEND = -1;
 		public static readonly string JSON_ARRAY = "\uFDD2";
 		public static readonly string JSON_FALSE = "\uFDD7";
 		public static readonly string JSON_INVALID = "\uFDD0";

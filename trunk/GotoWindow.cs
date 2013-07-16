@@ -56,7 +56,7 @@ namespace LSLEditor
 			this.lslEditForm = lslEditForm;
 
 			EditForm editForm = this.lslEditForm.ActiveMdiForm as EditForm;
-			this.label1.Text = "Line number (1-"+editForm.TextBox.Lines.Length+")";
+			this.label1.Text = "Line number (1-" + editForm.TextBox.Lines.Length + ")";
 		}
 
 		private void button1_Click(object sender, EventArgs e)
@@ -67,16 +67,12 @@ namespace LSLEditor
 		private void Goto()
 		{
 			EditForm editForm = this.lslEditForm.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
-			try
-			{
-				int intLine = Convert.ToInt32(this.textBox1.Text);
-				editForm.TextBox.Goto(intLine);
-				this.Close();
-			}
-			catch
-			{
+			if (editForm != null) {
+				try {
+					int intLine = Convert.ToInt32(this.textBox1.Text);
+					editForm.TextBox.Goto(intLine);
+					this.Close();
+				} catch { }
 			}
 		}
 
@@ -87,8 +83,7 @@ namespace LSLEditor
 
 		private void textBox1_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.Return)
-			{
+			if (e.KeyCode == Keys.Return) {
 				Goto();
 				e.SuppressKeyPress = true;
 			}

@@ -57,8 +57,7 @@ namespace LSLEditor
 			{
 				get
 				{
-					if (m_value == null)
-						m_value = (Int32)0;
+					if (m_value == null) m_value = (Int32)0;
 					return (Int32)m_value;
 				}
 				set
@@ -137,10 +136,7 @@ namespace LSLEditor
 			// Logical negation (NOT) operator
 			public static integer operator !(integer x)
 			{
-				if (x.value == 0)
-					return TRUE;
-				else
-					return FALSE;
+				return x.value == 0 ? TRUE : FALSE;
 			}
 
 			// Bitwise AND operator
@@ -257,22 +253,21 @@ namespace LSLEditor
 
 			public static int Compare(integer a, integer b)
 			{
-				if (a.value < b.value)
-					return -1;
-				if (a.value > b.value)
-					return 1;
-				return 0;
+				int intResult = 0;
+				if (a.value < b.value) {
+					intResult = -1;
+				} else if (a.value > b.value) {
+					intResult = 1;
+				}
+				return intResult;
 			}
 
 			// Override the Object.Equals(object o) method:
 			public override bool Equals(object o)
 			{
-				try
-				{
+				try {
 					return (bool)(this == (integer)o);
-				}
-				catch
-				{
+				} catch {
 					return false;
 				}
 			}

@@ -84,25 +84,18 @@ namespace LSLEditor
 			// This is the one-and-only implicit typecasting in SecondLife
 			public static implicit operator key(string strGuid)
 			{
-				if (strGuid == null)
-					return new key("");
-				else
-					return new key(strGuid);
+				return strGuid == null ? new key("") : new key(strGuid);
 			}
 
 			public static implicit operator key(String _strGuid)
 			{
 				string strGuid = _strGuid;
-				if (strGuid == null)
-					return new key("");
-				else
-					return new key(strGuid);
+				return strGuid == null ? new key("") : new key(strGuid);
 			}
 
 			public override string ToString()
 			{
-				if (this.guid == null)
-					this.guid = "";
+				if (this.guid == null) this.guid = "";
 				return this.guid.ToString();
 			}
 
@@ -129,34 +122,27 @@ namespace LSLEditor
 
 			public static bool operator true(key k)
 			{
-				if ((object)k == null)
-					return false;
-				if (k.guid == NULL_KEY)
-					return false;
-				if (k.guid == "")
-					return false;
-				return true;
+				bool bResult = true;
+				if ((object)k == null || k.guid == NULL_KEY || k.guid == "") {
+					bResult = false;
+				}
+				return bResult;
 			}
 
 			public static bool operator false(key k)
 			{
-				if ((object)k == null)
-					return true;
-				if (k.guid == NULL_KEY)
-					return true;
-				if (k.guid == "")
-					return true;
-				return false;
+				bool bResult = false;
+				if ((object)k == null || k.guid == NULL_KEY || k.guid == "") {
+					bResult = true;
+				}
+				return bResult;
 			}
 
 			public override bool Equals(object obj)
 			{
-				try
-				{
+				try {
 					return (this == (key)obj);
-				}
-				catch
-				{
+				} catch {
 					return false;
 				}
 			}

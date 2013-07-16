@@ -221,18 +221,18 @@ namespace LSLEditor
 
 			public static bool operator ==(vector v1, vector v2)
 			{
-				if ((object)v1 == null)
-					v1 = ZERO_VECTOR;
-				if ((object)v2 == null)
-					v2 = ZERO_VECTOR;
+				if ((object)v1 == null) v1 = ZERO_VECTOR;
+				if ((object)v2 == null) v2 = ZERO_VECTOR;
 
-				if (Math.Abs(v1.x - v2.x) > EqualityTolerence)
-					return false;
-				if (Math.Abs(v1.y - v2.y) > EqualityTolerence)
-					return false;
-				if (Math.Abs(v1.z - v2.z) > EqualityTolerence)
-					return false;
-				return true;
+				bool bResult = true;
+				if (Math.Abs(v1.x - v2.x) > EqualityTolerence) {
+					bResult = false;
+				} else if (Math.Abs(v1.y - v2.y) > EqualityTolerence) {
+					bResult = false;
+				} else if (Math.Abs(v1.z - v2.z) > EqualityTolerence) {
+					bResult = false;
+				}
+				return bResult;
 			}
 
 			public static bool operator !=(vector v1, vector v2)
@@ -242,19 +242,17 @@ namespace LSLEditor
 
 			public static bool operator true(vector v)
 			{
-				if ((object)v == null)
+				if ((object)v == null || (v.x == 0 && v.y == 0 && v.z == 0)) {
 					return false;
-				if (v.x == 0 && v.y == 0 && v.z == 0)
-					return false;
+				}
 				return true;
 			}
 
 			public static bool operator false(vector v)
 			{
-				if ((object)v == null)
+				if ((object)v == null || (v.x == 0 && v.y == 0 && v.z == 0)) {
 					return true;
-				if (v.x == 0 && v.y == 0 && v.z == 0)
-					return true;
+				}
 				return false;
 			}
 
@@ -265,10 +263,11 @@ namespace LSLEditor
 
 			public static explicit operator String(vector v)
 			{
-				if ((object)v == null)
+				if ((object)v == null) {
 					return ZERO_VECTOR.ToString();
-				else
+				} else {
 					return v.ToString();
+				}
 			}
 
 			public override int GetHashCode()
@@ -278,12 +277,9 @@ namespace LSLEditor
 
 			public override bool Equals(object obj)
 			{
-				try
-				{
+				try {
 					return (this == (vector)obj);
-				}
-				catch
-				{
+				} catch {
 					return false;
 				}
 			}
