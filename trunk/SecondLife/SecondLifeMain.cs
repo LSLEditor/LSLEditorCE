@@ -53,6 +53,8 @@ using System.Text.RegularExpressions;
 // mail: alphons@heijden.com
  */
 
+[module: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1642:ConstructorSummaryDocumentationMustBeginWithStandardText", Justification = "Reviewed.")]
+
 namespace LSLEditor
 {
 	/// <summary>
@@ -188,7 +190,6 @@ namespace LSLEditor
 		/// <summary>
 		/// Initialises a new instance of the <see cref="SecondLife"/> class.
 		/// </summary>
-		[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1642:ConstructorSummaryDocumentationMustBeginWithStandardText", Justification = "Reviewed.")]
 		public SecondLife()
 		{
 			this.host = null;
