@@ -51,7 +51,7 @@ namespace LSLEditor
 	/// <summary>
 	/// This part of the SecondLife class contains the Event definitions.
 	/// </summary>
-	[SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1502:ElementMustNotBeOnASingleLine", Justification = "Reviewed.")]
+	[SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1502:ElementMustNotBeOnSingleLine", Justification = "Reviewed.")]
 	[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "These are all LSL functions, the documentation is in the LSL Wiki.")]
 	public partial class SecondLife
 	{
