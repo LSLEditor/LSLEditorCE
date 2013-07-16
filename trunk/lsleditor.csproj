@@ -367,7 +367,7 @@
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="SecondLife\LSL_Functions.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+      <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Solution\GuidProperty.cs">
       <SubType>Form</SubType>
