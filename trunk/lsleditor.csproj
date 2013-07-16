@@ -360,13 +360,13 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="SecondLife\SecondLifeConstants.cs">
+    <Compile Include="SecondLife\LSL_Constants.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="SecondLife\SecondLifeEvents.cs">
+    <Compile Include="SecondLife\LSL_Events.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="SecondLife\SecondLifeFunctions.cs">
+    <Compile Include="SecondLife\LSL_Functions.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Solution\GuidProperty.cs">
@@ -555,7 +555,7 @@
       <DependentUpon>RuntimeConsole.cs</DependentUpon>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="SecondLife\SecondLifeHst.cs">
+    <Compile Include="SecondLife\SecondLifeHost.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Helpers\SmtpClient.cs">
