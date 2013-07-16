@@ -178,7 +178,7 @@ namespace LSLEditor
 		private vector vRegionCorner;
 
 		/// <summary>
-		/// Parameter passed to the script on startup.
+		/// Parameter passed to the script on start up.
 		/// </summary>
 		private integer iStartParameter;
 
