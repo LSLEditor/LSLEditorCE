@@ -360,15 +360,9 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="SecondLife\LSL_Constants.cs">
-      <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="SecondLife\LSL_Events.cs">
-      <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="SecondLife\LSL_Functions.cs">
-      <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
-    </Compile>
+    <Compile Include="SecondLife\LSL_Constants.cs" />
+    <Compile Include="SecondLife\LSL_Events.cs" />
+    <Compile Include="SecondLife\LSL_Functions.cs" />
     <Compile Include="Solution\GuidProperty.cs">
       <SubType>Form</SubType>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
@@ -562,9 +556,7 @@
       <SubType>Code</SubType>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="SecondLife\Float.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
+    <Compile Include="SecondLife\Float.cs" />
     <Compile Include="SecondLife\String.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
