@@ -42,9 +42,15 @@
 // ********
 // */
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LSLEditor
 {
+	/// <summary>
+	/// This part of the SecondLife class initialises the constants for LSL.
+	/// </summary>
+	[SuppressMessage("StyleCop.CSharp.NamingRules", "SA1310:FieldNamesMustNotContainUnderscore", Justification = "Reviewed.")]
+	[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed.")]
 	public partial class SecondLife
 	{
 		public const int TRUE = 1;
@@ -67,17 +73,6 @@ namespace LSLEditor
 		public const int SMOOTH = 16;
 		public const int ROTATE = 32;
 		public const int SCALE = 64;
-
-		public static readonly Float PI = 3.1415926535897932384626;
-		public static readonly Float TWO_PI = 2.0 * PI;
-		public static readonly Float PI_BY_TWO = 1.570796;
-		public static readonly Float DEG_TO_RAD = 0.017453;
-		public static readonly Float RAD_TO_DEG = 57.295780;
-		public static readonly Float SQRT2 = 1.414214;
-
-		public static readonly key NULL_KEY = key.NULL_KEY;
-		public static readonly rotation ZERO_ROTATION = rotation.ZERO_ROTATION;
-		public static readonly vector ZERO_VECTOR = vector.ZERO_VECTOR;
 
 		public const int ALL_SIDES = -1;
 
@@ -210,15 +205,15 @@ namespace LSLEditor
 		public const int CLICK_ACTION_PLAY = 5;
 		public const int CLICK_ACTION_OPEN_MEDIA = 6;
 
-		public static readonly string CONTENT_TYPE_ATOM = "application/atom+xml";
-		public static readonly string CONTENT_TYPE_FORM = "application/x-www-form-urlencoded";
-		public static readonly string CONTENT_TYPE_HTML = "text/html";
-		public static readonly string CONTENT_TYPE_JSON = "application/json";
-		public static readonly string CONTENT_TYPE_LLSD = "application/llsd+xml";
-		public static readonly string CONTENT_TYPE_RSS = "application/rss+xml";
-		public static readonly string CONTENT_TYPE_TEXT = "text/plain";
-		public static readonly string CONTENT_TYPE_XHTML = "application/xhtml+xml";
-		public static readonly string CONTENT_TYPE_XML = "application/xml";
+		public const string CONTENT_TYPE_ATOM = "application/atom+xml";
+		public const string CONTENT_TYPE_FORM = "application/x-www-form-urlencoded";
+		public const string CONTENT_TYPE_HTML = "text/html";
+		public const string CONTENT_TYPE_JSON = "application/json";
+		public const string CONTENT_TYPE_LLSD = "application/llsd+xml";
+		public const string CONTENT_TYPE_RSS = "application/rss+xml";
+		public const string CONTENT_TYPE_TEXT = "text/plain";
+		public const string CONTENT_TYPE_XHTML = "application/xhtml+xml";
+		public const string CONTENT_TYPE_XML = "application/xml";
 
 		public const int CONTROL_FWD = 1;
 		public const int CONTROL_BACK = 2;
@@ -281,14 +276,14 @@ namespace LSLEditor
 		public const int INVENTORY_GESTURE = 21;
 
 		public const int JSON_APPEND = -1;
-		public static readonly string JSON_ARRAY = "\uFDD2";
-		public static readonly string JSON_FALSE = "\uFDD7";
-		public static readonly string JSON_INVALID = "\uFDD0";
-		public static readonly string JSON_NULL = "\uFDD5";
-		public static readonly string JSON_NUMBER = "\uFDD3";
-		public static readonly string JSON_OBJECT = "\uFDD1";
-		public static readonly string JSON_STRING = "\uFDD4";
-		public static readonly string JSON_TRUE = "\uFDD6";
+		public const string JSON_ARRAY = "\uFDD2";
+		public const string JSON_FALSE = "\uFDD7";
+		public const string JSON_INVALID = "\uFDD0";
+		public const string JSON_NULL = "\uFDD5";
+		public const string JSON_NUMBER = "\uFDD3";
+		public const string JSON_OBJECT = "\uFDD1";
+		public const string JSON_STRING = "\uFDD4";
+		public const string JSON_TRUE = "\uFDD6";
 
 		public const int KFM_CMD_PAUSE = 2;
 		public const int KFM_CMD_PLAY = 0;
@@ -644,7 +639,6 @@ namespace LSLEditor
 		public const int RCERR_SIM_PERF_LOW = -2;
 		public const int RCERR_UNKNOWN = -1;
 
-
 		public const int REGION_FLAG_ALLOW_DAMAGE = 1;
 		public const int REGION_FLAG_FIXED_SUN = 16;
 		public const int REGION_FLAG_BLOCK_TERRAFORM = 64;
@@ -687,15 +681,13 @@ namespace LSLEditor
 		public const int STRING_TRIM_TAIL = 2;
 		public const int STRING_TRIM = 3;
 
-		public static readonly key TEXTURE_BLANK = "5748decc-f629-461c-9a36-a35a221fe21f";
-		public static readonly key TEXTURE_DEFAULT = "89556747-24cb-43ed-920b-47caed15465f";
-		public static readonly key TEXTURE_PLYWOOD = "89556747-24cb-43ed-920b-47caed15465f";
-		public static readonly key TEXTURE_TRANSPARENT = "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903";
-		public static readonly key TEXTURE_MEDIA = "8b5fec65-8d8d-9dc5-cda8-8fdf2716e361";
+		public const string TEXTURE_BLANK = "5748decc-f629-461c-9a36-a35a221fe21f";
+		public const string TEXTURE_DEFAULT = "89556747-24cb-43ed-920b-47caed15465f";
+		public const string TEXTURE_PLYWOOD = "89556747-24cb-43ed-920b-47caed15465f";
+		public const string TEXTURE_TRANSPARENT = "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903";
+		public const string TEXTURE_MEDIA = "8b5fec65-8d8d-9dc5-cda8-8fdf2716e361";
 
 		public const int TOUCH_INVALID_FACE = -1;
-		public static readonly vector TOUCH_INVALID_TEXCOORD = new vector(-1.0, -1.0, 0.0);
-		public static readonly vector TOUCH_INVALID_VECTOR = new vector(0.0, 0.0, 0.0);
 
 		public const int TRAVERSAL_TYPE = 7;
 		public const int TRAVERSAL_TYPE_FAST = 1;
@@ -710,8 +702,8 @@ namespace LSLEditor
 		public const int TYPE_ROTATION = 6;
 		public const int TYPE_INVALID = 0;
 
-		public static readonly String URL_REQUEST_GRANTED = "URL_REQUEST_GRANTED";
-		public static readonly String URL_REQUEST_DENIED = "URL_REQUEST_DENIED";
+		public const string URL_REQUEST_GRANTED = "URL_REQUEST_GRANTED";
+		public const string URL_REQUEST_DENIED = "URL_REQUEST_DENIED";
 
 		public const int VEHICLE_TYPE_NONE = 0;
 
@@ -759,5 +751,18 @@ namespace LSLEditor
 		public const int VEHICLE_TYPE_BALLOON = 5;
 
 		public const int VERTICAL = 0;
+
+		public static readonly Float PI = 3.1415926535897932384626;
+		public static readonly Float TWO_PI = 2.0 * PI;
+		public static readonly Float PI_BY_TWO = 1.570796;
+		public static readonly Float DEG_TO_RAD = 0.017453;
+		public static readonly Float RAD_TO_DEG = 57.295780;
+		public static readonly Float SQRT2 = 1.414214;
+
+		public static readonly key NULL_KEY = key.NULL_KEY;
+		public static readonly vector TOUCH_INVALID_TEXCOORD = new vector(-1.0, -1.0, 0.0);
+		public static readonly vector TOUCH_INVALID_VECTOR = new vector(0.0, 0.0, 0.0);
+		public static readonly rotation ZERO_ROTATION = rotation.ZERO_ROTATION;
+		public static readonly vector ZERO_VECTOR = vector.ZERO_VECTOR;
 	}
 }

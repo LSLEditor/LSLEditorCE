@@ -361,7 +361,7 @@
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="SecondLife\LSL_Constants.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+      <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="SecondLife\LSL_Events.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
