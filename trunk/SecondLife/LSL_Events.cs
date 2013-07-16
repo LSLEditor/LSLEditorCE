@@ -43,49 +43,90 @@
 // */
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace LSLEditor
 {
+	/// <summary>
+	/// This part of the SecondLife class contains the Event definitions.
+	/// </summary>
+	[SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1502:ElementMustNotBeOnASingleLine", Justification = "Reviewed.")]
+	[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "These are all LSL functions, the documentation is in the LSL Wiki.")]
 	public partial class SecondLife
 	{
 		#region events as virtuals, if one is used, use override
-		virtual public void at_rot_target(integer iHandle, rotation rTargetRotation, rotation rCurrentRotation) { }
-		virtual public void at_target(integer iHandle, vector vTargetPosition, vector vCurrrentPosition) { }
-		virtual public void attach(key kAttached) { }
-		virtual public void changed(integer iChangedFlags) { }
-		virtual public void collision(integer iCollisionCount) { }
-		virtual public void collision_end(integer iCollisionCount) { }
-		virtual public void collision_start(integer iCollisionCount) { }
-		virtual public void control(key kID, integer iLevels, integer iEdges) { }
-		virtual public void dataserver(key kRequestID, String sData) { }
-		virtual public void email(String sTime, String sAddress, String sSubject, String sBody, integer iRemaining) { }
-		virtual public void http_response(key kRequestID, integer iStatus, list lMetadata, String sBody) { }
-		virtual public void http_request(key kRequestID, String sMethod, String sBody) { }
-		virtual public void land_collision(vector vPosition) { }
-		virtual public void land_collision_end(vector vPosition) { }
-		virtual public void land_collision_start(vector vPosition) { }
-		virtual public void link_message(integer iSenderLinkIndex, integer iNumber, String sText, key kID) { }
-		virtual public void listen(integer iChannel, String sName, key kID, String sText) { }
-		virtual public void money(key kPayerID, integer iAmount) { }
-		virtual public void moving_end() { }
-		virtual public void moving_start() { }
-		virtual public void no_sensor() { }
-		virtual public void not_at_rot_target() { }
-		virtual public void not_at_target() { }
-		virtual public void object_rez(key kID) { }
-		virtual public void on_rez(integer iStartParameter) { }
-		virtual public void path_update(integer iType, list lReserved) { }
-		virtual public void remote_data(integer iEventType, key kChannelID, key kMessageID, String sSender, integer iData, String sData) { }
-		virtual public void run_time_permissions(integer iPermissionsFlags) { }
-		virtual public void sensor(integer iSensedCount) { }
-		virtual public void state_entry() { }
-		virtual public void state_exit() { }
-		virtual public void timer() { }
-		virtual public void touch(integer iTouchesCount) { }
-		virtual public void touch_end(integer iTouchesCount) { }
-		virtual public void touch_start(integer iTouchesCount) { }
-		virtual public void transaction_result(key kID, integer iSuccess, String sMessage) { }
+		public virtual void at_rot_target(integer iHandle, rotation rTargetRotation, rotation rCurrentRotation) { }
+
+		public virtual void at_target(integer iHandle, vector vTargetPosition, vector vCurrrentPosition) { }
+
+		public virtual void attach(key kAttached) { }
+
+		public virtual void changed(integer iChangedFlags) { }
+
+		public virtual void collision(integer iCollisionCount) { }
+
+		public virtual void collision_end(integer iCollisionCount) { }
+
+		public virtual void collision_start(integer iCollisionCount) { }
+
+		public virtual void control(key kID, integer iLevels, integer iEdges) { }
+
+		public virtual void dataserver(key kRequestID, String sData) { }
+
+		public virtual void email(String sTime, String sAddress, String sSubject, String sBody, integer iRemaining) { }
+
+		public virtual void http_response(key kRequestID, integer iStatus, list lMetadata, String sBody) { }
+
+		public virtual void http_request(key kRequestID, String sMethod, String sBody) { }
+
+		public virtual void land_collision(vector vPosition) { }
+
+		public virtual void land_collision_end(vector vPosition) { }
+
+		public virtual void land_collision_start(vector vPosition) { }
+
+		public virtual void link_message(integer iSenderLinkIndex, integer iNumber, String sText, key kID) { }
+
+		public virtual void listen(integer iChannel, String sName, key kID, String sText) { }
+
+		public virtual void money(key kPayerID, integer iAmount) { }
+
+		public virtual void moving_end() { }
+
+		public virtual void moving_start() { }
+
+		public virtual void no_sensor() { }
+
+		public virtual void not_at_rot_target() { }
+
+		public virtual void not_at_target() { }
+
+		public virtual void object_rez(key kID) { }
+
+		public virtual void on_rez(integer iStartParameter) { }
+
+		public virtual void path_update(integer iType, list lReserved) { }
+
+		public virtual void remote_data(integer iEventType, key kChannelID, key kMessageID, String sSender, integer iData, String sData) { }
+
+		public virtual void run_time_permissions(integer iPermissionsFlags) { }
+
+		public virtual void sensor(integer iSensedCount) { }
+
+		public virtual void state_entry() { }
+
+		public virtual void state_exit() { }
+
+		public virtual void timer() { }
+
+		public virtual void touch(integer iTouchesCount) { }
+
+		public virtual void touch_end(integer iTouchesCount) { }
+
+		public virtual void touch_start(integer iTouchesCount) { }
+
+		public virtual void transaction_result(key kID, integer iSuccess, String sMessage) { }
 		#endregion
 	}
 }

@@ -364,7 +364,7 @@
       <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="SecondLife\LSL_Events.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+      <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="SecondLife\LSL_Functions.cs">
       <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
