@@ -1,8 +1,8 @@
-using System;
-
 //Author: Arman Ghazanchyan
 //Created date: 01/27/2007
 //Last updated: 01/28/2007
+using System;
+
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
