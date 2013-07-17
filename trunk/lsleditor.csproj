@@ -549,9 +549,7 @@
       <DependentUpon>RuntimeConsole.cs</DependentUpon>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="SecondLife\SecondLifeHost.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
+    <Compile Include="SecondLife\SecondLifeHost.cs" />
     <Compile Include="Helpers\SmtpClient.cs">
       <SubType>Code</SubType>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
