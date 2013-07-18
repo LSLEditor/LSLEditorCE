@@ -2751,7 +2751,7 @@ namespace LSLEditor
 		public void llSensor(String sName, key kID, integer iType, Float fRange, Float fArc)
 		{
 			Verbose(@"llSensor(""{0}"", {1}, {2}, {3}, {4})", sName, kID, iType, fRange, fArc);
-			host.sensor_timer.Stop();
+			host.SensorTimer.Stop();
 			integer iTotalNumber = 1;
 			host.ExecuteSecondLife("sensor", iTotalNumber);
 		}
@@ -2759,16 +2759,16 @@ namespace LSLEditor
 		public void llSensorRemove()
 		{
 			Verbose("llSensorRemove()");
-			host.sensor_timer.Stop();
+			host.SensorTimer.Stop();
 		}
 
 		public void llSensorRepeat(String sName, key kID, integer iType, Float fRange, Float fArc, Float fRate)
 		{
 			Verbose(@"llSensorRepeat(""{0}"", {1}, {2}, {3}, {4}, {5})", sName, kID, iType, fRange, fArc, fRate);
-			host.sensor_timer.Stop();
+			host.SensorTimer.Stop();
 			if (fRate > 0) {
-				host.sensor_timer.Interval = (int)Math.Round(fRate * 1000);
-				host.sensor_timer.Start();
+				host.SensorTimer.Interval = (int)Math.Round(fRate * 1000);
+				host.SensorTimer.Start();
 			}
 		}
 
@@ -3028,10 +3028,10 @@ namespace LSLEditor
 		public void llSetTimerEvent(Float fSeconds)
 		{
 			Verbose("llSetTimerEvent({0})", fSeconds);
-			host.timer.Stop();
+			host.Timer.Stop();
 			if (fSeconds > 0) {
-				host.timer.Interval = (int)Math.Round(fSeconds * 1000);
-				host.timer.Start();
+				host.Timer.Interval = (int)Math.Round(fSeconds * 1000);
+				host.Timer.Start();
 			}
 		}
 

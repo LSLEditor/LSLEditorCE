@@ -98,11 +98,9 @@ namespace LSLEditor.Helpers
 
 		public void Stop()
 		{
-			if(WorkerThread!=null)
-			{
+			if (WorkerThread != null) {
 				WorkerThread.Abort();
-				if (!WorkerThread.Join(2000))
-				{
+				if (!WorkerThread.Join(2000)) {
 					// problems
 					System.Windows.Forms.MessageBox.Show("TaskQueue thread not Aborted", "Oops...");
 				}
@@ -110,21 +108,18 @@ namespace LSLEditor.Helpers
 			}
 		}
 
-		public void Invoke(object ActiveObject,string MethodName, params object[] args)
+		public void Invoke(object ActiveObject, string MethodName, params object[] args)
 		{
 			if (ActiveObject == null)
 				return;
-			try
-			{
+			try {
 				// Add the object to the internal buffer
 				Tasks.Enqueue(new Task(ActiveObject, MethodName, args));
 
 				// Signal the internal thread that there is some new object in the buffer
 				SignalNewTask.Set();
-			}
-			catch (Exception e)
-			{
-				Trace.WriteLine(string.Format("I An exception occurred in TaskQueue.Invoke: {0}", e.Message));
+			} catch (Exception e) {
+				Trace.WriteLine(string.Format("An exception occurred in TaskQueue.Invoke: {0}", e.Message));
 				// Since the exception was not actually handled and only logged - propagate it
 				throw;
 			}
@@ -139,32 +134,24 @@ namespace LSLEditor.Helpers
 			Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US", false);
 			Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US", false);
 
-			while (!stop)
-			{
-				try
-				{
+			while (!stop) {
+				try {
 					// Note: this code is safe (i.e. performing the .Count and .Dequeue not inside a lock)
 					// because there is only one thread emptying the queue.
 					// Even if .Count returns 0, and before Dequeue is called a new object is added to the Queue
 					// then still the system will behave nicely: the next if statement will return false and
 					// since this is run in an endless loop, in the next iteration we will have .Count > 0.
-					if (Tasks.Count > 0)
-					{
+					if (Tasks.Count > 0) {
 						(Tasks.Dequeue() as Task).Execute();
 					}
 
 					// Wait until new objects are received or Dispose was called
-					if (Tasks.Count == 0)
-					{
+					if (Tasks.Count == 0) {
 						SignalNewTask.WaitOne();
 					}
-				}
-				catch (ThreadAbortException)
-				{
+				} catch (ThreadAbortException) {
 					Trace.WriteLine("TaskQueue.Worker: ThreadAbortException, no problem");
-				}
-				catch (Exception e)
-				{
+				} catch (Exception e) {
 					Trace.WriteLine(string.Format("TaskQueue.Worker: {0}", e.Message));
 					// Since the exception was not actually handled and only logged - propagate it
 					throw;
@@ -191,17 +178,12 @@ namespace LSLEditor.Helpers
 
 		protected virtual void Dispose(bool disposing)
 		{
-			if (!this.disposed)
-			{
-				if (disposing)
-				{
-					try
-					{
+			if (!this.disposed) {
+				if (disposing) {
+					try {
 						stop = true;
 						SignalNewTask.Set();
-					}
-					catch (Exception e)
-					{
+					} catch (Exception e) {
 						Trace.WriteLine(string.Format("An exception occurred in MessageLoop.AddToBuffer: {0}", e.Message));
 						// Since the exception was not actually handled and only logged - propagate it
 						throw;
@@ -228,22 +210,17 @@ namespace LSLEditor.Helpers
 
 			public void Execute()
 			{
-				try
-				{
+				try {
 					MethodInfo mi = ActiveObject.GetType().GetMethod(MethodName,
-						BindingFlags.Public | 
+						BindingFlags.Public |
 						BindingFlags.Instance |
 						//BindingFlags.DeclaredOnly |
 						BindingFlags.NonPublic
 						);
 					mi.Invoke(ActiveObject, args);
-				}
-				catch (ThreadAbortException)
-				{
+				} catch (ThreadAbortException) {
 					Trace.WriteLine("TaskQueue.Task.Execute: ThreadAbortException, no problem");
-				}
-				catch (Exception exception)
-				{
+				} catch (Exception exception) {
 					Exception innerException = exception.InnerException;
 					if (innerException == null)
 						innerException = exception;

@@ -116,7 +116,7 @@ namespace LSLEditor
 			this.Listen(e);
 
 			// talk only to the owner
-			if (e.how != CommunicationType.OwnerSay) {
+			if (e.How != CommunicationType.OwnerSay) {
 				foreach (Form form in this.Children) {
 					EditForm editForm = form as EditForm;
 					if (editForm == null || editForm.IsDisposed) {
@@ -143,12 +143,12 @@ namespace LSLEditor
 		{
 			SecondLifeHost secondLifeHostSender = sender as SecondLifeHost;
 
-			Guid ObjectGuid = this.solutionExplorer.GetParentGuid(secondLifeHostSender.guid);
+			Guid ObjectGuid = this.solutionExplorer.GetParentGuid(secondLifeHostSender.GUID);
 			Guid RootObjectGuid = this.solutionExplorer.GetParentGuid(ObjectGuid);
 
 			List<Guid> list;
 
-			int intLinkNum = e.iLinkIndex;
+			int intLinkNum = e.LinkIndex;
 			switch (intLinkNum) {
 				case 1: // LINK_ROOT  , root prim in linked set (but not in a single prim, which is 0)
 					list = this.solutionExplorer.GetScripts(RootObjectGuid, false);
@@ -251,28 +251,28 @@ namespace LSLEditor
 		{
 			// Translate the incomming messages a bit so it looks like SL.
 			string strHow = ": ";
-			if (e.how == CommunicationType.Shout) {
+			if (e.How == CommunicationType.Shout) {
 				strHow = " shout: ";
 			}
 
-			if (e.how == CommunicationType.Whisper) {
+			if (e.How == CommunicationType.Whisper) {
 				strHow = " whispers: ";
 			}
 
-			string strWho = e.name;
-			string strMessage = e.message;
+			string strWho = e.Name;
+			string strMessage = e.Message;
 
-			if (e.name == Properties.Settings.Default.AvatarName) {
+			if (e.Name == Properties.Settings.Default.AvatarName) {
 				strWho = "You";
 			}
 
-			if (e.message.ToString().StartsWith("/me")) {
-				strWho = e.name;
+			if (e.Message.ToString().StartsWith("/me")) {
+				strWho = e.Name;
 				strHow = " ";
-				strMessage = e.message.ToString().Substring(3).Trim();
+				strMessage = e.Message.ToString().Substring(3).Trim();
 			}
 
-			if (e.channel == 0) {
+			if (e.Channel == 0) {
 				TalkToSimulatorConsole(strWho + strHow + strMessage);
 			}
 		}
