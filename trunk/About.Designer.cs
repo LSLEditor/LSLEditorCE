@@ -1,6 +1,9 @@
 namespace LSLEditor
 {
-	partial class About
+	/// <summary>
+	/// About dialogue box form.
+	/// </summary>
+	public partial class About
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -8,15 +11,50 @@ namespace LSLEditor
 		private System.ComponentModel.IContainer components = null;
 
 		/// <summary>
+		/// Container for LSLife picture.
+		/// </summary>
+		private System.Windows.Forms.PictureBox pictureBox1;
+
+		/// <summary>
+		/// Container to hold all the elements.
+		/// </summary>
+		private System.Windows.Forms.GroupBox groupBox1;
+
+		/// <summary>
+		/// OK Button.
+		/// </summary>
+		private System.Windows.Forms.Button button1;
+
+		/// <summary>
+		/// Web Browser.
+		/// </summary>
+		private System.Windows.Forms.WebBrowser webBrowser1;
+
+		/// <summary>
+		/// Link label.
+		/// </summary>
+		private System.Windows.Forms.LinkLabel linkLabel1;
+
+		/// <summary>
+		/// Version label.
+		/// </summary>
+		private System.Windows.Forms.Label label1;
+
+		/// <summary>
+		/// LSL Editor label.
+		/// </summary>
+		private System.Windows.Forms.Label label2;
+
+		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		/// <param name="disposing">True if managed resources should be disposed; otherwise, false.</param>
 		protected override void Dispose(bool disposing)
 		{
-			if (disposing && (components != null))
-			{
-				components.Dispose();
+			if (disposing && (this.components != null)) {
+				this.components.Dispose();
 			}
+
 			base.Dispose(disposing);
 		}
 
@@ -133,13 +171,5 @@ namespace LSLEditor
 		}
 
 		#endregion
-
-		private System.Windows.Forms.PictureBox pictureBox1;
-		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.WebBrowser webBrowser1;
-		private System.Windows.Forms.LinkLabel linkLabel1;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label label1;
 	}
 }

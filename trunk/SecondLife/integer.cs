@@ -1,46 +1,42 @@
-// /**
-// ********
-// *
-// * ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
-// * The code was donated on 4/28/2010 by Alphons van der Heijden
-// * To Brandon 'Dimentox Travanti' Husbands & Malcolm J. Kudra, who in turn License under the GPLv2.
-// * In agreement with Alphons van der Heijden's wishes.
-// *
-// * The community would like to thank Alphons for all of his hard work, blood sweat and tears.
-// * Without his work the community would be stuck with crappy editors.
-// *
-// * The source code in this file ("Source Code") is provided by The LSLEditor Group
-// * to you under the terms of the GNU General Public License, version 2.0
-// * ("GPL"), unless you have obtained a separate licensing agreement
-// * ("Other License"), formally executed by you and The LSLEditor Group.  Terms of
-// * the GPL can be found in the gplv2.txt document.
-// *
-// ********
-// * GPLv2 Header
-// ********
-// * LSLEditor, a External editor for the LSL Language.
-// * Copyright (C) 2010 The LSLEditor Group.
-// 
-// * This program is free software; you can redistribute it and/or
-// * modify it under the terms of the GNU General Public License
-// * as published by the Free Software Foundation; either version 2
-// * of the License, or (at your option) any later version.
-// *
-// * This program is distributed in the hope that it will be useful,
-// * but WITHOUT ANY WARRANTY; without even the implied warranty of
-// * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// * GNU General Public License for more details.
-// *
-// * You should have received a copy of the GNU General Public License
-// * along with this program; if not, write to the Free Software
-// * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-// ********
-// *
-// * The above copyright notice and this permission notice shall be included in all 
-// * copies or substantial portions of the Software.
-// *
-// ********
-// */
+// <copyright file="gpl-2.0.txt">
+// ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
+// The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
+// Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
+//
+// The community would like to thank Alphons for all of his hard work, blood sweat and tears. Without his work
+// the community would be stuck with crappy editors.
+//
+// The source code in this file ("Source Code") is provided by The LSLEditor Group to you under the terms of the GNU
+// General Public License, version 2.0 ("GPL"), unless you have obtained a separate licensing agreement ("Other
+// License"), formally executed by you and The LSLEditor Group.
+// Terms of the GPL can be found in the gplv2.txt document.
+//
+// GPLv2 Header
+// ************
+// LSLEditor, a External editor for the LSL Language.
+// Copyright (C) 2010 The LSLEditor Group.
+//
+// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public
+// License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any
+// later version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+// warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+// details.
+//
+// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free
+// Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+// ********************************************************************************************************************
+// The above copyright notice and this permission notice shall be included in copies or substantial portions of the
+// Software.
+// ********************************************************************************************************************
+// </copyright>
+//
+// <summary>
+//
+//
+// </summary>
+
 using System;
 
 namespace LSLEditor
@@ -57,8 +53,7 @@ namespace LSLEditor
 			{
 				get
 				{
-					if (m_value == null)
-						m_value = (Int32)0;
+					if (m_value == null) m_value = (Int32)0;
 					return (Int32)m_value;
 				}
 				set
@@ -137,10 +132,7 @@ namespace LSLEditor
 			// Logical negation (NOT) operator
 			public static integer operator !(integer x)
 			{
-				if (x.value == 0)
-					return TRUE;
-				else
-					return FALSE;
+				return x.value == 0 ? TRUE : FALSE;
 			}
 
 			// Bitwise AND operator
@@ -257,22 +249,21 @@ namespace LSLEditor
 
 			public static int Compare(integer a, integer b)
 			{
-				if (a.value < b.value)
-					return -1;
-				if (a.value > b.value)
-					return 1;
-				return 0;
+				int intResult = 0;
+				if (a.value < b.value) {
+					intResult = -1;
+				} else if (a.value > b.value) {
+					intResult = 1;
+				}
+				return intResult;
 			}
 
 			// Override the Object.Equals(object o) method:
 			public override bool Equals(object o)
 			{
-				try
-				{
+				try {
 					return (bool)(this == (integer)o);
-				}
-				catch
-				{
+				} catch {
 					return false;
 				}
 			}

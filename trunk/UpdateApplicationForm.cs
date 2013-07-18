@@ -1,46 +1,42 @@
-// /**
-// ********
-// *
-// * ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden
-// * The code was donated on 4/28/2010 by Alphons van der Heijden
-// * To Brandon 'Dimentox Travanti' Husbands & Malcolm J. Kudra, who in turn License under the GPLv2.
-// * In agreement with Alphons van der Heijden's wishes.
-// *
-// * The community would like to thank Alphons for all of his hard work, blood sweat and tears.
-// * Without his work the community would be stuck with crappy editors.
-// *
-// * The source code in this file ("Source Code") is provided by The LSLEditor Group
-// * to you under the terms of the GNU General Public License, version 2.0
-// * ("GPL"), unless you have obtained a separate licensing agreement
-// * ("Other License"), formally executed by you and The LSLEditor Group.  Terms of
-// * the GPL can be found in the gplv2.txt document.
-// *
-// ********
-// * GPLv2 Header
-// ********
-// * LSLEditor, a External editor for the LSL Language.
-// * Copyright (C) 2010 The LSLEditor Group.
-// 
-// * This program is free software; you can redistribute it and/or
-// * modify it under the terms of the GNU General Public License
-// * as published by the Free Software Foundation; either version 2
-// * of the License, or (at your option) any later version.
-// *
-// * This program is distributed in the hope that it will be useful,
-// * but WITHOUT ANY WARRANTY; without even the implied warranty of
-// * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// * GNU General Public License for more details.
-// *
-// * You should have received a copy of the GNU General Public License
-// * along with this program; if not, write to the Free Software
-// * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-// ********
-// *
-// * The above copyright notice and this permission notice shall be included in all 
-// * copies or substantial portions of the Software.
-// *
-// ********
-// */
+// <copyright file="gpl-2.0.txt">
+// ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
+// The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
+// Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
+//
+// The community would like to thank Alphons for all of his hard work, blood sweat and tears. Without his work
+// the community would be stuck with crappy editors.
+//
+// The source code in this file ("Source Code") is provided by The LSLEditor Group to you under the terms of the GNU
+// General Public License, version 2.0 ("GPL"), unless you have obtained a separate licensing agreement ("Other
+// License"), formally executed by you and The LSLEditor Group.
+// Terms of the GPL can be found in the gplv2.txt document.
+//
+// GPLv2 Header
+// ************
+// LSLEditor, a External editor for the LSL Language.
+// Copyright (C) 2010 The LSLEditor Group.
+//
+// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public
+// License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any
+// later version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+// warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+// details.
+//
+// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free
+// Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+// ********************************************************************************************************************
+// The above copyright notice and this permission notice shall be included in copies or substantial portions of the
+// Software.
+// ********************************************************************************************************************
+// </copyright>
+//
+// <summary>
+//
+//
+// </summary>
+
 using System;
 using System.IO;
 using System.Net;
@@ -112,10 +108,11 @@ namespace LSLEditor
 		{
 			Uri url;
 			string strVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			if (Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location).Contains("beta"))
+			if (Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location).Contains("beta")) {
 				url = new Uri(Properties.Settings.Default.UpdateManifest + "?beta-" + strVersion);
-			else
+			} else {
 				url = new Uri(Properties.Settings.Default.UpdateManifest + "?" + strVersion);
+			}
 
 			manifest = new WebClient();
 			manifest.DownloadStringCompleted += new DownloadStringCompletedEventHandler(manifest_DownloadCompleted);
@@ -130,28 +127,26 @@ namespace LSLEditor
 
 		public void CheckForUpdate(bool blnForce)
 		{
-			if (!blnForce)
-			{
-				if (Properties.Settings.Default.DeleteOldFiles)
+			if (!blnForce) {
+				if (Properties.Settings.Default.DeleteOldFiles) {
 					DeleteOldFile();
+				}
 
 				DateTime dateTime = Properties.Settings.Default.CheckDate;
-				if (Properties.Settings.Default.CheckEveryDay)
-				{
+				if (Properties.Settings.Default.CheckEveryDay) {
 					TimeSpan lastUpdate = DateTime.Now - dateTime;
-					if (lastUpdate.TotalDays >= 1.0)
+					if (lastUpdate.TotalDays >= 1.0) {
 						blnForce = true;
-				}
-				else if (Properties.Settings.Default.CheckEveryWeek)
-				{
+					}
+				} else if (Properties.Settings.Default.CheckEveryWeek) {
 					TimeSpan lastUpdate = DateTime.Now - dateTime;
-					if(lastUpdate.TotalDays >= 7.0)
+					if (lastUpdate.TotalDays >= 7.0) {
 						blnForce = true;
+					}
 				}
 			}
 
-			if (blnForce)
-			{
+			if (blnForce) {
 				Properties.Settings.Default.CheckDate = DateTime.Now;
 				Properties.Settings.Default.Save(); // save also all settings
 
@@ -164,7 +159,7 @@ namespace LSLEditor
 			if (e.Error != null)
 				return;
 
-			versionInfo bzip  = new versionInfo();
+			versionInfo bzip = new versionInfo();
 			versionInfo gzip = new versionInfo();
 			versionInfo wzip = new versionInfo();
 
@@ -176,19 +171,13 @@ namespace LSLEditor
 
 			string strHelpHashMe = "";
 			string strHelpFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), Properties.Settings.Default.HelpOfflineFile);
-			if (File.Exists(strHelpFile))
-			{
+			if (File.Exists(strHelpFile)) {
 				strHelpHashMe = Decompressor.MD5Verify.ComputeHash(strHelpFile);
-			}
-			else
-			{
+			} else {
 				// help file does not exist
-				if (Properties.Settings.Default.HelpOffline || blnOnlyHelpFile)
-				{
+				if (Properties.Settings.Default.HelpOffline || blnOnlyHelpFile) {
 					strHelpHashMe = "*"; // force new update
-				}
-				else
-				{
+				} else {
 					strHelpHashMe = ""; // no update
 					this.labelHelpFile.Visible = false;
 					this.labelHelpversionString.Visible = false;
@@ -196,22 +185,22 @@ namespace LSLEditor
 			}
 
 			StringReader sr = new StringReader(e.Result);
-			for (int intI = 0; intI < 255; intI++)
-			{
+			for (int intI = 0; intI < 255; intI++) {
 				string strLine = sr.ReadLine();
-				if (strLine == null)
+				if (strLine == null) {
 					break;
-				
-                int intSplit = strLine.IndexOf("=");
-				if (intSplit < 0)
+				}
+
+				int intSplit = strLine.IndexOf("=");
+				if (intSplit < 0) {
 					continue;
-				
-                string strName = strLine.Substring(0, intSplit);
+				}
+
+				string strName = strLine.Substring(0, intSplit);
 				string strValue = strLine.Substring(intSplit + 1);
 
 				//All hashes are of the uncompressed file. However, different archives may contain different versions.
-				switch (strName)
-				{
+				switch (strName) {
 					case "Version":
 					case "BZipVersion":
 						bzip = new versionInfo(strValue);
@@ -224,7 +213,7 @@ namespace LSLEditor
 					case "BZipUrl":
 						bzip.uri = strValue;
 						break;
-                    case "GZipVersion":
+					case "GZipVersion":
 						gzip = new versionInfo(strValue);
 						break;
 					case "GZipHash":
@@ -242,7 +231,7 @@ namespace LSLEditor
 					case "ZipUrl":
 						wzip.uri = strValue;
 						break;
-                    case "HelpHash":
+					case "HelpHash":
 						strHelpHashWeb = strValue;
 						break;
 					case "HelpUrl2":
@@ -274,46 +263,39 @@ namespace LSLEditor
 			this.labelOurVersionString.Text = current.version.ToString();
 			this.labelLatestVersionString.Text = web.version.ToString();
 
-			if (String.IsNullOrEmpty(web.uri) || (web.version.CompareTo(current.version) != 1))
-			{
+			if (String.IsNullOrEmpty(web.uri) || (web.version.CompareTo(current.version) != 1)) {
 				return;
 			}
 
-			if (strHelpHashMe == "")
+			if (strHelpHashMe == "") {
 				strHelpHashMe = strHelpHashWeb;
+			}
 
-			if (strHelpHashMe == strHelpHashWeb)
-			{
+			if (strHelpHashMe == strHelpHashWeb) {
 				this.labelHelpversionString.Text = "Up to date";
 				this.strHelpUrl = null;
-			}
-			else
-			{
+			} else {
 				this.labelHelpversionString.Text = "Out of date";
 			}
 
-			if (current.hash == web.hash)
-			{
+			if (current.hash == web.hash) {
 				this.strDownloadUrl = null;
-			}
-			else
-			{
+			} else {
 				this.strDownloadUrl = web.uri;
 			}
 
-			if (this.blnOnlyHelpFile)
-			{
+			if (this.blnOnlyHelpFile) {
 				this.strDownloadUrl = null;
 				this.labelLatestVersion.Visible = false;
 				this.labelLatestVersionString.Visible = false;
 			}
 
-			if (this.strHelpUrl != null || this.strDownloadUrl != null)
-			{
+			if (this.strHelpUrl != null || this.strDownloadUrl != null) {
 				this.buttonUpdate.Enabled = true;
 
-				if (OnUpdateAvailable != null)
+				if (OnUpdateAvailable != null) {
 					OnUpdateAvailable(this, null);
+				}
 			}
 		}
 
@@ -330,85 +312,85 @@ namespace LSLEditor
 
 		private void Download()
 		{
-			if (strHelpUrl != null)
+			if (strHelpUrl != null) {
 				DownloadHelpFile(); // starts also DownloadProgram when finished
-			else
+			} else {
 				DownloadProgram();
+			}
 		}
 
 		private void DownloadHelpFile()
 		{
-			if (strHelpUrl == null)
-				return;
+			if (strHelpUrl != null) {
+				Uri url = new Uri(strHelpUrl);
 
-			Uri url = new Uri(strHelpUrl);
+				client = new WebClient();
 
-			client = new WebClient();
+				if (this.strHelpReferer != null) {
+					client.Headers.Add("Referer", strHelpReferer);
+				}
 
-			if(this.strHelpReferer != null)
-				client.Headers.Add("Referer", strHelpReferer);
+				client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadHelpFileCompleted);
+				client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
 
-			client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadHelpFileCompleted);
-			client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
+				string strCurrentFile = Assembly.GetExecutingAssembly().Location;
+				string strDirectory = Path.GetDirectoryName(strCurrentFile);
+				string strNewFile = Path.Combine(strDirectory, Properties.Settings.Default.HelpOfflineFile);
 
-			string strCurrentFile = Assembly.GetExecutingAssembly().Location;
-			string strDirectory = Path.GetDirectoryName(strCurrentFile);
-			string strNewFile = Path.Combine(strDirectory, Properties.Settings.Default.HelpOfflineFile);
+				if (File.Exists(strNewFile)) {
+					File.Delete(strNewFile);
+				}
 
-			if (File.Exists(strNewFile))
-				File.Delete(strNewFile);
-
-			client.DownloadFileAsync(url, strNewFile);
+				client.DownloadFileAsync(url, strNewFile);
+			}
 		}
 
 		void client_DownloadHelpFileCompleted(object sender, AsyncCompletedEventArgs e)
 		{
-			try
-			{
-				if (e.Error != null)
+			try {
+				if (e.Error != null) {
 					throw e.Error;
+				}
 
 				string strCurrentFile = Assembly.GetExecutingAssembly().Location;
 				string strDirectory = Path.GetDirectoryName(strCurrentFile);
 				string strNewFile = Path.Combine(strDirectory, Properties.Settings.Default.HelpOfflineFile);
 
 				string strComputedHash = Decompressor.MD5Verify.ComputeHash(strNewFile);
-				if (strComputedHash != strHelpHashWeb)
-				{
+				if (strComputedHash != strHelpHashWeb) {
 					this.buttonUpdate.Enabled = true;
 					throw new Exception("MD5 Hash of HelpFile not correct, try downloading again!");
 				}
-				if (this.strDownloadUrl != null)
+				if (this.strDownloadUrl != null) {
 					DownloadProgram();
-				else
+				} else {
 					this.Close();
-			}
-			catch (Exception exception)
-			{
+				}
+			} catch (Exception exception) {
 				MessageBox.Show(exception.Message, "Oops...", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
 		private void DownloadProgram()
 		{
-			if (strDownloadUrl == null)
-				return;
+			if (strDownloadUrl != null) {
+				Uri url = new Uri(strDownloadUrl);
 
-			Uri url = new Uri(strDownloadUrl);
+				client = new WebClient();
+				client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
+				client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
 
-			client = new WebClient();
-			client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
-			client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
+				string strCurrentFile = Assembly.GetExecutingAssembly().Location;
+				string strDirectory = Path.GetDirectoryName(strCurrentFile);
+				string strNewFileName = Path.GetFileName(strDownloadUrl);
+				string strNewFile = Path.Combine(strDirectory, strNewFileName);
 
-			string strCurrentFile = Assembly.GetExecutingAssembly().Location;
-			string strDirectory = Path.GetDirectoryName(strCurrentFile);
-			string strNewFileName = Path.GetFileName(strDownloadUrl);
-			string strNewFile = Path.Combine(strDirectory, strNewFileName);
+				if (File.Exists(strNewFile)) {
+					File.Delete(strNewFile);
+				}
 
-			if (File.Exists(strNewFile))
-				File.Delete(strNewFile);
-
-			client.DownloadFileAsync(url, strNewFile, strNewFileName);
+				client.DownloadFileAsync(url, strNewFile, strNewFileName);
+			}
 		}
 
 		void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -418,10 +400,10 @@ namespace LSLEditor
 
 		void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
 		{
-			try
-			{
-				if (e.Error != null)
+			try {
+				if (e.Error != null) {
 					throw e.Error;
+				}
 
 				string strNewFileName = e.UserState.ToString();
 
@@ -433,8 +415,7 @@ namespace LSLEditor
 				string strOldFile = Path.Combine(strDirectory, "_LSLEditor.exe");
 
 				string strExtension = Path.GetExtension(strNewFileName);
-				switch (strExtension)
-				{
+				switch (strExtension) {
 					case ".bz2":
 						Decompressor.BZip2.Decompress(File.OpenRead(strZipFile), File.Create(strNewFile));
 						break;
@@ -449,16 +430,16 @@ namespace LSLEditor
 						break;
 				}
 				string strComputedHash = Decompressor.MD5Verify.ComputeHash(strNewFile);
-				if (strComputedHash == strHashWeb)
-				{
+				if (strComputedHash == strHashWeb) {
 					if (File.Exists(strOldFile))
 						File.Delete(strOldFile);
 
 					File.Move(strCurrentFile, strOldFile);
 					File.Move(strNewFile, strCurrentFile);
 
-					if (File.Exists(strZipFile))
+					if (File.Exists(strZipFile)) {
 						File.Delete(strZipFile);
+					}
 
 					// save all there is pending (if any)
 					Properties.Settings.Default.Save();
@@ -466,32 +447,28 @@ namespace LSLEditor
 					System.Diagnostics.Process.Start(strCurrentFile);
 
 					Environment.Exit(0);
-				}
-				else
-				{
+				} else {
 					this.buttonUpdate.Enabled = true;
 					throw new Exception("MD5 Hash not correct, try downloading again!");
 				}
-			}
-			catch (Exception exception)
-			{
+			} catch (Exception exception) {
 				MessageBox.Show(exception.Message, "Oops...", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
 		private void UpdateApplicationForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (client != null)
-			{
-				if (client.IsBusy)
+			if (client != null) {
+				if (client.IsBusy) {
 					client.CancelAsync();
+				}
 				client.Dispose();
 			}
 			client = null;
-			if (manifest != null)
-			{
-				if (manifest.IsBusy)
+			if (manifest != null) {
+				if (manifest.IsBusy) {
 					manifest.CancelAsync();
+				}
 				manifest.Dispose();
 			}
 			manifest = null;
@@ -502,8 +479,9 @@ namespace LSLEditor
 			string strCurrentFile = Assembly.GetExecutingAssembly().Location;
 			string strDirectory = Path.GetDirectoryName(strCurrentFile);
 			string strOldFile = Path.Combine(strDirectory, "_LSLEditor.exe");
-			if (File.Exists(strOldFile))
+			if (File.Exists(strOldFile)) {
 				File.Delete(strOldFile);
+			}
 		}
 
 	}
