@@ -249,7 +249,7 @@
 		</Word>
 
 		<Word name="llClearCameraParams">
-			llClearCameraParams();
+			llClearCameraParams(void);
 
 			Resets all camera parameters to default values and turns off scripted camera control.
 		</Word>
@@ -338,7 +338,7 @@
 		</Word>
 
 		<Word name="llDeleteCharacter" status="beta">
-			void llDeleteCharacter();
+			void llDeleteCharacter(void);
 
 			Convert the current link-set back to a standard object, removing all path-finding properties.
 		</Word>
@@ -648,7 +648,7 @@
 		</Word>
 
 		<Word name="llGenerateKey">
-			key llGenerateKey();
+			key llGenerateKey(void);
 
 			Generates a key (SHA-1 hash) using UUID generation to create a unique key.\n
 			As the UUID produced is versioned, it should never return a value of NULL_KEY.\nThe specific UUID version is an implementation detail that has changed in the past and may change again in the future. Do not depend upon the UUID that is returned to be version 5 SHA-1 hash.
@@ -732,14 +732,14 @@
 		</Word>
 
 		<Word name="llGetCameraPos">
-			vector llGetCameraPos();
+			vector llGetCameraPos(void);
 			Returns the position of the camera of the user that granted the
 			script PERMISSION_TRACK_CAMERA. If no user has granted the permission,
 			it returns ZERO_VECTOR.
 		</Word>
 
 		<Word name="llGetCameraRot">
-			rotation llGetCameraRot();
+			rotation llGetCameraRot(void);
 
 			Returns the rotation of the camera of the user who's granted
 			this script PERMISSION_TRACK_CAMERA. If no user has granted the
@@ -770,7 +770,7 @@
 		</Word>
 
 		<Word name="llGetCreator">
-			key llGetCreator();
+			key llGetCreator(void);
 
 			Returns the key of the object's original creator. Similar to llGetOwner.
 		</Word>
@@ -828,7 +828,7 @@
 		</Word>
 
 		<Word name="llGetGeometricCenter">
-			vector llGetGeometricCenter();
+			vector llGetGeometricCenter(void);
 
 			Returns the geometric center of the linked set the
 			script is in relative to the object's position
@@ -837,7 +837,7 @@
 		</Word>
 
 		<Word name="llGetGMTclock">
-			float llGetGMTclock();
+			float llGetGMTclock(void);
 
 			Gets the time in seconds since midnight in GMT/UTC.
 		</Word>
@@ -993,7 +993,7 @@
 		</Word>
 
 		<Word name="llGetMass">
-			float llGetMass();
+			float llGetMass(void);
 
 			Returns the scripted object's mass. When called from a script
 			in a linkset, the parent will return the sum of the linkset weights,
@@ -1042,7 +1042,7 @@
 		</Word>
 
 		<Word name="llGetNumberOfPrims">
-			integer llGetNumberOfPrims();
+			integer llGetNumberOfPrims(void);
 
 			Returns the number of prims in (and avatars seated on)
 			the object the script is in.
@@ -1055,7 +1055,7 @@
 		</Word>
 
 		<Word name="llGetObjectDesc">
-			string llGetObjectDesc();
+			string llGetObjectDesc(void);
 
 			Returns the description of the scripted object/prim.
 			You can set the description using llSetObjectDesc.
@@ -1136,7 +1136,7 @@
 		</Word>
 
 		<Word name="llGetParcelMusicURL">
-			string llGetParcelMusicURL();
+			string llGetParcelMusicURL(void);
 
 			Returns a string containing the parcel streaming audio URL.
 			The object owner (avatar or group) must also be the land owner.
@@ -1223,19 +1223,19 @@
 		</Word>
 
 		<Word name="llGetRegionAgentCount">
-			integer llGetRegionAgentCount();
+			integer llGetRegionAgentCount(void);
 
 			Returns an integer that is the number of avatars in the region.
 		</Word>
 
 		<Word name="llGetRegionCorner">
-			vector llGetRegionCorner();
+			vector llGetRegionCorner(void);
 
 			Returns the RegionCorner of the simulator containing the task.
 		</Word>
 
 		<Word name="llGetRegionFlags">
-			integer llGetRegionFlags();
+			integer llGetRegionFlags(void);
 
 			Returns a bitfield specifying the region flags
 			(REGION_FLAG_*) for the region the object is in.
@@ -1260,7 +1260,7 @@
 		</Word>
 
 		<Word name="llGetRootPosition">
-			vector llGetRootPosition();
+			vector llGetRootPosition(void);
 
 			Gets the position (in region coordinates)
 			of the root/parent prim of the object containing the script.
@@ -1268,7 +1268,7 @@
 		</Word>
 
 		<Word name="llGetRootRotation">
-			rotation llGetRootRotation();
+			rotation llGetRootRotation(void);
 
 			Gets the global rotation of the root object of the
 			object script is attached to.
@@ -1312,7 +1312,7 @@
 		</Word>
 
 		<Word name="llGetSimulatorHostname">
-			string llGetSimulatorHostname();
+			string llGetSimulatorHostname(void);
 
 			Returns the host name (server) of the sim
 			in which the scripted object is located.
@@ -1396,7 +1396,7 @@
 		</Word>
 
 		<Word name="llGetTimestamp">
-			string llGetTimestamp();
+			string llGetTimestamp(void);
 
 			Returns the current time-and-date (a timestamp)
 			in the format YYYY-MM-DDThh:mm:ss.ff..fZ,
@@ -1413,7 +1413,7 @@
 		</Word>
 
 		<Word name="llGetUnixTime">
-			integer llGetUnixTime();
+			integer llGetUnixTime(void);
 
 			Returns the number of seconds elapsed since 00:00 hours,
 			Jan 1, 1970 UTC from the system clock.
@@ -1441,7 +1441,7 @@
 		</Word>
 
 		<Word name="llGetVel">
-			vector llGetVel();
+			vector llGetVel(void);
 
 			Returns the velocity.
 		</Word>
@@ -1952,7 +1952,7 @@
 		</Word>
 
 		<Word name="llOpenRemoteDataChannel">
-			llOpenRemoteDataChannel();
+			llOpenRemoteDataChannel(void);
 
 			Creates a channel to listen for XML-RPC calls.
 			Will trigger a remote_data event with type = REMOTE_DATA_CHANNEL
@@ -2146,7 +2146,7 @@
 		</Word>
 
 		<Word name="llReleaseControls">
-			llReleaseControls();
+			llReleaseControls(void);
 
 			Stop taking inputs from avatar.
 		</Word>

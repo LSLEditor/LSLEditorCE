@@ -1214,7 +1214,7 @@ namespace LSLEditor
 			intKeyWordLength = strKeyWord.Length;
 
 			if (IsRegularExpression)
-				intKeyWordLength = 0; // else it would delete typed keyword
+				intKeyWordLength = 0; // else it would delete the word typed so far
 
 			if (strKeyWord.Length == 0 || this.blnEscape)
 			{
@@ -1258,7 +1258,7 @@ namespace LSLEditor
 					InsertSelectedWord();
 					 */
 
-					if (strKeyWord == "else") // else autocompletion enoys people!!! TODO
+					if (strKeyWord == "else") // else autocompletion annoys people!!! TODO
 					{
 						this.TooltipListBox.Visible = false;
 						this.GListBoxWindow.Visible = false;
