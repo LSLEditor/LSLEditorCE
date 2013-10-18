@@ -4737,6 +4737,7 @@
 		<WordsSubsection name="C.26 JSON constants">
 			<Word name="JSON_APPEND" type="integer" value="-1"/>
 			<Word name="JSON_ARRAY" type="string" value="">U+FDD2</Word>
+			<Word name="JSON_DELETE" type="string" value="U+FFD8"></Word>
 			<Word name="JSON_FALSE" type="string" value="">U+FDD7</Word>
 			<Word name="JSON_INVALID" type="string" value="">U+FDD0</Word>
 			<Word name="JSON_NULL" type="string" value="">U+FDD5</Word>

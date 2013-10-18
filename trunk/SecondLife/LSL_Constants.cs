@@ -273,6 +273,7 @@ namespace LSLEditor
 
 		public const int JSON_APPEND = -1;
 		public const string JSON_ARRAY = "\uFDD2";
+		public const string JSON_DELETE = "\uFDD8";
 		public const string JSON_FALSE = "\uFDD7";
 		public const string JSON_INVALID = "\uFDD0";
 		public const string JSON_NULL = "\uFDD5";
