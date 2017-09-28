@@ -3398,5 +3398,5 @@ namespace LSLEditor
 			Verbose(@"llXorBase64StringsCorrect(""{0}"",""{1}"")=""{2}""", sText1, sText2, sResult);
 			return sResult;
 		}
-	}
+    }
 }

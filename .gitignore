@@ -3,3 +3,8 @@
 ################################################################################
 
 /trunk/obj/Debug
+/bin
+/trunk/.vs/lsleditor/v15
+/trunk/obj/Release
+/lsl-editor-doc.xml
+/trunk/lsleditor.csproj.user
