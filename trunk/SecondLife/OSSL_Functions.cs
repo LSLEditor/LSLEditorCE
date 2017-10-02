@@ -1156,8 +1156,10 @@ namespace LSLEditor
 
         public String osFormatString(String format, list parameters)
         {
-            Verbose("osFormatString(\"{0}\", {1})=\"\"", format, parameters.ToVerboseString());
-            return "";
+            string formatted = string.Format(format, parameters.ToArray());
+
+            Verbose("osFormatString(\"{0}\", {1})=\"{2}\"", format, parameters.ToVerboseString(), formatted);
+            return formatted;
         }
 
         public String osKey2Name(key id)
