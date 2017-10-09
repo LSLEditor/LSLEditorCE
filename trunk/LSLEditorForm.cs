@@ -1799,5 +1799,25 @@ namespace LSLEditor
 			Browser browser = GetBrowser();
 			browser.ShowWebBrowser("LSLEditor QA", Properties.Settings.Default.qasite);
 		}
-	}
+
+        private void expandToLSLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // TODO: DE EXPAND FUNCTIE MAKEN. HIERVOOR MOET DE RUNTIMECONSOLE WORDEN GEIMPORTEERD
+            EditForm editForm = this.ActiveMdiForm as EditForm;
+            if (editForm != null && editForm.FullPathName.IndexOf(Helpers.LSLIConverter.EXPANDED_SUBEXT) < 0) // TODO: && editForm.FullPathName.IndexOf(".lsli") > -1)
+            {
+                Helpers.LSLIConverter converter = new Helpers.LSLIConverter();
+                string lsl = converter.ExpandToLSL(editForm);
+                string file = converter.CreateExpandedPathAndScriptName();
+
+                using (StreamWriter sw = new StreamWriter(file))
+                {
+                    sw.Write(lsl);
+                }
+
+                OpenFile(file);
+                //ActivateMdiForm();
+            }
+        }
+    }
 }

@@ -68,11 +68,15 @@ namespace LSLEditor
 		private string CSharpCode;
 		private EditForm editForm;
 
-		private bool GetNewHost()
+        private bool isLSLI = true; // Deze moet aflezen van de extensie van het script in de tab of het LSL is of LSLI
+
+        private bool GetNewHost()
 		{
 			bool blnResult = false;
-			Assembly assembly = CompilerHelper.CompileCSharp(editForm, CSharpCode);
-			if (assembly != null) {
+            Assembly assembly = null;
+            assembly = CompilerHelper.CompileCSharp(editForm, CSharpCode);
+
+            if (assembly != null) {
 				if (SecondLifeHost != null) {
 					SecondLifeHost.Dispose();
 				}
@@ -99,13 +103,46 @@ namespace LSLEditor
 		{
 			this.editForm = editForm;
 
-			ResetScriptEvent = new AutoResetEvent(false);
+            ResetScriptEvent = new AutoResetEvent(false);
 			ResetScriptWatcher = new Thread(new ThreadStart(ResetScriptWatch));
 			ResetScriptWatcher.Name = "ResetScriptWatch";
 			ResetScriptWatcher.IsBackground = true;
 			ResetScriptWatcher.Start();
 
-			CSharpCode = MakeSharp(editForm.ConfLSL, editForm.SourceCode);
+            string lsl = editForm.SourceCode;
+
+            if (isLSLI && editForm.FullPathName.IndexOf(LSLIConverter.EXPANDED_SUBEXT) < 0) // Expand LSLI to LSL
+            {
+                LSLIConverter lsliConverter = new LSLIConverter();
+                lsl = lsliConverter.ExpandToLSL(editForm);
+                string nameExpanded = editForm.Text.Remove(editForm.ScriptName.Length - 4, 4).TrimEnd(' ') 
+                    + LSLIConverter.EXPANDED_SUBEXT + LSLIConverter.LSL_EXT; // TODO: Dit is nog niet perfect
+                string path = lsliConverter.CreateExpandedPathAndScriptName();
+
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    sw.Write(lsl);
+                }
+
+                EditForm expandedForm = null;
+                for (int i = 0; i < Application.OpenForms.Count; i++)
+                {
+                    Form form = Application.OpenForms[i];
+                    if(form.Text.TrimEnd(' ') == nameExpanded)
+                    {
+                        expandedForm = (EditForm)form;
+                    } 
+                }
+                
+                // Open the expanded file if not already open
+                if(expandedForm == null)
+                {
+                    mainForm.OpenFile(path, Guid.NewGuid(), true); // TODO: MOET AUTOMATISCH GAAN RUNNEN
+                }
+
+            }
+
+			CSharpCode = MakeSharp(editForm.ConfLSL, lsl);
 
 			return GetNewHost();
 		}

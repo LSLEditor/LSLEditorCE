@@ -27,7 +27,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <SignAssembly>false</SignAssembly>
-    <Win32Resource>E:\Dev\SL\C#\lsleditor\official\trunk\LSLEditor.RES</Win32Resource>
+    <Win32Resource>C:\Users\User\Desktop\Workspace_Jasper\LSL_editor\lsleditor-code\trunk\LSLEditor.RES</Win32Resource>
     <OldToolsVersion>3.5</OldToolsVersion>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
@@ -192,7 +192,6 @@
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Docking\DockPanel.cs">
-      <SubType>Component</SubType>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Docking\DockPanel.DockDragHandler.cs">
@@ -333,6 +332,7 @@
     <Compile Include="Helpers\HTTPRequest.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Helpers\LSLIConverter.cs" />
     <Compile Include="Helpers\OutlineHelper.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
@@ -1105,9 +1105,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(ProgramFiles)\MSBuild\StyleCop\v4.7\StyleCop.targets" />
+  <!-- <Import Project="$(ProgramFiles)\MSBuild\StyleCop\v4.7\StyleCop.targets" /> -->
   <PropertyGroup>
-    <PreBuildEvent>"$(FrameworkSDKDir)Bin\rc.exe" /r "$(ProjectDir)$(TargetName).rc"</PreBuildEvent>
-    <PostBuildEvent>$(SolutionDir)\..\build\AssemblyRevisionIncrementer.exe /t="$(SolutionDir)\Properties\AssemblyInfo.cs"</PostBuildEvent>
+    <PreBuildEvent>"$(FrameworkSDKDir)..\v7.0A\Bin\x64\Rc.exe" /r "$(ProjectDir)$(TargetName).rc"</PreBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)..\build\AssemblyRevisionIncrementer.exe" /t="$(SolutionDir)Properties\AssemblyInfo.cs"</PostBuildEvent>
   </PropertyGroup>
 </Project>

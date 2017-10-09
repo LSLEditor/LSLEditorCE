@@ -146,27 +146,30 @@ namespace LSLEditor
 
 		public static string RemoveComment(string strLine)
 		{
-			bool blnWithinString = false;
-			for (int intI = 0; intI < (strLine.Length - 1); intI++)
-			{
-				char chrC = strLine[intI];
-				if (chrC == '"')
-					blnWithinString = !blnWithinString;
-				if (blnWithinString)
-				{
-					if (chrC == '\\')
-						intI++;
-					continue;
-				}
-				if (chrC != '/')
-					continue;
-				if (strLine[intI + 1] == '/')
-				{
-					strLine = strLine.Substring(0, intI);
-					break;
-				}
-			}
-			return strLine;
+            bool blnWithinString = false;
+            for (int intI = 0; intI < (strLine.Length - 1); intI++)
+            {
+                char chrC = strLine[intI];
+                if (chrC == '"')
+                    blnWithinString = !blnWithinString;
+                if (blnWithinString)
+                {
+                    if (chrC == '\\')
+                        intI++;
+                    continue;
+                }
+                if (chrC != '/')
+                    continue;
+                if (strLine[intI + 1] == '/')
+                {
+                    //if(strLine.IndexOf("@include") != intI + 2)
+                    //{
+                        strLine = strLine.Substring(0, intI);
+                    //}
+                    break;
+                }
+            }
+            return strLine;
 		}
 
 		public static string RemoveCommentsFromLines(string strLines)
