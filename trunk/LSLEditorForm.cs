@@ -279,7 +279,7 @@ namespace LSLEditor
 		private void Start(string[] args)
 		{
 			string fileFilterNotes = "Notecard files (*.txt)|*.txt|All files (*.*)|*.*";
-			string fileFilterScripts = "Secondlife script files (*.lsl)|*.lsl|All files (*.*)|*.*";
+			string fileFilterScripts = "Secondlife script files (*.lsl;*.lsli)|*.lsl;*.lsli|All files (*.*)|*.*";
 			string fileFilterSolutions = "LSLEditor Solution File (*.sol)|*.sol|All Files (*.*)|*.*";
 
 			this.ConfLSL = GetXmlFromResource(Properties.Settings.Default.ConfLSL);
@@ -1802,9 +1802,8 @@ namespace LSLEditor
 
         private void expandToLSLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO: DE EXPAND FUNCTIE MAKEN. HIERVOOR MOET DE RUNTIMECONSOLE WORDEN GEIMPORTEERD
             EditForm editForm = this.ActiveMdiForm as EditForm;
-            if (editForm != null && editForm.FullPathName.IndexOf(Helpers.LSLIConverter.EXPANDED_SUBEXT) < 0) // TODO: && editForm.FullPathName.IndexOf(".lsli") > -1)
+            if (editForm != null && editForm.FullPathName.IndexOf(Helpers.LSLIConverter.LSLI_EXT) > -1)
             {
                 Helpers.LSLIConverter converter = new Helpers.LSLIConverter();
                 string lsl = converter.ExpandToLSL(editForm);
@@ -1814,9 +1813,58 @@ namespace LSLEditor
                 {
                     sw.Write(lsl);
                 }
+                
+                EditForm expandedForm = null;
+                for (int i = 0; i < Application.OpenForms.Count; i++)
+                {
+                    Form form = Application.OpenForms[i];
+                    if (form.Text.TrimEnd(' ') == converter.CreateExpandedScriptName())
+                    {
+                        expandedForm = (EditForm)form;
+                    }
+                }
 
+                if (expandedForm != null)
+                {
+                    expandedForm.Close();
+                }
+                editForm.Close();
                 OpenFile(file);
-                //ActivateMdiForm();
+            }
+        }
+
+        private void CollapseToLSLIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditForm editForm = this.ActiveMdiForm as EditForm;
+
+            // NOTE: This checks only if there's an LSL file, not if there's a extended subextension
+            if (editForm != null && editForm.FullPathName.IndexOf(Helpers.LSLIConverter.LSL_EXT) > -1)
+            {
+                Helpers.LSLIConverter converter = new Helpers.LSLIConverter();
+                string lsli = converter.CollapseToLSLI(editForm);
+                string file = converter.CreateCollapsedPathAndScriptName();
+
+                using (StreamWriter sw = new StreamWriter(file))
+                {
+                    sw.Write(lsli);
+                }
+
+                EditForm collapsedForm = null;
+                for (int i = 0; i < Application.OpenForms.Count; i++)
+                {
+                    Form form = Application.OpenForms[i];
+                    if (form.Text.TrimEnd(' ') == converter.CreateCollapsedScriptName())
+                    {
+                        collapsedForm = (EditForm)form;
+                    }
+                }
+
+                if (collapsedForm != null)
+                {
+                    collapsedForm.Close();
+                }
+                editForm.Close();
+                OpenFile(file);
             }
         }
     }

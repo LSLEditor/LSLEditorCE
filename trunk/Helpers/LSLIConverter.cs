@@ -50,11 +50,19 @@ namespace LSLEditor.Helpers
         private EditForm editForm;
         private const string BEGIN = "//@BEGIN";
         private const string END = "//@END";
-        private static List<string> validExtensions = new List<string>(3) { "lsl", "lsli", "LSL", "LSLI" };
+        private static List<string> validExtensions = new List<string>() { "lsl", "lsli", ".lsl", ".lsli" };
 
         public const string EXPANDED_SUBEXT = ".expanded";
         public const string LSL_EXT = ".lsl";
         public const string LSLI_EXT = ".lsli";
+
+        // NEW INCLUDE REGEX MATCHES ONLY FIRST OCCURENCE OF LINE    (    OLD: ([\n]|^)+//@include\\(\".*?\"\\)(\\s\\w)?    )
+        // LAST NEW: ([\n]|^)+//@include\\(\".*?\"\\)(\\s)?
+        private const string INCLUDE_REGEX = "(\n|^)//@include\\(\".*?\"\\)"; // EVEN MORE SIMPLIFIED
+        private const string BEGIN_REGEX = "(\n|^)//@BEGIN"; // OLD: (\n|^)+//@BEGIN(\\s)*(\r|$)
+        private const string END_REGEX = "(\n|^)//@END"; //OLD: ([\n]|^)+//@END(\\s)*(\r|$)
+
+        private List<string> implementedIncludes = new List<string>();
 
         public LSLIConverter()
         {
@@ -62,15 +70,130 @@ namespace LSLEditor.Helpers
         }
 
         /// <summary>
+        /// Checks if a filename is LSLI
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static bool IsLSLI(string fileName)
+        {
+            return GetExtension(fileName) == LSLI_EXT;
+        }
+
+        /// <summary>
         /// Creates a new path and name from the original path and name based on the editForm.
         /// E.g. turns path/to/file.lsli into path/to/file.expanded.lsl
         /// </summary>
-        /// <returns>New path and scriptname</returns>
+        /// <returns></returns>
         public string CreateExpandedPathAndScriptName()
         {
-            string nameExpanded = editForm.Text.Remove(editForm.ScriptName.Length - 4, 4).TrimEnd(' ') + EXPANDED_SUBEXT + LSL_EXT;
+            return RemoveExtension(editForm.FullPathName) + EXPANDED_SUBEXT + LSL_EXT;
+        }
+
+        /// <summary>
+        /// Creates an expanded scriptname out of the current scriptname.
+        /// </summary>
+        /// <returns></returns>
+        public string CreateExpandedScriptName(string filename = null)
+        {
+            string nameExpanded = "";
+            if (filename != null)
+            {
+                nameExpanded = RemoveExtension(filename) + EXPANDED_SUBEXT + LSL_EXT;
+            } else
+            {
+                nameExpanded = RemoveExtension(editForm.Text) + EXPANDED_SUBEXT + LSL_EXT;
+            }
+
             nameExpanded = nameExpanded.IndexOf('*') > -1 ? nameExpanded.Remove(nameExpanded.IndexOf('*'), 1) : nameExpanded;
-            return editForm.FullPathName.Remove(editForm.FullPathName.Length - 4, 4) + EXPANDED_SUBEXT + LSL_EXT;
+            return nameExpanded;
+        }
+
+        /// <summary>
+        /// Creates a new path and name from the original path and name based on the editForm.
+        /// E.g. turns path/to/file.expanded.lsl into path/to/file.lsli
+        /// </summary>
+        /// <returns></returns>
+        public string CreateCollapsedPathAndScriptName()
+        {
+            return RemoveExtension(editForm.FullPathName) + LSLI_EXT;
+        }
+
+        /// <summary>
+        /// Creates a LSLI scriptname out of the current scriptname.
+        /// </summary>
+        /// <returns></returns>
+        public string CreateCollapsedScriptName()
+        {
+            string nameExpanded = RemoveExtension(editForm.Text) + LSLI_EXT;
+            nameExpanded = nameExpanded.IndexOf('*') > -1 ? nameExpanded.Remove(nameExpanded.IndexOf('*'), 1) : nameExpanded;
+            return nameExpanded;
+        }
+
+        /// <summary>
+        /// Gets the extension from a string, includes '.'
+        /// Only returns the last extension
+        /// Returns empty string if the extension cannot be found
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        private static string GetExtension(string filename)
+        {
+            int lastIndexOfDirectorySeperator = -1;
+            
+            // If '.' after last index of \\ or /
+            if (filename.Contains('/') || filename.Contains('\\'))
+            {
+                lastIndexOfDirectorySeperator = filename.LastIndexOf('/') > filename.LastIndexOf('\\') ? filename.LastIndexOf('/') : filename.LastIndexOf('\\');
+            }
+            if(lastIndexOfDirectorySeperator != -1 && filename.Contains('.') && lastIndexOfDirectorySeperator < filename.LastIndexOf('.'))
+            {
+                return filename.Substring(filename.LastIndexOf('.')).TrimEnd(' ');
+            }
+            
+            return "";
+        }
+
+        /// <summary>
+        /// Removes the extension and possible expanded subextension from a filename
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        private static string RemoveExtension(string filename)
+        {
+            filename = filename.Contains(EXPANDED_SUBEXT) ? filename.Replace(EXPANDED_SUBEXT, "") : filename;
+            return filename.Remove(filename.LastIndexOf(GetExtension(filename)));
+        }
+
+        /// <summary>
+        /// Searches for a file with one of the validExtensions based on a name or path.
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns>File path</returns>
+        private string SearchFile(string file)
+        {
+            // TODO: Check of settings IncludeFromFolder aanstaat
+
+            if (File.Exists(file))
+            {
+                return file;
+            }
+
+            if (GetExtension(file) == "")
+            {
+                List<string> extensions = validExtensions.Where(e => e[0] == '.').ToList();
+                string pFile = "";
+
+                foreach (string extension in extensions)
+                {
+                    pFile = file + extension;
+
+                    if (File.Exists(pFile)) {
+                        return pFile;
+                    }
+                }
+            }
+
+            return "";
         }
 
         /// <summary>
@@ -81,14 +204,14 @@ namespace LSLEditor.Helpers
         /// <returns></returns>
         private string GetRelativePath(string filespec, string folder)
         {
-            filespec = Path.GetFullPath(filespec);
+            filespec = Path.GetFullPath(filespec).ToLower();
             if(validExtensions.Contains(filespec.Substring(filespec.LastIndexOf(".") + 1)))
             {
                 int lastIndexOfSeperator = filespec.LastIndexOf('\\') > filespec.LastIndexOf('/') ? filespec.LastIndexOf('\\') : filespec.LastIndexOf('/');
                 filespec = filespec.Remove(lastIndexOfSeperator);
             }
             Uri pathUri = new Uri(filespec);
-            // Folders must end in a slash
+
             if (!folder.EndsWith(Path.DirectorySeparatorChar.ToString()))
             {
                 folder += Path.DirectorySeparatorChar;
@@ -113,7 +236,9 @@ namespace LSLEditor.Helpers
         /// <returns>Context with the new line</returns>
         private StringBuilder WriteAfterLine(StringBuilder context, string newLine, string lineBefore)
         {
-            int includeIndex = context.ToString().LastIndexOf(lineBefore) + lineBefore.Length;
+            string ctx = context.ToString();
+            int lastIndexOfLineBefore = ctx.LastIndexOf(lineBefore);
+            int includeIndex = lastIndexOfLineBefore + lineBefore.Length;
 
             string hasSeperator = lineBefore.Substring(lineBefore.Length - 1, 1);
             if (hasSeperator != "\n")
@@ -128,70 +253,71 @@ namespace LSLEditor.Helpers
             }
 
             context.Insert(includeIndex, newLine);
+            string test = context.ToString();
             return context;
         }
         
         /// <summary>
         /// Imports scripts from //@include statements
         /// </summary>
-        /// <param name="strC">Sourcecode to work with</param>
+        /// <param name="strC">Sourcecode</param>
         /// <param name="pathOfScript">Path of the source code of the script</param>
         /// <returns>Sourcecode with imported scripts</returns>
         private string ImportScripts(string strC, string pathOfScript)
         {
+            if(GetExtension(pathOfScript).ToLower() != LSLI_EXT)
+            {
+                // If it's not LSLI extension it can't import a script
+                return strC;
+            }
             StringBuilder sb = new StringBuilder(strC);
-            string includeMatch = "([\n]|^)+//@include\\(\".*?\"\\)(\\s\\w)?"; // OLD (\n|^)+//@include\\(\".*?\"\\)(\\s?)+(\n|$) MATCHES ONLY 1 INCLUDE
-            MatchCollection mIncludes = Regex.Matches(strC, includeMatch); // Find includes
+            MatchCollection mIncludes = Regex.Matches(strC, INCLUDE_REGEX); // Find includes
+
             foreach (Match m in mIncludes)
             {
-                string line = m.Value;
+                string contentAfterMatchValue = strC.Substring(m.Index + m.Value.Length);
+                int indexOfNewLine = contentAfterMatchValue.IndexOf('\n') + m.Index + m.Value.Length + 1; // Index of the first occurence of \n after this match
+                string line = strC.Substring(m.Index, indexOfNewLine - m.Index); // Get full line
 
                 string pathOfInclude = Regex.Match(line, "\".*?\"").Value.Trim('"');
-                int lastIndexOfLine = line.LastIndexOf("\n") > -1 && line.LastIndexOf("\n") > line.LastIndexOf(")")
-                    ? line.LastIndexOf("\n") + 1 : line.Length;
-                
-                // Trim end of string if
-                if (line.Substring(line.Length - 1, 1) != "\n" && line.Substring(line.Length - 1, 1) != ")")
-                {
-                    line = line.Remove(line.Length - 1);
-                }
+                string ext = GetExtension(pathOfInclude).ToLower();
 
-                string ext = pathOfInclude.Substring(pathOfInclude.LastIndexOf(".") + 1);
-
-                if (validExtensions.Contains(ext))
+                if ((validExtensions.Contains(ext) || ext == "") && !this.CreateExpandedScriptName(pathOfScript).Contains(pathOfInclude)
+                    && !pathOfScript.Contains(pathOfInclude))
                 {
                     // If path is relative
-                    if(!Path.IsPathRooted(pathOfInclude))
+                    if (!Path.IsPathRooted(pathOfInclude))
                     {
                         pathOfInclude = GetRelativePath(pathOfScript, Environment.CurrentDirectory) + pathOfInclude;
                     }
 
-                    sb = this.WriteAfterLine(sb, BEGIN, line);
-
-                    string script = "";
-                    if (File.Exists(pathOfInclude))
+                    pathOfInclude = SearchFile(pathOfInclude);
+                    if (pathOfInclude != "" && !this.implementedIncludes.Contains(Path.GetFullPath(pathOfInclude)))
                     {
+                        sb = this.WriteAfterLine(sb, BEGIN, line);
+
                         // Insert included script
+                        string script = "// Empty script\n";
                         using (StreamReader sr = new StreamReader(pathOfInclude))
                         {
+                            this.implementedIncludes.Add(Path.GetFullPath(pathOfInclude));
                             string scriptRaw = sr.ReadToEnd();
 
                             // If there are includes in the included script
-                            if (Regex.IsMatch(strC, includeMatch))
+                            if (Regex.IsMatch(scriptRaw, INCLUDE_REGEX))
                             {
-                                // TODO: Kijk voor alle matches, niet alleen 1 match AT: VOLGENS MIJ GEBEURD DIT AL?
-                                //Match mInclude = Regex.Match(strC, includeMatch); // Find includes
-                                //string IncludePath = Regex.Match(mInclude.ToString(), "\".*?\"").Value.Trim('"');
-
                                 // Then import these scripts too
                                 script = "\n" + ImportScripts(scriptRaw, pathOfInclude) + "\n";
+                            } else if(scriptRaw != "" && scriptRaw != " ")
+                            {
+                                script = scriptRaw + "\n";
                             }
                         }
-                    }
                     
-                    this.WriteAfterLine(sb, script, BEGIN + "\n");
+                        this.WriteAfterLine(sb, script, BEGIN + "\n");
 
-                    this.WriteAfterLine(sb, END, script);
+                        this.WriteAfterLine(sb, END, script);
+                    }
                 }
             }
 
@@ -199,7 +325,68 @@ namespace LSLEditor.Helpers
         }
 
         /// <summary>
-        /// Main function of the class. Call this to expand LSLI to LSL
+        /// Removes included scripts
+        /// </summary>
+        /// <param name="strC">Sourcecode</param>
+        /// <returns>Sourcecode without imported scripts</returns>
+        private string RemoveScripts(string strC) // TODO: DIT VALT MISS NOG TE OPTIMALISEREN MET STRINGBUILDER IPV STRING
+        {
+            //StringBuilder sb = new StringBuilder(strC);
+
+            string result = strC;
+            int indexOfFirstBeginStatement = -1;
+            uint depth = 0;
+            int readIndex = 0;
+
+            using(StringReader sr = new StringReader(strC))
+            {
+                int amountOfLines = strC.Split('\n').Length;
+                for (int i = 1; i < amountOfLines; i++)
+                {
+                    string line = sr.ReadLine();
+
+                    if (Regex.IsMatch(line, BEGIN_REGEX))
+                    {
+                        if(depth == 0)
+                        {
+                            indexOfFirstBeginStatement = readIndex;
+                        }
+                        depth++;
+                    }
+
+                    readIndex += line.Length + 1;
+
+                    if (Regex.IsMatch(line, END_REGEX))
+                    {
+                        depth--;
+
+                        if (depth == 0)
+                        {
+                            result = result.Remove(indexOfFirstBeginStatement, (readIndex - indexOfFirstBeginStatement));
+                            readIndex -= readIndex - indexOfFirstBeginStatement;
+                            indexOfFirstBeginStatement = -1;
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Call this to collapse LSL to LSLI
+        /// </summary>
+        /// <param name="editform"></param>
+        /// <returns>LSLI</returns>
+        public string CollapseToLSLI(EditForm editform)
+        {
+            this.editForm = editform;
+            string sourceCode = RemoveScripts(editForm.SourceCode);
+            return sourceCode;
+        }
+
+        /// <summary>
+        /// Call this to expand LSLI to LSL
         /// </summary>
         /// <param name="editForm"></param>
         /// <returns>LSL</returns>

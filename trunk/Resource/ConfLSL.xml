@@ -8,6 +8,10 @@
 		<Word name="regex">
 			"[^"\\]* (?>\\.[^"\\]*)*"
 		</Word>
+    <Word name="//@BEGIN">
+    </Word>
+    <Word name="//@END">
+    </Word>
 	</Words>
 
 

@@ -115,8 +115,7 @@ namespace LSLEditor
             {
                 LSLIConverter lsliConverter = new LSLIConverter();
                 lsl = lsliConverter.ExpandToLSL(editForm);
-                string nameExpanded = editForm.Text.Remove(editForm.ScriptName.Length - 4, 4).TrimEnd(' ') 
-                    + LSLIConverter.EXPANDED_SUBEXT + LSLIConverter.LSL_EXT; // TODO: Dit is nog niet perfect
+                string nameExpanded = lsliConverter.CreateExpandedScriptName();
                 string path = lsliConverter.CreateExpandedPathAndScriptName();
 
                 using (StreamWriter sw = new StreamWriter(path))
@@ -124,21 +123,22 @@ namespace LSLEditor
                     sw.Write(lsl);
                 }
 
-                EditForm expandedForm = null;
-                for (int i = 0; i < Application.OpenForms.Count; i++)
-                {
-                    Form form = Application.OpenForms[i];
-                    if(form.Text.TrimEnd(' ') == nameExpanded)
-                    {
-                        expandedForm = (EditForm)form;
-                    } 
-                }
+                // NOTE: DE EXPANDED LSL WORDT NU IN DE ACHTERGROND GERUNT EN NIET MEER LATEN ZIEN OP 2 TABS
+                //EditForm expandedForm = null;
+                //for (int i = 0; i < Application.OpenForms.Count; i++)
+                //{
+                //    Form form = Application.OpenForms[i];
+                //    if(form.Text.TrimEnd(' ') == nameExpanded)
+                //    {
+                //        expandedForm = (EditForm)form;
+                //    } 
+                //}
                 
-                // Open the expanded file if not already open
-                if(expandedForm == null)
-                {
-                    mainForm.OpenFile(path, Guid.NewGuid(), true); // TODO: MOET AUTOMATISCH GAAN RUNNEN
-                }
+                //// Open the expanded file if not already open
+                //if(expandedForm == null)
+                //{
+                //    mainForm.OpenFile(path, Guid.NewGuid(), true); // TODO: MOET AUTOMATISCH GAAN RUNNEN
+                //}
 
             }
 

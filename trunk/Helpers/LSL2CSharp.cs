@@ -109,29 +109,6 @@ namespace LSLEditor
 			return regex.Replace(strC, new MatchEvaluator(CorrectGlobalEvaluator));
 		}
 
-        /// <summary>
-        /// WORDT NIET MEER GEBRUIKT
-        /// Imports scripts that are imported using //@include() syntax.
-        /// </summary>
-        /// <param name="strC"></param>
-        /// <returns></returns>
-        private string ImportScripts(string strC)
-        {
-            StringBuilder sb = new StringBuilder(strC);
-            for (int i = strC.IndexOf("\n//@include"); i > -1; i = strC.IndexOf("\n//@include" + 1))
-            {
-                string line = Regex.Match(strC.Substring(i + 1), "^//@include\\(\".*?\"\\)").ToString();
-
-                if (line.Length > 0) {
-                    // Found an include statement
-                    string path = Regex.Match(line, "\".*?\"").ToString();
-                    sb.Insert(i, "\n\tpublic void bla() { }\n");
-                }
-            }
-
-            return sb.ToString();
-        }
-
 		private string RemoveComments(string strC)
 		{
 			if (Properties.Settings.Default.CommentCStyle)
@@ -633,8 +610,6 @@ namespace LSLEditor
 			strC = RemoveSingleQuotes(strC);
 
 			strC = PreCorrectReservedWords(strC); // Experimental
-
-            //strC = ImportScripts(strC);
 
 			strC = MakeGlobalAndLocal(strC);
 

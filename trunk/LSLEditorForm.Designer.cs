@@ -103,6 +103,9 @@ namespace LSLEditor
             this.formatSelectedTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commentInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uncommentingSelectedTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.CollapseToLSLIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expandToLSLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewlStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.solutionExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.outlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -144,9 +147,6 @@ namespace LSLEditor
             this.openSolutionFilesDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dockPanel = new LSLEditor.Docking.DockPanel();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            this.CollapseToLSLIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.expandToLSLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -652,6 +652,27 @@ namespace LSLEditor
             this.uncommentingSelectedTextToolStripMenuItem.Text = "Uncommenting selected text";
             this.uncommentingSelectedTextToolStripMenuItem.Click += new System.EventHandler(this.uncommentingSelectedTextToolStripMenuItem_Click);
             // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(222, 6);
+            // 
+            // CollapseToLSLIToolStripMenuItem
+            // 
+            this.CollapseToLSLIToolStripMenuItem.Name = "CollapseToLSLIToolStripMenuItem";
+            this.CollapseToLSLIToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
+            this.CollapseToLSLIToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.CollapseToLSLIToolStripMenuItem.Text = "Collapse to LSLI";
+            this.CollapseToLSLIToolStripMenuItem.Click += new System.EventHandler(this.CollapseToLSLIToolStripMenuItem_Click);
+            // 
+            // expandToLSLToolStripMenuItem
+            // 
+            this.expandToLSLToolStripMenuItem.Name = "expandToLSLToolStripMenuItem";
+            this.expandToLSLToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11;
+            this.expandToLSLToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.expandToLSLToolStripMenuItem.Text = "Expand to LSL";
+            this.expandToLSLToolStripMenuItem.Click += new System.EventHandler(this.expandToLSLToolStripMenuItem_Click);
+            // 
             // viewlStripMenuItem
             // 
             this.viewlStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -756,7 +777,7 @@ namespace LSLEditor
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.optionsToolStripMenuItem.Text = "Options...";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -971,24 +992,6 @@ namespace LSLEditor
             dockPanelSkin1.DockPaneStripSkin = dockPaneStripSkin1;
             this.dockPanel.Skin = dockPanelSkin1;
             this.dockPanel.TabIndex = 10;
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(222, 6);
-            // 
-            // CollapseToLSLIToolStripMenuItem
-            // 
-            this.CollapseToLSLIToolStripMenuItem.Name = "CollapseToLSLIToolStripMenuItem";
-            this.CollapseToLSLIToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.CollapseToLSLIToolStripMenuItem.Text = "Collapse to LSLI";
-            // 
-            // expandToLSLToolStripMenuItem
-            // 
-            this.expandToLSLToolStripMenuItem.Name = "expandToLSLToolStripMenuItem";
-            this.expandToLSLToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.expandToLSLToolStripMenuItem.Text = "Expand to LSL";
-            this.expandToLSLToolStripMenuItem.Click += new System.EventHandler(this.expandToLSLToolStripMenuItem_Click);
             // 
             // LSLEditorForm
             // 

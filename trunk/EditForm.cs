@@ -419,8 +419,17 @@ namespace LSLEditor
 			//	return false;
 
 			if (this.IsScript) {
+                string lsl = SourceCode;
+
+                // If it is LSLI, it needs to import scripts first, before it recognizes imported functions
+                if (LSLIConverter.IsLSLI(this.FullPathName))
+                {
+                    LSLIConverter converter = new LSLIConverter();
+                    lsl = converter.ExpandToLSL(this);
+                }
+
 				LSL2CSharp translator = new LSL2CSharp(ConfLSL);
-				string strCSharp = translator.Parse(SourceCode);
+				string strCSharp = translator.Parse(lsl);
 
 				if (System.Diagnostics.Debugger.IsAttached) {
 					for (int intI = this.tabControl1.TabPages.Count - 1; intI > 0; intI--) {
