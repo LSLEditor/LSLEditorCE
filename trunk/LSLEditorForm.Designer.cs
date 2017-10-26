@@ -146,6 +146,7 @@ namespace LSLEditor
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.openSolutionFilesDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.viewLSLIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dockPanel = new LSLEditor.Docking.DockPanel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -468,7 +469,8 @@ namespace LSLEditor
             this.advancedToolStripMenuItem,
             this.toolStripSeparator10,
             this.CollapseToLSLIToolStripMenuItem,
-            this.expandToLSLToolStripMenuItem});
+            this.expandToLSLToolStripMenuItem,
+            this.viewLSLIToolStripMenuItem});
             this.editStripMenuItem.Name = "editStripMenuItem";
             this.editStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editStripMenuItem.Text = "Edit";
@@ -939,6 +941,14 @@ namespace LSLEditor
             // 
             this.openSolutionFilesDialog.FileName = "openFileDialog2";
             // 
+            // viewLSLIToolStripMenuItem
+            // 
+            this.viewLSLIToolStripMenuItem.Name = "viewLSLIToolStripMenuItem";
+            this.viewLSLIToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12;
+            this.viewLSLIToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.viewLSLIToolStripMenuItem.Text = "View LSLI";
+            this.viewLSLIToolStripMenuItem.Click += new System.EventHandler(this.viewLSLIToolStripMenuItem_Click);
+            // 
             // dockPanel
             // 
             this.dockPanel.ActiveAutoHideContent = null;
@@ -1126,5 +1136,6 @@ namespace LSLEditor
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem CollapseToLSLIToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem expandToLSLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewLSLIToolStripMenuItem;
     }
 }

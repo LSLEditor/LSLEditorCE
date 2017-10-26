@@ -115,31 +115,17 @@ namespace LSLEditor
             {
                 LSLIConverter lsliConverter = new LSLIConverter();
                 lsl = lsliConverter.ExpandToLSL(editForm);
-                string nameExpanded = lsliConverter.CreateExpandedScriptName();
-                string path = lsliConverter.CreateExpandedPathAndScriptName();
+                string nameExpanded = LSLIPathHelper.CreateExpandedScriptName(editForm.FullPathName);
+                string path = LSLIPathHelper.CreateExpandedPathAndScriptName(editForm.FullPathName);
+
+                LSLIPathHelper.DeleteFile(path);
 
                 using (StreamWriter sw = new StreamWriter(path))
                 {
                     sw.Write(lsl);
                 }
 
-                // NOTE: DE EXPANDED LSL WORDT NU IN DE ACHTERGROND GERUNT EN NIET MEER LATEN ZIEN OP 2 TABS
-                //EditForm expandedForm = null;
-                //for (int i = 0; i < Application.OpenForms.Count; i++)
-                //{
-                //    Form form = Application.OpenForms[i];
-                //    if(form.Text.TrimEnd(' ') == nameExpanded)
-                //    {
-                //        expandedForm = (EditForm)form;
-                //    } 
-                //}
-                
-                //// Open the expanded file if not already open
-                //if(expandedForm == null)
-                //{
-                //    mainForm.OpenFile(path, Guid.NewGuid(), true); // TODO: MOET AUTOMATISCH GAAN RUNNEN
-                //}
-
+                LSLIPathHelper.HideFile(path);
             }
 
 			CSharpCode = MakeSharp(editForm.ConfLSL, lsl);

@@ -336,6 +336,7 @@
     <Compile Include="Helpers\OutlineHelper.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Helpers\LSLIPathHelper.cs" />
     <Compile Include="Helpers\SendMyKeys.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>

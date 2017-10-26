@@ -45,6 +45,7 @@ using System.Text;
 using System.Windows.Forms;
 using LSLEditor.Docking;
 using LSLEditor.Helpers;
+using System.Collections.Generic;
 
 namespace LSLEditor
 {
@@ -52,7 +53,9 @@ namespace LSLEditor
 	{
 		public RuntimeConsole runtime;
 
-		private string m_FullPathName;
+        public List<string> verboseQueue = new List<string>();
+
+        private string m_FullPathName;
 		private Guid m_Guid;
 		// private bool sOutline = true;
 		public LSLEditorForm parent;
@@ -180,13 +183,29 @@ namespace LSLEditor
 
 		void TextBox_OnDirtyChanged(object sender, EventArgs e)
 		{
-			this.Text = this.ScriptName;
-			if (this.numberedTextBoxUC1.TextBox.Dirty) {
-				this.Text = this.Text.Trim() + "*  ";
-			} else {
-				this.Text = this.Text.Trim() + "   ";
-			}
-			TabPage tabPage = this.Tag as TabPage;
+            if(this.Text == null || this.ScriptName == null)
+            {
+                this.Text = this.ScriptName;
+            }
+            if (LSLIPathHelper.GetExpandedTabName(this.ScriptName) == this.Text)
+            {
+                if (this.numberedTextBoxUC1.TextBox.Dirty)
+                {
+                    this.Text = this.Text.Trim() + "*  ";
+
+                }
+            }
+            else
+            {
+                this.Text = this.ScriptName;
+			    if (this.numberedTextBoxUC1.TextBox.Dirty) {
+				    this.Text = this.Text.Trim() + "*  ";
+			    } else {
+				    this.Text = this.Text.Trim() + "   ";
+			    }
+            }
+
+            TabPage tabPage = this.Tag as TabPage;
 			if (tabPage != null) {
 				tabPage.Text = this.Text;
 			}
@@ -307,30 +326,68 @@ namespace LSLEditor
 
 		public void SaveCurrentFile(string strPath)
 		{
-			this.FullPathName = strPath;
-			Encoding encodeAs = this.encodedAs;
-			if (this.IsScript && encodeAs == null) {
-				switch (Properties.Settings.Default.OutputFormat) {
-					case "UTF8":
-						encodeAs = Encoding.UTF8;
-						break;
-					case "Unicode":
-						encodeAs = Encoding.Unicode;
-						break;
-					case "BigEndianUnicode":
-						encodeAs = Encoding.BigEndianUnicode;
-						break;
-					default:
-						encodeAs = Encoding.Default;
-						break;
-				}
-			} else if (encodeAs == null) {
-				encodeAs = Encoding.UTF8;
-			}
+            // Check if this is an expanded.lsl
+            if (!LSLIPathHelper.IsExpandedLSL(strPath))
+            {
+                this.FullPathName = strPath;
+                Encoding encodeAs = this.encodedAs;
+                if (this.IsScript && encodeAs == null)
+                {
+                    switch (Properties.Settings.Default.OutputFormat)
+                    {
+                        case "UTF8":
+                            encodeAs = Encoding.UTF8;
+                            break;
+                        case "Unicode":
+                            encodeAs = Encoding.Unicode;
+                            break;
+                        case "BigEndianUnicode":
+                            encodeAs = Encoding.BigEndianUnicode;
+                            break;
+                        default:
+                            encodeAs = Encoding.Default;
+                            break;
+                    }
+                }
+                else if (encodeAs == null)
+                {
+                    encodeAs = Encoding.UTF8;
+                }
 
-			this.numberedTextBoxUC1.TextBox.SaveCurrentFile(strPath, encodeAs);
-			this.encodedAs = encodeAs;
-		}
+                this.numberedTextBoxUC1.TextBox.SaveCurrentFile(strPath, encodeAs);
+                this.encodedAs = encodeAs;
+
+            } else if (LSLIPathHelper.IsExpandedLSL(strPath))
+            {
+                string LSLIfilePath = LSLIPathHelper.CreateCollapsedPathAndScriptName(strPath);
+                // Check if an LSLI version of this script exists
+                if (File.Exists(LSLIfilePath))
+                {
+                    // Save the LSLI file as well
+                    File.WriteAllText(LSLIfilePath, LSLIConverter.CollapseToLSLI(this.numberedTextBoxUC1.TextBox.Text));
+                    EditForm form = null;
+
+                    // If it's currently open, then refresh it
+                    for (int i = 0; i < Application.OpenForms.Count; i++)
+                    {
+                        Form openForm = Application.OpenForms[i];
+                        string filename = LSLIPathHelper.TrimStarsAndWhiteSpace(openForm.Text);
+                        if (filename == Path.GetFileName(LSLIfilePath))
+                        {
+                            form = (EditForm)openForm;
+                        }
+                    }
+
+                    if (form != null && form.Enabled)
+                    {
+                        parent.OpenFile(LSLIfilePath, Guid.NewGuid(), true);
+                        form.Close();
+                    }
+                }
+                this.numberedTextBoxUC1.TextBox.Dirty = false;
+                this.Text = LSLIPathHelper.GetExpandedTabName(strPath);
+            }
+        }
 
 		public void SaveCurrentFile()
 		{
@@ -397,12 +454,26 @@ namespace LSLEditor
 					// for disposing
 					this.components.Add(runtime);
 
+                    foreach (string message in verboseQueue)
+                    {
+                        runtime.VerboseConsole(message);
+
+                        if (message.StartsWith("Error: "))
+                        {
+                            StopCompiler();
+                            this.tabControl1.SelectedIndex = 0;
+                            verboseQueue = new List<string>();
+                            return false;
+                        }
+                    }
+
 					if (!runtime.Compile(this)) {
 						this.tabControl1.SelectedIndex = 0;
 						return false;
 					}
 
-					TabPage tabPage = new TabPage("Debug");
+
+                    TabPage tabPage = new TabPage("Debug");
 					tabPage.Controls.Add(runtime);
 					this.tabControl1.TabPages.Add(tabPage);
 					this.tabControl1.SelectedIndex = 1;
@@ -422,7 +493,7 @@ namespace LSLEditor
                 string lsl = SourceCode;
 
                 // If it is LSLI, it needs to import scripts first, before it recognizes imported functions
-                if (LSLIConverter.IsLSLI(this.FullPathName))
+                if (LSLIPathHelper.IsLSLI(this.FullPathName))
                 {
                     LSLIConverter converter = new LSLIConverter();
                     lsl = converter.ExpandToLSL(this);
