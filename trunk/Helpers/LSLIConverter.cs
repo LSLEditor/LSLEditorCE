@@ -57,9 +57,9 @@ namespace LSLEditor.Helpers
         public const string LSL_EXT = ".lsl";
         public const string LSLI_EXT = ".lsli";
         
-        private const string INCLUDE_REGEX = "(\n|^)//@include\\(\".*?\"\\)";
-        private const string BEGIN_REGEX = "(\n|^)" + BEGIN; //"(\n|^)//@BEGIN"
-        private const string END_REGEX = "(\n|^)" + END;
+        private const string INCLUDE_REGEX = "(\\s+|^)//@include\\(\".*?\"\\)";// Eerst was '\\s+' '\n'
+        private const string BEGIN_REGEX = "(\\s+|^)" + BEGIN; //"(\n|^)//@BEGIN"
+        private const string END_REGEX = "(\\s+|^)" + END;
 
         private List<string> implementedIncludes = new List<string>();
         private int includeDepth = 0;
@@ -132,18 +132,47 @@ namespace LSLEditor.Helpers
             return relativePath;
         }
 
+        public static List<int> AllIndexesOf(string str, string value)
+        {
+            if (String.IsNullOrEmpty(value))
+                throw new ArgumentException("the string to find may not be empty", "value");
+            List<int> indexes = new List<int>();
+            for (int index = 0; ; index += value.Length)
+            {
+                index = str.IndexOf(value, index);
+                if (index == -1)
+                    return indexes;
+                indexes.Add(index);
+            }
+        }
+
         /// <summary>
         /// This is a hack to get the correct line, since problems arose in WriteAfterLine when inserting index-based
         /// </summary>
         /// <param name="lineBefore"></param>
         /// <returns></returns>
-        private int GetCorrectIndexOfLine(string lineBefore, string context) // TODO
+        private int GetCorrectIndexOfLine(string lineBefore, string context)
         {
-            //int correctIndex = -1;
-            //if(lineBefore.Trim('\n') == BEGIN)
-            //{
-            //    correctIndex = context.Where(l => l).LastIndexOf(lineBefore);
-            //}
+            if (Regex.IsMatch(lineBefore.Trim('\n'), INCLUDE_REGEX)
+                && lineBefore.Trim('\n').EndsWith(Regex.Match(lineBefore.Trim('\n'), INCLUDE_REGEX).ToString())) // Line before this line is an include statement, that means this is a BEGIN statement
+            {
+                // Get all matches with this linebefore
+                List<int> allIndexes = AllIndexesOf(context, lineBefore);
+
+                foreach(int index in allIndexes)
+                {
+                    // Check wether there is already a begin statement
+                    string actualLineBefore = context.Substring(index + lineBefore.Length).Trim('\n');
+                    if (actualLineBefore.StartsWith(BEGIN))
+                    {
+                        continue;
+                    } else
+                    {
+                        return index;
+                    }
+                }
+
+            }
             return context.LastIndexOf(lineBefore);
         }
 
@@ -157,7 +186,6 @@ namespace LSLEditor.Helpers
         private StringBuilder WriteAfterLine(StringBuilder context, string newLine, string lineBefore) // TODO: HIJ MOET KIJKEN NAAR DE INDEX VAN LINEBEFORE, NIET ZELF DE INDEX OPZOEKEN
         {
             string ctx = context.ToString();
-            //int lastIndexOfLineBefore = ctx.LastIndexOf(lineBefore);
             int lastIndexOfLineBefore = GetCorrectIndexOfLine(lineBefore, ctx);
             int includeIndex = lastIndexOfLineBefore + lineBefore.Length;
 
@@ -178,34 +206,29 @@ namespace LSLEditor.Helpers
             return context;
         }
 
-        /// <summary>
-        /// Creates a new line in the context after a specified index
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="newLine"></param>
-        /// <param name="indexOfNewLine"></param>
-        /// <returns>Context with the new line</returns>
-        //private StringBuilder WriteAfterLine(StringBuilder context, string newLine, int indexOfNewLine) // DEZE IS BETER, MAAR IN PRAKTIJK WERKT NIET...
-        //{
-        //    string ctx = context.ToString();
-        //    int includeIndex = indexOfNewLine;
+        private void ShowError(string message)
+        {
+            if (!editForm.verboseQueue.Contains(message))
+            {
+                MessageBox.Show(message, "Oops...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                editForm.verboseQueue.Add(message);
+            }
+        }
 
-        //    string hasSeperator = context.ToString().Substring(indexOfNewLine - 1, 1);
-        //    if (hasSeperator != "\n")
-        //    {
-        //        newLine = "\n" + newLine;
-        //    }
+        private string GetTabsForIncludeDepth(int includeDepth, bool OneLess = false) // TODO: Dit wordt wss een setting. Tabs hangt namelijk af van de hoeveelheid ingedente include statement.
+        {
+            string tabs = "";
+            if(OneLess && includeDepth != 0)
+            {
+                includeDepth--;
+            }
 
-        //    hasSeperator = newLine.Substring(newLine.Length - 1, 1);
-        //    if (hasSeperator != "\n")
-        //    {
-        //        newLine += "\n";
-        //    }
-
-        //    context.Insert(includeIndex, newLine);
-        //    string test = context.ToString();
-        //    return context;
-        //}
+            for(int i = 0; i < includeDepth; i++)
+            {
+                tabs += "\t";
+            }
+            return tabs;
+        }
 
         /// <summary>
         /// Imports scripts from //@include statements
@@ -213,7 +236,7 @@ namespace LSLEditor.Helpers
         /// <param name="strC">Sourcecode</param>
         /// <param name="pathOfScript">Path of the source code of the script</param>
         /// <returns>Sourcecode with imported scripts</returns>
-        private string ImportScripts(string strC, string pathOfScript) // TODO: Lange functie, kan ik deze opsplitten?
+        private string ImportScripts(string strC, string pathOfScript, bool ShowBeginEnd = true) // TODO: Lange functie, kan ik deze opsplitten?
         {
             if(!LSLIPathHelper.IsLSLI(pathOfScript))
             {
@@ -255,30 +278,46 @@ namespace LSLEditor.Helpers
 
                     if (pathOfInclude != "" && !this.implementedIncludes.Contains(Path.GetFullPath(pathOfInclude)))
                     {
-                        sb = this.WriteAfterLine(sb, BEGIN, line);
+                        if(ShowBeginEnd)
+                        {
+                            sb = this.WriteAfterLine(sb, GetTabsForIncludeDepth(includeDepth, true) + BEGIN, line);
+                        }
 
                         // Insert included script
-                        string script = "// Empty script\n";
+                        string script = GetTabsForIncludeDepth(includeDepth) + "// Empty script\n";
                         using (StreamReader sr = new StreamReader(pathOfInclude))
                         {
                             this.implementedIncludes.Add(Path.GetFullPath(pathOfInclude));
                             string scriptRaw = sr.ReadToEnd();
-                            scriptRaw = scriptRaw.Replace("\n", "\n\t");
+                            scriptRaw = GetTabsForIncludeDepth(includeDepth) + scriptRaw.Replace("\n", "\n" + GetTabsForIncludeDepth(includeDepth));
 
                             // If there are includes in the included script
                             if (Regex.IsMatch(scriptRaw, INCLUDE_REGEX))
                             {
                                 // Then import these scripts too
-                                script = "\n" + ImportScripts(scriptRaw, pathOfInclude) + "\n";
-                            } else if(scriptRaw != "" && scriptRaw != " ")
+                                if (ShowBeginEnd)
+                                {
+                                    script = "\n" + ImportScripts(scriptRaw, pathOfInclude) + "\n";
+                                } else
+                                {
+                                    script = "\n" + ImportScripts(scriptRaw, pathOfInclude, false) + "\n";
+                                }
+                            } else if(!Regex.IsMatch(scriptRaw, "^\\s*$"))// Check if its not empty or whitespace // scriptRaw != "" && scriptRaw != " ")
                             {
                                 script = scriptRaw + "\n";
                             }
                         }
-                    
-                        this.WriteAfterLine(sb, script, BEGIN + "\n");
 
-                        this.WriteAfterLine(sb, END, script);
+                        if (ShowBeginEnd)
+                        {
+                            this.WriteAfterLine(sb, script, BEGIN + "\n");
+                            this.WriteAfterLine(sb, GetTabsForIncludeDepth(includeDepth, true) + END, script);
+                        } else
+                        {
+                            this.WriteAfterLine(sb, script, line);
+                            string ctx = sb.ToString();
+                            sb = new StringBuilder(ctx.Remove(ctx.IndexOf(line.TrimStart('\n')), line.TrimStart('\n').Length));
+                        }
                     }
                     else if (pathOfInclude != "" && this.implementedIncludes.Contains(Path.GetFullPath(pathOfInclude)))
                     {
@@ -286,22 +325,14 @@ namespace LSLEditor.Helpers
                             "\". In script \""
                             + Path.GetFileName(pathOfScript) + "\". Line " + lineNumber + ".";
 
-                        if (!editForm.verboseQueue.Contains(message))
-                        {
-                            MessageBox.Show(message, "Oops...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            editForm.verboseQueue.Add(message);
-                        }
+                        ShowError(message);
                     } else
                     {
                         string correctPath = Path.GetFullPath(GetRelativePath(pathOfScript, Environment.CurrentDirectory) + pathOfIncludeOriginal);
                         string message = "Error: Unable to find file \"" + correctPath +
                             "\". In script \"" + Path.GetFileName(pathOfScript) + "\". Line " + lineNumber + ".";
-                        
-                        if (!editForm.verboseQueue.Contains(message))
-                        {
-                            MessageBox.Show(message, "Oops...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            editForm.verboseQueue.Add(message);
-                        }
+
+                        ShowError(message);
                     }
                 }
                 includeDepth--;
@@ -405,10 +436,10 @@ namespace LSLEditor.Helpers
         /// </summary>
         /// <param name="editForm"></param>
         /// <returns>LSL</returns>
-        public string ExpandToLSL(EditForm editForm)
+        public string ExpandToLSL(EditForm editForm, bool ShowBeginEnd = true)
         {
             this.editForm = editForm;
-            string sourceCode = ImportScripts(editForm.SourceCode, editForm.FullPathName);
+            string sourceCode = ImportScripts(editForm.SourceCode, editForm.FullPathName, ShowBeginEnd);
             return sourceCode;
         }
     }

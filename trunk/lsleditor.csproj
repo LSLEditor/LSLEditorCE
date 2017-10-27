@@ -958,6 +958,7 @@
     <EmbeddedResource Include="ImagesSolutionExplorer\Unknown.gif" />
     <EmbeddedResource Include="Images\Vars.gif" />
     <EmbeddedResource Include="Images\States.gif" />
+    <None Include="Resources\export_file-32.png" />
     <Content Include="Resource\App.ico" />
     <Content Include="Images\logo.gif" />
     <Content Include="LSLEditor.rc" />

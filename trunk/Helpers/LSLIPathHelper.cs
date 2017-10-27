@@ -144,7 +144,7 @@ namespace LSLEditor.Helpers
             return filename;
         }
 
-        private static string RemoveDotInFrontOfFilename(string filename)
+        public static string RemoveDotInFrontOfFilename(string filename)
         {
             int afterLastIndexOfSeperator = (filename.LastIndexOf('\\') > filename.LastIndexOf('/') ? filename.LastIndexOf('\\') : filename.LastIndexOf('/')) + 1;
 

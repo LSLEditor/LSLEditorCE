@@ -279,7 +279,7 @@ namespace LSLEditor
 		{
 			string fileFilterNotes = "Notecard files (*.txt)|*.txt|All files (*.*)|*.*";
 			string fileFilterScripts = "Secondlife script files (*.lsl;*.lsli)|*.lsl;*.lsli|All files (*.*)|*.*";
-			string fileFilterSolutions = "LSLEditor Solution File (*.sol)|*.sol|All Files (*.*)|*.*";
+            string fileFilterSolutions = "LSLEditor Solution File (*.sol)|*.sol|All Files (*.*)|*.*";
 
 			this.ConfLSL = GetXmlFromResource(Properties.Settings.Default.ConfLSL);
 			this.ConfCSharp = GetXmlFromResource(Properties.Settings.Default.ConfCSharp);
@@ -1750,7 +1750,21 @@ namespace LSLEditor
 
 		private void fileToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			SetupFileMenu();
+            EditForm editForm = this.ActiveMdiForm as EditForm;
+
+            if (editForm != null)
+            {
+                if (Helpers.LSLIPathHelper.IsLSLI(editForm.ScriptName) || Helpers.LSLIPathHelper.IsExpandedLSL(editForm.ScriptName))
+                {
+                    toolStripMenuItem2.Enabled = true;
+                }
+                else
+                {
+                    toolStripMenuItem2.Enabled = false;
+                }
+            }          
+
+            SetupFileMenu();
 		}
 
 		private void forumStripMenuItem_Click(object sender, EventArgs e)
@@ -1916,6 +1930,29 @@ namespace LSLEditor
                 else
                 {
                     MessageBox.Show("Error: No related LSLI file found. \n \"" + pathOfLSLI + "\"", "Oops...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            StreamWriter streamWriter;
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            EditForm editForm = this.ActiveMdiForm as EditForm;
+
+            saveFileDialog1.Filter = "Secondlife script files (*.lsl)|*.lsl";
+            saveFileDialog1.FileName = Helpers.LSLIPathHelper.RemoveDotInFrontOfFilename(Helpers.LSLIPathHelper.RemoveExpandedSubExtension(
+                Path.GetFileNameWithoutExtension(editForm.ScriptName))) + Helpers.LSLIConverter.LSL_EXT;
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.Title = "Export to LSL";
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if ((streamWriter = new StreamWriter(saveFileDialog1.OpenFile())) != null)
+                {
+                    Helpers.LSLIConverter lsliConverter = new Helpers.LSLIConverter();
+                    streamWriter.Write(lsliConverter.ExpandToLSL(editForm, false));
+                    streamWriter.Close();
                 }
             }
         }
