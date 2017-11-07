@@ -643,6 +643,18 @@
       <DependentUpon>EnvironmentPlugins.cs</DependentUpon>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Tools\IncludeExportSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools\IncludeExportSettings.Designer.cs">
+      <DependentUpon>IncludeExportSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ProjectIncludes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools\ProjectIncludes.Designer.cs">
+      <DependentUpon>ProjectIncludes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tools\RuntimeGeneral.cs">
       <SubType>UserControl</SubType>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
@@ -962,7 +974,9 @@
     <Content Include="Resource\App.ico" />
     <Content Include="Images\logo.gif" />
     <Content Include="LSLEditor.rc" />
-    <EmbeddedResource Include="Resource\ToolsOptions.xml" />
+    <EmbeddedResource Include="Resource\ToolsOptions.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resource\thanks.gif" />
     <None Include="Web References\org.lsleditor.www\Service1.disco" />
     <EmbeddedResource Include="Resource\About.htm" />
@@ -988,6 +1002,12 @@
     <EmbeddedResource Include="Tools\EnvironmentPlugins.resx">
       <SubType>Designer</SubType>
       <DependentUpon>EnvironmentPlugins.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\IncludeExportSettings.resx">
+      <DependentUpon>IncludeExportSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ProjectIncludes.resx">
+      <DependentUpon>ProjectIncludes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\RuntimeGeneral.resx">
       <DependentUpon>RuntimeGeneral.cs</DependentUpon>

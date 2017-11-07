@@ -51,15 +51,20 @@ namespace LSLEditor.Helpers
         private EditForm editForm;
         private const string BEGIN = "//@BEGIN";
         private const string END = "//@END";
-        private static List<string> validExtensions = new List<string>() { "lsl", "lsli", ".lsl", ".lsli" }; // TODO: Optimize dit...
+        private const string INCLUDE = "//@include";
 
         public const string EXPANDED_SUBEXT = ".expanded";
         public const string LSL_EXT = ".lsl";
         public const string LSLI_EXT = ".lsli";
+        public static List<string> validExtensions = new List<string>() { LSLI_EXT, LSL_EXT };
         
-        private const string INCLUDE_REGEX = "(\\s+|^)//@include\\(\".*?\"\\)";// Eerst was '\\s+' '\n'
-        private const string BEGIN_REGEX = "(\\s+|^)" + BEGIN; //"(\n|^)//@BEGIN"
+        private const string INCLUDE_REGEX = "(\n|^)\\s*" + INCLUDE + "\\(\".*?\"\\).*";//"(\\s+|^)" + INCLUDE + "\\(\".*?\"\\)";
+        private const string BEGIN_REGEX = "(\\s+|^)" + BEGIN;
         private const string END_REGEX = "(\\s+|^)" + END;
+        private const string EMPTY_OR_WHITESPACE_REGEX = "^\\s*$";
+        private const string PATH_OF_INCLUDE_REGEX = "\".*?\"";
+
+        private const string EMPTY_SCRIPT = "// Empty script\n";
 
         private List<string> implementedIncludes = new List<string>();
         private int includeDepth = 0;
@@ -69,73 +74,110 @@ namespace LSLEditor.Helpers
 
         }
 
+        //private string GetFile(string file) // TODO?
+        //{
+        //    if (File.Exists(directory))
+        //    {
+        //        return file;
+        //    }
+        //    if (Path.GetExtension(file) == "")
+        //    {
+        //        string pFile = "";
+
+        //        foreach (string extension in validExtensions)
+        //        {
+        //            pFile = file + extension;
+
+        //            if (File.Exists(pFile))
+        //            {
+        //                return pFile;
+        //            }
+        //        }
+        //    }
+        //}
+
         /// <summary>
-        /// Searches for a file with one of the validExtensions based on a name or path.
+        /// Searches for a file with one of the validExtensions based on a name or path. Also searches in the IncludeDirectories
         /// </summary>
         /// <param name="file"></param>
         /// <returns>File path</returns>
         private string SearchFile(string file)
         {
-            // TODO: Check of settings IncludeFromFolder aanstaat
-
-            if (File.Exists(file))
+            // If setting IncludeDirectories is enabled
+            foreach (string directory in Properties.Settings.Default.IncludeDirectories)
             {
-                return file;
-            }
-
-            if (Path.GetExtension(file) == "")
-            {
-                List<string> extensions = validExtensions.Where(e => e[0] == '.').ToList();
-                string pFile = "";
-
-                foreach (string extension in extensions)
+                string pFile;
+                if(file.Contains(directory))
                 {
-                    pFile = file + extension;
+                    pFile = file;
+                } else
+                {
+                    pFile = directory + file;
+                }
 
-                    if (File.Exists(pFile)) {
-                        return pFile;
+                if (File.Exists(pFile))
+                {
+                    return pFile;
+                }
+
+                if (Path.GetExtension(file) == "")
+                {
+                    foreach (string extension in validExtensions)
+                    {
+                        if (file.Contains(directory))
+                        {
+                            pFile = file + extension;
+                        }
+                        else
+                        {
+                            pFile = directory + file + extension;
+                        }
+
+                        if (File.Exists(pFile))
+                        {
+                            return pFile;
+                        }
                     }
                 }
             }
+
+            // If IncludeDirectories setting is disabled
+            if (Properties.Settings.Default.IncludeDirectories.Count == 0)
+            {
+                if (File.Exists(file))
+                {
+                    return file;
+                }
+
+                if (Path.GetExtension(file) == "")
+                {
+                    string pFile = "";
+
+                    foreach (string extension in validExtensions)
+                    {
+                        pFile = file + extension;
+
+                        if (File.Exists(pFile)) {
+                            return pFile;
+                        }
+                    }
+                }
+            }
+
 
             return "";
         }
 
         /// <summary>
-        /// Creates a relative path between two paths
+        /// Finds all indexes of a value in a string
         /// </summary>
-        /// <param name="filespec">The file or folder to create a relative path towards</param>
-        /// <param name="folder">The base folder</param>
+        /// <param name="str"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
-        private string GetRelativePath(string filespec, string folder)
-        {
-            filespec = Path.GetFullPath(filespec).ToLower();
-            if(validExtensions.Contains(filespec.Substring(filespec.LastIndexOf(".") + 1)))
-            {
-                int lastIndexOfSeperator = filespec.LastIndexOf('\\') > filespec.LastIndexOf('/') ? filespec.LastIndexOf('\\') : filespec.LastIndexOf('/');
-                filespec = filespec.Remove(lastIndexOfSeperator);
-            }
-            Uri pathUri = new Uri(filespec);
-
-            if (!folder.EndsWith(Path.DirectorySeparatorChar.ToString()))
-            {
-                folder += Path.DirectorySeparatorChar;
-            }
-            Uri folderUri = new Uri(folder);
-            string relativePath = Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', Path.DirectorySeparatorChar));
-
-            if (relativePath.Substring(relativePath.Length - 3) != Path.DirectorySeparatorChar.ToString())
-            {
-                relativePath += Path.DirectorySeparatorChar;
-            }
-
-            return relativePath;
-        }
-
         public static List<int> AllIndexesOf(string str, string value)
         {
             if (String.IsNullOrEmpty(value))
-                throw new ArgumentException("the string to find may not be empty", "value");
+                throw new ArgumentException("The string to find may not be empty", "value");
             List<int> indexes = new List<int>();
             for (int index = 0; ; index += value.Length)
             {
@@ -147,33 +189,43 @@ namespace LSLEditor.Helpers
         }
 
         /// <summary>
-        /// This is a hack to get the correct line, since problems arose in WriteAfterLine when inserting index-based
+        /// This is a hack to get the correct line, since problems arose in WriteAfterLine when inserting index-based.
+        /// It checks for each occurance of lineBefore (when it's an include statement) if it has a BEGIN after it.
         /// </summary>
         /// <param name="lineBefore"></param>
         /// <returns></returns>
         private int GetCorrectIndexOfLine(string lineBefore, string context)
         {
-            if (Regex.IsMatch(lineBefore.Trim('\n'), INCLUDE_REGEX)
-                && lineBefore.Trim('\n').EndsWith(Regex.Match(lineBefore.Trim('\n'), INCLUDE_REGEX).ToString())) // Line before this line is an include statement, that means this is a BEGIN statement
+            string trimmedLine = Regex.Replace(lineBefore, @"\s+", "");
+            string matchString = Regex.Match(trimmedLine, INCLUDE_REGEX).ToString();
+
+            // Tussen de één na laatste en de laatste moet de include statement staan, of na de laatste
+            int lastButOneNewLineIndex = lineBefore.TrimEnd('\n').LastIndexOf('\n') > -1 ? lineBefore.TrimEnd('\n').LastIndexOf('\n') : 0;
+            string lineBeforeAfterLastButOneNewLine = lineBefore.Substring(lastButOneNewLineIndex).TrimEnd('\n'); // Best variable name ever?
+
+            if (Regex.IsMatch(lineBefore.TrimEnd('\n'), INCLUDE_REGEX)
+                && Regex.IsMatch(lineBeforeAfterLastButOneNewLine, INCLUDE_REGEX)) // Line before this line is an include statement, that means this is a BEGIN statement //lineBefore.TrimEnd('\n').EndsWith(matchString)
             {
                 // Get all matches with this linebefore
                 List<int> allIndexes = AllIndexesOf(context, lineBefore);
 
-                foreach(int index in allIndexes)
+                foreach (int index in allIndexes)
                 {
                     // Check wether there is already a begin statement
-                    string actualLineBefore = context.Substring(index + lineBefore.Length).Trim('\n');
-                    if (actualLineBefore.StartsWith(BEGIN))
+                    string targetText = context.Substring(index + lineBefore.Length); // This is the text after lineBefore
+                    targetText = Regex.Replace(targetText, @"\s+", "");
+
+                    if (targetText.StartsWith(BEGIN)) // If the targetted text starts with BEGIN, then we should keep searching
                     {
                         continue;
                     } else
                     {
-                        return index;
+                        return index; // Found a free spot! Return the index
                     }
                 }
 
             }
-            return context.LastIndexOf(lineBefore);
+            return context.LastIndexOf(lineBefore); // If the lineBefore is not an include statement, simply return the last index of it.
         }
 
         /// <summary>
@@ -183,7 +235,7 @@ namespace LSLEditor.Helpers
         /// <param name="newLine"></param>
         /// <param name="lineBefore"></param>
         /// <returns>Context with the new line</returns>
-        private StringBuilder WriteAfterLine(StringBuilder context, string newLine, string lineBefore) // TODO: HIJ MOET KIJKEN NAAR DE INDEX VAN LINEBEFORE, NIET ZELF DE INDEX OPZOEKEN
+        private StringBuilder WriteAfterLine(StringBuilder context, string newLine, string lineBefore)
         {
             string ctx = context.ToString();
             int lastIndexOfLineBefore = GetCorrectIndexOfLine(lineBefore, ctx);
@@ -206,6 +258,10 @@ namespace LSLEditor.Helpers
             return context;
         }
 
+        /// <summary>
+        /// Shows an 'Oops...' messagebox with the message and verboses it.
+        /// </summary>
+        /// <param name="message"></param>
         private void ShowError(string message)
         {
             if (!editForm.verboseQueue.Contains(message))
@@ -215,6 +271,12 @@ namespace LSLEditor.Helpers
             }
         }
 
+        /// <summary>
+        /// Returns the amount of tabs for an include depth
+        /// </summary>
+        /// <param name="includeDepth"></param>
+        /// <param name="OneLess"></param>
+        /// <returns></returns>
         private string GetTabsForIncludeDepth(int includeDepth, bool OneLess = false) // TODO: Dit wordt wss een setting. Tabs hangt namelijk af van de hoeveelheid ingedente include statement.
         {
             string tabs = "";
@@ -231,12 +293,143 @@ namespace LSLEditor.Helpers
         }
 
         /// <summary>
+        /// Returns the amount of tabs in front of an include statement
+        /// </summary>
+        /// <param name="includeLine"></param>
+        /// <returns></returns>
+        private string GetTabsForIndentedInclude(string includeLine, int includeDepth, bool isDebug = false)
+        {
+            if(includeLine.Contains("\t"))
+            {
+                int includeIndex = Regex.Match(includeLine, INCLUDE).Index;
+
+                string beforeInclude = includeLine.Substring(0, includeIndex);
+                int tabCount = 0;
+
+                // Count the tabs between the start of the line and the begin of the include. NOTE: HIJ MOET ALLEEN DE INCLUDEDEPTH AFTREKKEN WANNEER HIJ DEBUG IS
+                if (isDebug)
+                {
+                    tabCount = beforeInclude.Count(f => f == '\t') - (includeDepth - 1); // The tabcount should be without the includeDepth, because this was already added.
+                } else
+                {
+                    tabCount = beforeInclude.Count(f => f == '\t');
+                }
+
+                string tabs = "";
+                for (int i = 0; i < tabCount; i++)
+                {
+                    tabs += "\t";
+                }
+                return tabs;
+            }
+            return "";
+        }
+
+        /// <summary>
+        /// Returns the amount of tabs for an include script
+        /// </summary>
+        /// <param name="includeLine"></param>
+        /// <param name="includeDepth"></param>
+        /// <param name="OneLess"></param>
+        /// <returns></returns>
+        private string GetTabsForIncludeScript(string includeLine, int includeDepth, bool OneLess = false)
+        {
+            string includeDepthTabs = GetTabsForIncludeDepth(includeDepth, OneLess);
+            string indentedIncludeTabs = GetTabsForIndentedInclude(includeLine, includeDepth, true);
+
+            
+            return includeDepthTabs + indentedIncludeTabs;
+        }
+        
+        /// <summary>
+        /// Returns the line of the match within a context
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        private string GetLineOfMatch(string context, Match m)
+        {
+            string contentAfterMatchValue = context.Substring(m.Index + m.Value.Length);
+            int indexOfNewLine = contentAfterMatchValue.IndexOf('\n') + m.Index + m.Value.Length + 1; // Index of the first occurence of \n after this match
+            return context.Substring(m.Index, indexOfNewLine - m.Index); // Get full line
+        }
+
+        /// <summary>
+        /// Inserts an included script and writes the expanded script for export.
+        /// </summary>
+        /// <param name="pathOfInclude"></param>
+        /// <param name="sb"></param>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        private StringBuilder WriteExportScript(string pathOfInclude, StringBuilder sb, string includeLine)
+        {
+            string script = GetTabsForIndentedInclude(includeLine, includeDepth) + EMPTY_SCRIPT;
+            using (StreamReader sr = new StreamReader(pathOfInclude))
+            {
+                this.implementedIncludes.Add(Path.GetFullPath(pathOfInclude));
+                string scriptRaw = sr.ReadToEnd();
+                scriptRaw = GetTabsForIndentedInclude(includeLine, includeDepth) + scriptRaw.Replace("\n", "\n" + GetTabsForIndentedInclude(includeLine, includeDepth));
+
+                // If there are includes in the included script
+                if (Regex.IsMatch(scriptRaw, INCLUDE_REGEX))
+                {
+                    // Then import these scripts too
+                    script = ImportScripts(scriptRaw, pathOfInclude, false) + "\n";
+                }
+                else if (!Regex.IsMatch(scriptRaw, EMPTY_OR_WHITESPACE_REGEX))
+                {
+                    script = scriptRaw + "\n";
+                }
+            }
+            this.WriteAfterLine(sb, script, includeLine);
+            string ctx = sb.ToString();
+            return new StringBuilder(ctx.Remove(ctx.IndexOf(includeLine.TrimStart('\n')), includeLine.TrimStart('\n').Length)); // Deletes the include statement
+        }
+
+        /// <summary>
+        /// Inserts an included script and writes it to the expanded script for debug.
+        /// </summary>
+        /// <param name="pathOfInclude"></param>
+        /// <param name="sb"></param>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        private StringBuilder WriteDebugScript(string pathOfInclude, StringBuilder sb, string includeLine)
+        {
+            sb = this.WriteAfterLine(sb, GetTabsForIncludeScript(includeLine, includeDepth, true) + BEGIN, includeLine);
+
+            // Insert included script
+            string script = GetTabsForIncludeScript(includeLine, includeDepth) + EMPTY_SCRIPT;
+
+            using (StreamReader sr = new StreamReader(pathOfInclude))
+            {
+                this.implementedIncludes.Add(Path.GetFullPath(pathOfInclude));
+                string scriptRaw = sr.ReadToEnd();
+                scriptRaw = GetTabsForIncludeScript(includeLine, includeDepth) + scriptRaw.Replace("\n", "\n" + GetTabsForIncludeScript(includeLine, includeDepth));
+
+                // If there are includes in the included script
+                if (Regex.IsMatch(scriptRaw, INCLUDE_REGEX))
+                {
+                    // Then import these scripts too
+                    script = "\n" + ImportScripts(scriptRaw, pathOfInclude) + "\n";
+                }
+                else if (!Regex.IsMatch(scriptRaw, EMPTY_OR_WHITESPACE_REGEX))// Check if its not empty or whitespace
+                {
+                    script = scriptRaw + "\n";
+                }
+            }
+
+            this.WriteAfterLine(sb, script, BEGIN + "\n");
+            this.WriteAfterLine(sb, GetTabsForIncludeScript(includeLine, includeDepth, true) + END, script);
+            return sb;
+        }
+
+        /// <summary>
         /// Imports scripts from //@include statements
         /// </summary>
         /// <param name="strC">Sourcecode</param>
         /// <param name="pathOfScript">Path of the source code of the script</param>
         /// <returns>Sourcecode with imported scripts</returns>
-        private string ImportScripts(string strC, string pathOfScript, bool ShowBeginEnd = true) // TODO: Lange functie, kan ik deze opsplitten?
+        private string ImportScripts(string strC, string pathOfScript, bool ShowBeginEnd = true)
         {
             if(!LSLIPathHelper.IsLSLI(pathOfScript))
             {
@@ -255,13 +448,10 @@ namespace LSLEditor.Helpers
                 }
                 includeDepth++;
 
-                string contentAfterMatchValue = strC.Substring(m.Index + m.Value.Length);
-                int indexOfNewLine = contentAfterMatchValue.IndexOf('\n') + m.Index + m.Value.Length + 1; // Index of the first occurence of \n after this match
-                string line = strC.Substring(m.Index, indexOfNewLine - m.Index); // Get full line
+                string line = GetLineOfMatch(strC, m);
+                int lineNumber = strC.Take(m.Index + line.Length - 1).Count(c => c == '\n') + 1;
 
-                int lineNumber = strC.Take(indexOfNewLine - 1).Count(c => c == '\n') + 1;
-
-                string pathOfIncludeOriginal = Regex.Match(line, "\".*?\"").Value.Trim('"');
+                string pathOfIncludeOriginal = Regex.Match(line, PATH_OF_INCLUDE_REGEX).Value.Trim('"');
                 string pathOfInclude = pathOfIncludeOriginal;
                 string ext = Path.GetExtension(pathOfInclude).ToLower();
 
@@ -269,54 +459,24 @@ namespace LSLEditor.Helpers
                     && !pathOfScript.Contains(pathOfInclude))
                 {
                     // If path is relative
-                    if (!Path.IsPathRooted(pathOfInclude))
+                    if (!Path.IsPathRooted(pathOfInclude) && Properties.Settings.Default.IncludeDirectories.Count == 0)
                     {
-                        pathOfInclude = GetRelativePath(pathOfScript, Environment.CurrentDirectory) + pathOfInclude;
+                        pathOfInclude = LSLIPathHelper.GetRelativePath(pathOfScript, Environment.CurrentDirectory) + pathOfInclude;
+                    } else if (this.implementedIncludes.Count > 0)
+                    {
+                        pathOfInclude = Path.GetDirectoryName(this.implementedIncludes.LastOrDefault()) + '\\' + pathOfInclude;
                     }
 
                     pathOfInclude = SearchFile(pathOfInclude);
 
                     if (pathOfInclude != "" && !this.implementedIncludes.Contains(Path.GetFullPath(pathOfInclude)))
                     {
-                        if(ShowBeginEnd)
+                        if(!ShowBeginEnd)
                         {
-                            sb = this.WriteAfterLine(sb, GetTabsForIncludeDepth(includeDepth, true) + BEGIN, line);
-                        }
-
-                        // Insert included script
-                        string script = GetTabsForIncludeDepth(includeDepth) + "// Empty script\n";
-                        using (StreamReader sr = new StreamReader(pathOfInclude))
-                        {
-                            this.implementedIncludes.Add(Path.GetFullPath(pathOfInclude));
-                            string scriptRaw = sr.ReadToEnd();
-                            scriptRaw = GetTabsForIncludeDepth(includeDepth) + scriptRaw.Replace("\n", "\n" + GetTabsForIncludeDepth(includeDepth));
-
-                            // If there are includes in the included script
-                            if (Regex.IsMatch(scriptRaw, INCLUDE_REGEX))
-                            {
-                                // Then import these scripts too
-                                if (ShowBeginEnd)
-                                {
-                                    script = "\n" + ImportScripts(scriptRaw, pathOfInclude) + "\n";
-                                } else
-                                {
-                                    script = "\n" + ImportScripts(scriptRaw, pathOfInclude, false) + "\n";
-                                }
-                            } else if(!Regex.IsMatch(scriptRaw, "^\\s*$"))// Check if its not empty or whitespace // scriptRaw != "" && scriptRaw != " ")
-                            {
-                                script = scriptRaw + "\n";
-                            }
-                        }
-
-                        if (ShowBeginEnd)
-                        {
-                            this.WriteAfterLine(sb, script, BEGIN + "\n");
-                            this.WriteAfterLine(sb, GetTabsForIncludeDepth(includeDepth, true) + END, script);
+                            sb = WriteExportScript(pathOfInclude, sb, line);
                         } else
                         {
-                            this.WriteAfterLine(sb, script, line);
-                            string ctx = sb.ToString();
-                            sb = new StringBuilder(ctx.Remove(ctx.IndexOf(line.TrimStart('\n')), line.TrimStart('\n').Length));
+                            sb = WriteDebugScript(pathOfInclude, sb, line);
                         }
                     }
                     else if (pathOfInclude != "" && this.implementedIncludes.Contains(Path.GetFullPath(pathOfInclude)))
@@ -328,7 +488,7 @@ namespace LSLEditor.Helpers
                         ShowError(message);
                     } else
                     {
-                        string correctPath = Path.GetFullPath(GetRelativePath(pathOfScript, Environment.CurrentDirectory) + pathOfIncludeOriginal);
+                        string correctPath = Path.GetFullPath(LSLIPathHelper.GetRelativePath(pathOfScript, Environment.CurrentDirectory) + pathOfIncludeOriginal);
                         string message = "Error: Unable to find file \"" + correctPath +
                             "\". In script \"" + Path.GetFileName(pathOfScript) + "\". Line " + lineNumber + ".";
 
@@ -439,7 +599,18 @@ namespace LSLEditor.Helpers
         public string ExpandToLSL(EditForm editForm, bool ShowBeginEnd = true)
         {
             this.editForm = editForm;
-            string sourceCode = ImportScripts(editForm.SourceCode, editForm.FullPathName, ShowBeginEnd);
+            string strC = editForm.SourceCode;
+            string fullPathName = editForm.FullPathName;
+
+            if (LSLIPathHelper.IsExpandedLSL(editForm.ScriptName))
+            {
+                // Collapse first, to ensure it is expanded showing or not showing begin/end.
+                strC = CollapseToLSLI(strC);
+                // Mimic LSLI file
+                fullPathName = LSLIPathHelper.CreateCollapsedPathAndScriptName(fullPathName);
+            }
+
+            string sourceCode = ImportScripts(strC, fullPathName, ShowBeginEnd);
             return sourceCode;
         }
     }

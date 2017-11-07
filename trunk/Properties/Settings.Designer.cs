@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace LSLEditor.Properties {
 
 
@@ -254,6 +256,17 @@ namespace LSLEditor.Properties {
         public string ExampleName {
             get {
                 return ((string)(this["ExampleName"]));
+            }
+        }
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("new.lsli")]
+        public string ExampleNameLSLI
+        {
+            get
+            {
+                return ((string)(this["ExampleNameLSLI"]));
             }
         }
 
@@ -696,6 +709,36 @@ namespace LSLEditor.Properties {
             }
             set {
                 this["ProjectLocation"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public List<string> IncludeDirectories
+        {
+            get
+            {
+                return ((List<string>)(this["IncludeDirectories"]));
+            }
+            set
+            {
+                this["IncludeDirectories"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowIncludeMetaData
+        {
+            get
+            {
+                return ((bool)(this["ShowIncludeMetaData"]));
+            }
+            set
+            {
+                this["ShowIncludeMetaData"] = value;
             }
         }
 

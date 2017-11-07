@@ -1725,15 +1725,40 @@ namespace LSLEditor.Solution
 			timer.Tag = null;
 
 			Guid guid = ((RealTag)e.Node.Tag).Guid;
+            string path = GetFullPath(e.Node);
 
-			// already opened
-			EditForm editForm = GetEditForm(guid);
+            // already opened
+            EditForm editForm = GetEditForm(guid);
 			if (editForm != null)
 			{
 				TabPage tabPage = editForm.Tag as TabPage;
 				if (tabPage == null)
 				{
-					editForm.Focus();
+                    if(editForm.Visible)
+                    {
+					    editForm.Focus();
+                    } else
+                    {
+                        // Check if there's a related expanded lsl or lsli opened. If so, focus it. Else open the lsli.
+                        EditForm expandedForm = (EditForm)parent.GetForm(Helpers.LSLIPathHelper.GetExpandedTabName(Helpers.LSLIPathHelper.CreateExpandedScriptName(Path.GetFileName(path))));
+                        EditForm collapsedForm = (EditForm)parent.GetForm(Helpers.LSLIPathHelper.CreateCollapsedScriptName(Path.GetFileName(path)));
+                        if (expandedForm != null && expandedForm.Visible)
+                        {
+                            expandedForm.Focus();
+                        }
+                        else if (collapsedForm != null && collapsedForm.Visible)
+                        {
+                            collapsedForm.Focus();
+                        }
+                        else
+                        {
+                            // Open a new one
+                            if (GetTypeSL(e.Node) == TypeSL.Script)
+                            {
+                                this.parent.OpenFile(GetFullPath(e.Node), guid, true);
+                            }
+                        }
+                    }
 				}
 				else
 				{
@@ -1744,9 +1769,37 @@ namespace LSLEditor.Solution
 				return;
 			}
 
-			// open a new one
-			if (GetTypeSL(e.Node) == TypeSL.Script)
-				this.parent.OpenFile(GetFullPath(e.Node), guid, true);
+            // Check if it's an lsli that has an open expanded form
+            if (GetTypeSL(e.Node) == TypeSL.Script)
+            {
+                if (Helpers.LSLIPathHelper.IsLSLI(path)) {
+                    // Check if there's a related expanded lsl opened. If so, focus it. Else open the lsli.
+                    EditForm expandedForm = (EditForm)parent.GetForm(Helpers.LSLIPathHelper.GetExpandedTabName(Helpers.LSLIPathHelper.CreateExpandedScriptName(Path.GetFileName(path))));
+                    EditForm collapsedForm = (EditForm)parent.GetForm(Helpers.LSLIPathHelper.CreateCollapsedScriptName(Path.GetFileName(path)));
+                    if (expandedForm != null && expandedForm.Visible)
+                    {
+                        expandedForm.Focus();
+                    } else if(collapsedForm != null && collapsedForm.Visible)
+                    {
+                        collapsedForm.Focus();
+                    } else
+                    {
+                        // Open a new one
+                        if (GetTypeSL(e.Node) == TypeSL.Script)
+                        {
+                            this.parent.OpenFile(GetFullPath(e.Node), guid, true);
+                        }
+                    }
+                } else
+                {
+                    // Open a new one
+                    if (GetTypeSL(e.Node) == TypeSL.Script)
+                    {
+                        this.parent.OpenFile(GetFullPath(e.Node), guid, true);
+                    }
+                }
+            }
+
 			if (GetTypeSL(e.Node) == TypeSL.Notecard)
 				this.parent.OpenFile(GetFullPath(e.Node), guid, false);
 		}

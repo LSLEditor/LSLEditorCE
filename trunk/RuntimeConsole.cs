@@ -68,8 +68,6 @@ namespace LSLEditor
 		private string CSharpCode;
 		private EditForm editForm;
 
-        private bool isLSLI = true; // Deze moet aflezen van de extensie van het script in de tab of het LSL is of LSLI
-
         private bool GetNewHost()
 		{
 			bool blnResult = false;
@@ -99,6 +97,28 @@ namespace LSLEditor
 			return blnResult;
 		}
 
+        /// <summary>
+        /// Converts this script (when it's LSLI) to expanded lsl and writes it.
+        /// </summary>
+        /// <returns></returns>
+        private string ConvertLSLI()
+        {
+            LSLIConverter lsliConverter = new LSLIConverter();
+            string lsl = lsliConverter.ExpandToLSL(editForm);
+            string nameExpanded = LSLIPathHelper.CreateExpandedScriptName(editForm.FullPathName);
+            string path = LSLIPathHelper.CreateExpandedPathAndScriptName(editForm.FullPathName);
+
+            LSLIPathHelper.DeleteFile(path);
+
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                sw.Write(lsl);
+            }
+
+            LSLIPathHelper.HideFile(path);
+            return lsl;
+        }
+
 		public bool Compile(EditForm editForm)
 		{
 			this.editForm = editForm;
@@ -111,21 +131,17 @@ namespace LSLEditor
 
             string lsl = editForm.SourceCode;
 
-            if (isLSLI && editForm.FullPathName.IndexOf(LSLIConverter.EXPANDED_SUBEXT) < 0) // Expand LSLI to LSL
+            // If not hidden and not readonly
+            if (!editForm.IsHidden && !this.mainForm.IsReadOnly(editForm))
             {
-                LSLIConverter lsliConverter = new LSLIConverter();
-                lsl = lsliConverter.ExpandToLSL(editForm);
-                string nameExpanded = LSLIPathHelper.CreateExpandedScriptName(editForm.FullPathName);
-                string path = LSLIPathHelper.CreateExpandedPathAndScriptName(editForm.FullPathName);
-
-                LSLIPathHelper.DeleteFile(path);
-
-                using (StreamWriter sw = new StreamWriter(path))
+                if (LSLIPathHelper.IsLSLI(editForm.ScriptName)) // Expand LSLI to LSL
                 {
-                    sw.Write(lsl);
+                    lsl = ConvertLSLI();
                 }
-
-                LSLIPathHelper.HideFile(path);
+            } else
+            {
+                this.editForm.StopCompiler();
+                return false;
             }
 
 			CSharpCode = MakeSharp(editForm.ConfLSL, lsl);

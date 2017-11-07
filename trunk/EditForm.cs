@@ -183,6 +183,11 @@ namespace LSLEditor
 
 		void TextBox_OnDirtyChanged(object sender, EventArgs e)
 		{
+            if(parent.IsReadOnly(this))
+            {
+                Dirty = false;
+                return;
+            }
             if(this.Text == null || this.ScriptName == null)
             {
                 this.Text = this.ScriptName;
@@ -215,7 +220,7 @@ namespace LSLEditor
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			this.Close();
+            this.Close();
 		}
 
 		public string FullPathName
@@ -538,14 +543,44 @@ namespace LSLEditor
 		{
 			this.parent.CancelClosing = false;
 			if (this.Dirty) {
-				DialogResult dialogResult = MessageBox.Show(this, @"Save """ + this.ScriptName + @"""?", "File has changed", MessageBoxButtons.YesNoCancel);
+                string scriptToSave = ScriptName;
+                if (LSLIPathHelper.IsExpandedLSL(ScriptName))
+                {
+                    // Expanded scripts will always be saved as LSLI's
+                    scriptToSave = LSLIPathHelper.CreateCollapsedScriptName(scriptToSave);
+                }
+
+                DialogResult dialogResult = MessageBox.Show(this, @"Save """ + scriptToSave + @"""?", "File has changed", MessageBoxButtons.YesNoCancel);
 				if (dialogResult == DialogResult.Yes) {
 					e.Cancel = !this.parent.SaveFile(this, false);
 				} else {
 					e.Cancel = (dialogResult == DialogResult.Cancel);
-				}
+                }
 			}
-			this.parent.CancelClosing = e.Cancel;
+
+            if (!e.Cancel)
+            {
+                // Close related readonly's if this is an expanded script
+                if (LSLIPathHelper.IsExpandedLSL(ScriptName))
+                {
+                    // Check if a LSLI readonly is open
+                    EditForm readOnlyLSLI = (EditForm)parent.GetForm(Path.GetFileName(
+                        LSLIPathHelper.CreateCollapsedScriptName(ScriptName)) + " (Read Only)");
+
+                    if (readOnlyLSLI != null)
+                    {
+                        readOnlyLSLI.Close();
+                    }
+                }
+
+                // Delete expanded file when closing
+                string expandedFile = LSLIPathHelper.CreateExpandedPathAndScriptName(FullPathName);
+                if (File.Exists(expandedFile))
+                {
+                    File.Delete(expandedFile);
+                }
+            }
+            this.parent.CancelClosing = e.Cancel;
 		}
 
 		private void disableCompilesyntaxCheckToolStripMenuItem_Click(object sender, EventArgs e)
@@ -589,6 +624,6 @@ namespace LSLEditor
 		private void tvOutline_VisibleChanged(object sender, EventArgs e)
 		{
 			this.tvOutline.ExpandAll();
-		}
-	}
+        }
+    }
 }

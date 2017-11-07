@@ -150,6 +150,7 @@ namespace LSLEditor
             this.openSolutionFilesDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dockPanel = new LSLEditor.Docking.DockPanel();
+            this.lSLIScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -211,6 +212,7 @@ namespace LSLEditor
             this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newProjectToolStripMenuItem,
             this.newFileToolStripMenuItem,
+            this.lSLIScriptToolStripMenuItem,
             this.notecardToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
@@ -231,7 +233,7 @@ namespace LSLEditor
             this.newFileToolStripMenuItem.Name = "newFileToolStripMenuItem";
             this.newFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.newFileToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.newFileToolStripMenuItem.Text = "Script";
+            this.newFileToolStripMenuItem.Text = "LSL Script";
             this.newFileToolStripMenuItem.Click += new System.EventHandler(this.newFileToolStripMenuItem_Click);
             // 
             // notecardToolStripMenuItem
@@ -1021,6 +1023,16 @@ namespace LSLEditor
             this.dockPanel.Skin = dockPanelSkin1;
             this.dockPanel.TabIndex = 10;
             // 
+            // lSLIScriptToolStripMenuItem
+            // 
+            this.lSLIScriptToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.NEWDOC;
+            this.lSLIScriptToolStripMenuItem.Name = "lSLIScriptToolStripMenuItem";
+            this.lSLIScriptToolStripMenuItem.ShortcutKeyDisplayString = "";
+            this.lSLIScriptToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+            this.lSLIScriptToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.lSLIScriptToolStripMenuItem.Text = "LSLI Script";
+            this.lSLIScriptToolStripMenuItem.Click += new System.EventHandler(this.lSLIScriptToolStripMenuItem_Click);
+            // 
             // LSLEditorForm
             // 
             this.AllowDrop = true;
@@ -1157,5 +1169,6 @@ namespace LSLEditor
         private System.Windows.Forms.ToolStripMenuItem viewLSLIToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem lSLIScriptToolStripMenuItem;
     }
 }

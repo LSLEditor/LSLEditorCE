@@ -81,7 +81,6 @@ namespace LSLEditor.Helpers
         
         private static string RemoveExtension(string filename)
         {
-            //filename = filename.Contains(LSLIConverter.EXPANDED_SUBEXT) ? filename.Replace(LSLIConverter.EXPANDED_SUBEXT, "") : filename; // Is nu een aparte functie voor
             filename = TrimStarsAndWhiteSpace(filename.Remove(filename.LastIndexOf(Path.GetExtension(filename))));
             return filename;
         }
@@ -113,7 +112,13 @@ namespace LSLEditor.Helpers
         /// <returns></returns>
         public static string CreateExpandedPathAndScriptName(string path)
         {
-            return PutDotInFrontOfFilename(RemoveExtension(path) + LSLIConverter.EXPANDED_SUBEXT + LSLIConverter.LSL_EXT);
+            if(path.Contains(LSLIConverter.EXPANDED_SUBEXT))
+            {
+                return PutDotInFrontOfFilename(RemoveExtension(path) + LSLIConverter.LSL_EXT);
+            } else
+            {
+                return PutDotInFrontOfFilename(RemoveExtension(path) + LSLIConverter.EXPANDED_SUBEXT + LSLIConverter.LSL_EXT);
+            }
         }
 
         /// <summary>
@@ -158,7 +163,7 @@ namespace LSLEditor.Helpers
         }
 
         /// <summary>
-        /// "Hides" the file in the folder
+        /// "Hides" the file in the folder by setting it's attributes to "Hidden"
         /// </summary>
         /// <param name="path"></param>
         public static void HideFile(string path)
@@ -183,10 +188,48 @@ namespace LSLEditor.Helpers
             return str.Trim(' ').TrimEnd('*');
         }
 
+        /// <summary>
+        /// Turns an expanded script name into a string to be displayed as the tab name
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static string GetExpandedTabName(string path)
         {
             if (path == null) return "";
             return RemoveDotInFrontOfFilename(Path.GetFileNameWithoutExtension(RemoveExpandedSubExtension(path)) + LSLIConverter.LSLI_EXT + " (Expanded LSL)");
+        }
+
+        // TODO: CREATE SAME FUNCTION AS ABOVE FOR READONLY TAB NAME (IS CURRENTLY HARD-CODED)
+
+        /// <summary>
+        /// Creates a relative path between two paths
+        /// </summary>
+        /// <param name="filespec">The file or folder to create a relative path towards</param>
+        /// <param name="folder">The base folder</param>
+        /// <returns></returns>
+        public static string GetRelativePath(string filespec, string folder)
+        {
+            filespec = Path.GetFullPath(filespec).ToLower();
+            if (LSLIConverter.validExtensions.Contains(filespec.Substring(filespec.LastIndexOf("."))))
+            {
+                int lastIndexOfSeperator = filespec.LastIndexOf('\\') > filespec.LastIndexOf('/') ? filespec.LastIndexOf('\\') : filespec.LastIndexOf('/');
+                filespec = filespec.Remove(lastIndexOfSeperator);
+            }
+            Uri pathUri = new Uri(filespec);
+
+            if (!folder.EndsWith(Path.DirectorySeparatorChar.ToString()))
+            {
+                folder += Path.DirectorySeparatorChar;
+            }
+            Uri folderUri = new Uri(folder);
+            string relativePath = Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', Path.DirectorySeparatorChar));
+
+            if (relativePath.Substring(relativePath.Length - 3) != Path.DirectorySeparatorChar.ToString())
+            {
+                relativePath += Path.DirectorySeparatorChar;
+            }
+
+            return relativePath;
         }
     }
 }
