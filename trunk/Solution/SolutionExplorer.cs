@@ -38,16 +38,16 @@
 // </summary>
 
 using System;
-using System.IO;
-using System.Xml;
-using System.Text;
-using System.Drawing;
-using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Text;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace LSLEditor.Solution
 {
-	public partial class SolutionExplorer : ToolWindow
+    public partial class SolutionExplorer : ToolWindow
 	{
 		public enum TypeSL : int
 		{
@@ -89,6 +89,7 @@ namespace LSLEditor.Solution
 			Snapshot = 25,
 
 			Script = 26,
+            LSLIScript = 42,
 			Sound = 27,
 			Texture = 28,
 
@@ -137,6 +138,7 @@ namespace LSLEditor.Solution
 			TypeSL.Snapshot,
 			TypeSL.Object,
 			TypeSL.Script,
+            TypeSL.LSLIScript,
 			TypeSL.Sound,
 			TypeSL.Texture
 		};
@@ -222,7 +224,7 @@ namespace LSLEditor.Solution
 
 			imageList1 = new ImageList();
 			imageList1.TransparentColor = Color.Transparent;
-			for (int intI = 0; intI <= 41; intI++)
+			for (int intI = 0; intI <= 42; intI++)//41
 			{
 				TypeSL typeSL = (TypeSL)intI;
 				imageList1.Images.Add(intI.ToString(), new Bitmap(typeof(LSLEditorForm), "ImagesSolutionExplorer." + typeSL.ToString().Replace("_", " ") + ".gif"));
@@ -586,6 +588,7 @@ namespace LSLEditor.Solution
 				}
 
 				RealTag rt = (RealTag)e.Node.Tag;
+                string oldName = rt.Name;
 				rt.Name = e.Node.Text;
 				e.Node.Tag = rt; // save name
 				EditForm editForm = GetEditForm(rt.Guid);
@@ -594,7 +597,33 @@ namespace LSLEditor.Solution
 					editForm.FullPathName = strDestination; // GetFullPath(e.Node);
 					editForm.SaveCurrentFile();
 				}
-				return; // rename file complete
+
+                if (rt.ItemType == TypeSL.LSLIScript)
+                {
+                    EditForm form = GetEditForm(rt.Guid);
+                    if(form != null)
+                    {
+                        form.SaveCurrentFile();
+                        form.Dirty = true;
+                        form.Show();
+
+                        // Get the expanded version of the form
+                        string x = Helpers.LSLIPathHelper.GetExpandedTabName(Helpers.LSLIPathHelper.CreateExpandedScriptName(oldName));
+                        EditForm xform = (EditForm)parent.GetForm(x);
+
+                        if (xform != null && xform.Visible)
+                        {
+                            string src = xform.SourceCode;
+                            xform.Dirty = false;
+                            xform.Close();
+                            form.SourceCode = src;
+                            form.Dirty = true;
+                            parent.ExpandForm(form);
+                        }
+                    }
+                }
+
+                return; // rename file complete
 			}
 
 			// rename directory
@@ -1008,7 +1037,10 @@ namespace LSLEditor.Solution
 			{
 				case TypeSL.Script:
 					strExtension = ".lsl";
-					break;
+                    break;
+                case TypeSL.LSLIScript:
+                    strExtension = ".lsli";
+                    break;
 				case TypeSL.Notecard:
 					strExtension = ".txt";
 					break;
@@ -1043,10 +1075,13 @@ namespace LSLEditor.Solution
 
 				switch (typeFile)
 				{
-					case TypeSL.Script:
+                    case TypeSL.Script:
 						sw.Write(AutoFormatter.ApplyFormatting(0,Helpers.GetTemplate.Source()));
 						break;
-					case TypeSL.Notecard:
+                    case TypeSL.LSLIScript:
+                        sw.Write(AutoFormatter.ApplyFormatting(0, Helpers.GetTemplate.Source()));
+                        break;
+                    case TypeSL.Notecard:
 						sw.Write("notecard");
 						break;
 					default:
@@ -1057,11 +1092,11 @@ namespace LSLEditor.Solution
 			}
 
 			TreeNode newFile = new TreeNode(strNewName, (int)typeFile, (int)typeFile);
-			newFile.Tag = new RealTag(typeFile, strNewName, Guid.NewGuid());
+            newFile.Tag = new RealTag(typeFile, strNewName, Guid.NewGuid());
 			parent.Nodes.Add(newFile);
 			parent.Expand();
 
-			this.m_dirty = true;
+            this.m_dirty = true;
 		}
 
 		private void AddExistingFile(TreeNode parent, string strName, Guid guid)
@@ -1694,7 +1729,7 @@ namespace LSLEditor.Solution
 			tn.BeginEdit();
 		}
 
-		private void CutAction(TreeNode tn)
+        private void CutAction(TreeNode tn)
 		{
 			if (CutObject != null)
 				CutObject.ForeColor = Color.Empty;
@@ -1736,7 +1771,7 @@ namespace LSLEditor.Solution
 				{
                     if(editForm.Visible)
                     {
-					    editForm.Focus();
+                        editForm.Focus();
                     } else
                     {
                         // Check if there's a related expanded lsl or lsli opened. If so, focus it. Else open the lsli.
@@ -1753,7 +1788,7 @@ namespace LSLEditor.Solution
                         else
                         {
                             // Open a new one
-                            if (GetTypeSL(e.Node) == TypeSL.Script)
+                            if (GetTypeSL(e.Node) == TypeSL.Script || GetTypeSL(e.Node) == TypeSL.LSLIScript)
                             {
                                 this.parent.OpenFile(GetFullPath(e.Node), guid, true);
                             }
@@ -1770,7 +1805,7 @@ namespace LSLEditor.Solution
 			}
 
             // Check if it's an lsli that has an open expanded form
-            if (GetTypeSL(e.Node) == TypeSL.Script)
+            if (GetTypeSL(e.Node) == TypeSL.Script || GetTypeSL(e.Node) == TypeSL.LSLIScript)
             {
                 if (Helpers.LSLIPathHelper.IsLSLI(path)) {
                     // Check if there's a related expanded lsl opened. If so, focus it. Else open the lsli.
@@ -1785,7 +1820,7 @@ namespace LSLEditor.Solution
                     } else
                     {
                         // Open a new one
-                        if (GetTypeSL(e.Node) == TypeSL.Script)
+                        if (GetTypeSL(e.Node) == TypeSL.Script || GetTypeSL(e.Node) == TypeSL.LSLIScript)
                         {
                             this.parent.OpenFile(GetFullPath(e.Node), guid, true);
                         }
@@ -1793,7 +1828,7 @@ namespace LSLEditor.Solution
                 } else
                 {
                     // Open a new one
-                    if (GetTypeSL(e.Node) == TypeSL.Script)
+                    if (GetTypeSL(e.Node) == TypeSL.Script || GetTypeSL(e.Node) == TypeSL.LSLIScript)
                     {
                         this.parent.OpenFile(GetFullPath(e.Node), guid, true);
                     }

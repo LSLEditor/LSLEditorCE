@@ -564,8 +564,7 @@ namespace LSLEditor
                 if (LSLIPathHelper.IsExpandedLSL(ScriptName))
                 {
                     // Check if a LSLI readonly is open
-                    EditForm readOnlyLSLI = (EditForm)parent.GetForm(Path.GetFileName(
-                        LSLIPathHelper.CreateCollapsedScriptName(ScriptName)) + " (Read Only)");
+                    EditForm readOnlyLSLI = (EditForm)parent.GetForm(Path.GetFileName(LSLIPathHelper.GetReadOnlyTabName(ScriptName)));
 
                     if (readOnlyLSLI != null)
                     {
@@ -573,11 +572,21 @@ namespace LSLEditor
                     }
                 }
 
-                // Delete expanded file when closing
-                string expandedFile = LSLIPathHelper.CreateExpandedPathAndScriptName(FullPathName);
-                if (File.Exists(expandedFile))
+                if(!this.parent.IsReadOnly(this)) // If this is not a readonly (LSLI)
                 {
-                    File.Delete(expandedFile);
+                    // Delete expanded file when closing
+                    string expandedFile = LSLIPathHelper.CreateExpandedPathAndScriptName(FullPathName);
+                    EditForm expandedForm = (EditForm)parent.GetForm(LSLIPathHelper.GetExpandedTabName(Path.GetFileName(expandedFile)));
+
+                    if (expandedForm != null && !LSLIPathHelper.IsExpandedLSL(ScriptName))
+                    {
+                        expandedForm.Close();
+                    }
+
+                    if (File.Exists(expandedFile))
+                    {
+                        File.Delete(expandedFile);
+                    }
                 }
             }
             this.parent.CancelClosing = e.Cancel;

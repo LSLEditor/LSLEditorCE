@@ -29,22 +29,24 @@
     <SignAssembly>false</SignAssembly>
     <Win32Resource>C:\Users\User\Desktop\Workspace_Jasper\LSL_editor\lsleditor-code\trunk\LSLEditor.RES</Win32Resource>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
-    <PublishUrl>http://localhost/LSLEditor/</PublishUrl>
+    <PublishUrl>C:\Users\User\Desktop\Workspace_Jasper\LSL_editor\Published LSLEditor\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Web</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -99,6 +101,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>5CBB20152EC70EC13542B336790AF2E7AB2E1DEB</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
@@ -971,6 +976,7 @@
     <EmbeddedResource Include="Images\Vars.gif" />
     <EmbeddedResource Include="Images\States.gif" />
     <None Include="Resources\export_file-32.png" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\LSLIScript.gif" />
     <Content Include="Resource\App.ico" />
     <Content Include="Images\logo.gif" />
     <Content Include="LSLEditor.rc" />

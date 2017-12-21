@@ -34,6 +34,8 @@
 //
 // <summary>
 // This class is used to convert LSLI to LSL and the other way around.
+// Created by Jasper Wiggerink
+// 13-11-2017
 // </summary>
 
 using System;
@@ -49,16 +51,16 @@ namespace LSLEditor.Helpers
     class LSLIConverter
     {
         private EditForm editForm;
-        private const string BEGIN = "//@BEGIN";
-        private const string END = "//@END";
-        private const string INCLUDE = "//@include";
+        private const string BEGIN = "//#BEGIN";
+        private const string END = "//#END";
+        private const string INCLUDE = "//#include";
 
         public const string EXPANDED_SUBEXT = ".expanded";
         public const string LSL_EXT = ".lsl";
         public const string LSLI_EXT = ".lsli";
         public static List<string> validExtensions = new List<string>() { LSLI_EXT, LSL_EXT };
         
-        private const string INCLUDE_REGEX = "(\n|^)\\s*" + INCLUDE + "\\(\".*?\"\\).*";//"(\\s+|^)" + INCLUDE + "\\(\".*?\"\\)";
+        private const string INCLUDE_REGEX = "(\n|^)\\s*" + INCLUDE + "\\(\".*?\"\\).*";
         private const string BEGIN_REGEX = "(\\s+|^)" + BEGIN;
         private const string END_REGEX = "(\\s+|^)" + END;
         private const string EMPTY_OR_WHITESPACE_REGEX = "^\\s*$";
@@ -74,43 +76,22 @@ namespace LSLEditor.Helpers
 
         }
 
-        //private string GetFile(string file) // TODO?
-        //{
-        //    if (File.Exists(directory))
-        //    {
-        //        return file;
-        //    }
-        //    if (Path.GetExtension(file) == "")
-        //    {
-        //        string pFile = "";
-
-        //        foreach (string extension in validExtensions)
-        //        {
-        //            pFile = file + extension;
-
-        //            if (File.Exists(pFile))
-        //            {
-        //                return pFile;
-        //            }
-        //        }
-        //    }
-        //}
-
         /// <summary>
         /// Searches for a file with one of the validExtensions based on a name or path. Also searches in the IncludeDirectories
         /// </summary>
         /// <param name="file"></param>
         /// <returns>File path</returns>
-        private string SearchFile(string file)
+        private static string SearchFile(string file)
         {
-            // If setting IncludeDirectories is enabled
+            // Search in optional include directories
             foreach (string directory in Properties.Settings.Default.IncludeDirectories)
             {
                 string pFile;
-                if(file.Contains(directory))
+                if (file.ToLower().Contains(directory.ToLower()))
                 {
                     pFile = file;
-                } else
+                }
+                else
                 {
                     pFile = directory + file;
                 }
@@ -141,31 +122,64 @@ namespace LSLEditor.Helpers
                 }
             }
 
-            // If IncludeDirectories setting is disabled
-            if (Properties.Settings.Default.IncludeDirectories.Count == 0)
+            // Search for file relative to the script
+            if (File.Exists(file))
             {
-                if (File.Exists(file))
+                return file;
+            }
+
+            if (Path.GetExtension(file) == "")
+            {
+                string pFile = "";
+
+                foreach (string extension in validExtensions)
                 {
-                    return file;
-                }
+                    pFile = file + extension;
 
-                if (Path.GetExtension(file) == "")
-                {
-                    string pFile = "";
-
-                    foreach (string extension in validExtensions)
-                    {
-                        pFile = file + extension;
-
-                        if (File.Exists(pFile)) {
-                            return pFile;
-                        }
+                    if (File.Exists(pFile)) {
+                        return pFile;
                     }
                 }
             }
 
-
             return "";
+        }
+
+        /// <summary>
+        /// Returns the path of the file
+        /// </summary>
+        /// <param name="pathOfInclude"></param>
+        /// <param name="pathOfScript"></param>
+        /// <returns></returns>
+        private string GetFilePath(string pathOfInclude, string pathOfScript)
+        {
+            // Step 1 (optional). Search from include directories
+            // Step 2. Search from relative path from script
+
+            string pathOfIncludeOriginal = pathOfInclude;
+            pathOfInclude = SearchFile(pathOfInclude);
+
+            if (pathOfInclude == "")
+            {
+                // If path is relative and no includedirectories
+                if (!Path.IsPathRooted(pathOfIncludeOriginal))
+                {
+                    pathOfInclude = LSLIPathHelper.GetRelativePath(pathOfScript, Environment.CurrentDirectory) + pathOfIncludeOriginal;
+                }
+                else if (this.implementedIncludes.Count > 0) // If there are already includes, the relative path is already correct
+                {
+                    pathOfInclude = Path.GetDirectoryName(this.implementedIncludes.LastOrDefault()) + '\\' + pathOfIncludeOriginal;
+                }
+                else
+                {
+                    pathOfInclude = pathOfIncludeOriginal;
+                }
+
+                // If path is absolute it will stay the pathOfInclude
+                pathOfInclude = SearchFile(pathOfInclude);
+            }
+
+            return pathOfInclude;
         }
 
         /// <summary>
@@ -176,16 +190,34 @@ namespace LSLEditor.Helpers
         /// <returns></returns>
         public static List<int> AllIndexesOf(string str, string value)
         {
-            if (String.IsNullOrEmpty(value))
-                throw new ArgumentException("The string to find may not be empty", "value");
-            List<int> indexes = new List<int>();
-            for (int index = 0; ; index += value.Length)
+            if (!String.IsNullOrEmpty(value))
             {
-                index = str.IndexOf(value, index);
-                if (index == -1)
-                    return indexes;
-                indexes.Add(index);
+                List<int> indexes = new List<int>();
+                for (int index = 0; ; index += value.Length)
+                {
+                    index = str.IndexOf(value, index);
+                    if (index == -1)
+                        return indexes;
+                    indexes.Add(index);
+                }
             }
+            return null;
+        }
+
+        /// <summary>
+        /// Compares 2 paths and returns true if they are different, false if they're the same.
+        /// Warning: This doesn't compare extensions.
+        /// </summary>
+        /// <param name="pathOfInclude"></param>
+        /// <param name="pathOfScript"></param>
+        /// <returns></returns>
+        public static bool IsDifferentScript(string pathOfInclude, string pathOfScript)
+        {
+            string pathOfScriptNoExt = LSLIPathHelper.RemoveExpandedSubExtension(Path.GetFileNameWithoutExtension(pathOfScript));
+            string pathOfIncludeNoExt = LSLIPathHelper.RemoveExpandedSubExtension(Path.GetFileNameWithoutExtension(pathOfInclude));
+
+            // Compare paths
+            return !pathOfScriptNoExt.EndsWith(pathOfIncludeNoExt);
         }
 
         /// <summary>
@@ -254,7 +286,6 @@ namespace LSLEditor.Helpers
             }
 
             context.Insert(includeIndex, newLine);
-            string test = context.ToString(); // Debug only
             return context;
         }
 
@@ -277,7 +308,7 @@ namespace LSLEditor.Helpers
         /// <param name="includeDepth"></param>
         /// <param name="OneLess"></param>
         /// <returns></returns>
-        private string GetTabsForIncludeDepth(int includeDepth, bool OneLess = false) // TODO: Dit wordt wss een setting. Tabs hangt namelijk af van de hoeveelheid ingedente include statement.
+        private string GetTabsForIncludeDepth(int includeDepth, bool OneLess = false)
         {
             string tabs = "";
             if(OneLess && includeDepth != 0)
@@ -299,14 +330,22 @@ namespace LSLEditor.Helpers
         /// <returns></returns>
         private string GetTabsForIndentedInclude(string includeLine, int includeDepth, bool isDebug = false)
         {
-            if(includeLine.Contains("\t"))
+            if(includeLine.Contains('\t'))
             {
                 int includeIndex = Regex.Match(includeLine, INCLUDE).Index;
 
                 string beforeInclude = includeLine.Substring(0, includeIndex);
+
+                if(beforeInclude.Contains('\n'))
+                {
+                    // Last '\n' before includeIndex
+                    int lastIndexNewLine = beforeInclude.LastIndexOf('\n');
+                    beforeInclude = beforeInclude.Substring(lastIndexNewLine, beforeInclude.Length - lastIndexNewLine);
+                }
+
                 int tabCount = 0;
 
-                // Count the tabs between the start of the line and the begin of the include. NOTE: HIJ MOET ALLEEN DE INCLUDEDEPTH AFTREKKEN WANNEER HIJ DEBUG IS
+                // Count the tabs between the start of the line and the begin of the include.
                 if (isDebug)
                 {
                     tabCount = beforeInclude.Count(f => f == '\t') - (includeDepth - 1); // The tabcount should be without the includeDepth, because this was already added.
@@ -326,7 +365,42 @@ namespace LSLEditor.Helpers
         }
 
         /// <summary>
-        /// Returns the amount of tabs for an include script
+        /// Returns the amount of spaces in front of an include statement
+        /// </summary>
+        /// <param name="includeLine"></param>
+        /// <returns></returns>
+        private string GetSpacesForIndentedInclude(string includeLine, int includeDepth, bool isDebug = false)
+        {
+            if (includeLine.Contains(" "))
+            {
+                int includeIndex = Regex.Match(includeLine, INCLUDE).Index;
+
+                string beforeInclude = includeLine.Substring(0, includeIndex);
+                int spaceCount = 0;
+
+                // Count the space between the start of the line and the begin of the include.
+                if (isDebug)
+                {
+                    // The spacecount should be without the includeDepth, because this was already added.
+                    spaceCount = beforeInclude.Count(f => f == ' ') - (includeDepth - 1); 
+                }
+                else
+                {
+                    spaceCount = beforeInclude.Count(f => f == ' ');
+                }
+
+                string spaces = "";
+                for (int i = 0; i < spaceCount; i++)
+                {
+                    spaces += " ";
+                }
+                return spaces;
+            }
+            return "";
+        }
+
+        /// <summary>
+        /// Returns the amount of tabs/spaces for an include script
         /// </summary>
         /// <param name="includeLine"></param>
         /// <param name="includeDepth"></param>
@@ -336,9 +410,9 @@ namespace LSLEditor.Helpers
         {
             string includeDepthTabs = GetTabsForIncludeDepth(includeDepth, OneLess);
             string indentedIncludeTabs = GetTabsForIndentedInclude(includeLine, includeDepth, true);
-
+            string spacesForIndentedInclude = GetSpacesForIndentedInclude(includeLine, includeDepth, true);
             
-            return includeDepthTabs + indentedIncludeTabs;
+            return includeDepthTabs + indentedIncludeTabs + spacesForIndentedInclude;
         }
         
         /// <summary>
@@ -424,7 +498,7 @@ namespace LSLEditor.Helpers
         }
 
         /// <summary>
-        /// Imports scripts from //@include statements
+        /// Imports scripts from //#include statements
         /// </summary>
         /// <param name="strC">Sourcecode</param>
         /// <param name="pathOfScript">Path of the source code of the script</param>
@@ -433,7 +507,7 @@ namespace LSLEditor.Helpers
         {
             if(!LSLIPathHelper.IsLSLI(pathOfScript))
             {
-                // If it's not LSLI extension it can't import a script
+                // If it's not an LSLI script, it can't import a script
                 return strC;
             }
 
@@ -455,26 +529,17 @@ namespace LSLEditor.Helpers
                 string pathOfInclude = pathOfIncludeOriginal;
                 string ext = Path.GetExtension(pathOfInclude).ToLower();
 
-                if ((validExtensions.Contains(ext) || ext == "") && !LSLIPathHelper.CreateExpandedScriptName(pathOfScript).Contains(pathOfInclude)
-                    && !pathOfScript.Contains(pathOfInclude))
+                if ((validExtensions.Contains(ext) || ext == "") && IsDifferentScript(pathOfInclude, pathOfScript))
                 {
-                    // If path is relative
-                    if (!Path.IsPathRooted(pathOfInclude) && Properties.Settings.Default.IncludeDirectories.Count == 0)
-                    {
-                        pathOfInclude = LSLIPathHelper.GetRelativePath(pathOfScript, Environment.CurrentDirectory) + pathOfInclude;
-                    } else if (this.implementedIncludes.Count > 0)
-                    {
-                        pathOfInclude = Path.GetDirectoryName(this.implementedIncludes.LastOrDefault()) + '\\' + pathOfInclude;
-                    }
-
-                    pathOfInclude = SearchFile(pathOfInclude);
+                    pathOfInclude = GetFilePath(pathOfInclude, pathOfScript);
 
                     if (pathOfInclude != "" && !this.implementedIncludes.Contains(Path.GetFullPath(pathOfInclude)))
                     {
-                        if(!ShowBeginEnd)
+                        if (!ShowBeginEnd)
                         {
                             sb = WriteExportScript(pathOfInclude, sb, line);
-                        } else
+                        }
+                        else
                         {
                             sb = WriteDebugScript(pathOfInclude, sb, line);
                         }
@@ -488,7 +553,8 @@ namespace LSLEditor.Helpers
                         ShowError(message);
                     } else
                     {
-                        string correctPath = Path.GetFullPath(LSLIPathHelper.GetRelativePath(pathOfScript, Environment.CurrentDirectory) + pathOfIncludeOriginal);
+                        string relativeToPathOfScript = LSLIPathHelper.GetRelativePath(pathOfScript, Environment.CurrentDirectory);
+                        string correctPath = Path.GetFullPath(relativeToPathOfScript) + pathOfIncludeOriginal;
                         string message = "Error: Unable to find file \"" + correctPath +
                             "\". In script \"" + Path.GetFileName(pathOfScript) + "\". Line " + lineNumber + ".";
 
@@ -598,6 +664,7 @@ namespace LSLEditor.Helpers
         /// <returns>LSL</returns>
         public string ExpandToLSL(EditForm editForm, bool ShowBeginEnd = true)
         {
+            editForm.verboseQueue = new List<string>();
             this.editForm = editForm;
             string strC = editForm.SourceCode;
             string fullPathName = editForm.FullPathName;

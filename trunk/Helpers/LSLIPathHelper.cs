@@ -34,18 +34,19 @@
 //
 // <summary>
 // This class is used to help with paths and LSLI files.
+// Created by Jasper Wiggerink
+// 13-11-2017
 // </summary>
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace LSLEditor.Helpers
 {
     static class LSLIPathHelper
     {
+        public const string READONLY_TAB_EXTENSION = " (Read Only)";
+        public const string EXPANDED_TAB_EXTENSION = " (Expanded LSL)";
 
         /// <summary>
         /// Checks if a filename is LSLI
@@ -79,12 +80,22 @@ namespace LSLEditor.Helpers
             return nameCollapsed;
         }
         
+        /// <summary>
+        /// Removes only the last extension
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
         private static string RemoveExtension(string filename)
         {
             filename = TrimStarsAndWhiteSpace(filename.Remove(filename.LastIndexOf(Path.GetExtension(filename))));
             return filename;
         }
 
+        /// <summary>
+        /// Removes the .expanded in a filename
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
         public static string RemoveExpandedSubExtension(string filename)
         {
             if (filename.Contains(LSLIConverter.EXPANDED_SUBEXT))
@@ -136,6 +147,11 @@ namespace LSLEditor.Helpers
             return PutDotInFrontOfFilename(TrimStarsAndWhiteSpace(nameExpanded));
         }
 
+        /// <summary>
+        /// Puts dot in front of a filename, e.g. "path/file.lsl" to "path/.file.lsl"
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
         private static string PutDotInFrontOfFilename(string filename)
         {
             int afterLastIndexOfSeperator = (filename.LastIndexOf('\\') > filename.LastIndexOf('/') ? filename.LastIndexOf('\\') : filename.LastIndexOf('/')) + 1;
@@ -149,6 +165,11 @@ namespace LSLEditor.Helpers
             return filename;
         }
 
+        /// <summary>
+        /// If found, removes the dot in front of a filename.
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
         public static string RemoveDotInFrontOfFilename(string filename)
         {
             int afterLastIndexOfSeperator = (filename.LastIndexOf('\\') > filename.LastIndexOf('/') ? filename.LastIndexOf('\\') : filename.LastIndexOf('/')) + 1;
@@ -183,6 +204,11 @@ namespace LSLEditor.Helpers
             }
         }
 
+        /// <summary>
+        /// Trims the "dirty" stars and whitespace in a string. E.g. "file*.lsl " to "file.lsl"
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static string TrimStarsAndWhiteSpace(string str)
         {
             return str.Trim(' ').TrimEnd('*');
@@ -196,10 +222,19 @@ namespace LSLEditor.Helpers
         public static string GetExpandedTabName(string path)
         {
             if (path == null) return "";
-            return RemoveDotInFrontOfFilename(Path.GetFileNameWithoutExtension(RemoveExpandedSubExtension(path)) + LSLIConverter.LSLI_EXT + " (Expanded LSL)");
+            return RemoveDotInFrontOfFilename(Path.GetFileNameWithoutExtension(RemoveExpandedSubExtension(path)) + LSLIConverter.LSLI_EXT + EXPANDED_TAB_EXTENSION);
         }
 
-        // TODO: CREATE SAME FUNCTION AS ABOVE FOR READONLY TAB NAME (IS CURRENTLY HARD-CODED)
+        /// <summary>
+        /// Turns a LSLI readonly script name into a string to be displayed as the tab name
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public static string GetReadOnlyTabName(string filename)
+        {
+            if (filename == null) return "";
+            return CreateCollapsedPathAndScriptName(filename) + READONLY_TAB_EXTENSION;
+        }
 
         /// <summary>
         /// Creates a relative path between two paths

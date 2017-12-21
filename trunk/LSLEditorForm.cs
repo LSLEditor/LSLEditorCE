@@ -356,7 +356,7 @@ namespace LSLEditor
 		{
             EditForm editForm = (EditForm)this.ActiveMdiForm;
             string expandedWarning = "";
-            if (Helpers.LSLIPathHelper.IsExpandedLSL(editForm.ScriptName))
+            if (editForm != null && Helpers.LSLIPathHelper.IsExpandedLSL(editForm.ScriptName))
             {
                 expandedWarning = "Warning: Editing in included sections will be erased when collapsing/saving!";
             }
@@ -599,15 +599,24 @@ namespace LSLEditor
 			DialogResult dialogresult = DialogResult.OK;
 			if (editForm.FullPathName == Properties.Settings.Default.ExampleName || blnSaveAs) {
 				SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
-				saveDialog.FileName = editForm.FullPathName;
-				string strExtension = Path.GetExtension(editForm.FullPathName);
+
+                // Save as LSLI when it's an expanded LSL
+                if (Helpers.LSLIPathHelper.IsExpandedLSL(editForm.ScriptName))
+                {
+                    saveDialog.FileName = Helpers.LSLIPathHelper.CreateCollapsedScriptName(editForm.ScriptName);
+                } else
+                {
+                    saveDialog.FileName = editForm.ScriptName;
+                }
+                //saveDialog.FileName = editForm.FullPathName;
+                string strExtension = Path.GetExtension(editForm.FullPathName);
 				dialogresult = saveDialog.ShowDialog();
 				if (dialogresult == DialogResult.OK) {
 					editForm.FullPathName = saveDialog.FileName;
 				}
 			}
 			if (dialogresult == DialogResult.OK) {
-				editForm.SaveCurrentFile();
+                editForm.SaveCurrentFile();
 				UpdateRecentFileList(editForm.FullPathName);
 				return true;
 			}
@@ -753,6 +762,7 @@ namespace LSLEditor
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+            // Check if a LSLI or expanded LSL open is, and close that one as well
 			this.Close();
 		}
 
@@ -1160,8 +1170,19 @@ namespace LSLEditor
 				if (editForm == null || editForm.IsDisposed) {
 					continue;
 				}
+                
 				if (editForm.FullPathName == e.FullPathName) {
-					ActivateMdiForm(editForm);
+                    if (!editForm.Visible)
+                    {
+                        if(Helpers.LSLIPathHelper.IsExpandedLSL(editForm.ScriptName) && GetForm(Helpers.LSLIPathHelper.CreateCollapsedScriptName(editForm.ScriptName)).Visible)
+                        {
+                            //SetReadOnly((EditForm) GetForm(Helpers.LSLIPathHelper.CreateCollapsedScriptName(editForm.ScriptName)), true); // Doesn't seem to work? Why?
+                            EditForm LSLIForm = (EditForm)GetForm(Helpers.LSLIPathHelper.CreateCollapsedScriptName(editForm.ScriptName));
+                            LSLIForm.Close();
+                        }
+                        editForm.Show();
+                    }
+                    ActivateMdiForm(editForm);
 					editForm.TextBox.Goto(e.Line, e.Char);
 					editForm.Focus();
 					return;
@@ -1198,6 +1219,43 @@ namespace LSLEditor
 			this.SimulatorConsole = null;
 		}
 
+        /// <summary>
+        /// When running an LSLI script, a related expanded LSL script or LSLI readonly may be opened. These should not be ran/checked for syntax.
+        /// An LSLI script should also first be expanded to an LSL script before it checks for syntax.
+        /// </summary>
+        /// <param name="editForm"></param>
+        /// <returns></returns>
+        private EditForm SelectEditFormToRun(EditForm editForm)
+        {
+            if (Helpers.LSLIPathHelper.IsLSLI(editForm.ScriptName) && editForm.Visible && !IsReadOnly(editForm))
+            {
+                // Open and hide or select the expanded LSLI form
+                EditForm expandedForm = (EditForm)GetForm(Helpers.LSLIPathHelper.GetExpandedTabName(editForm.ScriptName));
+                if (expandedForm == null)
+                {
+                    // Create the LSL
+                    ExpandForm(editForm);
+                    expandedForm = (EditForm)GetForm(Helpers.LSLIPathHelper.GetExpandedTabName(editForm.ScriptName));
+                    editForm = expandedForm;
+                }
+                else
+                {
+                    ExpandForm(editForm);
+                    editForm.Close();
+                }
+            }
+            else if (Helpers.LSLIPathHelper.IsExpandedLSL(editForm.ScriptName))
+            {
+                // NOTE: WAAROM COLLAPSED HIJ HEM EERST? ZO VERWIJDERD HIJ DE VERANDERINGEN IN DE EXPANDED INCLUDE SECTIONS
+                //CollapseForm(editForm);
+                //EditForm collapsedForm = (EditForm)GetForm(Helpers.LSLIPathHelper.CreateCollapsedScriptName(editForm.ScriptName));
+                //ExpandForm(collapsedForm);
+                EditForm expandedForm = (EditForm)GetForm(Helpers.LSLIPathHelper.GetExpandedTabName(editForm.ScriptName));
+                editForm = expandedForm;
+            }
+            return editForm;
+        }
+
 		private bool SyntaxCheck(bool Silent)
 		{
 			//TODO: What do we hide on SyntaxCheck?
@@ -1206,7 +1264,9 @@ namespace LSLEditor
 
 			foreach (Form form in this.Children) {
 				EditForm editForm = form as EditForm;
-				if (editForm == null || editForm.IsDisposed) {
+                editForm = SelectEditFormToRun(editForm);
+                
+				if (editForm == null || editForm.IsDisposed || !editForm.Visible || IsReadOnly(editForm)) {
 					continue;
 				}
 				if (Properties.Settings.Default.AutoSaveOnDebug) {
@@ -1856,10 +1916,10 @@ namespace LSLEditor
         public Form GetForm(string formName)
         {
             EditForm desirableForm = null; 
-            for (int i = 0; i < Children.Length; i++) //Application.OpenForms
+            for (int i = 0; i < Children.Length; i++)
             {
                 Form form = Children[i];
-                if (Helpers.LSLIPathHelper.TrimStarsAndWhiteSpace(form.Text) == formName) //.TrimEnd(' ')
+                if (Helpers.LSLIPathHelper.TrimStarsAndWhiteSpace(form.Text) == formName)
                 {
                     desirableForm = (EditForm)form;
                 }
@@ -1877,7 +1937,6 @@ namespace LSLEditor
         {
             foreach (Control c in form.tabControl.SelectedTab.Controls)
             {
-                Type dfsa = c.GetType();
                 if (c.GetType() == typeof(SplitContainer))
                 {
                     NumberedTextBox.NumberedTextBoxUC a = (NumberedTextBox.NumberedTextBoxUC)((SplitContainer)c).ActiveControl;
@@ -1898,7 +1957,6 @@ namespace LSLEditor
         {
             foreach (Control c in form.tabControl.SelectedTab.Controls)
             {
-                Type dfsa = c.GetType();
                 if (c.GetType() == typeof(SplitContainer))
                 {
                     NumberedTextBox.NumberedTextBoxUC a = (NumberedTextBox.NumberedTextBoxUC)((SplitContainer)c).ActiveControl;
@@ -1914,33 +1972,27 @@ namespace LSLEditor
             return false;
         }
 
-        private void expandToLSLToolStripMenuItem_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Expands an editform and opens it. Hides the LSLI
+        /// </summary>
+        /// <param name="editForm"></param>
+        public void ExpandForm(EditForm editForm)
         {
-            EditForm editForm = this.ActiveMdiForm as EditForm;
-
-            if (editForm != null && Helpers.LSLIPathHelper.IsLSLI(editForm.Text))
+            if (editForm != null && Helpers.LSLIPathHelper.IsLSLI(editForm.ScriptName))
             {
                 Helpers.LSLIConverter converter = new Helpers.LSLIConverter();
                 string lsl = converter.ExpandToLSL(editForm);
                 string file = Helpers.LSLIPathHelper.CreateExpandedPathAndScriptName(editForm.FullPathName);
+                EditForm oldExpandedForm = (EditForm)GetForm(Helpers.LSLIPathHelper.GetExpandedTabName(Helpers.LSLIPathHelper.CreateExpandedScriptName(editForm.ScriptName)));
 
                 // Check if the expanded form is already open. If so, then overwrite the content of it.
-                if(GetForm(Helpers.LSLIPathHelper.GetExpandedTabName(Helpers.LSLIPathHelper.CreateExpandedScriptName(editForm.ScriptName))) != null)
+                if (oldExpandedForm != null)//
                 {
-                    EditForm oldExpandedForm = (EditForm)GetForm(Helpers.LSLIPathHelper.GetExpandedTabName(Helpers.LSLIPathHelper.CreateExpandedScriptName(editForm.ScriptName)));
                     oldExpandedForm.SourceCode = lsl;
                     //oldExpandedForm.TabIndex = editForm.TabIndex; // TODO: Keep tabIndex when expanding/collapsing the same
                     oldExpandedForm.Show();
                     SetReadOnly(oldExpandedForm, false);
                     oldExpandedForm.Dirty = editForm.Dirty;
-
-                    if (editForm.Dirty)
-                    {
-                        oldExpandedForm.Text = Helpers.LSLIPathHelper.GetExpandedTabName(editForm.Text) + "*";
-                    } else
-                    {
-                        oldExpandedForm.Text = Helpers.LSLIPathHelper.GetExpandedTabName(editForm.Text);
-                    }
                 }
                 else
                 { // If not already open 
@@ -1950,7 +2002,7 @@ namespace LSLEditor
                     {
                         sw.Write(lsl);
                     }
-                
+
                     Helpers.LSLIPathHelper.HideFile(file);
 
                     EditForm expandedForm = (EditForm)GetForm(Helpers.LSLIPathHelper.CreateExpandedScriptName(Path.GetFileName(file)));
@@ -1963,16 +2015,20 @@ namespace LSLEditor
                     OpenFile(file);
                     EditForm lslForm = (EditForm)GetForm(Helpers.LSLIPathHelper.GetExpandedTabName(file));
                     lslForm.Dirty = editForm.Dirty;
-                    //lslForm.Text = Helpers.LSLIPathHelper.GetExpandedTabName(editForm.Text);
                 }
                 editForm.Hide();
             }
         }
 
-        private void CollapseToLSLIToolStripMenuItem_Click(object sender, EventArgs e)
+        // Expand to LSL button (F11)
+        private void expandToLSLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EditForm editForm = this.ActiveMdiForm as EditForm;
-            
+            ExpandForm(editForm);            
+        }
+
+        public void CollapseForm(EditForm editForm)
+        {
             if (editForm != null && Helpers.LSLIPathHelper.IsExpandedLSL(editForm.ScriptName))
             {
                 Helpers.LSLIConverter converter = new Helpers.LSLIConverter();
@@ -1981,7 +2037,7 @@ namespace LSLEditor
 
                 string lsli = converter.CollapseToLSLIFromEditform(editForm);
                 string file = Helpers.LSLIPathHelper.CreateCollapsedPathAndScriptName(editForm.FullPathName);
-                
+
                 // Check if the LSLI form is already open (but hidden)
                 if (GetForm(Path.GetFileName(file)) != null)
                 {
@@ -1996,17 +2052,26 @@ namespace LSLEditor
                 {
                     OpenFile(file);
                     EditForm LSLIform = (EditForm)GetForm(Path.GetFileName(file));
+                    LSLIform.SourceCode = lsli;
                     LSLIform.Dirty = editForm.Dirty;
                 }
 
-                if (GetForm(Path.GetFileName(file) + " (Read Only)") != null) // if readonly is open, close it
+                if (GetForm(Path.GetFileName(file) + Helpers.LSLIPathHelper.READONLY_TAB_EXTENSION) != null) // if readonly is open, close it
                 {
-                    GetForm(Path.GetFileName(file) + " (Read Only)").Close();
+                    GetForm(Path.GetFileName(file) + Helpers.LSLIPathHelper.READONLY_TAB_EXTENSION).Close();
                 }
                 editForm.Hide();
             }
         }
 
+        // Collapse to LSLI button (F10)
+        private void CollapseToLSLIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditForm editForm = this.ActiveMdiForm as EditForm;
+            CollapseForm(editForm);
+        }
+
+        // View LSLI button (F12)
         private void viewLSLIToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EditForm editForm = this.ActiveMdiForm as EditForm;
@@ -2021,7 +2086,7 @@ namespace LSLEditor
                 string pathOfLSLI = Helpers.LSLIPathHelper.CreateCollapsedPathAndScriptName(editForm.FullPathName);
 
                 if (File.Exists(pathOfLSLI)) {
-                    string tabText = Path.GetFileName(pathOfLSLI) + " (Read Only)";
+                    string tabText = Path.GetFileName(pathOfLSLI) + Helpers.LSLIPathHelper.READONLY_TAB_EXTENSION;
 
                     // If old LSLI readonly is open
                     Form OldReadOnlyLSLIform = GetForm(tabText);
@@ -2072,6 +2137,7 @@ namespace LSLEditor
             }
         }
 
+        // New LSLI script button (Ctrl+M)
         private void lSLIScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NewFile(true);
