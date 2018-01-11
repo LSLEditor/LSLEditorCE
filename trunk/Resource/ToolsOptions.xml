@@ -8,6 +8,8 @@
   </item>
   <item name="Projects and Solutions" usercontrol="ProjectSettings">
     <item name="General" usercontrol="ProjectSettings" />
+    <item name="Includes" usercontrol="ProjectIncludes" />
+    <item name="Exports LSL" usercontrol="IncludeExportSettings" />
   </item>
 
   <item name="Source Control" usercontrol="VersionControlGeneral">

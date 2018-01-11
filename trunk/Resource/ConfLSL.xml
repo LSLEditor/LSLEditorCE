@@ -5,11 +5,17 @@
 
 
 	<Words name="Strings" color="#A0A0A0" slcolor="#003300">
-		<Word name="regex">
+    <Word name="regex">
 			"[^"\\]* (?>\\.[^"\\]*)*"
 		</Word>
 	</Words>
 
+  <Words name="Includes" color="#A0A0A0" slcolor="#003300">
+    <Word name="//#BEGIN">
+    </Word>
+    <Word name="//#END">
+    </Word>
+  </Words>
 
 	<Words name="Operators" color="#777700" slcolor="#000000">
 		<Word name="regex">
