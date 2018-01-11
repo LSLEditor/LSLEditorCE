@@ -200,7 +200,7 @@ namespace LSLEditor
 		/// <summary>
 		/// An editor form?
 		/// </summary>
-		private LSLEditorForm efMainForm;
+		public LSLEditorForm efMainForm;
 
 		/// <summary>
 		/// A compiled assembly of the LSL script.
@@ -363,6 +363,7 @@ namespace LSLEditor
 				if (this.CurrentStateName != this.strNewStateName) {
 					this.CurrentStateName = this.strNewStateName;
 					ExecuteSecondLife("state_exit");
+                    // TODO: EXECUTE OPENSIM FUNCTION HERE
 
 					// Changing to CurrentStateName on this thread! (not ExecuteSecondLife)
 					this.tqTaskQueue.Invoke(this, "SetState");

@@ -3334,8 +3334,1249 @@
 		</Word>
 	</Words>
 
+  <Words icon="Functions" name="Appendix A. Linden Library Functions" color="#A00000" slcolor="#800026">
+    Complete listing of the OpenSim Library function calls available in lsl.
+    <Word name="osAgentSaveAppearance">
+      key osAgentSaveAppearance(key avatarId, string notecard);
 
-	<Words icon="Events" name="Appendix B. Events" color="#00A0A0" slcolor="#004D80">
+      Save an arbitrary avatar's appearance to a notecard in the prim's inventory. 
+      This includes body part data, clothing items and attachments. If a 
+      notecard with the same name already exists then it is replaced. 
+      The avatar must be present in the region when this function is invoked. 
+      The baked textures for the avatar (necessary to recreate appearance on 
+      the NPC) are saved permanently.
+    </Word>
+    <Word name="osAvatarName2Key">
+      string osAvatarName2Key(string firstname, string lastname);
+
+      Returns an avatar's UUID, based on his/her first and last name.
+    </Word>
+    <Word name="osAvatarPlayAnimation">
+      void osAvatarPlayAnimation(key avatar, string animation);
+
+      This function causes an animation to be played on the specified avatar.
+      The variable animation must be the name of an animation within the task
+      inventory. For security reasons, UUIDs are not allowed here.
+      Instead of the name of an animation in the prim's inventory, you can 
+      also use the names of the viewer's built-in animations.
+      osAvatarPlayAnimation does not perform any security checks or request
+      animation permissions from the targeted avatar.
+    </Word>
+    <Word name="osAvatarStopAnimation">
+      void osAvatarStopAnimation(key avatar, string animation);
+
+      This function stops the specified animation if it is playing on the 
+      avatar given. The value avatar is a UUID, and the animation value is 
+      either the name of an animation in the task inventory or the UUID of 
+      an animation. If the specified avatar is not logged in or on the 
+      same sim as the script, then osAvatarStopAnimation silently fails.
+    </Word>
+    <Word name="osCauseDamage">
+      void osCauseDamage(key avatar, float damage);
+    </Word>
+    <Word name="osCauseHealing">
+      void osCauseHealing(key avatar, float healing);
+    </Word>
+    <Word name="osDropAttachment">
+      void osDropAttachment();
+    </Word>
+    <Word name="osDropAttachmentAt">
+      void osDropAttachmentAt(Vector3 pos, Quaternion rot);
+    </Word>
+    <Word name="osEjectFromGroup">
+      integer osEjectFromGroup(key user);
+      
+      Eject the given user from the group the object is set to.
+      The object owner must have the right to eject users from the group the 
+      object is set to. The group member who is ejected can be offline. 
+      The user gets an instant message, that he/she has been ejected from 
+      that group. The result is TRUE, if the user could be ejected, otherwise 
+      FALSE.
+    </Word>
+    <Word name="osForceAttachToAvatar">
+      void osForceAttachToAvatar(integer attachmentPoint);
+
+      Works exactly like llAttachToAvatar() except that PERMISSION_ATTACH is 
+      not required.
+    </Word>
+    <Word name="osForceAttachToAvatarFromInventory">
+      void osForceAttachToAvatarFromInventory(string itemName, integer attachmentPoint);
+
+      Attach an inventory item in the object containing this script to any 
+      avatar in the region without asking for PERMISSION_ATTACH. Nothing happens 
+      if the avatar is not in the region.
+      itemName - The name of the item. If this is not found then a warning is 
+      said to the owner.
+      attachmentPoint - The attachment point. For example, ATTACH_CHEST.
+    </Word>
+    <Word name="osForceAttachToOtherAvatarFromInventory">
+      void osForceAttachToOtherAvatarFromInventory(string rawAvatarId, string itemName, integer attachmentPoint);
+
+      Attach an inventory item in the object containing this script to any
+      avatar in the region without asking for PERMISSION_ATTACH. Nothing 
+      happens if the avatar is not in the region.
+      rawAvatarId - The UUID of the avatar to which to attach. Nothing 
+      happens if this is not a UUID.
+      itemName - The name of the item. If this is not found then a warning 
+      is said to the owner.
+      attachmentPoint - The attachment point. For example, ATTACH_CHEST.
+    </Word>
+    <Word name="osForceDetachFromAvatar">
+      void osForceDetachFromAvatar();
+
+      Works exactly like llDetachFromAvatar() except that PERMISSION_ATTACH 
+      is not required.
+    </Word>
+    <Word name="osForceDropAttachment">
+      void osForceDropAttachment();
+
+      Drops an attachment like a user-triggered attachment drop without 
+      checking if PERMISSION_ATTACH has been granted.
+    </Word>
+    <Word name="osForceDropAttachmentAt">
+      void osForceDropAttachmentAt(Vector3 pos, Quaternion rot);
+
+      Drops an attachment at position pos with rotation rot without 
+      checking if PERMISSION_ATTACH has been granted.
+    </Word>
+    <Word name="osForceOtherSit">
+      void osForceOtherSit(string avatar, [string target]);
+
+      Forces a sit of targeted avatar onto prim.
+      avatar - The UUID of the avatar to which to attach. Nothing happens 
+      if this is not a UUID.
+      target - The UUID of another prim to sit avatar on. Nothing happens 
+      if this is not a UUID of prim in region.
+    </Word>
+    <Word name="osGetAgentIP">
+      string osGetAgentIP(key uuid);
+
+      Requires: key uuid of agent to get IP address for.
+      Returns: string representing the IP address returned.
+    </Word>
+    <Word name="osGetAgents">
+      list osGetAgents();
+
+      Returns a list of all the agents names in the region.
+    </Word>
+    <Word name="osGetAvatarHomeURI">
+      string osGetAvatarHomeURI(string uuid);
+
+      Returns an avatar's Home URI.
+    </Word>
+    <Word name="osGetAvatarList">
+      list osGetAvatarList();
+
+      Returns a strided list of the UUID, position, and name of each
+      avatar in the region except the owner.
+      This function is similar to osGetAgents but returns enough 
+      info for a radar.
+    </Word>
+    <Word name="osGetGender">
+      string osGetGender(key id);
+
+      Returns a string with one of the following values: "male",
+      "female", or "unknown". This value is determined by the value 
+      selected for the avatar shape in the appearance dialog in the 
+      user's viewer. If that value cannot be found for any reason 
+      (avatar is not in the region, improperly formatted key, etc.),
+      "unknown" is returned.
+    </Word>
+    <Word name="osGetHealRate">
+      float osGetHealRate(key avatar);
+
+      Gets the current automatic healing rate in % per second.
+      Default heal rate is now around 0.5% per second.
+      A value of zero can disable automatic heal, current maximum 
+      value is 100 % per second.
+    </Word>
+    <Word name="osGetHealth">
+      float osGetHealth(string avatar);
+      
+      Gets an avatars health by key and returns the value as a float.
+    </Word>
+    <Word name="osGetNumberOfAttachments">
+      list osGetNumberOfAttachments(key avatar, list attachmentPoints);
+
+      Returns a strided list of the specified attachment points and
+      the number of attachments on those points.
+      In OpenSimulator 0.7.5 development code only.
+    </Word>
+    <Word name="osInviteToGroup">
+      integer osInviteToGroup(key user);
+
+      Invite the given user to the group the object is set to. 
+      The group can be a closed user group.
+      The object owner must have the right to invite new users 
+      to the group the object is set to. The user with the given 
+      key has to be online in that region. This is a required 
+      limitation to not make group invitation spam possible. 
+      The user gets a normal group invitation, showing the 
+      owner of the object as sender. The invitation can be accepted 
+      or rejected and the user can open the corresponding group 
+      window. 
+      The result is TRUE, if the invitation could be sent,
+      otherwise FALSE.
+    </Word>
+    <Word name="osKickAvatar">
+      void osKickAvatar(string FirstName, string SurName, string alert);
+    </Word>
+    <Word name="osOwnerSaveAppearance">
+      key osOwnerSaveAppearance(string notecard);
+
+      Save the owner's current appearance to a notecard in the prim's 
+      inventory. This includes body part data, clothing items and 
+      attachments. If a notecard with the same name already exists then 
+      it is replaced. The owner must be present in the region when this 
+      function is invoked. The baked textures for the owner (necessary 
+      to recreate appearance on the NPC) are saved permanently.
+    </Word>
+    <Word name="osSetHealRate">
+      float osSetHealRate(key avatar, float healrate);
+
+      Sets the automatic healing rate in % per second.
+      Default heal rate is now around 0.5% per second.
+      A value of zero can disable automatic heal, current maximum 
+      value is 100 % per second.
+    </Word>
+    <Word name="osSetHealth">
+      float osSetHealth(string avatar, float health);
+
+      Sets an avatars health by key to the specified float value.
+    </Word>
+    <Word name="osTeleportAgent">
+      void osTeleportAgent(key agent, integer regionX, integer regionY, vector position, vector lookat);
+      
+      void osTeleportAgent(key agent, string regionName, vector position, vector lookat);
+      
+      void osTeleportAgent(key agent, vector position, vector lookat);
+    </Word>
+    <Word name="osTeleportOwner">
+      void osTeleportOwner(integer regionX, integer regionY, vector position, vector lookat);
+      
+      void osTeleportOwner(string regionName, vector position, vector lookat);
+      
+      void osTeleportOwner(vector position, vector lookat);
+    </Word>
+    <Word name="osIsNpc">
+      integer osIsNpc(key npc);
+      
+      Returns NPC status on the provided key.
+      Returns TRUE (1) / FALSE (0) if key provided is an NPC.
+      Returns FALSE (0) if the key provided doesn't exist in
+      the scene.
+    </Word>
+    <Word name="osNpcCreate">
+      key osNpcCreate(string firstname, string lastname, vector position, string cloneFrom, [integer options]);
+
+      Creates an NPC named firstname lastname at position 
+      from avatar appearance resource cloneFrom.
+    </Word>
+    <Word name="osGetNpcList">
+      list osGetNpcList();
+      
+      Returns a strided list of the UUID, position, and name of each NPC
+      in the region.
+    </Word>
+    <Word name="osNpcGetPos">
+      vector osNpcGetPos(key npc);
+      
+      Return the current position of the NPC.
+    </Word>
+    <Word name="osNpcGetRot">
+      rotation osNpcGetRot(key npc);
+
+      Gets the rotation of the avatar. Only the rotation around the 
+      Z plane in Euler rotation (horizontal rotation) has any meaning.
+    </Word>
+    <Word name="osNpcGetOwner">
+      key osNpcGetOwner(key npc);
+
+      Gets the NPC's owner's UUID.
+    </Word>
+    <Word name="osNpcLoadAppearance">
+      void osNpcLoadAppearance(key npc, string notecard);
+
+      Load appearance from a notecard. This notecard 
+      must contain appearance data created with one of the save appearance
+      functions.
+    </Word>
+    <Word name="osNpcMoveTo">
+      void osNpcMoveTo(key npc, vector position);
+
+      Moves npc to the position.
+    </Word>
+    <Word name="osNpcMoveToTarget">
+      osNpcMoveToTarget(key npc, vector target, integer options);
+
+      Move the avatar to a given target over time. How the avatar 
+      will get there depends on the following options.
+      
+      OS_NPC_FLY - Fly the avatar to the given position. The avatar will 
+      not land unless the OS_NPC_LAND_AT_TARGET option is also given.
+      OS_NPC_NO_FLY - Do not fly to the target. The NPC will attempt to 
+      walk to the location. If it's up in the air then the avatar will 
+      keep bouncing hopeless until another move target is given or the move is stopped.
+      OS_NPC_LAND_AT_TARGET - If given and the avatar is flying, then it 
+      will land when it reaches the target. If OS_NPC_NO_FLY is given then 
+      this option has no effect.
+      OS_NPC_FLY and OS_NPC_NO_FLY are options that cannot be combined - the avatar
+      will end up doing one or the other. If you want the avatar to fly and land at
+      the target, then OS_NPC_LAND_AT_TARGET must be combined with OS_NPC_FLY.
+      OS_NPC_RUNNING - Run the avatar to the given position.
+    </Word>
+    <Word name="osNpcPlayAnimation">
+      void osNpcPlayAnimation(key npc, string animation);
+
+      Plays animation on the NPC identified by their key.
+    </Word>
+    <Word name="osNpcRemove">
+      void osNpcRemove(key npc);
+
+      Removes the NPC specified by key npc.
+    </Word>
+    <Word name="osNpcSaveAppearance">
+      key osNpcSaveAppearance(key npc, string notecard);
+
+      Save the NPC's current appearance to a notecard in the prim's 
+      inventory. This includes body part data, clothing items and 
+      attachments. If a notecard with the same name already exists then 
+      it is replaced. The avatar must be present in the region when this 
+      function is invoked. The baked textures for the avatar (necessary 
+      to recreate appearance) are saved permanently.
+    </Word>
+    <Word name="osNpcSay">
+      void osNpcSay(key npc, string message);
+      
+      void osNpcSay(key npc, integer channel, string message);
+
+      Npc says message.
+    </Word>
+    <Word name="osNpcSetProfileAbout">
+      void osNpcSetProfileAbout(key npc, string about);
+
+      Set about in created NPC's profile.
+    </Word>
+    <Word name="osNpcSetProfileImage">
+      void osNpcSetProfileImage(key npc, string image);
+
+      Set image in created NPC's profile.
+      One can use UUID of the texture or name of texture included
+      in prim's inventory.
+    </Word>
+    <Word name="osNpcSetRot">
+      void osNpcSetRot(key npc, rotation rot);
+
+      Set the rotation of the avatar. Only setting the rotation 
+      in the Z plane in Euler rotation will have any meaningful effect 
+      (turning the avatar to point in one direction or another). 
+      Setting X or Y Euler values will result in the avatar 
+      rotating in an undefined manner.
+    </Word>
+    <Word name="osNpcShout">
+      void osNpcShout(key npc, int channel, string message);
+
+      Npc shouts message on the given channel.
+    </Word>
+    <Word name="osNpcSit">
+      void osNpcSit(key npc, key target, integer options);
+
+      Makes an NPC sit on an object.
+      Options - OS_NPC_SIT_NOW. Makes the npc instantly sit on 
+      the prim if possible. This is the only option available and
+      is currently always on no matter what is actually specified in
+      the options field.
+      If the prim has a sit target then sit always succeeds no matter
+      the distance between the NPC and the prim.
+      If the prim has no sit target then
+      If the prim is within 10 meters of the NPC then the sit will
+      always succeed.
+      At OpenSimulator 0.7.5 and later, if the prim is further than 
+      10 meters away then nothing will happen.
+      Before OpenSimulator 0.7.5, if the prim is further than 10 meters
+      away then the avatar will attempt to walk over to the prim 
+      but will not sit when it reaches it.
+    </Word>
+    <Word name="osNpcStand">
+      void osNpcStand(key npc);
+
+      Makes a sitting NPC stand up.
+    </Word>
+    <Word name="osNpcStopMoveToTarget">
+      void osNpcStopMoveToTarget(key npc);
+      
+      Stop a current move to a target.
+    </Word>
+    <Word name="osNpcStopAnimation">
+      void osNpcStopAnimation(key npc, string animation);
+      
+      Stops animation on being played by the NPC identified by their key.
+    </Word>
+    <Word name="osNpcTouch">
+      void osNpcTouch(key npcKey, key objectKey, integer linkNum);
+
+      Only LINK_THIS and LINK_ROOT are valid for this function. Any other
+      of the LINK_* constants will be ignored and no touch takes place.
+      1. If linkNum is LINK_THIS then the prim with the key objectKey will 
+      be touched.
+      2. If linkNum is LINK_ROOT or 0 then the root prim of the link set 
+      will be touched, even if the root prim key is not objectKey
+      3. For any other value of linkNum a search will be made through 
+      the linkset for a prim with that link number. If found that prim 
+      will be touched. If no prim is found for that link number the 
+      function fails silently and no touch takes place.
+      The touch is fired as if it came from an old client that does not 
+      support face touch detection or (probably) one of the text clients 
+      like Metabolt. Since there is no mouse the llDetectedTouch* 
+      functions will return the defaults (See the LSL Wiki for full details)
+      
+      llDetectedTouchBinormal TOUCH_INVALID_VECTOR
+      llDetectedTouchFace TOUCH_INVALID_FACE
+      llDetectedTouchNormal TOUCH_INVALID_VECTOR
+      llDetectedTouchPos TOUCH_INVALID_VECTOR
+      llDetectedTouchST TOUCH_INVALID_TEXCOORD
+      llDetectedTouchUV TOUCH_INVALID_TEXCOORD
+      
+      If the prim is not found or would not allow a normal client to touch 
+      it then this function fails silently.
+    </Word>
+    <Word name="osNpcWhisper">
+      void osNpcWhisper(key npc, int channel, string message);
+      
+      Npc whispers message on the given channel.
+    </Word>
+    <Word name="osClearInertia">
+      void osClearInertia();
+
+      Clears the effect of osSetInertia* functions. Link set total mass, 
+      center of mass and inertia will be the values estimated by default 
+      from the link set parts.
+    </Word>
+    <Word name="osForceBreakAllLinks">
+      void osForceBreakAllLinks();
+
+      Identical to llBreakAllLinks() except that it doesn't require the
+      link permission to be granted.
+    </Word>
+    <Word name="osForceBreakLink">
+      void osForceBreakLink(integer link);
+      
+      Identical to llBreakLink(integer link) except that it doesn't 
+      require the link permission to be granted.
+    </Word>
+    <Word name="osForceCreateLink">
+      osForceCreateLink(key target, int parent);
+      
+      Idential to llCreateLink() except that it doesn't require the 
+      link permission to be granted.
+    </Word>
+    <Word name="osGetInertiaData">
+      list osGetInertiaData();
+    </Word>
+    <Word name="osGetInventoryDesc">
+      string osGetInventoryDesc(string name);
+      
+      Returns a string that is the description of inventory item "name".
+    </Word>
+    <Word name="osGetLinkNumber">
+      integer osGetLinkNumber(string name);
+      
+      Returns the link number of the prim or sitting avatar with name 
+      "name" on the link set or -1 if the name is not found.
+      If names are not unique, the one with lower link number should be return.
+      Names "Object" and "Primitive" are ignored
+    </Word>
+    <Word name="osGetLinkPrimitiveParams">
+      list osGetLinkPrimitiveParams(integer linknumber, list rules);
+      
+      Returns the primitive parameters for the linkset prim or prims 
+      specified by linknumber. It is possible to use the linkset constants
+      (e.g. LINK_SET, LINK_ALL_CHILDREN) in place of a specific link number,
+      in which case the requested parameters of each relevant prim are 
+      concatenated to the end of the list. Otherwise, the usage is identical
+      to llGetPrimitiveParams().
+    </Word>
+    <Word name="osGetPrimitiveParams">
+      list osGetPrimitiveParams(key prim, list rules);
+
+      Gets the parameters for the prim specified by prim_uuid 
+      according to rules.
+      This function has the same behave as llGetPrimitiveParams 
+      except you can specify target prim anywhere in the scene.
+      For general information about rules, see llGetPrimitiveParams
+      in SecondLife Wiki.
+      Check llGetPrimitiveParams implementation status to see the 
+      differences from llGetPrimitiveParams.
+      If there is no prim_uuid prim in the scene, or the owner of the 
+      target prim is differ from the owner of the scripted prim,
+      it will fail without error.
+
+      NOTE: As of OpenSimulator 0.7.1.1, this function doesn't work, results in 
+      script error(#5560). It will able to do so on 0.7.2-dev or later.
+    </Word>
+    <Word name="osGetRezzingObject">
+      string osGetRezzingObject();
+      
+      Get the key of the object that rezzed this object.
+      Will return NULL_KEY if rezzed by agent or otherwise unknown source.
+      Should only be reliable inside the on_rez event.
+    </Word>
+    <Word name="osIsUUID">
+      integer osIsUUID(string thing);
+      
+      Returns 1 if the supplied string is a valid UUID, returns 0 otherwise.
+    </Word>
+    <Word name="osListenRegex">
+      integer osListenRegex(integer channelID, string name, string ID, string msg, integer regexBitfield);
+
+      Allows the server to filter listen events by regular expressions. name or message parameters can be
+      regular expressions, these are behaviours are controlled via the regexBitField parameter using the
+      constants OS_LISTEN_REGEX_NAME and OS_LISTEN_REGEX_MESSAGE.
+      If the regex strings are invalid, an error will be shouted on the debug channel.
+    </Word>
+    <Word name="osMessageAttachments">
+      void osMessageAttachments(key avatar, string message, list attachmentPoints, integer options);
+      
+      Sends a specified message to the specified avatar's attachments on the specified attachment points.
+      Behaves as osMessageObject, without the sending script needing to know the attachment keys in advance.
+    </Word>
+    <Word name="osMessageObject">
+      void osMessageObject(key objectUUID, string message);
+      
+      Where objectUUID = the UUID of the object you are messaging.
+      Where message = The String of data you want to send.
+      Sends a message to to object identified by the given UUID, a script 
+      in the object must implement the dataserver function the dataserver 
+      function is passed the ID of the calling function and a string message.
+    </Word>
+    <Word name="osSetInertia">
+      void osSetInertia(float mass, vector centerOfMass, vector principalInertiaScaled, rotation InertiaRot);
+
+      Allows creators to set the major physics dynamic proprieties, replacing the values estimated from the
+      linkset parts. Call osClearInertia to undo.
+
+      Mass - total mass of link set
+      centerOfMass - location of center of mass relative to root prim in local frame
+      principalInertiaScaled - moment of inertia relative to principal axis and center of mass,
+      Ixx, Iyy, Izz divided by mass so it can be changed independently
+      InertiaRot - rotation of the inertia, relative to local axis
+    </Word>
+    <Word name="osSetInertiaAsBox">
+      void osSetInertiaAsBox(float mass, vector boxSize, vector centerOfMass, rotation rot);
+      
+      Allows creators to set the link set total mass, center of mass and moment of inertia.
+      Moment of inertia will be the one of a box of size boxSize, placed at the center of 
+      mass and rotated by rot in the root prim local frame. Call osClearInertia to undo.
+
+      Mass - new total mass of link set
+      centerOfMass - new location of center of mass relative to root prim in local frame
+      boxSize - size of the box used to calculate the new inertia
+      rot - the rotation of that box in local frame
+    </Word>
+    <Word name="osSetInertiaAsCylinder">
+      void osSetInertiaAsCylinder(float mass, float radius, float length, vector centerOfMass, rotation rot);
+      
+      Allows creators to set the link set total mass, center of mass and moment of inertia. Moment of 
+      inertia will be the one of a cylinder of radius and length, placed at the center of mass and rotated 
+      by rot in the root prim local frame. Call osClearInertia to undo.
+      
+      Mass - new total mass of link set
+      centerOfMass - new location of center of mass relative to root prim in local frame
+      radius - radius of a cylinder used to calculate the new inertia
+      length - length of a cylinder used to calculate the new inertia
+      rot - rotation of the cylinder in the root prim local frame.
+    </Word>
+    <Word name="osSetInertiaAsSphere">
+      void osSetInertiaAsSphere(float mass, float radius, vector centerOfMass);
+      
+      Allows creators to set the link set total mass, center of mass and 
+      moment of inertia. Moment of inertia will be the one of a sphere of 
+      radius radius, placed at the center of mass. Call osClearInertia to undo.
+      
+      Mass - new total mass of link set
+      centerOfMass - new location of center of mass relative to root prim in local frame
+      radius - radius of a sphere used to calculate the new inertia
+    </Word>
+    <Word name="osSetPrimitiveParams">
+      void osSetPrimitiveParams(key prim, list rules);
+      
+      Sets the parameters for the prim specified by prim_uuid according to rules.
+      This function has the same behave as llSetPrimitiveParams except you can 
+      specify target prim anywhere in the scene.
+      For general information about rules, see llSetPrimitiveParams in 
+      SecondLife Wiki. Check llSetPrimitiveParams implementation status to see 
+      the differences from llSetPrimitiveParams.
+      If there is no prim_uuid prim in the scene, or the owner of the target prim 
+      is differ from the owner of the scripted prim, it will fail without error.
+      
+      NOTE: As of OpenSimulator 0.7.1.1, this function don't work, results in 
+      script error (#5560). This is fixed on OpenSimulator 0.7.2 and later.
+    </Word>
+    <Word name="osSetProjectionParams">
+      void osSetProjectionParams(integer projection, key texture, float fov, float focus, float amb);
+      
+      void osSetProjectionParams(key prim, integer projection, key texture, float fov, float focus, float amb);
+
+      2 Variations possible.
+      bool = TRUE / FALSE.
+      double = float.
+    </Word>
+    <Word name="osSetSpeed">
+      void osSetSpeed(string UUID, float SpeedModifier);
+      
+      This allows for users to speed themselves up. It multiplies the running, 
+      walking, rotating and flying of the avatar.
+      The default value for SpeedModifier is 1.0.
+      To be precise, it affects physical velocity. If you specify too large or 
+      too small number for SpeedModifier, the target will be unmovable, showing 
+      the following message in the region console:
+      [PHYSICS]: Got a NaN velocity from Scene in a Character
+    </Word>
+    <Word name="osTeleportObject">
+      integer osTeleportObject(key objectUUID, vector targetPos, rotation rot, int flags);
+
+      objectUUID - the id of the linkset to teleport
+      targetPos - target position
+      rot - a rotation
+      
+      Flags:
+      OSTPOBJ_NONE it is just 0
+      OSTPOBJ_STOPATTARRGET object is stopped at destination
+      OSTPOBJ_STOPONFAIL stops at start point if tp fails (still does nothing)
+      OSTPOBJ_SETROT the rotation is the final object rotation, otherwise is a added rotation
+    </Word>
+    <Word name="osDrawEllipse">
+      string osDrawEllipse(string drawList, integer width, integer height);
+      
+      Appends an Ellipse drawing command to the string provided in drawList 
+      and returns the result. The ellipse is drawn with the current pen 
+      size and color, with the specified width and height (in pixels), 
+      centered on a point which is (width/2) pixels to the right of the 
+      pen's current X position, and (height/2) pixels below the pen's 
+      current Y position. After the ellipse is drawn, the width and height 
+      values are added to the pen's X and Y position, respectively.
+    </Word>
+    <Word name="osDrawFilledEllipse">
+      string osDrawFilledEllipse(string drawList, integer width, integer height);
+      
+      Appends an FillEllipse drawing command to the string provided in drawList 
+      and returns the result.
+      The filled ellipse is drawn with the current pen size and color, with 
+      the specified width and height (in pixels), centered on a point which is 
+      (width/2) pixels to the right of the pen's current X position, and
+      (height/2) pixels below the pen's current Y position. After the filled 
+      ellipse is drawn, the width and height values are added to the pen's X 
+      and Y position, respectively.
+    </Word>
+    <Word name="osDrawFilledPolygon">
+      string osDrawFilledPolygon(string drawList, list xpoints, list ypoints);
+      
+      Appends a FillPolygon drawing command to the string provided in drawList 
+      and returns the result. This fills in the interior of the specified polygon.
+      The polygon is drawn with the current pen size and filled with the 
+      current color. So (x[0],y[0]),(x[1],y[1]),(x[2],y[2]) would be an example 
+      of a polygon.
+    </Word>
+    <Word name="osDrawFilledRectangle">
+      string osDrawFilledRectangle(string drawList, integer width, integer height);
+      
+      Appends a FillRectangle drawing command to the string provided in drawList 
+      and returns the result.
+      The filled rectangle is drawn with the current pen size and color, at the 
+      specified width and height (in pixels), with the upper left corner of the 
+      rectangle placed at the pen's current position. After the rectangle is drawn, 
+      the width and height values are added to the pen's X and Y position, 
+      respectively (that is, the pen is positioned at the lower right corner of 
+      the rectangle.
+    </Word>
+    <Word name="osDrawImage">
+      string osDrawImage(string drawList, integer width, integer height, string imageUrl);
+      
+      Appends an Image drawing command to the string provided in drawList and returns 
+      the result. Retrieves an image specified by the imageUrl parameter and draws it 
+      at the specified height and width, with the upper left corner of the image placed 
+      at the pen's current position. After the image is drawn, the width and height 
+      values are added to the pen's X and Y position, respectively (that is, the pen's
+      current position is set to the lower right corner of the image).
+      If imageUrl points to an invalid location, an image type not supported by libgdi, 
+      or a non-image MIME type, nothing is drawn. If either or both of the width or 
+      height parameters are zero or negative, nothing is drawn, but the image is still 
+      retrieved.
+    </Word>
+    <Word name="osDrawLine">
+      string osDrawLine(string drawList, integer startX, integer startY, integer endX, integer endY);
+      
+      string osDrawLine(string drawList, integer endX, integer endY);
+
+      Depending on the form, appends a LineTo drawing command, or MoveTo and LineTo commands, to the
+      string provided in drawList and returns the result.
+      In the longer form, draws a line using the current pen size and color from to the coordinates 
+      indicated by startX and startY to the coordinates indicated by endX and endY.
+      In the shorter form, draws a line using the current pen size and color from the pen's current 
+      position to the coordinates indicated by endX and endY.
+      After the line is drawn, the pen's X and Y coordinates are set to endX and endY, respectively.
+    </Word>
+    <Word name="osDrawPolygon">
+      string osDrawPolygon(string drawList, list xpoints, list ypoints);
+      
+      Appends a Polygon drawing command to the string provided in drawList 
+      and returns the result. The polygon is drawn with the current pen 
+      size and color on the x,y point pairs that comes from LSL list.
+      It will be converted into the drawing command 
+      "Polygon x[0],y[0],x[1],y[1],x[2],y[2],...".
+    </Word>
+    <Word name="osDrawRectangle">
+      string osDrawRectangle(string drawList, integer width, integer height);
+      
+      Appends a Rectangle drawing command to the string provided in drawList 
+      and returns the result.
+      The outline of a rectangle is drawn with the current pen size and color,
+      at the specified width and height (in pixels), with the upper left 
+      corner of the rectangle placed at the pen's current position. After the 
+      rectangle is drawn, the width and height values are added to the pen's X 
+      and Y position, respectively (that is, the pen is positioned at the 
+      lower right corner of the rectangle.
+    </Word>
+    <Word name="osDrawResetTransform">
+      string osDrawResetTransform(string drawList);
+    </Word>
+    <Word name="osDrawRotationTransform">
+      string osDrawRotationTransform(string drawList, float x);
+    </Word>
+    <Word name="osDrawScaleTransform">
+      string osDrawScaleTransform(string drawList, float x, float y);
+    </Word>
+    <Word name="osDrawText">
+      string osDrawText(string drawList, string text);
+      
+      Appends a Text drawing command to the string provided in drawList and returns 
+      the result. The specified text will be drawn with the current pen color, 
+      using the currently defined font, size and properties (which default to 
+      regular 14-point Arial). The text will be drawn with the upper left corner of 
+      the first glyph at the pen's current position (however, note that glyphs 
+      within the font may be defined to extend to the left of their origin point).
+      If you need to include a semicolon in the text to be displayed, you will need 
+      to directly manipulate the draw list string using the drawing commands rather 
+      than the dynamic texture convenience functions, then specify an alternate data 
+      delimiter in the extraParams parameter to the osSetDynamicTexture* functions. 
+      The convenience functions (including osDrawImage) are hardcoded to terminate 
+      each command with a semicolon. The text may or may not be antialiased, 
+      depending on the system settings of the machine upon which the simulator is 
+      running. Furthermore, if the system is configured to use LCD subpixel 
+      antialiasing (e.g. ClearType), the text may have colored fringes on the smoothed 
+      pixels, which may result in a less than optimum image.
+      Please note that the pen position is not updated after this call.
+    </Word>
+    <Word name="osDrawTranslationTransform">
+      string osDrawTranslationTransform(string drawList, float x, float y);
+    </Word>
+    <Word name="osGetDrawStringSize">
+      vector osGetDrawStringSize(string contentType, string text, string fontName, integer fontSize);
+      
+      Returns a vector containing the horizontal and vertical dimensions in pixels of the specified 
+      text, if drawn in the specified font and at the specified point size. The horizontal extent 
+      is returned in the .x component of the vector, and the vertical extent is returned in .y. 
+      The .z component is not used.
+      The contentType parameter should be "vector".
+      If the osSetFontSize() function has not been used, and neither the FontName nor FontProp 
+      commands have been added to the draw list, specify "Arial" as the font name, and 14 as the font size.
+    </Word>
+    <Word name="osMovePen">
+      string osMovePen(string drawList, integer x, integer y);
+      
+      Appends a MoveTo drawing command to the string provided in
+      drawList and returns the result.
+      This moves the pen's location to the coordinates specified 
+      by the x and y parameters, without drawing anything.
+    </Word>
+    <Word name="osSetFontName">
+      string osSetFontName(string drawList, string fontName);
+    </Word>
+    <Word name="osSetFontSize">
+      string osSetFontSize(string drawList, integer fontSize);
+      
+      Appends a FontSize drawing command to the string provided in 
+      drawList and returns the result.
+      Sets the size of the font used by subsequent osDrawTextText() 
+      calls. The fontSize parameter represents the font height in points.
+      Please note that the font height is given in points, not in 
+      pixels. The resulting size of the font in pixels may vary 
+      depending on the system settings, specifically the display 
+      system's "dots per inch" metric. A system set to 96dpi will 
+      produce differently sized text than a system set to 120dpi. If 
+      precise text size is required, consider using the 
+      osGetDrawStringSize() function to help calculate the proper 
+      fontSize value to use.
+      If a negative fontSize parameter is specified, any text 
+      subsequently added will be displayed upside down and to the 
+      right of the point of origin.
+      Please note that the pen position is not updated after this call.
+    </Word>
+    <Word name="osSetPenCap">
+      string osSetPenCap(string drawList, string direction, string type);
+      
+      *** This method works only on Windows for now. libgdi+ has a
+      fake implementation and will not draw it. ***
+
+      Appends a PenCap drawing command to the string provided in drawList 
+      and returns the result. This sets the pen's start or/and end cap to 
+      either "diamond", "arrow", "round", or default "flat" shape. 
+      It can set them in the "end" or "start" of the line, or "both". 
+      
+      Possible values are (case insensitive):
+      Type:
+      "arrow"
+      "diamond"
+      "round"
+      "flat"
+      Direction:
+      "start"
+      "end"
+      "both"
+    </Word>
+    <Word name="osSetPenColor">
+      string osSetPenColor(string drawList, string color);
+      
+      Appends a PenColor drawing command to the string provided in drawList 
+      and returns the result.
+      This sets the pen's drawing color to either the specified named .NET color 
+      or to a 32-bit color value (formatted as eight hexadecimal digits in 
+      the format aarrggbb, representing the eight-bit alpha, red, green and 
+      blue channels).
+      For full opacity, use an alpha value of FF (e.g. FFFF0000 for red); 
+      for varying degrees of transparency, reduce the alpha value 
+      (e.g. 800000FF for semi-transparent blue).
+      The color names and hexadecimal color representations are not case-sensitive.
+    </Word>
+    <Word name="osSetPenSize">
+      string osSetPenSize(string drawList, integer penSize);
+      
+      Appends a PenSize drawing command to the string provided in drawList 
+      and returns the result.
+      This sets the pen size to a square of penSize pixels by penSize pixels. 
+      If penSize is an odd number, the pen will be exactly centered on the 
+      coordinates provided in the various drawing commands; if it is an even 
+      number, it will be centered slightly higher and to the left of the 
+      actual coordinates.
+    </Word>
+    <Word name="osSetDynamicTextureData">
+      string osSetDynamicTextureData(string dynamicID, string contentType, string data, string extraParams, integer timer);
+      
+      Renders a dynamically created texture on the prim containing the script and returns the UUID of the newly created texture.
+      If you use this feature, you have to turn on any cache. If not, you'll see complete white texture. Flotsam cache performs 
+      better than cenome cache(default).
+    </Word>
+    <Word name="osSetDynamicTextureDataBlend">
+      string osSetDynamicTextureDataBlend(string dynamicID, string contentType, string data, string extraParams, integer timer, integer alpha);
+    </Word>
+    <Word name="osSetDynamicTextureDataBlendFace">
+      string osSetDynamicTextureDataBlendFace(string dynamicID, string contentType, string data, string extraParams, integer blend, integer disp, integer timer, integer alpha, integer face);
+      
+      Returns UUID of the generated texture. Intended to be used with subsequent calls to osSetDynamicTextureXXXX functions in order to modify the texture.
+    </Word>
+    <Word name="osSetDynamicTextureDataFace">
+      string osSetDynamicTextureDataFace(string dynamicID, string contentType, string data, string extraParams, int timer, int face);
+    </Word>
+    <Word name="osSetDynamicTextureURL">
+      string osSetDynamicTextureURL(string dynamicID, string contentType, string url, string extraParams, integer timer);
+      
+      Renders a web texture on the prim containing the script and returns the UUID of the newly created texture.
+      If you use this feature, you have to turn on any cache. If not, you'll see complete white texture. Flotsam cache 
+      performs better than cenome cache(default).
+    </Word>
+    <Word name="osSetDynamicTextureURLBlend">
+      string osSetDynamicTextureURLBlend(string dynamicID, string contentType, string url, string extraParams, integer timer, integer alpha);
+    </Word>
+    <Word name="osSetDynamicTextureURLBlendFace">
+      string osSetDynamicTextureURLBlendFace(string dynamicID, string contentType, string url, string extraParams, integer blend, integer disp, integer timer, integer alpha, integer face);
+    </Word>
+    <Word name="osGetNotecard">
+      string osGetNotecard(string name);
+      
+      This function directly reads the entire contents of a notecard if
+      it exists within the task inventory, and dumps it into a string. 
+      It skips the dataserver event, thereby reducing code complexity.
+    </Word>
+    <Word name="osGetNotecardLine">
+      string osGetNotecardLine(string name, integer line);
+      
+      This function directly reads a line of text from the 
+      specified notecard, if it exists within the task inventory, 
+      and returns the text as a string. It skips the dataserver 
+      event, thereby reducing code complexity.
+    </Word>
+    <Word name="osGetNumberOfNotecardLines">
+      integer osGetNumberOfNotecardLines(string name);
+      
+      This function directly reads how many lines a notecard 
+      has if the specified notecard exists within the task 
+      inventory, bypassing the dataserver event to reduce 
+      code complexity.
+    </Word>
+    <Word name="osMakeNotecard">
+      void osMakeNotecard(string notecardName, list contents);
+      
+      void osMakeNotecard(string notecardName, string contents);
+
+      Creates a notecard with text in the prim that contains the
+      script. Contents can be either a list or a string.
+    </Word>
+    <Word name="osRequestSecureURL">
+      void osRequestSecureURL(list options);
+      
+      Requests one HTTPS:// url (opensim version 0.9 or over)
+      Option supported : "allowXss" - Add 'Access-Control-Allow-Origin: *' to response header
+    </Word>
+    <Word name="osRequestURL">
+      void osRequestURL(list options);
+      
+      Requests one HTTP:// url (opensim version 0.9 or over)
+      Option supported : "allowXss" - Add 'Access-Control-Allow-Origin: *' to response header
+    </Word>
+    <Word name="osParcelJoin">
+      void osParcelJoin(vector pos1, vector pos2);
+      
+      Joins two adjacent parcels within the same region.
+    </Word>
+    <Word name="osParcelSubdivide">
+      void osParcelSubdivide(vector pos1, vector pos2);
+      
+      Subdivides a parcel into two adjacent parcels within the same region.
+    </Word>
+    <Word name="osSetParcelDetails">
+      void osSetParcelDetails(vector pos, list rules);
+      
+      This function is the counterpart to llGetParcelDetails. 
+      Currently PARCEL_DETAILS_NAME, PARCEL_DETAILS_DESC, 
+      PARCEL_DETAILS_OWNER, PARCEL_DETAILS_GROUP, 
+      PARCEL_DETAILS_CLAIMDATE are implemented. 
+      Note that the threat levels for PARCEL_DETAILS_NAME 
+      and PARCEL_DETAILS_DESC are "High", and those for 
+      PARCEL_DETAILS_OWNER, PARCEL_DETAILS_GROUP and 
+      PARCEL_DETAILS_CLAIMDATE are "VeryHigh".
+    </Word>
+    <Word name="osGetTerrainHeight">
+      float osGetTerrainHeight(integer x, integer y);
+    </Word>
+    <Word name="osSetTerrainHeight">
+      integer osSetTerrainHeight(integer x, integer y, float val);
+    </Word>
+    <Word name="osSetTerrainTexture">
+      void osSetTerrainTexture(integer level, key texture);
+      
+      Set the terrain texture of the estate to the texture 
+      given as key. The level can be 0, 1, 2 or 3.
+    </Word>
+    <Word name="osSetTerrainTextureHeight">
+      void osSetTerrainTextureHeight(integer corner, float low, float high);
+      
+      Set the terrain texture height of the estate. The level can be 0, 1, 2 or 3.
+      The values low and high are float values for the altitude measured in meters.
+    </Word>
+    <Word name="osTerrainFlush">
+      void osTerrainFlush();
+      
+      Function updates terrain changes to OpenSimulator database. 
+      This should be called after all the terrain-changes have 
+      been done to update Terrain Data.
+    </Word>
+    <Word name="osGetCurrentSunHour">
+      float osGetCurrentSunHour();
+      
+      Returns a float value of the current sun hour (24 hour clock). Hour 0 is sunrise.
+    </Word>
+    <Word name="osGetSunParam">
+      float osGetSunParam(string param);
+    </Word>
+    <Word name="osGetWindParam">
+      float osGetWindParam(string plugin, string param);
+      
+      Gets the value of param property for plugin module.
+    </Word>
+    <Word name="osSetEstateSunSettings">
+      void osSetEstateSunSettings(integer sunFixed, float sunHour);
+      
+      This function allows for an estate owner or manager to change 
+      the sun settings for the entire estate.
+    </Word>
+    <Word name="osSetRegionSunSettings">
+      void osSetRegionSunSettings(integer useEstateSun, integer sunFixed, float sunHour);
+      
+      Sets the Sun parameters for the Region.
+      The useEstateSun flag enables/disables synchronization with the Sun settings for the Estate.
+      sunFixed determines whether the Sun will remain fixed in place or proceed through its cycle.
+      sunHour determines the time of day the Sun will be set to.
+    </Word>
+    <Word name="osSetRegionWaterHeight">
+      void osSetRegionWaterHeight(float height);
+      
+      Sets the water height for the current region.
+    </Word>
+    <Word name="osSetSunParam">
+      void osSetSunParam(string param, float value);
+    </Word>
+    <Word name="osSetWindParam">
+      void osSetWindParam(string plugin, string param, float value);
+
+      Sets value of param property for plugin module.
+
+      See http://opensimulator.org/wiki/OsSetWindParam for the available parameters.
+    </Word>
+    <Word name="osWindActiveModelPluginName">
+      string osWindActiveModelPluginName();
+      
+      Gets active wind plugin name, specified by "wind_plugin"
+      in OpenSim.ini ("SimpleRandomWind" or "ConfigurableWind").
+    </Word>
+    <Word name="osCheckODE">
+      integer osCheckODE();
+      
+      That it checks if physics engine is legacy ODE 
+      and returns 1 ( TRUE ) it is, or 0 ( FALSE ) if not.
+    </Word>
+    <Word name="osGetGridCustom">
+      string osGetGridCustom(string key);
+      
+      Returns the value of the GridInfo key as a string.
+    </Word>
+    <Word name="osGetGridGatekeeperURI">
+      string osGetGridGatekeeperURI();
+      
+      Returns the current grid's Gatekeeper URI as a string.
+    </Word>
+    <Word name="osGetGridHomeURI">
+      string osGetGridHomeURI();
+      
+      Returns the current grid's home URI as a string.
+    </Word>
+    <Word name="osGetGridLoginURI">
+      string osGetGridLoginURI();
+      
+      Returns the current grid's login URI as a string.
+    </Word>
+    <Word name="osGetGridName">
+      string osGetGridName();
+      
+      Returns the current grid's name as a string.
+    </Word>
+    <Word name="osGetGridNick">
+      string osGetGridNick();
+      
+      Returns the current grid's nickname as a string.
+    </Word>
+    <Word name="osGetMapTexture">
+      key osGetMapTexture();
+      
+      Returns the UUID of the map texture of the current region.
+    </Word>
+    <Word name="osGetPhysicsEngineName">
+      string osGetPhysicsEngineName();
+      
+      This function returns a string containing the name 
+      and version number of the physics engine.
+    </Word>
+    <Word name="osGetPhysicsEngineType">
+      string osGetPhysicsEngineType();
+      
+      This function returns a string containing the name of the Physics Engine.
+    </Word>
+    <Word name="osGetRegionMapTexture">
+      key osGetRegionMapTexture(string regionName);
+      
+      This function retrieves the UUID of the texture used to 
+      represent the named region on the world map, and returns it.
+      Using this function, you can place the map texture directly 
+      onto a prim.
+    </Word>
+    <Word name="osGetRegionSize">
+      vector osGetRegionSize();
+      
+      Returns the size of the region in meters.
+      Usually this function returns 256x256. However, when called 
+      in a var/mega region it returns the size of the entire simulator.
+    </Word>
+    <Word name="osGetRegionStats">
+      list osGetRegionStats();
+      
+      Returns a list of float values representing a number of region 
+      statistics (many of the values shown in the "Stats Bar" of 
+      LL-based clients). Provides similar functionality to llGetRegionFPS() 
+      and llGetRegionTimeDilation(), but returns 21 statistics simultaneously.
+    </Word>
+    <Word name="osGetScriptEngineName">
+      string osGetScriptEngineName();
+      
+      Returns the name of the script engine which is currently enabled on the server.
+    </Word>
+    <Word name="osGetSimulatorMemory">
+      integer osGetSimulatorMemory();
+    </Word>
+    <Word name="osGetSimulatorVersion">
+      string osGetSimulatorVersion();
+      
+      This function returns a string containing the current simulator version.
+    </Word>
+    <Word name="osLoadedCreationDate">
+      string osLoadedCreationDate();
+      
+      This function returns a string containing the date that a sim 
+      was first created. An example of the string returned is 
+      "Monday, December 07, 2009". It will return empty string if the 
+      region hasn't been created by oar import, or the region 
+      uses SQLite for region database.
+    </Word>
+    <Word name="osLoadedCreationID">
+      string osLoadedCreationID();
+      
+      This function returns a string containing the UUID that a 
+      sim was originally created with.
+      It will return empty string if the region hasn't been created 
+      by oar import, or the region uses SQLite as region database.
+    </Word>
+    <Word name="osLoadedCreationTime">
+      string osLoadedCreationTime();
+      
+      This function returns a string containing the time that a sim 
+      was first created. An example of the string returned is "2:06:48 AM".
+      It will return empty string if the region hasn't been created 
+      by oar import, or the region uses SQLite for region database.
+    </Word>
+    <Word name="osConsoleCommand">
+      integer osConsoleCommand(string command);
+      
+      This function allows an LSL script to directly execute a command 
+      to opensim's console. Even if the function is available, only 
+      administrators/gods can successfully execute it.
+      In addition, one can further restrict this function to only 
+      certain administrators/gods. See Threat level for more information 
+      on how to do this.
+      If the script owner does have the necessary permissions to call 
+      this function, then they can do anything someone with direct access 
+      to the command console could do, such as changing the 
+      avatar passwords, deleting sims, changing the terrain, etc.
+      This command represents the highest security threat of any OSSL 
+      function, giving it a threat level of Severe.
+      
+      Do not use or allow this function unless you are absolutely 
+      sure of what you're doing!
+    </Word>
+    <Word name="osRegionNotice">
+      void osRegionNotice(string msg);
+      
+      Sends a region notice to the entire current region.
+    </Word>
+    <Word name="osRegionRestart">
+      integer osRegionRestart(float seconds);
+      
+      Restarts a region after a specified timeout. Only estate managers 
+      and administrators can successfully execute this function.
+    </Word>
+    <Word name="osSetParcelMediaURL">
+      void osSetParcelMediaURL(string url);
+      
+      Sets the Media URL for the parcel the scripted object is in.
+    </Word>
+    <Word name="osSetParcelSIPAddress">
+      void osSetParcelSIPAddress(string SIPAddress);
+    </Word>
+    <Word name="osSetPrimFloatOnWater">
+      void osSetPrimFloatOnWater(integer float);
+    </Word>
+    <Word name="osGrantScriptPermissions">
+      void osGrantScriptPermissions(key allowed_key, string function);
+      
+      Dynamically allow ossl execution to owner/creator/group by function name.
+    </Word>
+    <Word name="osRevokeScriptPermissions">
+      void osRevokeScriptPermissions(key revoked_key, string function);
+      
+      Dynamically allow/disallow ossl execution to owner/creator/group by function name.
+    </Word>
+    <Word name="osCollisionSound">
+      void osCollisionSound(string impact_sound, double impact_volume);
+      
+      Sets collision sound to impact_sound with specified volume.
+    </Word>
+    <Word name="osDie">
+      float osDie(key objectUUID);
+      
+      Deletes an object depending on the target uuid. 
+      Note : Only allow osDie() on objects rezzed by the 
+      script prim Group (linkset) or on it self.
+    </Word>
+    <Word name="osFormatString">
+      string osFormatString(string format,list params);
+      
+      Return the string with parameters substituted into it. These parameters 
+      need to be incrementing numbers, starting at zero, and surrounded by 
+      single accolades (also known as curly brackets).
+    </Word>
+    <Word name="osKey2Name">
+      string osKey2Name(key id);
+      
+      Returns the avatar's name, based on their UUID.
+    </Word>
+    <Word name="osList2Double">
+      float osList2Double(list src, integer index);
+      
+      This function converts a value in the specified index of the list src 
+      to the double data type. However, OSSL does not have a double data type. 
+    </Word>
+    <Word name="osMatchString">
+      list osMatchString(string src, string pattern, integer start);
+      
+      This function returns a list containing the matches from the given string.
+    </Word>
+    <Word name="osMax">
+      float osMax(Double a, Double b);
+      
+      Returns the larger of two numbers. Wraps to system Math.Max()
+    </Word>
+    <Word name="osMin">
+      float osMin(Double a, Double b);
+      
+      Returns the smaller of two numbers. Wraps to the system Math.Min() function.
+    </Word>
+    <Word name="osParseJSON">
+      Hashtable osParseJSON(string JSON);
+    </Word>
+    <Word name="osParseJSONNew">
+      osParseJSONNew(string JSON);
+      
+      Returns osd deserialized JSON to object.
+    </Word>
+    <Word name="osReplaceString">
+      string osReplaceString(string src, string pattern, string replace, int count, int start);
+      
+      This function is for regular expression-based string replacement. The count parameter 
+      specifies the total number of replacements to make where -1 makes all possible replacements.
+    </Word>
+    <Word name="osRegexIsMatch">
+      integer osRegexIsMatch(string input, string pattern);
+      
+      Returns 1 if the input string matches the regular expression pattern.
+    </Word>
+    <Word name="osSetContentType">
+      void osSetContentType(key id, string type);
+      
+      Sets an arbitrary content return type for an llRequestUrl().
+    </Word>
+    <Word name="osSetStateEvents">
+      void osSetStateEvents(integer events);
+    </Word>
+    <Word name="osUnixTimeToTimestamp">
+      string osUnixTimeToTimestamp(integer epoch);
+      
+      This function allows an input Unix time to be converted to an llGetTimeStamp() 
+      format. Please note that there will be no second fractions. This is because 
+      the implementation works with seconds only.
+    </Word>
+    <Word name="osVolumeDetect">
+      void osVolumeDetect(integer detect);
+    </Word>
+  </Words>
+
+    <Words icon="Events" name="Appendix B. Events" color="#00A0A0" slcolor="#004D80">
 		Every state must have at least one handler. You can choose to
 		handle an event by defining one of the the reserved
 		event handlers named here.
