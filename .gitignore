@@ -3,3 +3,7 @@
 ################################################################################
 
 /bin
+/trunk/obj/Release
+/trunk/obj/Debug
+/trunk/.vs/lsleditor/v15
+/trunk/lsleditor.csproj.user
