@@ -1078,15 +1078,13 @@ namespace LSLEditor
 				if (this.IsMdiContainer) {
 					// this is set by any EditForm close
 					e.Cancel = this.CancelClosing;
-					return;
+				} else {
+					e.Cancel = !CloseAllOpenWindows();
 				}
 
-				if (this.SolutionExplorer != null & !this.SolutionExplorer.IsDisposed) {
+				if (!e.Cancel && this.SolutionExplorer != null && !this.SolutionExplorer.IsDisposed) {
 					this.SolutionExplorer.CloseSolution();
 				}
-
-				e.Cancel = !CloseAllOpenWindows();
-
 			} catch { }
 		}
 
