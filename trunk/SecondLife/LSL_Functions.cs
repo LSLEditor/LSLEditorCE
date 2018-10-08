@@ -283,7 +283,7 @@ namespace LSLEditor
 				}
 			}
 
-			Verbose(@"llCSV2List(""{0}"")={1}", sSource, lResult.ToVerboseString());
+			Verbose(@"llCSV2List(""{0}"")={1}", sSource, lResult);
 
 			return lResult;
 		}
@@ -291,7 +291,7 @@ namespace LSLEditor
 		public list llCastRay(vector vStart, vector vEnd, list lOptions)
 		{
 			list lResult = new list();
-			Verbose("llCastRay({0}, {1}, {2})={3}", vStart, vEnd, lOptions.ToVerboseString(), lResult.ToVerboseString());
+			Verbose("llCastRay({0}, {1}, {2})={3}", vStart, vEnd, lOptions, lResult);
 			return lResult;
 		}
 
@@ -357,7 +357,7 @@ namespace LSLEditor
 
 		public void llCreateCharacter(list lOptions)
 		{
-			Verbose("llCreateCharacter({0})", lOptions.ToVerboseString());
+			Verbose("llCreateCharacter({0})", lOptions);
 		}
 
 		public void llCreateLink(key kID, integer iSimulator)
@@ -399,7 +399,7 @@ namespace LSLEditor
 					lResult.Add(src[intI]);
 				}
 			}
-			Verbose(string.Format("llDeleteSubList({0}, {1}, {2})={3}", lSource.ToVerboseString(), iStart, iEnd, lResult.ToVerboseString()));
+			Verbose(string.Format("llDeleteSubList({0}, {1}, {2})={3}", lSource, iStart, iEnd, lResult));
 			return lResult;
 		}
 
@@ -555,7 +555,7 @@ namespace LSLEditor
 
 		public void llDialog(key kID, String sMessage, list lButtons, integer iChannel)
 		{
-			Verbose(@"llDialog({0}, ""{1}"", {2}, {3})", kID, sMessage, lButtons.ToVerboseString(), iChannel);
+			Verbose(@"llDialog({0}, ""{1}"", {2}, {3})", kID, sMessage, lButtons, iChannel);
 			host.llDialog(kID, sMessage, lButtons, iChannel);
 		}
 
@@ -574,7 +574,7 @@ namespace LSLEditor
 				}
 				result.Append(lSource[intI].ToString());
 			}
-			Verbose(@"llDumpList2String({0},""{1}"")=""{2}""", lSource.ToVerboseString(), sSeparator, result.ToString());
+			Verbose(@"llDumpList2String({0},""{1}"")=""{2}""", lSource, sSeparator, result.ToString());
 			return result.ToString();
 		}
 
@@ -637,7 +637,7 @@ namespace LSLEditor
 
 		public void llExecCharacterCmd(integer iCommand, list lOptions)
 		{
-			Verbose("llExecCharacterCmd({0}, {1})", iCommand, lOptions.ToVerboseString());
+			Verbose("llExecCharacterCmd({0}, {1})", iCommand, lOptions);
 		}
 
 		public Float llFabs(Float fValue)
@@ -649,7 +649,7 @@ namespace LSLEditor
 
 		public void llFleeFrom(vector vSource, Float fDistance, list lOptions)
 		{
-			Verbose("llFleeFrom({0}, {1}, {2})", vSource, fDistance, lOptions.ToVerboseString());
+			Verbose("llFleeFrom({0}, {1}, {2})", vSource, fDistance, lOptions);
 		}
 
 		public integer llFloor(Float fValue)
@@ -702,7 +702,7 @@ namespace LSLEditor
 		public list llGetAgentList(integer iScope, list lOptions)
 		{
 			list lAgents = new list();
-			Verbose("llGetAgentList({0}, [{1}])={2}", iScope, lOptions, lAgents.ToVerboseString());
+			Verbose("llGetAgentList({0}, [{1}])={2}", iScope, lOptions, lAgents);
 			return lAgents;
 		}
 
@@ -741,7 +741,7 @@ namespace LSLEditor
 		public list llGetAnimationList(key kID)
 		{
 			list lAnimationList = new list();
-			Verbose("llGetAnimationList({0})={1}", kID, lAnimationList.ToVerboseString());
+			Verbose("llGetAnimationList({0})={1}", kID, lAnimationList);
 			return lAnimationList;
 		}
 
@@ -762,7 +762,7 @@ namespace LSLEditor
 		public list llGetBoundingBox(key kID)
 		{
 			list lBoundingCoords = new list();
-			Verbose("llGetBoundingBox({0})={1}", kID, lBoundingCoords.ToVerboseString());
+			Verbose("llGetBoundingBox({0})={1}", kID, lBoundingCoords);
 			return lBoundingCoords;
 		}
 
@@ -790,7 +790,7 @@ namespace LSLEditor
 		public list llGetClosestNavPoint(vector lPoint, list lOptions)
 		{
 			list lClosetNavPoint = new list();
-			Verbose("llGetClosestNavPoint({0}, {1})={2}", lPoint, lOptions.ToVerboseString(), lClosetNavPoint.ToVerboseString());
+			Verbose("llGetClosestNavPoint({0}, {1})={2}", lPoint, lOptions, lClosetNavPoint);
 			return lClosetNavPoint;
 		}
 
@@ -955,7 +955,7 @@ namespace LSLEditor
 		public list llGetLinkMedia(integer iLinkIndex, integer iFace, list lParameters)
 		{
 			list lMediaList = new list();
-			Verbose("llGetLinkMedia({0}, {1}, {2})={3}", iLinkIndex, iFace, lParameters.ToVerboseString(), lMediaList.ToVerboseString());
+			Verbose("llGetLinkMedia({0}, {1}, {2})={3}", iLinkIndex, iFace, lParameters, lMediaList);
 			return lMediaList;
 		}
 
@@ -983,7 +983,7 @@ namespace LSLEditor
 		public list llGetLinkPrimitiveParams(integer iLinkIndex, list lParametersRequested)
 		{
 			list lParametersReturned = new list();
-			Verbose("llGetLinkPrimitiveParams({0}, {1})={2}", iLinkIndex, lParametersRequested.ToVerboseString(), lParametersReturned);
+			Verbose("llGetLinkPrimitiveParams({0}, {1})={2}", iLinkIndex, lParametersRequested, lParametersReturned);
 			return lParametersReturned;
 		}
 
@@ -1024,14 +1024,14 @@ namespace LSLEditor
 						break;
 				}
 			}
-			Verbose("llGetListEntryType({0}, {1})={2}", lSource.ToVerboseString(), iIndex, iEntryType);
+			Verbose("llGetListEntryType({0}, {1})={2}", lSource, iIndex, iEntryType);
 			return iEntryType;
 		}
 
 		public integer llGetListLength(list lSource)
 		{
 			integer iLength = lSource.Count;
-			Verbose("llGetListLength({0})={1}", lSource.ToVerboseString(), iLength);
+			Verbose("llGetListLength({0})={1}", lSource, iLength);
 			return iLength;
 		}
 
@@ -1238,7 +1238,7 @@ namespace LSLEditor
 					}
 				}
 			}
-			Verbose("llGetParcelDetails({0}, {1})={2}", vPosition, lRequestedDetails.ToVerboseString(), lReturnedDetails.ToVerboseString());
+			Verbose("llGetParcelDetails({0}, {1})={2}", vPosition, lRequestedDetails, lReturnedDetails);
 			return lReturnedDetails;
 		}
 
@@ -1306,14 +1306,14 @@ namespace LSLEditor
 		public list llGetPrimMediaParams(integer iFace, list lDesiredParams)
 		{
 			list lReturnedParams = new list();
-			Verbose("llGetPrimMediaParams({0}, {1})={2}", iFace, lDesiredParams.ToVerboseString(), lReturnedParams.ToVerboseString());
+			Verbose("llGetPrimMediaParams({0}, {1})={2}", iFace, lDesiredParams, lReturnedParams);
 			return lReturnedParams;
 		}
 
 		public list llGetPrimitiveParams(list lDesiredParams)
 		{
 			list lReturnedParams = new list();
-			Verbose("llGetPrimitiveParams({0})={1}", lDesiredParams.ToVerboseString(), lReturnedParams.ToVerboseString());
+			Verbose("llGetPrimitiveParams({0})={1}", lDesiredParams, lReturnedParams);
 			return lReturnedParams;
 		}
 
@@ -1431,7 +1431,7 @@ namespace LSLEditor
 		public list llGetStaticPath(vector vStart, vector vEnd, Float fRadius, list lParameters)
 		{
 			list lReturn = new list();
-			Verbose("llGetStaticPath({0}, {1}, {2}, {3})={4}", vStart, vEnd, fRadius, lParameters.ToVerboseString(), lReturn.ToVerboseString());
+			Verbose("llGetStaticPath({0}, {1}, {2}, {3})={4}", vStart, vEnd, fRadius, lParameters, lReturn);
 			return lReturn;
 		}
 
@@ -1578,7 +1578,7 @@ namespace LSLEditor
 
 		public void llGiveInventoryList(key kID, String sDirectory, list lInventory)
 		{
-			Verbose(@"llGiveInventoryList({0}, ""{1}"", {2})", kID, sDirectory, lInventory.ToVerboseString());
+			Verbose(@"llGiveInventoryList({0}, ""{1}"", {2})", kID, sDirectory, lInventory);
 		}
 
 		public integer llGiveMoney(key kAvatarID, integer iAmount)
@@ -1623,7 +1623,7 @@ namespace LSLEditor
 		public key llHTTPRequest(String sURL, list lParameters, String sBody)
 		{
 			key kRequestID = host.Http(sURL, lParameters, sBody);
-			Verbose(@"llHTTPRequest(""{0}"", {1}, ""{2}"")=""{3}""", sURL, lParameters.ToVerboseString(), sBody, kRequestID);
+			Verbose(@"llHTTPRequest(""{0}"", {1}, ""{2}"")=""{3}""", sURL, lParameters, sBody, kRequestID);
 			return kRequestID;
 		}
 
@@ -1711,7 +1711,7 @@ namespace LSLEditor
 
 		public void llLinkParticleSystem(integer iLink, list lParameters)
 		{
-			Verbose("llLinkParticleSystem({0}, {1})", iLink, lParameters.ToVerboseString());
+			Verbose("llLinkParticleSystem({0}, {1})", iLink, lParameters);
 		}
 
 		public void llLinkSitTarget(integer iLinkIndex, vector vOffset, rotation rRotation)
@@ -1728,7 +1728,7 @@ namespace LSLEditor
 				}
 				sCSV.Append(lSource[intI].ToString());
 			}
-			Verbose(@"llList2CSV({0})=""{1}""", lSource.ToVerboseString(), sCSV.ToString());
+			Verbose(@"llList2CSV({0})=""{1}""", lSource, sCSV.ToString());
 			return sCSV.ToString();
 		}
 
@@ -1743,7 +1743,7 @@ namespace LSLEditor
 			} else {
 				fResult = (Float)lSource[iIndex].ToString();
 			}
-			Verbose("llList2Float({0}, {1})={2}", lSource.ToVerboseString(), iIndex, fResult);
+			Verbose("llList2Float({0}, {1})={2}", lSource, iIndex, fResult);
 			return fResult;
 		}
 
@@ -1758,7 +1758,7 @@ namespace LSLEditor
 			} else {
 				iResult = (integer)lSrc[iIndex].ToString();
 			}
-			Verbose("llList2Integer({0}, {1})={2}", lSrc.ToVerboseString(), iIndex, iResult);
+			Verbose("llList2Integer({0}, {1})={2}", lSrc, iIndex, iResult);
 			return iResult;
 		}
 
@@ -1766,7 +1766,7 @@ namespace LSLEditor
 		{
 			// TODO determine return value
 			string sReturn = JSON_INVALID;
-			Verbose(@"llList2Json({0}, {1})=""{2}""", sType, lValues.ToVerboseString(), sReturn);
+			Verbose(@"llList2Json({0}, {1})=""{2}""", sType, lValues, sReturn);
 			return sReturn;
 		}
 
@@ -1781,7 +1781,7 @@ namespace LSLEditor
 			} else {
 				kResult = (key)lSource[iIndex].ToString();
 			}
-			Verbose("llList2Key({0}, {1})={2}", lSource.ToVerboseString(), iIndex, kResult);
+			Verbose("llList2Key({0}, {1})={2}", lSource, iIndex, kResult);
 			return kResult;
 		}
 
@@ -1809,7 +1809,7 @@ namespace LSLEditor
 				}
 			}
 
-			Verbose(string.Format("List2List({0}, {1}, {2})={3}", lSource.ToVerboseString(), iStart, iEnd, lResult.ToVerboseString()));
+			Verbose(string.Format("List2List({0}, {1}, {2})={3}", lSource, iStart, iEnd, lResult));
 			return lResult;
 		}
 
@@ -1851,7 +1851,7 @@ namespace LSLEditor
 					}
 				}
 			}
-			Verbose(@"llList2ListStrided({0}, {1}, {2}, {3})={4}{5}", lSource.ToVerboseString(), intStart, intEnd, iStride, lResult.ToVerboseString(), sRemark);
+			Verbose(@"llList2ListStrided({0}, {1}, {2}, {3})={4}{5}", lSource, intStart, intEnd, iStride, lResult, sRemark);
 			return lResult;
 		}
 
@@ -1870,7 +1870,7 @@ namespace LSLEditor
 					rResult = rotation.ZERO_ROTATION;
 				}
 			}
-			Verbose("llList2Rot({0}, {1})={2}", lSource.ToVerboseString(), iIndex, rResult);
+			Verbose("llList2Rot({0}, {1})={2}", lSource, iIndex, rResult);
 			return rResult;
 		}
 
@@ -1885,7 +1885,7 @@ namespace LSLEditor
 			} else {
 				sResult = (String)lSource[iIndex].ToString();
 			}
-			Verbose(@"llList2String({0}, {1})=""{2}""", lSource.ToVerboseString(), iIndex, sResult);
+			Verbose(@"llList2String({0}, {1})=""{2}""", lSource, iIndex, sResult);
 			return sResult;
 		}
 
@@ -1904,7 +1904,7 @@ namespace LSLEditor
 					vResult = vector.ZERO_VECTOR;
 				}
 			}
-			Verbose("llList2Vector({0}, {1})={2}", lSource.ToVerboseString(), iIndex, vResult);
+			Verbose("llList2Vector({0}, {1})={2}", lSource, iIndex, vResult);
 			return vResult;
 		}
 
@@ -1936,7 +1936,7 @@ namespace LSLEditor
 					}
 				}
 			}
-			Verbose("llListFindList({0}, {1}={2}", lSource.ToVerboseString(), lMatch.ToVerboseString(), iReturn);
+			Verbose("llListFindList({0}, {1}={2}", lSource, lMatch, iReturn);
 			return iReturn;
 		}
 
@@ -1958,7 +1958,7 @@ namespace LSLEditor
 				lResult.Add(lDestination[intI]);
 			}
 
-			Verbose("llListInsertList({0}, {1}, {2})={3}", lDestination.ToVerboseString(), lSource.ToVerboseString(), iIndex, lResult.ToVerboseString());
+			Verbose("llListInsertList({0}, {1}, {2})={3}", lDestination, lSource, iIndex, lResult);
 			return lResult;
 		}
 
@@ -1971,7 +1971,7 @@ namespace LSLEditor
 			} else {
 				lResult = Buckets2List(RandomShuffle(buckets), iStride);
 			}
-			Verbose("llListRandomize({0}, {1})={2}", lSource.ToVerboseString(), iStride, lResult.ToVerboseString());
+			Verbose("llListRandomize({0}, {1})={2}", lSource, iStride, lResult);
 			return lResult;
 		}
 
@@ -1999,7 +1999,7 @@ namespace LSLEditor
 					lResult.Add(lDestination[intI]);
 				}
 			}
-			Verbose("llListReplaceList({0}, {1}, {2}, {3}={4}", lDestination.ToVerboseString(), lSource.ToVerboseString(), intStart, intEnd, lResult.ToVerboseString());
+			Verbose("llListReplaceList({0}, {1}, {2}, {3}={4}", lDestination, lSource, intStart, intEnd, lResult);
 			return lResult;
 		}
 
@@ -2015,7 +2015,7 @@ namespace LSLEditor
 				buckets.Sort(new BucketComparer(intAscending));
 				lResult = Buckets2List(buckets, intStride);
 			}
-			Verbose("llListSort({0}, {1}, {2})={3}", lSource.ToVerboseString(), iStride, iAscending, lResult.ToVerboseString());
+			Verbose("llListSort({0}, {1}, {2})={3}", lSource, iStride, iAscending, lResult);
 			return lResult;
 		}
 
@@ -2111,7 +2111,7 @@ namespace LSLEditor
 						break;
 				}
 			}
-			Verbose("llListStatistics({0}, {1})={2}", iOperation, lInput.ToVerboseString(), dResult);
+			Verbose("llListStatistics({0}, {1})={2}", iOperation, lInput, dResult);
 			return dResult;
 		}
 
@@ -2299,13 +2299,13 @@ namespace LSLEditor
 
 		public void llParcelMediaCommandList(list lCommands)
 		{
-			Verbose("llParcelMediaCommandList({0})", lCommands.ToVerboseString());
+			Verbose("llParcelMediaCommandList({0})", lCommands);
 		}
 
 		public list llParcelMediaQuery(list lQuery)
 		{
 			list lResult = new list();
-			Verbose("llParcelMediaQuery({0})={1})", lQuery.ToVerboseString(), lResult.ToVerboseString());
+			Verbose("llParcelMediaQuery({0})={1})", lQuery, lResult);
 			return lResult;
 		}
 
@@ -2313,7 +2313,7 @@ namespace LSLEditor
 		public list llParseString2List(String sSource, list lSseparators, list lSpacers)
 		{
 			list lResult = ParseString(sSource, lSseparators, lSpacers, false);
-			Verbose(@"llParseString2List(""{0}"", {1}, {2})={3}", sSource, lSseparators.ToVerboseString(), lSpacers.ToVerboseString(), lResult.ToVerboseString());
+			Verbose(@"llParseString2List(""{0}"", {1}, {2})={3}", sSource, lSseparators, lSpacers, lResult);
 			return lResult;
 		}
 
@@ -2321,13 +2321,13 @@ namespace LSLEditor
 		public list llParseStringKeepNulls(String sSource, list lSeparators, list lSpacers)
 		{
 			list lResult = ParseString(sSource, lSeparators, lSpacers, true);
-			Verbose(@"llParseStringKeepNulls(""{0}"", {1}, {2})={3}", sSource, lSeparators.ToVerboseString(), lSpacers.ToVerboseString(), lResult.ToVerboseString());
+			Verbose(@"llParseStringKeepNulls(""{0}"", {1}, {2})={3}", sSource, lSeparators, lSpacers, lResult);
 			return lResult;
 		}
 
 		public void llParticleSystem(list lParameters)
 		{
-			Verbose("llParticleSystem({0})", lParameters.ToVerboseString());
+			Verbose("llParticleSystem({0})", lParameters);
 		}
 
 		public void llPassCollisions(integer iPassFlag)
@@ -2804,7 +2804,7 @@ namespace LSLEditor
 
 		public void llSetCameraParams(list lRules)
 		{
-			Verbose("llSetCameraParams({0})", lRules.ToVerboseString());
+			Verbose("llSetCameraParams({0})", lRules);
 		}
 
 		public void llSetClickAction(integer iAction)
@@ -2849,7 +2849,7 @@ namespace LSLEditor
 
 		public void llSetKeyframedMotion(list lKeyframes, list lOptions)
 		{
-			Verbose("llSetKeyframedMotion({0}, {1})", lKeyframes.ToVerboseString(), lOptions.ToVerboseString());
+			Verbose("llSetKeyframedMotion({0}, {1})", lKeyframes, lOptions);
 		}
 
 		public void llSetLinkAlpha(integer iLinkIndex, Float fAlpha, integer iFace)
@@ -2870,18 +2870,18 @@ namespace LSLEditor
 		public integer llSetLinkMedia(integer iLinkIndex, integer iFace, list lParameters)
 		{
 			integer iResult = STATUS_OK;
-			Verbose("llSetLinkMedia({0}, {1}, {2})={3}", iLinkIndex, iFace, lParameters.ToVerboseString(), iResult);
+			Verbose("llSetLinkMedia({0}, {1}, {2})={3}", iLinkIndex, iFace, lParameters, iResult);
 			return iResult;
 		}
 
 		public void llSetLinkPrimitiveParams(integer iLinkIndex, list lRules)
 		{
-			Verbose("llSetLinkPrimitiveParams({0}, {1})", iLinkIndex, lRules.ToVerboseString());
+			Verbose("llSetLinkPrimitiveParams({0}, {1})", iLinkIndex, lRules);
 		}
 
 		public void llSetLinkPrimitiveParamsFast(integer iLinkIndex, list lRules)
 		{
-			Verbose("llSetLinkPrimitiveParamsFast({0}, {1})", iLinkIndex, lRules.ToVerboseString());
+			Verbose("llSetLinkPrimitiveParamsFast({0}, {1})", iLinkIndex, lRules);
 		}
 
 		public void llSetLinkTexture(integer iLinkIndex, String sTexture, integer iFace)
@@ -2932,7 +2932,7 @@ namespace LSLEditor
 
 		public void llSetPayPrice(integer iPrice, list lButtons)
 		{
-			Verbose("llSetPayPrice({0}, {1})", iPrice, lButtons.ToVerboseString());
+			Verbose("llSetPayPrice({0}, {1})", iPrice, lButtons);
 		}
 
 		public void llSetPhysicsMaterial(integer iMaterialBits, Float fGravityMultiplier, Float fRestitution, Float fFriction, Float fDensity)
@@ -2949,13 +2949,13 @@ namespace LSLEditor
 		public integer llSetPrimMediaParams(integer iFace, list lParameters)
 		{
 			integer iResult = 0;
-			Verbose("llSetPrimMediaParams({0}, {1})={2}", iFace, lParameters.ToVerboseString(), iResult);
+			Verbose("llSetPrimMediaParams({0}, {1})={2}", iFace, lParameters, iResult);
 			return iResult;
 		}
 
 		public void llSetPrimitiveParams(list lRule)
 		{
-			Verbose("llSetPrimitiveParams({0})", lRule.ToVerboseString());
+			Verbose("llSetPrimitiveParams({0})", lRule);
 		}
 
 		public integer llSetRegionPos(vector vPosition)
@@ -3309,7 +3309,7 @@ namespace LSLEditor
 
 		public void llUpdateCharacter(list lOptions)
 		{
-			Verbose("llUpdateCharacter({0})", lOptions.ToVerboseString());
+			Verbose("llUpdateCharacter({0})", lOptions);
 		}
 
 		public Float llVecDist(vector vPostionA, vector vPositionB)
@@ -3342,7 +3342,7 @@ namespace LSLEditor
 
 		public void llWanderWithin(vector vOrigin, vector vDistance, list lOptions)
 		{
-			Verbose("llWanderWithin({0}, {1}, {2})", vOrigin, vDistance, lOptions.ToVerboseString());
+			Verbose("llWanderWithin({0}, {1}, {2})", vOrigin, vDistance, lOptions);
 		}
 
 		public Float llWater(vector vOffset)
