@@ -1142,7 +1142,7 @@ namespace LSLEditor
 		{
 			Browser browser = GetBrowser();
 			string strVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			browser.ShowWebBrowser("Check for Updates", Properties.Settings.Default.Update + strVersion);
+			browser.ShowWebBrowser("Check for Updates", Properties.Settings.Default.Update + "?" + strVersion);
 		}
 
 		private void browserInWindowToolStripMenuItem_Click(object sender, EventArgs e)
