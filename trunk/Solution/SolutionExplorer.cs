@@ -745,25 +745,32 @@ namespace LSLEditor.Solution
 			RealTag realTag = (RealTag)treeNode.Tag;
 			string strTagName = realTag.ItemType.ToString();
 			string strValue = treeNode.Text;
-			if (treeNode == ActiveSolution)
+			if (treeNode == ActiveSolution) {
 				strValue = NameSolution;
-			for (int intI = 0; intI < intDepth; intI++)
+			}
+			for (int intI = 0; intI < intDepth; intI++) {
 				sb.Append('\t');
+			}
 			string strActive = "";
 			string strDescription = "";
 			string strEnd = "";
-			if (treeNode == ActiveObject)
+			if (treeNode == ActiveObject) {
 				strActive = @" active=""true""";
-			if (realTag.Description != string.Empty)
+			}
+			if (realTag.Description != string.Empty) {
 				strDescription = @" description=""" + realTag.Description + @"""";
-			if (treeNode.Nodes.Count == 0)
+			}
+			if (treeNode.Nodes.Count == 0) {
 				strEnd = " /";
+			}
 			sb.AppendFormat("<{0} name=\"{1}\" guid=\"{2}\"{3}{4}{5}>\r\n", strTagName, strValue, realTag.Guid, strActive, strDescription, strEnd);
 			if (treeNode.Nodes.Count > 0) {
-				foreach (TreeNode childNode in treeNode.Nodes)
+				foreach (TreeNode childNode in treeNode.Nodes) {
 					sb.Append(GetXml(intDepth + 1, childNode));
-				for (int intI = 0; intI < intDepth; intI++)
+				}
+				for (int intI = 0; intI < intDepth; intI++) {
 					sb.Append('\t');
+				}
 				sb.AppendFormat("</{0}>\r\n", strTagName);
 			}
 			return sb.ToString();
