@@ -70,10 +70,10 @@ namespace NativeHelper
 			public KEYBDINPUT ki;
 		}
 
-		[DllImport("user32.dll")]
+		[DllImport("user32")]
 		public static extern uint SendInput(uint nInputs, ref INPUT pInputs, int cbSize);
 
-		[DllImport("user32.dll")]
+		[DllImport("user32")]
 		[return: MarshalAs(UnmanagedType.Bool)]
 		public static extern bool SetForegroundWindow(IntPtr hWnd);
 	}
