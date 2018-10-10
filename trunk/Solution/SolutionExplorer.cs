@@ -751,16 +751,21 @@ namespace LSLEditor.Solution
 				sb.Append('\t');
 			string strActive = "";
 			string strDescription = "";
+			string strEnd = "";
 			if (treeNode == ActiveObject)
 				strActive = @" active=""true""";
 			if (realTag.Description != string.Empty)
 				strDescription = @" description=""" + realTag.Description + @"""";
-			sb.AppendFormat("<{0} name=\"{1}\" guid=\"{2}\"{3}{4}>\r\n", strTagName, strValue, realTag.Guid, strActive, strDescription);
-			foreach (TreeNode childNode in treeNode.Nodes)
-				sb.Append(GetXml(intDepth + 1, childNode));
-			for (int intI = 0; intI < intDepth; intI++)
-				sb.Append('\t');
-			sb.AppendFormat("</{0}>\r\n", strTagName);
+			if (treeNode.Nodes.Count == 0)
+				strEnd = " /";
+			sb.AppendFormat("<{0} name=\"{1}\" guid=\"{2}\"{3}{4}{5}>\r\n", strTagName, strValue, realTag.Guid, strActive, strDescription, strEnd);
+			if (treeNode.Nodes.Count > 0) {
+				foreach (TreeNode childNode in treeNode.Nodes)
+					sb.Append(GetXml(intDepth + 1, childNode));
+				for (int intI = 0; intI < intDepth; intI++)
+					sb.Append('\t');
+				sb.AppendFormat("</{0}>\r\n", strTagName);
+			}
 			return sb.ToString();
 		}
 
@@ -923,7 +928,7 @@ namespace LSLEditor.Solution
 					string strActive = "";
 					if (ActiveProject == nodeItem)
 						strActive = @" active=""true""";
-					sw.WriteLine("\t<Project name=\"{0}\" path=\"{1}\"{2}/>", nodeItem.Text, strItemPath, strActive);
+					sw.WriteLine("\t<Project name=\"{0}\" path=\"{1}\"{2} />", nodeItem.Text, strItemPath, strActive);
 				}
 			}
 			sw.WriteLine("</Solution>");
