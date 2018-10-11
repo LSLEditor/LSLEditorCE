@@ -450,20 +450,38 @@ namespace LSLEditor
 
 		private string ClippedPath(string strPath)
 		{
+			int pathClipLength = Properties.Settings.Default.PathClipLength;
+
+			if (string.IsNullOrEmpty(strPath)) {
+				return string.Empty;
+			}
+
+			if (strPath.Length <= pathClipLength) {
+				return strPath;
+			}
+
 			string strResult = strPath;
-			if (Properties.Settings.Default.PathClipLength < strPath.Length) {
-				string strRoot = Path.GetPathRoot(strPath);
-				string strTmp = "";
-				while (strTmp.Length < Properties.Settings.Default.PathClipLength) {
-					strTmp = Path.Combine(Path.GetFileName(strPath), strTmp);
-					strPath = Path.GetDirectoryName(strPath);
-					if (strPath == strRoot || strPath == null) {
-						break;
-					}
+			string strTmp = Path.GetFileName(strPath);
+			string strRoot;
+			if (strPath.StartsWith("..\\")) {
+				strRoot = "..";
+			}
+			else if (strPath.StartsWith(".\\")) {
+				strRoot = ".";
+			} else {
+				strRoot = Path.GetPathRoot(strPath);
+			}
+
+			do {
+				strPath = Path.GetDirectoryName(strPath);
+				if (strPath == strRoot || strPath == null) {
+					break;
 				}
 				strResult = Path.Combine(Path.Combine(strRoot, "..."), strTmp);
-			}
-			return strPath;
+				strTmp = Path.Combine(Path.GetFileName(strPath), strTmp);
+			} while (strRoot.Length + 4 + strTmp.Length < pathClipLength);
+
+			return strResult;
 		}
 
 		private void InitRecentFileList()
