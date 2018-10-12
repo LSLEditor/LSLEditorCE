@@ -460,26 +460,33 @@ namespace LSLEditor
 				return strPath;
 			}
 
-			string strResult = strPath;
-			string strTmp = Path.GetFileName(strPath);
+			string strResult = string.Empty;
+			string strTmp;
+			string strName = string.Empty;
 			string strRoot;
+
 			if (strPath.StartsWith("..\\")) {
 				strRoot = "..";
-			}
-			else if (strPath.StartsWith(".\\")) {
+			} else if (strPath.StartsWith(".\\")) {
 				strRoot = ".";
 			} else {
 				strRoot = Path.GetPathRoot(strPath);
 			}
+			strRoot = Path.Combine(strRoot, "...");
 
 			do {
-				strPath = Path.GetDirectoryName(strPath);
-				if (strPath == strRoot || strPath == null) {
+				strName = Path.Combine(Path.GetFileName(strPath), strName);
+				strTmp = Path.Combine(strRoot, strName);
+				if (strTmp.Length > pathClipLength) {
 					break;
 				}
-				strResult = Path.Combine(Path.Combine(strRoot, "..."), strTmp);
-				strTmp = Path.Combine(Path.GetFileName(strPath), strTmp);
-			} while (strRoot.Length + 4 + strTmp.Length < pathClipLength);
+				strResult = strTmp;
+				strPath = Path.GetDirectoryName(strPath);
+			} while (!string.IsNullOrEmpty(strPath));
+
+			if (strResult.Length == 0) {
+				strResult = strTmp;
+			}
 
 			return strResult;
 		}
