@@ -1078,28 +1078,6 @@ namespace LSLEditor.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"
-          default
-          {
-          state_entry()
-          {
-          llSay(0, ""Hello, Avatar!"");
-          }
-
-          touch_start(integer total_number)
-          {
-          llSay(0, ""Touched: ""+(string)total_number);
-          }
-          }
-        ")]
-        public string Example {
-            get {
-                return ((string)(this["Example"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00000000-0000-0000-0000-000000000000")]
@@ -1274,6 +1252,28 @@ namespace LSLEditor.Properties {
         public string UpdateManifest {
             get {
                 return ((string)(this["UpdateManifest"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"
+                  default
+                  {
+                    state_entry()
+                    {
+                      llSay(0, ""Hello, Avatar!"");
+                    }
+
+                    touch_start(integer total_number)
+                    {
+                      llSay(0, ""Touched: "" + (string)total_number);
+                    }
+                  }
+                ")]
+        public string Example {
+            get {
+                return ((string)(this["Example"]));
             }
         }
     }

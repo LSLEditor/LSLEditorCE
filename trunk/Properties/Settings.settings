@@ -275,22 +275,6 @@
     <Setting Name="ParcelArea" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">512</Value>
     </Setting>
-    <Setting Name="Example" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">
-          default
-          {
-          state_entry()
-          {
-          llSay(0, "Hello, Avatar!");
-          }
-
-          touch_start(integer total_number)
-          {
-          llSay(0, "Touched: "+(string)total_number);
-          }
-          }
-        </Value>
-    </Setting>
     <Setting Name="ParcelID" Type="System.String" Scope="User">
       <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
     </Setting>
@@ -344,6 +328,22 @@
     </Setting>
     <Setting Name="UpdateManifest" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://lsleditor.sourceforge.net/update.php</Value>
+    </Setting>
+    <Setting Name="Example" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">
+                  default
+                  {
+                    state_entry()
+                    {
+                      llSay(0, "Hello, Avatar!");
+                    }
+
+                    touch_start(integer total_number)
+                    {
+                      llSay(0, "Touched: " + (string)total_number);
+                    }
+                  }
+                </Value>
     </Setting>
   </Settings>
 </SettingsFile>
