@@ -1,2 +1,6 @@
 language: csharp
 solution: trunk/lsleditor.sln
+mono: none
+dotnet: 2.1.0
+script:
+ - dotnet restore
