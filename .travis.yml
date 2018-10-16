@@ -4,4 +4,4 @@ mono: none
 dotnet: 2.1.403
 script:
  - cd trunk
- - dotnet restore
+ - dotnet build
