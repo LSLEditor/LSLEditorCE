@@ -423,13 +423,15 @@ namespace LSLEditor
 				editForm.LoadFile(strPath);
 				AddForm(editForm);
 				ActivateMdiForm(editForm);
-			} else if (editForm.Dirty) {
+			} else {
 				ActivateMdiForm(editForm);
-				DialogResult dialogResult = MessageBox.Show(@"Revert file """ + editForm.ScriptName + @""" to last saved state? Your changes will be lost!", "File has changed", MessageBoxButtons.OKCancel);
-				if (dialogResult == DialogResult.OK) {
-					editForm.LoadFile(strPath);
-					editForm.TextBox.ClearUndoStack();
-					editForm.Dirty = false;
+				if (editForm.Dirty) {
+					DialogResult dialogResult = MessageBox.Show(@"Revert file """ + editForm.ScriptName + @""" to last saved state? Your changes will be lost!", "File has changed", MessageBoxButtons.OKCancel);
+					if (dialogResult == DialogResult.OK) {
+						editForm.LoadFile(strPath);
+						editForm.TextBox.ClearUndoStack();
+						editForm.Dirty = false;
+					}
 				}
 			}
 
