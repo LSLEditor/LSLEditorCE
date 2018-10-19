@@ -27,7 +27,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <SignAssembly>false</SignAssembly>
-    <Win32Resource>LSLEditor.RES</Win32Resource>
+    <Win32Resource>LSLEditor.res</Win32Resource>
     <OldToolsVersion>3.5</OldToolsVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
