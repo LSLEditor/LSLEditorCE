@@ -289,7 +289,7 @@ namespace LSLEditor
 				sb.Append('[');
 				for (int intI = 0; intI < this.value.Count; intI++) {
 					if (intI > 0) sb.Append(',');
-					if ((this.value[intI] is string) && Properties.Settings.Default.QuotesListVerbose) {
+					if ((this.value[intI] is SecondLife.String) && Properties.Settings.Default.QuotesListVerbose) {
 						sb.Append("\"" + this.value[intI].ToString() + "\"");
 					} else {
 						sb.Append(this.value[intI].ToString());
