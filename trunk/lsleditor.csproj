@@ -27,7 +27,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <SignAssembly>false</SignAssembly>
-    <Win32Resource>C:\Users\User\Desktop\Workspace_Jasper\LSL_editor\lsleditor-code\trunk\LSLEditor.RES</Win32Resource>
+    <Win32Resource>LSLEditor.res</Win32Resource>
     <OldToolsVersion>3.5</OldToolsVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
@@ -433,7 +433,7 @@
       <SubType>Form</SubType>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Editor\TooltipWindow.designer.cs">
+    <Compile Include="Editor\TooltipWindow.Designer.cs">
       <DependentUpon>TooltipWindow.cs</DependentUpon>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
@@ -441,7 +441,7 @@
       <SubType>Component</SubType>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Editor\GListBox.designer.cs">
+    <Compile Include="Editor\GListBox.Designer.cs">
       <DependentUpon>GListBox.cs</DependentUpon>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
@@ -449,7 +449,7 @@
       <SubType>Form</SubType>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Editor\GListBoxWindow.designer.cs">
+    <Compile Include="Editor\GListBoxWindow.Designer.cs">
       <DependentUpon>GListBoxWindow.cs</DependentUpon>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
@@ -536,7 +536,7 @@
       <SubType>UserControl</SubType>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Editor\NumberedTextBoxUC.designer.cs">
+    <Compile Include="Editor\NumberedTextBoxUC.Designer.cs">
       <DependentUpon>NumberedTextBoxUC.cs</DependentUpon>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
@@ -608,7 +608,7 @@
       <SubType>Form</SubType>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Solution\SolutionExplorer.designer.cs">
+    <Compile Include="Solution\SolutionExplorer.Designer.cs">
       <DependentUpon>SolutionExplorer.cs</DependentUpon>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
