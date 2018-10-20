@@ -277,19 +277,19 @@
     </Setting>
     <Setting Name="Example" Type="System.String" Scope="Application">
       <Value Profile="(Default)">
-                  default
-                  {
-                    state_entry()
-                    {
-                      llSay(0, "Hello, Avatar!");
-                    }
+          default
+          {
+          state_entry()
+          {
+            llSay(0, "Hello, Avatar!");
+          }
 
-                    touch_start(integer total_number)
-                    {
-                      llSay(0, "Touched: " + (string)total_number);
-                    }
-                  }
-                </Value>
+          touch_start(integer total_number)
+          {
+            llSay(0, "Touched: " + (string)total_number);
+          }
+          }
+        </Value>
     </Setting>
     <Setting Name="ParcelID" Type="System.String" Scope="User">
       <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
