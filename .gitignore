@@ -4,8 +4,8 @@
 
 /bin
 /lsl-editor-doc.xml
+/_ReSharper*
+/obj/*
 /trunk/.vs/lsleditor/v15
-/trunk/obj/Debug
-/trunk/obj/Release/Default/Project
-/trunk/obj/Release
 /trunk/lsleditor.csproj.user
+/.vs*
