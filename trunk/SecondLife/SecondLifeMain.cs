@@ -241,6 +241,13 @@ namespace LSLEditor
 			if (parameters.Length == 0) {
 				host.VerboseMessage(strLine);
 			} else {
+				for (int i = 0; i < parameters.Length; i++) {
+					if (parameters[i] is list) {
+						parameters[i] = ((list)parameters[i]).ToVerboseString();
+					} else {
+						parameters[i] = parameters[i].ToString();
+					}
+				}
 				this.host.VerboseMessage(string.Format(strLine, parameters));
 			}
 		}
