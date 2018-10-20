@@ -1209,6 +1209,10 @@ namespace LSLEditor
 		private void StartSimulator()
 		{
 			if (SyntaxCheck(true)) {
+				if (this.SimulatorConsole != null) {
+					this.StopSimulator();
+				}
+
 				this.SimulatorConsole = new SimulatorConsole(this.SolutionExplorer, this.Children);
 
 				this.SimulatorConsole.Show(dockPanel);
