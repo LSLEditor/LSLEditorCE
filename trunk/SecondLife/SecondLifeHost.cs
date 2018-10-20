@@ -892,6 +892,19 @@ namespace LSLEditor
 		/// <param name="strMessage"></param>
 		public void VerboseMessage(string strMessage)
 		{
+			if (strMessage != null && strMessage.Length > 0) {
+				StringBuilder sb = new StringBuilder(strMessage);
+				sb.Replace("\0", "\\0");
+				sb.Replace("\a", "\\a");
+				sb.Replace("\b", "\\b");
+				sb.Replace("\f", "\\f");
+				sb.Replace("\n", "\\n");
+				sb.Replace("\r", "\\r");
+				sb.Replace("\t", "\\t");
+				sb.Replace("\v", "\\v");
+				strMessage = sb.ToString();
+			}
+
 			if (OnVerboseMessage != null) {
 				OnVerboseMessage(this, new SecondLifeHostEventArgs(strMessage));
 			}
