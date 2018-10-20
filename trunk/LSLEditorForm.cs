@@ -450,20 +450,38 @@ namespace LSLEditor
 
 		private string ClippedPath(string strPath)
 		{
-			string strResult = strPath;
-			if (Properties.Settings.Default.PathClipLength < strPath.Length) {
-				string strRoot = Path.GetPathRoot(strPath);
-				string strTmp = "";
-				while (strTmp.Length < Properties.Settings.Default.PathClipLength) {
-					strTmp = Path.Combine(Path.GetFileName(strPath), strTmp);
-					strPath = Path.GetDirectoryName(strPath);
-					if (strPath == strRoot || strPath == null) {
-						break;
-					}
-				}
-				strResult = Path.Combine(Path.Combine(strRoot, "..."), strTmp);
+			if (string.IsNullOrEmpty(strPath)) {
+				return string.Empty;
 			}
-			return strPath;
+
+			int pathClipLength = Properties.Settings.Default.PathClipLength;
+			if (pathClipLength < 1) {
+				pathClipLength = 1;
+			}
+
+			string strFullPath = Path.GetFullPath(strPath);
+			List<string> lstDirectories = new List<string>(strFullPath.Split('\\'));
+
+			int intCount = 0;
+			int intLength = strFullPath.Length - pathClipLength;
+			if (intLength > 0 && lstDirectories.Count > 2) {
+				intLength += 4;
+
+				int index = 1;
+				int intRemoveCount = 0;
+				while (index < lstDirectories.Count - 1 && intCount < intLength) {
+					intCount += lstDirectories[index].Length + 1;
+					intRemoveCount++;
+					index++;
+				}
+
+				if (intRemoveCount > 0 && intCount >= 4) {
+					lstDirectories.Insert(1, "...");
+					lstDirectories.RemoveRange(2, intRemoveCount);
+				}
+			}
+
+			return string.Join("\\", lstDirectories.ToArray());
 		}
 
 		private void InitRecentFileList()
