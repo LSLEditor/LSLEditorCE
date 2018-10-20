@@ -125,7 +125,7 @@ namespace LSLEditor.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap export_file_32 {
             get {
-                object obj = ResourceManager.GetObject("export_file-32", resourceCulture);
+                object obj = ResourceManager.GetObject("export_file_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
