@@ -378,9 +378,10 @@ namespace LSLEditor
 
 		private void NewNotecard()
 		{
+			string fullPathName = Properties.Settings.Default.ExampleNameNotecard;
 			EditForm editForm = new EditForm(this);
 			editForm.IsScript = false;
-			editForm.FullPathName = Properties.Settings.Default.ExampleNameNotecard;
+			editForm.FullPathName = fullPathName;
 			editForm.TextBox.OnCursorPositionChanged += new SyntaxRichTextBox.CursorPositionChangedHandler(TextBox_OnCursorPositionChanged);
 			editForm.Dirty = false;
 			AddForm(editForm);
@@ -388,45 +389,51 @@ namespace LSLEditor
 
 		private void NewFile(bool isLSLI = false)
 		{
+			string fullPathName = isLSLI ? Properties.Settings.Default.ExampleNameLSLI : Properties.Settings.Default.ExampleName;
 			EditForm editForm = new EditForm(this);
 			editForm.SourceCode = Helpers.GetTemplate.Source();
 			editForm.TextBox.FormatDocument();
 			editForm.TextBox.ClearUndoStack();
-            if(isLSLI)
-            {
-			    editForm.FullPathName = Properties.Settings.Default.ExampleNameLSLI;
-            } else
-            {
-                editForm.FullPathName = Properties.Settings.Default.ExampleName;
-            }
+			editForm.FullPathName = fullPathName;
             editForm.TextBox.OnCursorPositionChanged += new SyntaxRichTextBox.CursorPositionChangedHandler(TextBox_OnCursorPositionChanged);
+			editForm.Dirty = false;
 			AddForm(editForm);
 		}
 
 		public EditForm OpenFile(string strPath, Guid guid, bool blnIsScript)
 		{
 			EditForm editForm = null;
-			if (this.Children.Length > 0) {
-				editForm = this.Children[0] as EditForm;
-				if (editForm != null && !editForm.IsDisposed) {
-					if (editForm.ScriptName != Properties.Settings.Default.ExampleName || editForm.Dirty) {
-						editForm = null;
-					}
+
+			foreach (Form child in this.Children) {
+				EditForm form = child as EditForm;
+				if (form == null || form.IsDisposed || form.IsNew) {
+					continue;
+				}
+				if (form.FullPathName == strPath) {
+					editForm = form;
+					break;
 				}
 			}
 
 			if (editForm == null) {
 				editForm = new EditForm(this);
 				editForm.TextBox.OnCursorPositionChanged += new SyntaxRichTextBox.CursorPositionChangedHandler(TextBox_OnCursorPositionChanged);
+				editForm.guid = guid;
+				editForm.IsScript = blnIsScript;
+				editForm.LoadFile(strPath);
 				AddForm(editForm);
+				ActivateMdiForm(editForm);
+			} else {
+				ActivateMdiForm(editForm);
+				if (editForm.Dirty) {
+					DialogResult dialogResult = MessageBox.Show(@"Revert file """ + editForm.ScriptName + @""" to last saved state? Your changes will be lost!", "File has changed", MessageBoxButtons.OKCancel);
+					if (dialogResult == DialogResult.OK) {
+						editForm.LoadFile(strPath);
+						editForm.TextBox.ClearUndoStack();
+						editForm.Dirty = false;
+					}
+				}
 			}
-
-			editForm.guid = guid;
-			editForm.IsScript = blnIsScript;
-			editForm.LoadFile(strPath);
-
-			// 23 oct 2007
-			ActivateMdiForm(editForm);
 
 			UpdateRecentFileList(strPath);
 
@@ -445,25 +452,43 @@ namespace LSLEditor
 
 		private void OpenFile(string strFileName)
 		{
-			OpenFile(strFileName, Guid.Empty, true);
+			OpenFile(strFileName, Guid.NewGuid(), true);
 		}
 
 		private string ClippedPath(string strPath)
 		{
-			string strResult = strPath;
-			if (Properties.Settings.Default.PathClipLength < strPath.Length) {
-				string strRoot = Path.GetPathRoot(strPath);
-				string strTmp = "";
-				while (strTmp.Length < Properties.Settings.Default.PathClipLength) {
-					strTmp = Path.Combine(Path.GetFileName(strPath), strTmp);
-					strPath = Path.GetDirectoryName(strPath);
-					if (strPath == strRoot || strPath == null) {
-						break;
-					}
-				}
-				strResult = Path.Combine(Path.Combine(strRoot, "..."), strTmp);
+			if (string.IsNullOrEmpty(strPath)) {
+				return string.Empty;
 			}
-			return strPath;
+
+			int pathClipLength = Properties.Settings.Default.PathClipLength;
+			if (pathClipLength < 1) {
+				pathClipLength = 1;
+			}
+
+			string strFullPath = Path.GetFullPath(strPath);
+			List<string> lstDirectories = new List<string>(strFullPath.Split('\\'));
+
+			int intCount = 0;
+			int intLength = strFullPath.Length - pathClipLength;
+			if (intLength > 0 && lstDirectories.Count > 2) {
+				intLength += 4;
+
+				int index = 1;
+				int intRemoveCount = 0;
+				while (index < lstDirectories.Count - 1 && intCount < intLength) {
+					intCount += lstDirectories[index].Length + 1;
+					intRemoveCount++;
+					index++;
+				}
+
+				if (intRemoveCount > 0 && intCount >= 4) {
+					lstDirectories.Insert(1, "...");
+					lstDirectories.RemoveRange(2, intRemoveCount);
+				}
+			}
+
+			return string.Join("\\", lstDirectories.ToArray());
 		}
 
 		private void InitRecentFileList()
@@ -566,7 +591,6 @@ namespace LSLEditor
 				foreach (string strFileName in this.openNoteFilesDialog.FileNames) {
 					if (File.Exists(strFileName)) {
 						OpenFile(strFileName, Guid.NewGuid(), false);
-						UpdateRecentFileList(strFileName);
 					}
 				}
 			}
@@ -579,7 +603,6 @@ namespace LSLEditor
 				foreach (string strFileName in this.openScriptFilesDialog.FileNames) {
 					if (File.Exists(strFileName)) {
 						OpenFile(strFileName, Guid.NewGuid());
-						UpdateRecentFileList(strFileName);
 					}
 				}
 			}
@@ -597,8 +620,10 @@ namespace LSLEditor
 		public bool SaveFile(EditForm editForm, bool blnSaveAs)
 		{
 			DialogResult dialogresult = DialogResult.OK;
-			if (editForm.FullPathName == Properties.Settings.Default.ExampleName || blnSaveAs) {
-				SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
+			if (blnSaveAs || editForm.IsNew) {
+                ActivateMdiForm(editForm);
+
+                SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
 
                 // Save as LSLI when it's an expanded LSL
                 if (Helpers.LSLIPathHelper.IsExpandedLSL(editForm.ScriptName))
@@ -623,32 +648,22 @@ namespace LSLEditor
 			return false;
 		}
 
-		// save file of active MDI child, if any
-		private bool SaveActiveFile()
-		{
-			bool blnResult = false;
-			EditForm editForm = this.ActiveMdiForm as EditForm;
-			if (editForm != null) {
-				// save as!!
-				// TODO: Refactor saveDialog to be a property of the form
-				SaveFileDialog saveDialog = editForm.IsScript ? this.saveScriptFilesDialog : this.saveNoteFilesDialog;
-				blnResult = SaveFile(editForm, true);
-			}
-			return blnResult;
-		}
-
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.ActiveMdiForm as EditForm;
 			if (editForm != null) {
-				editForm.SaveCurrentFile();
+				SaveFile(editForm, false);
 				this.Focus();
 			}
 		}
 
 		private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			SaveActiveFile();
+			EditForm editForm = this.ActiveMdiForm as EditForm;
+			if (editForm != null) {
+				SaveFile(editForm, true);
+				this.Focus();
+			}
 		}
 
 		private Browser GetBrowser()
@@ -1078,15 +1093,13 @@ namespace LSLEditor
 				if (this.IsMdiContainer) {
 					// this is set by any EditForm close
 					e.Cancel = this.CancelClosing;
-					return;
+				} else {
+					e.Cancel = !CloseAllOpenWindows();
 				}
 
-				if (this.SolutionExplorer != null & !this.SolutionExplorer.IsDisposed) {
+				if (!e.Cancel && this.SolutionExplorer != null && !this.SolutionExplorer.IsDisposed) {
 					this.SolutionExplorer.CloseSolution();
 				}
-
-				e.Cancel = !CloseAllOpenWindows();
-
 			} catch { }
 		}
 
@@ -1196,6 +1209,10 @@ namespace LSLEditor
 		private void StartSimulator()
 		{
 			if (SyntaxCheck(true)) {
+				if (this.SimulatorConsole != null) {
+					this.StopSimulator();
+				}
+
 				this.SimulatorConsole = new SimulatorConsole(this.SolutionExplorer, this.Children);
 
 				this.SimulatorConsole.Show(dockPanel);
@@ -1271,7 +1288,7 @@ namespace LSLEditor
 				}
 				if (Properties.Settings.Default.AutoSaveOnDebug) {
 					if (editForm.Dirty) {
-						editForm.SaveCurrentFile();
+						SaveFile(editForm, false);
 					}
 				}
 				editForm.SyntaxCheck();
@@ -1437,10 +1454,10 @@ namespace LSLEditor
 
 		public void CloseActiveWindow()
 		{
-            EditForm editForm = this.ActiveMdiForm as EditForm;
-            if (this.IsMdiContainer) {
-				if (this.ActiveMdiForm != null && !this.ActiveMdiForm.IsDisposed) {
-					this.ActiveMdiForm.Close();
+			if (this.IsMdiContainer) {
+				EditForm editForm = this.ActiveMdiForm as EditForm;
+				if (editForm != null && !editForm.IsDisposed) {
+					editForm.Close();
 				}
 			} else {
 				//TODO: Find a new way
@@ -1597,8 +1614,18 @@ namespace LSLEditor
 				this.fileStripMenuItem.HideDropDown();
 
 				string strPath = tsmi.Tag.ToString();
-				OpenFile(strPath, Guid.NewGuid());
-				UpdateRecentFileList(strPath);
+				if (!File.Exists(strPath)) {
+					DialogResult dialogResult = MessageBox.Show("File not found. Do you want to remove it from the recent list?", "File not found", MessageBoxButtons.YesNo);
+					if (dialogResult == DialogResult.Yes) {
+						this.recentFileToolStripMenuItem.DropDownItems.Remove(tsmi);
+						Properties.Settings.Default.RecentFileList.Remove(strPath);
+					}
+					return;
+				}
+
+				string strExt = Path.GetExtension(strPath);
+				bool blnIsScript = strExt == ".lsl" || strExt == ".lsli";
+				OpenFile(strPath, Guid.NewGuid(), blnIsScript);
 			}
 		}
 
@@ -1669,8 +1696,17 @@ namespace LSLEditor
 			if (tsmi != null) {
 				this.fileStripMenuItem.HideDropDown();
 
+				string strPath = tsmi.Tag.ToString();
+				if (!File.Exists(strPath)) {
+					DialogResult dialogResult = MessageBox.Show("Project not found. Do you want to remove it from the recent list?", "Project not found", MessageBoxButtons.YesNo);
+					if (dialogResult == DialogResult.Yes) {
+						this.recentProjectToolStripMenuItem.DropDownItems.Remove(tsmi);
+						Properties.Settings.Default.RecentProjectList.Remove(strPath);
+					}
+					return;
+				}
+
 				if (CloseAllOpenWindows()) {
-					string strPath = tsmi.Tag.ToString();
 					this.SolutionExplorer.OpenSolution(strPath);
 				}
 			}
@@ -1802,7 +1838,7 @@ namespace LSLEditor
 					continue;
 				}
 				if (editForm.Dirty) {
-					editForm.SaveCurrentFile();
+					SaveFile(editForm, false);
 				}
 			}
 			// save it all, also solution explorer file

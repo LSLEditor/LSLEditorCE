@@ -69,7 +69,7 @@ namespace LSLEditor
 		private const int EM_SETEVENTMASK = (WM_USER + 69);
 
 		// Scroll position
-		[DllImport("user32.dll")]
+		[DllImport("user32")]
 		private static extern int SendMessage(IntPtr hwndLock, Int32 wMsg, Int32 wParam, ref Point pt);
 
 		// Anti flicker
@@ -77,7 +77,7 @@ namespace LSLEditor
 		private static extern IntPtr SendMessage(IntPtr hWnd, int msg, int wParam, IntPtr lParam);
 
 		// Tabs
-		[DllImport("User32", CharSet = CharSet.Auto)]
+		[DllImport("user32", CharSet = CharSet.Auto)]
 		public static extern IntPtr SendMessage(IntPtr h, int msg, int wParam, int[] lParam);
 
 		private bool m_Dirty;

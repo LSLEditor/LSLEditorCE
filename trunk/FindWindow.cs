@@ -171,7 +171,7 @@ namespace LSLEditor
 		private void Replace_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.lslEditForm.ActiveMdiForm as EditForm;
-			if (editForm != null) {
+			if (editForm != null && !editForm.IsDisposed) {
 				UpdateComboBox(this.comboBoxReplace);
 
 				if (editForm.TextBox.SelectionLength > 0) {
@@ -213,7 +213,7 @@ namespace LSLEditor
 		private void ReplaceAll_Click(object sender, EventArgs e)
 		{
 			EditForm editForm = this.lslEditForm.ActiveMdiForm as EditForm;
-			if (editForm == null) {
+			if (editForm != null && !editForm.IsDisposed) {
 				UpdateComboBox(this.comboBoxReplace);
 
 				string strPattern;

@@ -125,7 +125,7 @@ namespace LSLEditor.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap export_file_32 {
             get {
-                object obj = ResourceManager.GetObject("export_file-32", resourceCulture);
+                object obj = ResourceManager.GetObject("export_file_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -246,6 +246,16 @@ namespace LSLEditor.Properties {
         internal static System.Drawing.Bitmap SAVE {
             get {
                 object obj = ResourceManager.GetObject("SAVE", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SAVEALL {
+            get {
+                object obj = ResourceManager.GetObject("SAVEALL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -55,6 +55,7 @@ namespace LSLEditor
 
         public List<string> verboseQueue = new List<string>();
 
+        private bool m_IsNew;
         private string m_FullPathName;
 		private Guid m_Guid;
 		// private bool sOutline = true;
@@ -239,6 +240,7 @@ namespace LSLEditor
 					if (!Directory.Exists(Properties.Settings.Default.WorkingDirectory)) {
 						Properties.Settings.Default.WorkingDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 					}
+					this.m_IsNew = true;
 					this.m_FullPathName = Path.Combine(Properties.Settings.Default.WorkingDirectory, this.m_FullPathName);
 				}
 				this.Text = this.ScriptName;
@@ -246,6 +248,14 @@ namespace LSLEditor
 				if (tabPage != null) {
 					tabPage.Text = this.Text + "   ";
 				}
+			}
+		}
+
+		public bool IsNew
+		{
+			get
+			{
+				return this.m_IsNew;
 			}
 		}
 
@@ -332,37 +342,7 @@ namespace LSLEditor
 		public void SaveCurrentFile(string strPath)
 		{
             // Check if this is an expanded.lsl
-            if (!LSLIPathHelper.IsExpandedLSL(strPath))
-            {
-                this.FullPathName = strPath;
-                Encoding encodeAs = this.encodedAs;
-                if (this.IsScript && encodeAs == null)
-                {
-                    switch (Properties.Settings.Default.OutputFormat)
-                    {
-                        case "UTF8":
-                            encodeAs = Encoding.UTF8;
-                            break;
-                        case "Unicode":
-                            encodeAs = Encoding.Unicode;
-                            break;
-                        case "BigEndianUnicode":
-                            encodeAs = Encoding.BigEndianUnicode;
-                            break;
-                        default:
-                            encodeAs = Encoding.Default;
-                            break;
-                    }
-                }
-                else if (encodeAs == null)
-                {
-                    encodeAs = Encoding.UTF8;
-                }
-
-                this.numberedTextBoxUC1.TextBox.SaveCurrentFile(strPath, encodeAs);
-                this.encodedAs = encodeAs;
-
-            } else if (LSLIPathHelper.IsExpandedLSL(strPath))
+            if (LSLIPathHelper.IsExpandedLSL(strPath))
             {
                 string LSLIfilePath = LSLIPathHelper.CreateCollapsedPathAndScriptName(strPath);
                 // Check if an LSLI version of this script exists
@@ -392,6 +372,37 @@ namespace LSLEditor
                 this.numberedTextBoxUC1.TextBox.Dirty = false;
                 this.Text = LSLIPathHelper.GetExpandedTabName(strPath);
             }
+            else
+            {
+                this.FullPathName = strPath;
+                Encoding encodeAs = this.encodedAs;
+                if (this.IsScript && encodeAs == null)
+                {
+                    switch (Properties.Settings.Default.OutputFormat)
+                    {
+                        case "UTF8":
+                            encodeAs = Encoding.UTF8;
+                            break;
+                        case "Unicode":
+                            encodeAs = Encoding.Unicode;
+                            break;
+                        case "BigEndianUnicode":
+                            encodeAs = Encoding.BigEndianUnicode;
+                            break;
+                        default:
+                            encodeAs = Encoding.Default;
+                            break;
+                    }
+                }
+                else if (encodeAs == null)
+                {
+                    encodeAs = Encoding.UTF8;
+                }
+
+                this.numberedTextBoxUC1.TextBox.SaveCurrentFile(strPath, encodeAs);
+                this.encodedAs = encodeAs;
+            }
+			this.m_IsNew = false;
         }
 
 		public void SaveCurrentFile()
@@ -542,6 +553,7 @@ namespace LSLEditor
 		private void EditForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			this.parent.CancelClosing = false;
+			this.parent.ActivateMdiForm(this);
 			if (this.Dirty) {
                 string scriptToSave = ScriptName;
                 if (LSLIPathHelper.IsExpandedLSL(ScriptName))
