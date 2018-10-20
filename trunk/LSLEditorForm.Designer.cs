@@ -373,7 +373,7 @@ namespace LSLEditor
             // 
             // SaveAllToolStripMenuItem
             // 
-            this.SaveAllToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.SAVEAS;
+            this.SaveAllToolStripMenuItem.Image = global::LSLEditor.Properties.Resources.SAVEALL;
             this.SaveAllToolStripMenuItem.Name = "SaveAllToolStripMenuItem";
             this.SaveAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
