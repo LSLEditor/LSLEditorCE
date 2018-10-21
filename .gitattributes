@@ -10,6 +10,7 @@
 *.bat		-binary text eol=crlf
 *.conf		-binary text eol=lf
 *.cs		-binary text eol=lf -whitespace
+*.csproj	-binary text eol=lf -whitespace
 *.css		-binary text eol=lf -whitespace
 *.html		-binary text eol=lf
 *.js		-binary text -whitespace
@@ -18,6 +19,7 @@
 *.md		-binary text eol=lf conflict-marker-size=100
 *.resx		-binary text eol=lf -whitespace
 *.sh		-binary text eol=lf
+*.sln		-binary text eol=lf -whitespace
 *.sql		-binary text eol=lf
 *.svg		-binary text eol=lf
 *.txt		-binary text eol=lf conflict-marker-size=100

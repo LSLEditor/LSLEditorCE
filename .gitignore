@@ -2,10 +2,10 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/bin
-/lsl-editor-doc.xml
-/_ReSharper*
-/obj/*
-/trunk/.vs/lsleditor/v15
-/trunk/lsleditor.csproj.user
-/.vs*
+bin/*
+lsl-editor-doc.xml
+_ReSharper*
+obj/*
+trunk/.vs/lsleditor/v15
+trunk/lsleditor.csproj.user
+*/.vs*
