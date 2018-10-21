@@ -84,6 +84,8 @@ namespace LSLEditor.Helpers
         private static string SearchFile(string file)
         {
             // Search in optional include directories
+            if (Properties.Settings.Default.IncludeDirectories == null)
+                Properties.Settings.Default.IncludeDirectories = new System.Collections.Specialized.StringCollection();
             foreach (string directory in Properties.Settings.Default.IncludeDirectories)
             {
                 string pFile;

@@ -59,6 +59,9 @@ namespace LSLEditor.Tools
 
 		private void ShowPlugin(string strName)
 		{
+			if (Properties.Settings.Default.Plugins == null)
+				Properties.Settings.Default.Plugins = new StringCollection();
+
 			CheckBox checkBox = new CheckBox();
 			checkBox.AutoSize = true;
 			checkBox.Text = strName;

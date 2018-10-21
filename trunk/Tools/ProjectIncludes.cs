@@ -15,8 +15,24 @@ namespace LSLEditor.Tools
         public ProjectIncludes()
         {
             InitializeComponent();
+
+            InitIncludeDirsList();
+        }
+
+        private void InitIncludeDirsList()
+        {
             listBoxIncludeDirs.Items.Clear();
-            listBoxIncludeDirs.Items.AddRange(Properties.Settings.Default.IncludeDirectories.ToArray());
+            if (Properties.Settings.Default.IncludeDirectories == null) {
+                Properties.Settings.Default.IncludeDirectories = new System.Collections.Specialized.StringCollection();
+            } else {
+                int intLen = Properties.Settings.Default.IncludeDirectories.Count;
+                for (int intI = 0; intI < intLen; intI++) {
+                    string item = Properties.Settings.Default.IncludeDirectories[intI].Trim();
+                    if (item.Length > 0) {
+                        listBoxIncludeDirs.Items.Add(item);
+                    }
+                }
+            }
         }
 
         private bool AddToIncludeDirs(string path)
@@ -53,14 +69,15 @@ namespace LSLEditor.Tools
 
         public void Commit()
         {
-            List<string> items = new List<string>();
             // Add to settings
-            foreach(Object item in listBoxIncludeDirs.Items)
-            {
-                items.Add(item.ToString());
+            Properties.Settings.Default.IncludeDirectories = new System.Collections.Specialized.StringCollection();
+            int intLen = listBoxIncludeDirs.Items.Count;
+            for (int intI = 0; intI < intLen; intI++) {
+                object item = listBoxIncludeDirs.Items[intI];
+                if (item != null) {
+                    Properties.Settings.Default.IncludeDirectories.Add(item.ToString());
+                }
             }
-
-            Properties.Settings.Default.IncludeDirectories = items;
         }
 
         private void buttonAddIncludeDir_Click(object sender, EventArgs e)
