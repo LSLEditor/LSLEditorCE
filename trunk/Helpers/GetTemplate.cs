@@ -61,7 +61,7 @@ namespace LSLEditor.Helpers
 			catch
 			{
 			}
-			return Properties.Settings.Default.Example;
+			return Properties.Settings.Default.Example.Trim() + Environment.NewLine;
 		}
 	}
 }
