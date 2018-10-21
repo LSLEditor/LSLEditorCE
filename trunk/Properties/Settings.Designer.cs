@@ -1105,19 +1105,19 @@ namespace LSLEditor.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"
-                  default
-                  {
-                    state_entry()
-                    {
-                    llSay(0, ""Hello, Avatar!"");
-                    }
+          default
+          {
+          state_entry()
+          {
+          llSay(0, ""Hello, Avatar!"");
+          }
 
-                    touch_start(integer total_number)
-                    {
-                    llSay(0, ""Touched: "" + (string)total_number);
-                    }
-                  }
-                ")]
+          touch_start(integer total_number)
+          {
+          llSay(0, ""Touched: "" + (string)total_number);
+          }
+          }
+        ")]
         public string Example {
             get {
                 return ((string)(this["Example"]));
@@ -1249,7 +1249,7 @@ namespace LSLEditor.Properties {
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("UTF8")]
+        [global::System.Configuration.DefaultSettingValueAttribute("UTF-8 (Notecard only)")]
         public string OutputFormat {
             get {
                 return ((string)(this["OutputFormat"]));

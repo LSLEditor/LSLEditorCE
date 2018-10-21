@@ -337,7 +337,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="OutputFormat" Type="System.String" Scope="User">
-      <Value Profile="(Default)">UTF8</Value>
+      <Value Profile="(Default)">UTF-8 (Notecard only)</Value>
     </Setting>
     <Setting Name="Update" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://lsleditor.sourceforge.net/check4update.php</Value>
