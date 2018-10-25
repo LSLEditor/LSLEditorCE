@@ -513,7 +513,7 @@ namespace LSLEditor
             try
             {
                 new Guid(thing);
-            } catch (FormatException e)
+            } catch (FormatException)
             {
                 Verbose("osIsUUID({0})=0", thing);
                 return 0;

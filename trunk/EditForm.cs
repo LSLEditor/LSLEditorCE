@@ -147,7 +147,7 @@ namespace LSLEditor
 
 			this.Layout += new LayoutEventHandler(EditForm_Layout);
 			ImageList imageList = new ImageList();
-			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Unknown.gif"));
+			imageList.Images.Add(new Bitmap(this.GetType(), "Images.UnknownType.gif"));
 			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Functions.gif"));
 			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Events.gif"));
 			imageList.Images.Add(new Bitmap(this.GetType(), "Images.Constants.gif"));
