@@ -25,16 +25,16 @@ namespace LSLEditor.Docking
                 #region PanelIndicator
                 private class PanelIndicator : PictureBox, IHitTest
                 {
-                    private static Image _imagePanelLeft = DockResources.DockIndicator_PanelLeft;
-                    private static Image _imagePanelRight = DockResources.DockIndicator_PanelRight;
-                    private static Image _imagePanelTop = DockResources.DockIndicator_PanelTop;
-                    private static Image _imagePanelBottom = DockResources.DockIndicator_PanelBottom;
-                    private static Image _imagePanelFill = DockResources.DockIndicator_PanelFill;
-                    private static Image _imagePanelLeftActive = DockResources.DockIndicator_PanelLeft_Active;
-                    private static Image _imagePanelRightActive = DockResources.DockIndicator_PanelRight_Active;
-                    private static Image _imagePanelTopActive = DockResources.DockIndicator_PanelTop_Active;
-                    private static Image _imagePanelBottomActive = DockResources.DockIndicator_PanelBottom_Active;
-                    private static Image _imagePanelFillActive = DockResources.DockIndicator_PanelFill_Active;
+                    private static Image _imagePanelLeft = Resources.DockIndicator_PanelLeft;
+                    private static Image _imagePanelRight = Resources.DockIndicator_PanelRight;
+                    private static Image _imagePanelTop = Resources.DockIndicator_PanelTop;
+                    private static Image _imagePanelBottom = Resources.DockIndicator_PanelBottom;
+                    private static Image _imagePanelFill = Resources.DockIndicator_PanelFill;
+                    private static Image _imagePanelLeftActive = Resources.DockIndicator_PanelLeft_Active;
+                    private static Image _imagePanelRightActive = Resources.DockIndicator_PanelRight_Active;
+                    private static Image _imagePanelTopActive = Resources.DockIndicator_PanelTop_Active;
+                    private static Image _imagePanelBottomActive = Resources.DockIndicator_PanelBottom_Active;
+                    private static Image _imagePanelFillActive = Resources.DockIndicator_PanelFill_Active;
 
                     public PanelIndicator(DockStyle dockStyle)
                     {
@@ -153,14 +153,14 @@ namespace LSLEditor.Docking
                         }
                     }
 
-                    private static Bitmap _bitmapPaneDiamond = DockResources.DockIndicator_PaneDiamond;
-                    private static Bitmap _bitmapPaneDiamondLeft = DockResources.DockIndicator_PaneDiamond_Left;
-                    private static Bitmap _bitmapPaneDiamondRight = DockResources.DockIndicator_PaneDiamond_Right;
-                    private static Bitmap _bitmapPaneDiamondTop = DockResources.DockIndicator_PaneDiamond_Top;
-                    private static Bitmap _bitmapPaneDiamondBottom = DockResources.DockIndicator_PaneDiamond_Bottom;
-                    private static Bitmap _bitmapPaneDiamondFill = DockResources.DockIndicator_PaneDiamond_Fill;
-                    private static Bitmap _bitmapPaneDiamondHotSpot = DockResources.DockIndicator_PaneDiamond_HotSpot;
-                    private static Bitmap _bitmapPaneDiamondHotSpotIndex = DockResources.DockIndicator_PaneDiamond_HotSpotIndex;
+                    private static Bitmap _bitmapPaneDiamond = Resources.DockIndicator_PaneDiamond;
+                    private static Bitmap _bitmapPaneDiamondLeft = Resources.DockIndicator_PaneDiamond_Left;
+                    private static Bitmap _bitmapPaneDiamondRight = Resources.DockIndicator_PaneDiamond_Right;
+                    private static Bitmap _bitmapPaneDiamondTop = Resources.DockIndicator_PaneDiamond_Top;
+                    private static Bitmap _bitmapPaneDiamondBottom = Resources.DockIndicator_PaneDiamond_Bottom;
+                    private static Bitmap _bitmapPaneDiamondFill = Resources.DockIndicator_PaneDiamond_Fill;
+                    private static Bitmap _bitmapPaneDiamondHotSpot = Resources.DockIndicator_PaneDiamond_HotSpot;
+                    private static Bitmap _bitmapPaneDiamondHotSpotIndex = Resources.DockIndicator_PaneDiamond_HotSpotIndex;
                     private static HotSpotIndex[] _hotSpots = new HotSpotIndex[]
 			{
 				new HotSpotIndex(1, 0, DockStyle.Top),

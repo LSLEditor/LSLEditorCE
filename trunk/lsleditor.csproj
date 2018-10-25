@@ -240,6 +240,11 @@
       <SubType>Component</SubType>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Docking\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Docking\DockWindow.cs">
       <SubType>Component</SubType>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
@@ -298,12 +303,6 @@
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Docking\NestedPaneCollection.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Docking\DockResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DockResources.resx</DependentUpon>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Docking\SplitterBase.cs">
@@ -374,6 +373,11 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SecondLife\LSL_Constants.cs" />
     <Compile Include="SecondLife\LSL_Events.cs" />
@@ -525,12 +529,6 @@
     </Compile>
     <Compile Include="LSLEditorForm.Designer.cs">
       <DependentUpon>LSLEditorForm.cs</DependentUpon>
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
@@ -808,11 +806,9 @@
       <DependentUpon>BugReportForm.cs</DependentUpon>
       <LogicalName>BugReportForm.resx</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Docking\DockResources.resx">
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Docking\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>DockResources.Designer.cs</LastGenOutput>
-      <LogicalName>DockResources.resx</LogicalName>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Docking\Strings.resx">
       <SubType>Designer</SubType>
@@ -821,6 +817,10 @@
     <EmbeddedResource Include="llTextBoxForm.resx">
       <DependentUpon>llTextBoxForm.cs</DependentUpon>
       <LogicalName>llTextBoxForm.resx</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Solution\GuidProperty.resx">
       <SubType>Designer</SubType>
@@ -876,12 +876,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>LSLEditorForm.cs</DependentUpon>
       <LogicalName>LSLEditorForm.resx</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <SubType>Designer</SubType>
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <LogicalName>Resources.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\NumberedTextBoxUC.resx">
       <DependentUpon>NumberedTextBoxUC.cs</DependentUpon>

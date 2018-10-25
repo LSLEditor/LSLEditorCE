@@ -36,7 +36,7 @@ namespace LSLEditor.Docking
 
         protected override Size DefaultSize
         {
-            get { return DockResources.DockPane_Close.Size; }
+            get { return Resources.DockPane_Close.Size; }
         }
 
         protected override void OnMouseMove(MouseEventArgs e)

@@ -121,7 +121,7 @@ namespace LSLEditor.Docking
             get
             {
                 if (_imageButtonClose == null)
-                    _imageButtonClose = DockResources.DockPane_Close;
+                    _imageButtonClose = Resources.DockPane_Close;
 
                 return _imageButtonClose;
             }
@@ -150,7 +150,7 @@ namespace LSLEditor.Docking
             get
             {
                 if (_imageButtonWindowList == null)
-                    _imageButtonWindowList = DockResources.DockPane_Option;
+                    _imageButtonWindowList = Resources.DockPane_Option;
 
                 return _imageButtonWindowList;
             }
@@ -162,7 +162,7 @@ namespace LSLEditor.Docking
             get
             {
                 if (_imageButtonWindowListOverflow == null)
-                    _imageButtonWindowListOverflow = DockResources.DockPane_OptionOverflow;
+                    _imageButtonWindowListOverflow = Resources.DockPane_OptionOverflow;
 
                 return _imageButtonWindowListOverflow;
             }
