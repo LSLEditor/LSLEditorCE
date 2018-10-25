@@ -8,6 +8,7 @@
 *.ttf		binary
 
 *.bat		-binary text eol=crlf
+*.ps1		-binary text eol=crlf
 *.conf		-binary text eol=lf
 *.cs		-binary text eol=lf -whitespace
 *.csproj	-binary text eol=lf -whitespace
