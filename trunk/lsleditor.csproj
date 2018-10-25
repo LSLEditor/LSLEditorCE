@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>9.0.21022</ProductVersion>
@@ -29,7 +29,7 @@
     <Win32Resource>LSLEditor.res</Win32Resource>
     <OldToolsVersion>3.5</OldToolsVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <PublishUrl>C:\Users\User\Desktop\Workspace_Jasper\LSL_editor\Published LSLEditor\</PublishUrl>
     <Install>true</Install>
@@ -70,7 +70,7 @@
     <WarningLevel>4</WarningLevel>
     <DebugType>full</DebugType>
     <ErrorReport>prompt</ErrorReport>
-    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>..\bin\Release\</OutputPath>
@@ -84,8 +84,7 @@
     <DebugSymbols>false</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <NoStdLib>false</NoStdLib>
-    <NoWarn>
-    </NoWarn>
+    <NoWarn>CS1591</NoWarn>
     <Optimize>true</Optimize>
     <RegisterForComInterop>false</RegisterForComInterop>
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
@@ -94,6 +93,7 @@
     <DebugType>none</DebugType>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
@@ -105,27 +105,13 @@
       <Name>System.Drawing</Name>
     </Reference>
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms">
       <Name>System.Windows.Forms</Name>
     </Reference>
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net35\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net35\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net35\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -595,7 +581,6 @@
     <EmbeddedResource Include="About.resx">
       <SubType>Designer</SubType>
       <DependentUpon>About.cs</DependentUpon>
-      <LogicalName>About.resx</LogicalName>
     </EmbeddedResource>
     <Compile Include="SecondLife\SecondLifeMain.cs">
       <SubType>Code</SubType>
@@ -796,149 +781,101 @@
     <EmbeddedResource Include="Browser.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Browser.cs</DependentUpon>
-      <LogicalName>Browser.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="BugReport\BugReportForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>BugReportForm.cs</DependentUpon>
-      <LogicalName>BugReportForm.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Docking\Resources.resx">
       <SubType>Designer</SubType>
-      <LogicalName>Resources.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Docking\Strings.resx">
       <SubType>Designer</SubType>
-      <LogicalName>Strings.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="llTextBoxForm.resx">
       <DependentUpon>llTextBoxForm.cs</DependentUpon>
-      <LogicalName>llTextBoxForm.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Solution\GuidProperty.resx">
       <SubType>Designer</SubType>
       <DependentUpon>GuidProperty.cs</DependentUpon>
-      <LogicalName>GuidProperty.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Solution\NewProject.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NewProject.cs</DependentUpon>
-      <LogicalName>NewProject.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="PermissionsForm.resx">
       <DependentUpon>PermissionsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <LogicalName>PermissionsForm.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="GotoWindow.resx">
       <DependentUpon>GotoWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <LogicalName>GotoWindow.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="EditForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>EditForm.cs</DependentUpon>
-      <LogicalName>EditForm.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\TooltipWindow.resx">
       <DependentUpon>TooltipWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <LogicalName>TooltipWindow.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\GListBoxWindow.resx">
       <DependentUpon>GListBoxWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <LogicalName>GListBoxWindow.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\RichLabel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>RichLabel.cs</DependentUpon>
-      <LogicalName>RichLabel.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="FindWindow.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FindWindow.cs</DependentUpon>
-      <LogicalName>FindWindow.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="llDialogForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>llDialogForm.cs</DependentUpon>
-      <LogicalName>llDialogForm.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="LSLEditorForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>LSLEditorForm.cs</DependentUpon>
-      <LogicalName>LSLEditorForm.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <LogicalName>Resources.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\NumberedTextBoxUC.resx">
       <DependentUpon>NumberedTextBoxUC.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <LogicalName>NumberedTextBoxUC.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource\ConfLSL.xml">
       <SubType>Designer</SubType>
-      <LogicalName>ConfLSL.xml</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resource\ConfCSharp.xml">
-      <LogicalName>ConfCSharp.xml</LogicalName>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resource\ConfCSharp.xml" />
     <EmbeddedResource Include="Helpers\GroupboxEvent.resx">
       <DependentUpon>GroupboxEvent.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <LogicalName>GroupboxEvent.resx</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Images\Class.gif">
-      <LogicalName>Class.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\Constants.gif">
-      <LogicalName>Constants.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\Enum.gif">
-      <LogicalName>Enum.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\Events.gif">
-      <LogicalName>Events.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\Functions.gif">
-      <LogicalName>Functions.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\Namespace.gif">
-      <LogicalName>Namespace.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\Properties.gif">
-      <LogicalName>Properties.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\SealedClass.gif">
-      <LogicalName>SealedClass.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\Unknown.gif">
-      <LogicalName>Unknown.gif</LogicalName>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Images\Class.gif" />
+    <EmbeddedResource Include="Images\Constants.gif" />
+    <EmbeddedResource Include="Images\Enum.gif" />
+    <EmbeddedResource Include="Images\Events.gif" />
+    <EmbeddedResource Include="Images\Functions.gif" />
+    <EmbeddedResource Include="Images\Namespace.gif" />
+    <EmbeddedResource Include="Images\Properties.gif" />
+    <EmbeddedResource Include="Images\SealedClass.gif" />
+    <EmbeddedResource Include="Images\Unknown.gif" />
     <EmbeddedResource Include="RuntimeConsole.resx">
       <SubType>Designer</SubType>
       <DependentUpon>RuntimeConsole.cs</DependentUpon>
-      <LogicalName>RuntimeConsole.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\SyntaxRichTextBox.resx">
       <DependentUpon>SyntaxRichTextBox.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <LogicalName>SyntaxRichTextBox.resx</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Images\Close-Active.gif">
-      <LogicalName>Close-Active.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\Close-Disabled.gif">
-      <LogicalName>Close-Disabled.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\Close-Inactive.gif">
-      <LogicalName>Close-Inactive.gif</LogicalName>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Images\Close-Active.gif" />
+    <EmbeddedResource Include="Images\Close-Disabled.gif" />
+    <EmbeddedResource Include="Images\Close-Inactive.gif" />
     <Content Include="App.ico" />
     <Content Include="Docking\DockPanel.bmp" />
     <Content Include="Docking\Resources\DockIndicator_PaneDiamond.bmp" />
@@ -985,273 +922,152 @@
     <Content Include="Icons\SAVEAS.GIF" />
     <Content Include="Icons\START.GIF" />
     <Content Include="Icons\UNDO.GIF" />
-    <EmbeddedResource Include="ImagesSolutionExplorer\Animation.gif">
-      <LogicalName>Animation.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Animations.gif">
-      <LogicalName>Animations.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Body Parts.gif">
-      <LogicalName>Body Parts.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Prim.gif">
-      <LogicalName>Prim.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Calling Cards.gif">
-      <LogicalName>Calling Cards.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Clothes.gif">
-      <LogicalName>Clothes.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Eyes.gif">
-      <LogicalName>Eyes.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Folder.gif">
-      <LogicalName>Folder.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Gesture.gif">
-      <LogicalName>Gesture.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Gestures.gif">
-      <LogicalName>Gestures.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Gloves.gif">
-      <LogicalName>Gloves.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Hair.gif">
-      <LogicalName>Hair.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Inventory.gif">
-      <LogicalName>Inventory.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Jacket.gif">
-      <LogicalName>Jacket.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Landmark.gif">
-      <LogicalName>Landmark.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Landmarks.gif">
-      <LogicalName>Landmarks.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Lost And Found.gif">
-      <LogicalName>Lost And Found.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Notecard.gif">
-      <LogicalName>Notecard.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Notecards.gif">
-      <LogicalName>Notecards.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Object.gif">
-      <LogicalName>Object.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Objects.gif">
-      <LogicalName>Objects.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Pants.gif">
-      <LogicalName>Pants.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Photo Album.gif">
-      <LogicalName>Photo Album.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Project.gif">
-      <LogicalName>Project.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\question.gif">
-      <LogicalName>question.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Script.gif">
-      <LogicalName>Script.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Scripts.gif">
-      <LogicalName>Scripts.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Shape.gif">
-      <LogicalName>Shape.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Shirt.gif">
-      <LogicalName>Shirt.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Shoes.gif">
-      <LogicalName>Shoes.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Skin.gif">
-      <LogicalName>Skin.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Skirt.gif">
-      <LogicalName>Skirt.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Snapshot.gif">
-      <LogicalName>Snapshot.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Socks.gif">
-      <LogicalName>Socks.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Solution.gif">
-      <LogicalName>Solution.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Sound.gif">
-      <LogicalName>Sound.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Sounds.gif">
-      <LogicalName>Sounds.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Texture.gif">
-      <LogicalName>Texture.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Textures.gif">
-      <LogicalName>Textures.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Trash.gif">
-      <LogicalName>Trash.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Underpants.gif">
-      <LogicalName>Underpants.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Undershirt.gif">
-      <LogicalName>Undershirt.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\Unknown.gif">
-      <LogicalName>Unknown.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\Vars.gif">
-      <LogicalName>Vars.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\States.gif">
-      <LogicalName>States.gif</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImagesSolutionExplorer\LSLIScript.gif">
-      <LogicalName>LSLIScript.gif</LogicalName>
-    </EmbeddedResource>
+    <EmbeddedResource Include="ImagesSolutionExplorer\Animation.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Animations.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Body Parts.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Prim.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Calling Cards.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Clothes.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Eyes.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Folder.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Gesture.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Gestures.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Gloves.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Hair.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Inventory.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Jacket.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Landmark.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Landmarks.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Lost And Found.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Notecard.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Notecards.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Object.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Objects.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Pants.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Photo Album.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Project.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\question.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Script.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Scripts.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Shape.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Shirt.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Shoes.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Skin.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Skirt.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Snapshot.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Socks.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Solution.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Sound.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Sounds.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Texture.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Textures.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Trash.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Underpants.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Undershirt.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\Unknown.gif" />
+    <EmbeddedResource Include="Images\Vars.gif" />
+    <EmbeddedResource Include="Images\States.gif" />
+    <EmbeddedResource Include="ImagesSolutionExplorer\LSLIScript.gif" />
     <Content Include="Resource\App.ico" />
     <Content Include="Images\logo.gif" />
     <Content Include="LSLEditor.rc" />
     <EmbeddedResource Include="Resource\ToolsOptions.xml">
       <SubType>Designer</SubType>
-      <LogicalName>ToolsOptions.xml</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resource\thanks.gif">
-      <LogicalName>thanks.gif</LogicalName>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resource\thanks.gif" />
     <None Include="lsleditor_TemporaryKey.pfx" />
     <None Include="Web References\org.lsleditor.www\Service1.disco" />
-    <EmbeddedResource Include="Resource\About.htm">
-      <LogicalName>About.htm</LogicalName>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resource\About.htm" />
     <EmbeddedResource Include="Resource\ReleaseNotes.htm">
       <SubType>Designer</SubType>
-      <LogicalName>ReleaseNotes.htm</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="SimulatorConsole.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SimulatorConsole.cs</DependentUpon>
-      <LogicalName>SimulatorConsole.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Solution\SolutionExplorer.resx">
       <DependentUpon>SolutionExplorer.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <LogicalName>SolutionExplorer.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Solution\SvnAguments.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SvnAguments.cs</DependentUpon>
-      <LogicalName>SvnAguments.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="SyntaxError.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SyntaxError.cs</DependentUpon>
-      <LogicalName>SyntaxError.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\EnvironmentPlugins.resx">
       <SubType>Designer</SubType>
       <DependentUpon>EnvironmentPlugins.cs</DependentUpon>
-      <LogicalName>EnvironmentPlugins.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\IncludeExportSettings.resx">
       <DependentUpon>IncludeExportSettings.cs</DependentUpon>
-      <LogicalName>IncludeExportSettings.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\ProjectIncludes.resx">
       <DependentUpon>ProjectIncludes.cs</DependentUpon>
-      <LogicalName>ProjectIncludes.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\RuntimeGeneral.resx">
       <DependentUpon>RuntimeGeneral.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <LogicalName>RuntimeGeneral.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\TextEditorCodeCompletion.resx">
       <DependentUpon>TextEditorCodeCompletion.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <LogicalName>TextEditorCodeCompletion.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\EnvironmentBrowser.resx">
       <SubType>Designer</SubType>
       <DependentUpon>EnvironmentBrowser.cs</DependentUpon>
-      <LogicalName>EnvironmentBrowser.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\ProjectSettings.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ProjectSettings.cs</DependentUpon>
-      <LogicalName>ProjectSettings.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\RuntimeInternal.resx">
       <DependentUpon>RuntimeInternal.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <LogicalName>RuntimeInternal.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\RuntimeSmtp.resx">
       <DependentUpon>RuntimeSmtp.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <LogicalName>RuntimeSmtp.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\RuntimeExternal.resx">
       <DependentUpon>RuntimeExternal.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <LogicalName>RuntimeExternal.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\EnvironmentGeneral.resx">
       <SubType>Designer</SubType>
       <DependentUpon>EnvironmentGeneral.cs</DependentUpon>
-      <LogicalName>EnvironmentGeneral.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\TextEditorFontColors.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TextEditorFontColors.cs</DependentUpon>
-      <LogicalName>TextEditorFontColors.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\EnvironmentHelp.resx">
       <SubType>Designer</SubType>
       <DependentUpon>EnvironmentHelp.cs</DependentUpon>
-      <LogicalName>EnvironmentHelp.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\TextEditorGeneral.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TextEditorGeneral.cs</DependentUpon>
-      <LogicalName>TextEditorGeneral.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\ToolsOptions.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ToolsOptions.cs</DependentUpon>
-      <LogicalName>ToolsOptions.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\VersionControlGeneral.resx">
       <SubType>Designer</SubType>
       <DependentUpon>VersionControlGeneral.cs</DependentUpon>
-      <LogicalName>VersionControlGeneral.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolWindow.resx">
       <DependentUpon>ToolWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <LogicalName>ToolWindow.resx</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateApplicationForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>UpdateApplicationForm.cs</DependentUpon>
-      <LogicalName>UpdateApplicationForm.resx</LogicalName>
     </EmbeddedResource>
     <None Include="Resource\export_file-32.png" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
