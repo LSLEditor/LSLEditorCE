@@ -36,7 +36,6 @@
 // </summary>
 
 
-using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -46,6 +45,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web.Script.Serialization;
 
 namespace LSLEditor
 {
@@ -513,7 +513,7 @@ namespace LSLEditor
             try
             {
                 new Guid(thing);
-            } catch (FormatException e)
+            } catch (FormatException)
             {
                 Verbose("osIsUUID({0})=0", thing);
                 return 0;
@@ -1241,8 +1241,11 @@ namespace LSLEditor
         
         public Hashtable osParseJSON(String JSON)
         {
-            Object decoded = JsonConvert.DeserializeObject(JSON);
-
+            var serializer = new JavaScriptSerializer()
+            {
+                MaxJsonLength = JSON.ToString().Length,
+            };
+            Object decoded = serializer.DeserializeObject(JSON);
             if (decoded is Hashtable)
             {
                 Verbose("osParseJSON(\"{0}\")={1}", JSON, (Hashtable)decoded);
@@ -1263,6 +1266,7 @@ namespace LSLEditor
             }
             else
             {
+                // It can be a recursive from Dictionary<string, object>.Value too
                 Chat(0, "osParseJSON: unable to parse JSON string " + JSON, CommunicationType.Say);
                 Verbose("osParseJSON(\"{0}\")={1}", JSON, new list().ToVerboseString());
                 return null;
@@ -1271,9 +1275,13 @@ namespace LSLEditor
 
         public Object osParseJSONNew(String JSON)
         {
-            Object result = JsonConvert.DeserializeObject(JSON);
-            Verbose("osParseJSONNew(\"{0}\")={1}", JSON, result);
-            return result;
+            var serializer = new JavaScriptSerializer()
+            {
+                MaxJsonLength = JSON.ToString().Length,
+            };
+            Object decoded = serializer.DeserializeObject(JSON);
+            Verbose("osParseJSONNew(\"{0}\")={1}", JSON, decoded);
+            return decoded;
         }
 
         public string osReplaceString(string src, String pattern, String replace, int count, int start)
