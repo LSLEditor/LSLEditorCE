@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -38,96 +38,103 @@
 // </summary>
 
 using System;
-using System.Reflection;
 using System.ComponentModel;
 using System.Drawing;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
 namespace LSLEditor.Tools
 {
-	public partial class TextEditorGeneral : UserControl, ICommit
-	{
-		public TextEditorGeneral()
-		{
-			InitializeComponent();
+    public partial class TextEditorGeneral : UserControl, ICommit
+    {
+        public TextEditorGeneral()
+        {
+            this.InitializeComponent();
 
-			this.checkBox1.Checked = Properties.Settings.Default.IndentWarning;
+            this.checkBox1.Checked = Properties.Settings.Default.IndentWarning;
 
-			this.checkBox2.Checked = Properties.Settings.Default.Indent;
-			checkBox2_CheckedChanged(null, null);
+            this.checkBox2.Checked = Properties.Settings.Default.Indent;
+            this.checkBox2_CheckedChanged(null, null);
 
-			this.radioButton1.Checked = Properties.Settings.Default.IndentFullAuto;
-			this.radioButton2.Checked = Properties.Settings.Default.IndentCursorPlacement;
+            this.radioButton1.Checked = Properties.Settings.Default.IndentFullAuto;
+            this.radioButton2.Checked = Properties.Settings.Default.IndentCursorPlacement;
 
-			this.radioButton3.Checked = !Properties.Settings.Default.SL4SpacesIndent;
-			this.radioButton4.Checked = Properties.Settings.Default.SL4SpacesIndent;
+            this.radioButton3.Checked = !Properties.Settings.Default.SL4SpacesIndent;
+            this.radioButton4.Checked = Properties.Settings.Default.SL4SpacesIndent;
 
-			this.checkBox3.Checked = Properties.Settings.Default.AutoWordSelection;
+            this.checkBox3.Checked = Properties.Settings.Default.AutoWordSelection;
 
-			this.checkBox4.Checked = Helpers.FileAssociator.IsAssociated(".lsl");
+            this.checkBox4.Checked = Helpers.FileAssociator.IsAssociated(".lsl");
 
-			this.checkBox5.Checked = Properties.Settings.Default.IndentAutoCorrect;
+            this.checkBox5.Checked = Properties.Settings.Default.IndentAutoCorrect;
 
+            switch (Properties.Settings.Default.OutputFormat)
+            {
+                case "Unicode":
+                    this.radioButton6.Checked = true;
+                    break;
+                case "BigEndianUnicode":
+                    this.radioButton7.Checked = true;
+                    break;
+                case "UTF8":
+                    this.radioButton8.Checked = true;
+                    break;
+                default: // ANSI
+                    this.radioButton5.Checked = true;
+                    break;
+            }
+        }
 
-			switch(Properties.Settings.Default.OutputFormat)
-			{
-				case "Unicode":
-					this.radioButton6.Checked = true;
-					break;
-				case "BigEndianUnicode":
-					this.radioButton7.Checked = true;
-					break;
-				case "UTF8":
-					this.radioButton8.Checked = true;
-					break;
-				default: // ANSI
-					this.radioButton5.Checked = true;
-					break;
-			}
-		}
+        public void Commit()
+        {
+            Properties.Settings.Default.IndentWarning = this.checkBox1.Checked;
+            Properties.Settings.Default.Indent = this.checkBox2.Checked;
+            Properties.Settings.Default.AutoWordSelection = this.checkBox3.Checked;
+            Properties.Settings.Default.SL4SpacesIndent = this.radioButton4.Checked;
+            Properties.Settings.Default.IndentAutoCorrect = this.checkBox5.Checked;
+            Properties.Settings.Default.IndentFullAuto = this.radioButton1.Checked;
+            Properties.Settings.Default.IndentCursorPlacement = this.radioButton2.Checked;
 
-		public void Commit()
-		{
-			Properties.Settings.Default.IndentWarning = this.checkBox1.Checked;
-			Properties.Settings.Default.Indent = this.checkBox2.Checked;
-			Properties.Settings.Default.AutoWordSelection = this.checkBox3.Checked;
-			Properties.Settings.Default.SL4SpacesIndent = this.radioButton4.Checked;
-			Properties.Settings.Default.IndentAutoCorrect = this.checkBox5.Checked;
-			Properties.Settings.Default.IndentFullAuto = this.radioButton1.Checked;
-			Properties.Settings.Default.IndentCursorPlacement = this.radioButton2.Checked;
+            if (this.radioButton5.Checked)
+            {
+                Properties.Settings.Default.OutputFormat = "ANSI";
+            }
+            else if (this.radioButton6.Checked)
+            {
+                Properties.Settings.Default.OutputFormat = "Unicode";
+            }
+            else if (this.radioButton7.Checked)
+            {
+                Properties.Settings.Default.OutputFormat = "BigEndianUnicode";
+            }
+            else if (this.radioButton8.Checked)
+            {
+                Properties.Settings.Default.OutputFormat = "UTF8";
+            }
 
-			if (this.radioButton5.Checked)
-				Properties.Settings.Default.OutputFormat = "ANSI";
-			else if (this.radioButton6.Checked)
-				Properties.Settings.Default.OutputFormat = "Unicode";
-			else if (this.radioButton7.Checked)
-				Properties.Settings.Default.OutputFormat = "BigEndianUnicode";
-			else if (this.radioButton8.Checked)
-				Properties.Settings.Default.OutputFormat = "UTF8";
+            if (this.checkBox4.Checked)
+            {
+                if (!Helpers.FileAssociator.Associate(
+                    ".lsl", "LSLEditorScript", "SecondLife script file for LSLEditor",
+                    Assembly.GetExecutingAssembly().Location, 0))
+                {
+                    MessageBox.Show("File association can not be made (needs administrative access)", "Oops...",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (Helpers.FileAssociator.IsAssociated(".lsl")
+                 && !Helpers.FileAssociator.DeAssociate(".lsl", "LSLEditorScript"))
+            {
+                MessageBox.Show("File association can not be unmade (needs administrative access)", "Oops...",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-			if (this.checkBox4.Checked)
-			{
-				if(!
-				Helpers.FileAssociator.Associate(".lsl", "LSLEditorScript", "SecondLife script file for LSLEditor", Assembly.GetExecutingAssembly().Location, 0))
-					MessageBox.Show("File association can not be made (needs administrative access)", "Oops...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-			}
-			else
-			{
-				if (Helpers.FileAssociator.IsAssociated(".lsl"))
-				{
-					if(!Helpers.FileAssociator.DeAssociate(".lsl", "LSLEditorScript"))
-						MessageBox.Show("File association can not be unmade (needs administrative access)", "Oops...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-			}
-		}
-
-		private void checkBox2_CheckedChanged(object sender, EventArgs e)
-		{
-			this.radioButton1.Enabled = this.checkBox2.Checked;
-			this.radioButton2.Enabled = this.checkBox2.Checked;
-		}
-
-	}
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            this.radioButton1.Enabled = this.checkBox2.Checked;
+            this.radioButton2.Enabled = this.checkBox2.Checked;
+        }
+    }
 }

@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -38,30 +38,30 @@
 // </summary>
 
 using System;
-using System.Reflection;
 using System.IO;
+using System.Reflection;
 
 namespace LSLEditor.Helpers
 {
-	class GetTemplate
-	{
-		public static string Source()
-		{
-			try
-			{
-				string strTemplate = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), Properties.Settings.Default.ExampleTemplate);
-				if (File.Exists(strTemplate))
-				{
-					StreamReader sr = new StreamReader(strTemplate);
-					string strCode = sr.ReadToEnd();
-					sr.Close();
-					return strCode;
-				}
-			}
-			catch
-			{
-			}
-			return Properties.Settings.Default.Example.Trim() + Environment.NewLine;
-		}
-	}
+    internal static class GetTemplate
+    {
+        public static string Source()
+        {
+            try
+            {
+                var strTemplate = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), Properties.Settings.Default.ExampleTemplate);
+                if (File.Exists(strTemplate))
+                {
+                    var sr = new StreamReader(strTemplate);
+                    var strCode = sr.ReadToEnd();
+                    sr.Close();
+                    return strCode;
+                }
+            }
+            catch
+            {
+            }
+            return Properties.Settings.Default.Example.Trim() + Environment.NewLine;
+        }
+    }
 }

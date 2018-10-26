@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -43,101 +43,106 @@ using System.Windows.Forms;
 
 namespace LSLEditor.Editor
 {
-	public partial class Numbered : UserControl
-	{
-		public RichTextBox richTextBox1;
-		private Brush brush;
-		public float LineHeight;
+    public partial class Numbered : UserControl
+    {
+        public RichTextBox richTextBox1;
+        private readonly Brush brush;
+        public float LineHeight;
 
-		public Numbered()
-		{
-			InitializeComponent();
+        public Numbered()
+        {
+            this.InitializeComponent();
 
-			this.SetStyle(
-				ControlStyles.DoubleBuffer |
-				ControlStyles.UserPaint |
-				ControlStyles.AllPaintingInWmPaint,
-				true);
+            this.SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
 
-			this.UpdateStyles();
+            this.UpdateStyles();
 
-			brush = new SolidBrush(this.ForeColor);
+            this.brush = new SolidBrush(this.ForeColor);
 
-			LineHeight = 0.0F;
-		}
+            this.LineHeight = 0.0F;
+        }
 
-		private void updateNumberLabel(PaintEventArgs e)
-		{
-			if (this.brush == null)
-				return;
+        private void updateNumberLabel(PaintEventArgs e)
+        {
+            if (this.brush == null)
+            {
+                return;
+            }
 
-			if (this.ClientSize.Width <= 0 || this.ClientSize.Height <= 0)
-				return;
+            if (this.ClientSize.Width <= 0 || this.ClientSize.Height <= 0)
+            {
+                return;
+            }
 
-			int delta = 0;
-			int firstLine = 0;
-			int lastLine = 10;
-			Font font = this.Font;
+            var delta = 0;
+            var firstLine = 0;
+            var lastLine = 10;
+            var font = this.Font;
             int selectedLineStart = -1, selectedLineEnd = -1;
-			if (this.richTextBox1 == null)
-			{
-				LineHeight = 16.0F;
-			}
-			else
-			{
-                if (richTextBox1.SelectionStart != -1)
+            if (this.richTextBox1 == null)
+            {
+                this.LineHeight = 16.0F;
+            }
+            else
+            {
+                if (this.richTextBox1.SelectionStart != -1)
                 {
-                    selectedLineStart = richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart);
-                    selectedLineEnd = richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart + richTextBox1.SelectionLength);
+                    selectedLineStart = this.richTextBox1.GetLineFromCharIndex(this.richTextBox1.SelectionStart);
+                    selectedLineEnd = this.richTextBox1.GetLineFromCharIndex(this.richTextBox1.SelectionStart + this.richTextBox1.SelectionLength);
                 }
-				//we get index of first visible char and number of first visible line
-				Point pos = new Point(0, 0);
+                //we get index of first visible char and number of first visible line
+                var pos = new Point(0, 0);
 
-				int firstIndex = this.richTextBox1.GetCharIndexFromPosition(pos);
-				firstLine = this.richTextBox1.GetLineFromCharIndex(firstIndex);
+                var firstIndex = this.richTextBox1.GetCharIndexFromPosition(pos);
+                firstLine = this.richTextBox1.GetLineFromCharIndex(firstIndex);
 
-				font = this.richTextBox1.Font;
+                font = this.richTextBox1.Font;
 
-				if (LineHeight < 0.01)
-				{
-					if (this.richTextBox1.Lines.Length > 1)
-					{
-						Point pos1 = this.richTextBox1.GetPositionFromCharIndex(this.richTextBox1.GetFirstCharIndexFromLine(1));
-						LineHeight = pos1.Y;
-					}
-				}
+                if (this.LineHeight < 0.01)
+                {
+                    if (this.richTextBox1.Lines.Length > 1)
+                    {
+                        var pos1 = this.richTextBox1.GetPositionFromCharIndex(this.richTextBox1.GetFirstCharIndexFromLine(1));
+                        this.LineHeight = pos1.Y;
+                    }
+                }
 
-				lastLine = Math.Min(this.richTextBox1.Lines.Length, 2 + firstLine + (int)(this.richTextBox1.ClientRectangle.Height / LineHeight));
+                lastLine = Math.Min(this.richTextBox1.Lines.Length, 2 + firstLine + (int)(this.richTextBox1.ClientRectangle.Height / this.LineHeight));
 
-				int intCharIndex = this.richTextBox1.GetCharIndexFromPosition(Point.Empty);
-				delta = 1 + this.richTextBox1.GetPositionFromCharIndex(intCharIndex).Y % font.Height;
-			}
+                var intCharIndex = this.richTextBox1.GetCharIndexFromPosition(Point.Empty);
+                delta = 1 + this.richTextBox1.GetPositionFromCharIndex(intCharIndex).Y % font.Height;
+            }
 
-			// here we go
-			lastLine = Math.Max(lastLine, 1);
+            // here we go
+            lastLine = Math.Max(lastLine, 1);
 
-			Graphics g = e.Graphics;
-			g.Clear(this.BackColor);
-			if(this.richTextBox1==null)
-				g.SetClip(new Rectangle(0, 0, this.Width, this.Height));
-			else
-				g.SetClip(new Rectangle(0, 0, this.Width, this.richTextBox1.ClientRectangle.Height));
+            var g = e.Graphics;
+            g.Clear(this.BackColor);
+            if (this.richTextBox1 == null)
+            {
+                g.SetClip(new Rectangle(0, 0, this.Width, this.Height));
+            }
+            else
+            {
+                g.SetClip(new Rectangle(0, 0, this.Width, this.richTextBox1.ClientRectangle.Height));
+            }
 
-			for (int i = firstLine; i < lastLine; i++)
-				g.DrawString(string.Format("{0:0###}", i + 1), (i>=selectedLineStart && i<= selectedLineEnd) ? new Font(font,FontStyle.Bold) : font, brush,
-					new PointF(0F, delta + (i - firstLine) * LineHeight) );
-			//g.DrawLine(new Pen(brush), backBuffer.Width - 1, 0, backBuffer.Width - 1, backBuffer.Height);
-		}
+            for (var i = firstLine; i < lastLine; i++)
+            {
+                g.DrawString(string.Format("{0:0###}", i + 1), (i >= selectedLineStart && i <= selectedLineEnd) ? new Font(font, FontStyle.Bold) : font, this.brush,
+                    new PointF(0F, delta + (i - firstLine) * this.LineHeight));
+            }
+            //g.DrawLine(new Pen(brush), backBuffer.Width - 1, 0, backBuffer.Width - 1, backBuffer.Height);
+        }
 
-		protected override void OnPaint(PaintEventArgs e)
-		{
-			updateNumberLabel(e);
-		}
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            this.updateNumberLabel(e);
+        }
 
-		protected override void OnPaintBackground(PaintEventArgs e)
-		{
-			//base.OnPaintBackground(e);
-		}
-
-	}
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            //base.OnPaintBackground(e);
+        }
+    }
 }

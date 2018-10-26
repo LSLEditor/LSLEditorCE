@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -38,55 +38,66 @@
 // </summary>
 
 using System;
-using System.Xml;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml;
 
 namespace LSLEditor
 {
-	class LSL2CSharp
-	{
-		public List<string> States;
-		private XmlDocument xml;
+    internal class LSL2CSharp
+    {
+        public List<string> States;
+        private readonly XmlDocument xml;
 
-		public LSL2CSharp(XmlDocument xml)
-		{
-			this.xml = xml;
-			this.States = new List<string>();
-		}
+        public LSL2CSharp(XmlDocument xml)
+        {
+            this.xml = xml;
+            this.States = new List<string>();
+        }
 
-		private string CorrectGlobalEvaluator(Match m)
-		{
-			string strPrefix = m.Groups["prefix"].Value;
-			string strPublic = m.Groups["public"].Value;
-			string strPostfix = m.Groups["postfix"].Value;
-			if (strPublic.EndsWith(";"))
-				return strPrefix + "public static " + strPublic + strPostfix;
-			// has to be static,
-			// because the vars must keep their values between state changes
+        private string CorrectGlobalEvaluator(Match m)
+        {
+            var strPrefix = m.Groups["prefix"].Value;
+            var strPublic = m.Groups["public"].Value;
+            var strPostfix = m.Groups["postfix"].Value;
+            if (strPublic.EndsWith(";"))
+            {
+                return strPrefix + "public static " + strPublic + strPostfix;
+            }
+            // has to be static,
+            // because the vars must keep their values between state changes
 
-			// 22 june 2007, added
-			Regex regex = new Regex(@"\w*", RegexOptions.IgnorePatternWhitespace );
-			int intCount=0;
-			for (Match pm = regex.Match(strPublic); pm.Success; pm = pm.NextMatch())
-			{
-				if (pm.Value.Length > 0)
-					intCount++;
-				if (intCount > 1)
-					break;
-			}
-			if(intCount==1)
-				return strPrefix + "public void " + strPublic + strPostfix;
-			else
-				return strPrefix + "public " + strPublic + strPostfix;
-		}
+            // 22 june 2007, added
+            var regex = new Regex(@"\w*", RegexOptions.IgnorePatternWhitespace);
+            var intCount = 0;
+            for (var pm = regex.Match(strPublic); pm.Success; pm = pm.NextMatch())
+            {
+                if (pm.Value.Length > 0)
+                {
+                    intCount++;
+                }
 
-		private string CorrectGlobal(string strC)
-		{
-			Regex regex = new Regex(
-				@"(?<prefix>\s*)
+                if (intCount > 1)
+                {
+                    break;
+                }
+            }
+            if (intCount == 1)
+            {
+                return strPrefix + "public void " + strPublic + strPostfix;
+            }
+            else
+            {
+                return strPrefix + "public " + strPublic + strPostfix;
+            }
+        }
+
+        private string CorrectGlobal(string strC)
+        {
+            var regex = new Regex(
+                @"(?<prefix>\s*)
 (?:
    (?<public>[^{};]*;)
 
@@ -105,83 +116,73 @@ namespace LSLEditor
 \}
 )
 )",
-				RegexOptions.IgnorePatternWhitespace);
-			return regex.Replace(strC, new MatchEvaluator(CorrectGlobalEvaluator));
-		}
+                RegexOptions.IgnorePatternWhitespace);
+            return regex.Replace(strC, new MatchEvaluator(this.CorrectGlobalEvaluator));
+        }
 
-		private string RemoveComments(string strC)
-		{
-			if (Properties.Settings.Default.CommentCStyle)
-			{
-				int intI = strC.IndexOf("/*");
-				while (intI > 0)
-				{
-					int intJ = strC.IndexOf("*" + "/", intI);
-					if (intJ < 0)
-						break;
-					strC = strC.Remove(intI, intJ - intI + 2);
-					intI = strC.IndexOf("/*");
-				}
-			}
-			return AutoFormatter.RemoveCommentsFromLines(strC);
-		}
+        private string RemoveComments(string strC)
+        {
+            if (Properties.Settings.Default.CommentCStyle)
+            {
+                var intI = strC.IndexOf("/*");
+                while (intI > 0)
+                {
+                    var intJ = strC.IndexOf("*/", intI);
+                    if (intJ < 0)
+                    {
+                        break;
+                    }
 
-		private string CorrectStates(string strC,string strGlobalClass)
-		{
-			Regex regex;
+                    strC = strC.Remove(intI, intJ - intI + 2);
+                    intI = strC.IndexOf("/*");
+                }
+            }
+            return AutoFormatter.RemoveCommentsFromLines(strC);
+        }
 
-			// Default state
-			regex = new Regex(@"^\s*(default)(\W)",
-				RegexOptions.Multiline
-				|  RegexOptions.IgnorePatternWhitespace
-				| RegexOptions.Compiled);
-			strC = regex.Replace(strC, @"class State_$1 : " + strGlobalClass + "$2");
+        private string CorrectStates(string strC, string strGlobalClass)
+        {
+            // Default state
+            var regex = new Regex(@"^\s*(default)(\W)",
+                RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+            strC = regex.Replace(strC, "class State_$1 : " + strGlobalClass + "$2");
 
-			// Other states
-			regex = new Regex(
-				@"^state\s+([^\s]*)(\s*\{)",
-				RegexOptions.Multiline
-				| RegexOptions.IgnorePatternWhitespace
-				| RegexOptions.Compiled
-				);
-			Match m = regex.Match(strC);
-			while (m.Success)
-			{
-				string strStateName = m.Groups[1].ToString();
-				this.States.Add(strStateName);
-				m = m.NextMatch();
-			}
-			strC = regex.Replace(strC, "class State_$1 : " + strGlobalClass + "$2");
+            // Other states
+            regex = new Regex(
+                @"^state\s+([^\s]*)(\s*\{)",
+                RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+            var m = regex.Match(strC);
+            while (m.Success)
+            {
+                var strStateName = m.Groups[1].ToString();
+                this.States.Add(strStateName);
+                m = m.NextMatch();
+            }
+            strC = regex.Replace(strC, "class State_$1 : " + strGlobalClass + "$2");
 
-			string strGlobal = "";
+            var strGlobal = "";
 
-			if (Properties.Settings.Default.StatesInGlobalFunctions)
-			{
-				// do nothing!
-			}
-			else
-			{
-				int intDefault = strC.IndexOf("class State_default");
-				if (intDefault >= 0)
-				{
-					strGlobal = strC.Substring(0, intDefault);
-					strC = strC.Substring(intDefault);
-				}
-			}
+            if (!Properties.Settings.Default.StatesInGlobalFunctions)
+            {
+                var intDefault = strC.IndexOf("class State_default");
+                if (intDefault >= 0)
+                {
+                    strGlobal = strC.Substring(0, intDefault);
+                    strC = strC.Substring(intDefault);
+                }
+            }
 
-			// State change, excluding global functions
-			regex = new Regex(
-				@"(\s+)state\s+(\w+)(\s*;)",
-				RegexOptions.IgnorePatternWhitespace
-				| RegexOptions.Compiled
-				);
-			return strGlobal + regex.Replace(strC, @"$1state(""$2"")$3");
-		}
+            // State change, excluding global functions
+            regex = new Regex(
+                @"(\s+)state\s+(\w+)(\s*;)",
+                RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+            return strGlobal + regex.Replace(strC, @"$1state(""$2"")$3");
+        }
 
-		private string PreCorrectReservedWords(string strC)
-		{
-			#region All PreCorrect reserved C# words
-			Regex regex = new Regex(@"(\b)(public
+        private string PreCorrectReservedWords(string strC)
+        {
+            #region All PreCorrect reserved C# words
+            var regex = new Regex(@"(\b)(public
 |		class
 |		override
 |		namespace
@@ -194,17 +195,15 @@ namespace LSLEditor
 |		Float
 
 )(\b)",
-			 RegexOptions.IgnorePatternWhitespace
-				| RegexOptions.Compiled
-				);
-			#endregion
-			return regex.Replace(strC, "$1_$2$3");
-		}
+             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+            #endregion
+            return regex.Replace(strC, "$1_$2$3");
+        }
 
-		private string CorrectReservedWords(string strC)
-		{
-			#region All reserved C# words
-			Regex regex = new Regex(@"(\b)(new
+        private string CorrectReservedWords(string strC)
+        {
+            #region All reserved C# words
+            var regex = new Regex(@"(\b)(new
 |		abstract
 |		as
 |		base
@@ -267,39 +266,35 @@ namespace LSLEditor
 |		virtual
 
 )(\b)",
-			 RegexOptions.IgnorePatternWhitespace
-				| RegexOptions.Compiled
-				);
-			#endregion
-			return regex.Replace(strC, "$1_$2$3");
-		}
+             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+            #endregion
+            return regex.Replace(strC, "$1_$2$3");
+        }
 
-		private string CorrectEvent(string strC, string strName)
-		{
-			Regex regex = new Regex(
-				@"([^\w_])" + strName + @"(\s*)\(",
-				RegexOptions.IgnorePatternWhitespace
-				| RegexOptions.Compiled
-				);
-			return regex.Replace(strC, "$1public override void " + strName + "$2(");
-		}
+        private string CorrectEvent(string strC, string strName)
+        {
+            var regex = new Regex(
+                @"([^\w_])" + strName + @"(\s*)\(",
+                RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+            return regex.Replace(strC, "$1public override void " + strName + "$2(");
+        }
 
-		private string CorrectEvents(string strC)
-		{
-			XmlNode words = xml.SelectSingleNode("//Words[@name='Appendix B. Events']");
-			foreach (XmlNode xmlNode in words.SelectNodes(".//Word"))
-			{
-				string strName = xmlNode.Attributes["name"].InnerText;
-				strC = CorrectEvent(strC, strName);
-			}
-			return strC;
-		}
+        private string CorrectEvents(string strC)
+        {
+            var words = this.xml.SelectSingleNode("//Words[@name='Appendix B. Events']");
+            foreach (XmlNode xmlNode in words.SelectNodes(".//Word"))
+            {
+                var strName = xmlNode.Attributes["name"].InnerText;
+                strC = this.CorrectEvent(strC, strName);
+            }
+            return strC;
+        }
 
-		// old vector parser
-		// <([^<>,;]*),([^<>,;]*),([^<>,;]*)>
-		private string CorrectVector(string strC)
-		{
-			Regex regex = new Regex(@"
+        // old vector parser
+        // <([^<>,;]*),([^<>,;]*),([^<>,;]*)>
+        private string CorrectVector(string strC)
+        {
+            var regex = new Regex(@"
 <
    (?<vector_x>
       (?>
@@ -332,17 +327,15 @@ namespace LSLEditor
    )
 >
 ",
-				RegexOptions.IgnorePatternWhitespace
-				| RegexOptions.Compiled
-				);
-			return regex.Replace(strC, "new vector(${vector_x},${vector_y},${vector_z})");
-		}
+                RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+            return regex.Replace(strC, "new vector(${vector_x},${vector_y},${vector_z})");
+        }
 
-		// old rotation
-		// <([^<>,;]*),([^<>,;]*),([^<>,;]*),([^<>,;]*)>
-		private string CorrectRotation(string strC)
-		{
-			Regex regex = new Regex(@"
+        // old rotation
+        // <([^<>,;]*),([^<>,;]*),([^<>,;]*),([^<>,;]*)>
+        private string CorrectRotation(string strC)
+        {
+            var regex = new Regex(@"
 <
    (?<rotation_x>
       (?>
@@ -385,32 +378,27 @@ namespace LSLEditor
    )
 >
 ",
-				RegexOptions.IgnorePatternWhitespace
-				| RegexOptions.Compiled
-				);
-			return regex.Replace(strC, "new rotation(${rotation_x},${rotation_y},${rotation_z},${rotation_s})");
-		}
+                RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+            return regex.Replace(strC, "new rotation(${rotation_x},${rotation_y},${rotation_z},${rotation_s})");
+        }
 
-		private string CorrectQuaternion(string strC)
-		{
-			Regex regex = new Regex(
-	@"(\b)quaternion(\b)",
-	RegexOptions.Compiled
-	| RegexOptions.IgnorePatternWhitespace
-	);
-			return regex.Replace(strC, "$1rotation$2");
-		}
+        private string CorrectQuaternion(string strC)
+        {
+            var regex = new Regex(@"(\b)quaternion(\b)",
+                RegexOptions.Compiled | RegexOptions.IgnorePatternWhitespace);
+            return regex.Replace(strC, "$1rotation$2");
+        }
 
-		private string CorrectListsEvaluator(Match m)
-		{
-			string strValue = m.Value;
-			return "new list(new object[] {" + CorrectLists(strValue.Substring(1, strValue.Length - 2)) + "})";
-		}
+        private string CorrectListsEvaluator(Match m)
+        {
+            var strValue = m.Value;
+            return "new list(new object[] {" + this.CorrectLists(strValue.Substring(1, strValue.Length - 2)) + "})";
+        }
 
-		private string CorrectLists(string strC)
-		{
-			Regex regex = new Regex(
-				@"
+        private string CorrectLists(string strC)
+        {
+            var regex = new Regex(
+                @"
 \[
     (?>
         [^\[\]]+ 
@@ -420,219 +408,222 @@ namespace LSLEditor
     (?(number)(?!))
 \]
 ",
-				RegexOptions.IgnorePatternWhitespace
-				| RegexOptions.Compiled);
-			return regex.Replace(strC, new MatchEvaluator(CorrectListsEvaluator));
-		}
+                RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+            return regex.Replace(strC, new MatchEvaluator(this.CorrectListsEvaluator));
+        }
 
-		// changed 16 aug 2007
-		private string CorrectJump(string strC)
-		{
-			// jump -> goto
-			Regex regex = new Regex(
-				@"(\b)jump(\s+)([^;]*;)",
-				RegexOptions.Compiled
-				| RegexOptions.IgnorePatternWhitespace
-				);
-			strC = regex.Replace(strC, "$1goto$2_$3");
+        // changed 16 aug 2007
+        private string CorrectJump(string strC)
+        {
+            // jump -> goto
+            var regex = new Regex(
+                @"(\b)jump(\s+)([^;]*;)",
+                RegexOptions.Compiled | RegexOptions.IgnorePatternWhitespace);
+            strC = regex.Replace(strC, "$1goto$2_$3");
 
-			// @label; -> label:;
-			regex = new Regex(
-				@"@\s*([a-z0-9_]+)\s*;",
-				RegexOptions.Compiled
-				| RegexOptions.IgnoreCase
-				| RegexOptions.IgnorePatternWhitespace
-				);
-			return regex.Replace(strC, "_$1:;");
-		}
+            // @label; -> label:;
+            regex = new Regex(
+                @"@\s*([a-z0-9_]+)\s*;",
+                RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+            return regex.Replace(strC, "_$1:;");
+        }
 
+        private string RemoveQuotedStrings(string strC, out List<string> h)
+        {
+            h = new List<string>();
+            var sb = new StringBuilder();
+            StringBuilder QuotedString = null;
+            for (var intI = 0; intI < strC.Length; intI++)
+            {
+                var chrC = strC[intI];
+                if (chrC == '"')
+                {
+                    if (QuotedString != null)
+                    {
+                        // end of a quoted string
+                        sb.Append('"');
+                        sb.Append(h.Count.ToString());
+                        sb.Append('"');
+                        h.Add(QuotedString.ToString());
+                        QuotedString = null;
+                        continue;
+                    }
+                    else
+                    {
+                        if (chrC == '"')
+                        {
+                            // start of a new quoted string
+                            QuotedString = new StringBuilder();
+                            continue;
+                        }
+                        // it was just a newline char, and not in a string
+                    }
+                }
 
-		private string RemoveQuotedStrings(string strC, out List<string> h)
-		{
-			h = new List<string>();
-			StringBuilder sb = new StringBuilder();
-			StringBuilder QuotedString = null;
-			for (int intI = 0; intI < strC.Length; intI++)
-			{
-				char chrC = strC[intI];
-				if (chrC == '"')
-				{
-					if (QuotedString != null)
-					{
-						// end of a quoted string
-						sb.Append('"');
-						sb.Append(h.Count.ToString());
-						sb.Append('"');
-						h.Add(QuotedString.ToString());
-						QuotedString = null;
-						continue;
-					}
-					else
-					{
-						if (chrC == '"')
-						{
-							// start of a new quoted string
-							QuotedString = new StringBuilder();
-							continue;
-						}
-						// it was just a newline char, and not in a string
-					}
-				}
+                if (QuotedString == null)
+                {
+                    sb.Append(chrC);
+                }
+                else
+                {
+                    if (chrC == '\n')
+                    {
+                        QuotedString.Append('\\');
+                        chrC = 'n';
+                    }
+                    if (chrC != '\\')
+                    {
+                        QuotedString.Append(chrC);
+                    }
+                    else // it is a backslash
+                    {
+                        intI++;
+                        chrC = strC[intI];
+                        if (chrC == 't') // tabs are 4 spaces in SL world!!
+                        {
+                            QuotedString.Append("    ");
+                        }
+                        else // nope, it is no tab, just output it all
+                        {
+                            QuotedString.Append('\\');
+                            QuotedString.Append(chrC);
+                        }
+                    }
+                }
+            }
+            return sb.ToString();
+        }
 
-				if (QuotedString == null)
-					sb.Append(chrC);
-				else
-				{
-					if (chrC == '\n')
-					{
-						QuotedString.Append('\\');
-						chrC = 'n';
-					}
-					if (chrC != '\\')
-					{
-						QuotedString.Append(chrC);
-					}
-					else // it is a backslash
-					{
-						intI++;
-						chrC = strC[intI];
-						if (chrC == 't') // tabs are 4 spaces in SL world!!
-						{
-							QuotedString.Append("    ");
-						}
-						else // nope, it is no tab, just output it all
-						{
-							QuotedString.Append('\\');
-							QuotedString.Append(chrC);
-						}
-					}
-				}
-			}
-			return sb.ToString();
-		}
+        private string InsertQuotedStrings(string strC, List<string> h)
+        {
+            var sb = new StringBuilder();
+            StringBuilder QuotedString = null;
+            for (var intI = 0; intI < strC.Length; intI++)
+            {
+                var chrC = strC[intI];
+                if (chrC == '"')
+                {
+                    if (QuotedString == null)
+                    {
+                        QuotedString = new StringBuilder();
+                    }
+                    else
+                    {
+                        sb.Append('"');
+                        // State("default") is not a number, result of 'CorrectStates'
+                        if (int.TryParse(QuotedString.ToString(), out var intNumber))
+                        {
+                            sb.Append(h[intNumber]);
+                        }
+                        else
+                        {
+                            sb.Append(QuotedString.ToString());
+                        }
 
-		private string InsertQuotedStrings(string strC, List<string> h)
-		{
-			StringBuilder sb = new StringBuilder();
-			StringBuilder QuotedString = null;
-			for (int intI = 0; intI < strC.Length; intI++)
-			{
-				char chrC = strC[intI];
-				if (chrC == '"')
-				{
-					if (QuotedString == null)
-					{
-						QuotedString = new StringBuilder();
-					}
-					else
-					{
-						sb.Append('"');
-						int intNumber;
-						// State("default") is not a number, result of 'CorrectStates'
-						if (int.TryParse(QuotedString.ToString(), out intNumber))
-							sb.Append(h[intNumber]);
-						else
-							sb.Append(QuotedString.ToString());
-						sb.Append('"');
-						QuotedString = null;
-					}
-					continue;
-				}
+                        sb.Append('"');
+                        QuotedString = null;
+                    }
+                    continue;
+                }
 
-				if (QuotedString == null)
-					sb.Append(chrC);
-				else
-					QuotedString.Append(chrC);
-			}
-			return sb.ToString();
-		}
+                if (QuotedString == null)
+                {
+                    sb.Append(chrC);
+                }
+                else
+                {
+                    QuotedString.Append(chrC);
+                }
+            }
+            return sb.ToString();
+        }
 
-		private string MakeGlobalAndLocal(string strC)
-		{
-			Regex regexDefault = new Regex(@"^\s*(default)\W",
-				RegexOptions.IgnorePatternWhitespace
-				| RegexOptions.Multiline
-				| RegexOptions.Compiled);
+        private string MakeGlobalAndLocal(string strC)
+        {
+            var regexDefault = new Regex(@"^\s*(default)\W",
+                RegexOptions.IgnorePatternWhitespace
+                | RegexOptions.Multiline
+                | RegexOptions.Compiled);
 
-			Match matchDefault = regexDefault.Match(strC);
+            var matchDefault = regexDefault.Match(strC);
 
-			string strGlobal;
-			int intDefaultIndex;
-			if (matchDefault.Groups.Count == 2)
-			{
-				States.Add("default");
-				intDefaultIndex = matchDefault.Groups[1].Index;
-				strGlobal = CorrectGlobal(strC.Substring(0, intDefaultIndex));
-			}
-			else
-			{
-				intDefaultIndex = 0;
-				strGlobal = "";
-			}
-			return "class GlobalClass : SecondLife\n{\n" + strGlobal + "}\n" + strC.Substring(intDefaultIndex);
-		}
+            string strGlobal;
+            int intDefaultIndex;
+            if (matchDefault.Groups.Count == 2)
+            {
+                this.States.Add("default");
+                intDefaultIndex = matchDefault.Groups[1].Index;
+                strGlobal = this.CorrectGlobal(strC.Substring(0, intDefaultIndex));
+            }
+            else
+            {
+                intDefaultIndex = 0;
+                strGlobal = "";
+            }
+            return "class GlobalClass : SecondLife\n{\n" + strGlobal + "}\n" + strC.Substring(intDefaultIndex);
+        }
 
-		private string Capitalize(string strC, string strName)
-		{
-			Regex regex = new Regex(@"(\W)"+strName+@"(\W)",
-				RegexOptions.IgnorePatternWhitespace
-				| RegexOptions.Multiline
-				| RegexOptions.Compiled);
-			string strCap = strName[0].ToString().ToUpper() + strName.Substring(1);
-			return regex.Replace(strC, "$1"+strCap+"$2");
-		}
+        private string Capitalize(string strC, string strName)
+        {
+            var regex = new Regex(@"(\W)" + strName + @"(\W)",
+                RegexOptions.IgnorePatternWhitespace
+                | RegexOptions.Multiline
+                | RegexOptions.Compiled);
+            var strCap = strName[0].ToString().ToUpper() + strName.Substring(1);
+            return regex.Replace(strC, "$1" + strCap + "$2");
+        }
 
-		private string RemoveSingleQuotes(string strC)
-		{
-			if (Properties.Settings.Default.SingleQuote)
-				return strC.Replace("'", "");
-			else
-				return strC;
-		}
+        private string RemoveSingleQuotes(string strC)
+        {
+            if (Properties.Settings.Default.SingleQuote)
+            {
+                return strC.Replace("'", "");
+            }
+            else
+            {
+                return strC;
+            }
+        }
 
-		/// <summary>
-		/// This Class translates LSL script into CSharp code
-		/// </summary>
-		/// <param name="strLSLCode">LSL scripting code</param>
-		/// <returns>CSHarp code</returns>
-		public string Parse(string strLSLCode)
-		{
-			List<string> quotedStrings;
+        /// <summary>
+        /// This Class translates LSL script into CSharp code
+        /// </summary>
+        /// <param name="strLSLCode">LSL scripting code</param>
+        /// <returns>CSHarp code</returns>
+        public string Parse(string strLSLCode)
+        {
+            const string strGlobalClass = "GlobalClass";
 
-			string strGlobalClass = "GlobalClass";
+            var strC = strLSLCode;
 
-			string strC = strLSLCode;
+            strC = this.RemoveComments(strC);
 
-			strC = RemoveComments(strC);
+            strC = this.RemoveQuotedStrings(strC, out var quotedStrings);
 
-			strC = RemoveQuotedStrings(strC, out quotedStrings);
+            strC = this.RemoveSingleQuotes(strC);
 
-			strC = RemoveSingleQuotes(strC);
+            strC = this.PreCorrectReservedWords(strC); // Experimental
 
-			strC = PreCorrectReservedWords(strC); // Experimental
+            strC = this.MakeGlobalAndLocal(strC);
 
-			strC = MakeGlobalAndLocal(strC);
+            strC = this.CorrectJump(strC);
+            strC = this.CorrectEvents(strC);
 
-			strC = CorrectJump(strC);
-			strC = CorrectEvents(strC);
+            strC = this.Capitalize(strC, "float");
+            strC = this.Capitalize(strC, "string"); //  llList2string is also translated
 
-			strC = Capitalize(strC, "float");
-			strC = Capitalize(strC, "string"); //  llList2string is also translated
+            strC = this.CorrectStates(strC, strGlobalClass);
 
-			strC = CorrectStates(strC, strGlobalClass);
+            strC = this.CorrectReservedWords(strC); // Experimental
 
-			strC = CorrectReservedWords(strC); // Experimental
+            strC = this.CorrectRotation(strC);
+            strC = this.CorrectQuaternion(strC);
+            strC = this.CorrectVector(strC);
+            strC = this.CorrectLists(strC);
 
-			strC = CorrectRotation(strC);
-			strC = CorrectQuaternion(strC);
-			strC = CorrectVector(strC);
-			strC = CorrectLists(strC);
+            strC = this.InsertQuotedStrings(strC, quotedStrings);
 
-			strC = InsertQuotedStrings(strC, quotedStrings);
-			
-			return strC;
-		}
-	}
-
-
+            return strC;
+        }
+    }
 }

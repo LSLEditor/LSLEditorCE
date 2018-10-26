@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -44,46 +44,47 @@ using System.Windows.Forms;
 
 namespace LSLEditor.Tools
 {
-	public partial class ProjectSettings : UserControl, ICommit
-	{
-		public ProjectSettings()
-		{
-			InitializeComponent();
+    public partial class ProjectSettings : UserControl, ICommit
+    {
+        public ProjectSettings()
+        {
+            this.InitializeComponent();
 
-			this.textBox1.Text = Properties.Settings.Default.ProjectLocation;
+            this.textBox1.Text = Properties.Settings.Default.ProjectLocation;
 
-			this.checkBox4.Checked = Helpers.FileAssociator.IsAssociated(".sol");
-		}
+            this.checkBox4.Checked = Helpers.FileAssociator.IsAssociated(".sol");
+        }
 
-		public void Commit()
-		{
-			Properties.Settings.Default.ProjectLocation = this.textBox1.Text;
+        public void Commit()
+        {
+            Properties.Settings.Default.ProjectLocation = this.textBox1.Text;
 
-			if (this.checkBox4.Checked)
-			{
-				if (!
-				Helpers.FileAssociator.Associate(".sol", "LSLEditorSolution", "Solution File for LSLEditor", Assembly.GetExecutingAssembly().Location, 0))
-					MessageBox.Show("File association can not be made (needs administrative access)", "Oops...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-			else
-			{
-				if (Helpers.FileAssociator.IsAssociated(".sol"))
-				{
-					if(!Helpers.FileAssociator.DeAssociate(".sol", "LSLEditorSolution"))
-						MessageBox.Show("File association can not be unmade (needs administrative access)", "Oops...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-			}
-		}
+            if (this.checkBox4.Checked)
+            {
+                if (!Helpers.FileAssociator.Associate(
+                    ".sol", "LSLEditorSolution", "Solution File for LSLEditor",
+                    Assembly.GetExecutingAssembly().Location, 0))
+                {
+                    MessageBox.Show("File association can not be made (needs administrative access)", "Oops...",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (Helpers.FileAssociator.IsAssociated(".sol")
+                 && !Helpers.FileAssociator.DeAssociate(".sol", "LSLEditorSolution"))
+            {
+                MessageBox.Show("File association can not be unmade (needs administrative access)", "Oops...",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-		private void button1_Click(object sender, EventArgs e)
-		{
-			this.folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
-			if (this.folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
-			{
-				if(Directory.Exists(this.folderBrowserDialog1.SelectedPath))
-					this.textBox1.Text = this.folderBrowserDialog1.SelectedPath;
-			}
-		}
-
-	}
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
+            if (this.folderBrowserDialog1.ShowDialog(this) == DialogResult.OK
+             && Directory.Exists(this.folderBrowserDialog1.SelectedPath))
+            {
+                this.textBox1.Text = this.folderBrowserDialog1.SelectedPath;
+            }
+        }
+    }
 }

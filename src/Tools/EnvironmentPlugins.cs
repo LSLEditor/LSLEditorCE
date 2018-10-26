@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -38,93 +38,106 @@
 // </summary>
 
 using System;
-using System.IO;
+using System.Collections.Specialized;
 using System.Drawing;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Collections.Specialized;
 
 namespace LSLEditor.Tools
 {
-	public partial class EnvironmentPlugins : UserControl, ICommit
-	{
-		private int intX,intY;
+    public partial class EnvironmentPlugins : UserControl, ICommit
+    {
+        private int intX, intY;
 
-		public EnvironmentPlugins()
-		{
-			InitializeComponent();
+        public EnvironmentPlugins()
+        {
+            this.InitializeComponent();
 
-			ShowPlugins();
-		}
+            this.ShowPlugins();
+        }
 
-		private void ShowPlugin(string strName)
-		{
-			if (Properties.Settings.Default.Plugins == null)
-				Properties.Settings.Default.Plugins = new StringCollection();
+        private void ShowPlugin(string strName)
+        {
+            if (Properties.Settings.Default.Plugins == null)
+            {
+                Properties.Settings.Default.Plugins = new StringCollection();
+            }
 
-			CheckBox checkBox = new CheckBox();
-			checkBox.AutoSize = true;
-			checkBox.Text = strName;
-			checkBox.Name = "Plugin_" + strName;
-			checkBox.Tag = strName;
-			checkBox.Checked = Properties.Settings.Default.Plugins.Contains(checkBox.Tag.ToString());
-			checkBox.Location = new Point(intX, intY);
-			this.groupBox1.Controls.Add(checkBox);
-			intY += 20;
-			this.label1.Visible = false;
-		}
+            var checkBox = new CheckBox
+            {
+                AutoSize = true,
+                Text = strName,
+                Name = "Plugin_" + strName,
+                Tag = strName
+            };
+            checkBox.Checked = Properties.Settings.Default.Plugins.Contains(checkBox.Tag.ToString());
+            checkBox.Location = new Point(this.intX, this.intY);
+            this.groupBox1.Controls.Add(checkBox);
+            this.intY += 20;
+            this.label1.Visible = false;
+        }
 
-		private void ShowPlugins()
-		{
-			if (Properties.Settings.Default.Plugins == null)
-				Properties.Settings.Default.Plugins = new StringCollection();
+        private void ShowPlugins()
+        {
+            if (Properties.Settings.Default.Plugins == null)
+            {
+                Properties.Settings.Default.Plugins = new StringCollection();
+            }
 
-			string strDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-			string strPluginsDirectory = Path.Combine(strDirectory, "Plugins");
+            var strDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var strPluginsDirectory = Path.Combine(strDirectory, "Plugins");
 
-			intX = 20;
-			intY = 20;
+            this.intX = 20;
+            this.intY = 20;
 
-			if (Directory.Exists(strPluginsDirectory))
-			{
-				foreach (string strFilePath in Directory.GetFiles(strPluginsDirectory, "*.exe"))
-				{
-					ShowPlugin(Path.GetFileNameWithoutExtension(strFilePath));
-				}
-			}
-			if (Svn.IsInstalled)
-			{
-				if(!Properties.Settings.Default.Plugins.Contains("SVN (Version control)"))
-					Properties.Settings.Default.Plugins.Add("SVN (Version control)");
-				ShowPlugin("SVN (Version control)");
-			}
+            if (Directory.Exists(strPluginsDirectory))
+            {
+                foreach (var strFilePath in Directory.GetFiles(strPluginsDirectory, "*.exe"))
+                {
+                    this.ShowPlugin(Path.GetFileNameWithoutExtension(strFilePath));
+                }
+            }
+            if (Svn.IsInstalled)
+            {
+                if (!Properties.Settings.Default.Plugins.Contains("SVN (Version control)"))
+                {
+                    Properties.Settings.Default.Plugins.Add("SVN (Version control)");
+                }
 
-			this.groupBox1.Height = intY + 20;
-		}
+                this.ShowPlugin("SVN (Version control)");
+            }
 
-		public void Commit()
-		{
-			Properties.Settings.Default.Plugins = new StringCollection();
+            this.groupBox1.Height = this.intY + 20;
+        }
 
-			bool SvnPlugin = false;
-			foreach (Control control in this.groupBox1.Controls)
-			{
-				CheckBox checkBox = control as CheckBox;
-				if (checkBox == null)
-					continue;
-				if (checkBox.Checked)
-				{
-					string strPluginName = checkBox.Tag.ToString();
-					Properties.Settings.Default.Plugins.Add(strPluginName);
-					if (strPluginName.ToLower().Contains("svn"))
-						SvnPlugin = true;
-				}
-			}
-			if (!SvnPlugin)
-			{
-				Properties.Settings.Default.VersionControl = false;
-				Properties.Settings.Default.VersionControlSVN = false;
-			}
-		}
-	}
+        public void Commit()
+        {
+            Properties.Settings.Default.Plugins = new StringCollection();
+
+            var SvnPlugin = false;
+            foreach (Control control in this.groupBox1.Controls)
+            {
+                if (!(control is CheckBox checkBox))
+                {
+                    continue;
+                }
+
+                if (checkBox.Checked)
+                {
+                    var strPluginName = checkBox.Tag.ToString();
+                    Properties.Settings.Default.Plugins.Add(strPluginName);
+                    if (strPluginName.IndexOf("svn", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        SvnPlugin = true;
+                    }
+                }
+            }
+            if (!SvnPlugin)
+            {
+                Properties.Settings.Default.VersionControl = false;
+                Properties.Settings.Default.VersionControlSVN = false;
+            }
+        }
+    }
 }

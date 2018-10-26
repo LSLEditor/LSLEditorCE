@@ -322,9 +322,9 @@
     <Compile Include="Decompressor\Decompress.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Editor\MsXsltContext.cs">
+    <None Include="Editor\MsXsltContext.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
+    </None>
     <Compile Include="Helpers\HTTPRequest.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
@@ -975,7 +975,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource\thanks.gif" />
-    <None Include="lsleditor_TemporaryKey.pfx" />
     <None Include="Web References\org.lsleditor.www\Service1.disco" />
     <EmbeddedResource Include="Resource\About.htm" />
     <EmbeddedResource Include="Resource\ReleaseNotes.htm">

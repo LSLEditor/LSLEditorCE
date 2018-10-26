@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -46,55 +46,54 @@ using System.Windows.Forms;
 
 namespace LSLEditor
 {
-	/// <summary>
-	/// About dialogue box form.
-	/// </summary>
-	public partial class About : Form
-	{
-		/// <summary>
-		/// Initialises a new instance of the <see cref="About" /> class.
-		/// </summary>
-		/// <param name="parent">The parent form.</param>
-		[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1642:ConstructorSummaryDocumentationMustBeginWithStandardText", Justification = "Reviewed.")]
-		public About(LSLEditorForm parent)
-		{
-			this.InitializeComponent();
+    /// <summary>
+    /// About dialogue box form.
+    /// </summary>
+    public partial class About : Form
+    {
+        /// <summary>
+        /// Initialises a new instance of the <see cref="About" /> class.
+        /// </summary>
+        /// <param name="parent">The parent form.</param>
+        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1642:ConstructorSummaryDocumentationMustBeginWithStandardText", Justification = "Reviewed.")]
+        public About(LSLEditorForm parent)
+        {
+            this.InitializeComponent();
 
-			this.Icon = parent.Icon;
+            this.Icon = parent.Icon;
 
-			string strVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			this.label2.Text = strVersion;
-		}
+            this.label2.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        }
 
-		/// <summary>
-		/// OK/Close button.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void button1_Click(object sender, EventArgs e)
-		{
-			this.Close();
-		}
+        /// <summary>
+        /// OK/Close button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
-		/// <summary>
-		/// Link to SourceForge page.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			System.Diagnostics.Process.Start(Properties.Settings.Default.ContactUrl);
-		}
+        /// <summary>
+        /// Link to SourceForge page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(Properties.Settings.Default.ContactUrl);
+        }
 
-		/// <summary>
-		/// Loads the page.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void About_Load(object sender, EventArgs e)
-		{
-			string strExeFileName = Path.GetFileName(Assembly.GetExecutingAssembly().CodeBase);
-			this.webBrowser1.Navigate("res://" + strExeFileName + "/" + Properties.Settings.Default.About);
-		}
-	}
+        /// <summary>
+        /// Loads the page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void About_Load(object sender, EventArgs e)
+        {
+            var strExeFileName = Path.GetFileName(Assembly.GetExecutingAssembly().CodeBase);
+            this.webBrowser1.Navigate("res://" + strExeFileName + "/" + Properties.Settings.Default.About);
+        }
+    }
 }

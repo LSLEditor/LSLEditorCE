@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -40,64 +40,64 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
 namespace LSLEditor.Solution
 {
-	public partial class SvnAguments : Form
-	{
-		public SvnAguments()
-		{
-			InitializeComponent();
-			this.DialogResult = DialogResult.Cancel;
-		}
+    public partial class SvnAguments : Form
+    {
+        public SvnAguments()
+        {
+            this.InitializeComponent();
+            this.DialogResult = DialogResult.Cancel;
+        }
 
-		public string Repository
-		{
-			get
-			{
-				return this.textBox1.Text.Trim();
-			}
-			set
-			{
-				this.textBox1.Text = value;
-			}
-		}
+        public string Repository
+        {
+            get
+            {
+                return this.textBox1.Text.Trim();
+            }
+            set
+            {
+                this.textBox1.Text = value;
+            }
+        }
 
-		public string Comment
-		{
-			get
-			{
-				return this.textBox2.Text.Trim();
-			}
-			set
-			{
-				this.textBox2.Text = value;
-			}
-		}
+        public string Comment
+        {
+            get
+            {
+                return this.textBox2.Text.Trim();
+            }
+            set
+            {
+                this.textBox2.Text = value;
+            }
+        }
 
-		public bool ReadOnly
-		{
-			set
-			{
-				this.textBox1.Enabled = !value;
-			}
-		}
+        public bool ReadOnly
+        {
+            set
+            {
+                this.textBox1.Enabled = !value;
+            }
+        }
 
-		private void button1_Click(object sender, EventArgs e)
-		{
-			//Import();
-			this.DialogResult = DialogResult.OK;
-			this.Close();
-		}
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Import();
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
 
-		private void button2_Click(object sender, EventArgs e)
-		{
-			this.DialogResult = DialogResult.Cancel;
-			this.Close();
-		}
-	}
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+    }
 }

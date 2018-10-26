@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -42,32 +42,30 @@ using System.Windows.Forms;
 
 namespace LSLEditor.Tools
 {
-	public partial class RuntimeGeneral : UserControl, ICommit
-	{
-		public RuntimeGeneral()
-		{
-			InitializeComponent();
+    public partial class RuntimeGeneral : UserControl, ICommit
+    {
+        public RuntimeGeneral()
+        {
+            this.InitializeComponent();
 
-			this.checkBox1.Checked = Properties.Settings.Default.CommentCStyle;
-			this.checkBox2.Checked = Properties.Settings.Default.SkipWarnings;
-			this.checkBox3.Checked = Properties.Settings.Default.SingleQuote;
-			this.checkBox4.Checked = Properties.Settings.Default.QuotesListVerbose;
-			this.checkBox5.Checked = Properties.Settings.Default.AutoSaveOnDebug;
-			this.checkBox6.Checked = Properties.Settings.Default.llGetScriptName;
-			this.checkBox7.Checked = Properties.Settings.Default.StatesInGlobalFunctions;
-		}
+            this.checkBox1.Checked = Properties.Settings.Default.CommentCStyle;
+            this.checkBox2.Checked = Properties.Settings.Default.SkipWarnings;
+            this.checkBox3.Checked = Properties.Settings.Default.SingleQuote;
+            this.checkBox4.Checked = Properties.Settings.Default.QuotesListVerbose;
+            this.checkBox5.Checked = Properties.Settings.Default.AutoSaveOnDebug;
+            this.checkBox6.Checked = Properties.Settings.Default.llGetScriptName;
+            this.checkBox7.Checked = Properties.Settings.Default.StatesInGlobalFunctions;
+        }
 
-		public void Commit()
-		{
-			Properties.Settings.Default.CommentCStyle = this.checkBox1.Checked;
-			Properties.Settings.Default.SkipWarnings = this.checkBox2.Checked;
-			Properties.Settings.Default.SingleQuote = this.checkBox3.Checked;
-			Properties.Settings.Default.QuotesListVerbose = this.checkBox4.Checked;
-			Properties.Settings.Default.AutoSaveOnDebug = this.checkBox5.Checked;
-			Properties.Settings.Default.llGetScriptName = this.checkBox6.Checked;
-			Properties.Settings.Default.StatesInGlobalFunctions = this.checkBox7.Checked;
-		}
-
-
-	}
+        public void Commit()
+        {
+            Properties.Settings.Default.CommentCStyle = this.checkBox1.Checked;
+            Properties.Settings.Default.SkipWarnings = this.checkBox2.Checked;
+            Properties.Settings.Default.SingleQuote = this.checkBox3.Checked;
+            Properties.Settings.Default.QuotesListVerbose = this.checkBox4.Checked;
+            Properties.Settings.Default.AutoSaveOnDebug = this.checkBox5.Checked;
+            Properties.Settings.Default.llGetScriptName = this.checkBox6.Checked;
+            Properties.Settings.Default.StatesInGlobalFunctions = this.checkBox7.Checked;
+        }
+    }
 }

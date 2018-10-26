@@ -43,7 +43,7 @@ using System.IO;
 
 namespace LSLEditor.Helpers
 {
-    static class LSLIPathHelper
+    internal static class LSLIPathHelper
     {
         public const string READONLY_TAB_EXTENSION = " (Read Only)";
         public const string EXPANDED_TAB_EXTENSION = " (Expanded LSL)";
@@ -76,10 +76,9 @@ namespace LSLEditor.Helpers
         /// <returns></returns>
         public static string CreateCollapsedScriptName(string filename)
         {
-            string nameCollapsed = RemoveDotInFrontOfFilename(Path.GetFileNameWithoutExtension(RemoveExpandedSubExtension(filename)) + LSLIConverter.LSLI_EXT);
-            return nameCollapsed;
+            return RemoveDotInFrontOfFilename(Path.GetFileNameWithoutExtension(RemoveExpandedSubExtension(filename)) + LSLIConverter.LSLI_EXT);
         }
-        
+
         /// <summary>
         /// Removes only the last extension
         /// </summary>
@@ -87,8 +86,7 @@ namespace LSLEditor.Helpers
         /// <returns></returns>
         private static string RemoveExtension(string filename)
         {
-            filename = TrimStarsAndWhiteSpace(filename.Remove(filename.LastIndexOf(Path.GetExtension(filename))));
-            return filename;
+            return TrimStarsAndWhiteSpace(filename.Remove(filename.LastIndexOf(Path.GetExtension(filename))));
         }
 
         /// <summary>
@@ -123,10 +121,11 @@ namespace LSLEditor.Helpers
         /// <returns></returns>
         public static string CreateExpandedPathAndScriptName(string path)
         {
-            if(path.Contains(LSLIConverter.EXPANDED_SUBEXT))
+            if (path.Contains(LSLIConverter.EXPANDED_SUBEXT))
             {
                 return PutDotInFrontOfFilename(RemoveExtension(path) + LSLIConverter.LSL_EXT);
-            } else
+            }
+            else
             {
                 return PutDotInFrontOfFilename(RemoveExtension(path) + LSLIConverter.EXPANDED_SUBEXT + LSLIConverter.LSL_EXT);
             }
@@ -138,12 +137,8 @@ namespace LSLEditor.Helpers
         /// <returns></returns>
         public static string CreateExpandedScriptName(string filename)
         {
-            string nameExpanded = "";
-            if (filename != null)
-            {
-                nameExpanded = Path.GetFileNameWithoutExtension(filename) + LSLIConverter.EXPANDED_SUBEXT + LSLIConverter.LSL_EXT;
-            }
-            
+            var nameExpanded = filename != null
+                ? Path.GetFileNameWithoutExtension(filename) + LSLIConverter.EXPANDED_SUBEXT + LSLIConverter.LSL_EXT : "";
             return PutDotInFrontOfFilename(TrimStarsAndWhiteSpace(nameExpanded));
         }
 
@@ -154,15 +149,14 @@ namespace LSLEditor.Helpers
         /// <returns></returns>
         private static string PutDotInFrontOfFilename(string filename)
         {
-            int afterLastIndexOfSeperator = (filename.LastIndexOf('\\') > filename.LastIndexOf('/') ? filename.LastIndexOf('\\') : filename.LastIndexOf('/')) + 1;
+            var afterLastIndexOfSeperator = (filename.LastIndexOf('\\') > filename.LastIndexOf('/') ? filename.LastIndexOf('\\') : filename.LastIndexOf('/')) + 1;
 
             if (filename.Substring(afterLastIndexOfSeperator, 1) == ".")
             {
                 return filename;
             }
 
-            filename = filename.Insert(afterLastIndexOfSeperator, ".");
-            return filename;
+            return filename.Insert(afterLastIndexOfSeperator, ".");
         }
 
         /// <summary>
@@ -172,15 +166,14 @@ namespace LSLEditor.Helpers
         /// <returns></returns>
         public static string RemoveDotInFrontOfFilename(string filename)
         {
-            int afterLastIndexOfSeperator = (filename.LastIndexOf('\\') > filename.LastIndexOf('/') ? filename.LastIndexOf('\\') : filename.LastIndexOf('/')) + 1;
+            var afterLastIndexOfSeperator = (filename.LastIndexOf('\\') > filename.LastIndexOf('/') ? filename.LastIndexOf('\\') : filename.LastIndexOf('/')) + 1;
 
             if (filename.Substring(afterLastIndexOfSeperator, 1) != ".")
             {
                 return filename;
             }
 
-            filename = filename.Remove(afterLastIndexOfSeperator, 1);
-            return filename;
+            return filename.Remove(afterLastIndexOfSeperator, 1);
         }
 
         /// <summary>
@@ -221,7 +214,11 @@ namespace LSLEditor.Helpers
         /// <returns></returns>
         public static string GetExpandedTabName(string path)
         {
-            if (path == null) return "";
+            if (path == null)
+            {
+                return "";
+            }
+
             return RemoveDotInFrontOfFilename(Path.GetFileNameWithoutExtension(RemoveExpandedSubExtension(path)) + LSLIConverter.LSLI_EXT + EXPANDED_TAB_EXTENSION);
         }
 
@@ -232,7 +229,11 @@ namespace LSLEditor.Helpers
         /// <returns></returns>
         public static string GetReadOnlyTabName(string filename)
         {
-            if (filename == null) return "";
+            if (filename == null)
+            {
+                return "";
+            }
+
             return CreateCollapsedPathAndScriptName(filename) + READONLY_TAB_EXTENSION;
         }
 
@@ -247,17 +248,17 @@ namespace LSLEditor.Helpers
             filespec = Path.GetFullPath(filespec).ToLower();
             if (LSLIConverter.validExtensions.Contains(filespec.Substring(filespec.LastIndexOf("."))))
             {
-                int lastIndexOfSeperator = filespec.LastIndexOf('\\') > filespec.LastIndexOf('/') ? filespec.LastIndexOf('\\') : filespec.LastIndexOf('/');
+                var lastIndexOfSeperator = filespec.LastIndexOf('\\') > filespec.LastIndexOf('/') ? filespec.LastIndexOf('\\') : filespec.LastIndexOf('/');
                 filespec = filespec.Remove(lastIndexOfSeperator);
             }
-            Uri pathUri = new Uri(filespec);
+            var pathUri = new Uri(filespec);
 
             if (!folder.EndsWith(Path.DirectorySeparatorChar.ToString()))
             {
                 folder += Path.DirectorySeparatorChar;
             }
-            Uri folderUri = new Uri(folder);
-            string relativePath = Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', Path.DirectorySeparatorChar));
+            var folderUri = new Uri(folder);
+            var relativePath = Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', Path.DirectorySeparatorChar));
 
             if (relativePath.Substring(relativePath.Length - 3) != Path.DirectorySeparatorChar.ToString())
             {

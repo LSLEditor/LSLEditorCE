@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -38,181 +38,196 @@
 // </summary>
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Drawing;
 using System.IO;
 using System.Text;
-using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Collections;
-using System.Collections.Specialized;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace LSLEditor.BugReport
 {
-	class UploadBugReport
-	{
-		public struct FileToUpload
-		{
-			public string FileName;
-			public string Body;
-			public string Path;
-			public FileToUpload(string FileName, string Body)
-			{
-				this.FileName = FileName;
-				this.Body = Body;
-				this.Path = null;
-			}
-		}
+    internal class UploadBugReport
+    {
+        public struct FileToUpload
+        {
+            public string FileName;
+            public string Body;
+            public string Path;
 
-		public class UploadCompleteEventArgs : EventArgs
-		{
-			public int TotalBytes;
-			public UploadCompleteEventArgs(int intTotal)
-			{
-				this.TotalBytes = intTotal;
-			}
-		}
+            public FileToUpload(string FileName, string Body)
+            {
+                this.FileName = FileName;
+                this.Body = Body;
+                this.Path = null;
+            }
+        }
 
-		public bool blnRunning;
+        public class UploadCompleteEventArgs : EventArgs
+        {
+            public int TotalBytes;
 
-		public delegate void UploadCompleteHandler(object sender, UploadCompleteEventArgs e);
-		public event UploadCompleteHandler OnComplete;
+            public UploadCompleteEventArgs(int intTotal)
+            {
+                this.TotalBytes = intTotal;
+            }
+        }
 
-		private Thread thread;
-		private ProgressBar progressbar;
-		private List<FileToUpload> list;
+        public bool blnRunning;
 
-		public void UploadAsync(List<FileToUpload> list, ProgressBar progressbar)
-		{
-			this.list = list;
-			this.progressbar = progressbar;
+        public delegate void UploadCompleteHandler(object sender, UploadCompleteEventArgs e);
+        public event UploadCompleteHandler OnComplete;
 
-			this.blnRunning = true;
+        private Thread thread;
+        private ProgressBar progressbar;
+        private List<FileToUpload> list;
 
-			thread = new Thread(new ThreadStart(Worker));
-			thread.IsBackground = true;
-			thread.Name = "Worker";
-			thread.Start();
-		}
+        public void UploadAsync(List<FileToUpload> list, ProgressBar progressbar)
+        {
+            this.list = list;
+            this.progressbar = progressbar;
 
-		public void Stop()
-		{
-			this.blnRunning = false;
-			if (thread != null)
-			{
-				thread.Join(1000);
-				thread = null;
-			}
-		}
+            this.blnRunning = true;
 
-		private void Worker()
-		{
-			int intTotal = 0;
-			try
-			{
-				org.lsleditor.www.Service1 webservice = new org.lsleditor.www.Service1();
+            this.thread = new Thread(new ThreadStart(this.Worker))
+            {
+                IsBackground = true,
+                Name = "Worker"
+            };
+            this.thread.Start();
+        }
 
-				string Handle = webservice.Open();
-				if (Handle == null)
-				{
-					MessageBox.Show("Can't get an upload handle", "Oops...");
-					this.blnRunning = false;
-					return;
-				}
+        public void Stop()
+        {
+            this.blnRunning = false;
+            if (this.thread != null)
+            {
+                this.thread.Join(1000);
+                this.thread = null;
+            }
+        }
 
-				if (Properties.Settings.Default.Bugreports == null)
-					Properties.Settings.Default.Bugreports = new StringCollection();
-				Properties.Settings.Default.Bugreports.Add(Handle);
+        private void Worker()
+        {
+            var intTotal = 0;
+            try
+            {
+                var webservice = new org.lsleditor.www.Service1();
 
-				// Properties.Settings.Default.Save();
+                var Handle = webservice.Open();
+                if (Handle == null)
+                {
+                    MessageBox.Show("Can't get an upload handle", "Oops...");
+                    this.blnRunning = false;
+                    return;
+                }
 
-				int intNumber = 0;
-				foreach (FileToUpload file in this.list)
-				{
-					string strFileName = string.Format("{0}-{1}", intNumber, file.FileName);
-					if (file.Path == null)
-					{
-						intTotal += Upload(Handle, strFileName, Encoding.ASCII.GetBytes(file.Body));
-					}
-					else
-					{
-						intTotal += Upload(Handle, strFileName, file.Path);
-					}
-					intNumber++;
-				}
-			}
-			catch
-			{
-				intTotal = -1;
-			}
-			if (this.blnRunning)
-				if (OnComplete != null)
-					OnComplete(this, new UploadCompleteEventArgs(intTotal));
-			this.blnRunning = false;
-		}
+                if (Properties.Settings.Default.Bugreports == null)
+                {
+                    Properties.Settings.Default.Bugreports = new StringCollection();
+                }
 
-		private delegate void SetValueDelegate(int intValue);
+                Properties.Settings.Default.Bugreports.Add(Handle);
 
-		private void SetMaximum(int intMaximum)
-		{
-			if (this.progressbar.InvokeRequired)
-			{
-				this.progressbar.Invoke(new SetValueDelegate(SetMaximum), new object[] { intMaximum });
-			}
-			else
-			{
-				this.progressbar.Maximum = intMaximum;
-			}
-		}
+                // Properties.Settings.Default.Save();
 
-		private void SetValue(int intValue)
-		{
-			if (this.progressbar.InvokeRequired)
-			{
-				this.progressbar.Invoke(new SetValueDelegate(SetValue), new object[] { intValue });
-			}
-			else
-			{
-				this.progressbar.Value = intValue;
-			}
-		}
-		private int Upload(string Handle, string FileName, byte[] buffer)
-		{
-			org.lsleditor.www.Service1 webservice = new org.lsleditor.www.Service1();
-			if (Handle == null)
-				return 0;
+                var intNumber = 0;
+                foreach (var file in this.list)
+                {
+                    var strFileName = string.Format("{0}-{1}", intNumber, file.FileName);
+                    if (file.Path == null)
+                    {
+                        intTotal += this.Upload(Handle, strFileName, Encoding.ASCII.GetBytes(file.Body));
+                    }
+                    else
+                    {
+                        intTotal += this.Upload(Handle, strFileName, file.Path);
+                    }
+                    intNumber++;
+                }
+            }
+            catch
+            {
+                intTotal = -1;
+            }
+            if (this.blnRunning)
+            {
+                OnComplete?.Invoke(this, new UploadCompleteEventArgs(intTotal));
+            }
 
-			SetMaximum(buffer.Length);
-			int intOffset = 0;
-			int intTotal = 0;
-			byte[] smallbuffer = new byte[1024];
-			while (this.blnRunning)
-			{
-				int intLength = Math.Min(smallbuffer.Length, buffer.Length - intOffset);
-				if (intLength <= 0)
-					break;
-				Array.Copy(buffer, intOffset, smallbuffer, 0, intLength);
-				intOffset += intLength;
-				string strError = webservice.Write(Handle, FileName, smallbuffer, intLength);
-				if (strError != null)
-				{
-					MessageBox.Show("Error:" + strError, "Oops...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-					break;
-				}
-				intTotal += intLength;
-				SetValue(intTotal);
-			}
-			return intTotal;
-		}
+            this.blnRunning = false;
+        }
 
-		private int Upload(string Handle, string FileName, string strPath)
-		{
-			FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
-			byte[] buffer = new byte[fs.Length];
-			fs.Read(buffer, 0, (int)fs.Length);
-			fs.Close();
-			return Upload(Handle, FileName, buffer);
-		}
-	}
+        private delegate void SetValueDelegate(int intValue);
+
+        private void SetMaximum(int intMaximum)
+        {
+            if (this.progressbar.InvokeRequired)
+            {
+                this.progressbar.Invoke(new SetValueDelegate(this.SetMaximum), new object[] { intMaximum });
+            }
+            else
+            {
+                this.progressbar.Maximum = intMaximum;
+            }
+        }
+
+        private void SetValue(int intValue)
+        {
+            if (this.progressbar.InvokeRequired)
+            {
+                this.progressbar.Invoke(new SetValueDelegate(this.SetValue), new object[] { intValue });
+            }
+            else
+            {
+                this.progressbar.Value = intValue;
+            }
+        }
+
+        private int Upload(string Handle, string FileName, byte[] buffer)
+        {
+            var webservice = new org.lsleditor.www.Service1();
+            if (Handle == null)
+            {
+                return 0;
+            }
+
+            this.SetMaximum(buffer.Length);
+            var intOffset = 0;
+            var intTotal = 0;
+            var smallbuffer = new byte[1024];
+            while (this.blnRunning)
+            {
+                var intLength = Math.Min(smallbuffer.Length, buffer.Length - intOffset);
+                if (intLength <= 0)
+                {
+                    break;
+                }
+
+                Array.Copy(buffer, intOffset, smallbuffer, 0, intLength);
+                intOffset += intLength;
+                var strError = webservice.Write(Handle, FileName, smallbuffer, intLength);
+                if (strError != null)
+                {
+                    MessageBox.Show("Error:" + strError, "Oops...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
+                intTotal += intLength;
+                this.SetValue(intTotal);
+            }
+            return intTotal;
+        }
+
+        private int Upload(string Handle, string FileName, string strPath)
+        {
+            var fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
+            var buffer = new byte[fs.Length];
+            fs.Read(buffer, 0, (int)fs.Length);
+            fs.Close();
+            return this.Upload(Handle, FileName, buffer);
+        }
+    }
 }

@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -44,42 +44,41 @@ using System.Windows.Forms;
 
 namespace NumberedTextBox
 {
-	public partial class NumberedTextBoxUC : UserControl
-	{
-		public NumberedTextBoxUC()
-		{
-			InitializeComponent();
+    public partial class NumberedTextBoxUC : UserControl
+    {
+        public NumberedTextBoxUC()
+        {
+            this.InitializeComponent();
 
-			this.numbered1.richTextBox1 = this.syntaxRichTextBox1;
-			this.syntaxRichTextBox1.OnPaintNumbers += new EventHandler(syntaxRichTextBox1_OnPaintNumbers);
-			this.FontChanged += new EventHandler(NumberedTextBoxUC_FontChanged);
-            this.syntaxRichTextBox1.OnCursorPositionChanged += new LSLEditor.SyntaxRichTextBox.CursorPositionChangedHandler(syntaxRichTextBox1_OnCursorPositionChanged);
-		}
+            this.numbered1.richTextBox1 = this.syntaxRichTextBox1;
+            this.syntaxRichTextBox1.OnPaintNumbers += this.syntaxRichTextBox1_OnPaintNumbers;
+            this.FontChanged += this.NumberedTextBoxUC_FontChanged;
+            this.syntaxRichTextBox1.OnCursorPositionChanged += this.syntaxRichTextBox1_OnCursorPositionChanged;
+        }
 
-        void syntaxRichTextBox1_OnCursorPositionChanged(object sender, LSLEditor.SyntaxRichTextBox.CursorPositionEventArgs e)
+        private void syntaxRichTextBox1_OnCursorPositionChanged(object sender, LSLEditor.SyntaxRichTextBox.CursorPositionEventArgs e)
         {
             this.numbered1.Invalidate();
         }
 
-		void NumberedTextBoxUC_FontChanged(object sender, EventArgs e)
-		{
-			this.numbered1.LineHeight = 0.0F; // reset!!
-			RectangleF rect = LSLEditor.Helpers.Measure.MeasureDisplayString(this.syntaxRichTextBox1, "M", this.Font);
-			this.splitContainer1.SplitterDistance = (int)(4 * rect.Width + 5.0);
-		}
+        private void NumberedTextBoxUC_FontChanged(object sender, EventArgs e)
+        {
+            this.numbered1.LineHeight = 0.0F; // reset!!
+            var rect = LSLEditor.Helpers.Measure.MeasureDisplayString(this.syntaxRichTextBox1, "M", this.Font);
+            this.splitContainer1.SplitterDistance = (int)(4 * rect.Width + 5.0);
+        }
 
-		void syntaxRichTextBox1_OnPaintNumbers(object sender, EventArgs e)
-		{
-			this.numbered1.Invalidate();
-		}
+        private void syntaxRichTextBox1_OnPaintNumbers(object sender, EventArgs e)
+        {
+            this.numbered1.Invalidate();
+        }
 
-		public LSLEditor.SyntaxRichTextBox TextBox
-		{
-			get
-			{
-				return this.syntaxRichTextBox1;
-			}
-		}
-
-	}
+        public LSLEditor.SyntaxRichTextBox TextBox
+        {
+            get
+            {
+                return this.syntaxRichTextBox1;
+            }
+        }
+    }
 }

@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -46,64 +46,80 @@ using System.Windows.Forms;
 
 namespace LSLEditor.Tools
 {
-	public partial class RuntimeSmtp : UserControl, ICommit
-	{
-		public RuntimeSmtp()
-		{
-			InitializeComponent();
+    public partial class RuntimeSmtp : UserControl, ICommit
+    {
+        public RuntimeSmtp()
+        {
+            this.InitializeComponent();
 
-			this.EmailServer.Text = Properties.Settings.Default.EmailServer;
-			this.EmailAddress.Text = Properties.Settings.Default.EmailAddress;
+            this.EmailServer.Text = Properties.Settings.Default.EmailServer;
+            this.EmailAddress.Text = Properties.Settings.Default.EmailAddress;
 
-			this.SmtpUserid.Text = Properties.Settings.Default.SmtpUserid;
-			this.SmtpPassword.Text = Properties.Settings.Default.SmtpPassword;
+            this.SmtpUserid.Text = Properties.Settings.Default.SmtpUserid;
+            this.SmtpPassword.Text = Properties.Settings.Default.SmtpPassword;
 
-			switch (Properties.Settings.Default.SmtpAuth)
-			{
-				case "PLAIN":
-					this.radioButton1.Checked = true;
-					break;
-				case "LOGIN":
-					this.radioButton2.Checked = true;
-					break;
-				case "CRAM-MD5":
-					this.radioButton3.Checked = true;
-					break;
-				case "DIGEST-MD5":
-					this.radioButton4.Checked = true;
-					break;
-				case "EXTERNAL":
-					this.radioButton5.Checked = true;
-					break;
-				case "ANONYMOUS":
-					this.radioButton6.Checked = true;
-					break;
-				default:
-					break;
-			}
-		}
+            switch (Properties.Settings.Default.SmtpAuth)
+            {
+                case "PLAIN":
+                    this.radioButton1.Checked = true;
+                    break;
+                case "LOGIN":
+                    this.radioButton2.Checked = true;
+                    break;
+                case "CRAM-MD5":
+                    this.radioButton3.Checked = true;
+                    break;
+                case "DIGEST-MD5":
+                    this.radioButton4.Checked = true;
+                    break;
+                case "EXTERNAL":
+                    this.radioButton5.Checked = true;
+                    break;
+                case "ANONYMOUS":
+                    this.radioButton6.Checked = true;
+                    break;
+                default:
+                    break;
+            }
+        }
 
-		public void Commit()
-		{
-			Properties.Settings.Default.EmailServer = this.EmailServer.Text;
-			Properties.Settings.Default.EmailAddress = this.EmailAddress.Text;
+        public void Commit()
+        {
+            Properties.Settings.Default.EmailServer = this.EmailServer.Text;
+            Properties.Settings.Default.EmailAddress = this.EmailAddress.Text;
 
-			Properties.Settings.Default.SmtpUserid = this.SmtpUserid.Text;
-			Properties.Settings.Default.SmtpPassword = this.SmtpPassword.Text;
+            Properties.Settings.Default.SmtpUserid = this.SmtpUserid.Text;
+            Properties.Settings.Default.SmtpPassword = this.SmtpPassword.Text;
 
-			if (this.radioButton1.Checked)
-				Properties.Settings.Default.SmtpAuth = "PLAIN";
-			if (this.radioButton2.Checked)
-				Properties.Settings.Default.SmtpAuth = "LOGIN";
-			if (this.radioButton3.Checked)
-				Properties.Settings.Default.SmtpAuth = "CRAM-MD5";
-			if (this.radioButton4.Checked)
-				Properties.Settings.Default.SmtpAuth = "DIGEST-MD5";
-			if (this.radioButton5.Checked)
-				Properties.Settings.Default.SmtpAuth = "EXTERNAL";
-			if (this.radioButton6.Checked)
-				Properties.Settings.Default.SmtpAuth = "ANONYMOUS";
+            if (this.radioButton1.Checked)
+            {
+                Properties.Settings.Default.SmtpAuth = "PLAIN";
+            }
 
-		}
-	}
+            if (this.radioButton2.Checked)
+            {
+                Properties.Settings.Default.SmtpAuth = "LOGIN";
+            }
+
+            if (this.radioButton3.Checked)
+            {
+                Properties.Settings.Default.SmtpAuth = "CRAM-MD5";
+            }
+
+            if (this.radioButton4.Checked)
+            {
+                Properties.Settings.Default.SmtpAuth = "DIGEST-MD5";
+            }
+
+            if (this.radioButton5.Checked)
+            {
+                Properties.Settings.Default.SmtpAuth = "EXTERNAL";
+            }
+
+            if (this.radioButton6.Checked)
+            {
+                Properties.Settings.Default.SmtpAuth = "ANONYMOUS";
+            }
+        }
+    }
 }

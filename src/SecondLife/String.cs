@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -41,88 +41,87 @@ using System;
 
 namespace LSLEditor
 {
-	public partial class SecondLife
-	{
-		public struct String
-		{
-			private string value;
+    public partial class SecondLife
+    {
+        public struct String
+        {
+            private string value;
 
-			public String(string s)
-			{
-				this.value = s;
-			}
+            public String(string s)
+            {
+                this.value = s;
+            }
 
-			public static implicit operator String(string s)
-			{
-				return new String(s);
-			}
+            public static implicit operator String(string s)
+            {
+                return new String(s);
+            }
 
-			// 3 oct 2007
-			public static explicit operator String(bool a)
-			{
-				return a ? "1" : "0";
-			}
+            // 3 oct 2007
+            public static explicit operator String(bool a)
+            {
+                return a ? "1" : "0";
+            }
 
-			// 24 augustus 2007 
-			public static explicit operator String(int i)
-			{
-				return new String(i.ToString());
-			}
+            // 24 augustus 2007 
+            public static explicit operator String(int i)
+            {
+                return new String(i.ToString());
+            }
 
-			public static explicit operator String(long i)
-			{
-				return new String(((int)(uint)i).ToString());
-			}
+            public static explicit operator String(long i)
+            {
+                return new String(((int)(uint)i).ToString());
+            }
 
-			public static explicit operator String(float i)
-			{
-				return new String(string.Format("{0:0.000000}", i));
-			}
+            public static explicit operator String(float i)
+            {
+                return new String(string.Format("{0:0.000000}", i));
+            }
 
-			public static implicit operator string(String s)
-			{
-				return s.ToString();
-			}
+            public static implicit operator string(String s)
+            {
+                return s.ToString();
+            }
 
-			public static implicit operator bool(String s)
-			{
-				return (s.value == null) ? false : (s.value.Length != 0);
-			}
+            public static implicit operator bool(String s)
+            {
+                return !string.IsNullOrEmpty(s.value);
+            }
 
-			public static bool operator ==(String x, String y)
-			{
-				return (x.ToString() == y.ToString());
-			}
+            public static bool operator ==(String x, String y)
+            {
+                return x.ToString() == y.ToString();
+            }
 
-			public static bool operator !=(String x, String y)
-			{
-				return !(x == y);
-			}
+            public static bool operator !=(String x, String y)
+            {
+                return !(x == y);
+            }
 
-			// Public overrides
+            // Public overrides
 
-			public override bool Equals(object o)
-			{
-				try {
-					return (bool)(this.value == o.ToString());
-				} catch {
-					return false;
-				}
-			}
+            public override bool Equals(object obj)
+            {
+                try
+                {
+                    return this.value == obj.ToString();
+                }
+                catch
+                {
+                    return false;
+                }
+            }
 
-			public override int GetHashCode()
-			{
-				return base.GetHashCode();
-			}
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
+            }
 
-			public override string ToString()
-			{
-				if (this.value == null) {
-					this.value = "";
-				}
-				return this.value;
-			}
-
-		}
-	}
+            public override string ToString()
+            {
+                return this.value ?? (this.value = "");
+            }
+        }
+    }
 }

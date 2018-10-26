@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -45,171 +45,175 @@ using System.Text;
 
 namespace LSLEditor
 {
-	class HTTPRequest
-	{
-		private class UserState
-		{
-			public SecondLife secondlife;
-			public SecondLife.key httpkey;
-			public UserState(SecondLife.key httpkey, SecondLife secondlife)
-			{
-				this.secondlife = secondlife;
-				this.httpkey = httpkey;
-			}
-		}
+    internal static class HTTPRequest
+    {
+        private class UserState
+        {
+            public SecondLife secondlife;
+            public SecondLife.key httpkey;
 
-		public static void Request(WebProxy proxy, SecondLife secondlife, string strUrl, SecondLife.list parameters, string postData, SecondLife.key key)
-		{
-			string strMethod = "GET";
-			string strContentType = "text/plain; charset=utf-8";
+            public UserState(SecondLife.key httpkey, SecondLife secondlife)
+            {
+                this.secondlife = secondlife;
+                this.httpkey = httpkey;
+            }
+        }
 
-			for (int intI = 0; intI < parameters.Count; intI += 2)
-			{
-				int intKey;
-				if (!int.TryParse(parameters[intI].ToString(), out intKey))
-					continue;
-				switch (intKey)
-				{
-					case 0:
-						// get, post, put, delete
-						strMethod = parameters[intI + 1].ToString().ToUpper();
-						break;
-					case 1:
-						strContentType = parameters[intI + 1].ToString();
-						break;
-					case 2:
-						// HTTP_BODY_MAXLENGTH
-						break;
-					case 3:
-						// HTTP_VERIFY_CERT
-						break;
-					default:
-						break;
-				}
-			}
+        public static void Request(WebProxy proxy, SecondLife secondlife, string strUrl, SecondLife.list parameters, string postData, SecondLife.key key)
+        {
+            var strMethod = "GET";
+            var strContentType = "text/plain; charset=utf-8";
 
-			WebClient wc = new WebClient();
+            for (var intI = 0; intI < parameters.Count; intI += 2)
+            {
+                if (!int.TryParse(parameters[intI].ToString(), out var intKey))
+                {
+                    continue;
+                }
 
-			wc.Headers.Add("Content-Type", strContentType);
-			wc.Headers.Add("Accept", "text/*");
-			wc.Headers.Add("Accept-Charset", "utf-8; q=1.0, *; q=0.5");
-			wc.Headers.Add("Accept-Encoding", "deflate, gzip");
-			wc.Headers.Add("User-Agent", "Second Life LSL/1.19.0(12345) (http://secondlife.com)");
+                switch (intKey)
+                {
+                    case 0:
+                        // get, post, put, delete
+                        strMethod = parameters[intI + 1].ToString().ToUpper();
+                        break;
+                    case 1:
+                        strContentType = parameters[intI + 1].ToString();
+                        break;
+                    case 2:
+                        // HTTP_BODY_MAXLENGTH
+                        break;
+                    case 3:
+                        // HTTP_VERIFY_CERT
+                        break;
+                    default:
+                        break;
+                }
+            }
 
-			System.Drawing.Point point = Properties.Settings.Default.RegionCorner;
-			SecondLife.vector RegionCorner = new SecondLife.vector(point.X, point.Y, 0);
+            var wc = new WebClient();
 
-			SecondLife.vector pos = secondlife.GetLocalPos;
+            wc.Headers.Add("Content-Type", strContentType);
+            wc.Headers.Add("Accept", "text/*");
+            wc.Headers.Add("Accept-Charset", "utf-8; q=1.0, *; q=0.5");
+            wc.Headers.Add("Accept-Encoding", "deflate, gzip");
+            wc.Headers.Add("User-Agent", "Second Life LSL/1.19.0(12345) (http://secondlife.com)");
 
-			wc.Headers.Add("X-SecondLife-Shard", Properties.Settings.Default.XSecondLifeShard);
-			wc.Headers.Add("X-SecondLife-Object-Name", secondlife.host.GetObjectName());
-			wc.Headers.Add("X-SecondLife-Object-Key", secondlife.host.GetKey().ToString());
-			wc.Headers.Add("X-SecondLife-Region", string.Format("{0} ({1}, {2})", Properties.Settings.Default.RegionName, (int)RegionCorner.x, (int)RegionCorner.y));
-			wc.Headers.Add("X-SecondLife-Local-Position", string.Format("({0}, {1}, {2})", pos.x, pos.y, pos.z));
-			wc.Headers.Add("X-SecondLife-Local-Rotation", "(0.000000, 0.000000, 0.000000, 1.000000)");
-			wc.Headers.Add("X-SecondLife-Local-Velocity", "(0.000000, 0.000000, 0.000000)");
-			wc.Headers.Add("X-SecondLife-Owner-Name", Properties.Settings.Default.AvatarName);
-			wc.Headers.Add("X-SecondLife-Owner-Key", Properties.Settings.Default.AvatarKey);
-			wc.Headers.Add("X-Forwarded-For", "127.0.0.1");
+            var point = Properties.Settings.Default.RegionCorner;
+            var RegionCorner = new SecondLife.vector(point.X, point.Y, 0);
 
-			if (proxy != null)
-				wc.Proxy = proxy;
+            var pos = secondlife.GetLocalPos;
 
-			Uri uri = new Uri(strUrl);
-			
-			// Basic Authentication scheme, added 28 mrt 2008
-			if (uri.UserInfo != "")
-			{
-				string[] UserInfo = uri.UserInfo.Split(':');
-				if (UserInfo.Length == 2)
-				{
-					CredentialCache mycache = new CredentialCache();
-					mycache.Add(uri, "Basic",
-								new NetworkCredential(UserInfo[0], UserInfo[1]));
-					wc.Credentials = mycache;
-				}
-			}
-			
+            wc.Headers.Add("X-SecondLife-Shard", Properties.Settings.Default.XSecondLifeShard);
+            wc.Headers.Add("X-SecondLife-Object-Name", secondlife.host.GetObjectName());
+            wc.Headers.Add("X-SecondLife-Object-Key", secondlife.host.GetKey().ToString());
+            wc.Headers.Add("X-SecondLife-Region", string.Format("{0} ({1}, {2})", Properties.Settings.Default.RegionName, (int)RegionCorner.x, (int)RegionCorner.y));
+            wc.Headers.Add("X-SecondLife-Local-Position", string.Format("({0}, {1}, {2})", pos.x, pos.y, pos.z));
+            wc.Headers.Add("X-SecondLife-Local-Rotation", "(0.000000, 0.000000, 0.000000, 1.000000)");
+            wc.Headers.Add("X-SecondLife-Local-Velocity", "(0.000000, 0.000000, 0.000000)");
+            wc.Headers.Add("X-SecondLife-Owner-Name", Properties.Settings.Default.AvatarName);
+            wc.Headers.Add("X-SecondLife-Owner-Key", Properties.Settings.Default.AvatarKey);
+            wc.Headers.Add("X-Forwarded-For", "127.0.0.1");
 
-			UserState userState = new UserState(key, secondlife);
+            if (proxy != null)
+            {
+                wc.Proxy = proxy;
+            }
 
-			if (strMethod == "POST" || strMethod == "PUT")
-			{
-				wc.UploadDataCompleted += new UploadDataCompletedEventHandler(wc_UploadDataCompleted);
-				wc.UploadDataAsync(uri, strMethod, Encoding.UTF8.GetBytes(postData), userState);
-			}
-			else
-			{
-				wc.DownloadDataCompleted += new DownloadDataCompletedEventHandler(wc_DownloadDataCompleted);
-				wc.DownloadDataAsync(uri, userState);
-			}
-		}
+            var uri = new Uri(strUrl);
 
-		private static void wc_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
-		{
-			int intStatusCode = 200;
-			UserState userState = (UserState)e.UserState;
-			string strResult = "";
+            // Basic Authentication scheme, added 28 mrt 2008
+            if (uri.UserInfo != "")
+            {
+                var UserInfo = uri.UserInfo.Split(':');
+                if (UserInfo.Length == 2)
+                {
+                    wc.Credentials = new CredentialCache
+                    {
+                        {
+                            uri,
+                            "Basic",
+                            new NetworkCredential(UserInfo[0], UserInfo[1])
+                        }
+                    };
+                }
+            }
 
-			if (e.Error != null)
-			{
-				WebException webException = e.Error as WebException;
-				HttpWebResponse webResponse = webException.Response as HttpWebResponse;
-				if (webResponse == null)
-				{
-					intStatusCode = 0;
-					strResult = webException.Message;
-				}
-				else
-				{
-					intStatusCode = (int)webResponse.StatusCode;
-					System.IO.StreamReader sr = new System.IO.StreamReader(webResponse.GetResponseStream());
-					strResult = sr.ReadToEnd();
-				}
-			}
-			else
-			{
-				if (e.Result != null)
-				{
-					strResult = Encoding.UTF8.GetString(e.Result);
-				}
-			}
-			userState.secondlife.host.ExecuteSecondLife("http_response", userState.httpkey, (SecondLife.integer)intStatusCode, new SecondLife.list(), (SecondLife.String)strResult);
-		}
+            var userState = new UserState(key, secondlife);
 
-		private static void wc_UploadDataCompleted(object sender, UploadDataCompletedEventArgs e)
-		{
-			int intStatusCode = 200;
-			UserState userState = (UserState)e.UserState;
-			string strResult = "";
+            if (strMethod == "POST" || strMethod == "PUT")
+            {
+                wc.UploadDataCompleted += wc_UploadDataCompleted;
+                wc.UploadDataAsync(uri, strMethod, Encoding.UTF8.GetBytes(postData), userState);
+            }
+            else
+            {
+                wc.DownloadDataCompleted += wc_DownloadDataCompleted;
+                wc.DownloadDataAsync(uri, userState);
+            }
+        }
 
-			if (e.Error != null)
-			{
-				WebException webException = e.Error as WebException;
-				HttpWebResponse webResponse = webException.Response as HttpWebResponse;
-				intStatusCode = (int)webResponse.StatusCode;
-				System.IO.StreamReader sr = new System.IO.StreamReader(webResponse.GetResponseStream());
-				strResult = sr.ReadToEnd();
-			}
-			else
-			{
-				if (e.Result != null)
-				{
-					string strEncoding = ((System.Net.WebClient)sender).ResponseHeaders["Content-Encoding"];
-					if (strEncoding == "gzip")
-					{
-						GZipStream tempE = new GZipStream(new System.IO.MemoryStream(e.Result), CompressionMode.Decompress);
+        private static void wc_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
+        {
+            var intStatusCode = 200;
+            var userState = (UserState)e.UserState;
+            var strResult = "";
 
-						var sr = new StreamReader(tempE);
-						strResult = sr.ReadToEnd();
-					}
-					else
-					{
-						strResult = Encoding.UTF8.GetString(e.Result);
-					}
-				}
-			}
-			userState.secondlife.host.ExecuteSecondLife("http_response", userState.httpkey, (SecondLife.integer)intStatusCode, new SecondLife.list(), (SecondLife.String)strResult);
-		}
-	}
+            if (e.Error != null)
+            {
+                var webException = e.Error as WebException;
+                if (webException.Response is HttpWebResponse webResponse)
+                {
+                    intStatusCode = (int)webResponse.StatusCode;
+                    var sr = new StreamReader(webResponse.GetResponseStream());
+                    strResult = sr.ReadToEnd();
+                }
+                else
+                {
+                    intStatusCode = 0;
+                    strResult = webException.Message;
+                }
+            }
+            else
+            {
+                if (e.Result != null)
+                {
+                    strResult = Encoding.UTF8.GetString(e.Result);
+                }
+            }
+            userState.secondlife.host.ExecuteSecondLife("http_response", userState.httpkey, (SecondLife.integer)intStatusCode, new SecondLife.list(), (SecondLife.String)strResult);
+        }
+
+        private static void wc_UploadDataCompleted(object sender, UploadDataCompletedEventArgs e)
+        {
+            var intStatusCode = 200;
+            var userState = (UserState)e.UserState;
+            var strResult = "";
+
+            if (e.Error != null)
+            {
+                var webException = e.Error as WebException;
+                var webResponse = webException.Response as HttpWebResponse;
+                intStatusCode = (int)webResponse.StatusCode;
+                var sr = new StreamReader(webResponse.GetResponseStream());
+                strResult = sr.ReadToEnd();
+            }
+            else if (e.Result != null)
+            {
+                var strEncoding = ((WebClient)sender).ResponseHeaders["Content-Encoding"];
+                if (strEncoding == "gzip")
+                {
+                    var tempE = new GZipStream(new MemoryStream(e.Result), CompressionMode.Decompress);
+
+                    var sr = new StreamReader(tempE);
+                    strResult = sr.ReadToEnd();
+                }
+                else
+                {
+                    strResult = Encoding.UTF8.GetString(e.Result);
+                }
+            }
+            userState.secondlife.host.ExecuteSecondLife("http_response", userState.httpkey, (SecondLife.integer)intStatusCode, new SecondLife.list(), (SecondLife.String)strResult);
+        }
+    }
 }

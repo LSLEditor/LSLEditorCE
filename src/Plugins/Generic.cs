@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -39,68 +39,67 @@
 
 using System;
 using System.IO;
-using System.Windows.Forms;
 using System.Reflection;
+using System.Windows.Forms;
 using LSLEditor.Docking;
 
 namespace LSLEditor.Plugins
 {
-	class Generic
-	{
-		private delegate void RunDelegate(string strFilePath, RichTextBox tb);
+    internal class Generic
+    {
+        private delegate void RunDelegate(string strFilePath, RichTextBox tb);
 
-		public Generic(LSLEditorForm parent, string strPluginName)
-		{
-			EditForm editForm = parent.ActiveMdiForm as EditForm;
-			if (editForm == null)
-				return;
+        public Generic(LSLEditorForm parent, string strPluginName)
+        {
+            if (!(parent.ActiveMdiForm is EditForm editForm))
+            {
+                return;
+            }
 
-			string strFilePath = editForm.FullPathName;
-			RichTextBox tb = editForm.TextBox as RichTextBox;
+            var strFilePath = editForm.FullPathName;
+            var tb = editForm.TextBox as RichTextBox;
 
-			string strDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-			string strPluginsDirectory = Path.Combine(strDirectory, "Plugins");
-			string strProgram = Path.Combine(strPluginsDirectory, strPluginName + ".exe");
+            var strDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var strPluginsDirectory = Path.Combine(strDirectory, "Plugins");
+            var strProgram = Path.Combine(strPluginsDirectory, strPluginName + ".exe");
 
-			Assembly assembly = null;
+            Assembly assembly = null;
 
-			try
-			{
-				assembly = Assembly.LoadFrom(strProgram);
-			}
-			catch
-			{
-				MessageBox.Show("Not a valid plugin, see http://www.lsleditor.org/help/Plugins.aspx", "Plugins", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
+            try
+            {
+                assembly = Assembly.LoadFrom(strProgram);
+            }
+            catch
+            {
+                MessageBox.Show("Not a valid plugin, see http://www.lsleditor.org/help/Plugins.aspx", "Plugins", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-			if (assembly == null)
-				return;
+            if (assembly == null)
+            {
+                return;
+            }
 
-			object[] args = new object[] { strFilePath, tb };
+            var args = new object[] { strFilePath, tb };
 
-			foreach (Type t in assembly.GetTypes())
-			{
-				if (t.BaseType.Name == "DockContent")
-				{
-					DockContent form = assembly.CreateInstance(t.FullName, false,
-						BindingFlags.Public|BindingFlags.Instance|BindingFlags.CreateInstance,
-                        null, args, null, null) as DockContent;
-					if (form != null)
-					{
-						parent.AddForm(form);
-						return;
-					}
-				}
-				MethodInfo info = t.GetMethod("Run",
-					BindingFlags.Public |
-					BindingFlags.NonPublic |
-					BindingFlags.Static);
+            foreach (var t in assembly.GetTypes())
+            {
+                if (t.BaseType.Name == "DockContent" && assembly.CreateInstance(t.FullName, false,
+                        BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance,
+                        null, args, null, null) is DockContent form)
+                {
+                    parent.AddForm(form);
+                    return;
+                }
+                var info = t.GetMethod("Run",
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
 
-				if (info == null)
-					continue;
+                if (info == null)
+                {
+                    continue;
+                }
 
-				info.Invoke(null, args);
-			}
-		}
-	}
+                info.Invoke(null, args);
+            }
+        }
+    }
 }

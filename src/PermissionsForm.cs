@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -46,70 +46,77 @@ using System.Windows.Forms;
 
 namespace LSLEditor
 {
-	public partial class PermissionsForm : Form
-	{
-		private SecondLifeHost host;
-		private SecondLife.String ObjectName;
-		private SecondLife.String OwnerName;
-		private SecondLife.key id;
-		private SecondLife.key agent;
-		private SecondLife.integer intPermissions;
+    public partial class PermissionsForm : Form
+    {
+        private readonly SecondLifeHost host;
+        private SecondLife.String ObjectName;
+        private SecondLife.String OwnerName;
+        private SecondLife.key id;
+        private SecondLife.key agent;
+        private SecondLife.integer intPermissions;
 
-		public PermissionsForm(SecondLifeHost host, string strObjectName, SecondLife.key id, string strOwner, SecondLife.key agent, int intPermissions)
-		{
-			InitializeComponent();
+        public PermissionsForm(SecondLifeHost host, string strObjectName, SecondLife.key id, string strOwner, SecondLife.key agent, int intPermissions)
+        {
+            this.InitializeComponent();
 
-			this.host = host;
-			this.OwnerName = strOwner;
-			this.ObjectName = strObjectName;
-			this.agent = agent;
-			this.id = id;
-			this.intPermissions = intPermissions;
+            this.host = host;
+            this.OwnerName = strOwner;
+            this.ObjectName = strObjectName;
+            this.agent = agent;
+            this.id = id;
+            this.intPermissions = intPermissions;
 
-			StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
-			if ((intPermissions & SecondLife.PERMISSION_DEBIT) == SecondLife.PERMISSION_DEBIT) {
-				sb.AppendLine("Take Linden dollars (L$) from you");
-			}
+            if ((intPermissions & SecondLife.PERMISSION_DEBIT) == SecondLife.PERMISSION_DEBIT)
+            {
+                sb.AppendLine("Take Linden dollars (L$) from you");
+            }
 
-			if ((intPermissions & SecondLife.PERMISSION_TAKE_CONTROLS) == SecondLife.PERMISSION_TAKE_CONTROLS) {
-				sb.AppendLine("Act on your control inputs");
-			}
+            if ((intPermissions & SecondLife.PERMISSION_TAKE_CONTROLS) == SecondLife.PERMISSION_TAKE_CONTROLS)
+            {
+                sb.AppendLine("Act on your control inputs");
+            }
 
-			if ((intPermissions & SecondLife.PERMISSION_TRIGGER_ANIMATION) == SecondLife.PERMISSION_TRIGGER_ANIMATION) {
-				sb.AppendLine("Animate your avatar");
-			}
+            if ((intPermissions & SecondLife.PERMISSION_TRIGGER_ANIMATION) == SecondLife.PERMISSION_TRIGGER_ANIMATION)
+            {
+                sb.AppendLine("Animate your avatar");
+            }
 
-			if ((intPermissions & SecondLife.PERMISSION_ATTACH) == SecondLife.PERMISSION_ATTACH) {
-				sb.AppendLine("Attach to your avatar");
-			}
+            if ((intPermissions & SecondLife.PERMISSION_ATTACH) == SecondLife.PERMISSION_ATTACH)
+            {
+                sb.AppendLine("Attach to your avatar");
+            }
 
-			if ((intPermissions & SecondLife.PERMISSION_CHANGE_LINKS) == SecondLife.PERMISSION_CHANGE_LINKS) {
-				sb.AppendLine("Link and delink from other objects");
-			}
+            if ((intPermissions & SecondLife.PERMISSION_CHANGE_LINKS) == SecondLife.PERMISSION_CHANGE_LINKS)
+            {
+                sb.AppendLine("Link and delink from other objects");
+            }
 
-			if ((intPermissions & SecondLife.PERMISSION_TRACK_CAMERA) == SecondLife.PERMISSION_TRACK_CAMERA) {
-				sb.AppendLine("Track your camera");
-			}
+            if ((intPermissions & SecondLife.PERMISSION_TRACK_CAMERA) == SecondLife.PERMISSION_TRACK_CAMERA)
+            {
+                sb.AppendLine("Track your camera");
+            }
 
-			if ((intPermissions & SecondLife.PERMISSION_CONTROL_CAMERA) == SecondLife.PERMISSION_CONTROL_CAMERA) {
-				sb.AppendLine("Control your camera");
-			}
+            if ((intPermissions & SecondLife.PERMISSION_CONTROL_CAMERA) == SecondLife.PERMISSION_CONTROL_CAMERA)
+            {
+                sb.AppendLine("Control your camera");
+            }
 
-			this.label1.Text = "'" + strObjectName + "', an object owned by '" + strOwner + "',\nwould like to:";
-			this.label2.Text = sb.ToString();
-		}
+            this.label1.Text = "'" + strObjectName + "', an object owned by '" + strOwner + "',\nwould like to:";
+            this.label2.Text = sb.ToString();
+        }
 
-		private void button2_Click(object sender, EventArgs e)
-		{
-			this.host.SetPermissions(new SecondLife.integer(0));
-			this.Close();
-		}
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.host.SetPermissions(new SecondLife.integer(0));
+            this.Close();
+        }
 
-		private void button1_Click(object sender, EventArgs e)
-		{
-			this.host.SetPermissions(this.intPermissions);
-			this.Close();
-		}
-	}
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.host.SetPermissions(this.intPermissions);
+            this.Close();
+        }
+    }
 }
