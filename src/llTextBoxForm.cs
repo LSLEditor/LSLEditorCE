@@ -51,39 +51,40 @@ using System.Windows.Forms;
 
 namespace LSLEditor
 {
-	public partial class llTextBoxForm : Form
-	{
-		private SecondLifeHost host;
-		private int Channel;
-		private string ObjectName;
-		private string OwnerName;
-		private SecondLife.key id;
+    public partial class llTextBoxForm : Form
+    {
+        private SecondLifeHost host;
+        private int Channel;
+        private string ObjectName;
+        private string OwnerName;
+        private SecondLife.key id;
 
-		public llTextBoxForm(SecondLifeHost host, SecondLife.String strObjectName, SecondLife.key id, SecondLife.String strOwner, SecondLife.String strMessage, SecondLife.integer intChannel)
-		{
-			InitializeComponent();
+        public llTextBoxForm(SecondLifeHost host, SecondLife.String strObjectName, SecondLife.key id, SecondLife.String strOwner, SecondLife.String strMessage, SecondLife.integer intChannel)
+        {
+            InitializeComponent();
 
-			this.host = host;
-			this.Channel = intChannel;
-			this.OwnerName = strOwner;
-			this.ObjectName = strObjectName;
-			this.id = id;
+            this.host = host;
+            Channel = intChannel;
+            OwnerName = strOwner;
+            ObjectName = strObjectName;
+            this.id = id;
 
-			this.label1.Text = strMessage.ToString().Replace("&", "&&");
-		}
+            label1.Text = strMessage.ToString().Replace("&", "&&");
+        }
 
-		private void buttonIgnore_Click(object sender, EventArgs e)
-		{
-			this.Close();
-		}
+        private void buttonIgnore_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
 
-		private void buttonOK_Click(object sender, EventArgs e)
-		{
-			Button button = sender as Button;
-			if (button != null) {
-				host.Chat(this, this.Channel, this.OwnerName, this.id, textBox.Text.Replace("&&", "&"), CommunicationType.Say);
-				this.Close();
-			}
-		}
-	}
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                host.Chat(this, Channel, OwnerName, id, textBox.Text.Replace("&&", "&"), CommunicationType.Say);
+                Close();
+            }
+        }
+    }
 }

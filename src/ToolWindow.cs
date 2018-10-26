@@ -52,7 +52,7 @@ namespace LSLEditor
     {
         public ToolWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

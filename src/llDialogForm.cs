@@ -1,4 +1,4 @@
-// <copyright file="gpl-2.0.txt">
+﻿// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -46,54 +46,60 @@ using System.Windows.Forms;
 
 namespace LSLEditor
 {
-	public partial class llDialogForm : Form
-	{
-		private SecondLifeHost host;
-		private int Channel;
-		private string ObjectName;
-		private string OwnerName;
-		private SecondLife.key id;
+    public partial class llDialogForm : Form
+    {
+        private SecondLifeHost host;
+        private int Channel;
+        private string ObjectName;
+        private string OwnerName;
+        private SecondLife.key id;
 
-		public llDialogForm(SecondLifeHost host, SecondLife.String strObjectName, SecondLife.key id, SecondLife.String strOwner, SecondLife.String strMessage, SecondLife.list buttons, SecondLife.integer intChannel)
-		{
-			InitializeComponent();
+        public llDialogForm(SecondLifeHost host, SecondLife.String strObjectName, SecondLife.key id, SecondLife.String strOwner, SecondLife.String strMessage, SecondLife.list buttons, SecondLife.integer intChannel)
+        {
+            InitializeComponent();
 
-			this.host = host;
-			this.Channel = intChannel;
-			this.OwnerName = strOwner;
-			this.ObjectName = strObjectName;
-			this.id = id;
+            this.host = host;
+            Channel = intChannel;
+            OwnerName = strOwner;
+            ObjectName = strObjectName;
+            this.id = id;
 
-			for (int intI = 1; intI <= 12; intI++) {
-				Button button = this.Controls["Button" + intI] as Button;
-				button.Visible = false;
-			}
+            for (var intI = 1; intI <= 12; intI++)
+            {
+                var button = Controls["Button" + intI] as Button;
+                button.Visible = false;
+            }
 
-			this.label1.Text = strOwner + "'s '" + strObjectName + "'";
-			this.label2.Text = strMessage.ToString().Replace("&", "&&");
+            label1.Text = strOwner + "'s '" + strObjectName + "'";
+            label2.Text = strMessage.ToString().Replace("&", "&&");
 
-			for (int intI = 1; intI <= buttons.Count; intI++) {
-				Button button = this.Controls["Button" + intI] as Button;
-				if (button == null)
-					continue;
-				button.Text = buttons[intI - 1].ToString().Replace("&", "&&");
-				button.Visible = true;
-				button.Click += new EventHandler(button_Click);
-			}
-		}
+            for (var intI = 1; intI <= buttons.Count; intI++)
+            {
+                var button = Controls["Button" + intI] as Button;
+                if (button == null)
+                {
+                    continue;
+                }
 
-		void button_Click(object sender, EventArgs e)
-		{
-			Button button = sender as Button;
-			if (button != null) {
-				host.Chat(this, this.Channel, this.OwnerName, this.id, button.Text.Replace("&&", "&"), CommunicationType.Say);
-				this.Close();
-			}
-		}
+                button.Text = buttons[intI - 1].ToString().Replace("&", "&&");
+                button.Visible = true;
+                button.Click += new EventHandler(button_Click);
+            }
+        }
 
-		private void button13_Click(object sender, EventArgs e)
-		{
-			this.Close();
-		}
-	}
+        private void button_Click(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                host.Chat(this, Channel, OwnerName, id, button.Text.Replace("&&", "&"), CommunicationType.Say);
+                Close();
+            }
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+    }
 }
