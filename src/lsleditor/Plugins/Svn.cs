@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -47,102 +47,90 @@ using Microsoft.Win32;
 
 namespace LSLEditor
 {
-    internal class Svn
-    {
-        public string Output;
-        public string Error;
+	internal class Svn
+	{
+		public string Output;
+		public string Error;
 
-        // HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\svn.exe
-        // HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\svn.exe
-        public static string Executable
-        {
-            get
-            {
-                try
-                {
-                    const string strKey = @"Software\Microsoft\Windows\CurrentVersion\App Paths\svn.exe";
-                    var key = Registry.CurrentUser.OpenSubKey(strKey, false);
-                    if (key == null)
-                    {
-                        return null;
-                    }
+		// HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\svn.exe
+		// HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\svn.exe
+		public static string Executable {
+			get {
+				try {
+					const string strKey = @"Software\Microsoft\Windows\CurrentVersion\App Paths\svn.exe";
+					var key = Registry.CurrentUser.OpenSubKey(strKey, false);
+					if (key == null) {
+						return null;
+					}
 
-                    var strExe = key.GetValue("").ToString();
-                    key.Close();
-                    return strExe;
-                }
-                catch
-                {
-                    return null;
-                }
-            }
-        }
+					var strExe = key.GetValue("").ToString();
+					key.Close();
+					return strExe;
+				} catch {
+					return null;
+				}
+			}
+		}
 
-        public static bool IsInstalled
-        {
-            get
-            {
-                return Executable != null;
-            }
-        }
+		public static bool IsInstalled {
+			get {
+				return Executable != null;
+			}
+		}
 
-        public bool Execute(string Arguments, bool ShowOutput, bool ShowError)
-        {
-            this.Error = "";
-            this.Output = "";
+		public bool Execute(string Arguments, bool ShowOutput, bool ShowError)
+		{
+			this.Error = "";
+			this.Output = "";
 
-            var p = new Process();
-            StreamWriter sw;
-            StreamReader sr;
-            StreamReader err;
+			var p = new Process();
+			StreamWriter sw;
+			StreamReader sr;
+			StreamReader err;
 
-            p.StartInfo.FileName = Properties.Settings.Default.SvnExe;
-            p.StartInfo.Arguments = Arguments;
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.RedirectStandardInput = true;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.CreateNoWindow = true;
+			p.StartInfo.FileName = Properties.Settings.Default.SvnExe;
+			p.StartInfo.Arguments = Arguments;
+			p.StartInfo.RedirectStandardError = true;
+			p.StartInfo.RedirectStandardInput = true;
+			p.StartInfo.RedirectStandardOutput = true;
+			p.StartInfo.UseShellExecute = false;
+			p.StartInfo.CreateNoWindow = true;
 
-            p.Start();
+			p.Start();
 
-            sw = p.StandardInput;
-            sr = p.StandardOutput;
-            err = p.StandardError;
+			sw = p.StandardInput;
+			sr = p.StandardOutput;
+			err = p.StandardError;
 
-            sw.AutoFlush = true;
+			sw.AutoFlush = true;
 
-            var sb = new StringBuilder();
+			var sb = new StringBuilder();
 
-            while (sr.Peek() >= 0)
-            {
-                var buffer = new char[1024];
-                sr.Read(buffer, 0, buffer.Length);
-                sb.Append(new string(buffer));
-            }
-            sw.Close();
-            this.Output = sb.ToString();
+			while (sr.Peek() >= 0) {
+				var buffer = new char[1024];
+				sr.Read(buffer, 0, buffer.Length);
+				sb.Append(new string(buffer));
+			}
+			sw.Close();
+			this.Output = sb.ToString();
 
-            sb = new StringBuilder();
-            while (err.Peek() >= 0)
-            {
-                var buffer = new char[4096];
-                err.Read(buffer, 0, buffer.Length);
-                sb.Append(new string(buffer));
-            }
-            this.Error = sb.ToString();
+			sb = new StringBuilder();
+			while (err.Peek() >= 0) {
+				var buffer = new char[4096];
+				err.Read(buffer, 0, buffer.Length);
+				sb.Append(new string(buffer));
+			}
+			this.Error = sb.ToString();
 
-            if (this.Error != "" && ShowError)
-            {
-                MessageBox.Show(this.Error, "SVN Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+			if (this.Error != "" && ShowError) {
+				MessageBox.Show(this.Error, "SVN Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 
-            if (this.Output != "" && ShowOutput)
-            {
-                MessageBox.Show(this.Output, "SVN Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+			if (this.Output != "" && ShowOutput) {
+				MessageBox.Show(this.Output, "SVN Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
 
-            return this.Error?.Length == 0;
-        }
-    }
+			return this.Error?.Length == 0;
+		}
+	}
 }

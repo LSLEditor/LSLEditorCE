@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -43,65 +43,58 @@ using System.Text.RegularExpressions;
 
 namespace LSLEditor.Helpers
 {
-    internal class CodeCompletion
-    {
-        private readonly Regex regex;
+	internal class CodeCompletion
+	{
+		private readonly Regex regex;
 
-        public CodeCompletion()
-        {
-            this.regex = new Regex(
-                @"
+		public CodeCompletion()
+		{
+			this.regex = new Regex(
+				@"
 \b(?<type>integer|float|string|vector|rotation|state|key|list)\s
 (?>
   \s* (?<name>[\w]*) \s*  
   (?>\= \s* 
-    (?:
-      (?>
-              [^(),;]+
-         |    \( (?<nr>)
-         |    \) (?<-nr>)
-    )*
-    (?(nr)(?!))
+	(?:
+	  (?>
+			  [^(),;]+
+		 |    \( (?<nr>)
+		 |    \) (?<-nr>)
+	)*
+	(?(nr)(?!))
   )
   \s*)? [,;)]
 )*
 "
-                ,
-                RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-        }
+				,
+				RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+		}
 
-        public void CodeCompletionUserVar(string strKeyWord, string strTextIn, int intStart, List<KeyWordInfo> list)
-        {
-            if (intStart == 0)
-            {
-                return;
-            }
+		public void CodeCompletionUserVar(string strKeyWord, string strTextIn, int intStart, List<KeyWordInfo> list)
+		{
+			if (intStart == 0) {
+				return;
+			}
 
-            var strText = strTextIn.Substring(0, intStart);
-            var strLowerCaseKeyWord = strKeyWord.ToLower();
-            foreach (Match m in this.regex.Matches(strText))
-            {
-                if (m.Groups.Count == 4)
-                {
-                    var strType = m.Groups[1].ToString();
-                    foreach (Capture cap in m.Groups[2].Captures)
-                    {
-                        var strName = cap.ToString();
-                        if (strName.ToLower().StartsWith(strLowerCaseKeyWord))
-                        {
-                            var ki = new KeyWordInfo(KeyWordTypeEnum.Vars, strName, Color.Red);
-                            if (!list.Contains(ki))
-                            {
-                                list.Add(ki);
-                            }
-                        }
-                        if (strType == "list" || strType == "vector" || strType == "rotation")
-                        {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
+			var strText = strTextIn.Substring(0, intStart);
+			var strLowerCaseKeyWord = strKeyWord.ToLower();
+			foreach (Match m in this.regex.Matches(strText)) {
+				if (m.Groups.Count == 4) {
+					var strType = m.Groups[1].ToString();
+					foreach (Capture cap in m.Groups[2].Captures) {
+						var strName = cap.ToString();
+						if (strName.ToLower().StartsWith(strLowerCaseKeyWord)) {
+							var ki = new KeyWordInfo(KeyWordTypeEnum.Vars, strName, Color.Red);
+							if (!list.Contains(ki)) {
+								list.Add(ki);
+							}
+						}
+						if (strType == "list" || strType == "vector" || strType == "rotation") {
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
 }

@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -42,51 +42,47 @@ using System.Windows.Forms;
 
 namespace LSLEditor
 {
-    public partial class GotoWindow : Form
-    {
-        private readonly LSLEditorForm lslEditForm;
+	public partial class GotoWindow : Form
+	{
+		private readonly LSLEditorForm lslEditForm;
 
-        public GotoWindow(LSLEditorForm lslEditForm)
-        {
-            this.InitializeComponent();
-            this.Icon = lslEditForm.Icon;
-            this.lslEditForm = lslEditForm;
+		public GotoWindow(LSLEditorForm lslEditForm)
+		{
+			this.InitializeComponent();
+			this.Icon = lslEditForm.Icon;
+			this.lslEditForm = lslEditForm;
 
-            var editForm = this.lslEditForm.ActiveMdiForm as EditForm;
-            this.label1.Text = "Line number (1-" + editForm.TextBox.Lines.Length + ")";
-        }
+			var editForm = this.lslEditForm.ActiveMdiForm as EditForm;
+			this.label1.Text = "Line number (1-" + editForm.TextBox.Lines.Length + ")";
+		}
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+		private void button1_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
 
-        private void Goto()
-        {
-            if (this.lslEditForm.ActiveMdiForm is EditForm editForm)
-            {
-                try
-                {
-                    var intLine = Convert.ToInt32(this.textBox1.Text);
-                    editForm.TextBox.Goto(intLine);
-                    this.Close();
-                }
-                catch { }
-            }
-        }
+		private void Goto()
+		{
+			if (this.lslEditForm.ActiveMdiForm is EditForm editForm) {
+				try {
+					var intLine = Convert.ToInt32(this.textBox1.Text);
+					editForm.TextBox.Goto(intLine);
+					this.Close();
+				} catch { }
+			}
+		}
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Goto();
-        }
+		private void button2_Click(object sender, EventArgs e)
+		{
+			this.Goto();
+		}
 
-        private void textBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Return)
-            {
-                this.Goto();
-                e.SuppressKeyPress = true;
-            }
-        }
-    }
+		private void textBox1_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Return) {
+				this.Goto();
+				e.SuppressKeyPress = true;
+			}
+		}
+	}
 }

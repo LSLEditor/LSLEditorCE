@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -43,44 +43,43 @@ using System.Windows.Forms;
 
 namespace LSLEditor.Tools
 {
-    public partial class VersionControlGeneral : UserControl, ICommit
-    {
-        public VersionControlGeneral()
-        {
-            this.InitializeComponent();
+	public partial class VersionControlGeneral : UserControl, ICommit
+	{
+		public VersionControlGeneral()
+		{
+			this.InitializeComponent();
 
-            this.groupBox1.Enabled = true;//Properties.Settings.Default.VersionControl;
+			this.groupBox1.Enabled = true;//Properties.Settings.Default.VersionControl;
 
-            this.checkBox1.Checked = Properties.Settings.Default.VersionControlSVN;
-            this.checkBox1.CheckedChanged += this.checkBox1_CheckedChanged;
-            this.checkBox1_CheckedChanged(null, null);
-            this.textBox1.Text = Properties.Settings.Default.SvnExe;
-            this.textBox2.Text = Properties.Settings.Default.SvnUserid;
-            this.textBox3.Text = Properties.Settings.Default.SvnPassword;
-        }
+			this.checkBox1.Checked = Properties.Settings.Default.VersionControlSVN;
+			this.checkBox1.CheckedChanged += this.checkBox1_CheckedChanged;
+			this.checkBox1_CheckedChanged(null, null);
+			this.textBox1.Text = Properties.Settings.Default.SvnExe;
+			this.textBox2.Text = Properties.Settings.Default.SvnUserid;
+			this.textBox3.Text = Properties.Settings.Default.SvnPassword;
+		}
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            this.textBox1.Enabled = this.checkBox1.Checked;
-        }
+		private void checkBox1_CheckedChanged(object sender, EventArgs e)
+		{
+			this.textBox1.Enabled = this.checkBox1.Checked;
+		}
 
-        public void Commit()
-        {
-            Properties.Settings.Default.SvnExe = this.textBox1.Text;
-            Properties.Settings.Default.SvnUserid = this.textBox2.Text;
-            Properties.Settings.Default.SvnPassword = this.textBox3.Text;
+		public void Commit()
+		{
+			Properties.Settings.Default.SvnExe = this.textBox1.Text;
+			Properties.Settings.Default.SvnUserid = this.textBox2.Text;
+			Properties.Settings.Default.SvnPassword = this.textBox3.Text;
 
-            Properties.Settings.Default.VersionControlSVN = this.checkBox1.Checked;
-        }
+			Properties.Settings.Default.VersionControlSVN = this.checkBox1.Checked;
+		}
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            this.openFileDialog1.FileName = "svn.exe";
-            this.openFileDialog1.Filter = "Executables (*.exe)|*.exe|All files (*.*)|*.*";
-            if (this.openFileDialog1.ShowDialog(this) == DialogResult.OK && File.Exists(this.openFileDialog1.FileName))
-            {
-                this.textBox1.Text = this.openFileDialog1.FileName;
-            }
-        }
-    }
+		private void button3_Click(object sender, EventArgs e)
+		{
+			this.openFileDialog1.FileName = "svn.exe";
+			this.openFileDialog1.Filter = "Executables (*.exe)|*.exe|All files (*.*)|*.*";
+			if (this.openFileDialog1.ShowDialog(this) == DialogResult.OK && File.Exists(this.openFileDialog1.FileName)) {
+				this.textBox1.Text = this.openFileDialog1.FileName;
+			}
+		}
+	}
 }

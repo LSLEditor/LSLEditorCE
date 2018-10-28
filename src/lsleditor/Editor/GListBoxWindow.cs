@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -44,131 +44,116 @@ using System.Windows.Forms;
 
 namespace LSLEditor
 {
-    public partial class GListBoxWindow : Form
-    {
-        public GListBox GListBox
-        {
-            get
-            {
-                return this.gListBox1;
-            }
-        }
+	public partial class GListBoxWindow : Form
+	{
+		public GListBox GListBox {
+			get {
+				return this.gListBox1;
+			}
+		}
 
-        public GListBoxItem Selected
-        {
-            get
-            {
-                return (GListBoxItem)this.gListBox1.Items[this.gListBox1.SelectedIndex];
-            }
-        }
+		public GListBoxItem Selected {
+			get {
+				return (GListBoxItem)this.gListBox1.Items[this.gListBox1.SelectedIndex];
+			}
+		}
 
-        public GListBoxWindow(Form parent)
-        {
-            this.InitializeComponent();
+		public GListBoxWindow(Form parent)
+		{
+			this.InitializeComponent();
 
-            this.Owner = parent;
+			this.Owner = parent;
 
-            this.GListBox.Cursor = Cursors.Arrow;
-            this.GListBox.Sorted = true;
+			this.GListBox.Cursor = Cursors.Arrow;
+			this.GListBox.Sorted = true;
 
-            this.FontChanged += this.GListBoxWindow_FontChanged;
-        }
+			this.FontChanged += this.GListBoxWindow_FontChanged;
+		}
 
-        private void GListBoxWindow_FontChanged(object sender, EventArgs e)
-        {
-            this.GListBox.ItemHeight = 2 + (int)Helpers.Measure.MeasureDisplayString(this.GListBox, "M", this.Font).Height;
-        }
+		private void GListBoxWindow_FontChanged(object sender, EventArgs e)
+		{
+			this.GListBox.ItemHeight = 2 + (int)Helpers.Measure.MeasureDisplayString(this.GListBox, "M", this.Font).Height;
+		}
 
-        public void KeyDownHandler(KeyEventArgs e)
-        {
-            if (!this.Visible)
-            {
-                return;
-            }
+		public void KeyDownHandler(KeyEventArgs e)
+		{
+			if (!this.Visible) {
+				return;
+			}
 
-            if (e.KeyCode == Keys.Enter)
-            {
-                // cancel richttext enter if listbox shows
-                e.Handled = true;
-            }
-            if (e.KeyCode == Keys.Down)
-            {
-                this.gListBox1.SelectedIndex = Math.Min(this.gListBox1.Items.Count - 1, this.gListBox1.SelectedIndex + 1);
-                e.Handled = true;
-            }
+			if (e.KeyCode == Keys.Enter) {
+				// cancel richttext enter if listbox shows
+				e.Handled = true;
+			}
+			if (e.KeyCode == Keys.Down) {
+				this.gListBox1.SelectedIndex = Math.Min(this.gListBox1.Items.Count - 1, this.gListBox1.SelectedIndex + 1);
+				e.Handled = true;
+			}
 
-            if (e.KeyCode == Keys.Up)
-            {
-                this.gListBox1.SelectedIndex = Math.Max(0, this.gListBox1.SelectedIndex - 1);
-                e.Handled = true;
-            }
+			if (e.KeyCode == Keys.Up) {
+				this.gListBox1.SelectedIndex = Math.Max(0, this.gListBox1.SelectedIndex - 1);
+				e.Handled = true;
+			}
 
-            if (e.KeyCode == Keys.PageUp)
-            {
-                this.gListBox1.SelectedIndex = Math.Max(0, this.gListBox1.SelectedIndex - 10);
-                e.Handled = true;
-            }
+			if (e.KeyCode == Keys.PageUp) {
+				this.gListBox1.SelectedIndex = Math.Max(0, this.gListBox1.SelectedIndex - 10);
+				e.Handled = true;
+			}
 
-            if (e.KeyCode == Keys.PageDown)
-            {
-                this.gListBox1.SelectedIndex = Math.Min(this.gListBox1.Items.Count - 1, this.gListBox1.SelectedIndex + 10);
-                e.Handled = true;
-            }
-        }
+			if (e.KeyCode == Keys.PageDown) {
+				this.gListBox1.SelectedIndex = Math.Min(this.gListBox1.Items.Count - 1, this.gListBox1.SelectedIndex + 10);
+				e.Handled = true;
+			}
+		}
 
-        public void SetPosition(Rectangle rect, RichTextBox RichTextBox)
-        {
-            //Rectangle rect = Screen.PrimaryScreen.WorkingArea;
-            var p = RichTextBox.GetPositionFromCharIndex(RichTextBox.SelectionStart);
+		public void SetPosition(Rectangle rect, RichTextBox RichTextBox)
+		{
+			//Rectangle rect = Screen.PrimaryScreen.WorkingArea;
+			var p = RichTextBox.GetPositionFromCharIndex(RichTextBox.SelectionStart);
 
-            p = new Point(p.X - 20, p.Y + this.gListBox1.ItemHeight); // ItemHeight = exact line height
+			p = new Point(p.X - 20, p.Y + this.gListBox1.ItemHeight); // ItemHeight = exact line height
 
-            var client = RichTextBox.ClientRectangle;
-            if (p.X < (client.Left - 20) || p.Y < client.Top || p.X > client.Width || p.Y > client.Height)
-            {
-                this.Visible = false;
-                return;
-            }
+			var client = RichTextBox.ClientRectangle;
+			if (p.X < (client.Left - 20) || p.Y < client.Top || p.X > client.Width || p.Y > client.Height) {
+				this.Visible = false;
+				return;
+			}
 
-            var screen = RichTextBox.PointToScreen(p);
+			var screen = RichTextBox.PointToScreen(p);
 
-            //if ((screen.Y + this.Height) > rect.Height)
-            //	screen = RichTextBox.PointToScreen(new Point(p.X - 20 + this.XOffset, p.Y - this.Height));
+			//if ((screen.Y + this.Height) > rect.Height)
+			//	screen = RichTextBox.PointToScreen(new Point(p.X - 20 + this.XOffset, p.Y - this.Height));
 
-            if (screen.Y > rect.Bottom)
-            {
-                this.Visible = false;
-                return;
-                //screen.Y = rect.Bottom;
-            }
+			if (screen.Y > rect.Bottom) {
+				this.Visible = false;
+				return;
+				//screen.Y = rect.Bottom;
+			}
 
-            if (screen.X > rect.Right)
-            {
-                this.Visible = false;
-                return;
-                //screen.X = rect.Right;
-            }
+			if (screen.X > rect.Right) {
+				this.Visible = false;
+				return;
+				//screen.X = rect.Right;
+			}
 
-            if (screen.X < rect.Left)
-            {
-                this.Visible = false;
-                return;
-                //screen.X = rect.Left;
-            }
+			if (screen.X < rect.Left) {
+				this.Visible = false;
+				return;
+				//screen.X = rect.Left;
+			}
 
-            if (screen.Y < rect.Top)
-            {
-                this.Visible = false;
-                return;
-                //screen.Y = rect.Top;
-            }
+			if (screen.Y < rect.Top) {
+				this.Visible = false;
+				return;
+				//screen.Y = rect.Top;
+			}
 
-            this.Location = screen;
-        }
+			this.Location = screen;
+		}
 
-        private void gListBox1_Resize(object sender, EventArgs e)
-        {
-            this.Size = this.gListBox1.Size;
-        }
-    }
+		private void gListBox1_Resize(object sender, EventArgs e)
+		{
+			this.Size = this.gListBox1.Size;
+		}
+	}
 }

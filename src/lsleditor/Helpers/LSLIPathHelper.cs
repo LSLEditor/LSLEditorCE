@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -43,229 +43,217 @@ using System.IO;
 
 namespace LSLEditor.Helpers
 {
-    internal static class LSLIPathHelper
-    {
-        public const string READONLY_TAB_EXTENSION = " (Read Only)";
-        public const string EXPANDED_TAB_EXTENSION = " (Expanded LSL)";
+	internal static class LSLIPathHelper
+	{
+		public const string READONLY_TAB_EXTENSION = " (Read Only)";
+		public const string EXPANDED_TAB_EXTENSION = " (Expanded LSL)";
 
-        /// <summary>
-        /// Checks if a filename is LSLI
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
-        public static bool IsLSLI(string filename)
-        {
-            filename = TrimStarsAndWhiteSpace(filename);
-            return Path.GetExtension(filename).ToLower() == LSLIConverter.LSLI_EXT;
-        }
+		/// <summary>
+		/// Checks if a filename is LSLI
+		/// </summary>
+		/// <param name="filename"></param>
+		/// <returns></returns>
+		public static bool IsLSLI(string filename)
+		{
+			filename = TrimStarsAndWhiteSpace(filename);
+			return Path.GetExtension(filename).ToLower() == LSLIConverter.LSLI_EXT;
+		}
 
-        /// <summary>
-        /// Checks if a filename is an expanded LSL file
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
-        public static bool IsExpandedLSL(string filename)
-        {
-            filename = TrimStarsAndWhiteSpace(filename);
-            return filename.EndsWith(LSLIConverter.EXPANDED_SUBEXT + LSLIConverter.LSL_EXT);
-        }
+		/// <summary>
+		/// Checks if a filename is an expanded LSL file
+		/// </summary>
+		/// <param name="filename"></param>
+		/// <returns></returns>
+		public static bool IsExpandedLSL(string filename)
+		{
+			filename = TrimStarsAndWhiteSpace(filename);
+			return filename.EndsWith(LSLIConverter.EXPANDED_SUBEXT + LSLIConverter.LSL_EXT);
+		}
 
-        /// <summary>
-        /// Creates a LSLI scriptname from a filename.
-        /// </summary>
-        /// <returns></returns>
-        public static string CreateCollapsedScriptName(string filename)
-        {
-            return RemoveDotInFrontOfFilename(Path.GetFileNameWithoutExtension(RemoveExpandedSubExtension(filename)) + LSLIConverter.LSLI_EXT);
-        }
+		/// <summary>
+		/// Creates a LSLI scriptname from a filename.
+		/// </summary>
+		/// <returns></returns>
+		public static string CreateCollapsedScriptName(string filename)
+		{
+			return RemoveDotInFrontOfFilename(Path.GetFileNameWithoutExtension(RemoveExpandedSubExtension(filename)) + LSLIConverter.LSLI_EXT);
+		}
 
-        /// <summary>
-        /// Removes only the last extension
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
-        private static string RemoveExtension(string filename)
-        {
-            return TrimStarsAndWhiteSpace(filename.Remove(filename.LastIndexOf(Path.GetExtension(filename))));
-        }
+		/// <summary>
+		/// Removes only the last extension
+		/// </summary>
+		/// <param name="filename"></param>
+		/// <returns></returns>
+		private static string RemoveExtension(string filename)
+		{
+			return TrimStarsAndWhiteSpace(filename.Remove(filename.LastIndexOf(Path.GetExtension(filename))));
+		}
 
-        /// <summary>
-        /// Removes the .expanded in a filename
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
-        public static string RemoveExpandedSubExtension(string filename)
-        {
-            if (filename.Contains(LSLIConverter.EXPANDED_SUBEXT))
-            {
-                return filename.Replace(LSLIConverter.EXPANDED_SUBEXT, "");
-            }
+		/// <summary>
+		/// Removes the .expanded in a filename
+		/// </summary>
+		/// <param name="filename"></param>
+		/// <returns></returns>
+		public static string RemoveExpandedSubExtension(string filename)
+		{
+			if (filename.Contains(LSLIConverter.EXPANDED_SUBEXT)) {
+				return filename.Replace(LSLIConverter.EXPANDED_SUBEXT, "");
+			}
 
-            return filename;
-        }
+			return filename;
+		}
 
-        /// <summary>
-        /// Creates a new path and name from the given filename.
-        /// E.g. turns path/to/file.expanded.lsl into path/to/file.lsli
-        /// </summary>
-        /// <returns></returns>
-        public static string CreateCollapsedPathAndScriptName(string filename)
-        {
-            return RemoveDotInFrontOfFilename(RemoveExtension(RemoveExpandedSubExtension(filename)) + LSLIConverter.LSLI_EXT);
-        }
+		/// <summary>
+		/// Creates a new path and name from the given filename.
+		/// E.g. turns path/to/file.expanded.lsl into path/to/file.lsli
+		/// </summary>
+		/// <returns></returns>
+		public static string CreateCollapsedPathAndScriptName(string filename)
+		{
+			return RemoveDotInFrontOfFilename(RemoveExtension(RemoveExpandedSubExtension(filename)) + LSLIConverter.LSLI_EXT);
+		}
 
-        /// <summary>
-        /// Creates a new path and name from the original path and name based on the editForm.
-        /// E.g. turns path/to/file.lsli into path/to/.file.expanded.lsl
-        /// </summary>
-        /// <returns></returns>
-        public static string CreateExpandedPathAndScriptName(string path)
-        {
-            if (path.Contains(LSLIConverter.EXPANDED_SUBEXT))
-            {
-                return PutDotInFrontOfFilename(RemoveExtension(path) + LSLIConverter.LSL_EXT);
-            }
-            else
-            {
-                return PutDotInFrontOfFilename(RemoveExtension(path) + LSLIConverter.EXPANDED_SUBEXT + LSLIConverter.LSL_EXT);
-            }
-        }
+		/// <summary>
+		/// Creates a new path and name from the original path and name based on the editForm.
+		/// E.g. turns path/to/file.lsli into path/to/.file.expanded.lsl
+		/// </summary>
+		/// <returns></returns>
+		public static string CreateExpandedPathAndScriptName(string path)
+		{
+			if (path.Contains(LSLIConverter.EXPANDED_SUBEXT)) {
+				return PutDotInFrontOfFilename(RemoveExtension(path) + LSLIConverter.LSL_EXT);
+			} else {
+				return PutDotInFrontOfFilename(RemoveExtension(path) + LSLIConverter.EXPANDED_SUBEXT + LSLIConverter.LSL_EXT);
+			}
+		}
 
-        /// <summary>
-        /// Creates an expanded scriptname out of the given filename.
-        /// </summary>
-        /// <returns></returns>
-        public static string CreateExpandedScriptName(string filename)
-        {
-            var nameExpanded = filename != null
-                ? Path.GetFileNameWithoutExtension(filename) + LSLIConverter.EXPANDED_SUBEXT + LSLIConverter.LSL_EXT : "";
-            return PutDotInFrontOfFilename(TrimStarsAndWhiteSpace(nameExpanded));
-        }
+		/// <summary>
+		/// Creates an expanded scriptname out of the given filename.
+		/// </summary>
+		/// <returns></returns>
+		public static string CreateExpandedScriptName(string filename)
+		{
+			var nameExpanded = filename != null
+				? Path.GetFileNameWithoutExtension(filename) + LSLIConverter.EXPANDED_SUBEXT + LSLIConverter.LSL_EXT : "";
+			return PutDotInFrontOfFilename(TrimStarsAndWhiteSpace(nameExpanded));
+		}
 
-        /// <summary>
-        /// Puts dot in front of a filename, e.g. "path/file.lsl" to "path/.file.lsl"
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
-        private static string PutDotInFrontOfFilename(string filename)
-        {
-            var afterLastIndexOfSeperator = (filename.LastIndexOf('\\') > filename.LastIndexOf('/') ? filename.LastIndexOf('\\') : filename.LastIndexOf('/')) + 1;
+		/// <summary>
+		/// Puts dot in front of a filename, e.g. "path/file.lsl" to "path/.file.lsl"
+		/// </summary>
+		/// <param name="filename"></param>
+		/// <returns></returns>
+		private static string PutDotInFrontOfFilename(string filename)
+		{
+			var afterLastIndexOfSeperator = (filename.LastIndexOf('\\') > filename.LastIndexOf('/') ? filename.LastIndexOf('\\') : filename.LastIndexOf('/')) + 1;
 
-            if (filename.Substring(afterLastIndexOfSeperator, 1) == ".")
-            {
-                return filename;
-            }
+			if (filename.Substring(afterLastIndexOfSeperator, 1) == ".") {
+				return filename;
+			}
 
-            return filename.Insert(afterLastIndexOfSeperator, ".");
-        }
+			return filename.Insert(afterLastIndexOfSeperator, ".");
+		}
 
-        /// <summary>
-        /// If found, removes the dot in front of a filename.
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
-        public static string RemoveDotInFrontOfFilename(string filename)
-        {
-            var afterLastIndexOfSeperator = (filename.LastIndexOf('\\') > filename.LastIndexOf('/') ? filename.LastIndexOf('\\') : filename.LastIndexOf('/')) + 1;
+		/// <summary>
+		/// If found, removes the dot in front of a filename.
+		/// </summary>
+		/// <param name="filename"></param>
+		/// <returns></returns>
+		public static string RemoveDotInFrontOfFilename(string filename)
+		{
+			var afterLastIndexOfSeperator = (filename.LastIndexOf('\\') > filename.LastIndexOf('/') ? filename.LastIndexOf('\\') : filename.LastIndexOf('/')) + 1;
 
-            if (filename.Substring(afterLastIndexOfSeperator, 1) != ".")
-            {
-                return filename;
-            }
+			if (filename.Substring(afterLastIndexOfSeperator, 1) != ".") {
+				return filename;
+			}
 
-            return filename.Remove(afterLastIndexOfSeperator, 1);
-        }
+			return filename.Remove(afterLastIndexOfSeperator, 1);
+		}
 
-        /// <summary>
-        /// "Hides" the file in the folder by setting it's attributes to "Hidden"
-        /// </summary>
-        /// <param name="path"></param>
-        public static void HideFile(string path)
-        {
-            File.SetAttributes(path, File.GetAttributes(path) | FileAttributes.Hidden);
-        }
+		/// <summary>
+		/// "Hides" the file in the folder by setting it's attributes to "Hidden"
+		/// </summary>
+		/// <param name="path"></param>
+		public static void HideFile(string path)
+		{
+			File.SetAttributes(path, File.GetAttributes(path) | FileAttributes.Hidden);
+		}
 
-        /// <summary>
-        /// First checks if the file exists, then deletes it
-        /// </summary>
-        /// <param name="path"></param>
-        public static void DeleteFile(string path)
-        {
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
-        }
+		/// <summary>
+		/// First checks if the file exists, then deletes it
+		/// </summary>
+		/// <param name="path"></param>
+		public static void DeleteFile(string path)
+		{
+			if (File.Exists(path)) {
+				File.Delete(path);
+			}
+		}
 
-        /// <summary>
-        /// Trims the "dirty" stars and whitespace in a string. E.g. "file*.lsl " to "file.lsl"
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        public static string TrimStarsAndWhiteSpace(string str)
-        {
-            return str.Trim(' ').TrimEnd('*');
-        }
+		/// <summary>
+		/// Trims the "dirty" stars and whitespace in a string. E.g. "file*.lsl " to "file.lsl"
+		/// </summary>
+		/// <param name="str"></param>
+		/// <returns></returns>
+		public static string TrimStarsAndWhiteSpace(string str)
+		{
+			return str.Trim(' ').TrimEnd('*');
+		}
 
-        /// <summary>
-        /// Turns an expanded script name into a string to be displayed as the tab name
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public static string GetExpandedTabName(string path)
-        {
-            if (path == null)
-            {
-                return "";
-            }
+		/// <summary>
+		/// Turns an expanded script name into a string to be displayed as the tab name
+		/// </summary>
+		/// <param name="path"></param>
+		/// <returns></returns>
+		public static string GetExpandedTabName(string path)
+		{
+			if (path == null) {
+				return "";
+			}
 
-            return RemoveDotInFrontOfFilename(Path.GetFileNameWithoutExtension(RemoveExpandedSubExtension(path)) + LSLIConverter.LSLI_EXT + EXPANDED_TAB_EXTENSION);
-        }
+			return RemoveDotInFrontOfFilename(Path.GetFileNameWithoutExtension(RemoveExpandedSubExtension(path)) + LSLIConverter.LSLI_EXT + EXPANDED_TAB_EXTENSION);
+		}
 
-        /// <summary>
-        /// Turns a LSLI readonly script name into a string to be displayed as the tab name
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
-        public static string GetReadOnlyTabName(string filename)
-        {
-            if (filename == null)
-            {
-                return "";
-            }
+		/// <summary>
+		/// Turns a LSLI readonly script name into a string to be displayed as the tab name
+		/// </summary>
+		/// <param name="filename"></param>
+		/// <returns></returns>
+		public static string GetReadOnlyTabName(string filename)
+		{
+			if (filename == null) {
+				return "";
+			}
 
-            return CreateCollapsedPathAndScriptName(filename) + READONLY_TAB_EXTENSION;
-        }
+			return CreateCollapsedPathAndScriptName(filename) + READONLY_TAB_EXTENSION;
+		}
 
-        /// <summary>
-        /// Creates a relative path between two paths
-        /// </summary>
-        /// <param name="filespec">The file or folder to create a relative path towards</param>
-        /// <param name="folder">The base folder</param>
-        /// <returns></returns>
-        public static string GetRelativePath(string filespec, string folder)
-        {
-            filespec = Path.GetFullPath(filespec).ToLower();
-            if (LSLIConverter.validExtensions.Contains(filespec.Substring(filespec.LastIndexOf("."))))
-            {
-                var lastIndexOfSeperator = filespec.LastIndexOf('\\') > filespec.LastIndexOf('/') ? filespec.LastIndexOf('\\') : filespec.LastIndexOf('/');
-                filespec = filespec.Remove(lastIndexOfSeperator);
-            }
-            var pathUri = new Uri(filespec);
+		/// <summary>
+		/// Creates a relative path between two paths
+		/// </summary>
+		/// <param name="filespec">The file or folder to create a relative path towards</param>
+		/// <param name="folder">The base folder</param>
+		/// <returns></returns>
+		public static string GetRelativePath(string filespec, string folder)
+		{
+			filespec = Path.GetFullPath(filespec).ToLower();
+			if (LSLIConverter.validExtensions.Contains(filespec.Substring(filespec.LastIndexOf(".")))) {
+				var lastIndexOfSeperator = filespec.LastIndexOf('\\') > filespec.LastIndexOf('/') ? filespec.LastIndexOf('\\') : filespec.LastIndexOf('/');
+				filespec = filespec.Remove(lastIndexOfSeperator);
+			}
+			var pathUri = new Uri(filespec);
 
-            if (!folder.EndsWith(Path.DirectorySeparatorChar.ToString()))
-            {
-                folder += Path.DirectorySeparatorChar;
-            }
-            var folderUri = new Uri(folder);
-            var relativePath = Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', Path.DirectorySeparatorChar));
+			if (!folder.EndsWith(Path.DirectorySeparatorChar.ToString())) {
+				folder += Path.DirectorySeparatorChar;
+			}
+			var folderUri = new Uri(folder);
+			var relativePath = Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', Path.DirectorySeparatorChar));
 
-            if (relativePath.Substring(relativePath.Length - 3) != Path.DirectorySeparatorChar.ToString())
-            {
-                relativePath += Path.DirectorySeparatorChar;
-            }
+			if (relativePath.Substring(relativePath.Length - 3) != Path.DirectorySeparatorChar.ToString()) {
+				relativePath += Path.DirectorySeparatorChar;
+			}
 
-            return relativePath;
-        }
-    }
+			return relativePath;
+		}
+	}
 }

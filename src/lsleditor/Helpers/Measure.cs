@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -42,25 +42,25 @@ using System.Drawing;
 
 namespace LSLEditor.Helpers
 {
-    internal static class Measure
-    {
-        public static RectangleF MeasureDisplayString(System.Windows.Forms.Control control, string text, Font font)
-        {
-            var graphics = control.CreateGraphics();
-            var rect = MeasureDisplayString(graphics, text, font);
-            graphics.Dispose();
-            return rect;
-        }
+	internal static class Measure
+	{
+		public static RectangleF MeasureDisplayString(System.Windows.Forms.Control control, string text, Font font)
+		{
+			var graphics = control.CreateGraphics();
+			var rect = MeasureDisplayString(graphics, text, font);
+			graphics.Dispose();
+			return rect;
+		}
 
-        public static RectangleF MeasureDisplayString(Graphics graphics, string text, Font font)
-        {
-            var format = new StringFormat();
-            var rect = new RectangleF(0, 0, 4096, 4096);
-            CharacterRange[] ranges = { new CharacterRange(0, text.Length) };
-            var regions = new Region[1];
-            format.SetMeasurableCharacterRanges(ranges);
-            regions = graphics.MeasureCharacterRanges(text, font, rect, format);
-            return regions[0].GetBounds(graphics);
-        }
-    }
+		public static RectangleF MeasureDisplayString(Graphics graphics, string text, Font font)
+		{
+			var format = new StringFormat();
+			var rect = new RectangleF(0, 0, 4096, 4096);
+			CharacterRange[] ranges = { new CharacterRange(0, text.Length) };
+			var regions = new Region[1];
+			format.SetMeasurableCharacterRanges(ranges);
+			regions = graphics.MeasureCharacterRanges(text, font, rect, format);
+			return regions[0].GetBounds(graphics);
+		}
+	}
 }

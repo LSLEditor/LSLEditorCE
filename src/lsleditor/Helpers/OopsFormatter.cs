@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -43,23 +43,23 @@ using System.Text;
 
 namespace LSLEditor
 {
-    internal static class OopsFormatter
-    {
-        public static string ApplyFormatting(string strInput)
-        {
-            strInput = strInput.Replace("SecondLifeHost.", "");
-            strInput = strInput.Replace("GlobalClass.", "");
-            strInput = strInput.Replace("State_", "");
-            strInput = strInput.Replace("LSLEditor.", "");
-            strInput = strInput.Replace("SecondLife.", "");
-            strInput = strInput.Replace("String", "string");
-            strInput = strInput.Replace("Float", "float");
+	internal static class OopsFormatter
+	{
+		public static string ApplyFormatting(string strInput)
+		{
+			strInput = strInput.Replace("SecondLifeHost.", "");
+			strInput = strInput.Replace("GlobalClass.", "");
+			strInput = strInput.Replace("State_", "");
+			strInput = strInput.Replace("LSLEditor.", "");
+			strInput = strInput.Replace("SecondLife.", "");
+			strInput = strInput.Replace("String", "string");
+			strInput = strInput.Replace("Float", "float");
 
-            //TODO: there was something here for removing the path (is it needed?)
-            //Properties.Settings.Default.OopsRemove = @"C:\Documents and Settings\Alphons\Visual Studio 2005\Projects";
-            //strInput = strInput.Replace(Properties.Settings.Default.OopsRemove, "");
+			//TODO: there was something here for removing the path (is it needed?)
+			//Properties.Settings.Default.OopsRemove = @"C:\Documents and Settings\Alphons\Visual Studio 2005\Projects";
+			//strInput = strInput.Replace(Properties.Settings.Default.OopsRemove, "");
 
-            return strInput;
-        }
-    }
+			return strInput;
+		}
+	}
 }

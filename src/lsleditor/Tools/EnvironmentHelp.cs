@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -47,81 +47,79 @@ using System.Windows.Forms;
 
 namespace LSLEditor.Tools
 {
-    public partial class EnvironmentHelp : UserControl, ICommit
-    {
-        public EnvironmentHelp()
-        {
-            this.InitializeComponent();
+	public partial class EnvironmentHelp : UserControl, ICommit
+	{
+		public EnvironmentHelp()
+		{
+			this.InitializeComponent();
 
-            this.radioButton1.Checked = Properties.Settings.Default.HelpOnline;
-            this.radioButton2.Checked = Properties.Settings.Default.HelpOffline;
+			this.radioButton1.Checked = Properties.Settings.Default.HelpOnline;
+			this.radioButton2.Checked = Properties.Settings.Default.HelpOffline;
 
-            this.radioButton3.Checked = Properties.Settings.Default.WikiSeperateBrowser;
-            this.radioButton4.Checked = !Properties.Settings.Default.WikiSeperateBrowser;
+			this.radioButton3.Checked = Properties.Settings.Default.WikiSeperateBrowser;
+			this.radioButton4.Checked = !Properties.Settings.Default.WikiSeperateBrowser;
 
-            this.checkBox1.Checked = Properties.Settings.Default.HelpNewTab;
+			this.checkBox1.Checked = Properties.Settings.Default.HelpNewTab;
 
-            this.checkBox2.Checked = Properties.Settings.Default.ToolTip;
+			this.checkBox2.Checked = Properties.Settings.Default.ToolTip;
 
-            this.textBox1.Text = Properties.Settings.Default.Help;
+			this.textBox1.Text = Properties.Settings.Default.Help;
 
-            this.radioButton1_CheckedChanged(null, null);
+			this.radioButton1_CheckedChanged(null, null);
 
-            this.radioButton4_CheckedChanged(null, null);
-        }
+			this.radioButton4_CheckedChanged(null, null);
+		}
 
-        public void Commit()
-        {
-            Properties.Settings.Default.HelpOnline = this.radioButton1.Checked;
-            Properties.Settings.Default.HelpOffline = this.radioButton2.Checked;
-            Properties.Settings.Default.WikiSeperateBrowser = this.radioButton3.Checked;
+		public void Commit()
+		{
+			Properties.Settings.Default.HelpOnline = this.radioButton1.Checked;
+			Properties.Settings.Default.HelpOffline = this.radioButton2.Checked;
+			Properties.Settings.Default.WikiSeperateBrowser = this.radioButton3.Checked;
 
-            Properties.Settings.Default.HelpNewTab = this.checkBox1.Checked;
-            Properties.Settings.Default.ToolTip = this.checkBox2.Checked;
+			Properties.Settings.Default.HelpNewTab = this.checkBox1.Checked;
+			Properties.Settings.Default.ToolTip = this.checkBox2.Checked;
 
-            Properties.Settings.Default.Help = this.textBox1.Text;
-        }
+			Properties.Settings.Default.Help = this.textBox1.Text;
+		}
 
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.radioButton2.Checked)
-            {
-                this.textBox1.Enabled = false;
-                var strHelpFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                    Properties.Settings.Default.HelpOfflineFile);
-                if (!File.Exists(strHelpFile) && MessageBox.Show(
-                    "Help file does not exist, would you like to download it?", "Download Helpfile",
-                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-                {
-                    var updater = new UpdateApplicationForm();
-                    //updater.Icon = this.Icon; // TODO!!
-                    updater.CheckForHelpFile();
-                    updater.ShowDialog(this);
-                }
-            }
-        }
+		private void radioButton2_CheckedChanged(object sender, EventArgs e)
+		{
+			if (this.radioButton2.Checked) {
+				this.textBox1.Enabled = false;
+				var strHelpFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+					Properties.Settings.Default.HelpOfflineFile);
+				if (!File.Exists(strHelpFile) && MessageBox.Show(
+					"Help file does not exist, would you like to download it?", "Download Helpfile",
+					MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
+					var updater = new UpdateApplicationForm();
+					//updater.Icon = this.Icon; // TODO!!
+					updater.CheckForHelpFile();
+					updater.ShowDialog(this);
+				}
+			}
+		}
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            this.textBox1.Enabled = this.radioButton1.Checked;
-            this.groupBox1.Enabled = this.radioButton1.Checked;
-            this.button1.Enabled = this.radioButton1.Checked;
-            this.button2.Enabled = this.radioButton1.Checked;
-        }
+		private void radioButton1_CheckedChanged(object sender, EventArgs e)
+		{
+			this.textBox1.Enabled = this.radioButton1.Checked;
+			this.groupBox1.Enabled = this.radioButton1.Checked;
+			this.button1.Enabled = this.radioButton1.Checked;
+			this.button2.Enabled = this.radioButton1.Checked;
+		}
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.textBox1.Text = Properties.Settings.Default.Help1;
-        }
+		private void button1_Click(object sender, EventArgs e)
+		{
+			this.textBox1.Text = Properties.Settings.Default.Help1;
+		}
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.textBox1.Text = Properties.Settings.Default.Help2;
-        }
+		private void button2_Click(object sender, EventArgs e)
+		{
+			this.textBox1.Text = Properties.Settings.Default.Help2;
+		}
 
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
-        {
-            this.checkBox1.Enabled = this.radioButton4.Checked;
-        }
-    }
+		private void radioButton4_CheckedChanged(object sender, EventArgs e)
+		{
+			this.checkBox1.Enabled = this.radioButton4.Checked;
+		}
+	}
 }

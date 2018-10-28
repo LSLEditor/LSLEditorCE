@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -48,11 +48,11 @@ using LSLEditor.Docking;
 
 namespace LSLEditor
 {
-    public partial class ToolWindow : DockContent
-    {
-        public ToolWindow()
-        {
-            this.InitializeComponent();
-        }
-    }
+	public partial class ToolWindow : DockContent
+	{
+		public ToolWindow()
+		{
+			this.InitializeComponent();
+		}
+	}
 }

@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -47,117 +47,103 @@ using System.Windows.Forms;
 
 namespace LSLEditor
 {
-    public partial class NewProject : Form
-    {
-        private readonly LSLEditorForm parent;
+	public partial class NewProject : Form
+	{
+		private readonly LSLEditorForm parent;
 
-        public NewProject(LSLEditorForm parent)
-        {
-            this.InitializeComponent();
+		public NewProject(LSLEditorForm parent)
+		{
+			this.InitializeComponent();
 
-            this.checkBox2.Visible = Svn.IsInstalled;
+			this.checkBox2.Visible = Svn.IsInstalled;
 
-            this.parent = parent;
+			this.parent = parent;
 
-            this.textBox2.Text = Properties.Settings.Default.ProjectLocation;
-        }
+			this.textBox2.Text = Properties.Settings.Default.ProjectLocation;
+		}
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
+		private void button2_Click(object sender, EventArgs e)
+		{
+			this.DialogResult = DialogResult.Cancel;
+			this.Close();
+		}
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (this.checkBox2.Checked)
-            {
-                this.Checkout();
-            }
-            else
-            {
-                this.CreateNew();
-            }
-        }
+		private void button3_Click(object sender, EventArgs e)
+		{
+			if (this.checkBox2.Checked) {
+				this.Checkout();
+			} else {
+				this.CreateNew();
+			}
+		}
 
-        private void Checkout()
-        {
-            var svn = new Svn();
-            var strSvnRepository = this.textBox1.Text.Trim();
-            var strLocalDirectory = this.textBox2.Text.Trim();
-            var strSolutionName = this.textBox3.Text.Trim();
+		private void Checkout()
+		{
+			var svn = new Svn();
+			var strSvnRepository = this.textBox1.Text.Trim();
+			var strLocalDirectory = this.textBox2.Text.Trim();
+			var strSolutionName = this.textBox3.Text.Trim();
 
-            strLocalDirectory = Path.Combine(strLocalDirectory, strSolutionName);
+			strLocalDirectory = Path.Combine(strLocalDirectory, strSolutionName);
 
-            strSvnRepository = strSvnRepository.TrimEnd(new char[] { '/' });
-            if (!strSvnRepository.EndsWith(strSolutionName))
-            {
-                strSvnRepository += "/" + strSolutionName;
-            }
+			strSvnRepository = strSvnRepository.TrimEnd(new char[] { '/' });
+			if (!strSvnRepository.EndsWith(strSolutionName)) {
+				strSvnRepository += "/" + strSolutionName;
+			}
 
-            strSvnRepository += "/";
+			strSvnRepository += "/";
 
-            var strSolFile = strSvnRepository + strSolutionName + ".sol";
-            if (!svn.Execute("list \"" + strSolFile + "\"", false, true))
-            {
-                return;
-            }
+			var strSolFile = strSvnRepository + strSolutionName + ".sol";
+			if (!svn.Execute("list \"" + strSolFile + "\"", false, true)) {
+				return;
+			}
 
-            if (!svn.Execute("checkout \"" + strSvnRepository + "\" \"" + strLocalDirectory + "\"", false, true))
-            {
-                return;
-            }
+			if (!svn.Execute("checkout \"" + strSvnRepository + "\" \"" + strLocalDirectory + "\"", false, true)) {
+				return;
+			}
 
-            // Into solution directory
-            var strLocalSolFile = Path.Combine(strLocalDirectory, strSolutionName + ".sol");
-            if (!Directory.Exists(strLocalDirectory))
-            {
-                MessageBox.Show("Can't find directory " + strLocalDirectory, "Checkout Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (!File.Exists(strLocalSolFile))
-            {
-                MessageBox.Show("Can't find solution file " + strLocalSolFile, "Checkout Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (this.parent.SolutionExplorer.OpenSolution(strLocalSolFile))
-            {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-        }
+			// Into solution directory
+			var strLocalSolFile = Path.Combine(strLocalDirectory, strSolutionName + ".sol");
+			if (!Directory.Exists(strLocalDirectory)) {
+				MessageBox.Show("Can't find directory " + strLocalDirectory, "Checkout Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+			if (!File.Exists(strLocalSolFile)) {
+				MessageBox.Show("Can't find solution file " + strLocalSolFile, "Checkout Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+			if (this.parent.SolutionExplorer.OpenSolution(strLocalSolFile)) {
+				this.DialogResult = DialogResult.OK;
+				this.Close();
+			}
+		}
 
-        private void CreateNew()
-        {
-            if (this.parent.SolutionExplorer.CreateNew(this.textBox1.Text, this.textBox2.Text, this.textBox3.Text, this.checkBox1.Checked))
-            {
-                this.parent.ShowSolutionExplorer(true);
-                this.parent.UpdateRecentProjectList(this.parent.SolutionExplorer.GetCurrentSolutionPath(), true);
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-        }
+		private void CreateNew()
+		{
+			if (this.parent.SolutionExplorer.CreateNew(this.textBox1.Text, this.textBox2.Text, this.textBox3.Text, this.checkBox1.Checked)) {
+				this.parent.ShowSolutionExplorer(true);
+				this.parent.UpdateRecentProjectList(this.parent.SolutionExplorer.GetCurrentSolutionPath(), true);
+				this.DialogResult = DialogResult.OK;
+				this.Close();
+			}
+		}
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (this.folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
-            {
-                this.textBox2.Text = this.folderBrowserDialog1.SelectedPath;
-            }
-        }
+		private void button1_Click(object sender, EventArgs e)
+		{
+			if (this.folderBrowserDialog1.ShowDialog(this) == DialogResult.OK) {
+				this.textBox2.Text = this.folderBrowserDialog1.SelectedPath;
+			}
+		}
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.checkBox2.Checked)
-            {
-                this.label1.Text = "SVN Path";
-                this.textBox1.Text = "";
-            }
-            else
-            {
-                this.label1.Text = "Name";
-                this.textBox1.Text = "Project";
-            }
-        }
-    }
+		private void checkBox2_CheckedChanged(object sender, EventArgs e)
+		{
+			if (this.checkBox2.Checked) {
+				this.label1.Text = "SVN Path";
+				this.textBox1.Text = "";
+			} else {
+				this.label1.Text = "Name";
+				this.textBox1.Text = "Project";
+			}
+		}
+	}
 }

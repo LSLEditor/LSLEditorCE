@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -46,22 +46,22 @@ using System.Windows.Forms;
 
 namespace LSLEditor.Tools
 {
-    public partial class RuntimeExternal : UserControl, ICommit
-    {
-        public RuntimeExternal()
-        {
-            this.InitializeComponent();
+	public partial class RuntimeExternal : UserControl, ICommit
+	{
+		public RuntimeExternal()
+		{
+			this.InitializeComponent();
 
-            this.ProxyServer.Text = Properties.Settings.Default.ProxyServer;
-            this.ProxyUserid.Text = Properties.Settings.Default.ProxyUserid;
-            this.ProxyPassword.Text = Properties.Settings.Default.ProxyPassword;
-        }
+			this.ProxyServer.Text = Properties.Settings.Default.ProxyServer;
+			this.ProxyUserid.Text = Properties.Settings.Default.ProxyUserid;
+			this.ProxyPassword.Text = Properties.Settings.Default.ProxyPassword;
+		}
 
-        public void Commit()
-        {
-            Properties.Settings.Default.ProxyServer = this.ProxyServer.Text;
-            Properties.Settings.Default.ProxyUserid = this.ProxyUserid.Text;
-            Properties.Settings.Default.ProxyPassword = this.ProxyPassword.Text;
-        }
-    }
+		public void Commit()
+		{
+			Properties.Settings.Default.ProxyServer = this.ProxyServer.Text;
+			Properties.Settings.Default.ProxyUserid = this.ProxyUserid.Text;
+			Properties.Settings.Default.ProxyPassword = this.ProxyPassword.Text;
+		}
+	}
 }

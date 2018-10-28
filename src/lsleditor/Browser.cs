@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -46,124 +46,112 @@ using LSLEditor.Docking;
 
 namespace LSLEditor
 {
-    public partial class Browser : DockContent
-    {
-        private readonly LSLEditorForm lslEditorForm;
+	public partial class Browser : DockContent
+	{
+		private readonly LSLEditorForm lslEditorForm;
 
-        public Browser(LSLEditorForm lslEditorForm)
-        {
-            this.InitializeComponent();
+		public Browser(LSLEditorForm lslEditorForm)
+		{
+			this.InitializeComponent();
 
-            this.Icon = lslEditorForm.Icon;
-            this.lslEditorForm = lslEditorForm;
+			this.Icon = lslEditorForm.Icon;
+			this.lslEditorForm = lslEditorForm;
 
-            // enables close buttons on tabs
-            this.tabControl1.SetDrawMode();
-        }
+			// enables close buttons on tabs
+			this.tabControl1.SetDrawMode();
+		}
 
-        private void axWebBrowser1_StatusTextChanged(object sender, EventArgs e)
-        {
-            var axWebBrowser1 = sender as WebBrowser;
-            if (axWebBrowser1.Tag is ToolStripStatusLabel status)
-            {
-                status.Text = axWebBrowser1.StatusText;
-            }
-        }
+		private void axWebBrowser1_StatusTextChanged(object sender, EventArgs e)
+		{
+			var axWebBrowser1 = sender as WebBrowser;
+			if (axWebBrowser1.Tag is ToolStripStatusLabel status) {
+				status.Text = axWebBrowser1.StatusText;
+			}
+		}
 
-        private void axWebBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
-        {
-            var strUrl = e.Url.ToString();
-            if (strUrl.EndsWith(".lsl"))
-            {
-                e.Cancel = true;
-                if (MessageBox.Show("Import LSL script?", "Import script", MessageBoxButtons.OKCancel) != DialogResult.Cancel)
-                {
-                    var axWebBrowser1 = sender as WebBrowser;
-                    axWebBrowser1.Stop();
+		private void axWebBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+		{
+			var strUrl = e.Url.ToString();
+			if (strUrl.EndsWith(".lsl")) {
+				e.Cancel = true;
+				if (MessageBox.Show("Import LSL script?", "Import script", MessageBoxButtons.OKCancel) != DialogResult.Cancel) {
+					var axWebBrowser1 = sender as WebBrowser;
+					axWebBrowser1.Stop();
 
-                    this.lslEditorForm.OpenFile(strUrl, Guid.NewGuid());
-                }
-            }
-        }
+					this.lslEditorForm.OpenFile(strUrl, Guid.NewGuid());
+				}
+			}
+		}
 
-        public void ShowWebBrowser(string strTabName, string strUrl)
-        {
-            WebBrowser axWebBrowser1 = null;
-            try
-            {
-                if (!Properties.Settings.Default.HelpNewTab)
-                {
-                    var tabPage = this.tabControl1.TabPages[0];
-                    tabPage.Text = strTabName + "    ";
-                    axWebBrowser1 = tabPage.Controls[0] as WebBrowser;
-                }
-            }
-            catch { }
+		public void ShowWebBrowser(string strTabName, string strUrl)
+		{
+			WebBrowser axWebBrowser1 = null;
+			try {
+				if (!Properties.Settings.Default.HelpNewTab) {
+					var tabPage = this.tabControl1.TabPages[0];
+					tabPage.Text = strTabName + "    ";
+					axWebBrowser1 = tabPage.Controls[0] as WebBrowser;
+				}
+			} catch { }
 
-            if (axWebBrowser1 == null)
-            {
-                var tabPage = new TabPage(strTabName + "    ")
-                {
-                    BackColor = Color.White
-                };
+			if (axWebBrowser1 == null) {
+				var tabPage = new TabPage(strTabName + "    ") {
+					BackColor = Color.White
+				};
 
-                axWebBrowser1 = new WebBrowser();
+				axWebBrowser1 = new WebBrowser();
 
-                var toolStripStatusLabel1 = new ToolStripStatusLabel();
-                var statusStrip1 = new StatusStrip();
+				var toolStripStatusLabel1 = new ToolStripStatusLabel();
+				var statusStrip1 = new StatusStrip();
 
-                statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1 });
-                statusStrip1.Location = new System.Drawing.Point(0, 318);
-                statusStrip1.Name = "statusStrip1";
-                statusStrip1.Size = new System.Drawing.Size(584, 22);
-                statusStrip1.TabIndex = 0;
-                statusStrip1.Text = "statusStrip1";
+				statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1 });
+				statusStrip1.Location = new System.Drawing.Point(0, 318);
+				statusStrip1.Name = "statusStrip1";
+				statusStrip1.Size = new System.Drawing.Size(584, 22);
+				statusStrip1.TabIndex = 0;
+				statusStrip1.Text = "statusStrip1";
 
-                toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-                toolStripStatusLabel1.Size = new System.Drawing.Size(109, 17);
-                toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+				toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+				toolStripStatusLabel1.Size = new System.Drawing.Size(109, 17);
+				toolStripStatusLabel1.Text = "toolStripStatusLabel1";
 
-                tabPage.Controls.Add(axWebBrowser1);
+				tabPage.Controls.Add(axWebBrowser1);
 
-                tabPage.Controls.Add(statusStrip1);
+				tabPage.Controls.Add(statusStrip1);
 
-                this.tabControl1.TabPages.Add(tabPage);
-                this.tabControl1.SelectedIndex = this.tabControl1.TabCount - 1;
+				this.tabControl1.TabPages.Add(tabPage);
+				this.tabControl1.SelectedIndex = this.tabControl1.TabCount - 1;
 
-                // reference
-                axWebBrowser1.Tag = toolStripStatusLabel1;
+				// reference
+				axWebBrowser1.Tag = toolStripStatusLabel1;
 
-                axWebBrowser1.Dock = DockStyle.Fill;
-                axWebBrowser1.StatusTextChanged += this.axWebBrowser1_StatusTextChanged;
-                axWebBrowser1.Navigating += this.axWebBrowser1_Navigating;
-            }
-            axWebBrowser1.Navigate(strUrl);
-        }
+				axWebBrowser1.Dock = DockStyle.Fill;
+				axWebBrowser1.StatusTextChanged += this.axWebBrowser1_StatusTextChanged;
+				axWebBrowser1.Navigating += this.axWebBrowser1_Navigating;
+			}
+			axWebBrowser1.Navigate(strUrl);
+		}
 
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var intTabToClose = (int)this.contextMenuStrip1.Tag;
-            if (intTabToClose < this.tabControl1.TabCount)
-            {
-                this.tabControl1.TabPages.RemoveAt(intTabToClose);
-            }
-        }
+		private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var intTabToClose = (int)this.contextMenuStrip1.Tag;
+			if (intTabToClose < this.tabControl1.TabCount) {
+				this.tabControl1.TabPages.RemoveAt(intTabToClose);
+			}
+		}
 
-        private void tabControl1_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (sender is TabControl tabControl && e.Button == MouseButtons.Right)
-            {
-                for (var intI = 0; intI < tabControl.TabCount; intI++)
-                {
-                    var rt = tabControl.GetTabRect(intI);
-                    if (e.X > rt.Left && e.X < rt.Right
-                     && e.Y > rt.Top && e.Y < rt.Bottom)
-                    {
-                        this.contextMenuStrip1.Tag = intI;
-                        this.contextMenuStrip1.Show(this.tabControl1, new Point(e.X, e.Y));
-                    }
-                }
-            }
-        }
-    }
+		private void tabControl1_MouseDown(object sender, MouseEventArgs e)
+		{
+			if (sender is TabControl tabControl && e.Button == MouseButtons.Right) {
+				for (var intI = 0; intI < tabControl.TabCount; intI++) {
+					var rt = tabControl.GetTabRect(intI);
+					if (e.X > rt.Left && e.X < rt.Right
+					 && e.Y > rt.Top && e.Y < rt.Bottom) {
+						this.contextMenuStrip1.Tag = intI;
+						this.contextMenuStrip1.Show(this.tabControl1, new Point(e.X, e.Y));
+					}
+				}
+			}
+		}
+	}
 }

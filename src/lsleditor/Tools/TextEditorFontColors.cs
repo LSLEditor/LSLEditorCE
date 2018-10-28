@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -46,74 +46,69 @@ using System.Windows.Forms;
 
 namespace LSLEditor.Tools
 {
-    public partial class TextEditorFontColors : UserControl, ICommit
-    {
-        private Font fontEditor;
-        private Font fontTooltips;
+	public partial class TextEditorFontColors : UserControl, ICommit
+	{
+		private Font fontEditor;
+		private Font fontTooltips;
 
-        public TextEditorFontColors()
-        {
-            this.InitializeComponent();
+		public TextEditorFontColors()
+		{
+			this.InitializeComponent();
 
-            this.checkBox1.Checked = Properties.Settings.Default.SLColorScheme;
+			this.checkBox1.Checked = Properties.Settings.Default.SLColorScheme;
 
-            this.fontEditor = Properties.Settings.Default.FontEditor;
-            this.fontTooltips = Properties.Settings.Default.FontTooltips;
+			this.fontEditor = Properties.Settings.Default.FontEditor;
+			this.fontTooltips = Properties.Settings.Default.FontTooltips;
 
-            this.ShowFonts();
-        }
+			this.ShowFonts();
+		}
 
-        private void ShowFonts()
-        {
-            this.label3.Text = string.Format("{0} / {1} / {2}",
-                this.fontEditor.Name,
-                this.fontEditor.Size,
-                this.fontEditor.Style);
+		private void ShowFonts()
+		{
+			this.label3.Text = string.Format("{0} / {1} / {2}",
+				this.fontEditor.Name,
+				this.fontEditor.Size,
+				this.fontEditor.Style);
 
-            this.label4.Text = string.Format("{0} / {1} / {2}",
-                this.fontTooltips.Name,
-                this.fontTooltips.Size,
-                this.fontTooltips.Style);
-        }
+			this.label4.Text = string.Format("{0} / {1} / {2}",
+				this.fontTooltips.Name,
+				this.fontTooltips.Size,
+				this.fontTooltips.Style);
+		}
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            this.fontDialog1.FixedPitchOnly = true;
-            this.fontDialog1.ShowEffects = false;
-            this.fontDialog1.AllowScriptChange = false;
-            this.fontDialog1.Font = Properties.Settings.Default.FontEditor;
-            try
-            {
-                if (this.fontDialog1.ShowDialog(this) == DialogResult.OK)
-                {
-                    this.fontEditor = this.fontDialog1.Font;
-                    this.ShowFonts();
-                }
-            }
-            catch
-            {
-            }
-        }
+		private void button3_Click(object sender, EventArgs e)
+		{
+			this.fontDialog1.FixedPitchOnly = true;
+			this.fontDialog1.ShowEffects = false;
+			this.fontDialog1.AllowScriptChange = false;
+			this.fontDialog1.Font = Properties.Settings.Default.FontEditor;
+			try {
+				if (this.fontDialog1.ShowDialog(this) == DialogResult.OK) {
+					this.fontEditor = this.fontDialog1.Font;
+					this.ShowFonts();
+				}
+			} catch {
+			}
+		}
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            this.fontDialog1.FixedPitchOnly = false;
-            this.fontDialog1.ShowEffects = false;
-            this.fontDialog1.AllowScriptChange = false;
-            this.fontDialog1.Font = Properties.Settings.Default.FontTooltips;
-            if (this.fontDialog1.ShowDialog(this) == DialogResult.OK)
-            {
-                this.fontTooltips = this.fontDialog1.Font;
-                this.ShowFonts();
-            }
-        }
+		private void button4_Click(object sender, EventArgs e)
+		{
+			this.fontDialog1.FixedPitchOnly = false;
+			this.fontDialog1.ShowEffects = false;
+			this.fontDialog1.AllowScriptChange = false;
+			this.fontDialog1.Font = Properties.Settings.Default.FontTooltips;
+			if (this.fontDialog1.ShowDialog(this) == DialogResult.OK) {
+				this.fontTooltips = this.fontDialog1.Font;
+				this.ShowFonts();
+			}
+		}
 
-        public void Commit()
-        {
-            Properties.Settings.Default.SLColorScheme = this.checkBox1.Checked;
+		public void Commit()
+		{
+			Properties.Settings.Default.SLColorScheme = this.checkBox1.Checked;
 
-            Properties.Settings.Default.FontEditor = this.fontEditor;
-            Properties.Settings.Default.FontTooltips = this.fontTooltips;
-        }
-    }
+			Properties.Settings.Default.FontEditor = this.fontEditor;
+			Properties.Settings.Default.FontTooltips = this.fontTooltips;
+		}
+	}
 }

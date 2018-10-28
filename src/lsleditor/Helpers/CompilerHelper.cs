@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -46,113 +46,103 @@ using Microsoft.CSharp;
 
 namespace LSLEditor.Helpers
 {
-    internal static class CompilerHelper
-    {
-        private static int FindDefaultLineNumber(string strCode)
-        {
-            var sr = new StringReader(strCode);
-            var intI = 0;
-            while (true)
-            {
-                var strLine = sr.ReadLine();
-                if (strLine == null)
-                {
-                    break;
-                }
+	internal static class CompilerHelper
+	{
+		private static int FindDefaultLineNumber(string strCode)
+		{
+			var sr = new StringReader(strCode);
+			var intI = 0;
+			while (true) {
+				var strLine = sr.ReadLine();
+				if (strLine == null) {
+					break;
+				}
 
-                if (strLine.StartsWith("class State_default"))
-                {
-                    return intI;
-                }
+				if (strLine.StartsWith("class State_default")) {
+					return intI;
+				}
 
-                intI++;
-            }
-            return intI;
-        }
+				intI++;
+			}
+			return intI;
+		}
 
-        public static Assembly CompileCSharp(EditForm editForm, string CSharpCode)
-        {
-            // Code compiler and provider
-            CodeDomProvider cc = new CSharpCodeProvider();
+		public static Assembly CompileCSharp(EditForm editForm, string CSharpCode)
+		{
+			// Code compiler and provider
+			CodeDomProvider cc = new CSharpCodeProvider();
 
-            // Compiler parameters
-            var cp = new CompilerParameters();
+			// Compiler parameters
+			var cp = new CompilerParameters();
 
-            // Sept 15, 2007 -> 3, 30 oct 2007 -> 4
-            if (!Properties.Settings.Default.SkipWarnings)
-            {
-                cp.WarningLevel = 4;
-            }
+			// Sept 15, 2007 -> 3, 30 oct 2007 -> 4
+			if (!Properties.Settings.Default.SkipWarnings) {
+				cp.WarningLevel = 4;
+			}
 
-            // Add common assemblies
-            cp.ReferencedAssemblies.Add("System.dll");
-            cp.ReferencedAssemblies.Add("System.Windows.Forms.dll");
+			// Add common assemblies
+			cp.ReferencedAssemblies.Add("System.dll");
+			cp.ReferencedAssemblies.Add("System.Windows.Forms.dll");
 
-            // LSLEditor.exe contains all base SecondLife class stuff
-            cp.ReferencedAssemblies.Add(Assembly.GetExecutingAssembly().Location);
+			// LSLEditor.exe contains all base SecondLife class stuff
+			cp.ReferencedAssemblies.Add(Assembly.GetExecutingAssembly().Location);
 
-            // Compiling to memory
-            cp.GenerateInMemory = true;
+			// Compiling to memory
+			cp.GenerateInMemory = true;
 
-            // Does this work?
-            cp.IncludeDebugInformation = true;
+			// Does this work?
+			cp.IncludeDebugInformation = true;
 
-            // Wrap strCSharpCode into my namespace
-            var strRunTime = "namespace LSLEditor\n{\n";
-            strRunTime += CSharpCode;
-            strRunTime += "\n}\n";
+			// Wrap strCSharpCode into my namespace
+			var strRunTime = "namespace LSLEditor\n{\n";
+			strRunTime += CSharpCode;
+			strRunTime += "\n}\n";
 
-            var intDefaultLineNumber = FindDefaultLineNumber(strRunTime);
+			var intDefaultLineNumber = FindDefaultLineNumber(strRunTime);
 
-            // Here we go
-            var cr = cc.CompileAssemblyFromSource(cp, strRunTime);
+			// Here we go
+			var cr = cc.CompileAssemblyFromSource(cp, strRunTime);
 
-            // get the listview to store some errors
-            var ListViewErrors = editForm.parent.SyntaxErrors.ListView;
+			// get the listview to store some errors
+			var ListViewErrors = editForm.parent.SyntaxErrors.ListView;
 
-            // Console.WriteLine(cr.Errors.HasWarnings.ToString());
-            // Check for compilation errors...
-            if (ListViewErrors != null && (cr.Errors.HasErrors || cr.Errors.HasWarnings))
-            {
-                var intNr = 1;
-                foreach (CompilerError err in cr.Errors)
-                {
-                    var intLine = err.Line;
-                    if (intLine < intDefaultLineNumber)
-                    {
-                        intLine -= 4;
-                    }
-                    else
-                    {
-                        intLine -= 5;
-                    }
+			// Console.WriteLine(cr.Errors.HasWarnings.ToString());
+			// Check for compilation errors...
+			if (ListViewErrors != null && (cr.Errors.HasErrors || cr.Errors.HasWarnings)) {
+				var intNr = 1;
+				foreach (CompilerError err in cr.Errors) {
+					var intLine = err.Line;
+					if (intLine < intDefaultLineNumber) {
+						intLine -= 4;
+					} else {
+						intLine -= 5;
+					}
 
-                    var strError = OopsFormatter.ApplyFormatting(err.ErrorText);
-                    var intImageIndex = 0;
-                    if (err.IsWarning)
-                    {
-                        intImageIndex = 1;
-                    }
+					var strError = OopsFormatter.ApplyFormatting(err.ErrorText);
+					var intImageIndex = 0;
+					if (err.IsWarning) {
+						intImageIndex = 1;
+					}
 
-                    var lvi = new ListViewItem(new string[]
-                    {
-                        "",								// 0
-                        intNr.ToString(),				// 1
-                        strError,						// 2
-                        editForm.ScriptName,			// 3
-                        intLine.ToString(),				// 4
-                        err.Column.ToString(),			// 5
-                        editForm.ProjectName ,			// 6
-                        editForm.FullPathName,			// 7
-                        editForm.guid.ToString(),		// 8
-                        editForm.IsScript.ToString()	// 9
-                    }, intImageIndex);
-                    ListViewErrors.Items.Add(lvi);
-                    intNr++;
-                }
-                return null;
-            }
-            return cr.CompiledAssembly;
-        }
-    }
+					var lvi = new ListViewItem(new string[]
+					{
+						"",								// 0
+						intNr.ToString(),				// 1
+						strError,						// 2
+						editForm.ScriptName,			// 3
+						intLine.ToString(),				// 4
+						err.Column.ToString(),			// 5
+						editForm.ProjectName ,			// 6
+						editForm.FullPathName,			// 7
+						editForm.guid.ToString(),		// 8
+						editForm.IsScript.ToString()	// 9
+					}, intImageIndex);
+					ListViewErrors.Items.Add(lvi);
+					intNr++;
+				}
+				return null;
+			}
+			return cr.CompiledAssembly;
+		}
+	}
 }

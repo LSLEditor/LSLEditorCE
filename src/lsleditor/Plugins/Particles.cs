@@ -1,4 +1,4 @@
-﻿// <copyright file="gpl-2.0.txt">
+// <copyright file="gpl-2.0.txt">
 // ORIGINAL CODE BASE IS Copyright (C) 2006-2010 by Alphons van der Heijden.
 // The code was donated on 2010-04-28 by Alphons van der Heijden to Brandon 'Dimentox Travanti' Husbands &
 // Malcolm J. Kudra, who in turn License under the GPLv2 in agreement with Alphons van der Heijden's wishes.
@@ -44,28 +44,28 @@ using System.Windows.Forms;
 
 namespace LSLEditor.Plugins
 {
-    internal class Particles
-    {
-        public Particles(LSLEditorForm parent)
-        {
-            const string strPluginName = "Particles";
+	internal class Particles
+	{
+		public Particles(LSLEditorForm parent)
+		{
+			const string strPluginName = "Particles";
 
-            var strDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var strPluginsDirectory = Path.Combine(strDirectory, "Plugins");
-            var strProgram = Path.Combine(strPluginsDirectory, strPluginName + ".exe");
+			var strDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+			var strPluginsDirectory = Path.Combine(strDirectory, "Plugins");
+			var strProgram = Path.Combine(strPluginsDirectory, strPluginName + ".exe");
 
-            var assembly = Assembly.LoadFrom(strProgram);
-            var frmMain = assembly.CreateInstance("Particles.frmMain") as Form;
+			var assembly = Assembly.LoadFrom(strProgram);
+			var frmMain = assembly.CreateInstance("Particles.frmMain") as Form;
 
-            /*	if (parent.IsMdiContainer)
-                {
-                    parent.AddForm(frmMain);
-                }
-                else
-                {*/
-            //MessageBox.Show("This plugin does not run in tabbed mode", "Particles plugin", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            frmMain.Show();
-            //}
-        }
-    }
+			/*	if (parent.IsMdiContainer)
+				{
+					parent.AddForm(frmMain);
+				}
+				else
+				{*/
+			//MessageBox.Show("This plugin does not run in tabbed mode", "Particles plugin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			frmMain.Show();
+			//}
+		}
+	}
 }
