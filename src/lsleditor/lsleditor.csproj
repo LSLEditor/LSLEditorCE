@@ -880,7 +880,7 @@
     <Content Include="Docking\DockPanel.bmp" />
     <Content Include="Docking\Resources\DockIndicator_PaneDiamond.bmp" />
     <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Bottom.bmp" />
-    <Content Include="Docking\Resources\Dockindicator_PaneDiamond_Fill.bmp" />
+    <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Fill.bmp" />
     <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Hotspot.bmp" />
     <Content Include="Docking\Resources\DockIndicator_PaneDiamond_HotspotIndex.bmp" />
     <Content Include="Docking\Resources\DockIndicator_PaneDiamond_Left.bmp" />
