@@ -1127,7 +1127,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- <Import Project="$(ProgramFiles)\MSBuild\StyleCop\v4.7\StyleCop.targets" /> -->
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\build\AssemblyRevisionIncrementer.exe" /t="$(SolutionDir)Properties\AssemblyInfo.cs"</PostBuildEvent>
+    <!-- PostBuildEvent>"$(SolutionDir)..\build\AssemblyRevisionIncrementer.exe" /t="$(SolutionDir)Properties\AssemblyInfo.cs"</PostBuildEvent -->
   </PropertyGroup>
   <ProjectExtensions>
     <MonoDevelop>
