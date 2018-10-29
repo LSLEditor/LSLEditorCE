@@ -46,13 +46,15 @@ namespace LSLEditor
 {
 	public partial class GListBoxWindow : Form
 	{
-		public GListBox GListBox {
+		public GListBox GListBox
+		{
 			get {
 				return this.gListBox1;
 			}
 		}
 
-		public GListBoxItem Selected {
+		public GListBoxItem Selected
+		{
 			get {
 				return (GListBoxItem)this.gListBox1.Items[this.gListBox1.SelectedIndex];
 			}

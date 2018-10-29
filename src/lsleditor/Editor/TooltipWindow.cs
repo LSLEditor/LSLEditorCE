@@ -50,7 +50,8 @@ namespace LSLEditor
 		public string Wild;
 		public int XOffset = 0;
 
-		public override string Text {
+		public override string Text
+		{
 			get {
 				return base.Text;
 			}

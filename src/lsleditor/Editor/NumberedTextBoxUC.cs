@@ -73,7 +73,8 @@ namespace NumberedTextBox
 			this.numbered1.Invalidate();
 		}
 
-		public LSLEditor.SyntaxRichTextBox TextBox {
+		public LSLEditor.SyntaxRichTextBox TextBox
+		{
 			get {
 				return this.syntaxRichTextBox1;
 			}

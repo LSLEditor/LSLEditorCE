@@ -380,7 +380,8 @@ namespace LSLEditor
 			this.PaintNumbers();
 		}
 
-		private Point RTBScrollPos {
+		private Point RTBScrollPos
+		{
 			get {
 				const int EM_GETSCROLLPOS = 0x0400 + 221;
 				var pt = new Point();
@@ -395,7 +396,8 @@ namespace LSLEditor
 			}
 		}
 
-		public bool Dirty {
+		public bool Dirty
+		{
 			get {
 				return this.m_Dirty;
 			}
@@ -496,7 +498,8 @@ namespace LSLEditor
 			}
 		}
 
-		private bool IsUpdating {
+		private bool IsUpdating
+		{
 			get {
 				return this.intUpdate > 0;
 			}
@@ -1483,7 +1486,8 @@ namespace LSLEditor
 			this.Dirty = false;
 		}
 
-		public override string Text {
+		public override string Text
+		{
 			get {
 				return base.Text;
 			}
@@ -1625,7 +1629,8 @@ namespace LSLEditor
 			this.Focus();
 		}
 
-		public bool ToolTipping {
+		public bool ToolTipping
+		{
 			get {
 				return this.m_blnToolTipping;
 			}
@@ -1911,7 +1916,8 @@ namespace LSLEditor
 			this.EndUpdate(false);
 		}
 
-		public override string SelectedText {
+		public override string SelectedText
+		{
 			get {
 				return base.SelectedText;
 			}
@@ -1924,7 +1930,8 @@ namespace LSLEditor
 			}
 		}
 
-		private string ColoredText {
+		private string ColoredText
+		{
 			set {
 				this.BeginUpdate();
 				var intFirstCharOfStartLine = this.GetFirstCharIndexOfCurrentLine();

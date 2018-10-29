@@ -116,7 +116,8 @@ namespace LSLEditor
 			base.WndProc(ref m);
 		}
 
-		public Solution.SolutionExplorer SolutionExplorer {
+		public Solution.SolutionExplorer SolutionExplorer
+		{
 			get {
 				return this.m_SolutionExplorer;
 			}
@@ -179,7 +180,8 @@ namespace LSLEditor
 			}
 		}
 
-		public Form[] Children {
+		public Form[] Children
+		{
 			get {
 				if (this.IsMdiContainer) {
 					return this.MdiChildren;
@@ -193,7 +195,8 @@ namespace LSLEditor
 			}
 		}
 
-		public Form ActiveMdiForm {
+		public Form ActiveMdiForm
+		{
 			get {
 				Form form = null;
 				if (this.IsMdiContainer) {

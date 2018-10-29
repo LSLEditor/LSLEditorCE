@@ -50,7 +50,8 @@ namespace LSLEditor
 
 			private object m_value;
 
-			private int value {
+			private int value
+			{
 				get {
 					if (this.m_value == null) {
 						this.m_value = 0;

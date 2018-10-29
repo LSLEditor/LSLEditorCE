@@ -213,7 +213,8 @@ namespace LSLEditor
 		/// Gets the position of the object within the simulator.
 		/// </summary>
 		/// <value>Gets the vPosition data member.</value>
-		public vector GetLocalPos {
+		public vector GetLocalPos
+		{
 			// TODO change this to use a call to llGetLocalPos specifying NOT to be Verbose. After all functions have been changed to allow verbose/silent option.
 			get { return this.vPosition; }
 		}
@@ -222,7 +223,8 @@ namespace LSLEditor
 		/// Gets or sets the SecondLifeHost object.
 		/// </summary>
 		/// <value>The host property gets/sets the slhHost data member.</value>
-		public SecondLifeHost host {
+		public SecondLifeHost host
+		{
 			get { return this.slhHost; }
 			set { this.slhHost = value; }
 		}

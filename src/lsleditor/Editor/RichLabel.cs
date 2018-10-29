@@ -51,7 +51,8 @@ namespace LSLEditor
 	{
 		private readonly Regex m_regex;
 
-		public override string Text {
+		public override string Text
+		{
 			get {
 				return base.Text;
 			}

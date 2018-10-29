@@ -57,13 +57,15 @@ namespace LSLEditor
 			this.listView1.Items.Clear();
 		}
 
-		public ListView ListView {
+		public ListView ListView
+		{
 			get {
 				return this.listView1;
 			}
 		}
 
-		public bool HasErrors {
+		public bool HasErrors
+		{
 			get {
 				return this.listView1.Items.Count > 0;
 			}

@@ -60,7 +60,8 @@ namespace LSLEditor
 			this.intEnd = 0;
 		}
 
-		public bool ReplaceAlso {
+		public bool ReplaceAlso
+		{
 			get {
 				return this.m_ReplaceAlso;
 			}
@@ -74,7 +75,8 @@ namespace LSLEditor
 			}
 		}
 
-		public string KeyWord {
+		public string KeyWord
+		{
 			set {
 				this.label1.Text = ""; // clear out message
 				if (value != "") {

@@ -54,7 +54,8 @@ namespace LSLEditor
 
 		// HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\svn.exe
 		// HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\svn.exe
-		public static string Executable {
+		public static string Executable
+		{
 			get {
 				try {
 					const string strKey = @"Software\Microsoft\Windows\CurrentVersion\App Paths\svn.exe";
@@ -72,7 +73,8 @@ namespace LSLEditor
 			}
 		}
 
-		public static bool IsInstalled {
+		public static bool IsInstalled
+		{
 			get {
 				return Executable != null;
 			}

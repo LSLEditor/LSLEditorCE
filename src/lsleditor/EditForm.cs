@@ -76,25 +76,29 @@ namespace LSLEditor
 			try { base.WndProc(ref m); } catch { }
 		}
 
-		public SyntaxRichTextBox TextBox {
+		public SyntaxRichTextBox TextBox
+		{
 			get {
 				return this.numberedTextBoxUC1.TextBox;
 			}
 		}
 
-		public XmlDocument ConfLSL {
+		public XmlDocument ConfLSL
+		{
 			get {
 				return this.parent.ConfLSL;
 			}
 		}
 
-		public XmlDocument ConfCSharp {
+		public XmlDocument ConfCSharp
+		{
 			get {
 				return this.parent.ConfCSharp;
 			}
 		}
 
-		public Guid guid {
+		public Guid guid
+		{
 			get {
 				return this.m_Guid;
 			}
@@ -103,7 +107,8 @@ namespace LSLEditor
 			}
 		}
 
-		public bool IsScript {
+		public bool IsScript
+		{
 			get {
 				return this.TextBox.ToolTipping;
 			}
@@ -195,7 +200,8 @@ namespace LSLEditor
 			this.Close();
 		}
 
-		public string FullPathName {
+		public string FullPathName
+		{
 			get {
 				return this.m_FullPathName;
 			}
@@ -218,25 +224,29 @@ namespace LSLEditor
 			}
 		}
 
-		public bool IsNew {
+		public bool IsNew
+		{
 			get {
 				return this.m_IsNew;
 			}
 		}
 
-		public string ScriptName {
+		public string ScriptName
+		{
 			get {
 				return Path.GetFileName(this.m_FullPathName);
 			}
 		}
 
-		public string ProjectName {
+		public string ProjectName
+		{
 			get {
 				return this.parent.SolutionExplorer.GetProjectName(this.guid);
 			}
 		}
 
-		public string SourceCode {
+		public string SourceCode
+		{
 			get {
 				return this.numberedTextBoxUC1.TextBox.Text;
 			}
@@ -353,7 +363,8 @@ namespace LSLEditor
 			this.SaveCurrentFile(this.FullPathName);
 		}
 
-		public bool Dirty {
+		public bool Dirty
+		{
 			get {
 				return this.numberedTextBoxUC1.TextBox.Dirty;
 			}
@@ -362,7 +373,8 @@ namespace LSLEditor
 			}
 		}
 
-		public TabControl tabControl {
+		public TabControl tabControl
+		{
 			get {
 				return this.tabControl1;
 			}

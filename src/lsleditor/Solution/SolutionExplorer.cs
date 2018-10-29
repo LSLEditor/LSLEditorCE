@@ -204,7 +204,8 @@ namespace LSLEditor.Solution
 		private ListViewItem m_HoveredItem;
 		private readonly ToolTip toolTip1;
 
-		public bool IsDirty {
+		public bool IsDirty
+		{
 			get {
 				return this.m_dirty;
 			}

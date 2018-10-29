@@ -100,7 +100,8 @@ namespace LSLEditor.Helpers
 		/// <summary>
 		/// Title for this report. Default is empty.
 		/// </summary>
-		public string Title {
+		public string Title
+		{
 			get { return this.title; }
 			set { this.title = value; this.docToPrint.DocumentName = this.title; }
 		}

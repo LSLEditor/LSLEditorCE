@@ -63,7 +63,8 @@ namespace LSLEditor
 			/// Gets or sets the value of the Float.
 			/// </summary>
 			/// <value>Gets or sets the objValue data member.</value>
-			private double value {
+			private double value
+			{
 				get {
 					if (this.objValue == null) {
 						this.objValue = (double)0;

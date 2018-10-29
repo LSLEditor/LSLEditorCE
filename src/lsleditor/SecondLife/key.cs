@@ -47,7 +47,8 @@ namespace LSLEditor
 		{
 			private string m_value;
 
-			public string guid {
+			public string guid
+			{
 				get {
 					return this.m_value ?? (this.m_value = "");
 				}

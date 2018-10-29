@@ -55,7 +55,8 @@ namespace LSLEditor.Solution
 			this.DialogResult = DialogResult.Cancel;
 		}
 
-		public string Repository {
+		public string Repository
+		{
 			get {
 				return this.textBox1.Text.Trim();
 			}
@@ -64,7 +65,8 @@ namespace LSLEditor.Solution
 			}
 		}
 
-		public string Comment {
+		public string Comment
+		{
 			get {
 				return this.textBox2.Text.Trim();
 			}
@@ -73,7 +75,8 @@ namespace LSLEditor.Solution
 			}
 		}
 
-		public bool ReadOnly {
+		public bool ReadOnly
+		{
 			set {
 				this.textBox1.Enabled = !value;
 			}

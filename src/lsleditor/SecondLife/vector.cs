@@ -48,7 +48,8 @@ namespace LSLEditor
 		{
 			private object m_x, m_y, m_z;
 
-			public Float x {
+			public Float x
+			{
 				get {
 					if (this.m_x == null) {
 						this.m_x = (Float)0;
@@ -61,7 +62,8 @@ namespace LSLEditor
 				}
 			}
 
-			public Float y {
+			public Float y
+			{
 				get {
 					if (this.m_y == null) {
 						this.m_y = (Float)0;
@@ -74,7 +76,8 @@ namespace LSLEditor
 				}
 			}
 
-			public Float z {
+			public Float z
+			{
 				get {
 					if (this.m_z == null) {
 						this.m_z = (Float)0;

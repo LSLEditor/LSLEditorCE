@@ -49,13 +49,15 @@ namespace LSLEditor
 		{
 			private ArrayList _value;
 
-			private ArrayList value {
+			private ArrayList value
+			{
 				get {
 					return this._value ?? (this._value = new ArrayList());
 				}
 			}
 
-			public int Count {
+			public int Count
+			{
 				get {
 					return this.value.Count;
 				}
@@ -127,7 +129,8 @@ namespace LSLEditor
 				return this.value.ToArray();
 			}
 
-			public object this[int index] {
+			public object this[int index]
+			{
 				get {
 					return this.value[index];
 				}
