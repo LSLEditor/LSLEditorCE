@@ -325,6 +325,9 @@
     <Compile Include="Editor\MsXsltContext.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
+    <None Include="Form1.cs">
+      <SubType>Form</SubType>
+    </None>
     <Compile Include="Helpers\HTTPRequest.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
@@ -792,6 +795,9 @@
     <EmbeddedResource Include="Docking\Strings.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </None>
     <EmbeddedResource Include="llTextBoxForm.resx">
       <DependentUpon>llTextBoxForm.cs</DependentUpon>
     </EmbeddedResource>
