@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lsleditor", "lsleditor.csproj", "{59468D25-6E68-4113-B740-C6EF4695045B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lsleditor", "lsleditor/lsleditor.csproj", "{59468D25-6E68-4113-B740-C6EF4695045B}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
