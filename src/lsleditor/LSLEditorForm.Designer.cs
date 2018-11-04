@@ -834,7 +834,7 @@ namespace LSLEditor
             this.WikiSepBrowserstoolStripMenuItem.Name = "WikiSepBrowserstoolStripMenuItem";
             this.WikiSepBrowserstoolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.WikiSepBrowserstoolStripMenuItem.Text = "Online Wiki-pages separate Browser";
-            this.WikiSepBrowserstoolStripMenuItem.Click += new System.EventHandler(this.WikiSepBrowserstoolStripMenuItem_Click);
+            this.WikiSepBrowserstoolStripMenuItem.Click += new System.EventHandler(this.WikiSepBrowserToolStripMenuItem_Click);
             // 
             // toolStripSeparator16
             // 
@@ -911,7 +911,7 @@ namespace LSLEditor
             this.makeBugReporttoolStripMenuItem.Name = "makeBugReporttoolStripMenuItem";
             this.makeBugReporttoolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.makeBugReporttoolStripMenuItem.Text = "Bug report...";
-            this.makeBugReporttoolStripMenuItem.Click += new System.EventHandler(this.makeBugReporttoolStripMenuItem_Click);
+            this.makeBugReporttoolStripMenuItem.Click += new System.EventHandler(this.makeBugReportToolStripMenuItem_Click);
             // 
             // toolStripSeparator12
             // 

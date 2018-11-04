@@ -1475,7 +1475,7 @@ namespace LSLEditor
 			CloseActiveWindow();
 		}
 
-		private void WikiSepBrowserstoolStripMenuItem_Click(object sender, EventArgs e)
+		private void WikiSepBrowserToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			WikiSepBrowserstoolStripMenuItem.Checked = !WikiSepBrowserstoolStripMenuItem.Checked;
 			Properties.Settings.Default.WikiSeperateBrowser = this.WikiSepBrowserstoolStripMenuItem.Checked;
@@ -1629,7 +1629,7 @@ namespace LSLEditor
 			}
 		}
 
-		private void makeBugReporttoolStripMenuItem_Click(object sender, EventArgs e)
+		private void makeBugReportToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			BugReport.BugReportForm bugReport = new BugReport.BugReportForm(this);
 			bugReport.Show(this);
