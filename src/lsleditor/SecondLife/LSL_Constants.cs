@@ -49,9 +49,6 @@ namespace LSLEditor
 	[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed.")]
 	public partial class SecondLife
 	{
-		public const int TRUE = 1;
-		public const int FALSE = 0;
-
 		public const int DENSITY = 1;
 		public const int FRICTION = 2;
 		public const int GRAVITY_MULTIPLIER = 8;
@@ -748,6 +745,9 @@ namespace LSLEditor
 		public const int VEHICLE_TYPE_BALLOON = 5;
 
 		public const int VERTICAL = 0;
+
+		public static readonly integer TRUE = integer.TRUE;
+		public static readonly integer FALSE = integer.FALSE;
 
 		public static readonly Float PI = 3.1415926535897932384626;
 		public static readonly Float TWO_PI = 2.0 * PI;

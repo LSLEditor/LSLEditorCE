@@ -1,33 +1,36 @@
-﻿*		binary
-*.gif		binary
-*.ico		binary
-*.jpg		binary
-*.otf		binary
-*.png		binary
-*.swf		binary
-*.ttf		binary
+﻿*				binary
 
-*.bat		-binary text eol=crlf
-*.ps1		-binary text eol=crlf
-*.conf		-binary text eol=lf
-*.cs		-binary text eol=lf -whitespace
-*.csproj	-binary text eol=lf -whitespace
-*.css		-binary text eol=lf -whitespace
-*.html		-binary text eol=lf
-*.js		-binary text -whitespace
-*.json		-binary text eol=lf
-*.less		-binary text eol=lf
-*.md		-binary text eol=lf conflict-marker-size=100
-*.resx		-binary text eol=lf -whitespace
-*.sh		-binary text eol=lf
-*.sln		-binary text eol=lf -whitespace
-*.sql		-binary text eol=lf
-*.svg		-binary text eol=lf
-*.txt		-binary text eol=lf conflict-marker-size=100
-*.vcproj	-binary text eol=crlf
-*.xml		-binary text eol=lf
-*.yml		-binary text eol=lf
+*.gif			binary
+*.ico			binary
+*.jpg			binary
+*.otf			binary
+*.png			binary
+*.swf			binary
+*.ttf			binary
 
-.gitignore	-binary text
+*.bat			-binary text eol=crlf
+*.cmd			-binary text eol=crlf
+*.conf			-binary text eol=lf
+*.cs			-binary text eol=lf -whitespace
+*.csproj		-binary text eol=lf -whitespace
+*.css			-binary text eol=lf -whitespace
+*.html			-binary text eol=lf
+*.js			-binary text -whitespace
+*.json			-binary text eol=lf
+*.less			-binary text eol=lf
+*.md			-binary text eol=lf conflict-marker-size=100
+*.ps1			-binary text eol=crlf
+*.resx			-binary text eol=lf -whitespace
+*.sh			-binary text eol=lf
+*.sln			-binary text eol=lf -whitespace
+*.sql			-binary text eol=lf
+*.svg			-binary text eol=lf
+*.txt			-binary text eol=lf conflict-marker-size=100
+*.vcproj		-binary text eol=crlf -whitespace
+*.xml			-binary text eol=lf
+*.yml			-binary text eol=lf
+
+.editorconfig	-binary text
 .gitattributes	-binary text
-.gitmodules	-binary text
+.gitignore		-binary text
+.gitmodules		-binary text
